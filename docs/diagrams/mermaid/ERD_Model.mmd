@@ -1,0 +1,852 @@
+erDiagram
+
+  %% -------------------------
+  %% CORE / GOVERNANCE
+  %% -------------------------
+  DimFranchise {
+    int      FranchiseKey PK
+    string   Name
+    string   UniverseCode              "short code: SW, LOTR, etc."
+    string   FranchiseGroup            "optional umbrella grouping"
+    string   OwnerOrRightsHolder       "nullable; informational"
+    string   DefaultContinuityFrame    "nullable; convenience label"
+    string   Notes
+
+    string   SourceSystem
+    string   SourceRef
+    string   IngestBatchId
+    datetime2 RowCreatedUtc
+    datetime2 RowUpdatedUtc
+    bool     IsActive
+    string   AttributesJson
+  }
+
+  %% -------------------------
+  %% WORK / SCENE CATALOG
+  %% -------------------------
+  DimWork {
+    int      WorkKey PK
+    int      FranchiseKey FK
+
+    string   WorkType                  "Film|Episode|Book|Comic|Game|Short|Web"
+    string   Title
+    string   TitleSort                 "nullable; for ordering"
+    string   EditionOrCut              "nullable; theatrical/directors cut"
+    string   SeasonEpisode             "SxxEyy nullable"
+    int      SeasonNumber              "nullable"
+    int      EpisodeNumber             "nullable"
+    string   VolumeOrIssue             "nullable; for books/comics"
+    string   WorkCode                  "nullable; internal short code"
+
+    date     ReleaseDate               "nullable"
+    string   ReleaseDatePrecision      "Exact|Estimated|Range|Unknown"
+    date     ReleaseDateEnd            "nullable; if range"
+    string   ReleaseRegion             "nullable"
+
+    string   RuntimeRef                "nullable; minutes/HH:MM:SS if known"
+    string   SynopsisShort             "nullable; internal summary"
+    string   Notes
+
+    string   SourceSystem
+    string   SourceRef
+    string   IngestBatchId
+    datetime2 RowCreatedUtc
+    datetime2 RowUpdatedUtc
+    bool     IsActive
+    string   AttributesJson
+  }
+
+  DimScene {
+    int      SceneKey PK
+    int      WorkKey FK
+
+    int      SceneOrdinal              "ordering within work"
+    string   SceneName                 "nullable"
+    string   SceneType                 "Act|Chapter|Sequence|Scene"
+    int      StartSec                  "nullable"
+    int      EndSec                    "nullable"
+    int      DurationSec               "nullable"
+
+    string   LocationHint              "nullable; coarse text"
+    string   Notes
+
+    string   SourceSystem
+    string   SourceRef
+    string   IngestBatchId
+    datetime2 RowCreatedUtc
+    datetime2 RowUpdatedUtc
+    bool     IsActive
+    string   AttributesJson
+  }
+
+  %% -------------------------
+  %% CONTINUITY / CANON FRAMES
+  %% -------------------------
+  DimContinuityFrame {
+    int      ContinuityFrameKey PK
+    int      FranchiseKey FK
+
+    string   FrameName                 "Canon|Legends|AltCut|Fan|Other"
+    string   FrameCode                 "short code"
+    string   AuthorityType             "Publisher|Creator|Community"
+    string   AuthorityRef              "nullable; org/person/site"
+    string   PolicySummary             "nullable; frame definition"
+    date     EffectiveStartDate        "nullable"
+    date     EffectiveEndDate          "nullable"
+    string   Notes
+
+    string   SourceSystem
+    string   SourceRef
+    string   IngestBatchId
+    datetime2 RowCreatedUtc
+    datetime2 RowUpdatedUtc
+    bool     IsActive
+    string   AttributesJson
+  }
+
+  %% -------------------------
+  %% UNIVERSE ERA (BBY/ABY-like)
+  %% -------------------------
+  DimEra {
+    int      EraKey PK
+    int      FranchiseKey FK
+
+    string   EraName                   "label: 'BBY/ABY-like' or epoch name"
+    string   EraCode                   "short code"
+    int      AnchorYear                "0 = anchor event year"
+    string   CalendarModel             "SignedYear|Range|Relative|Hybrid"
+    string   AnchorEventLabel          "nullable; e.g., 'Battle of Yavin'"
+    string   Notes
+
+    string   SourceSystem
+    string   SourceRef
+    string   IngestBatchId
+    datetime2 RowCreatedUtc
+    datetime2 RowUpdatedUtc
+    bool     IsActive
+    string   AttributesJson
+  }
+
+  %% -------------------------
+  %% ANALYTICAL CALENDAR (Earth-anchored)
+  %% -------------------------
+  DimDate {
+    int      DateKey PK                "YYYYMMDD surrogate"
+    date     CalendarDate              "SQL date"
+
+    int      Year
+    int      Quarter
+    int      Month
+    int      DayOfMonth
+    int      DayOfYear
+    int      DayOfWeek                 "1-7"
+    string   DayName
+    string   MonthName
+    int      ISOWeek
+    bool     IsWeekend
+    bool     IsHoliday                 "optional; locale-specific"
+    string   HolidayName               "nullable"
+
+    string   Notes
+
+    string   SourceSystem
+    string   SourceRef
+    string   IngestBatchId
+    datetime2 RowCreatedUtc
+    datetime2 RowUpdatedUtc
+    bool     IsActive
+    string   AttributesJson
+  }
+
+  DimTime {
+    int      TimeKey PK                "HHMMSS or HHMM"
+    time     ClockTime                 "SQL time"
+
+    int      Hour
+    int      Minute
+    int      Second
+    string   TimeBucket                "Hour|Minute|Second"
+    string   Notes
+
+    string   SourceSystem
+    string   SourceRef
+    string   IngestBatchId
+    datetime2 RowCreatedUtc
+    datetime2 RowUpdatedUtc
+    bool     IsActive
+    string   AttributesJson
+  }
+
+  %% -------------------------
+  %% BRIDGE: Universe time ↔ Analytical calendar
+  %% -------------------------
+  DimEraAnchor {
+    int      EraAnchorKey PK
+    int      FranchiseKey FK
+    int      EraKey FK
+
+    int      AnchorDateKey FK          "maps universe year=0 to CalendarDate"
+    int      AnchorTimeKey FK          "optional; usually 00:00:00"
+
+    string   AnchorRule                "SignedYearOffset|RangeOffset|Relative"
+    int      AnchorTimezoneOffsetMin   "nullable; for display only"
+    string   Notes
+
+    string   SourceSystem
+    string   SourceRef
+    string   IngestBatchId
+    datetime2 RowCreatedUtc
+    datetime2 RowUpdatedUtc
+    bool     IsActive
+    string   AttributesJson
+  }
+
+  %% -------------------------
+  %% RELATIONSHIPS (core only)
+  %% -------------------------
+  DimFranchise ||--o{ DimWork : has
+  DimWork      ||--o{ DimScene : contains
+
+  DimFranchise ||--o{ DimContinuityFrame : defines
+  DimFranchise ||--o{ DimEra : defines
+  DimFranchise ||--o{ DimEraAnchor : defines
+
+  DimEra       ||--o{ DimEraAnchor : anchored_by
+  DimDate      ||--o{ DimEraAnchor : anchor_date
+  DimTime      ||--o{ DimEraAnchor : anchor_time
+
+erDiagram
+
+  %% -------------------------
+  %% ANALYTICAL CALENDAR (Earth-anchored)
+  %% -------------------------
+  DimDate {
+    int     DateKey PK          "YYYYMMDD surrogate"
+    date    CalendarDate        "SQL date"
+    int     Year
+    int     Quarter
+    int     Month
+    int     DayOfMonth
+    int     DayOfWeek           "1-7"
+    string  DayName
+    string  MonthName
+    bool    IsWeekend
+    int     ISOWeek
+  }
+
+  %% Optional: time-of-day grain (hour/minute/second later)
+  DimTime {
+    int     TimeKey PK          "HHMMSS or HHMM"
+    time    ClockTime           "SQL time"
+    int     Hour
+    int     Minute
+    int     Second
+  }
+
+  %% -------------------------
+  %% BRIDGE: Universe time ↔ Analytical calendar
+  %% -------------------------
+  DimEraAnchor {
+    int     EraAnchorKey PK
+    int     FranchiseKey FK
+    int     EraKey FK
+    int     AnchorDateKey FK     "maps an Era's year=0 to a calendar date (e.g., 2000-01-01)"
+    int     AnchorTimeKey FK     "optional; usually 00:00:00"
+    string  AnchorRule           "SignedYearOffset|RangeOffset|Relative"
+    string  Notes
+  }
+
+  %% Extend FactEvent with optional analytical datetime keys
+  %% (This doesn't replace UniverseYearMin/Max; it complements it.)
+  FactEvent {
+    int     DateKey FK           "nullable; inferred/estimated"
+    int     TimeKey FK           "nullable; inferred/estimated"
+    int     DateKeyEnd FK        "nullable; for spans"
+    int     TimeKeyEnd FK        "nullable; for spans"
+    string  TemporalPrecision    "Exact|Estimated|Range|Unknown"
+  }
+
+
+  %% -------------------------
+  %% -------------------------
+  %% ENTITY CORE (generic identity registry)
+  %% -------------------------
+  DimEntity {
+    int      EntityKey PK
+    int      FranchiseKey FK
+
+    string   EntityType                "Character|Org|Species|Location|TechInstance|Other"
+    string   DisplayName
+    string   DisplayNameNormalized     "nullable; search/sort"
+    string   SortName                  "nullable; 'Last, First' or canonical ordering"
+    string   AliasCsv                  "nullable; quick aliases; optional"
+    string   ExternalId                "nullable; wiki page id etc."
+    string   ExternalIdType            "nullable; MediaWikiPageId|Slug|Other"
+    string   ExternalUrl               "nullable"
+    string   SummaryShort              "nullable; internal short summary"
+    string   SummaryLong               "nullable; internal long summary"
+    string   DescriptionSource         "nullable; where summary came from"
+    decimal  ConfidenceScore           "0-1 nullable"
+    bool     IsCanonical               "nullable; convenience"
+    string   Notes
+
+    string   SourceSystem
+    string   SourceRef
+    string   IngestBatchId
+    datetime2 RowCreatedUtc
+    datetime2 RowUpdatedUtc
+    bool     IsActive
+    string   AttributesJson
+  }
+
+  %% -------------------------
+  %% CHARACTERS
+  %% -------------------------
+  DimCharacter {
+    int      CharacterKey PK
+    int      EntityKey FK
+    int      SpeciesKey FK
+
+    string   Gender                  "nullable; as represented"
+    string   Pronouns                "nullable"
+    string   BirthRef                "nullable; text ref for MVP"
+    string   DeathRef                "nullable; text ref for MVP"
+    string   BirthPlaceRef           "nullable"
+    string   HomeworldRef            "nullable; text ref; may later become LocationKey"
+    string   SpeciesNameRef          "nullable; for cases species unknown"
+    string   HeightRef               "nullable"
+    string   MassRef                 "nullable"
+    string   EyeColor                "nullable"
+    string   HairColor               "nullable"
+    string   SkinColor               "nullable"
+    string   DistinguishingMarks     "nullable; scars/tattoos/etc."
+    string   RoleArchetype           "nullable; hero/villain/support"
+    string   Notes
+
+    string   SourceSystem
+    string   SourceRef
+    string   IngestBatchId
+    datetime2 RowCreatedUtc
+    datetime2 RowUpdatedUtc
+    bool     IsActive
+    string   AttributesJson
+  }
+
+  %% -------------------------
+  %% SPECIES / CREATURE TYPES
+  %% -------------------------
+  DimSpecies {
+    int      SpeciesKey PK
+    int      EntityKey FK
+
+    string   Category                 "Humanoid|Creature|Aquatic|Avian|Reptilian|Other"
+    string   HomeworldRef             "nullable; text ref for MVP"
+    string   TypicalLifespanRef       "nullable"
+    string   AverageHeightRef         "nullable"
+    string   SkinTypesRef             "nullable; scales/fur/etc."
+    string   LanguageRef              "nullable"
+    string   DietRef                  "nullable"
+    string   TraitsJson               "optional; curated traits"
+    string   Notes
+
+    string   SourceSystem
+    string   SourceRef
+    string   IngestBatchId
+    datetime2 RowCreatedUtc
+    datetime2 RowUpdatedUtc
+    bool     IsActive
+    string   AttributesJson
+  }
+
+  %% -------------------------
+  %% ORGANIZATIONS / FACTIONS
+  %% -------------------------
+  DimOrganization {
+    int      OrganizationKey PK
+    int      EntityKey FK
+
+    string   OrgType                  "Government|Guild|Gang|Order|Military|Corp|Other"
+    string   Scope                     "Local|Planetary|Sector|Regional|Galaxy|Intergalactic"
+    string   AlignmentRef              "nullable; lawful/neutral etc or factional"
+    string   FoundedRef                "nullable"
+    string   DissolvedRef              "nullable"
+    string   HeadquartersRef           "nullable; text ref; may later become LocationKey"
+    string   Notes
+
+    string   SourceSystem
+    string   SourceRef
+    string   IngestBatchId
+    datetime2 RowCreatedUtc
+    datetime2 RowUpdatedUtc
+    bool     IsActive
+    string   AttributesJson
+  }
+
+  %% -------------------------
+  %% LOCATION HIERARCHY
+  %% -------------------------
+  DimLocation {
+    int      LocationKey PK
+    int      EntityKey FK
+    int      ParentLocationKey FK
+
+    string   LocationType              "Galaxy|Region|System|Planet|Moon|City|Site|Structure"
+    string   RegionCode                "nullable; e.g., Inner Rim"
+    decimal  LatitudeRef               "nullable; if known"
+    decimal  LongitudeRef              "nullable; if known"
+    string   ClimateRef                "nullable"
+    string   TerrainRef                "nullable"
+    string   PopulationRef             "nullable"
+    string   GovernmentRef             "nullable; local governance note"
+    string   Notes
+
+    string   SourceSystem
+    string   SourceRef
+    string   IngestBatchId
+    datetime2 RowCreatedUtc
+    datetime2 RowUpdatedUtc
+    bool     IsActive
+    string   AttributesJson
+  }
+
+  %% -------------------------
+  %% TECH ASSET / INSTANCE (built things)
+  %% -------------------------
+  DimTechAsset {
+    int      TechAssetKey PK
+    int      FranchiseKey FK
+
+    string   AssetType                 "DroidModel|ShipModel|WeaponModel|StructureModel|ToolModel|Other"
+    string   ModelName
+    string   ModelNameNormalized       "nullable; search/sort"
+    string   ManufacturerRef           "nullable; text ref for MVP"
+    string   ManufacturerCode          "nullable"
+    string   EraRef                    "nullable; text ref; may later become EraKey"
+    string   FirstAppearanceRef        "nullable; work ref text for MVP"
+    string   TechLevelRef              "nullable"
+    string   PowerSourceRef            "nullable"
+    string   MaterialRef               "nullable"
+    string   SafetyNotes               "nullable"
+    string   Notes
+
+    string   SourceSystem
+    string   SourceRef
+    string   IngestBatchId
+    datetime2 RowCreatedUtc
+    datetime2 RowUpdatedUtc
+    bool     IsActive
+    string   AttributesJson
+  }
+
+  DimTechInstance {
+    int      TechInstanceKey PK
+    int      EntityKey FK
+    int      TechAssetKey FK
+
+    string   InstanceName              "e.g., named droid/ship/weapon"
+    string   SerialRef                 "nullable"
+    string   BuildRef                  "nullable; who/where built"
+    string   CurrentStatus             "nullable; Active|Destroyed|Unknown"
+    string   LastKnownLocationRef      "nullable"
+    string   Notes
+
+    string   SourceSystem
+    string   SourceRef
+    string   IngestBatchId
+    datetime2 RowCreatedUtc
+    datetime2 RowUpdatedUtc
+    bool     IsActive
+    string   AttributesJson
+  }
+
+  %% -------------------------
+  %% DROID SLICE (subtype of TechAsset/TechInstance)
+  %% -------------------------
+  DimDroidModel {
+    int      DroidModelKey PK
+    int      TechAssetKey FK
+
+    string   DroidClass                "Protocol|Astromech|Battle|Medical|Labor|Assassin|Other"
+    string   PrimaryFunction           "nullable"
+    string   AutonomyLevel             "Remote|Semi|Autonomous"
+    string   MobilityRef               "nullable"
+    string   ChassisRef                "nullable"
+    string   SensorSuiteRef            "nullable"
+    string   LanguageCapabilitiesRef   "nullable; text or json pointer"
+    string   Notes
+
+    string   SourceSystem
+    string   SourceRef
+    string   IngestBatchId
+    datetime2 RowCreatedUtc
+    datetime2 RowUpdatedUtc
+    bool     IsActive
+    string   AttributesJson
+  }
+
+  DimDroidInstance {
+    int      DroidInstanceKey PK
+    int      TechInstanceKey FK
+
+    string   PersonalityName           "nullable; nickname/persona"
+    string   MemoryWipeRef             "nullable"
+    bool     RestrainingBoltFlag       "nullable"
+    string   PrimaryLanguageRef        "nullable"
+    string   Notes
+
+    string   SourceSystem
+    string   SourceRef
+    string   IngestBatchId
+    datetime2 RowCreatedUtc
+    datetime2 RowUpdatedUtc
+    bool     IsActive
+    string   AttributesJson
+  }
+
+  %% -------------------------
+  %% SHIP SLICE (subtype)
+  %% -------------------------
+  DimShipModel {
+    int      ShipModelKey PK
+    int      TechAssetKey FK
+
+    string   ShipClass                 "Fighter|Freighter|Capital|Transport|Speeder|Other"
+    string   PropulsionType            "Hyperdrive|Sublight|None"
+    string   HyperdriveClassRef        "nullable"
+    string   CrewCapacityRef           "nullable"
+    string   PassengerCapacityRef      "nullable"
+    string   ArmamentRef               "nullable"
+    string   ShieldingRef              "nullable"
+    string   Notes
+
+    string   SourceSystem
+    string   SourceRef
+    string   IngestBatchId
+    datetime2 RowCreatedUtc
+    datetime2 RowUpdatedUtc
+    bool     IsActive
+    string   AttributesJson
+  }
+
+  %% -------------------------
+  %% WEAPON SLICE (subtype)
+  %% -------------------------
+  DimWeaponModel {
+    int      WeaponModelKey PK
+    int      TechAssetKey FK
+
+    string   WeaponClass               "Lightsaber|Blaster|Melee|Explosive|Heavy|Other"
+    string   EnergyType                "Kyber|Plasma|Projectile|Chemical|Other"
+    string   EffectiveRangeRef         "nullable"
+    string   AmmunitionRef             "nullable"
+    string   RateOfFireRef             "nullable"
+    string   LethalityRef              "nullable; qualitative"
+    string   Notes
+
+    string   SourceSystem
+    string   SourceRef
+    string   IngestBatchId
+    datetime2 RowCreatedUtc
+    datetime2 RowUpdatedUtc
+    bool     IsActive
+    string   AttributesJson
+  }
+
+  %% -------------------------
+  %% RELATIONSHIPS (entity + tech group only)
+  %% -------------------------
+  DimFranchise ||--o{ DimEntity : contains
+
+  DimEntity    ||--o| DimCharacter : "is-a"
+  DimEntity    ||--o| DimSpecies : "is-a"
+  DimEntity    ||--o| DimOrganization : "is-a"
+  DimEntity    ||--o| DimLocation : "is-a"
+
+  DimLocation  ||--o{ DimLocation : parent_of
+
+  DimFranchise ||--o{ DimTechAsset : defines
+  DimTechAsset ||--o{ DimTechInstance : instantiates
+
+  DimTechInstance ||--|| DimEntity : represented_as
+
+  DimTechAsset ||--o| DimDroidModel : "is-a"
+  DimTechAsset ||--o| DimShipModel : "is-a"
+  DimTechAsset ||--o| DimWeaponModel : "is-a"
+
+  DimTechInstance ||--o| DimDroidInstance : "is-a"
+
+  DimCharacter ||--o{ DimSpecies : "references (species catalog)"
+
+
+
+
+  %% -------------------------
+  %% APPEARANCE (WARDROBE / LOOK)
+  %% -------------------------
+  DimAppearanceLook {
+    int       LookKey PK
+    int       CharacterKey FK
+    int       WorkKey FK
+    int       SceneKey FK
+
+    string    LookLabel               "e.g., 'Bespin outfit' or general label"
+    string    LookType                "Robes|Armor|Uniform|Civilian|Disguise|Other"
+    string    PrimaryColorRef         "nullable"
+    string    SecondaryColorRef       "nullable"
+    string    MaterialRef             "nullable"
+    string    InsigniaRef             "nullable"
+    string    HairStyle               "nullable"
+    string    HairColor               "nullable"
+    string    FacialHair              "nullable"
+    string    MakeupOrMarkingsRef     "nullable"
+    string    ConditionRef            "Clean|Damaged|Weathered|Bloodied|Other"
+    string    AccessoriesRef          "nullable; helmet/cape/gloves/etc"
+    string    Notes
+
+    decimal   ConfidenceScore         "0-1 nullable"
+    bool      IsPrimaryLookInScene    "nullable; convenience"
+    string    EvidenceRef             "nullable; internal pointer only"
+
+    string    SourceSystem
+    string    SourceRef
+    string    IngestBatchId
+    datetime2 RowCreatedUtc
+    datetime2 RowUpdatedUtc
+    bool      IsActive
+    string    AttributesJson
+  }
+
+  %% -------------------------
+  %% EVENT SPINE
+  %% -------------------------
+  DimEventType {
+    int       EventTypeKey PK
+    int       FranchiseKey FK
+    int       ParentEventTypeKey FK
+
+    string    EventTypeName           "Injury|Death|ForceUse|Dialogue|Repair|..."
+    string    EventTypeCode           "short code"
+    string    VerbClass               "Physical|Force|Social|Technical|Environmental"
+    string    VerbLemma               "attack|heal|speak|travel|destroy|..."
+    string    PolarityDefault         "Positive|Negative|Neutral|Mixed"
+    string    GranularityGuidance     "Coarse|Moderate|Fine"
+    bool      IsLeafType              "nullable; convenience"
+    string    Notes
+
+    string    SourceSystem
+    string    SourceRef
+    string    IngestBatchId
+    datetime2 RowCreatedUtc
+    datetime2 RowUpdatedUtc
+    bool      IsActive
+    string    AttributesJson
+  }
+
+  FactEvent {
+    bigint    EventKey PK
+    int       FranchiseKey FK
+    int       ContinuityFrameKey FK
+    int       WorkKey FK
+    int       SceneKey FK
+    bigint    ParentEventKey FK
+
+    int       EventOrdinal            "ordering within scene/work"
+    int       EventTypeKey FK
+    int       LocationKey FK
+
+    int       StartSec                "nullable; within media scene"
+    int       EndSec                  "nullable"
+    int       EraKey                  "nullable; universe-era anchor"
+    int       UniverseYearMin         "signed nullable"
+    int       UniverseYearMax         "signed nullable"
+    int       DateKey FK              "nullable; analytical date anchor"
+    int       TimeKey FK              "nullable; analytical time anchor"
+    datetime2 EventTimestampUtc       "nullable; if computed/anchored"
+
+    string    SummaryShort            "transformative, non-quoting"
+    string    SummaryNormalized       "nullable; for search/dup"
+    decimal   ConfidenceScore         "0-1"
+    string    ExtractionMethod        "AI|Manual|Rules|Hybrid"
+    string    Notes
+
+    string    SourceSystem
+    string    SourceRef
+    string    IngestBatchId
+    datetime2 RowCreatedUtc
+    datetime2 RowUpdatedUtc
+    string    AttributesJson
+  }
+
+  BridgeEventParticipant {
+    bigint    EventKey FK
+    int       EntityKey FK
+
+    string    RoleInEvent             "Attacker|Victim|Speaker|Observer|..."
+    string    RoleSubtype             "nullable; e.g., 'primary_speaker'"
+    string    WeightClass             "Primary|Secondary|Background"
+    int       ParticipantOrdinal      "nullable; ordering of mentions"
+    decimal   ParticipationScore      "nullable; weighting"
+
+    string    Notes
+
+    string    SourceSystem
+    string    SourceRef
+    string    IngestBatchId
+    datetime2 RowCreatedUtc
+    datetime2 RowUpdatedUtc
+    string    AttributesJson
+  }
+
+  BridgeEventAsset {
+    bigint    EventKey FK
+    int       TechInstanceKey FK
+
+    string    AssetRole               "Used|Damaged|Destroyed|Operated|Referenced"
+    string    AssetRoleDetail         "nullable"
+    int       AssetOrdinal            "nullable"
+    string    Notes
+
+    string    SourceSystem
+    string    SourceRef
+    string    IngestBatchId
+    datetime2 RowCreatedUtc
+    datetime2 RowUpdatedUtc
+    string    AttributesJson
+  }
+
+  %% -------------------------
+  %% CONTINUITY META LAYER (CLAIMS AND ISSUES)
+  %% -------------------------
+  DimIssueType {
+    int       IssueTypeKey PK
+    string    IssueTypeName           "Temporal|Identity|Attribute|VersionVariance|..."
+    string    IssueTypeCode           "short code"
+    string    Description             "nullable"
+    string    Notes
+
+    string    SourceSystem
+    string    SourceRef
+    string    IngestBatchId
+    datetime2 RowCreatedUtc
+    datetime2 RowUpdatedUtc
+    bool      IsActive
+    string    AttributesJson
+  }
+
+  ContinuityIssue {
+    bigint    ContinuityIssueKey PK
+    int       FranchiseKey FK
+    int       ContinuityFrameKey FK
+    int       IssueTypeKey FK
+
+    string    IssueSummary            "short label"
+    string    IssueDescription        "nullable; internal descriptive"
+    string    Scope                   "Scene|Work|Franchise"
+    int       WorkKey FK              "nullable"
+    int       SceneKey FK             "nullable"
+
+    int       SeverityScore           "0-100"
+    string    SeverityLabel           "Low|Med|High|Critical"
+    string    DisputeLevel            "Low|Med|High"
+    string    Status                  "Open|Explained|Retconned|SplitByFrame|Closed"
+
+    decimal   ConfidenceScore         "0-1 nullable"
+    string    Notes
+
+    string    SourceSystem
+    string    SourceRef
+    string    IngestBatchId
+    datetime2 RowCreatedUtc
+    datetime2 RowUpdatedUtc
+    bool      IsActive
+    string    AttributesJson
+  }
+
+  FactClaim {
+    bigint    ClaimKey PK
+    int       FranchiseKey FK
+    int       ContinuityFrameKey FK
+
+    string    ClaimType               "Attribute|Relationship|Ordering|Identity|Other"
+    int       SubjectEntityKey FK
+    string    Predicate               "born_year|killed_by|appears_after|..."
+    string    ObjectValue             "MVP: literal or EntityKey-as-text"
+    string    ObjectValueType         "EntityRef|String|Number|Date|Range|Other"
+
+    int       WorkKey FK              "nullable"
+    int       SceneKey FK             "nullable"
+
+    decimal   ConfidenceScore         "0-1"
+    string    EvidenceRef             "nullable; internal pointer only"
+    string    ExtractionMethod        "AI|Manual|Rules|Hybrid"
+    string    Notes
+
+    string    SourceSystem
+    string    SourceRef
+    string    IngestBatchId
+    datetime2 RowCreatedUtc
+    datetime2 RowUpdatedUtc
+    string    AttributesJson
+  }
+
+  BridgeContinuityIssueClaim {
+    bigint    ContinuityIssueKey FK
+    bigint    ClaimKey FK
+
+    string    Role                    "Conflicting|Context|Supporting|ResolutionBasis"
+    string    Notes
+
+    string    SourceSystem
+    string    SourceRef
+    string    IngestBatchId
+    datetime2 RowCreatedUtc
+    datetime2 RowUpdatedUtc
+    string    AttributesJson
+  }
+
+  %% -------------------------
+  %% RELATIONSHIPS (only those relevant to this group)
+  %% -------------------------
+  DimCharacter ||--o{ DimAppearanceLook : has
+  DimWork      ||--o{ DimAppearanceLook : shows
+  DimScene     ||--o{ DimAppearanceLook : shows
+
+  DimFranchise ||--o{ DimEventType : defines
+  DimEventType ||--o{ DimEventType : parent_of
+
+  DimWork      ||--o{ FactEvent : has
+  DimScene     ||--o{ FactEvent : has
+  DimContinuityFrame ||--o{ FactEvent : scopes
+  DimEventType ||--o{ FactEvent : types
+  DimLocation  ||--o{ FactEvent : occurs_at
+  FactEvent    ||--o{ FactEvent : parent_of
+
+  FactEvent    ||--o{ BridgeEventParticipant : has
+  DimEntity    ||--o{ BridgeEventParticipant : participates
+
+  FactEvent    ||--o{ BridgeEventAsset : uses
+  DimTechInstance ||--o{ BridgeEventAsset : referenced
+
+  DimIssueType ||--o{ ContinuityIssue : classifies
+  DimContinuityFrame ||--o{ ContinuityIssue : scopes
+  DimWork      ||--o{ ContinuityIssue : optional_scope
+  DimScene     ||--o{ ContinuityIssue : optional_scope
+
+  FactClaim    ||--o{ BridgeContinuityIssueClaim : links
+  ContinuityIssue ||--o{ BridgeContinuityIssueClaim : links
+  DimWork      ||--o{ FactClaim : sourced_in
+  DimScene     ||--o{ FactClaim : sourced_in
+  DimContinuityFrame ||--o{ FactClaim : scopes
+  DimEntity    ||--o{ FactClaim : subject
+
+
+  %% -------------------------
+  %% RELATIONSHIPS
+  %% -------------------------
+  DimDate ||--o{ FactEvent : occurs_on
+  DimTime ||--o{ FactEvent : occurs_at
+
+  DimFranchise ||--o{ DimEraAnchor : defines
+  DimEra       ||--o{ DimEraAnchor : anchored_by
+  DimDate      ||--o{ DimEraAnchor : anchor_date
+  DimTime      ||--o{ DimEraAnchor : anchor_time
