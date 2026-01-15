@@ -1,0 +1,12 @@
+﻿# Example profiles configuration (template only)
+# Do not store secrets here
+
+profiles:
+  local:
+    db:
+      engine: "sqlserver"
+      host: "localhost"
+      port: 1433
+      database: "holocron"
+      user: "REPLACE_ME"
+      password: "REPLACE_ME"

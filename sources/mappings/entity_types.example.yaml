@@ -1,0 +1,9 @@
+﻿# Example entity type mappings (template only)
+
+entity_types:
+  character:
+    target_table: "dim_character"
+    key_field: "character_id"
+  location:
+    target_table: "dim_location"
+    key_field: "location_id"

@@ -29,3 +29,16 @@ obj/
 *.bak
 *.log
 
+# Local and environment
+local/
+.env
+.venv/
+__pycache__/
+*.pyc
+
+# Config and source templates
+config/*.yaml
+!config/*.example.yaml
+sources/*.yaml
+!sources/*.example.yaml
+

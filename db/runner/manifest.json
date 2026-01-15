@@ -1,0 +1,5 @@
+﻿{
+  "ddl_order": [
+    "ddl/00_schemas.sql"
+  ]
+}

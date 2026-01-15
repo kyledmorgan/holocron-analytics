@@ -1,0 +1,2 @@
+﻿-- Placeholder runner
+-- Future script will execute files in db/runner/manifest.json

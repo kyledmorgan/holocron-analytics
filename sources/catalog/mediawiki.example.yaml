@@ -1,0 +1,10 @@
+﻿# Example source definition (template only)
+
+source:
+  name: "mediawiki"
+  type: "http"
+  base_url: "https://example.org/api.php"
+  rate_limit:
+    requests_per_minute: 60
+  auth:
+    mode: "none"

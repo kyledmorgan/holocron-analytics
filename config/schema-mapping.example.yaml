@@ -1,0 +1,6 @@
+﻿# Example schema mapping configuration (template only)
+
+mappings:
+  - source_entity: "character"
+    target_table: "dim_character"
+    key: "character_id"

@@ -1,0 +1,7 @@
+﻿# Example logging configuration (template only)
+
+logging:
+  level: "info"
+  format: "json"
+  outputs:
+    - "console"
