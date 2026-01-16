@@ -1,2 +1,0 @@
-﻿-- Placeholder for schema creation order
--- No functional DDL yet
