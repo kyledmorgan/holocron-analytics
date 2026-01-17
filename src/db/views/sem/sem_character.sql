@@ -58,15 +58,12 @@ INNER JOIN dbo.DimFranchise f
     ON e.FranchiseKey = f.FranchiseKey
    AND f.IsActive = 1
    AND f.IsLatest = 1
+LEFT JOIN dbo.DimSpecies spc
+    ON c.SpeciesKey = spc.SpeciesKey
+   AND spc.IsActive = 1
+   AND spc.IsLatest = 1
 LEFT JOIN dbo.DimEntity sp
-    ON c.SpeciesKey IS NOT NULL
-   AND EXISTS (
-       SELECT 1 FROM dbo.DimSpecies spc
-       WHERE spc.SpeciesKey = c.SpeciesKey
-         AND spc.EntityKey = sp.EntityKey
-         AND spc.IsActive = 1
-         AND spc.IsLatest = 1
-   )
+    ON spc.EntityKey = sp.EntityKey
    AND sp.IsActive = 1
    AND sp.IsLatest = 1
 WHERE c.IsActive = 1
