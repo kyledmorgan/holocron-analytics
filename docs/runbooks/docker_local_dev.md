@@ -2,7 +2,33 @@
 
 This guide explains how to set up and run the Holocron Analytics environment using Docker Desktop.
 
+## Happy Path (Windows + Docker Desktop)
+
+If you're new to Docker, follow this short path first. It is designed for Windows users running Docker Desktop.
+
+1. Install **Docker Desktop** and make sure it is running (WSL 2 backend enabled).
+2. Clone the repo and open the folder in File Explorer:
+   - `git clone https://github.com/kyledmorgan/holocron-analytics.git`
+   - `cd holocron-analytics`
+3. Copy `.env.example` to `.env` and set a strong `MSSQL_SA_PASSWORD`.
+4. Open Docker Desktop and confirm you can see your engine running.
+5. From a terminal, run: `docker compose up --build`
+6. Wait for logs that show:
+   - `SQL Server is now ready for client connections`
+   - `Database initialization complete`
+   - `Seed loading complete` with exit code 0
+7. Connect with Azure Data Studio or SSMS using `localhost,1433`, user `sa`, and your `.env` password.
+
+If anything fails, jump to **Troubleshooting** below.
+
+## Detailed Steps (Windows First)
+
+Use this section if you want more explanation or if the Happy Path doesn't work the first time.
+
 ## Prerequisites
+
+- **Git** installed (for cloning the repo)
+- Optional: enable WSL 2 integration for your default distro (Docker Desktop -> Settings -> Resources -> WSL Integration)
 
 - **Docker Desktop** installed and running
   - Windows: [Download Docker Desktop](https://www.docker.com/products/docker-desktop/)
@@ -272,3 +298,108 @@ docker compose exec sqlserver /opt/mssql-tools18/bin/sqlcmd -S localhost -U sa -
 | `MSSQL_SA_PASSWORD` | *(required)* | SQL Server SA password |
 | `MSSQL_DATABASE` | `Holocron` | Database name to create |
 | `SEED_SKIP` | `false` | Skip seed loader if `true` |
+
+---
+
+## Detailed Walkthrough (Expanded)
+
+### 1) Install prerequisites
+
+- Install **Docker Desktop** (Windows) and confirm it is running.
+- Optional but recommended: enable WSL 2 backend and WSL integration in Docker Desktop.
+- Install **Git** so you can clone the repository.
+
+### 2) Clone the repository
+
+```bash
+git clone https://github.com/kyledmorgan/holocron-analytics.git
+cd holocron-analytics
+```
+
+### 3) Configure environment variables safely
+
+1. Copy `.env.example` to `.env` in the repo root.
+2. Set `MSSQL_SA_PASSWORD` to a strong password.
+3. Keep `.env` local only (it is gitignored and should never be committed).
+
+Example (PowerShell):
+
+```bash
+Copy-Item .env.example .env
+```
+
+### 4) Start the stack (recommended path)
+
+CLI (works on Windows PowerShell or Terminal):
+
+```bash
+docker compose up --build
+```
+
+Docker Desktop UI (GUI-first):
+
+1. Open Docker Desktop.
+2. Use **Compose** or **Open** and select the repo folder.
+3. Start the stack from the UI.
+
+### 5) What success looks like
+
+You should see:
+- `holocron-sqlserver` running and healthy
+- `holocron-initdb` exited successfully
+- `holocron-seed` exited successfully
+
+Log messages to look for:
+
+```
+SQL Server is now ready for client connections
+=== Database initialization complete ===
+Seed loading complete. Total rows inserted: ...
+```
+
+### 6) Connect from your host machine
+
+Use Azure Data Studio or SSMS with these settings:
+
+- Server: `localhost,1433`
+- Authentication: SQL Server Authentication
+- Username: `sa`
+- Password: your `.env` value
+- Database: `Holocron`
+
+### 7) Quick verification
+
+Run a simple query in your SQL client:
+
+```sql
+USE Holocron;
+SELECT COUNT(*) AS FranchiseCount FROM dbo.DimFranchise;
+```
+
+---
+
+## Troubleshooting Addendum (Windows + Docker Desktop)
+
+- **WSL 2 backend disabled**: Docker Desktop -> Settings -> General -> enable WSL 2 engine, then restart Docker Desktop.
+- **Image pulls fail**: Verify you are signed in to Docker Desktop and your network allows access to `mcr.microsoft.com`.
+- **SQL Server takes time to initialize**: Wait 1-3 minutes after `sqlserver` starts before running `seed`.
+- **Port 1433 in use**: Stop other SQL Server instances or change the compose port mapping.
+- **Volume permission issues**: Ensure the drive hosting the repo is shared in Docker Desktop -> Settings -> Resources -> File Sharing.
+- **Password policy failure**: Use at least 8 characters with upper, lower, number, and special characters.
+
+---
+
+## Cleanup and Reset Notes
+
+- `docker compose down` stops containers but keeps the `mssql_data` volume (data stays).
+- `docker compose down -v` removes volumes (all SQL data is deleted).
+- Re-running `docker compose up --build` will re-create the database and re-seed.
+
+---
+
+## Glossary (Plain Language)
+
+- **Image**: A packaged blueprint used to create containers (like a template).
+- **Container**: A running instance of an image (the actual process).
+- **Volume**: A persistent storage location for container data (your database files live here).
+- **Port mapping**: A rule that exposes a container port to your host (e.g., `1433:1433`).

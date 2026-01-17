@@ -116,6 +116,16 @@ This will:
 
 ---
 
+## Getting Started (Docker)
+
+The Docker runbook is the single source of truth for standing up the stack on Windows:
+
+- `docs/runbooks/docker_local_dev.md`
+
+It includes a happy-path quickstart, detailed steps, troubleshooting, and cleanup notes.
+
+---
+
 ## Learning & exercise focus
 
 This repo is intentionally structured so that:
