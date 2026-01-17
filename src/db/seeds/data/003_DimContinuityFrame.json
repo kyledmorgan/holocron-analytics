@@ -1,10 +1,13 @@
 {
   "seedVersion": "0.1.0",
-  "generatedUtc": "2026-01-16T00:00:00Z",
+  "generatedUtc": "2026-01-17T00:00:00Z",
   "target": {
     "schema": "dbo",
     "table": "DimContinuityFrame",
-    "naturalKey": ["FranchiseKey", "FrameCode"],
+    "naturalKey": [
+      "FranchiseKey",
+      "FrameCode"
+    ],
     "loadBehavior": "truncate-insert"
   },
   "options": {
@@ -18,14 +21,27 @@
   },
   "rows": [
     {
-      "ContinuityFrameGuid": "00000004-0001-0000-0000-000000000001",
+      "ContinuityFrameGuid": "0bc8340c-fff6-0edd-030e-28cf3b92d8d6",
       "FranchiseKey": 1,
       "FrameName": "Canon",
       "FrameCode": "CANON",
       "AuthorityType": "Official",
       "AuthorityRef": "Lucasfilm Story Group",
-      "PolicySummary": "Official continuity established after 2014 Disney acquisition",
+      "PolicySummary": "Official continuity post-2014",
       "EffectiveStartDate": "2014-04-25",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "003_DimContinuityFrame.json"
+    },
+    {
+      "ContinuityFrameGuid": "7f47ae58-9c6a-b292-c620-286100958e05",
+      "FranchiseKey": 1,
+      "FrameName": "Legends",
+      "FrameCode": "LEGENDS",
+      "AuthorityType": "Historical",
+      "AuthorityRef": "Pre-Disney EU",
+      "PolicySummary": "Expanded Universe content prior to 2014",
+      "EffectiveStartDate": "1991-01-01",
       "Notes": "Synthetic seed data",
       "SourceSystem": "seed_loader",
       "SourceRef": "003_DimContinuityFrame.json"

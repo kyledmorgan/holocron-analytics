@@ -1,10 +1,12 @@
 {
   "seedVersion": "0.1.0",
-  "generatedUtc": "2026-01-16T00:00:00Z",
+  "generatedUtc": "2026-01-17T00:00:00Z",
   "target": {
     "schema": "dbo",
     "table": "DimTechInstance",
-    "naturalKey": ["EntityKey"],
+    "naturalKey": [
+      "EntityKey"
+    ],
     "loadBehavior": "truncate-insert"
   },
   "options": {
@@ -18,14 +20,1501 @@
   },
   "rows": [
     {
-      "TechInstanceGuid": "00000015-0001-0000-0000-000000000001",
-      "EntityKey": 2,
-      "TechAssetKey": 1,
-      "InstanceName": "C-3PO",
-      "SerialRef": "Unknown",
-      "BuildRef": "Rebuilt by Anakin Skywalker",
+      "TechInstanceGuid": "7ff1c311-696d-6ad1-f4a0-20e003ed6f9c",
+      "EntityKey": 301,
+      "TechAssetKey": 11,
+      "InstanceName": "Red Five X-wing",
       "CurrentStatus": "Active",
-      "LastKnownLocationRef": "Resistance base",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "46636ead-17f3-272b-c665-50b904435473",
+      "EntityKey": 302,
+      "TechAssetKey": 11,
+      "InstanceName": "Red Two X-wing",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "2299530a-6bf8-84e7-cc64-7da0745b4587",
+      "EntityKey": 303,
+      "TechAssetKey": 11,
+      "InstanceName": "Red Three X-wing",
+      "CurrentStatus": "Destroyed",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "7f223036-cd58-32b6-7f5c-b724df142ecb",
+      "EntityKey": 304,
+      "TechAssetKey": 11,
+      "InstanceName": "Red Leader X-wing",
+      "CurrentStatus": "Destroyed",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "e4a75131-9d1f-068f-c62a-20f42eb02508",
+      "EntityKey": 305,
+      "TechAssetKey": 15,
+      "InstanceName": "Millennium Falcon",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "c76412ec-8f49-65cc-ceb0-8631083c6f95",
+      "EntityKey": 306,
+      "TechAssetKey": 14,
+      "InstanceName": "Vader's TIE Advanced",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "04cafe79-18e0-6768-e325-8216ac42256f",
+      "EntityKey": 307,
+      "TechAssetKey": 13,
+      "InstanceName": "TIE Fighter Black Two",
+      "CurrentStatus": "Destroyed",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "a19ddd6c-90bb-4a75-28f1-002341db977d",
+      "EntityKey": 308,
+      "TechAssetKey": 13,
+      "InstanceName": "TIE Fighter Black Three",
+      "CurrentStatus": "Destroyed",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "1275e49e-7c02-62ad-e77e-df237ff28fc2",
+      "EntityKey": 309,
+      "TechAssetKey": 16,
+      "InstanceName": "Tantive IV",
+      "CurrentStatus": "Captured",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "e7f3c1a3-e680-de91-5004-96ae60ac687c",
+      "EntityKey": 310,
+      "TechAssetKey": 17,
+      "InstanceName": "Slave I",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "868f2cb2-dde0-15a0-35c8-780fe2bc5d80",
+      "EntityKey": 311,
+      "TechAssetKey": 12,
+      "InstanceName": "Gold Leader Y-wing",
+      "CurrentStatus": "Destroyed",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "3e94bbac-837b-1860-6e40-4c80a266a587",
+      "EntityKey": 312,
+      "TechAssetKey": 12,
+      "InstanceName": "Gold Five Y-wing",
+      "CurrentStatus": "Destroyed",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "5d9a535c-46fa-82d3-5bff-d677ecc47e5b",
+      "EntityKey": 313,
+      "TechAssetKey": 21,
+      "InstanceName": "Luke's Lightsaber",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "3c6cdd25-4463-26f3-eaa9-c8eb415682eb",
+      "EntityKey": 314,
+      "TechAssetKey": 21,
+      "InstanceName": "Vader's Lightsaber",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "38f6e428-5c47-f923-0b39-1441429cdc08",
+      "EntityKey": 315,
+      "TechAssetKey": 21,
+      "InstanceName": "Obi-Wan's Lightsaber (ANH)",
+      "CurrentStatus": "Inactive",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "c0fe0c76-243e-15ae-bc89-d736d0c09f5d",
+      "EntityKey": 316,
+      "TechAssetKey": 21,
+      "InstanceName": "Qui-Gon's Lightsaber",
+      "CurrentStatus": "Inactive",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "e8bf0282-e7a2-6198-7219-d4e973af6358",
+      "EntityKey": 317,
+      "TechAssetKey": 22,
+      "InstanceName": "Darth Maul's Lightsaber",
+      "CurrentStatus": "Destroyed",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "a226b104-6295-ebda-ee3f-099cc82ffe31",
+      "EntityKey": 318,
+      "TechAssetKey": 21,
+      "InstanceName": "Anakin's Lightsaber (TPM)",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "3a2620c5-46e0-4786-8e67-f12b716c4779",
+      "EntityKey": 319,
+      "TechAssetKey": 18,
+      "InstanceName": "Naboo N-1 Starfighter",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "c452ee6f-f7cd-c16c-1a50-76945e2d6b98",
+      "EntityKey": 320,
+      "TechAssetKey": 20,
+      "InstanceName": "Tech Instance 20",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "6b7410ff-7c26-bdda-688d-65f3a5298e1d",
+      "EntityKey": 321,
+      "TechAssetKey": 21,
+      "InstanceName": "Tech Instance 21",
+      "CurrentStatus": "Inactive",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "6274e575-0040-98a0-f0c4-dbb72f7d1866",
+      "EntityKey": 322,
+      "TechAssetKey": 22,
+      "InstanceName": "Tech Instance 22",
+      "CurrentStatus": "Destroyed",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "796c374a-d78c-ad8b-767a-13c295051415",
+      "EntityKey": 323,
+      "TechAssetKey": 23,
+      "InstanceName": "Tech Instance 23",
+      "CurrentStatus": "Unknown",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "16947b5f-3d46-e32d-83ae-6fb4b06f8efd",
+      "EntityKey": 324,
+      "TechAssetKey": 24,
+      "InstanceName": "Tech Instance 24",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "517094b3-f612-32ad-9eda-fb10c3ae2731",
+      "EntityKey": 325,
+      "TechAssetKey": 25,
+      "InstanceName": "Tech Instance 25",
+      "CurrentStatus": "Inactive",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "66267b4f-50ad-fac2-6ce0-f9481daa1872",
+      "EntityKey": 326,
+      "TechAssetKey": 26,
+      "InstanceName": "Tech Instance 26",
+      "CurrentStatus": "Destroyed",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "109e7063-7139-f3ef-3983-d5fa7d5b3598",
+      "EntityKey": 327,
+      "TechAssetKey": 27,
+      "InstanceName": "Tech Instance 27",
+      "CurrentStatus": "Unknown",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "93af94d4-56f8-4f7e-4aec-2590381732d1",
+      "EntityKey": 328,
+      "TechAssetKey": 28,
+      "InstanceName": "Tech Instance 28",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "1f1a2ad7-cb6a-e7aa-e6f1-51b6c533432a",
+      "EntityKey": 329,
+      "TechAssetKey": 1,
+      "InstanceName": "Tech Instance 29",
+      "CurrentStatus": "Inactive",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "7e37312d-e8eb-6de3-ccad-fd434c91c3bd",
+      "EntityKey": 330,
+      "TechAssetKey": 2,
+      "InstanceName": "Tech Instance 30",
+      "CurrentStatus": "Destroyed",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "305ea59f-177b-79dd-3aaa-64e0d658ea0c",
+      "EntityKey": 331,
+      "TechAssetKey": 3,
+      "InstanceName": "Tech Instance 31",
+      "CurrentStatus": "Unknown",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "99b94592-d11d-b582-002c-13ca4088397a",
+      "EntityKey": 332,
+      "TechAssetKey": 4,
+      "InstanceName": "Tech Instance 32",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "cb41a126-86d8-2b79-3640-af56497e595c",
+      "EntityKey": 333,
+      "TechAssetKey": 5,
+      "InstanceName": "Tech Instance 33",
+      "CurrentStatus": "Inactive",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "8864f240-c61e-893d-fffc-0cc3042257f9",
+      "EntityKey": 334,
+      "TechAssetKey": 6,
+      "InstanceName": "Tech Instance 34",
+      "CurrentStatus": "Destroyed",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "1a50d21b-0cca-a46d-0d8f-daed863942d5",
+      "EntityKey": 335,
+      "TechAssetKey": 7,
+      "InstanceName": "Tech Instance 35",
+      "CurrentStatus": "Unknown",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "1a4827e1-6fa3-9d90-cef7-eac21e9f0dd6",
+      "EntityKey": 336,
+      "TechAssetKey": 8,
+      "InstanceName": "Tech Instance 36",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "c6792ac8-6a0f-92fe-713d-3a5f27701a93",
+      "EntityKey": 337,
+      "TechAssetKey": 9,
+      "InstanceName": "Tech Instance 37",
+      "CurrentStatus": "Inactive",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "ff83491a-97d3-2db7-3ecc-ae44a89ee3af",
+      "EntityKey": 338,
+      "TechAssetKey": 10,
+      "InstanceName": "Tech Instance 38",
+      "CurrentStatus": "Destroyed",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "6c352c19-91f0-ba58-932c-29bfd5f462a2",
+      "EntityKey": 339,
+      "TechAssetKey": 11,
+      "InstanceName": "Tech Instance 39",
+      "CurrentStatus": "Unknown",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "e4439d9b-824f-c848-0691-363e81fcbe19",
+      "EntityKey": 340,
+      "TechAssetKey": 12,
+      "InstanceName": "Tech Instance 40",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "19baf15f-958e-69fd-a436-31714c9590ca",
+      "EntityKey": 341,
+      "TechAssetKey": 13,
+      "InstanceName": "Tech Instance 41",
+      "CurrentStatus": "Inactive",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "c252d989-b6cf-055c-0a6b-90b4a20acfdc",
+      "EntityKey": 342,
+      "TechAssetKey": 14,
+      "InstanceName": "Tech Instance 42",
+      "CurrentStatus": "Destroyed",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "1bc5dda4-d9e2-29d3-8fc8-55073ced864b",
+      "EntityKey": 343,
+      "TechAssetKey": 15,
+      "InstanceName": "Tech Instance 43",
+      "CurrentStatus": "Unknown",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "495e51f6-e657-c0f0-6555-20f4ddde7e1d",
+      "EntityKey": 344,
+      "TechAssetKey": 16,
+      "InstanceName": "Tech Instance 44",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "3a60c67c-01e6-39bb-c948-2e38163c470d",
+      "EntityKey": 345,
+      "TechAssetKey": 17,
+      "InstanceName": "Tech Instance 45",
+      "CurrentStatus": "Inactive",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "52e7d21c-7906-ca13-7e16-4af7b2deb837",
+      "EntityKey": 346,
+      "TechAssetKey": 18,
+      "InstanceName": "Tech Instance 46",
+      "CurrentStatus": "Destroyed",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "9334a546-3d98-1b7e-846f-691af92eb90f",
+      "EntityKey": 347,
+      "TechAssetKey": 19,
+      "InstanceName": "Tech Instance 47",
+      "CurrentStatus": "Unknown",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "022bbfad-bbc0-6953-79af-02f6235280c8",
+      "EntityKey": 348,
+      "TechAssetKey": 20,
+      "InstanceName": "Tech Instance 48",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "d42f3888-6e22-5273-4817-f68ea5cf46e1",
+      "EntityKey": 349,
+      "TechAssetKey": 21,
+      "InstanceName": "Tech Instance 49",
+      "CurrentStatus": "Inactive",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "6f075c06-8883-fe34-7b8f-da72eba13281",
+      "EntityKey": 350,
+      "TechAssetKey": 22,
+      "InstanceName": "Tech Instance 50",
+      "CurrentStatus": "Destroyed",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "bd89de26-1099-14b8-0445-46800b4703e0",
+      "EntityKey": 351,
+      "TechAssetKey": 23,
+      "InstanceName": "Tech Instance 51",
+      "CurrentStatus": "Unknown",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "97a7c3cb-5acb-98ca-51b1-1e8728abac8b",
+      "EntityKey": 352,
+      "TechAssetKey": 24,
+      "InstanceName": "Tech Instance 52",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "1163a0ee-28d6-ecb1-8f47-ab8a9d8777f0",
+      "EntityKey": 353,
+      "TechAssetKey": 25,
+      "InstanceName": "Tech Instance 53",
+      "CurrentStatus": "Inactive",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "a56a9b31-767b-e0b6-19df-7049711f2cd6",
+      "EntityKey": 354,
+      "TechAssetKey": 26,
+      "InstanceName": "Tech Instance 54",
+      "CurrentStatus": "Destroyed",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "3ab3a456-7663-99db-4642-d93ce7a6efd3",
+      "EntityKey": 355,
+      "TechAssetKey": 27,
+      "InstanceName": "Tech Instance 55",
+      "CurrentStatus": "Unknown",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "9c8bf819-d242-fdd5-5c90-d3060ed05997",
+      "EntityKey": 356,
+      "TechAssetKey": 28,
+      "InstanceName": "Tech Instance 56",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "a4fe876c-45ff-5475-ceab-1e9283fc9f8e",
+      "EntityKey": 357,
+      "TechAssetKey": 1,
+      "InstanceName": "Tech Instance 57",
+      "CurrentStatus": "Inactive",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "eb564820-2a95-4028-2f1a-9cfd80287e18",
+      "EntityKey": 358,
+      "TechAssetKey": 2,
+      "InstanceName": "Tech Instance 58",
+      "CurrentStatus": "Destroyed",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "963373ab-a514-ba52-c7b2-f94a02ff5675",
+      "EntityKey": 359,
+      "TechAssetKey": 3,
+      "InstanceName": "Tech Instance 59",
+      "CurrentStatus": "Unknown",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "daf3ec4d-8363-1a63-55ce-1c587b5e430a",
+      "EntityKey": 360,
+      "TechAssetKey": 4,
+      "InstanceName": "Tech Instance 60",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "12e1e56a-809f-f35e-d529-1af7813014c2",
+      "EntityKey": 361,
+      "TechAssetKey": 5,
+      "InstanceName": "Tech Instance 61",
+      "CurrentStatus": "Inactive",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "a53c3331-6e04-af1a-7814-64a7767aa4c3",
+      "EntityKey": 362,
+      "TechAssetKey": 6,
+      "InstanceName": "Tech Instance 62",
+      "CurrentStatus": "Destroyed",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "bdd18286-47ff-4fe1-d829-ac2cce522738",
+      "EntityKey": 363,
+      "TechAssetKey": 7,
+      "InstanceName": "Tech Instance 63",
+      "CurrentStatus": "Unknown",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "29251474-2821-39d7-7e2a-e50a75f8a289",
+      "EntityKey": 364,
+      "TechAssetKey": 8,
+      "InstanceName": "Tech Instance 64",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "f87dbcfc-1256-fe21-b204-5ff0d62c51c1",
+      "EntityKey": 365,
+      "TechAssetKey": 9,
+      "InstanceName": "Tech Instance 65",
+      "CurrentStatus": "Inactive",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "44372855-9c1b-a7aa-7632-18fd3ac552f6",
+      "EntityKey": 366,
+      "TechAssetKey": 10,
+      "InstanceName": "Tech Instance 66",
+      "CurrentStatus": "Destroyed",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "70b27dd2-32a3-699b-6743-3b0c62d6851d",
+      "EntityKey": 367,
+      "TechAssetKey": 11,
+      "InstanceName": "Tech Instance 67",
+      "CurrentStatus": "Unknown",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "4854dff0-f45a-eee0-664d-6bd2cc360fde",
+      "EntityKey": 368,
+      "TechAssetKey": 12,
+      "InstanceName": "Tech Instance 68",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "e00209f2-7c9e-6603-ef12-fab6a127c1f1",
+      "EntityKey": 369,
+      "TechAssetKey": 13,
+      "InstanceName": "Tech Instance 69",
+      "CurrentStatus": "Inactive",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "9da0829a-e814-d70a-8e96-3808959d7e58",
+      "EntityKey": 370,
+      "TechAssetKey": 14,
+      "InstanceName": "Tech Instance 70",
+      "CurrentStatus": "Destroyed",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "338e9792-43eb-9ba1-44bd-dffadcca15c2",
+      "EntityKey": 371,
+      "TechAssetKey": 15,
+      "InstanceName": "Tech Instance 71",
+      "CurrentStatus": "Unknown",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "4e0ed7a0-24b8-27b9-669e-d356a3c0ade9",
+      "EntityKey": 372,
+      "TechAssetKey": 16,
+      "InstanceName": "Tech Instance 72",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "f7317260-339f-6559-cc12-0aba5468d087",
+      "EntityKey": 373,
+      "TechAssetKey": 17,
+      "InstanceName": "Tech Instance 73",
+      "CurrentStatus": "Inactive",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "28e10f72-1438-f6dc-b90e-b744fad3d818",
+      "EntityKey": 374,
+      "TechAssetKey": 18,
+      "InstanceName": "Tech Instance 74",
+      "CurrentStatus": "Destroyed",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "ce28b261-f396-3f82-56cb-a083e62ac7e0",
+      "EntityKey": 375,
+      "TechAssetKey": 19,
+      "InstanceName": "Tech Instance 75",
+      "CurrentStatus": "Unknown",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "b5b038b1-1fe7-6588-3ecb-a5fa7aeb9931",
+      "EntityKey": 376,
+      "TechAssetKey": 20,
+      "InstanceName": "Tech Instance 76",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "2851b3e2-af4c-dc72-9238-24ee6acb7782",
+      "EntityKey": 377,
+      "TechAssetKey": 21,
+      "InstanceName": "Tech Instance 77",
+      "CurrentStatus": "Inactive",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "f7cf63c2-9941-80fc-65cc-9b368e5ce6da",
+      "EntityKey": 378,
+      "TechAssetKey": 22,
+      "InstanceName": "Tech Instance 78",
+      "CurrentStatus": "Destroyed",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "7ab12c40-400e-9aba-18f3-1b5f4eaead06",
+      "EntityKey": 379,
+      "TechAssetKey": 23,
+      "InstanceName": "Tech Instance 79",
+      "CurrentStatus": "Unknown",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "cd028799-049f-c996-0279-276c8749b6a0",
+      "EntityKey": 380,
+      "TechAssetKey": 24,
+      "InstanceName": "Tech Instance 80",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "a0ef4326-5e21-c2c3-8794-2489ecd9c780",
+      "EntityKey": 381,
+      "TechAssetKey": 25,
+      "InstanceName": "Tech Instance 81",
+      "CurrentStatus": "Inactive",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "0ba49d7d-0ba5-4784-7bd6-b761f0d85584",
+      "EntityKey": 382,
+      "TechAssetKey": 26,
+      "InstanceName": "Tech Instance 82",
+      "CurrentStatus": "Destroyed",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "207af0d1-47f9-e8bc-5212-a910f5dd2638",
+      "EntityKey": 383,
+      "TechAssetKey": 27,
+      "InstanceName": "Tech Instance 83",
+      "CurrentStatus": "Unknown",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "2c148c1b-b5aa-1a33-5eb1-e1d5fd391229",
+      "EntityKey": 384,
+      "TechAssetKey": 28,
+      "InstanceName": "Tech Instance 84",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "3624ec3e-ce9a-6e55-3635-ef4b0b5930d4",
+      "EntityKey": 385,
+      "TechAssetKey": 1,
+      "InstanceName": "Tech Instance 85",
+      "CurrentStatus": "Inactive",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "3d5383db-eb4d-558a-d480-7ff05a4ee683",
+      "EntityKey": 386,
+      "TechAssetKey": 2,
+      "InstanceName": "Tech Instance 86",
+      "CurrentStatus": "Destroyed",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "fff9a236-9985-7068-d189-6697fd555031",
+      "EntityKey": 387,
+      "TechAssetKey": 3,
+      "InstanceName": "Tech Instance 87",
+      "CurrentStatus": "Unknown",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "a577593a-d78c-dc5d-82da-ccf8e76a480f",
+      "EntityKey": 388,
+      "TechAssetKey": 4,
+      "InstanceName": "Tech Instance 88",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "5a0cb8d7-739b-d925-455d-6f780a5f7ebb",
+      "EntityKey": 389,
+      "TechAssetKey": 5,
+      "InstanceName": "Tech Instance 89",
+      "CurrentStatus": "Inactive",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "d2db6ea9-7539-992b-920c-c86d9da6eba7",
+      "EntityKey": 390,
+      "TechAssetKey": 6,
+      "InstanceName": "Tech Instance 90",
+      "CurrentStatus": "Destroyed",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "0d7ace30-6c3f-22f1-83b4-873ddef94443",
+      "EntityKey": 391,
+      "TechAssetKey": 7,
+      "InstanceName": "Tech Instance 91",
+      "CurrentStatus": "Unknown",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "2c8b963e-0393-6022-24b5-59282f1f4f84",
+      "EntityKey": 392,
+      "TechAssetKey": 8,
+      "InstanceName": "Tech Instance 92",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "fa3d208d-6c78-ece1-009d-30423d83d99f",
+      "EntityKey": 393,
+      "TechAssetKey": 9,
+      "InstanceName": "Tech Instance 93",
+      "CurrentStatus": "Inactive",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "4671406a-1eea-3ebe-3cd7-fc079000d0f4",
+      "EntityKey": 394,
+      "TechAssetKey": 10,
+      "InstanceName": "Tech Instance 94",
+      "CurrentStatus": "Destroyed",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "bf401674-cc9c-a0e5-f63d-a670e8e6bc09",
+      "EntityKey": 395,
+      "TechAssetKey": 11,
+      "InstanceName": "Tech Instance 95",
+      "CurrentStatus": "Unknown",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "6cd5f2d7-0c3b-dc24-d094-e478c06b6077",
+      "EntityKey": 396,
+      "TechAssetKey": 12,
+      "InstanceName": "Tech Instance 96",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "17d75925-9ba9-d688-fdbf-4f6dff46dd0f",
+      "EntityKey": 397,
+      "TechAssetKey": 13,
+      "InstanceName": "Tech Instance 97",
+      "CurrentStatus": "Inactive",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "b6a9a8d3-33c6-6199-f705-4f2643e2bb35",
+      "EntityKey": 398,
+      "TechAssetKey": 14,
+      "InstanceName": "Tech Instance 98",
+      "CurrentStatus": "Destroyed",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "01d25d67-75ee-c1ff-d74e-ae634f021fa3",
+      "EntityKey": 399,
+      "TechAssetKey": 15,
+      "InstanceName": "Tech Instance 99",
+      "CurrentStatus": "Unknown",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "9bb6ab4c-ee02-f983-6e2d-05abee36b1b0",
+      "EntityKey": 400,
+      "TechAssetKey": 16,
+      "InstanceName": "Tech Instance 100",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "9327f3f2-7aa5-5153-1fc4-27625c6938d1",
+      "EntityKey": 401,
+      "TechAssetKey": 17,
+      "InstanceName": "Tech Instance 101",
+      "CurrentStatus": "Inactive",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "8b2f8df2-ad74-a292-c741-9d5ef2b487d6",
+      "EntityKey": 402,
+      "TechAssetKey": 18,
+      "InstanceName": "Tech Instance 102",
+      "CurrentStatus": "Destroyed",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "21f33e9a-0b05-ddb8-a59f-61dfabb7e74e",
+      "EntityKey": 403,
+      "TechAssetKey": 19,
+      "InstanceName": "Tech Instance 103",
+      "CurrentStatus": "Unknown",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "13f915a7-3f2f-aa64-9aca-fa291e0f4637",
+      "EntityKey": 404,
+      "TechAssetKey": 20,
+      "InstanceName": "Tech Instance 104",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "28225e8e-c0c0-bde2-7819-8143e956a9e6",
+      "EntityKey": 405,
+      "TechAssetKey": 21,
+      "InstanceName": "Tech Instance 105",
+      "CurrentStatus": "Inactive",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "0a437dc3-b0a3-ff36-c026-3c83f7373de7",
+      "EntityKey": 406,
+      "TechAssetKey": 22,
+      "InstanceName": "Tech Instance 106",
+      "CurrentStatus": "Destroyed",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "b27abfdc-1f28-bfef-9fde-1ab7a154c1be",
+      "EntityKey": 407,
+      "TechAssetKey": 23,
+      "InstanceName": "Tech Instance 107",
+      "CurrentStatus": "Unknown",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "2e31a139-257e-0643-e3f1-b041c1238cd4",
+      "EntityKey": 408,
+      "TechAssetKey": 24,
+      "InstanceName": "Tech Instance 108",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "dfe3f3bc-57a1-e87b-6e3e-55e9b3cb1401",
+      "EntityKey": 409,
+      "TechAssetKey": 25,
+      "InstanceName": "Tech Instance 109",
+      "CurrentStatus": "Inactive",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "c1df59a5-b17d-87bb-c644-32f5c5ac7a83",
+      "EntityKey": 410,
+      "TechAssetKey": 26,
+      "InstanceName": "Tech Instance 110",
+      "CurrentStatus": "Destroyed",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "04c56f81-76f5-39bd-6115-764d80e4442c",
+      "EntityKey": 411,
+      "TechAssetKey": 27,
+      "InstanceName": "Tech Instance 111",
+      "CurrentStatus": "Unknown",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "5f5e0797-9700-3a34-a409-21a5b1d70ba6",
+      "EntityKey": 412,
+      "TechAssetKey": 28,
+      "InstanceName": "Tech Instance 112",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "090c15b8-170d-106c-6e37-f6a2f5e5e3bc",
+      "EntityKey": 413,
+      "TechAssetKey": 1,
+      "InstanceName": "Tech Instance 113",
+      "CurrentStatus": "Inactive",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "3d35f419-f4cd-445a-1f9d-f0e73107ff6c",
+      "EntityKey": 414,
+      "TechAssetKey": 2,
+      "InstanceName": "Tech Instance 114",
+      "CurrentStatus": "Destroyed",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "f434f099-2054-5178-9b56-67e7f575ee0c",
+      "EntityKey": 415,
+      "TechAssetKey": 3,
+      "InstanceName": "Tech Instance 115",
+      "CurrentStatus": "Unknown",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "a25f966e-0f05-04df-082a-99570a70c7f8",
+      "EntityKey": 416,
+      "TechAssetKey": 4,
+      "InstanceName": "Tech Instance 116",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "65fd457e-6e2d-36e7-44b9-b60d76a462a6",
+      "EntityKey": 417,
+      "TechAssetKey": 5,
+      "InstanceName": "Tech Instance 117",
+      "CurrentStatus": "Inactive",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "7625af42-61e6-542f-463b-3e56ad5268e3",
+      "EntityKey": 418,
+      "TechAssetKey": 6,
+      "InstanceName": "Tech Instance 118",
+      "CurrentStatus": "Destroyed",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "05681d3d-1a22-af36-ddb7-ae212d901c80",
+      "EntityKey": 419,
+      "TechAssetKey": 7,
+      "InstanceName": "Tech Instance 119",
+      "CurrentStatus": "Unknown",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "0f0841e0-d134-1d05-05d6-01d74399f7b9",
+      "EntityKey": 420,
+      "TechAssetKey": 8,
+      "InstanceName": "Tech Instance 120",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "5a931205-1c6b-dba7-e072-ff1b16aac52d",
+      "EntityKey": 421,
+      "TechAssetKey": 9,
+      "InstanceName": "Tech Instance 121",
+      "CurrentStatus": "Inactive",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "395ec472-ab3c-918e-396d-fb7ec45039d0",
+      "EntityKey": 422,
+      "TechAssetKey": 10,
+      "InstanceName": "Tech Instance 122",
+      "CurrentStatus": "Destroyed",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "ee9c4ccc-4f12-ea1c-00c5-752f1553f26d",
+      "EntityKey": 423,
+      "TechAssetKey": 11,
+      "InstanceName": "Tech Instance 123",
+      "CurrentStatus": "Unknown",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "4a335703-0c3c-0942-59ad-77718738a948",
+      "EntityKey": 424,
+      "TechAssetKey": 12,
+      "InstanceName": "Tech Instance 124",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "f8c211e8-0476-5aec-0af5-84d216419cd7",
+      "EntityKey": 425,
+      "TechAssetKey": 13,
+      "InstanceName": "Tech Instance 125",
+      "CurrentStatus": "Inactive",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "ff5a1fac-415a-46e4-32f1-6b1da2491d43",
+      "EntityKey": 426,
+      "TechAssetKey": 14,
+      "InstanceName": "Tech Instance 126",
+      "CurrentStatus": "Destroyed",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "0059198a-97f4-ab80-f222-49f7d043aa5e",
+      "EntityKey": 427,
+      "TechAssetKey": 15,
+      "InstanceName": "Tech Instance 127",
+      "CurrentStatus": "Unknown",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "f8a64a2b-9a61-0b73-3f6b-4dc69c9d011c",
+      "EntityKey": 428,
+      "TechAssetKey": 16,
+      "InstanceName": "Tech Instance 128",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "690dfece-6cf8-a1c0-ed2d-6e33ce578c09",
+      "EntityKey": 429,
+      "TechAssetKey": 17,
+      "InstanceName": "Tech Instance 129",
+      "CurrentStatus": "Inactive",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "1884913c-2581-9e22-c468-9e9f463c82da",
+      "EntityKey": 430,
+      "TechAssetKey": 18,
+      "InstanceName": "Tech Instance 130",
+      "CurrentStatus": "Destroyed",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "bd39b8e9-c258-78f1-a62d-a6192c7b5a98",
+      "EntityKey": 431,
+      "TechAssetKey": 19,
+      "InstanceName": "Tech Instance 131",
+      "CurrentStatus": "Unknown",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "dc39a095-0831-cb5d-b549-5ee250e40198",
+      "EntityKey": 432,
+      "TechAssetKey": 20,
+      "InstanceName": "Tech Instance 132",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "6fe984be-9ea9-3422-32c9-27ebe4dbf01a",
+      "EntityKey": 433,
+      "TechAssetKey": 21,
+      "InstanceName": "Tech Instance 133",
+      "CurrentStatus": "Inactive",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "09a10b76-ce4a-5f75-769c-952fc1e34b41",
+      "EntityKey": 434,
+      "TechAssetKey": 22,
+      "InstanceName": "Tech Instance 134",
+      "CurrentStatus": "Destroyed",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "d4948f90-727c-7b68-089e-2304f3ae8159",
+      "EntityKey": 435,
+      "TechAssetKey": 23,
+      "InstanceName": "Tech Instance 135",
+      "CurrentStatus": "Unknown",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "0fbfb9d6-6ae7-51e2-229b-577a2528cede",
+      "EntityKey": 436,
+      "TechAssetKey": 24,
+      "InstanceName": "Tech Instance 136",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "af61571f-edc7-7024-ab27-0505092fb57e",
+      "EntityKey": 437,
+      "TechAssetKey": 25,
+      "InstanceName": "Tech Instance 137",
+      "CurrentStatus": "Inactive",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "2125fbdf-f3ed-0cdb-3ba5-ac0b83f49360",
+      "EntityKey": 438,
+      "TechAssetKey": 26,
+      "InstanceName": "Tech Instance 138",
+      "CurrentStatus": "Destroyed",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "d0c38cf5-b124-2d6b-66be-01a39e8af00c",
+      "EntityKey": 439,
+      "TechAssetKey": 27,
+      "InstanceName": "Tech Instance 139",
+      "CurrentStatus": "Unknown",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "67f9b262-13e5-ac47-0430-e74196817cb4",
+      "EntityKey": 440,
+      "TechAssetKey": 28,
+      "InstanceName": "Tech Instance 140",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "33835010-e3fa-390b-6f86-bca3f1e0b735",
+      "EntityKey": 441,
+      "TechAssetKey": 1,
+      "InstanceName": "Tech Instance 141",
+      "CurrentStatus": "Inactive",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "2be957c9-ac6a-eb73-0b19-c2b12456d709",
+      "EntityKey": 442,
+      "TechAssetKey": 2,
+      "InstanceName": "Tech Instance 142",
+      "CurrentStatus": "Destroyed",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "2b808d1c-4d68-3d29-b3ba-6ef7977ccc17",
+      "EntityKey": 443,
+      "TechAssetKey": 3,
+      "InstanceName": "Tech Instance 143",
+      "CurrentStatus": "Unknown",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "dcb708e4-8ee5-31d4-6265-4f6cef8ff5b0",
+      "EntityKey": 444,
+      "TechAssetKey": 4,
+      "InstanceName": "Tech Instance 144",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "6483cb68-2e26-35e3-d416-128e983f1bec",
+      "EntityKey": 445,
+      "TechAssetKey": 5,
+      "InstanceName": "Tech Instance 145",
+      "CurrentStatus": "Inactive",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "b8e04566-1ddb-b6e5-1b0e-3b57b4105256",
+      "EntityKey": 446,
+      "TechAssetKey": 6,
+      "InstanceName": "Tech Instance 146",
+      "CurrentStatus": "Destroyed",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "fafc84c8-8813-430d-0f05-d855f213036d",
+      "EntityKey": 447,
+      "TechAssetKey": 7,
+      "InstanceName": "Tech Instance 147",
+      "CurrentStatus": "Unknown",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "99e31ebd-ff04-2c52-9e69-76c760dd1d61",
+      "EntityKey": 448,
+      "TechAssetKey": 8,
+      "InstanceName": "Tech Instance 148",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "d20a3950-4f3c-4091-fe22-0f90e0228971",
+      "EntityKey": 449,
+      "TechAssetKey": 9,
+      "InstanceName": "Tech Instance 149",
+      "CurrentStatus": "Inactive",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "bd477773-6d1d-9a6a-4099-a97a4c845772",
+      "EntityKey": 450,
+      "TechAssetKey": 10,
+      "InstanceName": "Tech Instance 150",
+      "CurrentStatus": "Destroyed",
       "Notes": "Synthetic seed data",
       "SourceSystem": "seed_loader",
       "SourceRef": "013_DimTechInstance.json"

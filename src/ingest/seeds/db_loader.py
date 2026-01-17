@@ -46,6 +46,9 @@ LOAD_ORDER = [
     "DimSpecies",
     "DimLocation",
     "DimDroidModel",
+    "DimShipModel",
+    "DimWeaponModel",
+    "DimOrganization",
     # Level 3: Depend on Level 0-2
     "DimCharacter",
     "DimTechInstance",

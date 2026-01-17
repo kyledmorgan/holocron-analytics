@@ -1,10 +1,13 @@
 {
   "seedVersion": "0.1.0",
-  "generatedUtc": "2026-01-16T00:00:00Z",
+  "generatedUtc": "2026-01-17T00:00:00Z",
   "target": {
     "schema": "dbo",
     "table": "DimEra",
-    "naturalKey": ["FranchiseKey", "EraCode"],
+    "naturalKey": [
+      "FranchiseKey",
+      "EraCode"
+    ],
     "loadBehavior": "truncate-insert"
   },
   "options": {
@@ -18,14 +21,110 @@
   },
   "rows": [
     {
-      "EraGuid": "00000005-0001-0000-0000-000000000001",
+      "EraGuid": "4e3a3a3f-c287-cef4-9ae1-60e673ee0ef5",
+      "FranchiseKey": 1,
+      "EraName": "Dawn of the Jedi",
+      "EraCode": "DAWN",
+      "AnchorYear": -25000,
+      "CalendarModel": "BBY/ABY",
+      "AnchorEventLabel": "Formation of the Jedi Order",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "004_DimEra.json"
+    },
+    {
+      "EraGuid": "1f750b42-c25f-3d62-cb91-89b2b53d84bf",
+      "FranchiseKey": 1,
+      "EraName": "Old Republic",
+      "EraCode": "OLD_REPUBLIC",
+      "AnchorYear": -5000,
+      "CalendarModel": "BBY/ABY",
+      "AnchorEventLabel": "Ancient Sith Wars era",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "004_DimEra.json"
+    },
+    {
+      "EraGuid": "6910717f-c763-00ce-5192-e85d5551e3aa",
+      "FranchiseKey": 1,
+      "EraName": "High Republic",
+      "EraCode": "HIGH_REPUBLIC",
+      "AnchorYear": -500,
+      "CalendarModel": "BBY/ABY",
+      "AnchorEventLabel": "Golden age of the Republic",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "004_DimEra.json"
+    },
+    {
+      "EraGuid": "6bb2435b-18c7-77c9-5ba9-3440e8a4866c",
+      "FranchiseKey": 1,
+      "EraName": "Fall of the Jedi",
+      "EraCode": "FALL_JEDI",
+      "AnchorYear": -32,
+      "CalendarModel": "BBY/ABY",
+      "AnchorEventLabel": "Clone Wars and Order 66",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "004_DimEra.json"
+    },
+    {
+      "EraGuid": "cf815f07-659d-9720-85b1-f64a3dd5dffb",
+      "FranchiseKey": 1,
+      "EraName": "Reign of the Empire",
+      "EraCode": "EMPIRE",
+      "AnchorYear": 0,
+      "CalendarModel": "BBY/ABY",
+      "AnchorEventLabel": "Imperial Era begins",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "004_DimEra.json"
+    },
+    {
+      "EraGuid": "328e2267-474c-e1de-aa40-36ad35be0d1d",
       "FranchiseKey": 1,
       "EraName": "Battle of Yavin Era",
       "EraCode": "BBY-ABY",
       "AnchorYear": 0,
       "CalendarModel": "BBY/ABY",
-      "AnchorEventLabel": "Battle of Yavin",
-      "Notes": "Standard galactic calendar reference point",
+      "AnchorEventLabel": "Battle of Yavin anchor point",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "004_DimEra.json"
+    },
+    {
+      "EraGuid": "7c69940d-0c32-9212-6ff5-6b2d891934e9",
+      "FranchiseKey": 1,
+      "EraName": "Age of Rebellion",
+      "EraCode": "REBELLION",
+      "AnchorYear": 0,
+      "CalendarModel": "BBY/ABY",
+      "AnchorEventLabel": "Galactic Civil War period",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "004_DimEra.json"
+    },
+    {
+      "EraGuid": "b48d95a4-f76c-7631-641f-98bd53908a76",
+      "FranchiseKey": 1,
+      "EraName": "New Republic",
+      "EraCode": "NEW_REPUBLIC",
+      "AnchorYear": 5,
+      "CalendarModel": "BBY/ABY",
+      "AnchorEventLabel": "Post-Endor reconstruction",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "004_DimEra.json"
+    },
+    {
+      "EraGuid": "43266fe8-ffc0-0477-d2b0-cea51e77842d",
+      "FranchiseKey": 1,
+      "EraName": "Rise of the First Order",
+      "EraCode": "FIRST_ORDER",
+      "AnchorYear": 28,
+      "CalendarModel": "BBY/ABY",
+      "AnchorEventLabel": "First Order emergence",
+      "Notes": "Synthetic seed data",
       "SourceSystem": "seed_loader",
       "SourceRef": "004_DimEra.json"
     }

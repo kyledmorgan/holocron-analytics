@@ -1,10 +1,12 @@
 {
   "seedVersion": "0.1.0",
-  "generatedUtc": "2026-01-16T00:00:00Z",
+  "generatedUtc": "2026-01-17T00:00:00Z",
   "target": {
     "schema": "dbo",
     "table": "DimFranchise",
-    "naturalKey": ["UniverseCode"],
+    "naturalKey": [
+      "UniverseCode"
+    ],
     "loadBehavior": "truncate-insert"
   },
   "options": {
@@ -18,7 +20,7 @@
   },
   "rows": [
     {
-      "FranchiseGuid": "00000001-0000-0000-0000-000000000001",
+      "FranchiseGuid": "c0301d0f-187d-eee9-5661-491046a39ff7",
       "Name": "Star Wars",
       "UniverseCode": "SW",
       "FranchiseGroup": "Lucasfilm",
