@@ -1,10 +1,12 @@
 {
   "seedVersion": "0.1.0",
-  "generatedUtc": "2026-01-16T00:00:00Z",
+  "generatedUtc": "2026-01-17T00:00:00Z",
   "target": {
     "schema": "dbo",
     "table": "DimIssueType",
-    "naturalKey": ["IssueTypeCode"],
+    "naturalKey": [
+      "IssueTypeCode"
+    ],
     "loadBehavior": "truncate-insert"
   },
   "options": {
@@ -18,10 +20,91 @@
   },
   "rows": [
     {
-      "IssueTypeGuid": "00000022-0001-0000-0000-000000000001",
+      "IssueTypeGuid": "48ffc59c-7830-f116-1713-d0e75f9a7dd5",
       "IssueTypeName": "Timeline Contradiction",
       "IssueTypeCode": "TIMELINE",
-      "Description": "Events occur in conflicting chronological order across sources",
+      "Description": "Events occur in conflicting chronological order",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "002_DimIssueType.json"
+    },
+    {
+      "IssueTypeGuid": "9fb51507-6653-4b88-0ca0-fa3a0a964d48",
+      "IssueTypeName": "Visual Inconsistency",
+      "IssueTypeCode": "VISUAL",
+      "Description": "Appearance differs between sources",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "002_DimIssueType.json"
+    },
+    {
+      "IssueTypeGuid": "a0496435-0278-cdfd-a441-10972554df87",
+      "IssueTypeName": "Technology Contradiction",
+      "IssueTypeCode": "TECH",
+      "Description": "Technical specifications conflict",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "002_DimIssueType.json"
+    },
+    {
+      "IssueTypeGuid": "262f8c22-21fb-ae54-b16e-6f350e3c9c84",
+      "IssueTypeName": "Character Biography",
+      "IssueTypeCode": "CHAR_BIO",
+      "Description": "Character background details conflict",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "002_DimIssueType.json"
+    },
+    {
+      "IssueTypeGuid": "c9d7164c-3252-0759-5f7e-85ca4b46ee0d",
+      "IssueTypeName": "Location Inconsistency",
+      "IssueTypeCode": "LOCATION",
+      "Description": "Location descriptions or geography differ",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "002_DimIssueType.json"
+    },
+    {
+      "IssueTypeGuid": "de29c364-2c0a-c1d2-46e5-a75d17a23268",
+      "IssueTypeName": "Dialogue Conflict",
+      "IssueTypeCode": "DIALOGUE",
+      "Description": "Spoken information contradicts established facts",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "002_DimIssueType.json"
+    },
+    {
+      "IssueTypeGuid": "0a2110f8-173d-cc31-12f5-cb8c2a59afc8",
+      "IssueTypeName": "Power Level Variance",
+      "IssueTypeCode": "POWER_LEVEL",
+      "Description": "Character abilities inconsistent",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "002_DimIssueType.json"
+    },
+    {
+      "IssueTypeGuid": "23dd53af-a51d-5327-39f9-618ac1617169",
+      "IssueTypeName": "Death/Survival Retcon",
+      "IssueTypeCode": "DEATH_RETCON",
+      "Description": "Character death status changed",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "002_DimIssueType.json"
+    },
+    {
+      "IssueTypeGuid": "a24cc59d-7f88-7c6d-d9a7-1d04708fd143",
+      "IssueTypeName": "Organization Structure",
+      "IssueTypeCode": "ORG_STRUCTURE",
+      "Description": "Faction hierarchy or membership conflicts",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "002_DimIssueType.json"
+    },
+    {
+      "IssueTypeGuid": "24ee72dd-b842-2d11-962d-370afe8bcfef",
+      "IssueTypeName": "Ship Specification",
+      "IssueTypeCode": "SHIP_SPEC",
+      "Description": "Vessel capabilities differ between sources",
       "Notes": "Synthetic seed data",
       "SourceSystem": "seed_loader",
       "SourceRef": "002_DimIssueType.json"

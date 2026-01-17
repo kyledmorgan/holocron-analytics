@@ -1,10 +1,12 @@
 {
   "seedVersion": "0.1.0",
-  "generatedUtc": "2026-01-16T00:00:00Z",
+  "generatedUtc": "2026-01-17T00:00:00Z",
   "target": {
     "schema": "dbo",
     "table": "DimDroidInstance",
-    "naturalKey": ["TechInstanceKey"],
+    "naturalKey": [
+      "TechInstanceKey"
+    ],
     "loadBehavior": "truncate-insert"
   },
   "options": {
@@ -18,12 +20,89 @@
   },
   "rows": [
     {
-      "DroidInstanceGuid": "00000017-0001-0000-0000-000000000001",
+      "DroidInstanceGuid": "475ea404-3742-a5ed-52dc-80469467ebd1",
       "TechInstanceKey": 1,
       "PersonalityName": "C-3PO",
       "MemoryWipeRef": "Partial (end of Clone Wars)",
       "RestrainingBoltFlag": false,
       "PrimaryLanguageRef": "Galactic Basic",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "015_DimDroidInstance.json"
+    },
+    {
+      "DroidInstanceGuid": "9e1d3ad1-d405-a45c-6c98-ec0b1455ecdb",
+      "TechInstanceKey": 2,
+      "PersonalityName": "R2-D2",
+      "MemoryWipeRef": "None",
+      "RestrainingBoltFlag": false,
+      "PrimaryLanguageRef": "Binary",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "015_DimDroidInstance.json"
+    },
+    {
+      "DroidInstanceGuid": "a861f426-d6bc-df8e-9aee-137ac1325117",
+      "TechInstanceKey": 3,
+      "PersonalityName": "R5-D4",
+      "MemoryWipeRef": "None",
+      "RestrainingBoltFlag": true,
+      "PrimaryLanguageRef": "Binary",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "015_DimDroidInstance.json"
+    },
+    {
+      "DroidInstanceGuid": "2f8ce66c-c8e9-f7c0-a78e-a6800a48fe1a",
+      "TechInstanceKey": 4,
+      "PersonalityName": "R2-D5",
+      "MemoryWipeRef": "Unknown",
+      "RestrainingBoltFlag": false,
+      "PrimaryLanguageRef": "Binary",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "015_DimDroidInstance.json"
+    },
+    {
+      "DroidInstanceGuid": "f05127fc-9a12-f3e5-1297-b6e17ce59f02",
+      "TechInstanceKey": 5,
+      "PersonalityName": "IG-88",
+      "MemoryWipeRef": "None",
+      "RestrainingBoltFlag": false,
+      "PrimaryLanguageRef": "Limited",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "015_DimDroidInstance.json"
+    },
+    {
+      "DroidInstanceGuid": "c3b90548-d042-0640-a9f8-cd070ea922e8",
+      "TechInstanceKey": 6,
+      "PersonalityName": "4-LOM",
+      "MemoryWipeRef": "Modified",
+      "RestrainingBoltFlag": false,
+      "PrimaryLanguageRef": "Multiple",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "015_DimDroidInstance.json"
+    },
+    {
+      "DroidInstanceGuid": "ca7caa6a-348f-b07c-d656-d595e476b835",
+      "TechInstanceKey": 7,
+      "PersonalityName": "EV-9D9",
+      "MemoryWipeRef": "None",
+      "RestrainingBoltFlag": false,
+      "PrimaryLanguageRef": "Binary",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "015_DimDroidInstance.json"
+    },
+    {
+      "DroidInstanceGuid": "7d868461-97c4-5cc7-f4e4-a33531701258",
+      "TechInstanceKey": 8,
+      "PersonalityName": "R4-P17",
+      "MemoryWipeRef": "None",
+      "RestrainingBoltFlag": false,
+      "PrimaryLanguageRef": "Binary",
       "Notes": "Synthetic seed data",
       "SourceSystem": "seed_loader",
       "SourceRef": "015_DimDroidInstance.json"

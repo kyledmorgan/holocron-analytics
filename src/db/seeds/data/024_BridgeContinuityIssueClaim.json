@@ -1,0 +1,1599 @@
+{
+  "seedVersion": "0.1.0",
+  "generatedUtc": "2026-01-17T00:00:00Z",
+  "target": {
+    "schema": "dbo",
+    "table": "BridgeContinuityIssueClaim",
+    "naturalKey": [
+      "ContinuityIssueKey",
+      "ClaimKey"
+    ],
+    "loadBehavior": "truncate-insert"
+  },
+  "options": {
+    "allowIdentityInsert": false,
+    "ignoreUnknownFields": false,
+    "defaults": {
+      "IsActive": true,
+      "IsLatest": true,
+      "VersionNum": 1
+    }
+  },
+  "rows": [
+    {
+      "BridgeContinuityIssueClaimGuid": "3bebe55e-c21b-ca63-e838-4aa238aa6392",
+      "ContinuityIssueKey": 1,
+      "ClaimKey": 1,
+      "Role": "Conflicting",
+      "Notes": "Claim provides conflicting for issue",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "024_BridgeContinuityIssueClaim.json"
+    },
+    {
+      "BridgeContinuityIssueClaimGuid": "cb41ab6b-3ff5-f34a-b2b2-ae5034a48ebf",
+      "ContinuityIssueKey": 1,
+      "ClaimKey": 2,
+      "Role": "Context",
+      "Notes": "Claim provides context for issue",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "024_BridgeContinuityIssueClaim.json"
+    },
+    {
+      "BridgeContinuityIssueClaimGuid": "7f4071fc-683d-0629-bcf4-02d156b4b9cf",
+      "ContinuityIssueKey": 1,
+      "ClaimKey": 3,
+      "Role": "Supporting",
+      "Notes": "Claim provides supporting for issue",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "024_BridgeContinuityIssueClaim.json"
+    },
+    {
+      "BridgeContinuityIssueClaimGuid": "26f1e596-5bbe-f493-1b32-ac4d1d829d5c",
+      "ContinuityIssueKey": 2,
+      "ClaimKey": 6,
+      "Role": "Conflicting",
+      "Notes": "Claim provides conflicting for issue",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "024_BridgeContinuityIssueClaim.json"
+    },
+    {
+      "BridgeContinuityIssueClaimGuid": "253deaab-d92d-2638-0b74-e62c3ed4ca4e",
+      "ContinuityIssueKey": 2,
+      "ClaimKey": 7,
+      "Role": "Context",
+      "Notes": "Claim provides context for issue",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "024_BridgeContinuityIssueClaim.json"
+    },
+    {
+      "BridgeContinuityIssueClaimGuid": "cca8777e-8157-e3ea-6622-b5aaa04546a6",
+      "ContinuityIssueKey": 2,
+      "ClaimKey": 8,
+      "Role": "Supporting",
+      "Notes": "Claim provides supporting for issue",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "024_BridgeContinuityIssueClaim.json"
+    },
+    {
+      "BridgeContinuityIssueClaimGuid": "da8cb089-7f8a-415b-72da-38fbc5ad1c7a",
+      "ContinuityIssueKey": 2,
+      "ClaimKey": 9,
+      "Role": "ResolutionBasis",
+      "Notes": "Claim provides resolution basis for issue",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "024_BridgeContinuityIssueClaim.json"
+    },
+    {
+      "BridgeContinuityIssueClaimGuid": "d4c857ac-e6ab-769f-efde-5e9c1b8236ec",
+      "ContinuityIssueKey": 3,
+      "ClaimKey": 11,
+      "Role": "Conflicting",
+      "Notes": "Claim provides conflicting for issue",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "024_BridgeContinuityIssueClaim.json"
+    },
+    {
+      "BridgeContinuityIssueClaimGuid": "84bc033b-008a-4fc2-9749-c57254f5cf3c",
+      "ContinuityIssueKey": 3,
+      "ClaimKey": 12,
+      "Role": "Context",
+      "Notes": "Claim provides context for issue",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "024_BridgeContinuityIssueClaim.json"
+    },
+    {
+      "BridgeContinuityIssueClaimGuid": "1c796720-d846-9fee-479d-193fd3d1f2d4",
+      "ContinuityIssueKey": 3,
+      "ClaimKey": 13,
+      "Role": "Supporting",
+      "Notes": "Claim provides supporting for issue",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "024_BridgeContinuityIssueClaim.json"
+    },
+    {
+      "BridgeContinuityIssueClaimGuid": "028cd374-d308-19b8-d459-446063618db4",
+      "ContinuityIssueKey": 3,
+      "ClaimKey": 14,
+      "Role": "ResolutionBasis",
+      "Notes": "Claim provides resolution basis for issue",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "024_BridgeContinuityIssueClaim.json"
+    },
+    {
+      "BridgeContinuityIssueClaimGuid": "35af2bad-5a43-000a-d7fe-a3927c05497b",
+      "ContinuityIssueKey": 3,
+      "ClaimKey": 15,
+      "Role": "Conflicting",
+      "Notes": "Claim provides conflicting for issue",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "024_BridgeContinuityIssueClaim.json"
+    },
+    {
+      "BridgeContinuityIssueClaimGuid": "c17a3ddb-3b5e-0c69-94d1-53759e98bca6",
+      "ContinuityIssueKey": 4,
+      "ClaimKey": 16,
+      "Role": "Conflicting",
+      "Notes": "Claim provides conflicting for issue",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "024_BridgeContinuityIssueClaim.json"
+    },
+    {
+      "BridgeContinuityIssueClaimGuid": "0e0185f1-22ad-f9d5-5587-6d8d04448ac5",
+      "ContinuityIssueKey": 4,
+      "ClaimKey": 17,
+      "Role": "Context",
+      "Notes": "Claim provides context for issue",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "024_BridgeContinuityIssueClaim.json"
+    },
+    {
+      "BridgeContinuityIssueClaimGuid": "464804eb-f9c0-4d97-c0d4-b696f0138281",
+      "ContinuityIssueKey": 5,
+      "ClaimKey": 21,
+      "Role": "Conflicting",
+      "Notes": "Claim provides conflicting for issue",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "024_BridgeContinuityIssueClaim.json"
+    },
+    {
+      "BridgeContinuityIssueClaimGuid": "15fbe6e4-84f6-c5b7-b1a9-1abd78b31b77",
+      "ContinuityIssueKey": 5,
+      "ClaimKey": 22,
+      "Role": "Context",
+      "Notes": "Claim provides context for issue",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "024_BridgeContinuityIssueClaim.json"
+    },
+    {
+      "BridgeContinuityIssueClaimGuid": "56943cc1-2be1-3df9-50d8-56e43cddc2f4",
+      "ContinuityIssueKey": 5,
+      "ClaimKey": 23,
+      "Role": "Supporting",
+      "Notes": "Claim provides supporting for issue",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "024_BridgeContinuityIssueClaim.json"
+    },
+    {
+      "BridgeContinuityIssueClaimGuid": "515edb1f-4868-b55c-79a6-5a4d56bb13b6",
+      "ContinuityIssueKey": 6,
+      "ClaimKey": 26,
+      "Role": "Conflicting",
+      "Notes": "Claim provides conflicting for issue",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "024_BridgeContinuityIssueClaim.json"
+    },
+    {
+      "BridgeContinuityIssueClaimGuid": "cd96652f-513b-5873-3175-256b93e1f04b",
+      "ContinuityIssueKey": 6,
+      "ClaimKey": 27,
+      "Role": "Context",
+      "Notes": "Claim provides context for issue",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "024_BridgeContinuityIssueClaim.json"
+    },
+    {
+      "BridgeContinuityIssueClaimGuid": "0acbd635-9773-1426-526b-cade870242ab",
+      "ContinuityIssueKey": 6,
+      "ClaimKey": 28,
+      "Role": "Supporting",
+      "Notes": "Claim provides supporting for issue",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "024_BridgeContinuityIssueClaim.json"
+    },
+    {
+      "BridgeContinuityIssueClaimGuid": "a8908f7b-9856-3c03-db99-5b08d4b7d537",
+      "ContinuityIssueKey": 6,
+      "ClaimKey": 29,
+      "Role": "ResolutionBasis",
+      "Notes": "Claim provides resolution basis for issue",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "024_BridgeContinuityIssueClaim.json"
+    },
+    {
+      "BridgeContinuityIssueClaimGuid": "e071ec27-de48-8d8d-234f-0453364fa06b",
+      "ContinuityIssueKey": 7,
+      "ClaimKey": 31,
+      "Role": "Conflicting",
+      "Notes": "Claim provides conflicting for issue",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "024_BridgeContinuityIssueClaim.json"
+    },
+    {
+      "BridgeContinuityIssueClaimGuid": "a3893862-cc59-c134-b645-7afcf0ca0470",
+      "ContinuityIssueKey": 7,
+      "ClaimKey": 32,
+      "Role": "Context",
+      "Notes": "Claim provides context for issue",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "024_BridgeContinuityIssueClaim.json"
+    },
+    {
+      "BridgeContinuityIssueClaimGuid": "1d427502-c698-49e8-a476-1438a278c629",
+      "ContinuityIssueKey": 7,
+      "ClaimKey": 33,
+      "Role": "Supporting",
+      "Notes": "Claim provides supporting for issue",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "024_BridgeContinuityIssueClaim.json"
+    },
+    {
+      "BridgeContinuityIssueClaimGuid": "e39ce721-dbee-e2ad-9f39-04f314a64702",
+      "ContinuityIssueKey": 7,
+      "ClaimKey": 34,
+      "Role": "ResolutionBasis",
+      "Notes": "Claim provides resolution basis for issue",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "024_BridgeContinuityIssueClaim.json"
+    },
+    {
+      "BridgeContinuityIssueClaimGuid": "1a01c3c8-17eb-38c0-b66a-e60727b56cfe",
+      "ContinuityIssueKey": 7,
+      "ClaimKey": 35,
+      "Role": "Conflicting",
+      "Notes": "Claim provides conflicting for issue",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "024_BridgeContinuityIssueClaim.json"
+    },
+    {
+      "BridgeContinuityIssueClaimGuid": "9b28d49e-b6c2-0b7b-be00-2e6512923910",
+      "ContinuityIssueKey": 8,
+      "ClaimKey": 36,
+      "Role": "Conflicting",
+      "Notes": "Claim provides conflicting for issue",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "024_BridgeContinuityIssueClaim.json"
+    },
+    {
+      "BridgeContinuityIssueClaimGuid": "8e3797a2-8154-4a88-4706-7201ad935111",
+      "ContinuityIssueKey": 8,
+      "ClaimKey": 37,
+      "Role": "Context",
+      "Notes": "Claim provides context for issue",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "024_BridgeContinuityIssueClaim.json"
+    },
+    {
+      "BridgeContinuityIssueClaimGuid": "c41ebadc-7994-be90-00f8-e404d5fd722e",
+      "ContinuityIssueKey": 9,
+      "ClaimKey": 41,
+      "Role": "Conflicting",
+      "Notes": "Claim provides conflicting for issue",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "024_BridgeContinuityIssueClaim.json"
+    },
+    {
+      "BridgeContinuityIssueClaimGuid": "cc679bda-4acc-0c8e-4f08-320fbc2926e0",
+      "ContinuityIssueKey": 9,
+      "ClaimKey": 42,
+      "Role": "Context",
+      "Notes": "Claim provides context for issue",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "024_BridgeContinuityIssueClaim.json"
+    },
+    {
+      "BridgeContinuityIssueClaimGuid": "7d486c8c-89f6-b3c9-a252-66d8c335798e",
+      "ContinuityIssueKey": 9,
+      "ClaimKey": 43,
+      "Role": "Supporting",
+      "Notes": "Claim provides supporting for issue",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "024_BridgeContinuityIssueClaim.json"
+    },
+    {
+      "BridgeContinuityIssueClaimGuid": "ffc20348-f017-7ec9-f17c-e4f1d72445a8",
+      "ContinuityIssueKey": 10,
+      "ClaimKey": 46,
+      "Role": "Conflicting",
+      "Notes": "Claim provides conflicting for issue",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "024_BridgeContinuityIssueClaim.json"
+    },
+    {
+      "BridgeContinuityIssueClaimGuid": "5baf21e0-de8d-ee5a-3a51-07b2a6d1ed94",
+      "ContinuityIssueKey": 10,
+      "ClaimKey": 47,
+      "Role": "Context",
+      "Notes": "Claim provides context for issue",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "024_BridgeContinuityIssueClaim.json"
+    },
+    {
+      "BridgeContinuityIssueClaimGuid": "0a978126-c922-42de-2dea-e9f1cb00ce6d",
+      "ContinuityIssueKey": 10,
+      "ClaimKey": 48,
+      "Role": "Supporting",
+      "Notes": "Claim provides supporting for issue",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "024_BridgeContinuityIssueClaim.json"
+    },
+    {
+      "BridgeContinuityIssueClaimGuid": "1b28048e-57e6-a1e9-65e4-4732a320917d",
+      "ContinuityIssueKey": 10,
+      "ClaimKey": 49,
+      "Role": "ResolutionBasis",
+      "Notes": "Claim provides resolution basis for issue",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "024_BridgeContinuityIssueClaim.json"
+    },
+    {
+      "BridgeContinuityIssueClaimGuid": "c38e7c85-dc32-ec1b-7407-6054adeb00f0",
+      "ContinuityIssueKey": 11,
+      "ClaimKey": 51,
+      "Role": "Conflicting",
+      "Notes": "Claim provides conflicting for issue",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "024_BridgeContinuityIssueClaim.json"
+    },
+    {
+      "BridgeContinuityIssueClaimGuid": "6d39d94a-e985-5d70-d3a2-8b4062b18bef",
+      "ContinuityIssueKey": 11,
+      "ClaimKey": 52,
+      "Role": "Context",
+      "Notes": "Claim provides context for issue",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "024_BridgeContinuityIssueClaim.json"
+    },
+    {
+      "BridgeContinuityIssueClaimGuid": "05e87983-eb29-fa76-024a-fc6c2d0ac07f",
+      "ContinuityIssueKey": 11,
+      "ClaimKey": 53,
+      "Role": "Supporting",
+      "Notes": "Claim provides supporting for issue",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "024_BridgeContinuityIssueClaim.json"
+    },
+    {
+      "BridgeContinuityIssueClaimGuid": "b28a505c-bb21-4bd7-031b-46467500c184",
+      "ContinuityIssueKey": 11,
+      "ClaimKey": 54,
+      "Role": "ResolutionBasis",
+      "Notes": "Claim provides resolution basis for issue",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "024_BridgeContinuityIssueClaim.json"
+    },
+    {
+      "BridgeContinuityIssueClaimGuid": "a26cd976-0452-1cf0-d3a4-67305eff71ff",
+      "ContinuityIssueKey": 11,
+      "ClaimKey": 55,
+      "Role": "Conflicting",
+      "Notes": "Claim provides conflicting for issue",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "024_BridgeContinuityIssueClaim.json"
+    },
+    {
+      "BridgeContinuityIssueClaimGuid": "53faebf3-95bf-dcc7-0ed3-8dd0c08f5b20",
+      "ContinuityIssueKey": 12,
+      "ClaimKey": 56,
+      "Role": "Conflicting",
+      "Notes": "Claim provides conflicting for issue",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "024_BridgeContinuityIssueClaim.json"
+    },
+    {
+      "BridgeContinuityIssueClaimGuid": "77819d82-f921-8f2c-fe78-4915f2722316",
+      "ContinuityIssueKey": 12,
+      "ClaimKey": 57,
+      "Role": "Context",
+      "Notes": "Claim provides context for issue",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "024_BridgeContinuityIssueClaim.json"
+    },
+    {
+      "BridgeContinuityIssueClaimGuid": "556183af-6c56-04e8-3301-be4b2ba876d2",
+      "ContinuityIssueKey": 13,
+      "ClaimKey": 61,
+      "Role": "Conflicting",
+      "Notes": "Claim provides conflicting for issue",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "024_BridgeContinuityIssueClaim.json"
+    },
+    {
+      "BridgeContinuityIssueClaimGuid": "0522895a-d420-c92b-e253-ebafe7e091fa",
+      "ContinuityIssueKey": 13,
+      "ClaimKey": 62,
+      "Role": "Context",
+      "Notes": "Claim provides context for issue",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "024_BridgeContinuityIssueClaim.json"
+    },
+    {
+      "BridgeContinuityIssueClaimGuid": "d974b304-4c37-bd70-8ed4-b649d065b27c",
+      "ContinuityIssueKey": 13,
+      "ClaimKey": 63,
+      "Role": "Supporting",
+      "Notes": "Claim provides supporting for issue",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "024_BridgeContinuityIssueClaim.json"
+    },
+    {
+      "BridgeContinuityIssueClaimGuid": "9ab4f572-d579-6426-4103-3321b8c0437d",
+      "ContinuityIssueKey": 14,
+      "ClaimKey": 66,
+      "Role": "Conflicting",
+      "Notes": "Claim provides conflicting for issue",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "024_BridgeContinuityIssueClaim.json"
+    },
+    {
+      "BridgeContinuityIssueClaimGuid": "890af21b-0286-618b-bf4c-981edbcbe886",
+      "ContinuityIssueKey": 14,
+      "ClaimKey": 67,
+      "Role": "Context",
+      "Notes": "Claim provides context for issue",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "024_BridgeContinuityIssueClaim.json"
+    },
+    {
+      "BridgeContinuityIssueClaimGuid": "fb22942e-732a-5d5e-9657-aebce52c3ff1",
+      "ContinuityIssueKey": 14,
+      "ClaimKey": 68,
+      "Role": "Supporting",
+      "Notes": "Claim provides supporting for issue",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "024_BridgeContinuityIssueClaim.json"
+    },
+    {
+      "BridgeContinuityIssueClaimGuid": "8c3223cb-d05e-2217-41ab-7149661ae330",
+      "ContinuityIssueKey": 14,
+      "ClaimKey": 69,
+      "Role": "ResolutionBasis",
+      "Notes": "Claim provides resolution basis for issue",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "024_BridgeContinuityIssueClaim.json"
+    },
+    {
+      "BridgeContinuityIssueClaimGuid": "01770c44-8c49-6ac3-35b3-66b8a8cced89",
+      "ContinuityIssueKey": 15,
+      "ClaimKey": 71,
+      "Role": "Conflicting",
+      "Notes": "Claim provides conflicting for issue",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "024_BridgeContinuityIssueClaim.json"
+    },
+    {
+      "BridgeContinuityIssueClaimGuid": "43215f22-5b1b-2e1b-984f-b89895a3532c",
+      "ContinuityIssueKey": 15,
+      "ClaimKey": 72,
+      "Role": "Context",
+      "Notes": "Claim provides context for issue",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "024_BridgeContinuityIssueClaim.json"
+    },
+    {
+      "BridgeContinuityIssueClaimGuid": "f5b3ad89-2f3b-9a1d-8cdb-0d7d73e2ba64",
+      "ContinuityIssueKey": 15,
+      "ClaimKey": 73,
+      "Role": "Supporting",
+      "Notes": "Claim provides supporting for issue",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "024_BridgeContinuityIssueClaim.json"
+    },
+    {
+      "BridgeContinuityIssueClaimGuid": "5591d725-b52d-e582-7231-4b3dbb94fa85",
+      "ContinuityIssueKey": 15,
+      "ClaimKey": 74,
+      "Role": "ResolutionBasis",
+      "Notes": "Claim provides resolution basis for issue",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "024_BridgeContinuityIssueClaim.json"
+    },
+    {
+      "BridgeContinuityIssueClaimGuid": "aba21dd6-a6ab-0134-a5a2-de1b9bdd9dc4",
+      "ContinuityIssueKey": 15,
+      "ClaimKey": 75,
+      "Role": "Conflicting",
+      "Notes": "Claim provides conflicting for issue",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "024_BridgeContinuityIssueClaim.json"
+    },
+    {
+      "BridgeContinuityIssueClaimGuid": "a8f883ce-a76b-734b-3fe5-745b9b22b237",
+      "ContinuityIssueKey": 16,
+      "ClaimKey": 76,
+      "Role": "Conflicting",
+      "Notes": "Claim provides conflicting for issue",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "024_BridgeContinuityIssueClaim.json"
+    },
+    {
+      "BridgeContinuityIssueClaimGuid": "c3da4ff0-9cda-ad8a-923e-f37977538c11",
+      "ContinuityIssueKey": 16,
+      "ClaimKey": 77,
+      "Role": "Context",
+      "Notes": "Claim provides context for issue",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "024_BridgeContinuityIssueClaim.json"
+    },
+    {
+      "BridgeContinuityIssueClaimGuid": "a9f507d1-c532-96ec-ad67-115fc3e961c4",
+      "ContinuityIssueKey": 17,
+      "ClaimKey": 81,
+      "Role": "Conflicting",
+      "Notes": "Claim provides conflicting for issue",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "024_BridgeContinuityIssueClaim.json"
+    },
+    {
+      "BridgeContinuityIssueClaimGuid": "9bbc3825-8b28-9efa-c4a4-77ef1d0ea7c5",
+      "ContinuityIssueKey": 17,
+      "ClaimKey": 82,
+      "Role": "Context",
+      "Notes": "Claim provides context for issue",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "024_BridgeContinuityIssueClaim.json"
+    },
+    {
+      "BridgeContinuityIssueClaimGuid": "4f7dedf4-ad4e-1b4a-22f3-8b5e6de2814e",
+      "ContinuityIssueKey": 17,
+      "ClaimKey": 83,
+      "Role": "Supporting",
+      "Notes": "Claim provides supporting for issue",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "024_BridgeContinuityIssueClaim.json"
+    },
+    {
+      "BridgeContinuityIssueClaimGuid": "d2240771-7309-157c-33c4-93b99e0467a8",
+      "ContinuityIssueKey": 18,
+      "ClaimKey": 86,
+      "Role": "Conflicting",
+      "Notes": "Claim provides conflicting for issue",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "024_BridgeContinuityIssueClaim.json"
+    },
+    {
+      "BridgeContinuityIssueClaimGuid": "014dd921-ad02-f5c5-4193-30daf782334b",
+      "ContinuityIssueKey": 18,
+      "ClaimKey": 87,
+      "Role": "Context",
+      "Notes": "Claim provides context for issue",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "024_BridgeContinuityIssueClaim.json"
+    },
+    {
+      "BridgeContinuityIssueClaimGuid": "37e1c0cf-60e0-fb30-f806-1015fa881f58",
+      "ContinuityIssueKey": 18,
+      "ClaimKey": 88,
+      "Role": "Supporting",
+      "Notes": "Claim provides supporting for issue",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "024_BridgeContinuityIssueClaim.json"
+    },
+    {
+      "BridgeContinuityIssueClaimGuid": "9cf0c4ef-121c-5414-8c0d-fb27f29aa1e2",
+      "ContinuityIssueKey": 18,
+      "ClaimKey": 89,
+      "Role": "ResolutionBasis",
+      "Notes": "Claim provides resolution basis for issue",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "024_BridgeContinuityIssueClaim.json"
+    },
+    {
+      "BridgeContinuityIssueClaimGuid": "77a19d23-bccb-8ea2-087f-96a4ba0fc6dc",
+      "ContinuityIssueKey": 19,
+      "ClaimKey": 91,
+      "Role": "Conflicting",
+      "Notes": "Claim provides conflicting for issue",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "024_BridgeContinuityIssueClaim.json"
+    },
+    {
+      "BridgeContinuityIssueClaimGuid": "45c66a88-58fa-eda4-93cf-0104dbb78260",
+      "ContinuityIssueKey": 19,
+      "ClaimKey": 92,
+      "Role": "Context",
+      "Notes": "Claim provides context for issue",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "024_BridgeContinuityIssueClaim.json"
+    },
+    {
+      "BridgeContinuityIssueClaimGuid": "c92e05fb-5c40-133a-d693-9bbd7508f616",
+      "ContinuityIssueKey": 19,
+      "ClaimKey": 93,
+      "Role": "Supporting",
+      "Notes": "Claim provides supporting for issue",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "024_BridgeContinuityIssueClaim.json"
+    },
+    {
+      "BridgeContinuityIssueClaimGuid": "397dd578-c0e6-4e2d-0684-50c56b8c73bf",
+      "ContinuityIssueKey": 19,
+      "ClaimKey": 94,
+      "Role": "ResolutionBasis",
+      "Notes": "Claim provides resolution basis for issue",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "024_BridgeContinuityIssueClaim.json"
+    },
+    {
+      "BridgeContinuityIssueClaimGuid": "c5a6665b-b6ed-3679-b68c-58f461292f19",
+      "ContinuityIssueKey": 19,
+      "ClaimKey": 95,
+      "Role": "Conflicting",
+      "Notes": "Claim provides conflicting for issue",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "024_BridgeContinuityIssueClaim.json"
+    },
+    {
+      "BridgeContinuityIssueClaimGuid": "5e39fced-ba47-987d-7dd5-403a12af22d1",
+      "ContinuityIssueKey": 20,
+      "ClaimKey": 96,
+      "Role": "Conflicting",
+      "Notes": "Claim provides conflicting for issue",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "024_BridgeContinuityIssueClaim.json"
+    },
+    {
+      "BridgeContinuityIssueClaimGuid": "18f61153-b954-0f1b-486e-0f81196db03c",
+      "ContinuityIssueKey": 20,
+      "ClaimKey": 97,
+      "Role": "Context",
+      "Notes": "Claim provides context for issue",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "024_BridgeContinuityIssueClaim.json"
+    },
+    {
+      "BridgeContinuityIssueClaimGuid": "237b57ab-23b7-8855-d029-0c46ff8a184a",
+      "ContinuityIssueKey": 21,
+      "ClaimKey": 101,
+      "Role": "Conflicting",
+      "Notes": "Claim provides conflicting for issue",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "024_BridgeContinuityIssueClaim.json"
+    },
+    {
+      "BridgeContinuityIssueClaimGuid": "e2fb5224-e208-e42d-ec7c-3314e493fe56",
+      "ContinuityIssueKey": 21,
+      "ClaimKey": 102,
+      "Role": "Context",
+      "Notes": "Claim provides context for issue",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "024_BridgeContinuityIssueClaim.json"
+    },
+    {
+      "BridgeContinuityIssueClaimGuid": "59961cc8-bb67-e322-b453-2b6a4d6e6aad",
+      "ContinuityIssueKey": 21,
+      "ClaimKey": 103,
+      "Role": "Supporting",
+      "Notes": "Claim provides supporting for issue",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "024_BridgeContinuityIssueClaim.json"
+    },
+    {
+      "BridgeContinuityIssueClaimGuid": "df1e8caf-7396-d2a5-c44a-6db79f5dc392",
+      "ContinuityIssueKey": 22,
+      "ClaimKey": 106,
+      "Role": "Conflicting",
+      "Notes": "Claim provides conflicting for issue",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "024_BridgeContinuityIssueClaim.json"
+    },
+    {
+      "BridgeContinuityIssueClaimGuid": "8585e74b-c26b-2cfb-abbc-4146a009a2dc",
+      "ContinuityIssueKey": 22,
+      "ClaimKey": 107,
+      "Role": "Context",
+      "Notes": "Claim provides context for issue",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "024_BridgeContinuityIssueClaim.json"
+    },
+    {
+      "BridgeContinuityIssueClaimGuid": "4838c5d0-e861-d7a2-47e8-9126419bddc8",
+      "ContinuityIssueKey": 22,
+      "ClaimKey": 108,
+      "Role": "Supporting",
+      "Notes": "Claim provides supporting for issue",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "024_BridgeContinuityIssueClaim.json"
+    },
+    {
+      "BridgeContinuityIssueClaimGuid": "dd320d5d-a42d-423f-3074-ceb489193ed6",
+      "ContinuityIssueKey": 22,
+      "ClaimKey": 109,
+      "Role": "ResolutionBasis",
+      "Notes": "Claim provides resolution basis for issue",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "024_BridgeContinuityIssueClaim.json"
+    },
+    {
+      "BridgeContinuityIssueClaimGuid": "cceb3951-fb60-09dc-de1d-8f13dc15efe0",
+      "ContinuityIssueKey": 23,
+      "ClaimKey": 111,
+      "Role": "Conflicting",
+      "Notes": "Claim provides conflicting for issue",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "024_BridgeContinuityIssueClaim.json"
+    },
+    {
+      "BridgeContinuityIssueClaimGuid": "e95f6d18-2e65-1150-a29a-6f58945daf75",
+      "ContinuityIssueKey": 23,
+      "ClaimKey": 112,
+      "Role": "Context",
+      "Notes": "Claim provides context for issue",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "024_BridgeContinuityIssueClaim.json"
+    },
+    {
+      "BridgeContinuityIssueClaimGuid": "79666df3-2aba-9308-fddc-eeb443c91d74",
+      "ContinuityIssueKey": 23,
+      "ClaimKey": 113,
+      "Role": "Supporting",
+      "Notes": "Claim provides supporting for issue",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "024_BridgeContinuityIssueClaim.json"
+    },
+    {
+      "BridgeContinuityIssueClaimGuid": "8bbf00a3-d4c3-5cbb-3f83-7e9cd5fc46c8",
+      "ContinuityIssueKey": 23,
+      "ClaimKey": 114,
+      "Role": "ResolutionBasis",
+      "Notes": "Claim provides resolution basis for issue",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "024_BridgeContinuityIssueClaim.json"
+    },
+    {
+      "BridgeContinuityIssueClaimGuid": "1fe4c79a-5735-8b93-1b58-90a9fd40c4fd",
+      "ContinuityIssueKey": 23,
+      "ClaimKey": 115,
+      "Role": "Conflicting",
+      "Notes": "Claim provides conflicting for issue",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "024_BridgeContinuityIssueClaim.json"
+    },
+    {
+      "BridgeContinuityIssueClaimGuid": "36bd8856-c0ac-73ca-5d98-053a4a3fa17f",
+      "ContinuityIssueKey": 24,
+      "ClaimKey": 116,
+      "Role": "Conflicting",
+      "Notes": "Claim provides conflicting for issue",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "024_BridgeContinuityIssueClaim.json"
+    },
+    {
+      "BridgeContinuityIssueClaimGuid": "6bc8d4e6-8394-3ec6-8f75-66f674fb90ab",
+      "ContinuityIssueKey": 24,
+      "ClaimKey": 117,
+      "Role": "Context",
+      "Notes": "Claim provides context for issue",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "024_BridgeContinuityIssueClaim.json"
+    },
+    {
+      "BridgeContinuityIssueClaimGuid": "e438e9c1-eeab-11cb-0cb7-36fab6866b27",
+      "ContinuityIssueKey": 25,
+      "ClaimKey": 121,
+      "Role": "Conflicting",
+      "Notes": "Claim provides conflicting for issue",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "024_BridgeContinuityIssueClaim.json"
+    },
+    {
+      "BridgeContinuityIssueClaimGuid": "3805cf25-b70c-3dfe-86b7-391d0f9c8da6",
+      "ContinuityIssueKey": 25,
+      "ClaimKey": 122,
+      "Role": "Context",
+      "Notes": "Claim provides context for issue",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "024_BridgeContinuityIssueClaim.json"
+    },
+    {
+      "BridgeContinuityIssueClaimGuid": "876bf7d4-e952-f85f-6211-9239192a5b88",
+      "ContinuityIssueKey": 25,
+      "ClaimKey": 123,
+      "Role": "Supporting",
+      "Notes": "Claim provides supporting for issue",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "024_BridgeContinuityIssueClaim.json"
+    },
+    {
+      "BridgeContinuityIssueClaimGuid": "34fc97c1-81f7-1078-7b12-5bb37d30c079",
+      "ContinuityIssueKey": 26,
+      "ClaimKey": 126,
+      "Role": "Conflicting",
+      "Notes": "Claim provides conflicting for issue",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "024_BridgeContinuityIssueClaim.json"
+    },
+    {
+      "BridgeContinuityIssueClaimGuid": "deb62b2a-a2a1-78f9-ddf6-8260f4648461",
+      "ContinuityIssueKey": 26,
+      "ClaimKey": 127,
+      "Role": "Context",
+      "Notes": "Claim provides context for issue",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "024_BridgeContinuityIssueClaim.json"
+    },
+    {
+      "BridgeContinuityIssueClaimGuid": "2a174e2d-4080-7e03-3a1a-b8e852dc3db8",
+      "ContinuityIssueKey": 26,
+      "ClaimKey": 128,
+      "Role": "Supporting",
+      "Notes": "Claim provides supporting for issue",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "024_BridgeContinuityIssueClaim.json"
+    },
+    {
+      "BridgeContinuityIssueClaimGuid": "7b560031-cb9e-3952-484e-4d7184be02c3",
+      "ContinuityIssueKey": 26,
+      "ClaimKey": 129,
+      "Role": "ResolutionBasis",
+      "Notes": "Claim provides resolution basis for issue",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "024_BridgeContinuityIssueClaim.json"
+    },
+    {
+      "BridgeContinuityIssueClaimGuid": "438e6018-e5dd-455c-26ac-eb8173819ee5",
+      "ContinuityIssueKey": 27,
+      "ClaimKey": 131,
+      "Role": "Conflicting",
+      "Notes": "Claim provides conflicting for issue",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "024_BridgeContinuityIssueClaim.json"
+    },
+    {
+      "BridgeContinuityIssueClaimGuid": "14df35dc-aee1-dcaa-769d-ab47c469dbf1",
+      "ContinuityIssueKey": 27,
+      "ClaimKey": 132,
+      "Role": "Context",
+      "Notes": "Claim provides context for issue",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "024_BridgeContinuityIssueClaim.json"
+    },
+    {
+      "BridgeContinuityIssueClaimGuid": "160721cc-8f8c-874a-cf80-9866a844b107",
+      "ContinuityIssueKey": 27,
+      "ClaimKey": 133,
+      "Role": "Supporting",
+      "Notes": "Claim provides supporting for issue",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "024_BridgeContinuityIssueClaim.json"
+    },
+    {
+      "BridgeContinuityIssueClaimGuid": "ebe55129-8670-5896-aec2-3e519856b022",
+      "ContinuityIssueKey": 27,
+      "ClaimKey": 134,
+      "Role": "ResolutionBasis",
+      "Notes": "Claim provides resolution basis for issue",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "024_BridgeContinuityIssueClaim.json"
+    },
+    {
+      "BridgeContinuityIssueClaimGuid": "42ab8e00-aa96-2068-ae21-3fef119dec24",
+      "ContinuityIssueKey": 27,
+      "ClaimKey": 135,
+      "Role": "Conflicting",
+      "Notes": "Claim provides conflicting for issue",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "024_BridgeContinuityIssueClaim.json"
+    },
+    {
+      "BridgeContinuityIssueClaimGuid": "cd9366da-8b5a-7955-ca78-b45e0e8afa31",
+      "ContinuityIssueKey": 28,
+      "ClaimKey": 136,
+      "Role": "Conflicting",
+      "Notes": "Claim provides conflicting for issue",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "024_BridgeContinuityIssueClaim.json"
+    },
+    {
+      "BridgeContinuityIssueClaimGuid": "204c5764-eb40-27c5-f17c-929aebef1b9d",
+      "ContinuityIssueKey": 28,
+      "ClaimKey": 137,
+      "Role": "Context",
+      "Notes": "Claim provides context for issue",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "024_BridgeContinuityIssueClaim.json"
+    },
+    {
+      "BridgeContinuityIssueClaimGuid": "3a0b43b6-76a6-d27d-0a1f-1c90e2da76fc",
+      "ContinuityIssueKey": 29,
+      "ClaimKey": 141,
+      "Role": "Conflicting",
+      "Notes": "Claim provides conflicting for issue",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "024_BridgeContinuityIssueClaim.json"
+    },
+    {
+      "BridgeContinuityIssueClaimGuid": "fdd7a2aa-642b-ebb3-f439-2c771809ee7e",
+      "ContinuityIssueKey": 29,
+      "ClaimKey": 142,
+      "Role": "Context",
+      "Notes": "Claim provides context for issue",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "024_BridgeContinuityIssueClaim.json"
+    },
+    {
+      "BridgeContinuityIssueClaimGuid": "b6115e8a-29a6-aee7-1c7e-76ce9b61c903",
+      "ContinuityIssueKey": 29,
+      "ClaimKey": 143,
+      "Role": "Supporting",
+      "Notes": "Claim provides supporting for issue",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "024_BridgeContinuityIssueClaim.json"
+    },
+    {
+      "BridgeContinuityIssueClaimGuid": "377ffe7e-798c-7380-858e-f457acca5ef1",
+      "ContinuityIssueKey": 30,
+      "ClaimKey": 146,
+      "Role": "Conflicting",
+      "Notes": "Claim provides conflicting for issue",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "024_BridgeContinuityIssueClaim.json"
+    },
+    {
+      "BridgeContinuityIssueClaimGuid": "fec87640-ac94-29c9-e60f-6852c1815d0f",
+      "ContinuityIssueKey": 30,
+      "ClaimKey": 147,
+      "Role": "Context",
+      "Notes": "Claim provides context for issue",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "024_BridgeContinuityIssueClaim.json"
+    },
+    {
+      "BridgeContinuityIssueClaimGuid": "04476c21-c404-43ad-c5f7-680504353c55",
+      "ContinuityIssueKey": 30,
+      "ClaimKey": 148,
+      "Role": "Supporting",
+      "Notes": "Claim provides supporting for issue",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "024_BridgeContinuityIssueClaim.json"
+    },
+    {
+      "BridgeContinuityIssueClaimGuid": "a8a9ebad-c943-7650-20f3-ad4e131b1a67",
+      "ContinuityIssueKey": 30,
+      "ClaimKey": 149,
+      "Role": "ResolutionBasis",
+      "Notes": "Claim provides resolution basis for issue",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "024_BridgeContinuityIssueClaim.json"
+    },
+    {
+      "BridgeContinuityIssueClaimGuid": "95158f62-0627-306f-6d6e-de3e078bf0a9",
+      "ContinuityIssueKey": 31,
+      "ClaimKey": 151,
+      "Role": "Conflicting",
+      "Notes": "Claim provides conflicting for issue",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "024_BridgeContinuityIssueClaim.json"
+    },
+    {
+      "BridgeContinuityIssueClaimGuid": "d644eb98-5d1f-8106-bdc2-a8063e71bda6",
+      "ContinuityIssueKey": 31,
+      "ClaimKey": 152,
+      "Role": "Context",
+      "Notes": "Claim provides context for issue",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "024_BridgeContinuityIssueClaim.json"
+    },
+    {
+      "BridgeContinuityIssueClaimGuid": "514021a0-e634-2bbe-f39a-c4de28e2c53a",
+      "ContinuityIssueKey": 31,
+      "ClaimKey": 153,
+      "Role": "Supporting",
+      "Notes": "Claim provides supporting for issue",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "024_BridgeContinuityIssueClaim.json"
+    },
+    {
+      "BridgeContinuityIssueClaimGuid": "24c70f49-5593-2699-0e30-d34220fc66ac",
+      "ContinuityIssueKey": 31,
+      "ClaimKey": 154,
+      "Role": "ResolutionBasis",
+      "Notes": "Claim provides resolution basis for issue",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "024_BridgeContinuityIssueClaim.json"
+    },
+    {
+      "BridgeContinuityIssueClaimGuid": "083d3f41-bc8d-7ea9-4127-0aa70de7e6c8",
+      "ContinuityIssueKey": 31,
+      "ClaimKey": 155,
+      "Role": "Conflicting",
+      "Notes": "Claim provides conflicting for issue",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "024_BridgeContinuityIssueClaim.json"
+    },
+    {
+      "BridgeContinuityIssueClaimGuid": "175b74dd-0f08-9e07-761c-44109b0548fd",
+      "ContinuityIssueKey": 32,
+      "ClaimKey": 156,
+      "Role": "Conflicting",
+      "Notes": "Claim provides conflicting for issue",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "024_BridgeContinuityIssueClaim.json"
+    },
+    {
+      "BridgeContinuityIssueClaimGuid": "893fd127-6f8c-98a9-952d-428dad606717",
+      "ContinuityIssueKey": 32,
+      "ClaimKey": 157,
+      "Role": "Context",
+      "Notes": "Claim provides context for issue",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "024_BridgeContinuityIssueClaim.json"
+    },
+    {
+      "BridgeContinuityIssueClaimGuid": "740ccd36-637b-2620-ae33-635ef7c3b917",
+      "ContinuityIssueKey": 33,
+      "ClaimKey": 161,
+      "Role": "Conflicting",
+      "Notes": "Claim provides conflicting for issue",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "024_BridgeContinuityIssueClaim.json"
+    },
+    {
+      "BridgeContinuityIssueClaimGuid": "86e781cc-ecaa-b42b-2807-12daba547544",
+      "ContinuityIssueKey": 33,
+      "ClaimKey": 162,
+      "Role": "Context",
+      "Notes": "Claim provides context for issue",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "024_BridgeContinuityIssueClaim.json"
+    },
+    {
+      "BridgeContinuityIssueClaimGuid": "5ac6dacf-8b02-d5f8-e898-829cf58b0ad9",
+      "ContinuityIssueKey": 33,
+      "ClaimKey": 163,
+      "Role": "Supporting",
+      "Notes": "Claim provides supporting for issue",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "024_BridgeContinuityIssueClaim.json"
+    },
+    {
+      "BridgeContinuityIssueClaimGuid": "dad917c4-173c-c91d-57d6-bcf0ad8db490",
+      "ContinuityIssueKey": 34,
+      "ClaimKey": 166,
+      "Role": "Conflicting",
+      "Notes": "Claim provides conflicting for issue",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "024_BridgeContinuityIssueClaim.json"
+    },
+    {
+      "BridgeContinuityIssueClaimGuid": "3c7bae80-cd38-b32e-bf3e-35fd705fd208",
+      "ContinuityIssueKey": 34,
+      "ClaimKey": 167,
+      "Role": "Context",
+      "Notes": "Claim provides context for issue",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "024_BridgeContinuityIssueClaim.json"
+    },
+    {
+      "BridgeContinuityIssueClaimGuid": "918ec3e0-f674-56d0-2805-5a3b7ab14627",
+      "ContinuityIssueKey": 34,
+      "ClaimKey": 168,
+      "Role": "Supporting",
+      "Notes": "Claim provides supporting for issue",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "024_BridgeContinuityIssueClaim.json"
+    },
+    {
+      "BridgeContinuityIssueClaimGuid": "7023ba75-4015-942d-1a35-a750e97f7536",
+      "ContinuityIssueKey": 34,
+      "ClaimKey": 169,
+      "Role": "ResolutionBasis",
+      "Notes": "Claim provides resolution basis for issue",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "024_BridgeContinuityIssueClaim.json"
+    },
+    {
+      "BridgeContinuityIssueClaimGuid": "df44bc40-7973-4b8e-8889-07b33f8f47b3",
+      "ContinuityIssueKey": 35,
+      "ClaimKey": 171,
+      "Role": "Conflicting",
+      "Notes": "Claim provides conflicting for issue",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "024_BridgeContinuityIssueClaim.json"
+    },
+    {
+      "BridgeContinuityIssueClaimGuid": "b7b1aae2-6973-ba98-b781-e580d2e1a79e",
+      "ContinuityIssueKey": 35,
+      "ClaimKey": 172,
+      "Role": "Context",
+      "Notes": "Claim provides context for issue",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "024_BridgeContinuityIssueClaim.json"
+    },
+    {
+      "BridgeContinuityIssueClaimGuid": "44270864-b99c-0fca-47bb-f888b74f3d36",
+      "ContinuityIssueKey": 35,
+      "ClaimKey": 173,
+      "Role": "Supporting",
+      "Notes": "Claim provides supporting for issue",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "024_BridgeContinuityIssueClaim.json"
+    },
+    {
+      "BridgeContinuityIssueClaimGuid": "0cb46694-d1b2-b57e-4482-778ba645c7bc",
+      "ContinuityIssueKey": 35,
+      "ClaimKey": 174,
+      "Role": "ResolutionBasis",
+      "Notes": "Claim provides resolution basis for issue",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "024_BridgeContinuityIssueClaim.json"
+    },
+    {
+      "BridgeContinuityIssueClaimGuid": "4ce07a80-5178-b62d-8400-02038d9b3e9e",
+      "ContinuityIssueKey": 35,
+      "ClaimKey": 175,
+      "Role": "Conflicting",
+      "Notes": "Claim provides conflicting for issue",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "024_BridgeContinuityIssueClaim.json"
+    },
+    {
+      "BridgeContinuityIssueClaimGuid": "cba57533-2b18-32c0-597a-4ce99179a166",
+      "ContinuityIssueKey": 36,
+      "ClaimKey": 176,
+      "Role": "Conflicting",
+      "Notes": "Claim provides conflicting for issue",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "024_BridgeContinuityIssueClaim.json"
+    },
+    {
+      "BridgeContinuityIssueClaimGuid": "2816632c-6d7e-17d8-da7d-6edab827f198",
+      "ContinuityIssueKey": 36,
+      "ClaimKey": 177,
+      "Role": "Context",
+      "Notes": "Claim provides context for issue",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "024_BridgeContinuityIssueClaim.json"
+    },
+    {
+      "BridgeContinuityIssueClaimGuid": "529906c6-9225-be77-dbf5-a08720e68804",
+      "ContinuityIssueKey": 37,
+      "ClaimKey": 181,
+      "Role": "Conflicting",
+      "Notes": "Claim provides conflicting for issue",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "024_BridgeContinuityIssueClaim.json"
+    },
+    {
+      "BridgeContinuityIssueClaimGuid": "c517fdb7-a542-9b5e-2c3b-8bdae09a242e",
+      "ContinuityIssueKey": 37,
+      "ClaimKey": 182,
+      "Role": "Context",
+      "Notes": "Claim provides context for issue",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "024_BridgeContinuityIssueClaim.json"
+    },
+    {
+      "BridgeContinuityIssueClaimGuid": "cbeab555-af0c-de2d-dbe7-637affea955d",
+      "ContinuityIssueKey": 37,
+      "ClaimKey": 183,
+      "Role": "Supporting",
+      "Notes": "Claim provides supporting for issue",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "024_BridgeContinuityIssueClaim.json"
+    },
+    {
+      "BridgeContinuityIssueClaimGuid": "a2853fc2-4f82-c375-d09a-b3328e99a9a1",
+      "ContinuityIssueKey": 38,
+      "ClaimKey": 186,
+      "Role": "Conflicting",
+      "Notes": "Claim provides conflicting for issue",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "024_BridgeContinuityIssueClaim.json"
+    },
+    {
+      "BridgeContinuityIssueClaimGuid": "c3e73192-29bb-4f79-491e-d8d4fc4f4ad1",
+      "ContinuityIssueKey": 38,
+      "ClaimKey": 187,
+      "Role": "Context",
+      "Notes": "Claim provides context for issue",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "024_BridgeContinuityIssueClaim.json"
+    },
+    {
+      "BridgeContinuityIssueClaimGuid": "34c5cbc7-41a1-656c-2f36-ab30a72b28ec",
+      "ContinuityIssueKey": 38,
+      "ClaimKey": 188,
+      "Role": "Supporting",
+      "Notes": "Claim provides supporting for issue",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "024_BridgeContinuityIssueClaim.json"
+    },
+    {
+      "BridgeContinuityIssueClaimGuid": "bbcf7c09-b678-e68c-8626-d871a5e3e01d",
+      "ContinuityIssueKey": 38,
+      "ClaimKey": 189,
+      "Role": "ResolutionBasis",
+      "Notes": "Claim provides resolution basis for issue",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "024_BridgeContinuityIssueClaim.json"
+    },
+    {
+      "BridgeContinuityIssueClaimGuid": "52a0d311-e0af-083e-c992-16c539bf2dfe",
+      "ContinuityIssueKey": 39,
+      "ClaimKey": 191,
+      "Role": "Conflicting",
+      "Notes": "Claim provides conflicting for issue",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "024_BridgeContinuityIssueClaim.json"
+    },
+    {
+      "BridgeContinuityIssueClaimGuid": "155945d4-ebc4-8978-cfa7-4567d5b31578",
+      "ContinuityIssueKey": 39,
+      "ClaimKey": 192,
+      "Role": "Context",
+      "Notes": "Claim provides context for issue",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "024_BridgeContinuityIssueClaim.json"
+    },
+    {
+      "BridgeContinuityIssueClaimGuid": "c82b954d-9cb4-3a94-cdbc-7e8aa85fe4a7",
+      "ContinuityIssueKey": 39,
+      "ClaimKey": 193,
+      "Role": "Supporting",
+      "Notes": "Claim provides supporting for issue",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "024_BridgeContinuityIssueClaim.json"
+    },
+    {
+      "BridgeContinuityIssueClaimGuid": "bc9b89f9-4e8f-7ca5-7d7c-e0816a8b3d49",
+      "ContinuityIssueKey": 39,
+      "ClaimKey": 194,
+      "Role": "ResolutionBasis",
+      "Notes": "Claim provides resolution basis for issue",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "024_BridgeContinuityIssueClaim.json"
+    },
+    {
+      "BridgeContinuityIssueClaimGuid": "94c22e22-c526-3fde-d16d-499643f32b56",
+      "ContinuityIssueKey": 39,
+      "ClaimKey": 195,
+      "Role": "Conflicting",
+      "Notes": "Claim provides conflicting for issue",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "024_BridgeContinuityIssueClaim.json"
+    },
+    {
+      "BridgeContinuityIssueClaimGuid": "d30c54c0-6aa6-9195-72c2-50856b981b6d",
+      "ContinuityIssueKey": 40,
+      "ClaimKey": 196,
+      "Role": "Conflicting",
+      "Notes": "Claim provides conflicting for issue",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "024_BridgeContinuityIssueClaim.json"
+    },
+    {
+      "BridgeContinuityIssueClaimGuid": "d64a13fa-90b2-2235-59f9-f148b6337be7",
+      "ContinuityIssueKey": 40,
+      "ClaimKey": 197,
+      "Role": "Context",
+      "Notes": "Claim provides context for issue",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "024_BridgeContinuityIssueClaim.json"
+    },
+    {
+      "BridgeContinuityIssueClaimGuid": "b7e84569-508c-41c3-c6ca-723b7d39f96a",
+      "ContinuityIssueKey": 41,
+      "ClaimKey": 201,
+      "Role": "Conflicting",
+      "Notes": "Claim provides conflicting for issue",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "024_BridgeContinuityIssueClaim.json"
+    },
+    {
+      "BridgeContinuityIssueClaimGuid": "590dfcfd-204d-a096-c980-e538d2cd90bf",
+      "ContinuityIssueKey": 41,
+      "ClaimKey": 202,
+      "Role": "Context",
+      "Notes": "Claim provides context for issue",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "024_BridgeContinuityIssueClaim.json"
+    },
+    {
+      "BridgeContinuityIssueClaimGuid": "182dbfeb-14f4-be03-62a2-ac8c0abbd2ff",
+      "ContinuityIssueKey": 41,
+      "ClaimKey": 203,
+      "Role": "Supporting",
+      "Notes": "Claim provides supporting for issue",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "024_BridgeContinuityIssueClaim.json"
+    },
+    {
+      "BridgeContinuityIssueClaimGuid": "ebfe73f9-81fa-dc9b-f6a2-69a508661636",
+      "ContinuityIssueKey": 42,
+      "ClaimKey": 206,
+      "Role": "Conflicting",
+      "Notes": "Claim provides conflicting for issue",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "024_BridgeContinuityIssueClaim.json"
+    },
+    {
+      "BridgeContinuityIssueClaimGuid": "338a25d5-ad46-bfb3-34ad-12ddf83de62d",
+      "ContinuityIssueKey": 42,
+      "ClaimKey": 207,
+      "Role": "Context",
+      "Notes": "Claim provides context for issue",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "024_BridgeContinuityIssueClaim.json"
+    },
+    {
+      "BridgeContinuityIssueClaimGuid": "cb9e596a-3e24-afb1-5500-82ac1aff5710",
+      "ContinuityIssueKey": 42,
+      "ClaimKey": 208,
+      "Role": "Supporting",
+      "Notes": "Claim provides supporting for issue",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "024_BridgeContinuityIssueClaim.json"
+    },
+    {
+      "BridgeContinuityIssueClaimGuid": "75fe9ecd-fe98-79a5-f0d2-021912ecbc50",
+      "ContinuityIssueKey": 42,
+      "ClaimKey": 209,
+      "Role": "ResolutionBasis",
+      "Notes": "Claim provides resolution basis for issue",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "024_BridgeContinuityIssueClaim.json"
+    },
+    {
+      "BridgeContinuityIssueClaimGuid": "4fbb98c0-6850-83d1-e1d8-d3a40a83ddda",
+      "ContinuityIssueKey": 43,
+      "ClaimKey": 211,
+      "Role": "Conflicting",
+      "Notes": "Claim provides conflicting for issue",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "024_BridgeContinuityIssueClaim.json"
+    },
+    {
+      "BridgeContinuityIssueClaimGuid": "7a7730c3-9263-1fe1-b5ff-311ddfef3c33",
+      "ContinuityIssueKey": 43,
+      "ClaimKey": 212,
+      "Role": "Context",
+      "Notes": "Claim provides context for issue",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "024_BridgeContinuityIssueClaim.json"
+    },
+    {
+      "BridgeContinuityIssueClaimGuid": "a03a337b-9406-6b12-3bb8-3e4df1254e29",
+      "ContinuityIssueKey": 43,
+      "ClaimKey": 213,
+      "Role": "Supporting",
+      "Notes": "Claim provides supporting for issue",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "024_BridgeContinuityIssueClaim.json"
+    },
+    {
+      "BridgeContinuityIssueClaimGuid": "284cb68c-da85-b43f-879c-662d9f98cd3a",
+      "ContinuityIssueKey": 43,
+      "ClaimKey": 214,
+      "Role": "ResolutionBasis",
+      "Notes": "Claim provides resolution basis for issue",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "024_BridgeContinuityIssueClaim.json"
+    },
+    {
+      "BridgeContinuityIssueClaimGuid": "fefc6e4f-4b6e-86ec-1f58-054c3d9bf2f5",
+      "ContinuityIssueKey": 43,
+      "ClaimKey": 215,
+      "Role": "Conflicting",
+      "Notes": "Claim provides conflicting for issue",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "024_BridgeContinuityIssueClaim.json"
+    },
+    {
+      "BridgeContinuityIssueClaimGuid": "a26d6b9b-548b-38ba-ce10-53457b796de0",
+      "ContinuityIssueKey": 44,
+      "ClaimKey": 216,
+      "Role": "Conflicting",
+      "Notes": "Claim provides conflicting for issue",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "024_BridgeContinuityIssueClaim.json"
+    },
+    {
+      "BridgeContinuityIssueClaimGuid": "7572dec1-9a47-d067-35f8-6471d45be2c3",
+      "ContinuityIssueKey": 44,
+      "ClaimKey": 217,
+      "Role": "Context",
+      "Notes": "Claim provides context for issue",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "024_BridgeContinuityIssueClaim.json"
+    },
+    {
+      "BridgeContinuityIssueClaimGuid": "6c4b87ea-2fd8-4bd3-c39f-cfbc7c98aadc",
+      "ContinuityIssueKey": 45,
+      "ClaimKey": 221,
+      "Role": "Conflicting",
+      "Notes": "Claim provides conflicting for issue",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "024_BridgeContinuityIssueClaim.json"
+    },
+    {
+      "BridgeContinuityIssueClaimGuid": "fbced4a3-0907-89c5-bd55-846bd9818d6f",
+      "ContinuityIssueKey": 45,
+      "ClaimKey": 222,
+      "Role": "Context",
+      "Notes": "Claim provides context for issue",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "024_BridgeContinuityIssueClaim.json"
+    },
+    {
+      "BridgeContinuityIssueClaimGuid": "47814797-f558-dbae-bd43-1725ac63afba",
+      "ContinuityIssueKey": 45,
+      "ClaimKey": 223,
+      "Role": "Supporting",
+      "Notes": "Claim provides supporting for issue",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "024_BridgeContinuityIssueClaim.json"
+    },
+    {
+      "BridgeContinuityIssueClaimGuid": "ceb0f451-0c51-ca21-d603-5c023a788ed4",
+      "ContinuityIssueKey": 46,
+      "ClaimKey": 226,
+      "Role": "Conflicting",
+      "Notes": "Claim provides conflicting for issue",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "024_BridgeContinuityIssueClaim.json"
+    },
+    {
+      "BridgeContinuityIssueClaimGuid": "d92c5761-9c46-5036-6a2b-70e72ab89b47",
+      "ContinuityIssueKey": 46,
+      "ClaimKey": 227,
+      "Role": "Context",
+      "Notes": "Claim provides context for issue",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "024_BridgeContinuityIssueClaim.json"
+    },
+    {
+      "BridgeContinuityIssueClaimGuid": "ff35dafd-5f04-bf9a-43ad-6001528a588d",
+      "ContinuityIssueKey": 46,
+      "ClaimKey": 228,
+      "Role": "Supporting",
+      "Notes": "Claim provides supporting for issue",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "024_BridgeContinuityIssueClaim.json"
+    },
+    {
+      "BridgeContinuityIssueClaimGuid": "be7abb2c-39c6-1184-d435-5a98e4142e1e",
+      "ContinuityIssueKey": 46,
+      "ClaimKey": 229,
+      "Role": "ResolutionBasis",
+      "Notes": "Claim provides resolution basis for issue",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "024_BridgeContinuityIssueClaim.json"
+    },
+    {
+      "BridgeContinuityIssueClaimGuid": "0180ed5f-d253-b447-f1a8-e62a2931a647",
+      "ContinuityIssueKey": 47,
+      "ClaimKey": 231,
+      "Role": "Conflicting",
+      "Notes": "Claim provides conflicting for issue",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "024_BridgeContinuityIssueClaim.json"
+    },
+    {
+      "BridgeContinuityIssueClaimGuid": "bf14928b-abac-6779-1da4-ae86ba708de3",
+      "ContinuityIssueKey": 47,
+      "ClaimKey": 232,
+      "Role": "Context",
+      "Notes": "Claim provides context for issue",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "024_BridgeContinuityIssueClaim.json"
+    },
+    {
+      "BridgeContinuityIssueClaimGuid": "cf25faae-fe41-e54e-c9e9-b32b70a5e285",
+      "ContinuityIssueKey": 47,
+      "ClaimKey": 233,
+      "Role": "Supporting",
+      "Notes": "Claim provides supporting for issue",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "024_BridgeContinuityIssueClaim.json"
+    },
+    {
+      "BridgeContinuityIssueClaimGuid": "07d4a691-aa8b-52dc-4a4e-d667fa63da20",
+      "ContinuityIssueKey": 47,
+      "ClaimKey": 234,
+      "Role": "ResolutionBasis",
+      "Notes": "Claim provides resolution basis for issue",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "024_BridgeContinuityIssueClaim.json"
+    },
+    {
+      "BridgeContinuityIssueClaimGuid": "ae594d73-102b-f682-4aa3-fc70d00340d7",
+      "ContinuityIssueKey": 47,
+      "ClaimKey": 235,
+      "Role": "Conflicting",
+      "Notes": "Claim provides conflicting for issue",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "024_BridgeContinuityIssueClaim.json"
+    },
+    {
+      "BridgeContinuityIssueClaimGuid": "7a8d07af-f1a2-6d1f-2404-4430a4645f6f",
+      "ContinuityIssueKey": 48,
+      "ClaimKey": 236,
+      "Role": "Conflicting",
+      "Notes": "Claim provides conflicting for issue",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "024_BridgeContinuityIssueClaim.json"
+    },
+    {
+      "BridgeContinuityIssueClaimGuid": "7fffb803-a990-af32-f313-4d8ce5e826ab",
+      "ContinuityIssueKey": 48,
+      "ClaimKey": 237,
+      "Role": "Context",
+      "Notes": "Claim provides context for issue",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "024_BridgeContinuityIssueClaim.json"
+    },
+    {
+      "BridgeContinuityIssueClaimGuid": "5f0c3edf-bfba-a71b-27fd-fbc321479e82",
+      "ContinuityIssueKey": 49,
+      "ClaimKey": 241,
+      "Role": "Conflicting",
+      "Notes": "Claim provides conflicting for issue",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "024_BridgeContinuityIssueClaim.json"
+    },
+    {
+      "BridgeContinuityIssueClaimGuid": "ab3e883a-e91d-b04d-a8c3-0a74f224edce",
+      "ContinuityIssueKey": 49,
+      "ClaimKey": 242,
+      "Role": "Context",
+      "Notes": "Claim provides context for issue",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "024_BridgeContinuityIssueClaim.json"
+    },
+    {
+      "BridgeContinuityIssueClaimGuid": "3f568479-39cb-95e7-dacb-1e85e734fbce",
+      "ContinuityIssueKey": 49,
+      "ClaimKey": 243,
+      "Role": "Supporting",
+      "Notes": "Claim provides supporting for issue",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "024_BridgeContinuityIssueClaim.json"
+    },
+    {
+      "BridgeContinuityIssueClaimGuid": "f3226709-5c49-d31d-2f8a-6d8f3dde65f8",
+      "ContinuityIssueKey": 50,
+      "ClaimKey": 246,
+      "Role": "Conflicting",
+      "Notes": "Claim provides conflicting for issue",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "024_BridgeContinuityIssueClaim.json"
+    },
+    {
+      "BridgeContinuityIssueClaimGuid": "e3a12445-4d5b-3b5a-adc0-66f61bd6068d",
+      "ContinuityIssueKey": 50,
+      "ClaimKey": 247,
+      "Role": "Context",
+      "Notes": "Claim provides context for issue",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "024_BridgeContinuityIssueClaim.json"
+    },
+    {
+      "BridgeContinuityIssueClaimGuid": "4ec76273-6e68-1295-d7bc-d36d78be6ef8",
+      "ContinuityIssueKey": 50,
+      "ClaimKey": 248,
+      "Role": "Supporting",
+      "Notes": "Claim provides supporting for issue",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "024_BridgeContinuityIssueClaim.json"
+    },
+    {
+      "BridgeContinuityIssueClaimGuid": "42cb7cb6-3f5d-59e8-bd85-f45165a45f02",
+      "ContinuityIssueKey": 50,
+      "ClaimKey": 249,
+      "Role": "ResolutionBasis",
+      "Notes": "Claim provides resolution basis for issue",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "024_BridgeContinuityIssueClaim.json"
+    }
+  ]
+}
