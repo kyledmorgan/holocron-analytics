@@ -45,6 +45,20 @@
       "Notes": "Synthetic seed data",
       "SourceSystem": "seed_loader",
       "SourceRef": "003_DimContinuityFrame.json"
+    },
+    {
+      "ContinuityFrameGuid": "4506d1e8-44b2-455c-8028-7d4567c1b74a",
+      "FranchiseKey": 1,
+      "FrameName": "Merch",
+      "FrameCode": "MERCH",
+      "AuthorityType": "Catalog",
+      "AuthorityRef": "Merchandising",
+      "PolicySummary": "Non-narrative merchandise catalog continuity",
+      "EffectiveStartDate": "1977-05-25",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "003_DimContinuityFrame.json",
+      "AttributesJson": "{\"catalogDomain\": \"toy\"}"
     }
   ]
 }
