@@ -223,6 +223,9 @@ ORDER BY EventNumber;
 -- EXERCISE 10: Trench Run Narrative Summary
 -- ============================================================================
 
+-- NOTE: STRING_AGG requires SQL Server 2017 or later.
+--       See alternative query below for older SQL Server versions.
+
 SELECT
     e.SceneNumber,
     e.SceneName,

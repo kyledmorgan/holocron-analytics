@@ -265,6 +265,9 @@ ORDER BY SceneNumber;
 -- EXERCISE 10: Complete Duel Narrative
 -- ============================================================================
 
+-- NOTE: STRING_AGG requires SQL Server 2017 or later.
+--       See alternative query below for older SQL Server versions.
+
 SELECT
     s.SceneNumber,
     s.SceneName,

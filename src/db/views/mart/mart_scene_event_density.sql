@@ -14,7 +14,7 @@
  *   - EventDensity: Events per minute (if duration known)
  *   - StartSec, EndSec: Timing anchors
  *
- * DEPENDENCIES: sem_scene, sem_event
+ * DEPENDENCIES: sem_scene, sem_event, sem_event_participant
  ******************************************************************************/
 CREATE OR ALTER VIEW dbo.mart_scene_event_density
 AS
@@ -44,21 +44,23 @@ SELECT
     ev.MinEventOrdinal,
     ev.MaxEventOrdinal,
     ev.DistinctEventTypes,
-    ev.DistinctParticipants
+    COALESCE(part.DistinctParticipants, 0) AS DistinctParticipants
 FROM dbo.sem_scene sc
 LEFT JOIN (
     SELECT
         e.SceneKey,
-        COUNT(*)                    AS EventCount,
-        MIN(e.EventOrdinal)         AS MinEventOrdinal,
-        MAX(e.EventOrdinal)         AS MaxEventOrdinal,
-        COUNT(DISTINCT e.EventTypeKey) AS DistinctEventTypes,
-        (
-            SELECT COUNT(DISTINCT p.EntityKey)
-            FROM dbo.sem_event_participant p
-            WHERE p.SceneKey = e.SceneKey
-        ) AS DistinctParticipants
+        COUNT(*)                       AS EventCount,
+        MIN(e.EventOrdinal)            AS MinEventOrdinal,
+        MAX(e.EventOrdinal)            AS MaxEventOrdinal,
+        COUNT(DISTINCT e.EventTypeKey) AS DistinctEventTypes
     FROM dbo.sem_event e
     GROUP BY e.SceneKey
-) ev ON sc.SceneKey = ev.SceneKey;
+) ev ON sc.SceneKey = ev.SceneKey
+LEFT JOIN (
+    SELECT
+        p.SceneKey,
+        COUNT(DISTINCT p.EntityKey) AS DistinctParticipants
+    FROM dbo.sem_event_participant p
+    GROUP BY p.SceneKey
+) part ON sc.SceneKey = part.SceneKey;
 GO

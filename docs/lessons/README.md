@@ -69,10 +69,10 @@ Each module starts with simpler exercises and progresses to more complex ones:
 
 Many tables include a `ConfidenceScore` column (0.0 to 1.0) indicating data quality:
 
-- **0.90+**: High confidence, well-sourced
-- **0.70-0.89**: Good confidence, minor ambiguity
-- **0.50-0.69**: Moderate confidence, some uncertainty
-- **Below 0.50**: Low confidence, use with caution
+- **≥ 0.90**: High confidence, well-sourced
+- **≥ 0.70 and < 0.90**: Good confidence, minor ambiguity
+- **≥ 0.50 and < 0.70**: Moderate confidence, some uncertainty
+- **< 0.50**: Low confidence, use with caution
 
 Filtering by confidence is a valuable skill for working with real-world data.
 

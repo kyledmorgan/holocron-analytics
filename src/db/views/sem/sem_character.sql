@@ -31,7 +31,7 @@ SELECT
     e.SummaryShort,
     e.IsCanonical,
     c.SpeciesKey,
-    sp.DisplayName              AS SpeciesName,
+    species_entity.DisplayName  AS SpeciesName,
     c.Gender,
     c.Pronouns,
     c.BirthRef,
@@ -58,14 +58,14 @@ INNER JOIN dbo.DimFranchise f
     ON e.FranchiseKey = f.FranchiseKey
    AND f.IsActive = 1
    AND f.IsLatest = 1
-LEFT JOIN dbo.DimSpecies spc
-    ON c.SpeciesKey = spc.SpeciesKey
-   AND spc.IsActive = 1
-   AND spc.IsLatest = 1
-LEFT JOIN dbo.DimEntity sp
-    ON spc.EntityKey = sp.EntityKey
-   AND sp.IsActive = 1
-   AND sp.IsLatest = 1
+LEFT JOIN dbo.DimSpecies species_dim
+    ON c.SpeciesKey = species_dim.SpeciesKey
+   AND species_dim.IsActive = 1
+   AND species_dim.IsLatest = 1
+LEFT JOIN dbo.DimEntity species_entity
+    ON species_dim.EntityKey = species_entity.EntityKey
+   AND species_entity.IsActive = 1
+   AND species_entity.IsLatest = 1
 WHERE c.IsActive = 1
   AND c.IsLatest = 1;
 GO
