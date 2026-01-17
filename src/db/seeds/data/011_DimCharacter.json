@@ -1,0 +1,39 @@
+{
+  "seedVersion": "0.1.0",
+  "generatedUtc": "2026-01-16T00:00:00Z",
+  "target": {
+    "schema": "dbo",
+    "table": "DimCharacter",
+    "naturalKey": ["EntityKey"],
+    "loadBehavior": "truncate-insert"
+  },
+  "options": {
+    "allowIdentityInsert": false,
+    "ignoreUnknownFields": false,
+    "defaults": {
+      "IsActive": true,
+      "IsLatest": true,
+      "VersionNum": 1
+    }
+  },
+  "rows": [
+    {
+      "CharacterGuid": "00000011-0001-0000-0000-000000000001",
+      "EntityKey": 1,
+      "SpeciesKey": 1,
+      "Gender": "Male",
+      "Pronouns": "he/him",
+      "BirthRef": "19 BBY",
+      "BirthPlaceRef": "Polis Massa",
+      "HomeworldRef": "Tatooine",
+      "SpeciesNameRef": "Human",
+      "HeightRef": "1.72 m",
+      "EyeColor": "Blue",
+      "HairColor": "Blond",
+      "RoleArchetype": "Hero",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "011_DimCharacter.json"
+    }
+  ]
+}

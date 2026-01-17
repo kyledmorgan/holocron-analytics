@@ -1,0 +1,35 @@
+{
+  "seedVersion": "0.1.0",
+  "generatedUtc": "2026-01-16T00:00:00Z",
+  "target": {
+    "schema": "dbo",
+    "table": "DimTechAsset",
+    "naturalKey": ["FranchiseKey", "ModelName"],
+    "loadBehavior": "truncate-insert"
+  },
+  "options": {
+    "allowIdentityInsert": false,
+    "ignoreUnknownFields": false,
+    "defaults": {
+      "IsActive": true,
+      "IsLatest": true,
+      "VersionNum": 1
+    }
+  },
+  "rows": [
+    {
+      "TechAssetGuid": "00000014-0001-0000-0000-000000000001",
+      "FranchiseKey": 1,
+      "AssetType": "Droid",
+      "ModelName": "3PO-series Protocol Droid",
+      "ModelNameNormalized": "3po-series protocol droid",
+      "ManufacturerRef": "Cybot Galactica",
+      "EraRef": "Pre-Clone Wars",
+      "TechLevelRef": "Advanced",
+      "PowerSourceRef": "Power cell",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "012_DimTechAsset.json"
+    }
+  ]
+}
