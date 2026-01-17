@@ -30,7 +30,7 @@ services:
     restart: unless-stopped
 
   initdb:
-    image: mcr.microsoft.com/mssql-tools:latest
+    image: mcr.microsoft.com/mssql-tools:18
     container_name: holocron-initdb
     depends_on:
       sqlserver:

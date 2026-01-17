@@ -175,6 +175,32 @@ If you prefer a graphical interface:
 
 ## Troubleshooting
 
+### Image Pull EOF or Registry Failures
+
+If you see errors like:
+```
+failed to resolve reference "mcr.microsoft.com/mssql-tools:latest": EOF
+```
+
+**Why this happens**: `:latest` tags can change, and registry connections can fail due to network, VPN, proxy, or DNS issues. This repo now pins the tools image to a stable major tag (`mcr.microsoft.com/mssql-tools:18`) to reduce brittleness.
+
+**Try this first**:
+1. Restart Docker Desktop.
+2. Ensure you are signed in to Docker Desktop.
+3. Temporarily disable VPN/proxy or SSL inspection if present.
+4. Manually pull the images to confirm connectivity:
+
+```bash
+docker pull mcr.microsoft.com/mssql/server:2022-latest
+docker pull mcr.microsoft.com/mssql-tools:18
+```
+
+If pulls succeed, re-run:
+
+```bash
+docker compose up --build
+```
+
 ### Password Complexity Error
 
 If you see an error like:
