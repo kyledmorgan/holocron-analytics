@@ -330,7 +330,12 @@ class SeedLoader:
 
         # Compute RowHash
         if "RowHash" in table_schema.columns:
-            # Exclude identity, UpdatedUtc, RowHash itself from hash
+            # Exclude columns that are:
+            # - identity PK (auto-generated)
+            # - UpdatedUtc (changes on every update)
+            # - RowHash itself
+            # - ValidFromUtc, CreatedUtc (set by loader at load time, not business data)
+            # This ensures the hash represents the actual seed content for change detection
             exclude = {identity_col, "UpdatedUtc", "RowHash", "ValidFromUtc", "CreatedUtc"}
             exclude.discard(None)
             prepared["RowHash"] = compute_row_hash(prepared, exclude)

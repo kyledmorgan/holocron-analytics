@@ -236,9 +236,10 @@ def main() -> int:
         for sf in seed_files:
             if table_filter and sf.target.table not in table_filter:
                 continue
+            columns = sorted(sf.rows[0].keys()) if sf.rows else []
             logger.info(
                 f"  {sf.target.table}: {len(sf.rows)} rows, "
-                f"columns: {', '.join(sorted(sf.rows[0].keys()) if sf.rows else [])}"
+                f"columns: {', '.join(columns)}"
             )
         logger.info("[DRY RUN] Validation complete (no database connection)")
         return 0

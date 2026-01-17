@@ -51,9 +51,12 @@ class SeedFile:
 
 
 class SeedValidationError(Exception):
-    """Raised when seed file validation fails."""
+    """
+    Raised when seed file validation fails.
 
-    pass
+    This exception indicates that a seed file has structural issues
+    such as missing required fields, invalid JSON, or schema mismatches.
+    """
 
 
 def load_seed_file(file_path: Path) -> SeedFile:
@@ -161,7 +164,10 @@ def generate_deterministic_guid(
     """
     # Use DNS namespace as base, then combine with our namespace string
     base_ns = uuid.uuid5(uuid.NAMESPACE_DNS, namespace)
-    key_string = "|".join(str(v) for v in natural_key_values)
+    # Use JSON serialization for robust key string (handles special characters)
+    key_string = json.dumps(
+        [str(v) for v in natural_key_values], ensure_ascii=False, sort_keys=True
+    )
     generated_uuid = uuid.uuid5(base_ns, key_string)
     return str(generated_uuid)
 
