@@ -1,0 +1,36 @@
+# Dockerfile for Holocron Analytics seed runner
+# Builds a Python container with ODBC Driver 18 for SQL Server
+
+FROM python:3.11-slim-bookworm
+
+# Install dependencies for pyodbc and MS ODBC Driver 18
+# Including ca-certificates for HTTPS connections
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    ca-certificates \
+    curl \
+    gnupg2 \
+    unixodbc \
+    unixodbc-dev \
+    && rm -rf /var/lib/apt/lists/*
+
+# Add Microsoft repository and install ODBC Driver 18 for SQL Server
+# Using the official Microsoft installation method for Debian 12 (bookworm)
+RUN curl -fsSL https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor -o /usr/share/keyrings/microsoft-prod.gpg \
+    && curl -fsSL https://packages.microsoft.com/config/debian/12/prod.list > /etc/apt/sources.list.d/mssql-release.list \
+    && apt-get update \
+    && ACCEPT_EULA=Y apt-get install -y --no-install-recommends msodbcsql18 \
+    && rm -rf /var/lib/apt/lists/*
+
+# Set working directory
+WORKDIR /app
+
+# Copy requirements and install Python dependencies
+COPY docker/requirements.txt /app/docker/requirements.txt
+RUN pip install --no-cache-dir -r /app/docker/requirements.txt
+
+# Copy source code
+COPY src/ /app/src/
+
+# Default command: run the seed loader
+# Can be overridden with docker compose command
+CMD ["python", "src/ingest/seed_loader.py", "--all", "--verbose"]

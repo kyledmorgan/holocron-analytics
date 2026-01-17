@@ -1,0 +1,5 @@
+# Python dependencies for Docker seed runner
+# Minimal set needed for seed_loader.py
+
+pyodbc>=5.0.0
+python-dotenv>=1.0.0
