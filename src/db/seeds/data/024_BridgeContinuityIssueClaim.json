@@ -79,7 +79,7 @@
       "ContinuityIssueKey": 2,
       "ClaimKey": 9,
       "Role": "ResolutionBasis",
-      "Notes": "Claim provides resolutionbasis for issue",
+      "Notes": "Claim provides resolution basis for issue",
       "SourceSystem": "seed_loader",
       "SourceRef": "024_BridgeContinuityIssueClaim.json"
     },
@@ -115,7 +115,7 @@
       "ContinuityIssueKey": 3,
       "ClaimKey": 14,
       "Role": "ResolutionBasis",
-      "Notes": "Claim provides resolutionbasis for issue",
+      "Notes": "Claim provides resolution basis for issue",
       "SourceSystem": "seed_loader",
       "SourceRef": "024_BridgeContinuityIssueClaim.json"
     },
@@ -205,7 +205,7 @@
       "ContinuityIssueKey": 6,
       "ClaimKey": 29,
       "Role": "ResolutionBasis",
-      "Notes": "Claim provides resolutionbasis for issue",
+      "Notes": "Claim provides resolution basis for issue",
       "SourceSystem": "seed_loader",
       "SourceRef": "024_BridgeContinuityIssueClaim.json"
     },
@@ -241,7 +241,7 @@
       "ContinuityIssueKey": 7,
       "ClaimKey": 34,
       "Role": "ResolutionBasis",
-      "Notes": "Claim provides resolutionbasis for issue",
+      "Notes": "Claim provides resolution basis for issue",
       "SourceSystem": "seed_loader",
       "SourceRef": "024_BridgeContinuityIssueClaim.json"
     },
@@ -331,7 +331,7 @@
       "ContinuityIssueKey": 10,
       "ClaimKey": 49,
       "Role": "ResolutionBasis",
-      "Notes": "Claim provides resolutionbasis for issue",
+      "Notes": "Claim provides resolution basis for issue",
       "SourceSystem": "seed_loader",
       "SourceRef": "024_BridgeContinuityIssueClaim.json"
     },
@@ -367,7 +367,7 @@
       "ContinuityIssueKey": 11,
       "ClaimKey": 54,
       "Role": "ResolutionBasis",
-      "Notes": "Claim provides resolutionbasis for issue",
+      "Notes": "Claim provides resolution basis for issue",
       "SourceSystem": "seed_loader",
       "SourceRef": "024_BridgeContinuityIssueClaim.json"
     },
@@ -457,7 +457,7 @@
       "ContinuityIssueKey": 14,
       "ClaimKey": 69,
       "Role": "ResolutionBasis",
-      "Notes": "Claim provides resolutionbasis for issue",
+      "Notes": "Claim provides resolution basis for issue",
       "SourceSystem": "seed_loader",
       "SourceRef": "024_BridgeContinuityIssueClaim.json"
     },
@@ -493,7 +493,7 @@
       "ContinuityIssueKey": 15,
       "ClaimKey": 74,
       "Role": "ResolutionBasis",
-      "Notes": "Claim provides resolutionbasis for issue",
+      "Notes": "Claim provides resolution basis for issue",
       "SourceSystem": "seed_loader",
       "SourceRef": "024_BridgeContinuityIssueClaim.json"
     },
@@ -583,7 +583,7 @@
       "ContinuityIssueKey": 18,
       "ClaimKey": 89,
       "Role": "ResolutionBasis",
-      "Notes": "Claim provides resolutionbasis for issue",
+      "Notes": "Claim provides resolution basis for issue",
       "SourceSystem": "seed_loader",
       "SourceRef": "024_BridgeContinuityIssueClaim.json"
     },
@@ -619,7 +619,7 @@
       "ContinuityIssueKey": 19,
       "ClaimKey": 94,
       "Role": "ResolutionBasis",
-      "Notes": "Claim provides resolutionbasis for issue",
+      "Notes": "Claim provides resolution basis for issue",
       "SourceSystem": "seed_loader",
       "SourceRef": "024_BridgeContinuityIssueClaim.json"
     },
@@ -709,7 +709,7 @@
       "ContinuityIssueKey": 22,
       "ClaimKey": 109,
       "Role": "ResolutionBasis",
-      "Notes": "Claim provides resolutionbasis for issue",
+      "Notes": "Claim provides resolution basis for issue",
       "SourceSystem": "seed_loader",
       "SourceRef": "024_BridgeContinuityIssueClaim.json"
     },
@@ -745,7 +745,7 @@
       "ContinuityIssueKey": 23,
       "ClaimKey": 114,
       "Role": "ResolutionBasis",
-      "Notes": "Claim provides resolutionbasis for issue",
+      "Notes": "Claim provides resolution basis for issue",
       "SourceSystem": "seed_loader",
       "SourceRef": "024_BridgeContinuityIssueClaim.json"
     },
@@ -835,7 +835,7 @@
       "ContinuityIssueKey": 26,
       "ClaimKey": 129,
       "Role": "ResolutionBasis",
-      "Notes": "Claim provides resolutionbasis for issue",
+      "Notes": "Claim provides resolution basis for issue",
       "SourceSystem": "seed_loader",
       "SourceRef": "024_BridgeContinuityIssueClaim.json"
     },
@@ -871,7 +871,7 @@
       "ContinuityIssueKey": 27,
       "ClaimKey": 134,
       "Role": "ResolutionBasis",
-      "Notes": "Claim provides resolutionbasis for issue",
+      "Notes": "Claim provides resolution basis for issue",
       "SourceSystem": "seed_loader",
       "SourceRef": "024_BridgeContinuityIssueClaim.json"
     },
@@ -961,7 +961,7 @@
       "ContinuityIssueKey": 30,
       "ClaimKey": 149,
       "Role": "ResolutionBasis",
-      "Notes": "Claim provides resolutionbasis for issue",
+      "Notes": "Claim provides resolution basis for issue",
       "SourceSystem": "seed_loader",
       "SourceRef": "024_BridgeContinuityIssueClaim.json"
     },
@@ -997,7 +997,7 @@
       "ContinuityIssueKey": 31,
       "ClaimKey": 154,
       "Role": "ResolutionBasis",
-      "Notes": "Claim provides resolutionbasis for issue",
+      "Notes": "Claim provides resolution basis for issue",
       "SourceSystem": "seed_loader",
       "SourceRef": "024_BridgeContinuityIssueClaim.json"
     },
@@ -1087,7 +1087,7 @@
       "ContinuityIssueKey": 34,
       "ClaimKey": 169,
       "Role": "ResolutionBasis",
-      "Notes": "Claim provides resolutionbasis for issue",
+      "Notes": "Claim provides resolution basis for issue",
       "SourceSystem": "seed_loader",
       "SourceRef": "024_BridgeContinuityIssueClaim.json"
     },
@@ -1123,7 +1123,7 @@
       "ContinuityIssueKey": 35,
       "ClaimKey": 174,
       "Role": "ResolutionBasis",
-      "Notes": "Claim provides resolutionbasis for issue",
+      "Notes": "Claim provides resolution basis for issue",
       "SourceSystem": "seed_loader",
       "SourceRef": "024_BridgeContinuityIssueClaim.json"
     },
@@ -1213,7 +1213,7 @@
       "ContinuityIssueKey": 38,
       "ClaimKey": 189,
       "Role": "ResolutionBasis",
-      "Notes": "Claim provides resolutionbasis for issue",
+      "Notes": "Claim provides resolution basis for issue",
       "SourceSystem": "seed_loader",
       "SourceRef": "024_BridgeContinuityIssueClaim.json"
     },
@@ -1249,7 +1249,7 @@
       "ContinuityIssueKey": 39,
       "ClaimKey": 194,
       "Role": "ResolutionBasis",
-      "Notes": "Claim provides resolutionbasis for issue",
+      "Notes": "Claim provides resolution basis for issue",
       "SourceSystem": "seed_loader",
       "SourceRef": "024_BridgeContinuityIssueClaim.json"
     },
@@ -1339,7 +1339,7 @@
       "ContinuityIssueKey": 42,
       "ClaimKey": 209,
       "Role": "ResolutionBasis",
-      "Notes": "Claim provides resolutionbasis for issue",
+      "Notes": "Claim provides resolution basis for issue",
       "SourceSystem": "seed_loader",
       "SourceRef": "024_BridgeContinuityIssueClaim.json"
     },
@@ -1375,7 +1375,7 @@
       "ContinuityIssueKey": 43,
       "ClaimKey": 214,
       "Role": "ResolutionBasis",
-      "Notes": "Claim provides resolutionbasis for issue",
+      "Notes": "Claim provides resolution basis for issue",
       "SourceSystem": "seed_loader",
       "SourceRef": "024_BridgeContinuityIssueClaim.json"
     },
@@ -1465,7 +1465,7 @@
       "ContinuityIssueKey": 46,
       "ClaimKey": 229,
       "Role": "ResolutionBasis",
-      "Notes": "Claim provides resolutionbasis for issue",
+      "Notes": "Claim provides resolution basis for issue",
       "SourceSystem": "seed_loader",
       "SourceRef": "024_BridgeContinuityIssueClaim.json"
     },
@@ -1501,7 +1501,7 @@
       "ContinuityIssueKey": 47,
       "ClaimKey": 234,
       "Role": "ResolutionBasis",
-      "Notes": "Claim provides resolutionbasis for issue",
+      "Notes": "Claim provides resolution basis for issue",
       "SourceSystem": "seed_loader",
       "SourceRef": "024_BridgeContinuityIssueClaim.json"
     },
@@ -1591,7 +1591,7 @@
       "ContinuityIssueKey": 50,
       "ClaimKey": 249,
       "Role": "ResolutionBasis",
-      "Notes": "Claim provides resolutionbasis for issue",
+      "Notes": "Claim provides resolution basis for issue",
       "SourceSystem": "seed_loader",
       "SourceRef": "024_BridgeContinuityIssueClaim.json"
     }
