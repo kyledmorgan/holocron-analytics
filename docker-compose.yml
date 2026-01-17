@@ -45,40 +45,30 @@ services:
     command:
       - |
         set -e
+        
+        # Function to run SQL scripts from a directory
+        run_scripts() {
+          local dir="$$1"
+          if [ -d "$${dir}" ]; then
+            for script in "$${dir}"/*.sql; do
+              if [ -f "$${script}" ]; then
+                echo "Running $${script}..."
+                /opt/mssql-tools18/bin/sqlcmd -S sqlserver -U sa -P "$${MSSQL_SA_PASSWORD}" -C \
+                  -d "$${DATABASE_NAME}" -i "$${script}"
+              fi
+            done
+          fi
+        }
+        
         echo "=== Creating database if not exists ==="
         /opt/mssql-tools18/bin/sqlcmd -S sqlserver -U sa -P "$${MSSQL_SA_PASSWORD}" -C \
           -v DATABASE_NAME="$${DATABASE_NAME}" \
           -i /init-db.sql
 
         echo "=== Running DDL scripts ==="
-        # Run dimension scripts
-        for script in /ddl/01_dimensions/*.sql; do
-          echo "Running $${script}..."
-          /opt/mssql-tools18/bin/sqlcmd -S sqlserver -U sa -P "$${MSSQL_SA_PASSWORD}" -C \
-            -d "$${DATABASE_NAME}" -i "$${script}" || echo "Warning: $${script} may have failed"
-        done
-        
-        # Run fact scripts if they exist
-        if [ -d "/ddl/02_facts" ]; then
-          for script in /ddl/02_facts/*.sql; do
-            if [ -f "$${script}" ]; then
-              echo "Running $${script}..."
-              /opt/mssql-tools18/bin/sqlcmd -S sqlserver -U sa -P "$${MSSQL_SA_PASSWORD}" -C \
-                -d "$${DATABASE_NAME}" -i "$${script}" || echo "Warning: $${script} may have failed"
-            fi
-          done
-        fi
-        
-        # Run bridge scripts if they exist
-        if [ -d "/ddl/03_bridges" ]; then
-          for script in /ddl/03_bridges/*.sql; do
-            if [ -f "$${script}" ]; then
-              echo "Running $${script}..."
-              /opt/mssql-tools18/bin/sqlcmd -S sqlserver -U sa -P "$${MSSQL_SA_PASSWORD}" -C \
-                -d "$${DATABASE_NAME}" -i "$${script}" || echo "Warning: $${script} may have failed"
-            fi
-          done
-        fi
+        run_scripts "/ddl/01_dimensions"
+        run_scripts "/ddl/02_facts"
+        run_scripts "/ddl/03_bridges"
         
         echo "=== Database initialization complete ==="
 
