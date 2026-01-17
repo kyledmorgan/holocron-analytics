@@ -1,0 +1,38 @@
+{
+  "seedVersion": "0.1.0",
+  "generatedUtc": "2026-01-16T00:00:00Z",
+  "target": {
+    "schema": "dbo",
+    "table": "DimWork",
+    "naturalKey": ["FranchiseKey", "WorkCode"],
+    "loadBehavior": "truncate-insert"
+  },
+  "options": {
+    "allowIdentityInsert": false,
+    "ignoreUnknownFields": false,
+    "defaults": {
+      "IsActive": true,
+      "IsLatest": true,
+      "VersionNum": 1
+    }
+  },
+  "rows": [
+    {
+      "WorkGuid": "00000002-0001-0000-0000-000000000001",
+      "FranchiseKey": 1,
+      "WorkType": "Film",
+      "Title": "A New Hope",
+      "TitleSort": "New Hope, A",
+      "EditionOrCut": "Special Edition",
+      "WorkCode": "ANH",
+      "ReleaseDate": "1977-05-25",
+      "ReleaseDatePrecision": "Day",
+      "ReleaseRegion": "US",
+      "RuntimeRef": "121 minutes",
+      "SynopsisShort": "Luke Skywalker joins rebel forces to save Princess Leia",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "005_DimWork.json"
+    }
+  ]
+}

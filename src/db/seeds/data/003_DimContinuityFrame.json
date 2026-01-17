@@ -1,0 +1,34 @@
+{
+  "seedVersion": "0.1.0",
+  "generatedUtc": "2026-01-16T00:00:00Z",
+  "target": {
+    "schema": "dbo",
+    "table": "DimContinuityFrame",
+    "naturalKey": ["FranchiseKey", "FrameCode"],
+    "loadBehavior": "truncate-insert"
+  },
+  "options": {
+    "allowIdentityInsert": false,
+    "ignoreUnknownFields": false,
+    "defaults": {
+      "IsActive": true,
+      "IsLatest": true,
+      "VersionNum": 1
+    }
+  },
+  "rows": [
+    {
+      "ContinuityFrameGuid": "00000004-0001-0000-0000-000000000001",
+      "FranchiseKey": 1,
+      "FrameName": "Canon",
+      "FrameCode": "CANON",
+      "AuthorityType": "Official",
+      "AuthorityRef": "Lucasfilm Story Group",
+      "PolicySummary": "Official continuity established after 2014 Disney acquisition",
+      "EffectiveStartDate": "2014-04-25",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "003_DimContinuityFrame.json"
+    }
+  ]
+}

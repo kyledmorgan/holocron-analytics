@@ -36,6 +36,9 @@ local/
 __pycache__/
 *.pyc
 
+# Seed loader runtime logs
+src/db/seeds/logs/
+
 # Config and source templates
 config/*.yaml
 !config/*.example.yaml

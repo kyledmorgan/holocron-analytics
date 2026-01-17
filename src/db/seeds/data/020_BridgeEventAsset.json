@@ -1,0 +1,32 @@
+{
+  "seedVersion": "0.1.0",
+  "generatedUtc": "2026-01-16T00:00:00Z",
+  "target": {
+    "schema": "dbo",
+    "table": "BridgeEventAsset",
+    "naturalKey": ["EventKey", "TechInstanceKey"],
+    "loadBehavior": "truncate-insert"
+  },
+  "options": {
+    "allowIdentityInsert": false,
+    "ignoreUnknownFields": false,
+    "defaults": {
+      "IsActive": true,
+      "IsLatest": true,
+      "VersionNum": 1
+    }
+  },
+  "rows": [
+    {
+      "BridgeEventAssetGuid": "00000500-0001-0000-0000-000000000001",
+      "EventKey": 1,
+      "TechInstanceKey": 1,
+      "AssetRole": "Referenced",
+      "AssetRoleDetail": "C-3PO present in scene",
+      "AssetOrdinal": 1,
+      "Notes": "Droid instance participating in event",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "020_BridgeEventAsset.json"
+    }
+  ]
+}

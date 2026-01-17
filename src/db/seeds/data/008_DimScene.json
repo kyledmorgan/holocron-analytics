@@ -1,0 +1,35 @@
+{
+  "seedVersion": "0.1.0",
+  "generatedUtc": "2026-01-16T00:00:00Z",
+  "target": {
+    "schema": "dbo",
+    "table": "DimScene",
+    "naturalKey": ["WorkKey", "SceneOrdinal"],
+    "loadBehavior": "truncate-insert"
+  },
+  "options": {
+    "allowIdentityInsert": false,
+    "ignoreUnknownFields": false,
+    "defaults": {
+      "IsActive": true,
+      "IsLatest": true,
+      "VersionNum": 1
+    }
+  },
+  "rows": [
+    {
+      "SceneGuid": "00000003-0001-0000-0000-000000000001",
+      "WorkKey": 1,
+      "SceneOrdinal": 1,
+      "SceneName": "Droids on Tatooine",
+      "SceneType": "Establishing",
+      "StartSec": 0,
+      "EndSec": 300,
+      "DurationSec": 300,
+      "LocationHint": "Tatooine desert",
+      "Notes": "Opening scene with droids escaping",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "008_DimScene.json"
+    }
+  ]
+}
