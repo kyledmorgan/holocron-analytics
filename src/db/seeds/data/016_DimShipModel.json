@@ -1,0 +1,247 @@
+{
+  "seedVersion": "0.1.0",
+  "generatedUtc": "2026-01-17T00:00:00Z",
+  "target": {
+    "schema": "dbo",
+    "table": "DimShipModel",
+    "naturalKey": [
+      "TechAssetKey"
+    ],
+    "loadBehavior": "truncate-insert"
+  },
+  "options": {
+    "allowIdentityInsert": false,
+    "ignoreUnknownFields": false,
+    "defaults": {
+      "IsActive": true,
+      "IsLatest": true,
+      "VersionNum": 1
+    }
+  },
+  "rows": [
+    {
+      "ShipModelGuid": "aad5ca9c-1d37-2d2d-fa95-85fec12d448b",
+      "TechAssetKey": 11,
+      "ShipClass": "Starfighter",
+      "PropulsionType": "Sublight+Hyperdrive",
+      "HyperdriveClassRef": "1.0",
+      "CrewCapacityRef": "1",
+      "PassengerCapacityRef": "0",
+      "ArmamentRef": "4 laser cannons, proton torpedoes",
+      "ShieldingRef": "Deflector shields",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "016_DimShipModel.json"
+    },
+    {
+      "ShipModelGuid": "8d474125-aa9e-5be4-ded4-501fb5afc3a1",
+      "TechAssetKey": 12,
+      "ShipClass": "Bomber",
+      "PropulsionType": "Sublight+Hyperdrive",
+      "HyperdriveClassRef": "1.0",
+      "CrewCapacityRef": "2",
+      "PassengerCapacityRef": "0",
+      "ArmamentRef": "Ion cannons, proton torpedoes",
+      "ShieldingRef": "Deflector shields",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "016_DimShipModel.json"
+    },
+    {
+      "ShipModelGuid": "41cf28a8-d74c-0754-c137-be8def4aa27e",
+      "TechAssetKey": 13,
+      "ShipClass": "Starfighter",
+      "PropulsionType": "Sublight",
+      "HyperdriveClassRef": null,
+      "CrewCapacityRef": "1",
+      "PassengerCapacityRef": "0",
+      "ArmamentRef": "2 laser cannons",
+      "ShieldingRef": "None",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "016_DimShipModel.json"
+    },
+    {
+      "ShipModelGuid": "0229cc70-2589-6ac5-80da-e6116656df61",
+      "TechAssetKey": 14,
+      "ShipClass": "Starfighter",
+      "PropulsionType": "Sublight+Hyperdrive",
+      "HyperdriveClassRef": "4.0",
+      "CrewCapacityRef": "1",
+      "PassengerCapacityRef": "0",
+      "ArmamentRef": "4 laser cannons, cluster missiles",
+      "ShieldingRef": "Enhanced shields",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "016_DimShipModel.json"
+    },
+    {
+      "ShipModelGuid": "50fd6fc5-7afb-1d0d-bc62-76cc2045a9ee",
+      "TechAssetKey": 15,
+      "ShipClass": "Freighter",
+      "PropulsionType": "Sublight+Hyperdrive",
+      "HyperdriveClassRef": "0.5",
+      "CrewCapacityRef": "2",
+      "PassengerCapacityRef": "6",
+      "ArmamentRef": "2 laser cannons",
+      "ShieldingRef": "Deflector shields",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "016_DimShipModel.json"
+    },
+    {
+      "ShipModelGuid": "70cf721d-10f9-aad6-bd54-de03916f26b4",
+      "TechAssetKey": 16,
+      "ShipClass": "Corvette",
+      "PropulsionType": "Sublight+Hyperdrive",
+      "HyperdriveClassRef": "2.0",
+      "CrewCapacityRef": "30-165",
+      "PassengerCapacityRef": "600",
+      "ArmamentRef": "2 turbolasers, 4 turret lasers",
+      "ShieldingRef": "Deflector shields",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "016_DimShipModel.json"
+    },
+    {
+      "ShipModelGuid": "20a48951-5c1c-5f9f-978e-7b5a44893c36",
+      "TechAssetKey": 17,
+      "ShipClass": "Patrol Craft",
+      "PropulsionType": "Sublight+Hyperdrive",
+      "HyperdriveClassRef": "1.0",
+      "CrewCapacityRef": "1",
+      "PassengerCapacityRef": "6",
+      "ArmamentRef": "Blaster cannons, seismic charges",
+      "ShieldingRef": "Deflector shields",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "016_DimShipModel.json"
+    },
+    {
+      "ShipModelGuid": "3393c133-2bb5-3a4d-aedb-3576d2a3892b",
+      "TechAssetKey": 18,
+      "ShipClass": "Starfighter",
+      "PropulsionType": "Sublight",
+      "HyperdriveClassRef": null,
+      "CrewCapacityRef": "1",
+      "PassengerCapacityRef": "0",
+      "ArmamentRef": "2 laser cannons, proton torpedoes",
+      "ShieldingRef": "Deflector shields",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "016_DimShipModel.json"
+    },
+    {
+      "ShipModelGuid": "9124c93d-e3eb-0a3e-8f4d-fb696ee1ee8c",
+      "TechAssetKey": 19,
+      "ShipClass": "Infiltrator",
+      "PropulsionType": "Sublight+Hyperdrive",
+      "HyperdriveClassRef": "1.5",
+      "CrewCapacityRef": "1",
+      "PassengerCapacityRef": "6",
+      "ArmamentRef": "6 laser cannons",
+      "ShieldingRef": "Cloaking device",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "016_DimShipModel.json"
+    },
+    {
+      "ShipModelGuid": "2d8c72c4-29ff-43cf-ce9f-8db7f28b4f37",
+      "TechAssetKey": 20,
+      "ShipClass": "Yacht",
+      "PropulsionType": "Sublight+Hyperdrive",
+      "HyperdriveClassRef": "1.8",
+      "CrewCapacityRef": "8",
+      "PassengerCapacityRef": "50",
+      "ArmamentRef": "None",
+      "ShieldingRef": "Deflector shields",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "016_DimShipModel.json"
+    },
+    {
+      "ShipModelGuid": "e62fadd8-05b8-4a5b-a5c0-6d9af4f940fb",
+      "TechAssetKey": 68,
+      "ShipClass": "Military",
+      "PropulsionType": "Ion",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "016_DimShipModel.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "ShipModelGuid": "c400e929-06fb-4ad1-a9ad-529ab4247a76",
+      "TechAssetKey": 69,
+      "ShipClass": "Military",
+      "PropulsionType": "Ion",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "016_DimShipModel.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "ShipModelGuid": "d405e6fe-b2ff-4357-8840-edecce08390d",
+      "TechAssetKey": 70,
+      "ShipClass": "Military",
+      "PropulsionType": "Ion",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "016_DimShipModel.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "ShipModelGuid": "b114bb3b-a117-448b-ac72-040fd8a25aa4",
+      "TechAssetKey": 71,
+      "ShipClass": "Military",
+      "PropulsionType": "Ion",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "016_DimShipModel.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "ShipModelGuid": "385bb438-113e-46fd-9e8f-fb8ed0ab7293",
+      "TechAssetKey": 72,
+      "ShipClass": "Military",
+      "PropulsionType": "Ion",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "016_DimShipModel.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "ShipModelGuid": "b41311cc-05be-4f8a-94c8-4af72ebbc74c",
+      "TechAssetKey": 73,
+      "ShipClass": "Military",
+      "PropulsionType": "Ion",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "016_DimShipModel.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    }
+  ]
+}

@@ -1,0 +1,655 @@
+{
+  "seedVersion": "0.1.0",
+  "generatedUtc": "2026-01-17T00:00:00Z",
+  "target": {
+    "schema": "dbo",
+    "table": "DimOrganization",
+    "naturalKey": [
+      "EntityKey"
+    ],
+    "loadBehavior": "truncate-insert"
+  },
+  "options": {
+    "allowIdentityInsert": false,
+    "ignoreUnknownFields": false,
+    "defaults": {
+      "IsActive": true,
+      "IsLatest": true,
+      "VersionNum": 1
+    }
+  },
+  "rows": [
+    {
+      "OrganizationGuid": "abf9b1e8-f234-d3ae-59d9-97f1e1f8c703",
+      "EntityKey": 251,
+      "OrgType": "Political",
+      "Scope": "Galactic",
+      "AlignmentRef": "Light",
+      "FoundedRef": "2 BBY",
+      "DissolvedRef": null,
+      "HeadquartersRef": "Yavin 4",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "018_DimOrganization.json"
+    },
+    {
+      "OrganizationGuid": "9dde7610-b27b-f0ea-9ac3-21691730b173",
+      "EntityKey": 252,
+      "OrgType": "Political",
+      "Scope": "Galactic",
+      "AlignmentRef": "Dark",
+      "FoundedRef": "19 BBY",
+      "DissolvedRef": null,
+      "HeadquartersRef": "Coruscant",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "018_DimOrganization.json"
+    },
+    {
+      "OrganizationGuid": "50093cc6-1403-ba5d-14ab-3baa9f2b61a8",
+      "EntityKey": 253,
+      "OrgType": "Religious",
+      "Scope": "Galactic",
+      "AlignmentRef": "Light",
+      "FoundedRef": "25000 BBY",
+      "DissolvedRef": "19 BBY",
+      "HeadquartersRef": "Coruscant",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "018_DimOrganization.json"
+    },
+    {
+      "OrganizationGuid": "8de7c93c-c3c8-804b-a8f4-da1060278608",
+      "EntityKey": 254,
+      "OrgType": "Religious",
+      "Scope": "Galactic",
+      "AlignmentRef": "Dark",
+      "FoundedRef": "6900 BBY",
+      "DissolvedRef": null,
+      "HeadquartersRef": "Various",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "018_DimOrganization.json"
+    },
+    {
+      "OrganizationGuid": "5e4ed445-c5b3-3cad-44f1-3f400ec73e43",
+      "EntityKey": 255,
+      "OrgType": "Commercial",
+      "Scope": "Galactic",
+      "AlignmentRef": "Neutral",
+      "FoundedRef": "350 BBY",
+      "DissolvedRef": "22 BBY",
+      "HeadquartersRef": "Neimoidia",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "018_DimOrganization.json"
+    },
+    {
+      "OrganizationGuid": "b4c0cc36-3de6-4831-fc93-8e5f4a881255",
+      "EntityKey": 256,
+      "OrgType": "Political",
+      "Scope": "Galactic",
+      "AlignmentRef": "Neutral/Dark",
+      "FoundedRef": "24 BBY",
+      "DissolvedRef": "19 BBY",
+      "HeadquartersRef": "Raxus",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "018_DimOrganization.json"
+    },
+    {
+      "OrganizationGuid": "bbd20bde-ab32-bc33-5df0-e559f0dd182d",
+      "EntityKey": 257,
+      "OrgType": "Political",
+      "Scope": "Galactic",
+      "AlignmentRef": "Light",
+      "FoundedRef": "25000 BBY",
+      "DissolvedRef": "19 BBY",
+      "HeadquartersRef": "Coruscant",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "018_DimOrganization.json"
+    },
+    {
+      "OrganizationGuid": "83fe00ce-8aac-3ed5-5dba-789194303aeb",
+      "EntityKey": 258,
+      "OrgType": "Political",
+      "Scope": "Galactic",
+      "AlignmentRef": "Dark",
+      "FoundedRef": "29 ABY",
+      "DissolvedRef": null,
+      "HeadquartersRef": "Unknown Regions",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "018_DimOrganization.json"
+    },
+    {
+      "OrganizationGuid": "4873f26f-c0d8-9d70-176d-1594090a5595",
+      "EntityKey": 259,
+      "OrgType": "Political",
+      "Scope": "Regional",
+      "AlignmentRef": "Light",
+      "FoundedRef": "28 ABY",
+      "DissolvedRef": null,
+      "HeadquartersRef": "D'Qar",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "018_DimOrganization.json"
+    },
+    {
+      "OrganizationGuid": "7e4cf5b2-5615-ab69-e919-bf070edbbf75",
+      "EntityKey": 260,
+      "OrgType": "Criminal",
+      "Scope": "Galactic",
+      "AlignmentRef": "Neutral",
+      "FoundedRef": "Ancient",
+      "DissolvedRef": null,
+      "HeadquartersRef": "Nal Hutta",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "018_DimOrganization.json"
+    },
+    {
+      "OrganizationGuid": "03cc8627-c0c6-fca8-125b-563f2269c5a1",
+      "EntityKey": 261,
+      "OrgType": "Professional",
+      "Scope": "Galactic",
+      "AlignmentRef": "Neutral",
+      "FoundedRef": "Unknown",
+      "DissolvedRef": null,
+      "HeadquartersRef": "Various",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "018_DimOrganization.json"
+    },
+    {
+      "OrganizationGuid": "3f24996c-f254-acd1-2b06-fa04c46ade67",
+      "EntityKey": 262,
+      "OrgType": "Cultural",
+      "Scope": "Planetary",
+      "AlignmentRef": "Neutral",
+      "FoundedRef": "Ancient",
+      "DissolvedRef": null,
+      "HeadquartersRef": "Mandalore",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "018_DimOrganization.json"
+    },
+    {
+      "OrganizationGuid": "cab8de23-3976-dc42-bfe1-c04e6f49c6ed",
+      "EntityKey": 263,
+      "OrgType": "Military",
+      "Scope": "Planetary",
+      "AlignmentRef": "Light",
+      "FoundedRef": "Ancient",
+      "DissolvedRef": null,
+      "HeadquartersRef": "Otoh Gunga",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "018_DimOrganization.json"
+    },
+    {
+      "OrganizationGuid": "17170883-46b2-d962-46c0-bf073f2f11e1",
+      "EntityKey": 264,
+      "OrgType": "Military",
+      "Scope": "Planetary",
+      "AlignmentRef": "Light",
+      "FoundedRef": "Unknown",
+      "DissolvedRef": null,
+      "HeadquartersRef": "Theed",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "018_DimOrganization.json"
+    },
+    {
+      "OrganizationGuid": "747e1c2a-f699-d600-dd8e-368c3c7ef945",
+      "EntityKey": 265,
+      "OrgType": "Military",
+      "Scope": "Galactic",
+      "AlignmentRef": "Dark",
+      "FoundedRef": "19 BBY",
+      "DissolvedRef": "5 ABY",
+      "HeadquartersRef": "Coruscant",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "018_DimOrganization.json"
+    },
+    {
+      "OrganizationGuid": "0dd8e8ff-0cf1-0761-9849-193f39424f14",
+      "EntityKey": 266,
+      "OrgType": "Military",
+      "Scope": "Galactic",
+      "AlignmentRef": "Light",
+      "FoundedRef": "2 BBY",
+      "DissolvedRef": null,
+      "HeadquartersRef": "Various",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "018_DimOrganization.json"
+    },
+    {
+      "OrganizationGuid": "60727aba-eb11-1f66-0236-3db0d0491644",
+      "EntityKey": 267,
+      "OrgType": "Military",
+      "Scope": "Squadron",
+      "AlignmentRef": "Light",
+      "FoundedRef": "0 BBY",
+      "DissolvedRef": null,
+      "HeadquartersRef": "Yavin 4",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "018_DimOrganization.json"
+    },
+    {
+      "OrganizationGuid": "703d408c-4c3c-cee5-2a4b-e71cf7ed55d5",
+      "EntityKey": 268,
+      "OrgType": "Military",
+      "Scope": "Squadron",
+      "AlignmentRef": "Light",
+      "FoundedRef": "0 BBY",
+      "DissolvedRef": null,
+      "HeadquartersRef": "Yavin 4",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "018_DimOrganization.json"
+    },
+    {
+      "OrganizationGuid": "4b664b51-3171-7e0a-7046-22d8da318ce5",
+      "EntityKey": 269,
+      "OrgType": "Military",
+      "Scope": "Squadron",
+      "AlignmentRef": "Dark",
+      "FoundedRef": "0 BBY",
+      "DissolvedRef": null,
+      "HeadquartersRef": "Death Star",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "018_DimOrganization.json"
+    },
+    {
+      "OrganizationGuid": "c95263c0-2de8-ad08-60a3-04cbb13fac27",
+      "EntityKey": 270,
+      "OrgType": "Political",
+      "Scope": "Galactic",
+      "AlignmentRef": "Neutral",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "018_DimOrganization.json"
+    },
+    {
+      "OrganizationGuid": "1cc50ccd-fbbf-c0a5-69c9-be5f007b3244",
+      "EntityKey": 271,
+      "OrgType": "Military",
+      "Scope": "Regional",
+      "AlignmentRef": "Light",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "018_DimOrganization.json"
+    },
+    {
+      "OrganizationGuid": "cfe89fba-dc37-1bac-d199-d6d54c456de1",
+      "EntityKey": 272,
+      "OrgType": "Commercial",
+      "Scope": "Planetary",
+      "AlignmentRef": "Dark",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "018_DimOrganization.json"
+    },
+    {
+      "OrganizationGuid": "8c004416-4b6c-3dc7-d844-996aa03cfeea",
+      "EntityKey": 273,
+      "OrgType": "Criminal",
+      "Scope": "Local",
+      "AlignmentRef": "Neutral",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "018_DimOrganization.json"
+    },
+    {
+      "OrganizationGuid": "08c9a863-110a-6588-5c2c-348bcdf532a4",
+      "EntityKey": 274,
+      "OrgType": "Political",
+      "Scope": "Galactic",
+      "AlignmentRef": "Light",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "018_DimOrganization.json"
+    },
+    {
+      "OrganizationGuid": "6e85e39a-63fb-0b41-2357-a349fa2f3c3b",
+      "EntityKey": 275,
+      "OrgType": "Military",
+      "Scope": "Regional",
+      "AlignmentRef": "Dark",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "018_DimOrganization.json"
+    },
+    {
+      "OrganizationGuid": "fc0630c4-a236-98a1-924e-22f5d2a32080",
+      "EntityKey": 276,
+      "OrgType": "Commercial",
+      "Scope": "Planetary",
+      "AlignmentRef": "Neutral",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "018_DimOrganization.json"
+    },
+    {
+      "OrganizationGuid": "6065527d-c80c-c0c4-7ada-123db3efeedb",
+      "EntityKey": 277,
+      "OrgType": "Criminal",
+      "Scope": "Local",
+      "AlignmentRef": "Light",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "018_DimOrganization.json"
+    },
+    {
+      "OrganizationGuid": "3b71cf65-8830-9655-3efd-bf27fbca7dce",
+      "EntityKey": 278,
+      "OrgType": "Political",
+      "Scope": "Galactic",
+      "AlignmentRef": "Dark",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "018_DimOrganization.json"
+    },
+    {
+      "OrganizationGuid": "5e0bbe7b-9737-6a0b-7123-7833369a40a5",
+      "EntityKey": 279,
+      "OrgType": "Military",
+      "Scope": "Regional",
+      "AlignmentRef": "Neutral",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "018_DimOrganization.json"
+    },
+    {
+      "OrganizationGuid": "32d149dd-c9e2-a2eb-e07a-ecdeae42f795",
+      "EntityKey": 280,
+      "OrgType": "Commercial",
+      "Scope": "Planetary",
+      "AlignmentRef": "Light",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "018_DimOrganization.json"
+    },
+    {
+      "OrganizationGuid": "538425e5-9e18-f573-f738-b580c30a479f",
+      "EntityKey": 281,
+      "OrgType": "Criminal",
+      "Scope": "Local",
+      "AlignmentRef": "Dark",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "018_DimOrganization.json"
+    },
+    {
+      "OrganizationGuid": "d7dc1995-ed2c-26c9-2fae-80f8fa39b004",
+      "EntityKey": 282,
+      "OrgType": "Political",
+      "Scope": "Galactic",
+      "AlignmentRef": "Neutral",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "018_DimOrganization.json"
+    },
+    {
+      "OrganizationGuid": "e8be41cd-0f48-239f-9aff-ba87bab5ac21",
+      "EntityKey": 283,
+      "OrgType": "Military",
+      "Scope": "Regional",
+      "AlignmentRef": "Light",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "018_DimOrganization.json"
+    },
+    {
+      "OrganizationGuid": "b7252324-6b53-5701-5355-1027a9bf23ba",
+      "EntityKey": 284,
+      "OrgType": "Commercial",
+      "Scope": "Planetary",
+      "AlignmentRef": "Dark",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "018_DimOrganization.json"
+    },
+    {
+      "OrganizationGuid": "6f645a4c-7b33-2163-9906-db655c5a4d3f",
+      "EntityKey": 285,
+      "OrgType": "Criminal",
+      "Scope": "Local",
+      "AlignmentRef": "Neutral",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "018_DimOrganization.json"
+    },
+    {
+      "OrganizationGuid": "82184d02-c329-0689-f60d-c5237ca09845",
+      "EntityKey": 286,
+      "OrgType": "Political",
+      "Scope": "Galactic",
+      "AlignmentRef": "Light",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "018_DimOrganization.json"
+    },
+    {
+      "OrganizationGuid": "57a7edfa-0253-f16b-76a6-dc06b9189dca",
+      "EntityKey": 287,
+      "OrgType": "Military",
+      "Scope": "Regional",
+      "AlignmentRef": "Dark",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "018_DimOrganization.json"
+    },
+    {
+      "OrganizationGuid": "00f5c5e9-36db-ad5a-1cb9-ebacefc55ba8",
+      "EntityKey": 288,
+      "OrgType": "Commercial",
+      "Scope": "Planetary",
+      "AlignmentRef": "Neutral",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "018_DimOrganization.json"
+    },
+    {
+      "OrganizationGuid": "9488f787-95df-8256-f14a-76a99eb73b01",
+      "EntityKey": 289,
+      "OrgType": "Criminal",
+      "Scope": "Local",
+      "AlignmentRef": "Light",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "018_DimOrganization.json"
+    },
+    {
+      "OrganizationGuid": "f7216c1b-1beb-3afa-fb51-03c6a62d8221",
+      "EntityKey": 290,
+      "OrgType": "Political",
+      "Scope": "Galactic",
+      "AlignmentRef": "Dark",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "018_DimOrganization.json"
+    },
+    {
+      "OrganizationGuid": "b6279a4e-6be5-42a3-9eb3-c58c01b2fdca",
+      "EntityKey": 291,
+      "OrgType": "Military",
+      "Scope": "Regional",
+      "AlignmentRef": "Neutral",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "018_DimOrganization.json"
+    },
+    {
+      "OrganizationGuid": "939e7243-6714-7510-dd22-5e3c2bd2f3a3",
+      "EntityKey": 292,
+      "OrgType": "Commercial",
+      "Scope": "Planetary",
+      "AlignmentRef": "Light",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "018_DimOrganization.json"
+    },
+    {
+      "OrganizationGuid": "bc1beaf5-657e-7585-411f-c08d8913f64f",
+      "EntityKey": 293,
+      "OrgType": "Criminal",
+      "Scope": "Local",
+      "AlignmentRef": "Dark",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "018_DimOrganization.json"
+    },
+    {
+      "OrganizationGuid": "621b1760-2d2d-e00e-b2b3-fb211513d1fb",
+      "EntityKey": 294,
+      "OrgType": "Political",
+      "Scope": "Galactic",
+      "AlignmentRef": "Neutral",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "018_DimOrganization.json"
+    },
+    {
+      "OrganizationGuid": "ec62ccfe-4405-dc03-6dbc-1187738953e4",
+      "EntityKey": 295,
+      "OrgType": "Military",
+      "Scope": "Regional",
+      "AlignmentRef": "Light",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "018_DimOrganization.json"
+    },
+    {
+      "OrganizationGuid": "98cac374-54d2-425f-0c62-6671e894824e",
+      "EntityKey": 296,
+      "OrgType": "Commercial",
+      "Scope": "Planetary",
+      "AlignmentRef": "Dark",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "018_DimOrganization.json"
+    },
+    {
+      "OrganizationGuid": "a6fab087-38ed-35e6-1344-3606eef3030a",
+      "EntityKey": 297,
+      "OrgType": "Criminal",
+      "Scope": "Local",
+      "AlignmentRef": "Neutral",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "018_DimOrganization.json"
+    },
+    {
+      "OrganizationGuid": "21d44bd0-00f3-5d20-2c83-2a0e1d4514a9",
+      "EntityKey": 298,
+      "OrgType": "Political",
+      "Scope": "Galactic",
+      "AlignmentRef": "Light",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "018_DimOrganization.json"
+    },
+    {
+      "OrganizationGuid": "aeac45e6-bc9c-6d3c-0612-af6ba7b57b3c",
+      "EntityKey": 299,
+      "OrgType": "Military",
+      "Scope": "Regional",
+      "AlignmentRef": "Dark",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "018_DimOrganization.json"
+    },
+    {
+      "OrganizationGuid": "950a3cab-642b-d55a-6dc0-e3f521e1e9b7",
+      "EntityKey": 300,
+      "OrgType": "Commercial",
+      "Scope": "Planetary",
+      "AlignmentRef": "Neutral",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "018_DimOrganization.json"
+    },
+    {
+      "OrganizationGuid": "0beadf04-d34e-4983-8fd6-146f888be68d",
+      "EntityKey": 571,
+      "OrgType": "Research",
+      "Scope": "Sector",
+      "AlignmentRef": "Dark",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "018_DimOrganization.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "OrganizationGuid": "0b6352d7-55db-4c19-b7fc-fa90f9a88030",
+      "EntityKey": 572,
+      "OrgType": "Research",
+      "Scope": "Sector",
+      "AlignmentRef": "Dark",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "018_DimOrganization.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "OrganizationGuid": "6d40328d-9924-4ccd-9738-a2242cf5d5dd",
+      "EntityKey": 573,
+      "OrgType": "Military",
+      "Scope": "Sector",
+      "AlignmentRef": "Light",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "018_DimOrganization.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "OrganizationGuid": "73896b34-8264-437e-b518-dad946c65ab7",
+      "EntityKey": 574,
+      "OrgType": "Military",
+      "Scope": "Unit",
+      "AlignmentRef": "Light",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "018_DimOrganization.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "OrganizationGuid": "1b9efde4-a315-4617-88ea-7338162b3017",
+      "EntityKey": 575,
+      "OrgType": "Military",
+      "Scope": "Unit",
+      "AlignmentRef": "Dark",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "018_DimOrganization.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    }
+  ]
+}

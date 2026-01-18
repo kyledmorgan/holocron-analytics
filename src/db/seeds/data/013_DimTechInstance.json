@@ -1,0 +1,3473 @@
+{
+  "seedVersion": "0.1.0",
+  "generatedUtc": "2026-01-17T00:00:00Z",
+  "target": {
+    "schema": "dbo",
+    "table": "DimTechInstance",
+    "naturalKey": [
+      "EntityKey"
+    ],
+    "loadBehavior": "truncate-insert"
+  },
+  "options": {
+    "allowIdentityInsert": false,
+    "ignoreUnknownFields": false,
+    "defaults": {
+      "IsActive": true,
+      "IsLatest": true,
+      "VersionNum": 1
+    }
+  },
+  "rows": [
+    {
+      "TechInstanceGuid": "7ff1c311-696d-6ad1-f4a0-20e003ed6f9c",
+      "EntityKey": 301,
+      "TechAssetKey": 11,
+      "InstanceName": "Red Five X-wing",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "46636ead-17f3-272b-c665-50b904435473",
+      "EntityKey": 302,
+      "TechAssetKey": 11,
+      "InstanceName": "Red Two X-wing",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "2299530a-6bf8-84e7-cc64-7da0745b4587",
+      "EntityKey": 303,
+      "TechAssetKey": 11,
+      "InstanceName": "Red Three X-wing",
+      "CurrentStatus": "Destroyed",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "7f223036-cd58-32b6-7f5c-b724df142ecb",
+      "EntityKey": 304,
+      "TechAssetKey": 11,
+      "InstanceName": "Red Leader X-wing",
+      "CurrentStatus": "Destroyed",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "e4a75131-9d1f-068f-c62a-20f42eb02508",
+      "EntityKey": 305,
+      "TechAssetKey": 15,
+      "InstanceName": "Millennium Falcon",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "c76412ec-8f49-65cc-ceb0-8631083c6f95",
+      "EntityKey": 306,
+      "TechAssetKey": 14,
+      "InstanceName": "Vader's TIE Advanced",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "04cafe79-18e0-6768-e325-8216ac42256f",
+      "EntityKey": 307,
+      "TechAssetKey": 13,
+      "InstanceName": "TIE Fighter Black Two",
+      "CurrentStatus": "Destroyed",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "a19ddd6c-90bb-4a75-28f1-002341db977d",
+      "EntityKey": 308,
+      "TechAssetKey": 13,
+      "InstanceName": "TIE Fighter Black Three",
+      "CurrentStatus": "Destroyed",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "1275e49e-7c02-62ad-e77e-df237ff28fc2",
+      "EntityKey": 309,
+      "TechAssetKey": 16,
+      "InstanceName": "Tantive IV",
+      "CurrentStatus": "Captured",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "e7f3c1a3-e680-de91-5004-96ae60ac687c",
+      "EntityKey": 310,
+      "TechAssetKey": 17,
+      "InstanceName": "Slave I",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "868f2cb2-dde0-15a0-35c8-780fe2bc5d80",
+      "EntityKey": 311,
+      "TechAssetKey": 12,
+      "InstanceName": "Gold Leader Y-wing",
+      "CurrentStatus": "Destroyed",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "3e94bbac-837b-1860-6e40-4c80a266a587",
+      "EntityKey": 312,
+      "TechAssetKey": 12,
+      "InstanceName": "Gold Five Y-wing",
+      "CurrentStatus": "Destroyed",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "5d9a535c-46fa-82d3-5bff-d677ecc47e5b",
+      "EntityKey": 313,
+      "TechAssetKey": 21,
+      "InstanceName": "Luke's Lightsaber",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "3c6cdd25-4463-26f3-eaa9-c8eb415682eb",
+      "EntityKey": 314,
+      "TechAssetKey": 21,
+      "InstanceName": "Vader's Lightsaber",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "38f6e428-5c47-f923-0b39-1441429cdc08",
+      "EntityKey": 315,
+      "TechAssetKey": 21,
+      "InstanceName": "Obi-Wan's Lightsaber (ANH)",
+      "CurrentStatus": "Inactive",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "c0fe0c76-243e-15ae-bc89-d736d0c09f5d",
+      "EntityKey": 316,
+      "TechAssetKey": 21,
+      "InstanceName": "Qui-Gon's Lightsaber",
+      "CurrentStatus": "Inactive",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "e8bf0282-e7a2-6198-7219-d4e973af6358",
+      "EntityKey": 317,
+      "TechAssetKey": 22,
+      "InstanceName": "Darth Maul's Lightsaber",
+      "CurrentStatus": "Destroyed",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "a226b104-6295-ebda-ee3f-099cc82ffe31",
+      "EntityKey": 318,
+      "TechAssetKey": 21,
+      "InstanceName": "Anakin's Lightsaber (TPM)",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "3a2620c5-46e0-4786-8e67-f12b716c4779",
+      "EntityKey": 319,
+      "TechAssetKey": 18,
+      "InstanceName": "Naboo N-1 Starfighter",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "c452ee6f-f7cd-c16c-1a50-76945e2d6b98",
+      "EntityKey": 320,
+      "TechAssetKey": 20,
+      "InstanceName": "Tech Instance 20",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "6b7410ff-7c26-bdda-688d-65f3a5298e1d",
+      "EntityKey": 321,
+      "TechAssetKey": 21,
+      "InstanceName": "Tech Instance 21",
+      "CurrentStatus": "Inactive",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "6274e575-0040-98a0-f0c4-dbb72f7d1866",
+      "EntityKey": 322,
+      "TechAssetKey": 22,
+      "InstanceName": "Tech Instance 22",
+      "CurrentStatus": "Destroyed",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "796c374a-d78c-ad8b-767a-13c295051415",
+      "EntityKey": 323,
+      "TechAssetKey": 23,
+      "InstanceName": "Tech Instance 23",
+      "CurrentStatus": "Unknown",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "16947b5f-3d46-e32d-83ae-6fb4b06f8efd",
+      "EntityKey": 324,
+      "TechAssetKey": 24,
+      "InstanceName": "Tech Instance 24",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "517094b3-f612-32ad-9eda-fb10c3ae2731",
+      "EntityKey": 325,
+      "TechAssetKey": 25,
+      "InstanceName": "Tech Instance 25",
+      "CurrentStatus": "Inactive",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "66267b4f-50ad-fac2-6ce0-f9481daa1872",
+      "EntityKey": 326,
+      "TechAssetKey": 26,
+      "InstanceName": "Tech Instance 26",
+      "CurrentStatus": "Destroyed",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "109e7063-7139-f3ef-3983-d5fa7d5b3598",
+      "EntityKey": 327,
+      "TechAssetKey": 27,
+      "InstanceName": "Tech Instance 27",
+      "CurrentStatus": "Unknown",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "93af94d4-56f8-4f7e-4aec-2590381732d1",
+      "EntityKey": 328,
+      "TechAssetKey": 28,
+      "InstanceName": "Tech Instance 28",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "1f1a2ad7-cb6a-e7aa-e6f1-51b6c533432a",
+      "EntityKey": 329,
+      "TechAssetKey": 1,
+      "InstanceName": "Tech Instance 29",
+      "CurrentStatus": "Inactive",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "7e37312d-e8eb-6de3-ccad-fd434c91c3bd",
+      "EntityKey": 330,
+      "TechAssetKey": 2,
+      "InstanceName": "Tech Instance 30",
+      "CurrentStatus": "Destroyed",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "305ea59f-177b-79dd-3aaa-64e0d658ea0c",
+      "EntityKey": 331,
+      "TechAssetKey": 3,
+      "InstanceName": "Tech Instance 31",
+      "CurrentStatus": "Unknown",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "99b94592-d11d-b582-002c-13ca4088397a",
+      "EntityKey": 332,
+      "TechAssetKey": 4,
+      "InstanceName": "Tech Instance 32",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "cb41a126-86d8-2b79-3640-af56497e595c",
+      "EntityKey": 333,
+      "TechAssetKey": 5,
+      "InstanceName": "Tech Instance 33",
+      "CurrentStatus": "Inactive",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "8864f240-c61e-893d-fffc-0cc3042257f9",
+      "EntityKey": 334,
+      "TechAssetKey": 6,
+      "InstanceName": "Tech Instance 34",
+      "CurrentStatus": "Destroyed",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "1a50d21b-0cca-a46d-0d8f-daed863942d5",
+      "EntityKey": 335,
+      "TechAssetKey": 7,
+      "InstanceName": "Tech Instance 35",
+      "CurrentStatus": "Unknown",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "1a4827e1-6fa3-9d90-cef7-eac21e9f0dd6",
+      "EntityKey": 336,
+      "TechAssetKey": 8,
+      "InstanceName": "Tech Instance 36",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "c6792ac8-6a0f-92fe-713d-3a5f27701a93",
+      "EntityKey": 337,
+      "TechAssetKey": 9,
+      "InstanceName": "Tech Instance 37",
+      "CurrentStatus": "Inactive",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "ff83491a-97d3-2db7-3ecc-ae44a89ee3af",
+      "EntityKey": 338,
+      "TechAssetKey": 10,
+      "InstanceName": "Tech Instance 38",
+      "CurrentStatus": "Destroyed",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "6c352c19-91f0-ba58-932c-29bfd5f462a2",
+      "EntityKey": 339,
+      "TechAssetKey": 11,
+      "InstanceName": "Tech Instance 39",
+      "CurrentStatus": "Unknown",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "e4439d9b-824f-c848-0691-363e81fcbe19",
+      "EntityKey": 340,
+      "TechAssetKey": 12,
+      "InstanceName": "Tech Instance 40",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "19baf15f-958e-69fd-a436-31714c9590ca",
+      "EntityKey": 341,
+      "TechAssetKey": 13,
+      "InstanceName": "Tech Instance 41",
+      "CurrentStatus": "Inactive",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "c252d989-b6cf-055c-0a6b-90b4a20acfdc",
+      "EntityKey": 342,
+      "TechAssetKey": 14,
+      "InstanceName": "Tech Instance 42",
+      "CurrentStatus": "Destroyed",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "1bc5dda4-d9e2-29d3-8fc8-55073ced864b",
+      "EntityKey": 343,
+      "TechAssetKey": 15,
+      "InstanceName": "Tech Instance 43",
+      "CurrentStatus": "Unknown",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "495e51f6-e657-c0f0-6555-20f4ddde7e1d",
+      "EntityKey": 344,
+      "TechAssetKey": 16,
+      "InstanceName": "Tech Instance 44",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "3a60c67c-01e6-39bb-c948-2e38163c470d",
+      "EntityKey": 345,
+      "TechAssetKey": 17,
+      "InstanceName": "Tech Instance 45",
+      "CurrentStatus": "Inactive",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "52e7d21c-7906-ca13-7e16-4af7b2deb837",
+      "EntityKey": 346,
+      "TechAssetKey": 18,
+      "InstanceName": "Tech Instance 46",
+      "CurrentStatus": "Destroyed",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "9334a546-3d98-1b7e-846f-691af92eb90f",
+      "EntityKey": 347,
+      "TechAssetKey": 19,
+      "InstanceName": "Tech Instance 47",
+      "CurrentStatus": "Unknown",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "022bbfad-bbc0-6953-79af-02f6235280c8",
+      "EntityKey": 348,
+      "TechAssetKey": 20,
+      "InstanceName": "Tech Instance 48",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "d42f3888-6e22-5273-4817-f68ea5cf46e1",
+      "EntityKey": 349,
+      "TechAssetKey": 21,
+      "InstanceName": "Tech Instance 49",
+      "CurrentStatus": "Inactive",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "6f075c06-8883-fe34-7b8f-da72eba13281",
+      "EntityKey": 350,
+      "TechAssetKey": 22,
+      "InstanceName": "Tech Instance 50",
+      "CurrentStatus": "Destroyed",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "bd89de26-1099-14b8-0445-46800b4703e0",
+      "EntityKey": 351,
+      "TechAssetKey": 23,
+      "InstanceName": "Tech Instance 51",
+      "CurrentStatus": "Unknown",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "97a7c3cb-5acb-98ca-51b1-1e8728abac8b",
+      "EntityKey": 352,
+      "TechAssetKey": 24,
+      "InstanceName": "Tech Instance 52",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "1163a0ee-28d6-ecb1-8f47-ab8a9d8777f0",
+      "EntityKey": 353,
+      "TechAssetKey": 25,
+      "InstanceName": "Tech Instance 53",
+      "CurrentStatus": "Inactive",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "a56a9b31-767b-e0b6-19df-7049711f2cd6",
+      "EntityKey": 354,
+      "TechAssetKey": 26,
+      "InstanceName": "Tech Instance 54",
+      "CurrentStatus": "Destroyed",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "3ab3a456-7663-99db-4642-d93ce7a6efd3",
+      "EntityKey": 355,
+      "TechAssetKey": 27,
+      "InstanceName": "Tech Instance 55",
+      "CurrentStatus": "Unknown",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "9c8bf819-d242-fdd5-5c90-d3060ed05997",
+      "EntityKey": 356,
+      "TechAssetKey": 28,
+      "InstanceName": "Tech Instance 56",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "a4fe876c-45ff-5475-ceab-1e9283fc9f8e",
+      "EntityKey": 357,
+      "TechAssetKey": 1,
+      "InstanceName": "Tech Instance 57",
+      "CurrentStatus": "Inactive",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "eb564820-2a95-4028-2f1a-9cfd80287e18",
+      "EntityKey": 358,
+      "TechAssetKey": 2,
+      "InstanceName": "Tech Instance 58",
+      "CurrentStatus": "Destroyed",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "963373ab-a514-ba52-c7b2-f94a02ff5675",
+      "EntityKey": 359,
+      "TechAssetKey": 3,
+      "InstanceName": "Tech Instance 59",
+      "CurrentStatus": "Unknown",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "daf3ec4d-8363-1a63-55ce-1c587b5e430a",
+      "EntityKey": 360,
+      "TechAssetKey": 4,
+      "InstanceName": "Tech Instance 60",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "12e1e56a-809f-f35e-d529-1af7813014c2",
+      "EntityKey": 361,
+      "TechAssetKey": 5,
+      "InstanceName": "Tech Instance 61",
+      "CurrentStatus": "Inactive",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "a53c3331-6e04-af1a-7814-64a7767aa4c3",
+      "EntityKey": 362,
+      "TechAssetKey": 6,
+      "InstanceName": "Tech Instance 62",
+      "CurrentStatus": "Destroyed",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "bdd18286-47ff-4fe1-d829-ac2cce522738",
+      "EntityKey": 363,
+      "TechAssetKey": 7,
+      "InstanceName": "Tech Instance 63",
+      "CurrentStatus": "Unknown",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "29251474-2821-39d7-7e2a-e50a75f8a289",
+      "EntityKey": 364,
+      "TechAssetKey": 8,
+      "InstanceName": "Tech Instance 64",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "f87dbcfc-1256-fe21-b204-5ff0d62c51c1",
+      "EntityKey": 365,
+      "TechAssetKey": 9,
+      "InstanceName": "Tech Instance 65",
+      "CurrentStatus": "Inactive",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "44372855-9c1b-a7aa-7632-18fd3ac552f6",
+      "EntityKey": 366,
+      "TechAssetKey": 10,
+      "InstanceName": "Tech Instance 66",
+      "CurrentStatus": "Destroyed",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "70b27dd2-32a3-699b-6743-3b0c62d6851d",
+      "EntityKey": 367,
+      "TechAssetKey": 11,
+      "InstanceName": "Tech Instance 67",
+      "CurrentStatus": "Unknown",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "4854dff0-f45a-eee0-664d-6bd2cc360fde",
+      "EntityKey": 368,
+      "TechAssetKey": 12,
+      "InstanceName": "Tech Instance 68",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "e00209f2-7c9e-6603-ef12-fab6a127c1f1",
+      "EntityKey": 369,
+      "TechAssetKey": 13,
+      "InstanceName": "Tech Instance 69",
+      "CurrentStatus": "Inactive",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "9da0829a-e814-d70a-8e96-3808959d7e58",
+      "EntityKey": 370,
+      "TechAssetKey": 14,
+      "InstanceName": "Tech Instance 70",
+      "CurrentStatus": "Destroyed",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "338e9792-43eb-9ba1-44bd-dffadcca15c2",
+      "EntityKey": 371,
+      "TechAssetKey": 15,
+      "InstanceName": "Tech Instance 71",
+      "CurrentStatus": "Unknown",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "4e0ed7a0-24b8-27b9-669e-d356a3c0ade9",
+      "EntityKey": 372,
+      "TechAssetKey": 16,
+      "InstanceName": "Tech Instance 72",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "f7317260-339f-6559-cc12-0aba5468d087",
+      "EntityKey": 373,
+      "TechAssetKey": 17,
+      "InstanceName": "Tech Instance 73",
+      "CurrentStatus": "Inactive",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "28e10f72-1438-f6dc-b90e-b744fad3d818",
+      "EntityKey": 374,
+      "TechAssetKey": 18,
+      "InstanceName": "Tech Instance 74",
+      "CurrentStatus": "Destroyed",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "ce28b261-f396-3f82-56cb-a083e62ac7e0",
+      "EntityKey": 375,
+      "TechAssetKey": 19,
+      "InstanceName": "Tech Instance 75",
+      "CurrentStatus": "Unknown",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "b5b038b1-1fe7-6588-3ecb-a5fa7aeb9931",
+      "EntityKey": 376,
+      "TechAssetKey": 20,
+      "InstanceName": "Tech Instance 76",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "2851b3e2-af4c-dc72-9238-24ee6acb7782",
+      "EntityKey": 377,
+      "TechAssetKey": 21,
+      "InstanceName": "Tech Instance 77",
+      "CurrentStatus": "Inactive",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "f7cf63c2-9941-80fc-65cc-9b368e5ce6da",
+      "EntityKey": 378,
+      "TechAssetKey": 22,
+      "InstanceName": "Tech Instance 78",
+      "CurrentStatus": "Destroyed",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "7ab12c40-400e-9aba-18f3-1b5f4eaead06",
+      "EntityKey": 379,
+      "TechAssetKey": 23,
+      "InstanceName": "Tech Instance 79",
+      "CurrentStatus": "Unknown",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "cd028799-049f-c996-0279-276c8749b6a0",
+      "EntityKey": 380,
+      "TechAssetKey": 24,
+      "InstanceName": "Tech Instance 80",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "a0ef4326-5e21-c2c3-8794-2489ecd9c780",
+      "EntityKey": 381,
+      "TechAssetKey": 25,
+      "InstanceName": "Tech Instance 81",
+      "CurrentStatus": "Inactive",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "0ba49d7d-0ba5-4784-7bd6-b761f0d85584",
+      "EntityKey": 382,
+      "TechAssetKey": 26,
+      "InstanceName": "Tech Instance 82",
+      "CurrentStatus": "Destroyed",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "207af0d1-47f9-e8bc-5212-a910f5dd2638",
+      "EntityKey": 383,
+      "TechAssetKey": 27,
+      "InstanceName": "Tech Instance 83",
+      "CurrentStatus": "Unknown",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "2c148c1b-b5aa-1a33-5eb1-e1d5fd391229",
+      "EntityKey": 384,
+      "TechAssetKey": 28,
+      "InstanceName": "Tech Instance 84",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "3624ec3e-ce9a-6e55-3635-ef4b0b5930d4",
+      "EntityKey": 385,
+      "TechAssetKey": 1,
+      "InstanceName": "Tech Instance 85",
+      "CurrentStatus": "Inactive",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "3d5383db-eb4d-558a-d480-7ff05a4ee683",
+      "EntityKey": 386,
+      "TechAssetKey": 2,
+      "InstanceName": "Tech Instance 86",
+      "CurrentStatus": "Destroyed",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "fff9a236-9985-7068-d189-6697fd555031",
+      "EntityKey": 387,
+      "TechAssetKey": 3,
+      "InstanceName": "Tech Instance 87",
+      "CurrentStatus": "Unknown",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "a577593a-d78c-dc5d-82da-ccf8e76a480f",
+      "EntityKey": 388,
+      "TechAssetKey": 4,
+      "InstanceName": "Tech Instance 88",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "5a0cb8d7-739b-d925-455d-6f780a5f7ebb",
+      "EntityKey": 389,
+      "TechAssetKey": 5,
+      "InstanceName": "Tech Instance 89",
+      "CurrentStatus": "Inactive",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "d2db6ea9-7539-992b-920c-c86d9da6eba7",
+      "EntityKey": 390,
+      "TechAssetKey": 6,
+      "InstanceName": "Tech Instance 90",
+      "CurrentStatus": "Destroyed",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "0d7ace30-6c3f-22f1-83b4-873ddef94443",
+      "EntityKey": 391,
+      "TechAssetKey": 7,
+      "InstanceName": "Tech Instance 91",
+      "CurrentStatus": "Unknown",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "2c8b963e-0393-6022-24b5-59282f1f4f84",
+      "EntityKey": 392,
+      "TechAssetKey": 8,
+      "InstanceName": "Tech Instance 92",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "fa3d208d-6c78-ece1-009d-30423d83d99f",
+      "EntityKey": 393,
+      "TechAssetKey": 9,
+      "InstanceName": "Tech Instance 93",
+      "CurrentStatus": "Inactive",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "4671406a-1eea-3ebe-3cd7-fc079000d0f4",
+      "EntityKey": 394,
+      "TechAssetKey": 10,
+      "InstanceName": "Tech Instance 94",
+      "CurrentStatus": "Destroyed",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "bf401674-cc9c-a0e5-f63d-a670e8e6bc09",
+      "EntityKey": 395,
+      "TechAssetKey": 11,
+      "InstanceName": "Tech Instance 95",
+      "CurrentStatus": "Unknown",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "6cd5f2d7-0c3b-dc24-d094-e478c06b6077",
+      "EntityKey": 396,
+      "TechAssetKey": 12,
+      "InstanceName": "Tech Instance 96",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "17d75925-9ba9-d688-fdbf-4f6dff46dd0f",
+      "EntityKey": 397,
+      "TechAssetKey": 13,
+      "InstanceName": "Tech Instance 97",
+      "CurrentStatus": "Inactive",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "b6a9a8d3-33c6-6199-f705-4f2643e2bb35",
+      "EntityKey": 398,
+      "TechAssetKey": 14,
+      "InstanceName": "Tech Instance 98",
+      "CurrentStatus": "Destroyed",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "01d25d67-75ee-c1ff-d74e-ae634f021fa3",
+      "EntityKey": 399,
+      "TechAssetKey": 15,
+      "InstanceName": "Tech Instance 99",
+      "CurrentStatus": "Unknown",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "9bb6ab4c-ee02-f983-6e2d-05abee36b1b0",
+      "EntityKey": 400,
+      "TechAssetKey": 16,
+      "InstanceName": "Tech Instance 100",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "9327f3f2-7aa5-5153-1fc4-27625c6938d1",
+      "EntityKey": 401,
+      "TechAssetKey": 17,
+      "InstanceName": "Tech Instance 101",
+      "CurrentStatus": "Inactive",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "8b2f8df2-ad74-a292-c741-9d5ef2b487d6",
+      "EntityKey": 402,
+      "TechAssetKey": 18,
+      "InstanceName": "Tech Instance 102",
+      "CurrentStatus": "Destroyed",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "21f33e9a-0b05-ddb8-a59f-61dfabb7e74e",
+      "EntityKey": 403,
+      "TechAssetKey": 19,
+      "InstanceName": "Tech Instance 103",
+      "CurrentStatus": "Unknown",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "13f915a7-3f2f-aa64-9aca-fa291e0f4637",
+      "EntityKey": 404,
+      "TechAssetKey": 20,
+      "InstanceName": "Tech Instance 104",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "28225e8e-c0c0-bde2-7819-8143e956a9e6",
+      "EntityKey": 405,
+      "TechAssetKey": 21,
+      "InstanceName": "Tech Instance 105",
+      "CurrentStatus": "Inactive",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "0a437dc3-b0a3-ff36-c026-3c83f7373de7",
+      "EntityKey": 406,
+      "TechAssetKey": 22,
+      "InstanceName": "Tech Instance 106",
+      "CurrentStatus": "Destroyed",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "b27abfdc-1f28-bfef-9fde-1ab7a154c1be",
+      "EntityKey": 407,
+      "TechAssetKey": 23,
+      "InstanceName": "Tech Instance 107",
+      "CurrentStatus": "Unknown",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "2e31a139-257e-0643-e3f1-b041c1238cd4",
+      "EntityKey": 408,
+      "TechAssetKey": 24,
+      "InstanceName": "Tech Instance 108",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "dfe3f3bc-57a1-e87b-6e3e-55e9b3cb1401",
+      "EntityKey": 409,
+      "TechAssetKey": 25,
+      "InstanceName": "Tech Instance 109",
+      "CurrentStatus": "Inactive",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "c1df59a5-b17d-87bb-c644-32f5c5ac7a83",
+      "EntityKey": 410,
+      "TechAssetKey": 26,
+      "InstanceName": "Tech Instance 110",
+      "CurrentStatus": "Destroyed",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "04c56f81-76f5-39bd-6115-764d80e4442c",
+      "EntityKey": 411,
+      "TechAssetKey": 27,
+      "InstanceName": "Tech Instance 111",
+      "CurrentStatus": "Unknown",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "5f5e0797-9700-3a34-a409-21a5b1d70ba6",
+      "EntityKey": 412,
+      "TechAssetKey": 28,
+      "InstanceName": "Tech Instance 112",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "090c15b8-170d-106c-6e37-f6a2f5e5e3bc",
+      "EntityKey": 413,
+      "TechAssetKey": 1,
+      "InstanceName": "Tech Instance 113",
+      "CurrentStatus": "Inactive",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "3d35f419-f4cd-445a-1f9d-f0e73107ff6c",
+      "EntityKey": 414,
+      "TechAssetKey": 2,
+      "InstanceName": "Tech Instance 114",
+      "CurrentStatus": "Destroyed",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "f434f099-2054-5178-9b56-67e7f575ee0c",
+      "EntityKey": 415,
+      "TechAssetKey": 3,
+      "InstanceName": "Tech Instance 115",
+      "CurrentStatus": "Unknown",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "a25f966e-0f05-04df-082a-99570a70c7f8",
+      "EntityKey": 416,
+      "TechAssetKey": 4,
+      "InstanceName": "Tech Instance 116",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "65fd457e-6e2d-36e7-44b9-b60d76a462a6",
+      "EntityKey": 417,
+      "TechAssetKey": 5,
+      "InstanceName": "Tech Instance 117",
+      "CurrentStatus": "Inactive",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "7625af42-61e6-542f-463b-3e56ad5268e3",
+      "EntityKey": 418,
+      "TechAssetKey": 6,
+      "InstanceName": "Tech Instance 118",
+      "CurrentStatus": "Destroyed",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "05681d3d-1a22-af36-ddb7-ae212d901c80",
+      "EntityKey": 419,
+      "TechAssetKey": 7,
+      "InstanceName": "Tech Instance 119",
+      "CurrentStatus": "Unknown",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "0f0841e0-d134-1d05-05d6-01d74399f7b9",
+      "EntityKey": 420,
+      "TechAssetKey": 8,
+      "InstanceName": "Tech Instance 120",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "5a931205-1c6b-dba7-e072-ff1b16aac52d",
+      "EntityKey": 421,
+      "TechAssetKey": 9,
+      "InstanceName": "Tech Instance 121",
+      "CurrentStatus": "Inactive",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "395ec472-ab3c-918e-396d-fb7ec45039d0",
+      "EntityKey": 422,
+      "TechAssetKey": 10,
+      "InstanceName": "Tech Instance 122",
+      "CurrentStatus": "Destroyed",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "ee9c4ccc-4f12-ea1c-00c5-752f1553f26d",
+      "EntityKey": 423,
+      "TechAssetKey": 11,
+      "InstanceName": "Tech Instance 123",
+      "CurrentStatus": "Unknown",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "4a335703-0c3c-0942-59ad-77718738a948",
+      "EntityKey": 424,
+      "TechAssetKey": 12,
+      "InstanceName": "Tech Instance 124",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "f8c211e8-0476-5aec-0af5-84d216419cd7",
+      "EntityKey": 425,
+      "TechAssetKey": 13,
+      "InstanceName": "Tech Instance 125",
+      "CurrentStatus": "Inactive",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "ff5a1fac-415a-46e4-32f1-6b1da2491d43",
+      "EntityKey": 426,
+      "TechAssetKey": 14,
+      "InstanceName": "Tech Instance 126",
+      "CurrentStatus": "Destroyed",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "0059198a-97f4-ab80-f222-49f7d043aa5e",
+      "EntityKey": 427,
+      "TechAssetKey": 15,
+      "InstanceName": "Tech Instance 127",
+      "CurrentStatus": "Unknown",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "f8a64a2b-9a61-0b73-3f6b-4dc69c9d011c",
+      "EntityKey": 428,
+      "TechAssetKey": 16,
+      "InstanceName": "Tech Instance 128",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "690dfece-6cf8-a1c0-ed2d-6e33ce578c09",
+      "EntityKey": 429,
+      "TechAssetKey": 17,
+      "InstanceName": "Tech Instance 129",
+      "CurrentStatus": "Inactive",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "1884913c-2581-9e22-c468-9e9f463c82da",
+      "EntityKey": 430,
+      "TechAssetKey": 18,
+      "InstanceName": "Tech Instance 130",
+      "CurrentStatus": "Destroyed",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "bd39b8e9-c258-78f1-a62d-a6192c7b5a98",
+      "EntityKey": 431,
+      "TechAssetKey": 19,
+      "InstanceName": "Tech Instance 131",
+      "CurrentStatus": "Unknown",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "dc39a095-0831-cb5d-b549-5ee250e40198",
+      "EntityKey": 432,
+      "TechAssetKey": 20,
+      "InstanceName": "Tech Instance 132",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "6fe984be-9ea9-3422-32c9-27ebe4dbf01a",
+      "EntityKey": 433,
+      "TechAssetKey": 21,
+      "InstanceName": "Tech Instance 133",
+      "CurrentStatus": "Inactive",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "09a10b76-ce4a-5f75-769c-952fc1e34b41",
+      "EntityKey": 434,
+      "TechAssetKey": 22,
+      "InstanceName": "Tech Instance 134",
+      "CurrentStatus": "Destroyed",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "d4948f90-727c-7b68-089e-2304f3ae8159",
+      "EntityKey": 435,
+      "TechAssetKey": 23,
+      "InstanceName": "Tech Instance 135",
+      "CurrentStatus": "Unknown",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "0fbfb9d6-6ae7-51e2-229b-577a2528cede",
+      "EntityKey": 436,
+      "TechAssetKey": 24,
+      "InstanceName": "Tech Instance 136",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "af61571f-edc7-7024-ab27-0505092fb57e",
+      "EntityKey": 437,
+      "TechAssetKey": 25,
+      "InstanceName": "Tech Instance 137",
+      "CurrentStatus": "Inactive",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "2125fbdf-f3ed-0cdb-3ba5-ac0b83f49360",
+      "EntityKey": 438,
+      "TechAssetKey": 26,
+      "InstanceName": "Tech Instance 138",
+      "CurrentStatus": "Destroyed",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "d0c38cf5-b124-2d6b-66be-01a39e8af00c",
+      "EntityKey": 439,
+      "TechAssetKey": 27,
+      "InstanceName": "Tech Instance 139",
+      "CurrentStatus": "Unknown",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "67f9b262-13e5-ac47-0430-e74196817cb4",
+      "EntityKey": 440,
+      "TechAssetKey": 28,
+      "InstanceName": "Tech Instance 140",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "33835010-e3fa-390b-6f86-bca3f1e0b735",
+      "EntityKey": 441,
+      "TechAssetKey": 1,
+      "InstanceName": "Tech Instance 141",
+      "CurrentStatus": "Inactive",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "2be957c9-ac6a-eb73-0b19-c2b12456d709",
+      "EntityKey": 442,
+      "TechAssetKey": 2,
+      "InstanceName": "Tech Instance 142",
+      "CurrentStatus": "Destroyed",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "2b808d1c-4d68-3d29-b3ba-6ef7977ccc17",
+      "EntityKey": 443,
+      "TechAssetKey": 3,
+      "InstanceName": "Tech Instance 143",
+      "CurrentStatus": "Unknown",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "dcb708e4-8ee5-31d4-6265-4f6cef8ff5b0",
+      "EntityKey": 444,
+      "TechAssetKey": 4,
+      "InstanceName": "Tech Instance 144",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "6483cb68-2e26-35e3-d416-128e983f1bec",
+      "EntityKey": 445,
+      "TechAssetKey": 5,
+      "InstanceName": "Tech Instance 145",
+      "CurrentStatus": "Inactive",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "b8e04566-1ddb-b6e5-1b0e-3b57b4105256",
+      "EntityKey": 446,
+      "TechAssetKey": 6,
+      "InstanceName": "Tech Instance 146",
+      "CurrentStatus": "Destroyed",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "fafc84c8-8813-430d-0f05-d855f213036d",
+      "EntityKey": 447,
+      "TechAssetKey": 7,
+      "InstanceName": "Tech Instance 147",
+      "CurrentStatus": "Unknown",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "99e31ebd-ff04-2c52-9e69-76c760dd1d61",
+      "EntityKey": 448,
+      "TechAssetKey": 8,
+      "InstanceName": "Tech Instance 148",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "d20a3950-4f3c-4091-fe22-0f90e0228971",
+      "EntityKey": 449,
+      "TechAssetKey": 9,
+      "InstanceName": "Tech Instance 149",
+      "CurrentStatus": "Inactive",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "bd477773-6d1d-9a6a-4099-a97a4c845772",
+      "EntityKey": 450,
+      "TechAssetKey": 10,
+      "InstanceName": "Tech Instance 150",
+      "CurrentStatus": "Destroyed",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "18eb464f-32dd-491e-9a4e-a7b76f44a5d0",
+      "EntityKey": 696,
+      "TechAssetKey": 29,
+      "InstanceName": "Bryar Pistol - Kyle Katarn",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechInstanceGuid": "94be6d9b-a762-4677-9aa3-f0d2a3728cd1",
+      "EntityKey": 697,
+      "TechAssetKey": 29,
+      "InstanceName": "Bryar Pistol - Field Cache",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechInstanceGuid": "66cf42c0-46a3-45f0-986d-7c908a8a1daa",
+      "EntityKey": 698,
+      "TechAssetKey": 24,
+      "InstanceName": "E-11 Blaster Rifle - Kyle Katarn",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechInstanceGuid": "1577a235-0580-40ee-b868-265132ac29b0",
+      "EntityKey": 699,
+      "TechAssetKey": 24,
+      "InstanceName": "E-11 Blaster Rifle - Field Cache",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechInstanceGuid": "2b35f075-a809-4186-9970-61e41946f248",
+      "EntityKey": 700,
+      "TechAssetKey": 30,
+      "InstanceName": "DL-44 Blaster Pistol - Kyle Katarn",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechInstanceGuid": "9bfa70f3-33d2-470d-a97f-aaee8a377f81",
+      "EntityKey": 701,
+      "TechAssetKey": 30,
+      "InstanceName": "DL-44 Blaster Pistol - Field Cache",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechInstanceGuid": "f58f9ac2-1467-40c7-a8de-225e096dc3c7",
+      "EntityKey": 702,
+      "TechAssetKey": 31,
+      "InstanceName": "Imperial Repeater - Kyle Katarn",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechInstanceGuid": "645709fb-e2df-4d87-9f9d-1d866c703838",
+      "EntityKey": 703,
+      "TechAssetKey": 31,
+      "InstanceName": "Imperial Repeater - Field Cache",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechInstanceGuid": "f3643483-7b47-4c46-a6cd-5d9bed89d5c3",
+      "EntityKey": 704,
+      "TechAssetKey": 32,
+      "InstanceName": "Concussion Rifle - Kyle Katarn",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechInstanceGuid": "abc7005f-67ee-44fd-96fa-662fa7b06bc7",
+      "EntityKey": 705,
+      "TechAssetKey": 32,
+      "InstanceName": "Concussion Rifle - Field Cache",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechInstanceGuid": "99efff3f-4813-4cab-9f3a-d33a7de62c3d",
+      "EntityKey": 706,
+      "TechAssetKey": 33,
+      "InstanceName": "Assault Cannon - Kyle Katarn",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechInstanceGuid": "65382942-1b0e-48b9-813a-64b98637bb72",
+      "EntityKey": 707,
+      "TechAssetKey": 33,
+      "InstanceName": "Assault Cannon - Field Cache",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechInstanceGuid": "fdfd2dae-cd41-415d-b162-6b2bd49ff13b",
+      "EntityKey": 708,
+      "TechAssetKey": 34,
+      "InstanceName": "Thermal Detonator Launcher - Kyle Katarn",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechInstanceGuid": "8f72fddd-866c-4e1d-a3b4-7b4c4dc4e360",
+      "EntityKey": 709,
+      "TechAssetKey": 34,
+      "InstanceName": "Thermal Detonator Launcher - Field Cache",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechInstanceGuid": "0d514f24-4258-4d56-8464-9e2bdbe524f2",
+      "EntityKey": 710,
+      "TechAssetKey": 35,
+      "InstanceName": "Mortar Launcher - Kyle Katarn",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechInstanceGuid": "e8332720-6b9a-4e2e-951d-16c0dd0bed2e",
+      "EntityKey": 711,
+      "TechAssetKey": 35,
+      "InstanceName": "Mortar Launcher - Field Cache",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechInstanceGuid": "d633ba6d-d164-48a9-a1c3-93766995b37d",
+      "EntityKey": 712,
+      "TechAssetKey": 36,
+      "InstanceName": "Heavy Blaster - Kyle Katarn",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechInstanceGuid": "dcdb61d7-583c-4177-8116-e1d19af2d203",
+      "EntityKey": 713,
+      "TechAssetKey": 36,
+      "InstanceName": "Heavy Blaster - Field Cache",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechInstanceGuid": "91196e48-dee9-46b5-afd3-61d6a9f50f86",
+      "EntityKey": 714,
+      "TechAssetKey": 37,
+      "InstanceName": "Blaster Carbine - Kyle Katarn",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechInstanceGuid": "417ec400-6ebe-4948-b852-74ae81252d27",
+      "EntityKey": 715,
+      "TechAssetKey": 37,
+      "InstanceName": "Blaster Carbine - Field Cache",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechInstanceGuid": "4119f95d-f967-453c-b425-68deff38e0e4",
+      "EntityKey": 716,
+      "TechAssetKey": 38,
+      "InstanceName": "Blaster Pistol Mk I - Kyle Katarn",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechInstanceGuid": "d992b5ad-d77b-47a0-be9f-a52b41744456",
+      "EntityKey": 717,
+      "TechAssetKey": 38,
+      "InstanceName": "Blaster Pistol Mk I - Field Cache",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechInstanceGuid": "59265d1c-b529-4b10-b45a-f18b49b64225",
+      "EntityKey": 718,
+      "TechAssetKey": 39,
+      "InstanceName": "Blaster Pistol Mk II - Kyle Katarn",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechInstanceGuid": "727b6b16-0842-435e-966c-ec186f6bcc31",
+      "EntityKey": 719,
+      "TechAssetKey": 39,
+      "InstanceName": "Blaster Pistol Mk II - Field Cache",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechInstanceGuid": "8300163b-cdc4-498d-9fc2-6e7f1daef30e",
+      "EntityKey": 720,
+      "TechAssetKey": 40,
+      "InstanceName": "Plasma Rifle - Kyle Katarn",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechInstanceGuid": "d02651ef-569c-420f-8e7e-daf303ec715f",
+      "EntityKey": 721,
+      "TechAssetKey": 40,
+      "InstanceName": "Plasma Rifle - Field Cache",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechInstanceGuid": "87ddd49d-882f-44fb-b8b9-18b7cfd7b420",
+      "EntityKey": 722,
+      "TechAssetKey": 41,
+      "InstanceName": "Ion Rifle - Kyle Katarn",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechInstanceGuid": "26761678-3d95-4e01-95c6-58d3fe690d69",
+      "EntityKey": 723,
+      "TechAssetKey": 41,
+      "InstanceName": "Ion Rifle - Field Cache",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechInstanceGuid": "16bd38ca-29a1-4db7-b112-fb7ed44330cf",
+      "EntityKey": 724,
+      "TechAssetKey": 42,
+      "InstanceName": "Repeater Cannon - Kyle Katarn",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechInstanceGuid": "987e71a7-0239-4c15-8111-662b2096efc9",
+      "EntityKey": 725,
+      "TechAssetKey": 42,
+      "InstanceName": "Repeater Cannon - Field Cache",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechInstanceGuid": "2eeec24b-e5e4-458b-a957-a69afef898a9",
+      "EntityKey": 726,
+      "TechAssetKey": 43,
+      "InstanceName": "Sniper Blaster - Kyle Katarn",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechInstanceGuid": "bf070f0d-ae60-4729-a7b8-997f07b6ce64",
+      "EntityKey": 727,
+      "TechAssetKey": 43,
+      "InstanceName": "Sniper Blaster - Field Cache",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechInstanceGuid": "227a3909-40b7-4686-a55a-94b98295bfb9",
+      "EntityKey": 728,
+      "TechAssetKey": 44,
+      "InstanceName": "Vibroblade - Kyle Katarn",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechInstanceGuid": "685f5f94-209f-4ef2-8f35-e0a9b775a45a",
+      "EntityKey": 729,
+      "TechAssetKey": 44,
+      "InstanceName": "Vibroblade - Field Cache",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechInstanceGuid": "71bc5d06-c4b3-402d-9c33-5a4e10d1f853",
+      "EntityKey": 730,
+      "TechAssetKey": 45,
+      "InstanceName": "Stun Baton - Kyle Katarn",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechInstanceGuid": "2dcab932-8690-4848-adda-3f999806d239",
+      "EntityKey": 731,
+      "TechAssetKey": 45,
+      "InstanceName": "Stun Baton - Field Cache",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechInstanceGuid": "4ddc2e37-631b-4817-ae93-20f314cfff72",
+      "EntityKey": 732,
+      "TechAssetKey": 46,
+      "InstanceName": "Blast Rifle - Kyle Katarn",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechInstanceGuid": "660a78b5-3a77-45a3-b183-835f21b8d8de",
+      "EntityKey": 733,
+      "TechAssetKey": 46,
+      "InstanceName": "Blast Rifle - Field Cache",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechInstanceGuid": "bbec6253-9758-453b-8bc5-d3c2c1117733",
+      "EntityKey": 734,
+      "TechAssetKey": 47,
+      "InstanceName": "Pulse Cannon - Kyle Katarn",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechInstanceGuid": "c4cee251-ba5b-4f49-8ce7-dd22e9db0f79",
+      "EntityKey": 735,
+      "TechAssetKey": 47,
+      "InstanceName": "Pulse Cannon - Field Cache",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechInstanceGuid": "48be028f-7005-4255-8f7a-b836f1c27a41",
+      "EntityKey": 736,
+      "TechAssetKey": 48,
+      "InstanceName": "Thermal Detonator - Mission Stock",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechInstanceGuid": "1a04e8e0-a41b-450c-8b3f-05750dde0765",
+      "EntityKey": 737,
+      "TechAssetKey": 49,
+      "InstanceName": "Detonator Mine - Mission Stock",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechInstanceGuid": "8f37441b-0c1a-41a0-a339-ce65edcba12a",
+      "EntityKey": 738,
+      "TechAssetKey": 50,
+      "InstanceName": "Baradium Charge - Mission Stock",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechInstanceGuid": "47d38ae7-efbe-400f-a909-ddc481dddba4",
+      "EntityKey": 739,
+      "TechAssetKey": 51,
+      "InstanceName": "Remote Det Pack - Mission Stock",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechInstanceGuid": "4511501f-817e-4722-828f-1c004f128bae",
+      "EntityKey": 740,
+      "TechAssetKey": 52,
+      "InstanceName": "Timed Det Pack - Mission Stock",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechInstanceGuid": "e7642ebe-c7a9-410e-a3f2-1e7d01a035e7",
+      "EntityKey": 741,
+      "TechAssetKey": 53,
+      "InstanceName": "Proximity Mine - Mission Stock",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechInstanceGuid": "b8ab5bbd-8fb3-4c71-8d3c-637b5ee9cf5d",
+      "EntityKey": 742,
+      "TechAssetKey": 54,
+      "InstanceName": "Concussion Grenade - Mission Stock",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechInstanceGuid": "0173e14a-4fcc-4685-80d6-9ef8028572a4",
+      "EntityKey": 743,
+      "TechAssetKey": 55,
+      "InstanceName": "Satchel Charge - Mission Stock",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechInstanceGuid": "fa7c6cd2-b6d6-49e8-81df-a7b89b4ff4b6",
+      "EntityKey": 744,
+      "TechAssetKey": 56,
+      "InstanceName": "Plasma Charge - Mission Stock",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechInstanceGuid": "a3e47bee-1700-4bde-887a-3d682e8af62a",
+      "EntityKey": 745,
+      "TechAssetKey": 57,
+      "InstanceName": "Ion Charge - Mission Stock",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechInstanceGuid": "a386726a-0740-4456-bea2-30adb0475986",
+      "EntityKey": 746,
+      "TechAssetKey": 58,
+      "InstanceName": "Dark Trooper Phase I Unit 001",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechInstanceGuid": "c6f59fa5-abe0-4cc6-8a7f-5a28ada9cc28",
+      "EntityKey": 747,
+      "TechAssetKey": 58,
+      "InstanceName": "Dark Trooper Phase I Unit 002",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechInstanceGuid": "44249785-18d5-4a1a-aa59-fcbed16a8ff5",
+      "EntityKey": 748,
+      "TechAssetKey": 59,
+      "InstanceName": "Dark Trooper Phase II Unit 001",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechInstanceGuid": "2c93609d-1b8b-4cd0-af30-a0caaf045314",
+      "EntityKey": 749,
+      "TechAssetKey": 59,
+      "InstanceName": "Dark Trooper Phase II Unit 002",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechInstanceGuid": "4c36baef-2351-4293-b185-41ba40b060c3",
+      "EntityKey": 750,
+      "TechAssetKey": 60,
+      "InstanceName": "Dark Trooper Phase III Unit 001",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechInstanceGuid": "843d0b6c-3fbd-4a9d-b687-5ff7ddb6dae1",
+      "EntityKey": 751,
+      "TechAssetKey": 60,
+      "InstanceName": "Dark Trooper Phase III Unit 002",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechInstanceGuid": "2c3ff475-6e4d-441d-b44e-325303e0ba1a",
+      "EntityKey": 752,
+      "TechAssetKey": 61,
+      "InstanceName": "Imperial Probe Droid Unit 001",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechInstanceGuid": "19f82cbd-aacc-4710-a6b1-10b5f2375b37",
+      "EntityKey": 753,
+      "TechAssetKey": 61,
+      "InstanceName": "Imperial Probe Droid Unit 002",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechInstanceGuid": "ba297f1c-2242-4cbe-b220-1f1726ada6f5",
+      "EntityKey": 754,
+      "TechAssetKey": 62,
+      "InstanceName": "Imperial Sentry Droid Unit 001",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechInstanceGuid": "67d6dac8-3b9a-463d-99f4-b9fd1edc2cab",
+      "EntityKey": 755,
+      "TechAssetKey": 62,
+      "InstanceName": "Imperial Sentry Droid Unit 002",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechInstanceGuid": "ff9ae989-19b7-448a-8c95-fd79963e8f61",
+      "EntityKey": 756,
+      "TechAssetKey": 63,
+      "InstanceName": "Maintenance Droid Unit 001",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechInstanceGuid": "400d270f-8133-4c2b-b219-423eef31ccda",
+      "EntityKey": 757,
+      "TechAssetKey": 63,
+      "InstanceName": "Maintenance Droid Unit 002",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechInstanceGuid": "58d97f36-a853-4347-9d04-7707dc1b382c",
+      "EntityKey": 758,
+      "TechAssetKey": 64,
+      "InstanceName": "Security Droid Unit 001",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechInstanceGuid": "07486547-3f5c-44a5-a4b6-739095894109",
+      "EntityKey": 759,
+      "TechAssetKey": 64,
+      "InstanceName": "Security Droid Unit 002",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechInstanceGuid": "c547299b-3f4d-40a2-a62f-f22c5c0f67ed",
+      "EntityKey": 760,
+      "TechAssetKey": 65,
+      "InstanceName": "Cargo Handler Droid Unit 001",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechInstanceGuid": "4aca5140-824f-4954-aa3f-16793dee068e",
+      "EntityKey": 761,
+      "TechAssetKey": 65,
+      "InstanceName": "Cargo Handler Droid Unit 002",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechInstanceGuid": "f774d3e1-2aa6-4b40-b572-680f7aed6547",
+      "EntityKey": 762,
+      "TechAssetKey": 66,
+      "InstanceName": "Repair Droid Unit 001",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechInstanceGuid": "57a81872-3f5a-4ce5-a479-1a94608a08ab",
+      "EntityKey": 763,
+      "TechAssetKey": 66,
+      "InstanceName": "Repair Droid Unit 002",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechInstanceGuid": "42f901f2-a299-4bf3-a6df-7be829329883",
+      "EntityKey": 764,
+      "TechAssetKey": 67,
+      "InstanceName": "Communications Droid Unit 001",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechInstanceGuid": "0382640a-175b-4ae1-9568-8faae579c951",
+      "EntityKey": 765,
+      "TechAssetKey": 67,
+      "InstanceName": "Communications Droid Unit 002",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechInstanceGuid": "ca60ba05-96c2-49f1-bfdb-ac79e097e9ad",
+      "EntityKey": 766,
+      "TechAssetKey": 68,
+      "InstanceName": "Arc Hammer",
+      "CurrentStatus": "Destroyed",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechInstanceGuid": "565145d2-19fd-4709-ae52-34efd13068eb",
+      "EntityKey": 767,
+      "TechAssetKey": 69,
+      "InstanceName": "Lambda-class Shuttle",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechInstanceGuid": "a822f966-a518-41a6-b869-e8e2c01370be",
+      "EntityKey": 768,
+      "TechAssetKey": 70,
+      "InstanceName": "Imperial Transport",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechInstanceGuid": "cf12e0e7-3397-405a-9316-22f6343e9484",
+      "EntityKey": 769,
+      "TechAssetKey": 71,
+      "InstanceName": "Imperial Patrol Craft",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechInstanceGuid": "a7a0f0d4-6296-48a8-8b22-327bb75d498b",
+      "EntityKey": 770,
+      "TechAssetKey": 72,
+      "InstanceName": "Imperial Gunboat",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechInstanceGuid": "0bba0e92-95a5-48cf-aa16-a13fd45ac5f7",
+      "EntityKey": 771,
+      "TechAssetKey": 73,
+      "InstanceName": "Rebel Transport Shuttle",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechInstanceGuid": "792754ed-06df-4041-b478-afd938d3c2bf",
+      "EntityKey": 772,
+      "TechAssetKey": 74,
+      "InstanceName": "Imperial Landing Craft",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechInstanceGuid": "5e0140ad-091a-4ebb-b3cd-4af5f8b48bcf",
+      "EntityKey": 773,
+      "TechAssetKey": 75,
+      "InstanceName": "Cargo Skiff",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechInstanceGuid": "016152f1-e1fa-4755-98b0-5311b514a409",
+      "EntityKey": 774,
+      "TechAssetKey": 76,
+      "InstanceName": "Assault Skiff",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechInstanceGuid": "01e8d7f4-bd9f-4828-90a8-466c5de9b4bb",
+      "EntityKey": 775,
+      "TechAssetKey": 77,
+      "InstanceName": "Imperial Hover Tank",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechInstanceGuid": "cf8baf39-25ae-406c-965b-e64f91cac1e9",
+      "EntityKey": 776,
+      "TechAssetKey": 78,
+      "InstanceName": "Security Console Type A - Primary",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechInstanceGuid": "5971263d-1077-4d9a-ba25-c009c5b0495b",
+      "EntityKey": 777,
+      "TechAssetKey": 79,
+      "InstanceName": "Security Console Type B - Primary",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechInstanceGuid": "8508429a-7ebe-4957-a2ee-97e6e81c5a84",
+      "EntityKey": 778,
+      "TechAssetKey": 80,
+      "InstanceName": "Security Console Type C - Primary",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechInstanceGuid": "3317e1ab-5072-4b43-beed-21408436f6be",
+      "EntityKey": 779,
+      "TechAssetKey": 81,
+      "InstanceName": "Security Console Type D - Primary",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechInstanceGuid": "d1e7dab5-be28-4953-b5a3-c320b9bf2ffa",
+      "EntityKey": 780,
+      "TechAssetKey": 82,
+      "InstanceName": "Security Console Type E - Primary",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechInstanceGuid": "ae0300b4-678e-40ab-9e93-fb3a0394e521",
+      "EntityKey": 781,
+      "TechAssetKey": 83,
+      "InstanceName": "Security Console Type F - Primary",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechInstanceGuid": "1e12917f-6faf-4fe5-bae6-0e9d51c0bb09",
+      "EntityKey": 782,
+      "TechAssetKey": 84,
+      "InstanceName": "Security Console Type G - Primary",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechInstanceGuid": "d05780d8-be56-44df-92c9-d0180843ec13",
+      "EntityKey": 783,
+      "TechAssetKey": 85,
+      "InstanceName": "Security Console Type H - Primary",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechInstanceGuid": "e8d903a9-32db-4afe-968f-8df67ac470a8",
+      "EntityKey": 784,
+      "TechAssetKey": 86,
+      "InstanceName": "Security Console Type I - Primary",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechInstanceGuid": "03eb1640-9a8f-4fdd-9f49-a4e1d5214e50",
+      "EntityKey": 785,
+      "TechAssetKey": 87,
+      "InstanceName": "Security Console Type J - Primary",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechInstanceGuid": "7d90b792-d913-4ef9-b16e-ad095b4763c7",
+      "EntityKey": 786,
+      "TechAssetKey": 88,
+      "InstanceName": "Security Console Type K - Primary",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechInstanceGuid": "e2ba1406-af74-4755-a923-814bfbd9ed29",
+      "EntityKey": 787,
+      "TechAssetKey": 89,
+      "InstanceName": "Security Console Type L - Primary",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechInstanceGuid": "9a3b5af2-da30-4471-ade9-15b169747d31",
+      "EntityKey": 788,
+      "TechAssetKey": 90,
+      "InstanceName": "Security Console Type M - Primary",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechInstanceGuid": "728b8da8-af18-46e0-8a86-c8a17d55ebc6",
+      "EntityKey": 789,
+      "TechAssetKey": 91,
+      "InstanceName": "Security Console Type N - Primary",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechInstanceGuid": "384a3cb3-29b1-4640-9604-abd577ee1e42",
+      "EntityKey": 790,
+      "TechAssetKey": 92,
+      "InstanceName": "Security Console Type O - Primary",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechInstanceGuid": "cba86202-d14c-48b7-8213-ab6990faf1fb",
+      "EntityKey": 791,
+      "TechAssetKey": 93,
+      "InstanceName": "Security Console Type P - Primary",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechInstanceGuid": "235645eb-4098-4b23-b4d3-cfe8cf972dc1",
+      "EntityKey": 792,
+      "TechAssetKey": 94,
+      "InstanceName": "Security Console Type Q - Primary",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechInstanceGuid": "5722fcf6-b8e4-4b0a-9526-af5846ea2161",
+      "EntityKey": 793,
+      "TechAssetKey": 95,
+      "InstanceName": "Security Console Type R - Primary",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechInstanceGuid": "b3cfde81-17e8-459e-ac3d-482b623662c8",
+      "EntityKey": 794,
+      "TechAssetKey": 96,
+      "InstanceName": "Security Console Type S - Primary",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechInstanceGuid": "935bb210-51bf-4f76-a98b-56ab7986c830",
+      "EntityKey": 795,
+      "TechAssetKey": 97,
+      "InstanceName": "Security Console Type T - Primary",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechInstanceGuid": "dcfb565b-0f40-4cb3-bd81-f895a14be464",
+      "EntityKey": 796,
+      "TechAssetKey": 98,
+      "InstanceName": "Stormtrooper Armor - Issue",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechInstanceGuid": "8997a02b-d3a6-4f5b-bae4-2a8dae6d67c5",
+      "EntityKey": 797,
+      "TechAssetKey": 99,
+      "InstanceName": "Imperial Officer Armor - Issue",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechInstanceGuid": "30f7afd0-aefb-4452-8d59-dacd4f29eb2e",
+      "EntityKey": 798,
+      "TechAssetKey": 100,
+      "InstanceName": "Dark Trooper Armor Phase I - Issue",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechInstanceGuid": "1d01ba3d-f9ba-4f5f-a1a6-5d7e8a09dd13",
+      "EntityKey": 799,
+      "TechAssetKey": 101,
+      "InstanceName": "Dark Trooper Armor Phase II - Issue",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechInstanceGuid": "77dc2663-a03e-40ee-916d-458de2a66108",
+      "EntityKey": 800,
+      "TechAssetKey": 102,
+      "InstanceName": "Dark Trooper Armor Phase III - Issue",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechInstanceGuid": "d3be24b9-a927-46a1-9cf4-08f85e8d211d",
+      "EntityKey": 801,
+      "TechAssetKey": 103,
+      "InstanceName": "Rebel Combat Armor - Issue",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechInstanceGuid": "dc599c80-dfd4-4a6e-a3fe-5bfc0116e390",
+      "EntityKey": 802,
+      "TechAssetKey": 104,
+      "InstanceName": "Blast Shield - Issue",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechInstanceGuid": "eba9f80e-e4f7-47ec-a623-ec544747f842",
+      "EntityKey": 803,
+      "TechAssetKey": 105,
+      "InstanceName": "Breathing Mask - Issue",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechInstanceGuid": "03084319-293a-4ef3-a733-77de5e8893ac",
+      "EntityKey": 804,
+      "TechAssetKey": 106,
+      "InstanceName": "Power Pack - Issue",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechInstanceGuid": "932eb93f-f91e-47b6-99d6-a3134c1759ef",
+      "EntityKey": 805,
+      "TechAssetKey": 107,
+      "InstanceName": "Shield Belt - Issue",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechInstanceGuid": "91673dd5-ceda-43f7-8a94-4ff498367d9e",
+      "EntityKey": 806,
+      "TechAssetKey": 108,
+      "InstanceName": "Access Keycard Level 1 - Mission",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechInstanceGuid": "e6882109-d828-4125-94cf-b9ee1cd83a5e",
+      "EntityKey": 807,
+      "TechAssetKey": 109,
+      "InstanceName": "Access Keycard Level 2 - Mission",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechInstanceGuid": "cb436568-d973-4b25-9cf0-7e8b037b6db6",
+      "EntityKey": 808,
+      "TechAssetKey": 110,
+      "InstanceName": "Access Keycard Level 3 - Mission",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechInstanceGuid": "8c469c8c-27f1-481c-80ef-d7cbefba803f",
+      "EntityKey": 809,
+      "TechAssetKey": 111,
+      "InstanceName": "Access Keycard Level 4 - Mission",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechInstanceGuid": "3a8bebd7-5627-4d17-b4a5-35117bb0cbc7",
+      "EntityKey": 810,
+      "TechAssetKey": 112,
+      "InstanceName": "Access Keycard Level 5 - Mission",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechInstanceGuid": "d95414fe-1c8d-452b-8e01-4ccd9e15897d",
+      "EntityKey": 811,
+      "TechAssetKey": 113,
+      "InstanceName": "Access Keycard Level 6 - Mission",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechInstanceGuid": "5c7b9689-ccde-4a59-92fc-ef208428c536",
+      "EntityKey": 812,
+      "TechAssetKey": 114,
+      "InstanceName": "Access Keycard Level 7 - Mission",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechInstanceGuid": "32ba0a97-a63d-4df5-b33c-a3d0422aac8a",
+      "EntityKey": 813,
+      "TechAssetKey": 115,
+      "InstanceName": "Access Keycard Level 8 - Mission",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechInstanceGuid": "8856c0dc-b190-4358-b1ff-69c0208cd394",
+      "EntityKey": 814,
+      "TechAssetKey": 116,
+      "InstanceName": "Access Keycard Level 9 - Mission",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechInstanceGuid": "f5f28fc9-1b36-42bf-b2c5-2cdd31d3bdc0",
+      "EntityKey": 815,
+      "TechAssetKey": 117,
+      "InstanceName": "Access Keycard Level 10 - Mission",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechInstanceGuid": "198cad60-6eeb-4651-98ed-7720c61232b2",
+      "EntityKey": 816,
+      "TechAssetKey": 118,
+      "InstanceName": "Data Cartridge Type A - Briefing",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechInstanceGuid": "3976c9c9-ed7e-47fb-b340-ad85f263dd67",
+      "EntityKey": 817,
+      "TechAssetKey": 119,
+      "InstanceName": "Data Cartridge Type B - Briefing",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechInstanceGuid": "d021885e-6ac7-4710-a1e1-09a53f7be54f",
+      "EntityKey": 818,
+      "TechAssetKey": 120,
+      "InstanceName": "Data Cartridge Type C - Briefing",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechInstanceGuid": "376db7d8-80e3-4fa2-859d-9585737a9994",
+      "EntityKey": 819,
+      "TechAssetKey": 121,
+      "InstanceName": "Data Cartridge Type D - Briefing",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechInstanceGuid": "48173112-3190-4fd2-bcfc-7613f3765dbe",
+      "EntityKey": 820,
+      "TechAssetKey": 122,
+      "InstanceName": "Data Cartridge Type E - Briefing",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechInstanceGuid": "391e942c-d467-43cd-9bf5-d736e9a7d43c",
+      "EntityKey": 821,
+      "TechAssetKey": 123,
+      "InstanceName": "Data Cartridge Type F - Briefing",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechInstanceGuid": "e91a36a9-e1ce-47fb-805c-ff1b9b968f9a",
+      "EntityKey": 822,
+      "TechAssetKey": 124,
+      "InstanceName": "Data Cartridge Type G - Briefing",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechInstanceGuid": "780ffff5-dbd6-41a2-a2d4-bf9536dc7d50",
+      "EntityKey": 823,
+      "TechAssetKey": 125,
+      "InstanceName": "Data Cartridge Type H - Briefing",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechInstanceGuid": "235ce1a2-f9ee-4dbe-86da-e5561a8d9608",
+      "EntityKey": 824,
+      "TechAssetKey": 126,
+      "InstanceName": "Data Cartridge Type I - Briefing",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechInstanceGuid": "2e5b4276-d7d8-478f-a903-707b8f487813",
+      "EntityKey": 825,
+      "TechAssetKey": 127,
+      "InstanceName": "Data Cartridge Type J - Briefing",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    }
+  ]
+}

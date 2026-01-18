@@ -1,0 +1,313 @@
+{
+  "seedVersion": "0.1.0",
+  "generatedUtc": "2026-01-17T00:00:00Z",
+  "target": {
+    "schema": "dbo",
+    "table": "DimDroidModel",
+    "naturalKey": [
+      "TechAssetKey"
+    ],
+    "loadBehavior": "truncate-insert"
+  },
+  "options": {
+    "allowIdentityInsert": false,
+    "ignoreUnknownFields": false,
+    "defaults": {
+      "IsActive": true,
+      "IsLatest": true,
+      "VersionNum": 1
+    }
+  },
+  "rows": [
+    {
+      "DroidModelGuid": "283b21d9-0483-40ec-5efb-2f3fce763385",
+      "TechAssetKey": 1,
+      "DroidClass": "Protocol",
+      "PrimaryFunction": "Etiquette and translation",
+      "AutonomyLevel": "Full",
+      "MobilityRef": "Bipedal",
+      "ChassisRef": "Humanoid",
+      "SensorSuiteRef": "Optical/auditory",
+      "LanguageCapabilitiesRef": "6M+ languages",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "014_DimDroidModel.json"
+    },
+    {
+      "DroidModelGuid": "75b083f9-f7e2-6ff4-e224-29dcf4a9e78d",
+      "TechAssetKey": 2,
+      "DroidClass": "Astromech",
+      "PrimaryFunction": "Starship repair and navigation",
+      "AutonomyLevel": "Full",
+      "MobilityRef": "Wheeled/treaded",
+      "ChassisRef": "Cylindrical",
+      "SensorSuiteRef": "Full spectrum",
+      "LanguageCapabilitiesRef": "Binary plus ship interface",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "014_DimDroidModel.json"
+    },
+    {
+      "DroidModelGuid": "02133ad3-9f30-f8b9-dad6-a3163562a85e",
+      "TechAssetKey": 3,
+      "DroidClass": "Astromech",
+      "PrimaryFunction": "Starship maintenance",
+      "AutonomyLevel": "Full",
+      "MobilityRef": "Wheeled/treaded",
+      "ChassisRef": "Cylindrical",
+      "SensorSuiteRef": "Standard",
+      "LanguageCapabilitiesRef": "Binary",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "014_DimDroidModel.json"
+    },
+    {
+      "DroidModelGuid": "af6e0dca-2d81-c3d6-5868-541a8eac01ef",
+      "TechAssetKey": 4,
+      "DroidClass": "Astromech",
+      "PrimaryFunction": "Starship co-pilot",
+      "AutonomyLevel": "Full",
+      "MobilityRef": "Wheeled/treaded",
+      "ChassisRef": "Cylindrical",
+      "SensorSuiteRef": "Enhanced",
+      "LanguageCapabilitiesRef": "Binary plus tactical",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "014_DimDroidModel.json"
+    },
+    {
+      "DroidModelGuid": "f1357737-c1a2-00c5-84ec-38c4924ddf59",
+      "TechAssetKey": 5,
+      "DroidClass": "Assassin",
+      "PrimaryFunction": "Elimination of targets",
+      "AutonomyLevel": "Full",
+      "MobilityRef": "Bipedal",
+      "ChassisRef": "Humanoid",
+      "SensorSuiteRef": "Multi-spectrum",
+      "LanguageCapabilitiesRef": "Limited",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "014_DimDroidModel.json"
+    },
+    {
+      "DroidModelGuid": "7fbe97bc-c541-82c9-c963-063e4decb3d0",
+      "TechAssetKey": 6,
+      "DroidClass": "Protocol",
+      "PrimaryFunction": "Protocol with modifications",
+      "AutonomyLevel": "Partial",
+      "MobilityRef": "Bipedal",
+      "ChassisRef": "Insectoid",
+      "SensorSuiteRef": "Enhanced",
+      "LanguageCapabilitiesRef": "Multiple languages",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "014_DimDroidModel.json"
+    },
+    {
+      "DroidModelGuid": "46146a8c-87ce-97c8-f0c9-ee7d09e972bb",
+      "TechAssetKey": 7,
+      "DroidClass": "Supervisor",
+      "PrimaryFunction": "Droid oversight",
+      "AutonomyLevel": "Full",
+      "MobilityRef": "Bipedal",
+      "ChassisRef": "Humanoid",
+      "SensorSuiteRef": "Standard",
+      "LanguageCapabilitiesRef": "Multiple languages",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "014_DimDroidModel.json"
+    },
+    {
+      "DroidModelGuid": "e69f6927-abe4-8a76-d410-22de44e745c4",
+      "TechAssetKey": 8,
+      "DroidClass": "Battle",
+      "PrimaryFunction": "Infantry combat",
+      "AutonomyLevel": "Limited",
+      "MobilityRef": "Bipedal",
+      "ChassisRef": "Skeletal",
+      "SensorSuiteRef": "Basic",
+      "LanguageCapabilitiesRef": "Binary",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "014_DimDroidModel.json"
+    },
+    {
+      "DroidModelGuid": "bfec75aa-5c52-8994-1fd9-88331ca64ffa",
+      "TechAssetKey": 9,
+      "DroidClass": "Battle",
+      "PrimaryFunction": "Heavy combat",
+      "AutonomyLevel": "Limited",
+      "MobilityRef": "Bipedal",
+      "ChassisRef": "Armored",
+      "SensorSuiteRef": "Standard",
+      "LanguageCapabilitiesRef": "Binary",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "014_DimDroidModel.json"
+    },
+    {
+      "DroidModelGuid": "9674e3fd-9a65-498a-324b-80fe3901c2aa",
+      "TechAssetKey": 10,
+      "DroidClass": "Droideka",
+      "PrimaryFunction": "Assault and defense",
+      "AutonomyLevel": "Full",
+      "MobilityRef": "Wheel/tripod",
+      "ChassisRef": "Spherical",
+      "SensorSuiteRef": "Enhanced",
+      "LanguageCapabilitiesRef": "Binary",
+      "Notes": "Synthetic seed data",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "014_DimDroidModel.json"
+    },
+    {
+      "DroidModelGuid": "0f6afbec-0117-4e89-a403-a98069a81d1c",
+      "TechAssetKey": 58,
+      "DroidClass": "Combat",
+      "PrimaryFunction": "Combat",
+      "AutonomyLevel": "High",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "014_DimDroidModel.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "DroidModelGuid": "75f8ed4f-9142-4e5d-9063-8d96e1490cb2",
+      "TechAssetKey": 59,
+      "DroidClass": "Combat",
+      "PrimaryFunction": "Combat",
+      "AutonomyLevel": "High",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "014_DimDroidModel.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "DroidModelGuid": "62666bfb-94e3-4b22-a7e2-a7e5ef59148c",
+      "TechAssetKey": 60,
+      "DroidClass": "Combat",
+      "PrimaryFunction": "Combat",
+      "AutonomyLevel": "High",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "014_DimDroidModel.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "DroidModelGuid": "f871a7e3-81e2-47a0-b560-5e04421e68f4",
+      "TechAssetKey": 61,
+      "DroidClass": "Utility",
+      "PrimaryFunction": "Support",
+      "AutonomyLevel": "High",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "014_DimDroidModel.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "DroidModelGuid": "fab898a7-4a6c-4b75-a5c5-0c4804a038e9",
+      "TechAssetKey": 62,
+      "DroidClass": "Combat",
+      "PrimaryFunction": "Combat",
+      "AutonomyLevel": "High",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "014_DimDroidModel.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "DroidModelGuid": "42c9003d-3d60-4db7-bc26-515a346a4391",
+      "TechAssetKey": 63,
+      "DroidClass": "Utility",
+      "PrimaryFunction": "Support",
+      "AutonomyLevel": "High",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "014_DimDroidModel.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "DroidModelGuid": "6d878867-e5a8-43e1-838d-22b687a206e7",
+      "TechAssetKey": 64,
+      "DroidClass": "Utility",
+      "PrimaryFunction": "Support",
+      "AutonomyLevel": "High",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "014_DimDroidModel.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "DroidModelGuid": "d3438f20-ab8f-4e7b-bc75-c06d3125c715",
+      "TechAssetKey": 65,
+      "DroidClass": "Utility",
+      "PrimaryFunction": "Support",
+      "AutonomyLevel": "High",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "014_DimDroidModel.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "DroidModelGuid": "893fcebc-5401-4ce2-96d2-d1d18df05e9f",
+      "TechAssetKey": 66,
+      "DroidClass": "Utility",
+      "PrimaryFunction": "Support",
+      "AutonomyLevel": "High",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "014_DimDroidModel.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "DroidModelGuid": "ec76ae24-9700-41e7-8839-9fb040aa97dc",
+      "TechAssetKey": 67,
+      "DroidClass": "Utility",
+      "PrimaryFunction": "Support",
+      "AutonomyLevel": "High",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "014_DimDroidModel.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    }
+  ]
+}

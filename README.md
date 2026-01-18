@@ -92,6 +92,40 @@ Users are responsible for complying with the terms of service of any external da
 
 ---
 
+## Quick Start with Docker
+
+The fastest way to get started is with Docker Desktop. With just one command, you can spin up SQL Server with a fully seeded database:
+
+```bash
+# 1. Copy environment file and set your password
+cp .env.example .env
+# Edit .env and set MSSQL_SA_PASSWORD
+
+# 2. Start everything
+docker compose up --build
+```
+
+This will:
+- Start SQL Server 2022 Developer Edition
+- Create the database and all tables
+- Load seed data automatically
+
+**Requirements:** Docker Desktop only (no SQL Server or Python installation needed)
+
+📖 **[Full Docker Setup Guide →](docs/runbooks/docker_local_dev.md)**
+
+---
+
+## Getting Started (Docker)
+
+The Docker runbook is the single source of truth for standing up the stack on Windows:
+
+- `docs/runbooks/docker_local_dev.md`
+
+It includes a happy-path quickstart, detailed steps, troubleshooting, and cleanup notes.
+
+---
+
 ## Learning & exercise focus
 
 This repo is intentionally structured so that:
