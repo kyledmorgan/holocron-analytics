@@ -116,6 +116,12 @@ This will:
 
 ---
 
+## Documentation Index
+
+For a complete navigational guide to all documentation in this repository, see the **[Documentation Index](docs/DOCS_INDEX.md)**. It provides quick links to essential docs, topic-based navigation, and a full inventory of all Markdown files.
+
+---
+
 ## Getting Started (Docker)
 
 The Docker runbook is the single source of truth for standing up the stack on Windows:
