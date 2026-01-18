@@ -575,6 +575,81 @@
       "Notes": "Synthetic seed data",
       "SourceSystem": "seed_loader",
       "SourceRef": "018_DimOrganization.json"
+    },
+    {
+      "OrganizationGuid": "0beadf04-d34e-4983-8fd6-146f888be68d",
+      "EntityKey": 571,
+      "OrgType": "Research",
+      "Scope": "Sector",
+      "AlignmentRef": "Dark",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "018_DimOrganization.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "OrganizationGuid": "0b6352d7-55db-4c19-b7fc-fa90f9a88030",
+      "EntityKey": 572,
+      "OrgType": "Research",
+      "Scope": "Sector",
+      "AlignmentRef": "Dark",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "018_DimOrganization.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "OrganizationGuid": "6d40328d-9924-4ccd-9738-a2242cf5d5dd",
+      "EntityKey": 573,
+      "OrgType": "Military",
+      "Scope": "Sector",
+      "AlignmentRef": "Light",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "018_DimOrganization.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "OrganizationGuid": "73896b34-8264-437e-b518-dad946c65ab7",
+      "EntityKey": 574,
+      "OrgType": "Military",
+      "Scope": "Unit",
+      "AlignmentRef": "Light",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "018_DimOrganization.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "OrganizationGuid": "1b9efde4-a315-4617-88ea-7338162b3017",
+      "EntityKey": 575,
+      "OrgType": "Military",
+      "Scope": "Unit",
+      "AlignmentRef": "Dark",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "018_DimOrganization.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
     }
   ]
 }

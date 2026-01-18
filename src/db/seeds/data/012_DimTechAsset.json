@@ -383,6 +383,1788 @@
       "Notes": "Synthetic seed data",
       "SourceSystem": "seed_loader",
       "SourceRef": "012_DimTechAsset.json"
+    },
+    {
+      "TechAssetGuid": "1d4db7cc-de5d-4198-bc4b-87731e946417",
+      "FranchiseKey": 1,
+      "AssetType": "Weapon",
+      "ModelName": "Bryar Pistol",
+      "ModelNameNormalized": "bryar pistol",
+      "ManufacturerRef": "Blaster manufacturers",
+      "EraRef": "Reign of the Empire",
+      "TechLevelRef": "Advanced",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "012_DimTechAsset.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechAssetGuid": "a9ca728f-d2da-4f88-a209-ccbbce1dbda8",
+      "FranchiseKey": 1,
+      "AssetType": "Weapon",
+      "ModelName": "DL-44 Blaster Pistol",
+      "ModelNameNormalized": "dl-44 blaster pistol",
+      "ManufacturerRef": "Blaster manufacturers",
+      "EraRef": "Reign of the Empire",
+      "TechLevelRef": "Advanced",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "012_DimTechAsset.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechAssetGuid": "d21e0b94-3277-493c-9404-1caf0c28715b",
+      "FranchiseKey": 1,
+      "AssetType": "Weapon",
+      "ModelName": "Imperial Repeater",
+      "ModelNameNormalized": "imperial repeater",
+      "ManufacturerRef": "Blaster manufacturers",
+      "EraRef": "Reign of the Empire",
+      "TechLevelRef": "Advanced",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "012_DimTechAsset.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechAssetGuid": "21447297-f48f-4dd3-ba63-9a61a371ede9",
+      "FranchiseKey": 1,
+      "AssetType": "Weapon",
+      "ModelName": "Concussion Rifle",
+      "ModelNameNormalized": "concussion rifle",
+      "ManufacturerRef": "Blaster manufacturers",
+      "EraRef": "Reign of the Empire",
+      "TechLevelRef": "Advanced",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "012_DimTechAsset.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechAssetGuid": "93431495-7269-4e87-88b5-e1ae0424c61f",
+      "FranchiseKey": 1,
+      "AssetType": "Weapon",
+      "ModelName": "Assault Cannon",
+      "ModelNameNormalized": "assault cannon",
+      "ManufacturerRef": "Blaster manufacturers",
+      "EraRef": "Reign of the Empire",
+      "TechLevelRef": "Advanced",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "012_DimTechAsset.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechAssetGuid": "7106015c-f5fa-4c09-9c6b-88c74e1f9482",
+      "FranchiseKey": 1,
+      "AssetType": "Weapon",
+      "ModelName": "Thermal Detonator Launcher",
+      "ModelNameNormalized": "thermal detonator launcher",
+      "ManufacturerRef": "Blaster manufacturers",
+      "EraRef": "Reign of the Empire",
+      "TechLevelRef": "Advanced",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "012_DimTechAsset.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechAssetGuid": "243f4940-5542-4e3c-aa0c-68de82ddc4e4",
+      "FranchiseKey": 1,
+      "AssetType": "Weapon",
+      "ModelName": "Mortar Launcher",
+      "ModelNameNormalized": "mortar launcher",
+      "ManufacturerRef": "Blaster manufacturers",
+      "EraRef": "Reign of the Empire",
+      "TechLevelRef": "Advanced",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "012_DimTechAsset.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechAssetGuid": "0aa7fb2c-2e34-4f05-b7fd-6cbd89b4ccfc",
+      "FranchiseKey": 1,
+      "AssetType": "Weapon",
+      "ModelName": "Heavy Blaster",
+      "ModelNameNormalized": "heavy blaster",
+      "ManufacturerRef": "Blaster manufacturers",
+      "EraRef": "Reign of the Empire",
+      "TechLevelRef": "Advanced",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "012_DimTechAsset.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechAssetGuid": "b2f712be-0387-4040-ae87-ae93fab3fc03",
+      "FranchiseKey": 1,
+      "AssetType": "Weapon",
+      "ModelName": "Blaster Carbine",
+      "ModelNameNormalized": "blaster carbine",
+      "ManufacturerRef": "Blaster manufacturers",
+      "EraRef": "Reign of the Empire",
+      "TechLevelRef": "Advanced",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "012_DimTechAsset.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechAssetGuid": "c759f929-d46d-4ccb-b39f-b742e57f7f4d",
+      "FranchiseKey": 1,
+      "AssetType": "Weapon",
+      "ModelName": "Blaster Pistol Mk I",
+      "ModelNameNormalized": "blaster pistol mk i",
+      "ManufacturerRef": "Blaster manufacturers",
+      "EraRef": "Reign of the Empire",
+      "TechLevelRef": "Advanced",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "012_DimTechAsset.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechAssetGuid": "ea139257-7e6d-43dd-bda9-07c029e06dec",
+      "FranchiseKey": 1,
+      "AssetType": "Weapon",
+      "ModelName": "Blaster Pistol Mk II",
+      "ModelNameNormalized": "blaster pistol mk ii",
+      "ManufacturerRef": "Blaster manufacturers",
+      "EraRef": "Reign of the Empire",
+      "TechLevelRef": "Advanced",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "012_DimTechAsset.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechAssetGuid": "40ceed32-b8d5-43ae-b16d-f9e99d9d369b",
+      "FranchiseKey": 1,
+      "AssetType": "Weapon",
+      "ModelName": "Plasma Rifle",
+      "ModelNameNormalized": "plasma rifle",
+      "ManufacturerRef": "Blaster manufacturers",
+      "EraRef": "Reign of the Empire",
+      "TechLevelRef": "Advanced",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "012_DimTechAsset.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechAssetGuid": "9e4034fe-9b30-4469-a783-b544f619739f",
+      "FranchiseKey": 1,
+      "AssetType": "Weapon",
+      "ModelName": "Ion Rifle",
+      "ModelNameNormalized": "ion rifle",
+      "ManufacturerRef": "Blaster manufacturers",
+      "EraRef": "Reign of the Empire",
+      "TechLevelRef": "Advanced",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "012_DimTechAsset.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechAssetGuid": "b5a1c58b-68a0-4413-9e0b-7f6d7273ac69",
+      "FranchiseKey": 1,
+      "AssetType": "Weapon",
+      "ModelName": "Repeater Cannon",
+      "ModelNameNormalized": "repeater cannon",
+      "ManufacturerRef": "Blaster manufacturers",
+      "EraRef": "Reign of the Empire",
+      "TechLevelRef": "Advanced",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "012_DimTechAsset.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechAssetGuid": "8d67b88f-4316-477a-b0ae-eced798f4898",
+      "FranchiseKey": 1,
+      "AssetType": "Weapon",
+      "ModelName": "Sniper Blaster",
+      "ModelNameNormalized": "sniper blaster",
+      "ManufacturerRef": "Blaster manufacturers",
+      "EraRef": "Reign of the Empire",
+      "TechLevelRef": "Advanced",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "012_DimTechAsset.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechAssetGuid": "3fd0c590-a3bb-4c29-a6e9-f9648b6b0fc0",
+      "FranchiseKey": 1,
+      "AssetType": "Weapon",
+      "ModelName": "Vibroblade",
+      "ModelNameNormalized": "vibroblade",
+      "ManufacturerRef": "Blaster manufacturers",
+      "EraRef": "Reign of the Empire",
+      "TechLevelRef": "Advanced",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "012_DimTechAsset.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechAssetGuid": "2650578d-a086-4a95-97ef-1162bd56c325",
+      "FranchiseKey": 1,
+      "AssetType": "Weapon",
+      "ModelName": "Stun Baton",
+      "ModelNameNormalized": "stun baton",
+      "ManufacturerRef": "Blaster manufacturers",
+      "EraRef": "Reign of the Empire",
+      "TechLevelRef": "Advanced",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "012_DimTechAsset.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechAssetGuid": "ef1fed30-bc36-4ebb-9b8d-5886114b5450",
+      "FranchiseKey": 1,
+      "AssetType": "Weapon",
+      "ModelName": "Blast Rifle",
+      "ModelNameNormalized": "blast rifle",
+      "ManufacturerRef": "Blaster manufacturers",
+      "EraRef": "Reign of the Empire",
+      "TechLevelRef": "Advanced",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "012_DimTechAsset.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechAssetGuid": "fee39051-a72f-4b0a-a497-942ff09ad272",
+      "FranchiseKey": 1,
+      "AssetType": "Weapon",
+      "ModelName": "Pulse Cannon",
+      "ModelNameNormalized": "pulse cannon",
+      "ManufacturerRef": "Blaster manufacturers",
+      "EraRef": "Reign of the Empire",
+      "TechLevelRef": "Advanced",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "012_DimTechAsset.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechAssetGuid": "ed8b0608-c190-4ac9-9ecf-685e85a54059",
+      "FranchiseKey": 1,
+      "AssetType": "Explosive",
+      "ModelName": "Thermal Detonator",
+      "ModelNameNormalized": "thermal detonator",
+      "ManufacturerRef": "Imperial ordnance",
+      "EraRef": "Reign of the Empire",
+      "TechLevelRef": "Advanced",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "012_DimTechAsset.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechAssetGuid": "62a31da5-9c48-4ea7-bc65-ebdbf0d6d695",
+      "FranchiseKey": 1,
+      "AssetType": "Explosive",
+      "ModelName": "Detonator Mine",
+      "ModelNameNormalized": "detonator mine",
+      "ManufacturerRef": "Imperial ordnance",
+      "EraRef": "Reign of the Empire",
+      "TechLevelRef": "Advanced",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "012_DimTechAsset.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechAssetGuid": "0fac6cd3-908d-4406-838f-750c6bf5b9f0",
+      "FranchiseKey": 1,
+      "AssetType": "Explosive",
+      "ModelName": "Baradium Charge",
+      "ModelNameNormalized": "baradium charge",
+      "ManufacturerRef": "Imperial ordnance",
+      "EraRef": "Reign of the Empire",
+      "TechLevelRef": "Advanced",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "012_DimTechAsset.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechAssetGuid": "836da7de-038d-4ac6-9bc4-9a22a6b95889",
+      "FranchiseKey": 1,
+      "AssetType": "Explosive",
+      "ModelName": "Remote Det Pack",
+      "ModelNameNormalized": "remote det pack",
+      "ManufacturerRef": "Imperial ordnance",
+      "EraRef": "Reign of the Empire",
+      "TechLevelRef": "Advanced",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "012_DimTechAsset.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechAssetGuid": "bf12be8f-691e-406b-9dd3-3ee6bd4c8abd",
+      "FranchiseKey": 1,
+      "AssetType": "Explosive",
+      "ModelName": "Timed Det Pack",
+      "ModelNameNormalized": "timed det pack",
+      "ManufacturerRef": "Imperial ordnance",
+      "EraRef": "Reign of the Empire",
+      "TechLevelRef": "Advanced",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "012_DimTechAsset.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechAssetGuid": "0171ad67-6d42-4d48-a01c-d66f1edb8890",
+      "FranchiseKey": 1,
+      "AssetType": "Explosive",
+      "ModelName": "Proximity Mine",
+      "ModelNameNormalized": "proximity mine",
+      "ManufacturerRef": "Imperial ordnance",
+      "EraRef": "Reign of the Empire",
+      "TechLevelRef": "Advanced",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "012_DimTechAsset.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechAssetGuid": "bb045f64-0c68-40cc-bdce-00df447cb990",
+      "FranchiseKey": 1,
+      "AssetType": "Explosive",
+      "ModelName": "Concussion Grenade",
+      "ModelNameNormalized": "concussion grenade",
+      "ManufacturerRef": "Imperial ordnance",
+      "EraRef": "Reign of the Empire",
+      "TechLevelRef": "Advanced",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "012_DimTechAsset.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechAssetGuid": "cf6e2a36-fb70-429d-b36e-00025ad597a4",
+      "FranchiseKey": 1,
+      "AssetType": "Explosive",
+      "ModelName": "Satchel Charge",
+      "ModelNameNormalized": "satchel charge",
+      "ManufacturerRef": "Imperial ordnance",
+      "EraRef": "Reign of the Empire",
+      "TechLevelRef": "Advanced",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "012_DimTechAsset.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechAssetGuid": "f1c7e20e-b40d-425d-abcb-88b52e48f8e3",
+      "FranchiseKey": 1,
+      "AssetType": "Explosive",
+      "ModelName": "Plasma Charge",
+      "ModelNameNormalized": "plasma charge",
+      "ManufacturerRef": "Imperial ordnance",
+      "EraRef": "Reign of the Empire",
+      "TechLevelRef": "Advanced",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "012_DimTechAsset.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechAssetGuid": "ce1b5fc5-9c80-4567-98bf-f78cf990e372",
+      "FranchiseKey": 1,
+      "AssetType": "Explosive",
+      "ModelName": "Ion Charge",
+      "ModelNameNormalized": "ion charge",
+      "ManufacturerRef": "Imperial ordnance",
+      "EraRef": "Reign of the Empire",
+      "TechLevelRef": "Advanced",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "012_DimTechAsset.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechAssetGuid": "48f9087b-7552-4101-8fce-6468e1095eb2",
+      "FranchiseKey": 1,
+      "AssetType": "Droid",
+      "ModelName": "Dark Trooper Phase I",
+      "ModelNameNormalized": "dark trooper phase i",
+      "ManufacturerRef": "Imperial factories",
+      "EraRef": "Reign of the Empire",
+      "TechLevelRef": "Advanced",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "012_DimTechAsset.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechAssetGuid": "8f65d8de-1c37-4628-8a86-f8c418b06d38",
+      "FranchiseKey": 1,
+      "AssetType": "Droid",
+      "ModelName": "Dark Trooper Phase II",
+      "ModelNameNormalized": "dark trooper phase ii",
+      "ManufacturerRef": "Imperial factories",
+      "EraRef": "Reign of the Empire",
+      "TechLevelRef": "Advanced",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "012_DimTechAsset.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechAssetGuid": "32d658f3-7f0c-4dbb-b416-2367411172ee",
+      "FranchiseKey": 1,
+      "AssetType": "Droid",
+      "ModelName": "Dark Trooper Phase III",
+      "ModelNameNormalized": "dark trooper phase iii",
+      "ManufacturerRef": "Imperial factories",
+      "EraRef": "Reign of the Empire",
+      "TechLevelRef": "Advanced",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "012_DimTechAsset.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechAssetGuid": "44ffa806-8160-4105-a574-21fc91f70f67",
+      "FranchiseKey": 1,
+      "AssetType": "Droid",
+      "ModelName": "Imperial Probe Droid",
+      "ModelNameNormalized": "imperial probe droid",
+      "ManufacturerRef": "Imperial factories",
+      "EraRef": "Reign of the Empire",
+      "TechLevelRef": "Advanced",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "012_DimTechAsset.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechAssetGuid": "541164cd-a74f-4bc0-a44a-81432647c1fd",
+      "FranchiseKey": 1,
+      "AssetType": "Droid",
+      "ModelName": "Imperial Sentry Droid",
+      "ModelNameNormalized": "imperial sentry droid",
+      "ManufacturerRef": "Imperial factories",
+      "EraRef": "Reign of the Empire",
+      "TechLevelRef": "Advanced",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "012_DimTechAsset.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechAssetGuid": "c6f18d63-3509-424a-bb44-921156c263f1",
+      "FranchiseKey": 1,
+      "AssetType": "Droid",
+      "ModelName": "Maintenance Droid",
+      "ModelNameNormalized": "maintenance droid",
+      "ManufacturerRef": "Imperial factories",
+      "EraRef": "Reign of the Empire",
+      "TechLevelRef": "Advanced",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "012_DimTechAsset.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechAssetGuid": "72bbf184-4b6a-479f-be23-ce1fb136b16c",
+      "FranchiseKey": 1,
+      "AssetType": "Droid",
+      "ModelName": "Security Droid",
+      "ModelNameNormalized": "security droid",
+      "ManufacturerRef": "Imperial factories",
+      "EraRef": "Reign of the Empire",
+      "TechLevelRef": "Advanced",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "012_DimTechAsset.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechAssetGuid": "525cec41-080e-419c-b2d4-337bbc48f510",
+      "FranchiseKey": 1,
+      "AssetType": "Droid",
+      "ModelName": "Cargo Handler Droid",
+      "ModelNameNormalized": "cargo handler droid",
+      "ManufacturerRef": "Imperial factories",
+      "EraRef": "Reign of the Empire",
+      "TechLevelRef": "Advanced",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "012_DimTechAsset.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechAssetGuid": "3046f97c-2aa6-4f06-b717-f76d9172907a",
+      "FranchiseKey": 1,
+      "AssetType": "Droid",
+      "ModelName": "Repair Droid",
+      "ModelNameNormalized": "repair droid",
+      "ManufacturerRef": "Imperial factories",
+      "EraRef": "Reign of the Empire",
+      "TechLevelRef": "Advanced",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "012_DimTechAsset.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechAssetGuid": "59d0416a-2b2f-45a5-99b7-038b76c1d284",
+      "FranchiseKey": 1,
+      "AssetType": "Droid",
+      "ModelName": "Communications Droid",
+      "ModelNameNormalized": "communications droid",
+      "ManufacturerRef": "Imperial factories",
+      "EraRef": "Reign of the Empire",
+      "TechLevelRef": "Advanced",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "012_DimTechAsset.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechAssetGuid": "f187545f-143b-4a34-b27f-52deec31f18b",
+      "FranchiseKey": 1,
+      "AssetType": "Starship",
+      "ModelName": "Arc Hammer",
+      "ModelNameNormalized": "arc hammer",
+      "ManufacturerRef": "Imperial shipyards",
+      "EraRef": "Reign of the Empire",
+      "TechLevelRef": "Advanced",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "012_DimTechAsset.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechAssetGuid": "de788b72-9c5b-486d-bca7-bc1c982e9c6f",
+      "FranchiseKey": 1,
+      "AssetType": "Starship",
+      "ModelName": "Lambda-class Shuttle",
+      "ModelNameNormalized": "lambda-class shuttle",
+      "ManufacturerRef": "Imperial shipyards",
+      "EraRef": "Reign of the Empire",
+      "TechLevelRef": "Advanced",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "012_DimTechAsset.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechAssetGuid": "c3133fa3-ba38-434d-bff0-17ec4dbb0f4c",
+      "FranchiseKey": 1,
+      "AssetType": "Starship",
+      "ModelName": "Imperial Transport",
+      "ModelNameNormalized": "imperial transport",
+      "ManufacturerRef": "Imperial shipyards",
+      "EraRef": "Reign of the Empire",
+      "TechLevelRef": "Advanced",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "012_DimTechAsset.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechAssetGuid": "66eb2d9f-f7cb-445c-9b10-4a73dd3e4317",
+      "FranchiseKey": 1,
+      "AssetType": "Starship",
+      "ModelName": "Imperial Patrol Craft",
+      "ModelNameNormalized": "imperial patrol craft",
+      "ManufacturerRef": "Imperial shipyards",
+      "EraRef": "Reign of the Empire",
+      "TechLevelRef": "Advanced",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "012_DimTechAsset.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechAssetGuid": "ea118563-2f2c-44b3-afa1-dee35a580f1a",
+      "FranchiseKey": 1,
+      "AssetType": "Starship",
+      "ModelName": "Imperial Gunboat",
+      "ModelNameNormalized": "imperial gunboat",
+      "ManufacturerRef": "Imperial shipyards",
+      "EraRef": "Reign of the Empire",
+      "TechLevelRef": "Advanced",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "012_DimTechAsset.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechAssetGuid": "3f065107-d00e-401a-ae73-62a160da3477",
+      "FranchiseKey": 1,
+      "AssetType": "Starship",
+      "ModelName": "Rebel Transport Shuttle",
+      "ModelNameNormalized": "rebel transport shuttle",
+      "ManufacturerRef": "Imperial shipyards",
+      "EraRef": "Reign of the Empire",
+      "TechLevelRef": "Advanced",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "012_DimTechAsset.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechAssetGuid": "81dfc191-a3ba-49cf-bd1e-c803e0fe918d",
+      "FranchiseKey": 1,
+      "AssetType": "Vehicle",
+      "ModelName": "Imperial Landing Craft",
+      "ModelNameNormalized": "imperial landing craft",
+      "ManufacturerRef": "Imperial shipyards",
+      "EraRef": "Reign of the Empire",
+      "TechLevelRef": "Advanced",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "012_DimTechAsset.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechAssetGuid": "ed40d507-8006-4146-81a4-c682ac221514",
+      "FranchiseKey": 1,
+      "AssetType": "Vehicle",
+      "ModelName": "Cargo Skiff",
+      "ModelNameNormalized": "cargo skiff",
+      "ManufacturerRef": "Imperial shipyards",
+      "EraRef": "Reign of the Empire",
+      "TechLevelRef": "Advanced",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "012_DimTechAsset.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechAssetGuid": "3a375785-3713-4e7c-b25a-30848d2a29d7",
+      "FranchiseKey": 1,
+      "AssetType": "Vehicle",
+      "ModelName": "Assault Skiff",
+      "ModelNameNormalized": "assault skiff",
+      "ManufacturerRef": "Imperial shipyards",
+      "EraRef": "Reign of the Empire",
+      "TechLevelRef": "Advanced",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "012_DimTechAsset.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechAssetGuid": "6a38d1b5-5763-4de2-844c-3a1de6a5f109",
+      "FranchiseKey": 1,
+      "AssetType": "Vehicle",
+      "ModelName": "Imperial Hover Tank",
+      "ModelNameNormalized": "imperial hover tank",
+      "ManufacturerRef": "Imperial shipyards",
+      "EraRef": "Reign of the Empire",
+      "TechLevelRef": "Advanced",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "012_DimTechAsset.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechAssetGuid": "47519147-62cc-4314-a58a-1a09d421196a",
+      "FranchiseKey": 1,
+      "AssetType": "SecuritySystem",
+      "ModelName": "Security Console Type A",
+      "ModelNameNormalized": "security console type a",
+      "ManufacturerRef": "Imperial facilities",
+      "EraRef": "Reign of the Empire",
+      "TechLevelRef": "Advanced",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "012_DimTechAsset.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechAssetGuid": "c9b33f69-468c-4668-9f4c-ec2d3d803616",
+      "FranchiseKey": 1,
+      "AssetType": "SecuritySystem",
+      "ModelName": "Security Console Type B",
+      "ModelNameNormalized": "security console type b",
+      "ManufacturerRef": "Imperial facilities",
+      "EraRef": "Reign of the Empire",
+      "TechLevelRef": "Advanced",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "012_DimTechAsset.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechAssetGuid": "83e46740-f0af-43b4-98f2-ce661b290438",
+      "FranchiseKey": 1,
+      "AssetType": "SecuritySystem",
+      "ModelName": "Security Console Type C",
+      "ModelNameNormalized": "security console type c",
+      "ManufacturerRef": "Imperial facilities",
+      "EraRef": "Reign of the Empire",
+      "TechLevelRef": "Advanced",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "012_DimTechAsset.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechAssetGuid": "57ceb8fb-bee9-4a33-92f6-4a61f59ed074",
+      "FranchiseKey": 1,
+      "AssetType": "SecuritySystem",
+      "ModelName": "Security Console Type D",
+      "ModelNameNormalized": "security console type d",
+      "ManufacturerRef": "Imperial facilities",
+      "EraRef": "Reign of the Empire",
+      "TechLevelRef": "Advanced",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "012_DimTechAsset.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechAssetGuid": "5afaf170-aa7f-420c-b68d-93fd16fe340c",
+      "FranchiseKey": 1,
+      "AssetType": "SecuritySystem",
+      "ModelName": "Security Console Type E",
+      "ModelNameNormalized": "security console type e",
+      "ManufacturerRef": "Imperial facilities",
+      "EraRef": "Reign of the Empire",
+      "TechLevelRef": "Advanced",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "012_DimTechAsset.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechAssetGuid": "998ede7e-fd67-43bb-8f7e-11da2c7a7d1e",
+      "FranchiseKey": 1,
+      "AssetType": "SecuritySystem",
+      "ModelName": "Security Console Type F",
+      "ModelNameNormalized": "security console type f",
+      "ManufacturerRef": "Imperial facilities",
+      "EraRef": "Reign of the Empire",
+      "TechLevelRef": "Advanced",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "012_DimTechAsset.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechAssetGuid": "1fe6b3bf-80f6-4fec-879a-4b5a210716cb",
+      "FranchiseKey": 1,
+      "AssetType": "SecuritySystem",
+      "ModelName": "Security Console Type G",
+      "ModelNameNormalized": "security console type g",
+      "ManufacturerRef": "Imperial facilities",
+      "EraRef": "Reign of the Empire",
+      "TechLevelRef": "Advanced",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "012_DimTechAsset.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechAssetGuid": "7da1235a-307d-42d2-a08b-94204c9876f2",
+      "FranchiseKey": 1,
+      "AssetType": "SecuritySystem",
+      "ModelName": "Security Console Type H",
+      "ModelNameNormalized": "security console type h",
+      "ManufacturerRef": "Imperial facilities",
+      "EraRef": "Reign of the Empire",
+      "TechLevelRef": "Advanced",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "012_DimTechAsset.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechAssetGuid": "88cc8836-2ca0-4dc7-8a92-1c298957447b",
+      "FranchiseKey": 1,
+      "AssetType": "SecuritySystem",
+      "ModelName": "Security Console Type I",
+      "ModelNameNormalized": "security console type i",
+      "ManufacturerRef": "Imperial facilities",
+      "EraRef": "Reign of the Empire",
+      "TechLevelRef": "Advanced",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "012_DimTechAsset.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechAssetGuid": "6da6194c-2d0d-438f-a93f-c78c1918f18c",
+      "FranchiseKey": 1,
+      "AssetType": "SecuritySystem",
+      "ModelName": "Security Console Type J",
+      "ModelNameNormalized": "security console type j",
+      "ManufacturerRef": "Imperial facilities",
+      "EraRef": "Reign of the Empire",
+      "TechLevelRef": "Advanced",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "012_DimTechAsset.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechAssetGuid": "7a242d69-bb8b-4143-bfea-50c7880c8de0",
+      "FranchiseKey": 1,
+      "AssetType": "SecuritySystem",
+      "ModelName": "Security Console Type K",
+      "ModelNameNormalized": "security console type k",
+      "ManufacturerRef": "Imperial facilities",
+      "EraRef": "Reign of the Empire",
+      "TechLevelRef": "Advanced",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "012_DimTechAsset.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechAssetGuid": "655cd30e-ebd2-4b8b-8192-e16eb0a80b61",
+      "FranchiseKey": 1,
+      "AssetType": "SecuritySystem",
+      "ModelName": "Security Console Type L",
+      "ModelNameNormalized": "security console type l",
+      "ManufacturerRef": "Imperial facilities",
+      "EraRef": "Reign of the Empire",
+      "TechLevelRef": "Advanced",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "012_DimTechAsset.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechAssetGuid": "617b4d7f-904e-47c4-b6cf-aed99b921307",
+      "FranchiseKey": 1,
+      "AssetType": "SecuritySystem",
+      "ModelName": "Security Console Type M",
+      "ModelNameNormalized": "security console type m",
+      "ManufacturerRef": "Imperial facilities",
+      "EraRef": "Reign of the Empire",
+      "TechLevelRef": "Advanced",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "012_DimTechAsset.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechAssetGuid": "e4a5f508-52dc-40fd-88c3-18151e18549f",
+      "FranchiseKey": 1,
+      "AssetType": "SecuritySystem",
+      "ModelName": "Security Console Type N",
+      "ModelNameNormalized": "security console type n",
+      "ManufacturerRef": "Imperial facilities",
+      "EraRef": "Reign of the Empire",
+      "TechLevelRef": "Advanced",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "012_DimTechAsset.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechAssetGuid": "24ab7196-9a3b-4549-9f57-72ba052c1991",
+      "FranchiseKey": 1,
+      "AssetType": "SecuritySystem",
+      "ModelName": "Security Console Type O",
+      "ModelNameNormalized": "security console type o",
+      "ManufacturerRef": "Imperial facilities",
+      "EraRef": "Reign of the Empire",
+      "TechLevelRef": "Advanced",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "012_DimTechAsset.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechAssetGuid": "4c53cc59-d59b-4c97-98a8-579c45b6d2ee",
+      "FranchiseKey": 1,
+      "AssetType": "SecuritySystem",
+      "ModelName": "Security Console Type P",
+      "ModelNameNormalized": "security console type p",
+      "ManufacturerRef": "Imperial facilities",
+      "EraRef": "Reign of the Empire",
+      "TechLevelRef": "Advanced",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "012_DimTechAsset.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechAssetGuid": "4713d688-0471-4f5b-bb4b-d8d866129c50",
+      "FranchiseKey": 1,
+      "AssetType": "SecuritySystem",
+      "ModelName": "Security Console Type Q",
+      "ModelNameNormalized": "security console type q",
+      "ManufacturerRef": "Imperial facilities",
+      "EraRef": "Reign of the Empire",
+      "TechLevelRef": "Advanced",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "012_DimTechAsset.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechAssetGuid": "569d107b-399f-4beb-aa8d-992503d0d308",
+      "FranchiseKey": 1,
+      "AssetType": "SecuritySystem",
+      "ModelName": "Security Console Type R",
+      "ModelNameNormalized": "security console type r",
+      "ManufacturerRef": "Imperial facilities",
+      "EraRef": "Reign of the Empire",
+      "TechLevelRef": "Advanced",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "012_DimTechAsset.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechAssetGuid": "e89cf43a-db93-47f9-a240-1a7204c3b7db",
+      "FranchiseKey": 1,
+      "AssetType": "SecuritySystem",
+      "ModelName": "Security Console Type S",
+      "ModelNameNormalized": "security console type s",
+      "ManufacturerRef": "Imperial facilities",
+      "EraRef": "Reign of the Empire",
+      "TechLevelRef": "Advanced",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "012_DimTechAsset.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechAssetGuid": "cc701e5f-5b9e-4de7-907f-46e99d361060",
+      "FranchiseKey": 1,
+      "AssetType": "SecuritySystem",
+      "ModelName": "Security Console Type T",
+      "ModelNameNormalized": "security console type t",
+      "ManufacturerRef": "Imperial facilities",
+      "EraRef": "Reign of the Empire",
+      "TechLevelRef": "Advanced",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "012_DimTechAsset.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechAssetGuid": "89af9c81-e0e9-4ad1-ba50-20ffe11d7768",
+      "FranchiseKey": 1,
+      "AssetType": "Armor",
+      "ModelName": "Stormtrooper Armor",
+      "ModelNameNormalized": "stormtrooper armor",
+      "ManufacturerRef": "Imperial supply",
+      "EraRef": "Reign of the Empire",
+      "TechLevelRef": "Advanced",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "012_DimTechAsset.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechAssetGuid": "4f9ddea7-cb1c-4523-87db-a59be7266ef2",
+      "FranchiseKey": 1,
+      "AssetType": "Armor",
+      "ModelName": "Imperial Officer Armor",
+      "ModelNameNormalized": "imperial officer armor",
+      "ManufacturerRef": "Imperial supply",
+      "EraRef": "Reign of the Empire",
+      "TechLevelRef": "Advanced",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "012_DimTechAsset.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechAssetGuid": "8de763f3-c1a7-47f0-ae66-aace13e64b18",
+      "FranchiseKey": 1,
+      "AssetType": "Armor",
+      "ModelName": "Dark Trooper Armor Phase I",
+      "ModelNameNormalized": "dark trooper armor phase i",
+      "ManufacturerRef": "Imperial supply",
+      "EraRef": "Reign of the Empire",
+      "TechLevelRef": "Advanced",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "012_DimTechAsset.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechAssetGuid": "71bae6aa-bf0d-4204-8201-e5ffe32e85e3",
+      "FranchiseKey": 1,
+      "AssetType": "Armor",
+      "ModelName": "Dark Trooper Armor Phase II",
+      "ModelNameNormalized": "dark trooper armor phase ii",
+      "ManufacturerRef": "Imperial supply",
+      "EraRef": "Reign of the Empire",
+      "TechLevelRef": "Advanced",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "012_DimTechAsset.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechAssetGuid": "ebf8a73a-57ff-48eb-bc47-298c8ca0b086",
+      "FranchiseKey": 1,
+      "AssetType": "Armor",
+      "ModelName": "Dark Trooper Armor Phase III",
+      "ModelNameNormalized": "dark trooper armor phase iii",
+      "ManufacturerRef": "Imperial supply",
+      "EraRef": "Reign of the Empire",
+      "TechLevelRef": "Advanced",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "012_DimTechAsset.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechAssetGuid": "25aa97e6-bf28-4f4a-a731-9d3b0e85b39d",
+      "FranchiseKey": 1,
+      "AssetType": "Armor",
+      "ModelName": "Rebel Combat Armor",
+      "ModelNameNormalized": "rebel combat armor",
+      "ManufacturerRef": "Imperial supply",
+      "EraRef": "Reign of the Empire",
+      "TechLevelRef": "Advanced",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "012_DimTechAsset.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechAssetGuid": "80d3573a-6867-4b7c-9f98-268c7b0fe06b",
+      "FranchiseKey": 1,
+      "AssetType": "Armor",
+      "ModelName": "Blast Shield",
+      "ModelNameNormalized": "blast shield",
+      "ManufacturerRef": "Imperial supply",
+      "EraRef": "Reign of the Empire",
+      "TechLevelRef": "Advanced",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "012_DimTechAsset.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechAssetGuid": "40232040-4d69-4fc3-8af5-2d77a0011b92",
+      "FranchiseKey": 1,
+      "AssetType": "Armor",
+      "ModelName": "Breathing Mask",
+      "ModelNameNormalized": "breathing mask",
+      "ManufacturerRef": "Imperial supply",
+      "EraRef": "Reign of the Empire",
+      "TechLevelRef": "Advanced",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "012_DimTechAsset.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechAssetGuid": "d06cea58-26d1-44bd-b5be-2207916a45f5",
+      "FranchiseKey": 1,
+      "AssetType": "Armor",
+      "ModelName": "Power Pack",
+      "ModelNameNormalized": "power pack",
+      "ManufacturerRef": "Imperial supply",
+      "EraRef": "Reign of the Empire",
+      "TechLevelRef": "Advanced",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "012_DimTechAsset.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechAssetGuid": "cf6965bd-70fa-4ae2-9501-b2ac7c5443b4",
+      "FranchiseKey": 1,
+      "AssetType": "Armor",
+      "ModelName": "Shield Belt",
+      "ModelNameNormalized": "shield belt",
+      "ManufacturerRef": "Imperial supply",
+      "EraRef": "Reign of the Empire",
+      "TechLevelRef": "Advanced",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "012_DimTechAsset.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechAssetGuid": "9bfd929b-b0b3-4bfd-baf2-94ea176098c2",
+      "FranchiseKey": 1,
+      "AssetType": "AccessDevice",
+      "ModelName": "Access Keycard Level 1",
+      "ModelNameNormalized": "access keycard level 1",
+      "ManufacturerRef": "Imperial security",
+      "EraRef": "Reign of the Empire",
+      "TechLevelRef": "Advanced",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "012_DimTechAsset.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechAssetGuid": "6c2acdd7-7e69-4100-9bab-16dc8d1fdce9",
+      "FranchiseKey": 1,
+      "AssetType": "AccessDevice",
+      "ModelName": "Access Keycard Level 2",
+      "ModelNameNormalized": "access keycard level 2",
+      "ManufacturerRef": "Imperial security",
+      "EraRef": "Reign of the Empire",
+      "TechLevelRef": "Advanced",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "012_DimTechAsset.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechAssetGuid": "bce4a92f-4377-428d-8775-621f33ce72d2",
+      "FranchiseKey": 1,
+      "AssetType": "AccessDevice",
+      "ModelName": "Access Keycard Level 3",
+      "ModelNameNormalized": "access keycard level 3",
+      "ManufacturerRef": "Imperial security",
+      "EraRef": "Reign of the Empire",
+      "TechLevelRef": "Advanced",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "012_DimTechAsset.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechAssetGuid": "fe434f5b-eae6-4b44-aac7-2602e06d4b74",
+      "FranchiseKey": 1,
+      "AssetType": "AccessDevice",
+      "ModelName": "Access Keycard Level 4",
+      "ModelNameNormalized": "access keycard level 4",
+      "ManufacturerRef": "Imperial security",
+      "EraRef": "Reign of the Empire",
+      "TechLevelRef": "Advanced",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "012_DimTechAsset.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechAssetGuid": "84013171-4b97-4a7b-91bf-1bae6538a0f8",
+      "FranchiseKey": 1,
+      "AssetType": "AccessDevice",
+      "ModelName": "Access Keycard Level 5",
+      "ModelNameNormalized": "access keycard level 5",
+      "ManufacturerRef": "Imperial security",
+      "EraRef": "Reign of the Empire",
+      "TechLevelRef": "Advanced",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "012_DimTechAsset.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechAssetGuid": "7a13ab83-cce1-46f5-9048-18d7d629de84",
+      "FranchiseKey": 1,
+      "AssetType": "AccessDevice",
+      "ModelName": "Access Keycard Level 6",
+      "ModelNameNormalized": "access keycard level 6",
+      "ManufacturerRef": "Imperial security",
+      "EraRef": "Reign of the Empire",
+      "TechLevelRef": "Advanced",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "012_DimTechAsset.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechAssetGuid": "977d64fd-2bcc-4b98-b491-3f6b908f9f2f",
+      "FranchiseKey": 1,
+      "AssetType": "AccessDevice",
+      "ModelName": "Access Keycard Level 7",
+      "ModelNameNormalized": "access keycard level 7",
+      "ManufacturerRef": "Imperial security",
+      "EraRef": "Reign of the Empire",
+      "TechLevelRef": "Advanced",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "012_DimTechAsset.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechAssetGuid": "ab8eaaeb-c82e-4b1e-a885-37dc2ef8c63a",
+      "FranchiseKey": 1,
+      "AssetType": "AccessDevice",
+      "ModelName": "Access Keycard Level 8",
+      "ModelNameNormalized": "access keycard level 8",
+      "ManufacturerRef": "Imperial security",
+      "EraRef": "Reign of the Empire",
+      "TechLevelRef": "Advanced",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "012_DimTechAsset.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechAssetGuid": "de7ef607-bb03-4945-a7ec-eb1cbb626ee8",
+      "FranchiseKey": 1,
+      "AssetType": "AccessDevice",
+      "ModelName": "Access Keycard Level 9",
+      "ModelNameNormalized": "access keycard level 9",
+      "ManufacturerRef": "Imperial security",
+      "EraRef": "Reign of the Empire",
+      "TechLevelRef": "Advanced",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "012_DimTechAsset.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechAssetGuid": "9b480590-19f0-4f73-83bd-b3ddd3d5518f",
+      "FranchiseKey": 1,
+      "AssetType": "AccessDevice",
+      "ModelName": "Access Keycard Level 10",
+      "ModelNameNormalized": "access keycard level 10",
+      "ManufacturerRef": "Imperial security",
+      "EraRef": "Reign of the Empire",
+      "TechLevelRef": "Advanced",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "012_DimTechAsset.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechAssetGuid": "5bae5409-82c9-4b53-ad50-834506d0a96e",
+      "FranchiseKey": 1,
+      "AssetType": "DataDevice",
+      "ModelName": "Data Cartridge Type A",
+      "ModelNameNormalized": "data cartridge type a",
+      "ManufacturerRef": "Imperial data services",
+      "EraRef": "Reign of the Empire",
+      "TechLevelRef": "Advanced",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "012_DimTechAsset.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechAssetGuid": "1c7e03a2-8e97-4d9d-aaad-eba556f7ab2f",
+      "FranchiseKey": 1,
+      "AssetType": "DataDevice",
+      "ModelName": "Data Cartridge Type B",
+      "ModelNameNormalized": "data cartridge type b",
+      "ManufacturerRef": "Imperial data services",
+      "EraRef": "Reign of the Empire",
+      "TechLevelRef": "Advanced",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "012_DimTechAsset.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechAssetGuid": "b4e6b2ef-7caf-42f0-8513-bdfa6c253ed2",
+      "FranchiseKey": 1,
+      "AssetType": "DataDevice",
+      "ModelName": "Data Cartridge Type C",
+      "ModelNameNormalized": "data cartridge type c",
+      "ManufacturerRef": "Imperial data services",
+      "EraRef": "Reign of the Empire",
+      "TechLevelRef": "Advanced",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "012_DimTechAsset.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechAssetGuid": "9e7fde5c-b7db-49ee-a097-246ed2022df3",
+      "FranchiseKey": 1,
+      "AssetType": "DataDevice",
+      "ModelName": "Data Cartridge Type D",
+      "ModelNameNormalized": "data cartridge type d",
+      "ManufacturerRef": "Imperial data services",
+      "EraRef": "Reign of the Empire",
+      "TechLevelRef": "Advanced",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "012_DimTechAsset.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechAssetGuid": "1edef071-d62d-44bd-9b99-f47e1589f6a9",
+      "FranchiseKey": 1,
+      "AssetType": "DataDevice",
+      "ModelName": "Data Cartridge Type E",
+      "ModelNameNormalized": "data cartridge type e",
+      "ManufacturerRef": "Imperial data services",
+      "EraRef": "Reign of the Empire",
+      "TechLevelRef": "Advanced",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "012_DimTechAsset.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechAssetGuid": "e19fda40-7865-4cf6-b30e-4296f8addf95",
+      "FranchiseKey": 1,
+      "AssetType": "DataDevice",
+      "ModelName": "Data Cartridge Type F",
+      "ModelNameNormalized": "data cartridge type f",
+      "ManufacturerRef": "Imperial data services",
+      "EraRef": "Reign of the Empire",
+      "TechLevelRef": "Advanced",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "012_DimTechAsset.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechAssetGuid": "ae3897cd-25c8-45b3-847b-5fd46ec8fbc1",
+      "FranchiseKey": 1,
+      "AssetType": "DataDevice",
+      "ModelName": "Data Cartridge Type G",
+      "ModelNameNormalized": "data cartridge type g",
+      "ManufacturerRef": "Imperial data services",
+      "EraRef": "Reign of the Empire",
+      "TechLevelRef": "Advanced",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "012_DimTechAsset.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechAssetGuid": "91a31374-7a5f-43f4-8b12-d2f2266f4ace",
+      "FranchiseKey": 1,
+      "AssetType": "DataDevice",
+      "ModelName": "Data Cartridge Type H",
+      "ModelNameNormalized": "data cartridge type h",
+      "ManufacturerRef": "Imperial data services",
+      "EraRef": "Reign of the Empire",
+      "TechLevelRef": "Advanced",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "012_DimTechAsset.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechAssetGuid": "21b45b99-d2b1-4033-83d9-94d1da9b4197",
+      "FranchiseKey": 1,
+      "AssetType": "DataDevice",
+      "ModelName": "Data Cartridge Type I",
+      "ModelNameNormalized": "data cartridge type i",
+      "ManufacturerRef": "Imperial data services",
+      "EraRef": "Reign of the Empire",
+      "TechLevelRef": "Advanced",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "012_DimTechAsset.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechAssetGuid": "32d4779a-e5dd-4dd9-8e88-bfb7b22f0fc1",
+      "FranchiseKey": 1,
+      "AssetType": "DataDevice",
+      "ModelName": "Data Cartridge Type J",
+      "ModelNameNormalized": "data cartridge type j",
+      "ManufacturerRef": "Imperial data services",
+      "EraRef": "Reign of the Empire",
+      "TechLevelRef": "Advanced",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "012_DimTechAsset.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
     }
   ]
 }

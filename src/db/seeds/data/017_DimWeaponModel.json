@@ -122,6 +122,286 @@
       "Notes": "Synthetic seed data",
       "SourceSystem": "seed_loader",
       "SourceRef": "017_DimWeaponModel.json"
+    },
+    {
+      "WeaponModelGuid": "d93b9593-ca89-41db-8d52-eda39c3b32d7",
+      "TechAssetKey": 29,
+      "WeaponClass": "Ranged",
+      "EnergyType": "Blaster",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "017_DimWeaponModel.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "WeaponModelGuid": "dba7e88e-2028-489b-9378-49d56109f0f2",
+      "TechAssetKey": 24,
+      "WeaponClass": "Ranged",
+      "EnergyType": "Blaster",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "017_DimWeaponModel.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "WeaponModelGuid": "cc6fb824-3df0-41c2-ac04-4a2795417191",
+      "TechAssetKey": 30,
+      "WeaponClass": "Ranged",
+      "EnergyType": "Blaster",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "017_DimWeaponModel.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "WeaponModelGuid": "0503b455-09aa-4dde-9a5a-6af7885d044d",
+      "TechAssetKey": 31,
+      "WeaponClass": "Ranged",
+      "EnergyType": "Blaster",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "017_DimWeaponModel.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "WeaponModelGuid": "f4ab6dba-5e7f-4cd0-8011-572b10a7df5e",
+      "TechAssetKey": 32,
+      "WeaponClass": "Ranged",
+      "EnergyType": "Blaster",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "017_DimWeaponModel.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "WeaponModelGuid": "58f70262-536d-4702-98fe-ad60b7e1fb17",
+      "TechAssetKey": 33,
+      "WeaponClass": "Ranged",
+      "EnergyType": "Blaster",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "017_DimWeaponModel.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "WeaponModelGuid": "4f79017d-b623-45ef-a22e-a52d6f6139d4",
+      "TechAssetKey": 34,
+      "WeaponClass": "Ranged",
+      "EnergyType": "Blaster",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "017_DimWeaponModel.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "WeaponModelGuid": "3517d8da-4ab8-4e3f-b126-9aca19bf5755",
+      "TechAssetKey": 35,
+      "WeaponClass": "Ranged",
+      "EnergyType": "Blaster",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "017_DimWeaponModel.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "WeaponModelGuid": "f67a320f-8e70-474a-b514-74a5f2b5038c",
+      "TechAssetKey": 36,
+      "WeaponClass": "Ranged",
+      "EnergyType": "Blaster",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "017_DimWeaponModel.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "WeaponModelGuid": "3bfc29e4-42c4-43b3-aa67-779d1475bff2",
+      "TechAssetKey": 37,
+      "WeaponClass": "Ranged",
+      "EnergyType": "Blaster",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "017_DimWeaponModel.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "WeaponModelGuid": "a8da4379-2c47-4d41-979a-e163b36a4bd6",
+      "TechAssetKey": 38,
+      "WeaponClass": "Ranged",
+      "EnergyType": "Blaster",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "017_DimWeaponModel.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "WeaponModelGuid": "551490b9-b802-400b-afda-45af757f5131",
+      "TechAssetKey": 39,
+      "WeaponClass": "Ranged",
+      "EnergyType": "Blaster",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "017_DimWeaponModel.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "WeaponModelGuid": "3bbab4d3-0617-45ec-a6cc-f30d2182fb4d",
+      "TechAssetKey": 40,
+      "WeaponClass": "Ranged",
+      "EnergyType": "Blaster",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "017_DimWeaponModel.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "WeaponModelGuid": "212cbcc0-e670-4790-86eb-5f107167b42c",
+      "TechAssetKey": 41,
+      "WeaponClass": "Ranged",
+      "EnergyType": "Blaster",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "017_DimWeaponModel.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "WeaponModelGuid": "d02ea042-f9f9-4d8c-a0e5-de3fdfd65674",
+      "TechAssetKey": 42,
+      "WeaponClass": "Ranged",
+      "EnergyType": "Blaster",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "017_DimWeaponModel.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "WeaponModelGuid": "f2100712-1f1e-4a8f-89a5-02d8d87e0f0e",
+      "TechAssetKey": 43,
+      "WeaponClass": "Ranged",
+      "EnergyType": "Blaster",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "017_DimWeaponModel.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "WeaponModelGuid": "2d15b25e-2a67-4a39-a472-84dbcfe93e03",
+      "TechAssetKey": 44,
+      "WeaponClass": "Ranged",
+      "EnergyType": "Blaster",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "017_DimWeaponModel.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "WeaponModelGuid": "78eb2a5f-0316-4ca4-80cd-9b6a0f957846",
+      "TechAssetKey": 45,
+      "WeaponClass": "Ranged",
+      "EnergyType": "Blaster",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "017_DimWeaponModel.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "WeaponModelGuid": "79b1d0fa-0a55-409f-a614-636e89891a30",
+      "TechAssetKey": 46,
+      "WeaponClass": "Ranged",
+      "EnergyType": "Blaster",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "017_DimWeaponModel.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "WeaponModelGuid": "bda12eb8-3fc9-4e63-8afc-486bbb3e4f92",
+      "TechAssetKey": 47,
+      "WeaponClass": "Ranged",
+      "EnergyType": "Blaster",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "017_DimWeaponModel.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
     }
   ]
 }

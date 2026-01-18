@@ -1218,6 +1218,2046 @@
       "Notes": "Synthetic seed data",
       "SourceSystem": "seed_loader",
       "SourceRef": "010_DimLocation.json"
+    },
+    {
+      "LocationGuid": "fa4c1cde-7559-46b9-b633-2aad65308fca",
+      "EntityKey": 576,
+      "ParentLocationKey": null,
+      "LocationType": "Base",
+      "RegionCode": "UNKNOWN",
+      "ClimateRef": null,
+      "TerrainRef": null,
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "010_DimLocation.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "LocationGuid": "f3443025-fe61-4ece-a49e-0915d07d69f2",
+      "EntityKey": 577,
+      "ParentLocationKey": null,
+      "LocationType": "Base",
+      "RegionCode": "UNKNOWN",
+      "ClimateRef": null,
+      "TerrainRef": null,
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "010_DimLocation.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "LocationGuid": "24297f5f-9271-4d27-8f55-bfd5b46536ce",
+      "EntityKey": 578,
+      "ParentLocationKey": null,
+      "LocationType": "Base",
+      "RegionCode": "UNKNOWN",
+      "ClimateRef": null,
+      "TerrainRef": null,
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "010_DimLocation.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "LocationGuid": "254e444f-9115-475b-a0f2-f2d7d8f6d2a1",
+      "EntityKey": 579,
+      "ParentLocationKey": null,
+      "LocationType": "Base",
+      "RegionCode": "UNKNOWN",
+      "ClimateRef": null,
+      "TerrainRef": null,
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "010_DimLocation.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "LocationGuid": "0bd96954-3483-4241-a624-c2b8ee9dc0d2",
+      "EntityKey": 580,
+      "ParentLocationKey": null,
+      "LocationType": "Base",
+      "RegionCode": "UNKNOWN",
+      "ClimateRef": null,
+      "TerrainRef": null,
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "010_DimLocation.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "LocationGuid": "5527f987-ecfe-48a9-91cc-16581184ca01",
+      "EntityKey": 581,
+      "ParentLocationKey": null,
+      "LocationType": "Base",
+      "RegionCode": "UNKNOWN",
+      "ClimateRef": null,
+      "TerrainRef": null,
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "010_DimLocation.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "LocationGuid": "54b25e2b-8498-4a10-b9e2-e43ad1836ecb",
+      "EntityKey": 582,
+      "ParentLocationKey": null,
+      "LocationType": "Base",
+      "RegionCode": "UNKNOWN",
+      "ClimateRef": null,
+      "TerrainRef": null,
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "010_DimLocation.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "LocationGuid": "56110362-abf1-4c15-b25a-8399adf75683",
+      "EntityKey": 583,
+      "ParentLocationKey": null,
+      "LocationType": "Base",
+      "RegionCode": "UNKNOWN",
+      "ClimateRef": null,
+      "TerrainRef": null,
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "010_DimLocation.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "LocationGuid": "f55ffaca-c671-44df-a58f-268778dbf52c",
+      "EntityKey": 584,
+      "ParentLocationKey": null,
+      "LocationType": "Station",
+      "RegionCode": "UNKNOWN",
+      "ClimateRef": null,
+      "TerrainRef": null,
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "010_DimLocation.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "LocationGuid": "c2c90d31-a016-40fa-a3c5-4f5ba0afaedb",
+      "EntityKey": 585,
+      "ParentLocationKey": null,
+      "LocationType": "Station",
+      "RegionCode": "UNKNOWN",
+      "ClimateRef": null,
+      "TerrainRef": null,
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "010_DimLocation.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "LocationGuid": "c15d01b0-f2bb-4bc4-9747-4d1ea9d74f59",
+      "EntityKey": 586,
+      "ParentLocationKey": null,
+      "LocationType": "Station",
+      "RegionCode": "UNKNOWN",
+      "ClimateRef": null,
+      "TerrainRef": null,
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "010_DimLocation.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "LocationGuid": "d411d2bc-44e6-4ce4-8492-a368ea93f983",
+      "EntityKey": 587,
+      "ParentLocationKey": null,
+      "LocationType": "Station",
+      "RegionCode": "UNKNOWN",
+      "ClimateRef": null,
+      "TerrainRef": null,
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "010_DimLocation.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "LocationGuid": "2c606db3-a35b-4516-b078-dca17c66e841",
+      "EntityKey": 588,
+      "ParentLocationKey": null,
+      "LocationType": "Station",
+      "RegionCode": "UNKNOWN",
+      "ClimateRef": null,
+      "TerrainRef": null,
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "010_DimLocation.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "LocationGuid": "9ccce81c-4262-4daf-a718-8fa720af522b",
+      "EntityKey": 589,
+      "ParentLocationKey": null,
+      "LocationType": "Station",
+      "RegionCode": "UNKNOWN",
+      "ClimateRef": null,
+      "TerrainRef": null,
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "010_DimLocation.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "LocationGuid": "6a903a5d-2000-49f7-941b-7a99df9b3825",
+      "EntityKey": 590,
+      "ParentLocationKey": null,
+      "LocationType": "Station",
+      "RegionCode": "UNKNOWN",
+      "ClimateRef": null,
+      "TerrainRef": null,
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "010_DimLocation.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "LocationGuid": "c099c166-0611-4ace-a15f-a95224957a59",
+      "EntityKey": 591,
+      "ParentLocationKey": null,
+      "LocationType": "Station",
+      "RegionCode": "UNKNOWN",
+      "ClimateRef": null,
+      "TerrainRef": null,
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "010_DimLocation.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "LocationGuid": "d8a4459d-aa25-40d6-bb69-903c7ad318c9",
+      "EntityKey": 592,
+      "ParentLocationKey": null,
+      "LocationType": "Facility",
+      "RegionCode": "UNKNOWN",
+      "ClimateRef": null,
+      "TerrainRef": null,
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "010_DimLocation.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "LocationGuid": "461d8187-399a-4f49-a272-42ca5eb94e21",
+      "EntityKey": 593,
+      "ParentLocationKey": null,
+      "LocationType": "Facility",
+      "RegionCode": "UNKNOWN",
+      "ClimateRef": null,
+      "TerrainRef": null,
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "010_DimLocation.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "LocationGuid": "857688e0-328c-4999-8dfb-7c4d30081d94",
+      "EntityKey": 594,
+      "ParentLocationKey": null,
+      "LocationType": "Facility",
+      "RegionCode": "UNKNOWN",
+      "ClimateRef": null,
+      "TerrainRef": null,
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "010_DimLocation.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "LocationGuid": "8b5517f4-f52d-4ac4-98ee-edee1970a9b8",
+      "EntityKey": 595,
+      "ParentLocationKey": null,
+      "LocationType": "Facility",
+      "RegionCode": "UNKNOWN",
+      "ClimateRef": null,
+      "TerrainRef": null,
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "010_DimLocation.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "LocationGuid": "042a8d8c-4d27-45d9-81c8-120b1ce4567c",
+      "EntityKey": 596,
+      "ParentLocationKey": null,
+      "LocationType": "Facility",
+      "RegionCode": "UNKNOWN",
+      "ClimateRef": null,
+      "TerrainRef": null,
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "010_DimLocation.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "LocationGuid": "1e8850d4-5fd0-42ef-9d03-12537f5e3070",
+      "EntityKey": 597,
+      "ParentLocationKey": null,
+      "LocationType": "Facility",
+      "RegionCode": "UNKNOWN",
+      "ClimateRef": null,
+      "TerrainRef": null,
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "010_DimLocation.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "LocationGuid": "b3214f7c-e29a-4afe-908f-5b09720d24a8",
+      "EntityKey": 598,
+      "ParentLocationKey": null,
+      "LocationType": "Facility",
+      "RegionCode": "UNKNOWN",
+      "ClimateRef": null,
+      "TerrainRef": null,
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "010_DimLocation.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "LocationGuid": "f7338d89-baa7-46db-91f9-446770104ece",
+      "EntityKey": 599,
+      "ParentLocationKey": null,
+      "LocationType": "Facility",
+      "RegionCode": "UNKNOWN",
+      "ClimateRef": null,
+      "TerrainRef": null,
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "010_DimLocation.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "LocationGuid": "9e932182-ff1e-44ba-bc25-60869038858e",
+      "EntityKey": 600,
+      "ParentLocationKey": null,
+      "LocationType": "Facility",
+      "RegionCode": "UNKNOWN",
+      "ClimateRef": null,
+      "TerrainRef": null,
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "010_DimLocation.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "LocationGuid": "f345b5a3-a475-4d22-b20b-f4253560496d",
+      "EntityKey": 601,
+      "ParentLocationKey": null,
+      "LocationType": "Facility",
+      "RegionCode": "UNKNOWN",
+      "ClimateRef": null,
+      "TerrainRef": null,
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "010_DimLocation.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "LocationGuid": "78a90cca-584d-4678-9785-8927520206e9",
+      "EntityKey": 602,
+      "ParentLocationKey": null,
+      "LocationType": "Facility",
+      "RegionCode": "UNKNOWN",
+      "ClimateRef": null,
+      "TerrainRef": null,
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "010_DimLocation.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "LocationGuid": "50e09421-0706-440b-8955-85d726781a08",
+      "EntityKey": 603,
+      "ParentLocationKey": null,
+      "LocationType": "Facility",
+      "RegionCode": "UNKNOWN",
+      "ClimateRef": null,
+      "TerrainRef": null,
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "010_DimLocation.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "LocationGuid": "1754fcc9-b8dc-411d-8e0c-6f2364a03042",
+      "EntityKey": 604,
+      "ParentLocationKey": null,
+      "LocationType": "Facility",
+      "RegionCode": "UNKNOWN",
+      "ClimateRef": null,
+      "TerrainRef": null,
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "010_DimLocation.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "LocationGuid": "b9337927-9ca9-43b2-b22c-d8ee8e5491eb",
+      "EntityKey": 605,
+      "ParentLocationKey": null,
+      "LocationType": "Facility",
+      "RegionCode": "UNKNOWN",
+      "ClimateRef": null,
+      "TerrainRef": null,
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "010_DimLocation.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "LocationGuid": "e0ae6d82-1e72-45c0-bbc5-666ad58f5e81",
+      "EntityKey": 606,
+      "ParentLocationKey": null,
+      "LocationType": "Facility",
+      "RegionCode": "UNKNOWN",
+      "ClimateRef": null,
+      "TerrainRef": null,
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "010_DimLocation.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "LocationGuid": "c6cf3a57-9510-4eb4-aa21-8bc866effe33",
+      "EntityKey": 607,
+      "ParentLocationKey": null,
+      "LocationType": "Facility",
+      "RegionCode": "UNKNOWN",
+      "ClimateRef": null,
+      "TerrainRef": null,
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "010_DimLocation.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "LocationGuid": "0bc8f1cd-d173-4d7f-84a1-d8718c10f678",
+      "EntityKey": 608,
+      "ParentLocationKey": null,
+      "LocationType": "Facility",
+      "RegionCode": "UNKNOWN",
+      "ClimateRef": null,
+      "TerrainRef": null,
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "010_DimLocation.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "LocationGuid": "5d837980-a5d1-41cb-84a6-fe29bcb5cc77",
+      "EntityKey": 609,
+      "ParentLocationKey": null,
+      "LocationType": "Facility",
+      "RegionCode": "UNKNOWN",
+      "ClimateRef": null,
+      "TerrainRef": null,
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "010_DimLocation.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "LocationGuid": "4b5918c7-14dc-4279-a054-1c3a93d0dd77",
+      "EntityKey": 610,
+      "ParentLocationKey": null,
+      "LocationType": "Facility",
+      "RegionCode": "UNKNOWN",
+      "ClimateRef": null,
+      "TerrainRef": null,
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "010_DimLocation.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "LocationGuid": "e3996229-128a-4c23-a935-268a95cc87b4",
+      "EntityKey": 611,
+      "ParentLocationKey": null,
+      "LocationType": "Facility",
+      "RegionCode": "UNKNOWN",
+      "ClimateRef": null,
+      "TerrainRef": null,
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "010_DimLocation.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "LocationGuid": "953039ad-f35e-4bad-9048-2b582c5d1772",
+      "EntityKey": 612,
+      "ParentLocationKey": null,
+      "LocationType": "Facility",
+      "RegionCode": "UNKNOWN",
+      "ClimateRef": null,
+      "TerrainRef": null,
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "010_DimLocation.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "LocationGuid": "c1de0b95-8445-4ae2-be8a-648183def499",
+      "EntityKey": 613,
+      "ParentLocationKey": null,
+      "LocationType": "Facility",
+      "RegionCode": "UNKNOWN",
+      "ClimateRef": null,
+      "TerrainRef": null,
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "010_DimLocation.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "LocationGuid": "b3abd1a5-7171-4be4-a8ca-ae128edb6402",
+      "EntityKey": 614,
+      "ParentLocationKey": null,
+      "LocationType": "Facility",
+      "RegionCode": "UNKNOWN",
+      "ClimateRef": null,
+      "TerrainRef": null,
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "010_DimLocation.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "LocationGuid": "c44b7846-75d5-42ac-b6dd-b528aeae85fc",
+      "EntityKey": 615,
+      "ParentLocationKey": null,
+      "LocationType": "Facility",
+      "RegionCode": "UNKNOWN",
+      "ClimateRef": null,
+      "TerrainRef": null,
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "010_DimLocation.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "LocationGuid": "c55537e7-1e90-450e-81b6-7895cf69df70",
+      "EntityKey": 616,
+      "ParentLocationKey": null,
+      "LocationType": "City",
+      "RegionCode": "UNKNOWN",
+      "ClimateRef": null,
+      "TerrainRef": null,
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "010_DimLocation.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "LocationGuid": "27f63a1b-e986-4d19-8846-b3b2dab8ec2f",
+      "EntityKey": 617,
+      "ParentLocationKey": null,
+      "LocationType": "City",
+      "RegionCode": "UNKNOWN",
+      "ClimateRef": null,
+      "TerrainRef": null,
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "010_DimLocation.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "LocationGuid": "9eb92087-8ff2-41b4-b121-3b634bbde5ae",
+      "EntityKey": 618,
+      "ParentLocationKey": null,
+      "LocationType": "City",
+      "RegionCode": "UNKNOWN",
+      "ClimateRef": null,
+      "TerrainRef": null,
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "010_DimLocation.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "LocationGuid": "808b6591-2270-4934-816a-087becbd9fc0",
+      "EntityKey": 619,
+      "ParentLocationKey": null,
+      "LocationType": "City",
+      "RegionCode": "UNKNOWN",
+      "ClimateRef": null,
+      "TerrainRef": null,
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "010_DimLocation.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "LocationGuid": "78d14525-5d31-410a-9e9b-79bd668891d7",
+      "EntityKey": 620,
+      "ParentLocationKey": null,
+      "LocationType": "City",
+      "RegionCode": "UNKNOWN",
+      "ClimateRef": null,
+      "TerrainRef": null,
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "010_DimLocation.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "LocationGuid": "71b0c9d6-9d4d-40b3-a07b-4f2e354cb9d4",
+      "EntityKey": 621,
+      "ParentLocationKey": null,
+      "LocationType": "City",
+      "RegionCode": "UNKNOWN",
+      "ClimateRef": null,
+      "TerrainRef": null,
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "010_DimLocation.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "LocationGuid": "eb261f5b-6209-47ad-952a-0dd9571d3494",
+      "EntityKey": 622,
+      "ParentLocationKey": null,
+      "LocationType": "City",
+      "RegionCode": "UNKNOWN",
+      "ClimateRef": null,
+      "TerrainRef": null,
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "010_DimLocation.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "LocationGuid": "2c760221-710f-4641-96d3-1dda9ad62ecf",
+      "EntityKey": 623,
+      "ParentLocationKey": null,
+      "LocationType": "City",
+      "RegionCode": "UNKNOWN",
+      "ClimateRef": null,
+      "TerrainRef": null,
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "010_DimLocation.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "LocationGuid": "f2c5066e-bcd9-4ba7-b9fe-da88de64f3c0",
+      "EntityKey": 624,
+      "ParentLocationKey": null,
+      "LocationType": "Ship",
+      "RegionCode": "UNKNOWN",
+      "ClimateRef": null,
+      "TerrainRef": null,
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "010_DimLocation.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "LocationGuid": "4bd24264-5b8c-496a-ad1b-0e01fc6def73",
+      "EntityKey": 625,
+      "ParentLocationKey": null,
+      "LocationType": "Ship",
+      "RegionCode": "UNKNOWN",
+      "ClimateRef": null,
+      "TerrainRef": null,
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "010_DimLocation.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "LocationGuid": "2da99f41-90c6-45e7-a761-4e63fc15741d",
+      "EntityKey": 626,
+      "ParentLocationKey": null,
+      "LocationType": "Ship",
+      "RegionCode": "UNKNOWN",
+      "ClimateRef": null,
+      "TerrainRef": null,
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "010_DimLocation.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "LocationGuid": "5809c91f-d05e-4c5a-bb38-ed5afc4126de",
+      "EntityKey": 627,
+      "ParentLocationKey": null,
+      "LocationType": "Ship",
+      "RegionCode": "UNKNOWN",
+      "ClimateRef": null,
+      "TerrainRef": null,
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "010_DimLocation.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "LocationGuid": "89a0ec10-1262-47d2-9ac4-2fac405bb9ee",
+      "EntityKey": 628,
+      "ParentLocationKey": null,
+      "LocationType": "Ship",
+      "RegionCode": "UNKNOWN",
+      "ClimateRef": null,
+      "TerrainRef": null,
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "010_DimLocation.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "LocationGuid": "3164bbbc-ba6b-44ea-bc45-7b5660312b61",
+      "EntityKey": 629,
+      "ParentLocationKey": null,
+      "LocationType": "Ship",
+      "RegionCode": "UNKNOWN",
+      "ClimateRef": null,
+      "TerrainRef": null,
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "010_DimLocation.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "LocationGuid": "4cfdce9d-1a02-4003-9333-2134b9819f6a",
+      "EntityKey": 630,
+      "ParentLocationKey": null,
+      "LocationType": "Ship",
+      "RegionCode": "UNKNOWN",
+      "ClimateRef": null,
+      "TerrainRef": null,
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "010_DimLocation.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "LocationGuid": "f4ae6208-ef36-4c70-a066-cdd8f7ebe781",
+      "EntityKey": 631,
+      "ParentLocationKey": null,
+      "LocationType": "Ship",
+      "RegionCode": "UNKNOWN",
+      "ClimateRef": null,
+      "TerrainRef": null,
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "010_DimLocation.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "LocationGuid": "1c88c8e4-b1b7-49ed-b158-6edb22f0d980",
+      "EntityKey": 632,
+      "ParentLocationKey": null,
+      "LocationType": "Ship",
+      "RegionCode": "UNKNOWN",
+      "ClimateRef": null,
+      "TerrainRef": null,
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "010_DimLocation.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "LocationGuid": "3f4d3cb6-2eee-4e0a-8010-4b8997e2c26a",
+      "EntityKey": 633,
+      "ParentLocationKey": null,
+      "LocationType": "Ship",
+      "RegionCode": "UNKNOWN",
+      "ClimateRef": null,
+      "TerrainRef": null,
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "010_DimLocation.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "LocationGuid": "96ad58eb-c91e-4810-bada-b2c296a93a13",
+      "EntityKey": 634,
+      "ParentLocationKey": null,
+      "LocationType": "Ship",
+      "RegionCode": "UNKNOWN",
+      "ClimateRef": null,
+      "TerrainRef": null,
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "010_DimLocation.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "LocationGuid": "0ad121e1-80d3-455d-a337-fdbc1040d63d",
+      "EntityKey": 635,
+      "ParentLocationKey": null,
+      "LocationType": "Ship",
+      "RegionCode": "UNKNOWN",
+      "ClimateRef": null,
+      "TerrainRef": null,
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "010_DimLocation.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "LocationGuid": "f9349e02-8fbd-4293-9c40-361fd95c3329",
+      "EntityKey": 636,
+      "ParentLocationKey": null,
+      "LocationType": "Ship",
+      "RegionCode": "UNKNOWN",
+      "ClimateRef": null,
+      "TerrainRef": null,
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "010_DimLocation.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "LocationGuid": "f013efe2-c8b7-44e8-bc98-789a7a91ea13",
+      "EntityKey": 637,
+      "ParentLocationKey": null,
+      "LocationType": "Ship",
+      "RegionCode": "UNKNOWN",
+      "ClimateRef": null,
+      "TerrainRef": null,
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "010_DimLocation.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "LocationGuid": "8f13a282-c34e-4fc5-a99a-868f1efaed23",
+      "EntityKey": 638,
+      "ParentLocationKey": null,
+      "LocationType": "Ship",
+      "RegionCode": "UNKNOWN",
+      "ClimateRef": null,
+      "TerrainRef": null,
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "010_DimLocation.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "LocationGuid": "354e1fed-5c1e-4ec2-a0ab-590cc01f324e",
+      "EntityKey": 639,
+      "ParentLocationKey": null,
+      "LocationType": "Ship",
+      "RegionCode": "UNKNOWN",
+      "ClimateRef": null,
+      "TerrainRef": null,
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "010_DimLocation.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "LocationGuid": "0ed0d5ae-8e0a-49dd-9515-03c3c5d086a8",
+      "EntityKey": 640,
+      "ParentLocationKey": null,
+      "LocationType": "Ship",
+      "RegionCode": "UNKNOWN",
+      "ClimateRef": null,
+      "TerrainRef": null,
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "010_DimLocation.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "LocationGuid": "95b93cf7-65b1-4cfb-863e-1bc6246b4f34",
+      "EntityKey": 641,
+      "ParentLocationKey": null,
+      "LocationType": "Ship",
+      "RegionCode": "UNKNOWN",
+      "ClimateRef": null,
+      "TerrainRef": null,
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "010_DimLocation.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "LocationGuid": "03734743-3375-4560-af52-852f84fc0b9b",
+      "EntityKey": 642,
+      "ParentLocationKey": null,
+      "LocationType": "Ship",
+      "RegionCode": "UNKNOWN",
+      "ClimateRef": null,
+      "TerrainRef": null,
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "010_DimLocation.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "LocationGuid": "9a38ee82-7ff8-4016-a514-390390e5f3c6",
+      "EntityKey": 643,
+      "ParentLocationKey": null,
+      "LocationType": "Ship",
+      "RegionCode": "UNKNOWN",
+      "ClimateRef": null,
+      "TerrainRef": null,
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "010_DimLocation.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "LocationGuid": "a2394a07-59a7-411a-98a0-cb472fab2438",
+      "EntityKey": 644,
+      "ParentLocationKey": null,
+      "LocationType": "Ship",
+      "RegionCode": "UNKNOWN",
+      "ClimateRef": null,
+      "TerrainRef": null,
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "010_DimLocation.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "LocationGuid": "7f16eb86-fc86-49f9-bb30-9c745da1c24c",
+      "EntityKey": 645,
+      "ParentLocationKey": null,
+      "LocationType": "Ship",
+      "RegionCode": "UNKNOWN",
+      "ClimateRef": null,
+      "TerrainRef": null,
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "010_DimLocation.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "LocationGuid": "74b4f4d7-5fb2-4d96-8124-9336e9fd69af",
+      "EntityKey": 646,
+      "ParentLocationKey": null,
+      "LocationType": "Ship",
+      "RegionCode": "UNKNOWN",
+      "ClimateRef": null,
+      "TerrainRef": null,
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "010_DimLocation.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "LocationGuid": "f29f20ed-8f5e-4bce-a2df-e8bb703a8a78",
+      "EntityKey": 647,
+      "ParentLocationKey": null,
+      "LocationType": "Ship",
+      "RegionCode": "UNKNOWN",
+      "ClimateRef": null,
+      "TerrainRef": null,
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "010_DimLocation.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "LocationGuid": "0b8b1ff4-d4f8-44aa-b53b-a698c648d019",
+      "EntityKey": 648,
+      "ParentLocationKey": null,
+      "LocationType": "Ship",
+      "RegionCode": "UNKNOWN",
+      "ClimateRef": null,
+      "TerrainRef": null,
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "010_DimLocation.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "LocationGuid": "5cd8cb5e-0c96-462b-b749-80c922f0fb7d",
+      "EntityKey": 649,
+      "ParentLocationKey": null,
+      "LocationType": "Ship",
+      "RegionCode": "UNKNOWN",
+      "ClimateRef": null,
+      "TerrainRef": null,
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "010_DimLocation.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "LocationGuid": "7db0b49c-b116-42b4-a244-61b1d824f40b",
+      "EntityKey": 650,
+      "ParentLocationKey": null,
+      "LocationType": "Ship",
+      "RegionCode": "UNKNOWN",
+      "ClimateRef": null,
+      "TerrainRef": null,
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "010_DimLocation.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "LocationGuid": "03d33b13-fe56-4f7e-b46c-5b6a3da1b3d4",
+      "EntityKey": 651,
+      "ParentLocationKey": null,
+      "LocationType": "Ship",
+      "RegionCode": "UNKNOWN",
+      "ClimateRef": null,
+      "TerrainRef": null,
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "010_DimLocation.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "LocationGuid": "5ed38cff-1fcd-4312-8bde-4f4fbe6d4d50",
+      "EntityKey": 652,
+      "ParentLocationKey": null,
+      "LocationType": "Ship",
+      "RegionCode": "UNKNOWN",
+      "ClimateRef": null,
+      "TerrainRef": null,
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "010_DimLocation.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "LocationGuid": "e087a0e3-2225-4a7c-85f9-98f504965c4e",
+      "EntityKey": 653,
+      "ParentLocationKey": null,
+      "LocationType": "Ship",
+      "RegionCode": "UNKNOWN",
+      "ClimateRef": null,
+      "TerrainRef": null,
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "010_DimLocation.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "LocationGuid": "b4b052a8-3cf7-4304-b3c0-f3e16f2d1b5c",
+      "EntityKey": 654,
+      "ParentLocationKey": null,
+      "LocationType": "Ship",
+      "RegionCode": "UNKNOWN",
+      "ClimateRef": null,
+      "TerrainRef": null,
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "010_DimLocation.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "LocationGuid": "16987586-ccf6-411a-b23d-323e40e8e632",
+      "EntityKey": 655,
+      "ParentLocationKey": null,
+      "LocationType": "Ship",
+      "RegionCode": "UNKNOWN",
+      "ClimateRef": null,
+      "TerrainRef": null,
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "010_DimLocation.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "LocationGuid": "b48c6435-6ce3-43fa-9f11-525ac86b79d8",
+      "EntityKey": 656,
+      "ParentLocationKey": null,
+      "LocationType": "Facility",
+      "RegionCode": "UNKNOWN",
+      "ClimateRef": null,
+      "TerrainRef": null,
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "010_DimLocation.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "LocationGuid": "8e72f8ac-ceb3-49d1-ae87-3f41aa160601",
+      "EntityKey": 657,
+      "ParentLocationKey": null,
+      "LocationType": "Facility",
+      "RegionCode": "UNKNOWN",
+      "ClimateRef": null,
+      "TerrainRef": null,
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "010_DimLocation.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "LocationGuid": "95e62c9f-a633-4e74-9364-7d078c101ca7",
+      "EntityKey": 658,
+      "ParentLocationKey": null,
+      "LocationType": "Facility",
+      "RegionCode": "UNKNOWN",
+      "ClimateRef": null,
+      "TerrainRef": null,
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "010_DimLocation.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "LocationGuid": "debd78fb-798b-455d-84fe-4e49aef70853",
+      "EntityKey": 659,
+      "ParentLocationKey": null,
+      "LocationType": "Facility",
+      "RegionCode": "UNKNOWN",
+      "ClimateRef": null,
+      "TerrainRef": null,
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "010_DimLocation.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "LocationGuid": "ebf8701d-759d-470e-b323-466faf5bc84e",
+      "EntityKey": 660,
+      "ParentLocationKey": null,
+      "LocationType": "Facility",
+      "RegionCode": "UNKNOWN",
+      "ClimateRef": null,
+      "TerrainRef": null,
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "010_DimLocation.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "LocationGuid": "617e8fcf-de8e-4724-8e0d-6aa6f2de9cdf",
+      "EntityKey": 661,
+      "ParentLocationKey": null,
+      "LocationType": "Facility",
+      "RegionCode": "UNKNOWN",
+      "ClimateRef": null,
+      "TerrainRef": null,
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "010_DimLocation.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "LocationGuid": "9e000f7c-bb1a-43df-9823-e789a93d64d2",
+      "EntityKey": 662,
+      "ParentLocationKey": null,
+      "LocationType": "Facility",
+      "RegionCode": "UNKNOWN",
+      "ClimateRef": null,
+      "TerrainRef": null,
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "010_DimLocation.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "LocationGuid": "8ee4c5af-437b-4659-b1af-f06e8b640259",
+      "EntityKey": 663,
+      "ParentLocationKey": null,
+      "LocationType": "Facility",
+      "RegionCode": "UNKNOWN",
+      "ClimateRef": null,
+      "TerrainRef": null,
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "010_DimLocation.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "LocationGuid": "58af4748-8068-405c-b280-eef661ff7ea8",
+      "EntityKey": 664,
+      "ParentLocationKey": null,
+      "LocationType": "Facility",
+      "RegionCode": "UNKNOWN",
+      "ClimateRef": null,
+      "TerrainRef": null,
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "010_DimLocation.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "LocationGuid": "7b78e33d-91d0-41a6-94d5-48b640c94486",
+      "EntityKey": 665,
+      "ParentLocationKey": null,
+      "LocationType": "Facility",
+      "RegionCode": "UNKNOWN",
+      "ClimateRef": null,
+      "TerrainRef": null,
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "010_DimLocation.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "LocationGuid": "9e5967a6-dc65-4cc5-8928-d895db1266af",
+      "EntityKey": 666,
+      "ParentLocationKey": null,
+      "LocationType": "Facility",
+      "RegionCode": "UNKNOWN",
+      "ClimateRef": null,
+      "TerrainRef": null,
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "010_DimLocation.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "LocationGuid": "6cb0dcab-4bea-427a-bae0-faf74b959805",
+      "EntityKey": 667,
+      "ParentLocationKey": null,
+      "LocationType": "Facility",
+      "RegionCode": "UNKNOWN",
+      "ClimateRef": null,
+      "TerrainRef": null,
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "010_DimLocation.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "LocationGuid": "ed796744-0301-4cab-b062-3b941a24d035",
+      "EntityKey": 668,
+      "ParentLocationKey": null,
+      "LocationType": "Facility",
+      "RegionCode": "UNKNOWN",
+      "ClimateRef": null,
+      "TerrainRef": null,
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "010_DimLocation.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "LocationGuid": "56f79114-5495-4a9e-bc5b-781bfa03b450",
+      "EntityKey": 669,
+      "ParentLocationKey": null,
+      "LocationType": "Facility",
+      "RegionCode": "UNKNOWN",
+      "ClimateRef": null,
+      "TerrainRef": null,
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "010_DimLocation.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "LocationGuid": "3218b261-d792-4977-8f2a-234699b7eaaa",
+      "EntityKey": 670,
+      "ParentLocationKey": null,
+      "LocationType": "Facility",
+      "RegionCode": "UNKNOWN",
+      "ClimateRef": null,
+      "TerrainRef": null,
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "010_DimLocation.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "LocationGuid": "21e4d63d-1ac4-476e-b2fa-542bfd2db202",
+      "EntityKey": 671,
+      "ParentLocationKey": null,
+      "LocationType": "Facility",
+      "RegionCode": "UNKNOWN",
+      "ClimateRef": null,
+      "TerrainRef": null,
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "010_DimLocation.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "LocationGuid": "e19dbab7-4ff0-4630-9f21-843b5c7da40b",
+      "EntityKey": 672,
+      "ParentLocationKey": null,
+      "LocationType": "Facility",
+      "RegionCode": "UNKNOWN",
+      "ClimateRef": null,
+      "TerrainRef": null,
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "010_DimLocation.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "LocationGuid": "fa2eafc8-3981-49a3-902b-1f2b34cd631e",
+      "EntityKey": 673,
+      "ParentLocationKey": null,
+      "LocationType": "Facility",
+      "RegionCode": "UNKNOWN",
+      "ClimateRef": null,
+      "TerrainRef": null,
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "010_DimLocation.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "LocationGuid": "22ebd70e-425c-4926-b081-b88e74ea2549",
+      "EntityKey": 674,
+      "ParentLocationKey": null,
+      "LocationType": "Facility",
+      "RegionCode": "UNKNOWN",
+      "ClimateRef": null,
+      "TerrainRef": null,
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "010_DimLocation.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "LocationGuid": "ac458791-4291-496c-9909-100bf107b836",
+      "EntityKey": 675,
+      "ParentLocationKey": null,
+      "LocationType": "Facility",
+      "RegionCode": "UNKNOWN",
+      "ClimateRef": null,
+      "TerrainRef": null,
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "010_DimLocation.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "LocationGuid": "72788150-00c5-471c-855d-5c218849996a",
+      "EntityKey": 676,
+      "ParentLocationKey": null,
+      "LocationType": "Facility",
+      "RegionCode": "UNKNOWN",
+      "ClimateRef": null,
+      "TerrainRef": null,
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "010_DimLocation.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "LocationGuid": "450a4bf7-1fa4-4929-9dfd-befad30081c1",
+      "EntityKey": 677,
+      "ParentLocationKey": null,
+      "LocationType": "Facility",
+      "RegionCode": "UNKNOWN",
+      "ClimateRef": null,
+      "TerrainRef": null,
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "010_DimLocation.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "LocationGuid": "9a9c7afa-b1a4-4576-89ed-647d9afd8959",
+      "EntityKey": 678,
+      "ParentLocationKey": null,
+      "LocationType": "Facility",
+      "RegionCode": "UNKNOWN",
+      "ClimateRef": null,
+      "TerrainRef": null,
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "010_DimLocation.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "LocationGuid": "65392149-1c04-41a2-9252-66fddb985523",
+      "EntityKey": 679,
+      "ParentLocationKey": null,
+      "LocationType": "Facility",
+      "RegionCode": "UNKNOWN",
+      "ClimateRef": null,
+      "TerrainRef": null,
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "010_DimLocation.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "LocationGuid": "ee6191e7-b6cc-4fea-8065-7f91a2eb379c",
+      "EntityKey": 680,
+      "ParentLocationKey": null,
+      "LocationType": "Facility",
+      "RegionCode": "UNKNOWN",
+      "ClimateRef": null,
+      "TerrainRef": null,
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "010_DimLocation.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "LocationGuid": "aee9ba4a-32b5-42a7-b129-3584509253fe",
+      "EntityKey": 681,
+      "ParentLocationKey": null,
+      "LocationType": "Facility",
+      "RegionCode": "UNKNOWN",
+      "ClimateRef": null,
+      "TerrainRef": null,
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "010_DimLocation.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "LocationGuid": "792aa6cf-a7db-4e57-81d8-cd824f99514e",
+      "EntityKey": 682,
+      "ParentLocationKey": null,
+      "LocationType": "Facility",
+      "RegionCode": "UNKNOWN",
+      "ClimateRef": null,
+      "TerrainRef": null,
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "010_DimLocation.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "LocationGuid": "13c4f44c-f028-4faa-8dff-82562d2f2339",
+      "EntityKey": 683,
+      "ParentLocationKey": null,
+      "LocationType": "Facility",
+      "RegionCode": "UNKNOWN",
+      "ClimateRef": null,
+      "TerrainRef": null,
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "010_DimLocation.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "LocationGuid": "819a9cd7-2c8f-4093-888c-9ca3e21470c3",
+      "EntityKey": 684,
+      "ParentLocationKey": null,
+      "LocationType": "Facility",
+      "RegionCode": "UNKNOWN",
+      "ClimateRef": null,
+      "TerrainRef": null,
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "010_DimLocation.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "LocationGuid": "17a3cd6d-5dfd-47aa-b337-6c3d98bfb28b",
+      "EntityKey": 685,
+      "ParentLocationKey": null,
+      "LocationType": "Facility",
+      "RegionCode": "UNKNOWN",
+      "ClimateRef": null,
+      "TerrainRef": null,
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "010_DimLocation.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "LocationGuid": "2360df4a-53c2-4086-9ecf-e2984648e7aa",
+      "EntityKey": 686,
+      "ParentLocationKey": null,
+      "LocationType": "Facility",
+      "RegionCode": "UNKNOWN",
+      "ClimateRef": null,
+      "TerrainRef": null,
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "010_DimLocation.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "LocationGuid": "dcc00232-a956-45fa-818f-30f515e4f22f",
+      "EntityKey": 687,
+      "ParentLocationKey": null,
+      "LocationType": "Facility",
+      "RegionCode": "UNKNOWN",
+      "ClimateRef": null,
+      "TerrainRef": null,
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "010_DimLocation.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "LocationGuid": "ae871996-b296-41df-915a-da1f4208185f",
+      "EntityKey": 688,
+      "ParentLocationKey": null,
+      "LocationType": "Ship",
+      "RegionCode": "UNKNOWN",
+      "ClimateRef": null,
+      "TerrainRef": null,
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "010_DimLocation.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "LocationGuid": "49633e5c-308b-41b6-8165-2fc8a8ae3cb9",
+      "EntityKey": 689,
+      "ParentLocationKey": null,
+      "LocationType": "Ship",
+      "RegionCode": "UNKNOWN",
+      "ClimateRef": null,
+      "TerrainRef": null,
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "010_DimLocation.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "LocationGuid": "c4870856-86e7-4d1d-a283-9993fb74128d",
+      "EntityKey": 690,
+      "ParentLocationKey": null,
+      "LocationType": "Ship",
+      "RegionCode": "UNKNOWN",
+      "ClimateRef": null,
+      "TerrainRef": null,
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "010_DimLocation.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "LocationGuid": "e9dd61ab-59c9-415a-80a1-41a5a52b653d",
+      "EntityKey": 691,
+      "ParentLocationKey": null,
+      "LocationType": "Facility",
+      "RegionCode": "UNKNOWN",
+      "ClimateRef": null,
+      "TerrainRef": null,
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "010_DimLocation.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "LocationGuid": "6fe7db4f-17d5-4bda-b4fd-e4571cb91166",
+      "EntityKey": 692,
+      "ParentLocationKey": null,
+      "LocationType": "Facility",
+      "RegionCode": "UNKNOWN",
+      "ClimateRef": null,
+      "TerrainRef": null,
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "010_DimLocation.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "LocationGuid": "5e7d9319-19f0-47c4-bc17-cbfd933fe2d1",
+      "EntityKey": 693,
+      "ParentLocationKey": null,
+      "LocationType": "Station",
+      "RegionCode": "UNKNOWN",
+      "ClimateRef": null,
+      "TerrainRef": null,
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "010_DimLocation.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "LocationGuid": "8303800f-23d6-4ab6-a4d0-d79df465a3b3",
+      "EntityKey": 694,
+      "ParentLocationKey": null,
+      "LocationType": "Facility",
+      "RegionCode": "UNKNOWN",
+      "ClimateRef": null,
+      "TerrainRef": null,
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "010_DimLocation.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "LocationGuid": "5bac6170-9055-428a-b08e-c430f4bcac45",
+      "EntityKey": 695,
+      "ParentLocationKey": null,
+      "LocationType": "Facility",
+      "RegionCode": "UNKNOWN",
+      "ClimateRef": null,
+      "TerrainRef": null,
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "010_DimLocation.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
     }
   ]
 }

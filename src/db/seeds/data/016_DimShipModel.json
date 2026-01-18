@@ -158,6 +158,90 @@
       "Notes": "Synthetic seed data",
       "SourceSystem": "seed_loader",
       "SourceRef": "016_DimShipModel.json"
+    },
+    {
+      "ShipModelGuid": "e62fadd8-05b8-4a5b-a5c0-6d9af4f940fb",
+      "TechAssetKey": 68,
+      "ShipClass": "Military",
+      "PropulsionType": "Ion",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "016_DimShipModel.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "ShipModelGuid": "c400e929-06fb-4ad1-a9ad-529ab4247a76",
+      "TechAssetKey": 69,
+      "ShipClass": "Military",
+      "PropulsionType": "Ion",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "016_DimShipModel.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "ShipModelGuid": "d405e6fe-b2ff-4357-8840-edecce08390d",
+      "TechAssetKey": 70,
+      "ShipClass": "Military",
+      "PropulsionType": "Ion",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "016_DimShipModel.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "ShipModelGuid": "b114bb3b-a117-448b-ac72-040fd8a25aa4",
+      "TechAssetKey": 71,
+      "ShipClass": "Military",
+      "PropulsionType": "Ion",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "016_DimShipModel.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "ShipModelGuid": "385bb438-113e-46fd-9e8f-fb8ed0ab7293",
+      "TechAssetKey": 72,
+      "ShipClass": "Military",
+      "PropulsionType": "Ion",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "016_DimShipModel.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "ShipModelGuid": "b41311cc-05be-4f8a-94c8-4af72ebbc74c",
+      "TechAssetKey": 73,
+      "ShipClass": "Military",
+      "PropulsionType": "Ion",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "016_DimShipModel.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
     }
   ]
 }

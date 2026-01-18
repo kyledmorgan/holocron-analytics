@@ -1251,6 +1251,2246 @@
       "Notes": "Synthetic seed data",
       "SourceSystem": "seed_loader",
       "SourceRef": "008_DimScene.json"
+    },
+    {
+      "SceneGuid": "fd9c0d06-5d49-4c61-a2aa-0a2d9889b142",
+      "WorkKey": 154,
+      "SceneOrdinal": 1,
+      "SceneName": "Mission 01 Secret Base - Insertion",
+      "SceneType": "MissionSegment",
+      "StartSec": null,
+      "EndSec": null,
+      "DurationSec": null,
+      "LocationHint": "Secret Base - Insertion Zone",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "008_DimScene.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces",
+        "missionName": "Secret Base"
+      }
+    },
+    {
+      "SceneGuid": "7aec50b7-0f32-4636-a241-94c208a058d8",
+      "WorkKey": 154,
+      "SceneOrdinal": 2,
+      "SceneName": "Mission 01 Secret Base - Perimeter",
+      "SceneType": "MissionSegment",
+      "StartSec": null,
+      "EndSec": null,
+      "DurationSec": null,
+      "LocationHint": "Secret Base - Perimeter Zone",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "008_DimScene.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces",
+        "missionName": "Secret Base"
+      }
+    },
+    {
+      "SceneGuid": "2f6a3edd-caa8-4002-a975-c29964b89530",
+      "WorkKey": 154,
+      "SceneOrdinal": 3,
+      "SceneName": "Mission 01 Secret Base - Interior Access",
+      "SceneType": "MissionSegment",
+      "StartSec": null,
+      "EndSec": null,
+      "DurationSec": null,
+      "LocationHint": "Secret Base - Interior Access Zone",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "008_DimScene.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces",
+        "missionName": "Secret Base"
+      }
+    },
+    {
+      "SceneGuid": "3ba4c8cf-9213-46e8-bf97-3703b9821338",
+      "WorkKey": 154,
+      "SceneOrdinal": 4,
+      "SceneName": "Mission 01 Secret Base - Security Nodes",
+      "SceneType": "MissionSegment",
+      "StartSec": null,
+      "EndSec": null,
+      "DurationSec": null,
+      "LocationHint": "Secret Base - Security Nodes Zone",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "008_DimScene.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces",
+        "missionName": "Secret Base"
+      }
+    },
+    {
+      "SceneGuid": "e9c32693-5a9e-4e10-94aa-fe4ddaf48ef6",
+      "WorkKey": 154,
+      "SceneOrdinal": 5,
+      "SceneName": "Mission 01 Secret Base - Primary Objective",
+      "SceneType": "MissionSegment",
+      "StartSec": null,
+      "EndSec": null,
+      "DurationSec": null,
+      "LocationHint": "Secret Base - Primary Objective Zone",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "008_DimScene.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces",
+        "missionName": "Secret Base"
+      }
+    },
+    {
+      "SceneGuid": "741eb576-1ee7-4f0b-b22a-1e5f21880b0c",
+      "WorkKey": 154,
+      "SceneOrdinal": 6,
+      "SceneName": "Mission 01 Secret Base - Secondary Objective",
+      "SceneType": "MissionSegment",
+      "StartSec": null,
+      "EndSec": null,
+      "DurationSec": null,
+      "LocationHint": "Secret Base - Secondary Objective Zone",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "008_DimScene.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces",
+        "missionName": "Secret Base"
+      }
+    },
+    {
+      "SceneGuid": "b085ffaa-c869-4b82-a085-6b4819e847ea",
+      "WorkKey": 154,
+      "SceneOrdinal": 7,
+      "SceneName": "Mission 01 Secret Base - Extraction Route",
+      "SceneType": "MissionSegment",
+      "StartSec": null,
+      "EndSec": null,
+      "DurationSec": null,
+      "LocationHint": "Secret Base - Extraction Route Zone",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "008_DimScene.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces",
+        "missionName": "Secret Base"
+      }
+    },
+    {
+      "SceneGuid": "ea4671a4-5d11-4825-9598-2f19d241a729",
+      "WorkKey": 154,
+      "SceneOrdinal": 8,
+      "SceneName": "Mission 01 Secret Base - Evacuation",
+      "SceneType": "MissionSegment",
+      "StartSec": null,
+      "EndSec": null,
+      "DurationSec": null,
+      "LocationHint": "Secret Base - Evacuation Zone",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "008_DimScene.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces",
+        "missionName": "Secret Base"
+      }
+    },
+    {
+      "SceneGuid": "83d7b213-d40f-47d1-a095-2329213f701b",
+      "WorkKey": 154,
+      "SceneOrdinal": 9,
+      "SceneName": "Mission 02 Fuel Station - Insertion",
+      "SceneType": "MissionSegment",
+      "StartSec": null,
+      "EndSec": null,
+      "DurationSec": null,
+      "LocationHint": "Fuel Station - Insertion Zone",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "008_DimScene.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces",
+        "missionName": "Fuel Station"
+      }
+    },
+    {
+      "SceneGuid": "ec29cea7-1312-48ef-bdea-046032cd1d5f",
+      "WorkKey": 154,
+      "SceneOrdinal": 10,
+      "SceneName": "Mission 02 Fuel Station - Perimeter",
+      "SceneType": "MissionSegment",
+      "StartSec": null,
+      "EndSec": null,
+      "DurationSec": null,
+      "LocationHint": "Fuel Station - Perimeter Zone",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "008_DimScene.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces",
+        "missionName": "Fuel Station"
+      }
+    },
+    {
+      "SceneGuid": "29f235b8-a533-4c0e-85b1-77175be6a243",
+      "WorkKey": 154,
+      "SceneOrdinal": 11,
+      "SceneName": "Mission 02 Fuel Station - Interior Access",
+      "SceneType": "MissionSegment",
+      "StartSec": null,
+      "EndSec": null,
+      "DurationSec": null,
+      "LocationHint": "Fuel Station - Interior Access Zone",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "008_DimScene.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces",
+        "missionName": "Fuel Station"
+      }
+    },
+    {
+      "SceneGuid": "abaf1851-4210-491e-8684-48586e975f65",
+      "WorkKey": 154,
+      "SceneOrdinal": 12,
+      "SceneName": "Mission 02 Fuel Station - Security Nodes",
+      "SceneType": "MissionSegment",
+      "StartSec": null,
+      "EndSec": null,
+      "DurationSec": null,
+      "LocationHint": "Fuel Station - Security Nodes Zone",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "008_DimScene.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces",
+        "missionName": "Fuel Station"
+      }
+    },
+    {
+      "SceneGuid": "f8fca5fd-27a6-4db7-bbe3-bf55ba0a9ba0",
+      "WorkKey": 154,
+      "SceneOrdinal": 13,
+      "SceneName": "Mission 02 Fuel Station - Primary Objective",
+      "SceneType": "MissionSegment",
+      "StartSec": null,
+      "EndSec": null,
+      "DurationSec": null,
+      "LocationHint": "Fuel Station - Primary Objective Zone",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "008_DimScene.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces",
+        "missionName": "Fuel Station"
+      }
+    },
+    {
+      "SceneGuid": "bf42f3bb-a84c-4cae-bf64-4d8600d76625",
+      "WorkKey": 154,
+      "SceneOrdinal": 14,
+      "SceneName": "Mission 02 Fuel Station - Secondary Objective",
+      "SceneType": "MissionSegment",
+      "StartSec": null,
+      "EndSec": null,
+      "DurationSec": null,
+      "LocationHint": "Fuel Station - Secondary Objective Zone",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "008_DimScene.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces",
+        "missionName": "Fuel Station"
+      }
+    },
+    {
+      "SceneGuid": "d8c59eb4-f4a8-4034-bf7f-97a1aa83a99b",
+      "WorkKey": 154,
+      "SceneOrdinal": 15,
+      "SceneName": "Mission 02 Fuel Station - Extraction Route",
+      "SceneType": "MissionSegment",
+      "StartSec": null,
+      "EndSec": null,
+      "DurationSec": null,
+      "LocationHint": "Fuel Station - Extraction Route Zone",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "008_DimScene.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces",
+        "missionName": "Fuel Station"
+      }
+    },
+    {
+      "SceneGuid": "8e711a7c-4715-4215-9a34-3c6029d191b6",
+      "WorkKey": 154,
+      "SceneOrdinal": 16,
+      "SceneName": "Mission 02 Fuel Station - Evacuation",
+      "SceneType": "MissionSegment",
+      "StartSec": null,
+      "EndSec": null,
+      "DurationSec": null,
+      "LocationHint": "Fuel Station - Evacuation Zone",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "008_DimScene.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces",
+        "missionName": "Fuel Station"
+      }
+    },
+    {
+      "SceneGuid": "443b777c-509c-43c8-aaeb-702c0bddd336",
+      "WorkKey": 154,
+      "SceneOrdinal": 17,
+      "SceneName": "Mission 03 Research Facility - Insertion",
+      "SceneType": "MissionSegment",
+      "StartSec": null,
+      "EndSec": null,
+      "DurationSec": null,
+      "LocationHint": "Research Facility - Insertion Zone",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "008_DimScene.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces",
+        "missionName": "Research Facility"
+      }
+    },
+    {
+      "SceneGuid": "10ec3ea0-6e86-42dd-973e-de37c56e0840",
+      "WorkKey": 154,
+      "SceneOrdinal": 18,
+      "SceneName": "Mission 03 Research Facility - Perimeter",
+      "SceneType": "MissionSegment",
+      "StartSec": null,
+      "EndSec": null,
+      "DurationSec": null,
+      "LocationHint": "Research Facility - Perimeter Zone",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "008_DimScene.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces",
+        "missionName": "Research Facility"
+      }
+    },
+    {
+      "SceneGuid": "7100f053-2a66-4861-a333-c6955b77b2e8",
+      "WorkKey": 154,
+      "SceneOrdinal": 19,
+      "SceneName": "Mission 03 Research Facility - Interior Access",
+      "SceneType": "MissionSegment",
+      "StartSec": null,
+      "EndSec": null,
+      "DurationSec": null,
+      "LocationHint": "Research Facility - Interior Access Zone",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "008_DimScene.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces",
+        "missionName": "Research Facility"
+      }
+    },
+    {
+      "SceneGuid": "e5ea6f18-2b1f-41a4-a65c-2b32b19c2347",
+      "WorkKey": 154,
+      "SceneOrdinal": 20,
+      "SceneName": "Mission 03 Research Facility - Security Nodes",
+      "SceneType": "MissionSegment",
+      "StartSec": null,
+      "EndSec": null,
+      "DurationSec": null,
+      "LocationHint": "Research Facility - Security Nodes Zone",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "008_DimScene.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces",
+        "missionName": "Research Facility"
+      }
+    },
+    {
+      "SceneGuid": "abe3e8f3-4a85-413a-8354-7752986b3737",
+      "WorkKey": 154,
+      "SceneOrdinal": 21,
+      "SceneName": "Mission 03 Research Facility - Primary Objective",
+      "SceneType": "MissionSegment",
+      "StartSec": null,
+      "EndSec": null,
+      "DurationSec": null,
+      "LocationHint": "Research Facility - Primary Objective Zone",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "008_DimScene.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces",
+        "missionName": "Research Facility"
+      }
+    },
+    {
+      "SceneGuid": "66d2c9b7-1600-4740-8f54-6363e6f95965",
+      "WorkKey": 154,
+      "SceneOrdinal": 22,
+      "SceneName": "Mission 03 Research Facility - Secondary Objective",
+      "SceneType": "MissionSegment",
+      "StartSec": null,
+      "EndSec": null,
+      "DurationSec": null,
+      "LocationHint": "Research Facility - Secondary Objective Zone",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "008_DimScene.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces",
+        "missionName": "Research Facility"
+      }
+    },
+    {
+      "SceneGuid": "0ac217d9-d1a5-4a19-b148-f49e690a1345",
+      "WorkKey": 154,
+      "SceneOrdinal": 23,
+      "SceneName": "Mission 03 Research Facility - Extraction Route",
+      "SceneType": "MissionSegment",
+      "StartSec": null,
+      "EndSec": null,
+      "DurationSec": null,
+      "LocationHint": "Research Facility - Extraction Route Zone",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "008_DimScene.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces",
+        "missionName": "Research Facility"
+      }
+    },
+    {
+      "SceneGuid": "b27b707c-2310-4b9f-b7ac-428573e41727",
+      "WorkKey": 154,
+      "SceneOrdinal": 24,
+      "SceneName": "Mission 03 Research Facility - Evacuation",
+      "SceneType": "MissionSegment",
+      "StartSec": null,
+      "EndSec": null,
+      "DurationSec": null,
+      "LocationHint": "Research Facility - Evacuation Zone",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "008_DimScene.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces",
+        "missionName": "Research Facility"
+      }
+    },
+    {
+      "SceneGuid": "55f8686e-a4bf-4df4-8981-c0398b810684",
+      "WorkKey": 154,
+      "SceneOrdinal": 25,
+      "SceneName": "Mission 04 Detention Block - Insertion",
+      "SceneType": "MissionSegment",
+      "StartSec": null,
+      "EndSec": null,
+      "DurationSec": null,
+      "LocationHint": "Detention Block - Insertion Zone",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "008_DimScene.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces",
+        "missionName": "Detention Block"
+      }
+    },
+    {
+      "SceneGuid": "93c86b2b-e7cb-4cb6-9bcf-1cb263cdb6d5",
+      "WorkKey": 154,
+      "SceneOrdinal": 26,
+      "SceneName": "Mission 04 Detention Block - Perimeter",
+      "SceneType": "MissionSegment",
+      "StartSec": null,
+      "EndSec": null,
+      "DurationSec": null,
+      "LocationHint": "Detention Block - Perimeter Zone",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "008_DimScene.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces",
+        "missionName": "Detention Block"
+      }
+    },
+    {
+      "SceneGuid": "85edefac-12ec-49b7-9b5f-a2734c1d5ba2",
+      "WorkKey": 154,
+      "SceneOrdinal": 27,
+      "SceneName": "Mission 04 Detention Block - Interior Access",
+      "SceneType": "MissionSegment",
+      "StartSec": null,
+      "EndSec": null,
+      "DurationSec": null,
+      "LocationHint": "Detention Block - Interior Access Zone",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "008_DimScene.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces",
+        "missionName": "Detention Block"
+      }
+    },
+    {
+      "SceneGuid": "35ead82f-d864-4245-9a43-2df6691bc86c",
+      "WorkKey": 154,
+      "SceneOrdinal": 28,
+      "SceneName": "Mission 04 Detention Block - Security Nodes",
+      "SceneType": "MissionSegment",
+      "StartSec": null,
+      "EndSec": null,
+      "DurationSec": null,
+      "LocationHint": "Detention Block - Security Nodes Zone",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "008_DimScene.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces",
+        "missionName": "Detention Block"
+      }
+    },
+    {
+      "SceneGuid": "a02b4872-9925-405a-89d4-f31b4a48a39c",
+      "WorkKey": 154,
+      "SceneOrdinal": 29,
+      "SceneName": "Mission 04 Detention Block - Primary Objective",
+      "SceneType": "MissionSegment",
+      "StartSec": null,
+      "EndSec": null,
+      "DurationSec": null,
+      "LocationHint": "Detention Block - Primary Objective Zone",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "008_DimScene.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces",
+        "missionName": "Detention Block"
+      }
+    },
+    {
+      "SceneGuid": "2d2d2f69-a2cd-45fe-a933-daf430d2c851",
+      "WorkKey": 154,
+      "SceneOrdinal": 30,
+      "SceneName": "Mission 04 Detention Block - Secondary Objective",
+      "SceneType": "MissionSegment",
+      "StartSec": null,
+      "EndSec": null,
+      "DurationSec": null,
+      "LocationHint": "Detention Block - Secondary Objective Zone",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "008_DimScene.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces",
+        "missionName": "Detention Block"
+      }
+    },
+    {
+      "SceneGuid": "23a2fa43-ec0c-4717-9998-b041cff6f9a1",
+      "WorkKey": 154,
+      "SceneOrdinal": 31,
+      "SceneName": "Mission 04 Detention Block - Extraction Route",
+      "SceneType": "MissionSegment",
+      "StartSec": null,
+      "EndSec": null,
+      "DurationSec": null,
+      "LocationHint": "Detention Block - Extraction Route Zone",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "008_DimScene.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces",
+        "missionName": "Detention Block"
+      }
+    },
+    {
+      "SceneGuid": "b343b334-254c-4ce6-90a4-56187404671e",
+      "WorkKey": 154,
+      "SceneOrdinal": 32,
+      "SceneName": "Mission 04 Detention Block - Evacuation",
+      "SceneType": "MissionSegment",
+      "StartSec": null,
+      "EndSec": null,
+      "DurationSec": null,
+      "LocationHint": "Detention Block - Evacuation Zone",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "008_DimScene.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces",
+        "missionName": "Detention Block"
+      }
+    },
+    {
+      "SceneGuid": "199c8ad6-51c6-48cf-9465-f09bd4e3b3c5",
+      "WorkKey": 154,
+      "SceneOrdinal": 33,
+      "SceneName": "Mission 05 Nar Shaddaa - Insertion",
+      "SceneType": "MissionSegment",
+      "StartSec": null,
+      "EndSec": null,
+      "DurationSec": null,
+      "LocationHint": "Nar Shaddaa - Insertion Zone",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "008_DimScene.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces",
+        "missionName": "Nar Shaddaa"
+      }
+    },
+    {
+      "SceneGuid": "05b6d8c8-8243-466d-8ae1-9de977ab05ce",
+      "WorkKey": 154,
+      "SceneOrdinal": 34,
+      "SceneName": "Mission 05 Nar Shaddaa - Perimeter",
+      "SceneType": "MissionSegment",
+      "StartSec": null,
+      "EndSec": null,
+      "DurationSec": null,
+      "LocationHint": "Nar Shaddaa - Perimeter Zone",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "008_DimScene.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces",
+        "missionName": "Nar Shaddaa"
+      }
+    },
+    {
+      "SceneGuid": "74802ff8-1e3d-4607-b549-9aaaa1521497",
+      "WorkKey": 154,
+      "SceneOrdinal": 35,
+      "SceneName": "Mission 05 Nar Shaddaa - Interior Access",
+      "SceneType": "MissionSegment",
+      "StartSec": null,
+      "EndSec": null,
+      "DurationSec": null,
+      "LocationHint": "Nar Shaddaa - Interior Access Zone",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "008_DimScene.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces",
+        "missionName": "Nar Shaddaa"
+      }
+    },
+    {
+      "SceneGuid": "1de424a9-6dca-4635-bf83-84daf82af253",
+      "WorkKey": 154,
+      "SceneOrdinal": 36,
+      "SceneName": "Mission 05 Nar Shaddaa - Security Nodes",
+      "SceneType": "MissionSegment",
+      "StartSec": null,
+      "EndSec": null,
+      "DurationSec": null,
+      "LocationHint": "Nar Shaddaa - Security Nodes Zone",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "008_DimScene.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces",
+        "missionName": "Nar Shaddaa"
+      }
+    },
+    {
+      "SceneGuid": "c129ca74-1a0e-4fb9-925f-f37e8dbe0cba",
+      "WorkKey": 154,
+      "SceneOrdinal": 37,
+      "SceneName": "Mission 05 Nar Shaddaa - Primary Objective",
+      "SceneType": "MissionSegment",
+      "StartSec": null,
+      "EndSec": null,
+      "DurationSec": null,
+      "LocationHint": "Nar Shaddaa - Primary Objective Zone",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "008_DimScene.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces",
+        "missionName": "Nar Shaddaa"
+      }
+    },
+    {
+      "SceneGuid": "7bd3ecac-8fbe-4d72-a152-4da293481962",
+      "WorkKey": 154,
+      "SceneOrdinal": 38,
+      "SceneName": "Mission 05 Nar Shaddaa - Secondary Objective",
+      "SceneType": "MissionSegment",
+      "StartSec": null,
+      "EndSec": null,
+      "DurationSec": null,
+      "LocationHint": "Nar Shaddaa - Secondary Objective Zone",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "008_DimScene.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces",
+        "missionName": "Nar Shaddaa"
+      }
+    },
+    {
+      "SceneGuid": "5dece9be-488d-493c-94ca-9304a4606106",
+      "WorkKey": 154,
+      "SceneOrdinal": 39,
+      "SceneName": "Mission 05 Nar Shaddaa - Extraction Route",
+      "SceneType": "MissionSegment",
+      "StartSec": null,
+      "EndSec": null,
+      "DurationSec": null,
+      "LocationHint": "Nar Shaddaa - Extraction Route Zone",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "008_DimScene.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces",
+        "missionName": "Nar Shaddaa"
+      }
+    },
+    {
+      "SceneGuid": "a6428c76-89d9-4a97-adf1-fe0ef1247289",
+      "WorkKey": 154,
+      "SceneOrdinal": 40,
+      "SceneName": "Mission 05 Nar Shaddaa - Evacuation",
+      "SceneType": "MissionSegment",
+      "StartSec": null,
+      "EndSec": null,
+      "DurationSec": null,
+      "LocationHint": "Nar Shaddaa - Evacuation Zone",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "008_DimScene.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces",
+        "missionName": "Nar Shaddaa"
+      }
+    },
+    {
+      "SceneGuid": "9c967df9-2706-4bd5-9213-b269d7df2c3d",
+      "WorkKey": 154,
+      "SceneOrdinal": 41,
+      "SceneName": "Mission 06 Imperial City - Insertion",
+      "SceneType": "MissionSegment",
+      "StartSec": null,
+      "EndSec": null,
+      "DurationSec": null,
+      "LocationHint": "Imperial City - Insertion Zone",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "008_DimScene.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces",
+        "missionName": "Imperial City"
+      }
+    },
+    {
+      "SceneGuid": "d7fdda9e-2e76-4ddb-b9ed-f9a381d34cd5",
+      "WorkKey": 154,
+      "SceneOrdinal": 42,
+      "SceneName": "Mission 06 Imperial City - Perimeter",
+      "SceneType": "MissionSegment",
+      "StartSec": null,
+      "EndSec": null,
+      "DurationSec": null,
+      "LocationHint": "Imperial City - Perimeter Zone",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "008_DimScene.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces",
+        "missionName": "Imperial City"
+      }
+    },
+    {
+      "SceneGuid": "c2db902f-69fc-4b40-82ec-91054e2853df",
+      "WorkKey": 154,
+      "SceneOrdinal": 43,
+      "SceneName": "Mission 06 Imperial City - Interior Access",
+      "SceneType": "MissionSegment",
+      "StartSec": null,
+      "EndSec": null,
+      "DurationSec": null,
+      "LocationHint": "Imperial City - Interior Access Zone",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "008_DimScene.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces",
+        "missionName": "Imperial City"
+      }
+    },
+    {
+      "SceneGuid": "c6efee47-e5ae-4134-b6ae-ff9d9991d936",
+      "WorkKey": 154,
+      "SceneOrdinal": 44,
+      "SceneName": "Mission 06 Imperial City - Security Nodes",
+      "SceneType": "MissionSegment",
+      "StartSec": null,
+      "EndSec": null,
+      "DurationSec": null,
+      "LocationHint": "Imperial City - Security Nodes Zone",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "008_DimScene.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces",
+        "missionName": "Imperial City"
+      }
+    },
+    {
+      "SceneGuid": "ed8d2398-7fe6-46b8-85bf-6fc26b952a08",
+      "WorkKey": 154,
+      "SceneOrdinal": 45,
+      "SceneName": "Mission 06 Imperial City - Primary Objective",
+      "SceneType": "MissionSegment",
+      "StartSec": null,
+      "EndSec": null,
+      "DurationSec": null,
+      "LocationHint": "Imperial City - Primary Objective Zone",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "008_DimScene.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces",
+        "missionName": "Imperial City"
+      }
+    },
+    {
+      "SceneGuid": "318bfbeb-0f77-4c21-9528-bd0c45ff7c91",
+      "WorkKey": 154,
+      "SceneOrdinal": 46,
+      "SceneName": "Mission 06 Imperial City - Secondary Objective",
+      "SceneType": "MissionSegment",
+      "StartSec": null,
+      "EndSec": null,
+      "DurationSec": null,
+      "LocationHint": "Imperial City - Secondary Objective Zone",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "008_DimScene.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces",
+        "missionName": "Imperial City"
+      }
+    },
+    {
+      "SceneGuid": "20e6e337-7ace-4d7c-b2e1-4e094d9c14c5",
+      "WorkKey": 154,
+      "SceneOrdinal": 47,
+      "SceneName": "Mission 06 Imperial City - Extraction Route",
+      "SceneType": "MissionSegment",
+      "StartSec": null,
+      "EndSec": null,
+      "DurationSec": null,
+      "LocationHint": "Imperial City - Extraction Route Zone",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "008_DimScene.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces",
+        "missionName": "Imperial City"
+      }
+    },
+    {
+      "SceneGuid": "c39a806d-eb7f-4b72-82b7-37e41f495283",
+      "WorkKey": 154,
+      "SceneOrdinal": 48,
+      "SceneName": "Mission 06 Imperial City - Evacuation",
+      "SceneType": "MissionSegment",
+      "StartSec": null,
+      "EndSec": null,
+      "DurationSec": null,
+      "LocationHint": "Imperial City - Evacuation Zone",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "008_DimScene.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces",
+        "missionName": "Imperial City"
+      }
+    },
+    {
+      "SceneGuid": "25b8e869-a94e-4344-acd0-0bf9fe1704d6",
+      "WorkKey": 154,
+      "SceneOrdinal": 49,
+      "SceneName": "Mission 07 Arc Hammer Approach - Insertion",
+      "SceneType": "MissionSegment",
+      "StartSec": null,
+      "EndSec": null,
+      "DurationSec": null,
+      "LocationHint": "Arc Hammer Approach - Insertion Zone",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "008_DimScene.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces",
+        "missionName": "Arc Hammer Approach"
+      }
+    },
+    {
+      "SceneGuid": "7f68d8bc-d686-44f3-85d4-cd67a0e9f3bd",
+      "WorkKey": 154,
+      "SceneOrdinal": 50,
+      "SceneName": "Mission 07 Arc Hammer Approach - Perimeter",
+      "SceneType": "MissionSegment",
+      "StartSec": null,
+      "EndSec": null,
+      "DurationSec": null,
+      "LocationHint": "Arc Hammer Approach - Perimeter Zone",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "008_DimScene.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces",
+        "missionName": "Arc Hammer Approach"
+      }
+    },
+    {
+      "SceneGuid": "53dec6fa-3a97-46eb-8964-2eb8c8febfa8",
+      "WorkKey": 154,
+      "SceneOrdinal": 51,
+      "SceneName": "Mission 07 Arc Hammer Approach - Interior Access",
+      "SceneType": "MissionSegment",
+      "StartSec": null,
+      "EndSec": null,
+      "DurationSec": null,
+      "LocationHint": "Arc Hammer Approach - Interior Access Zone",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "008_DimScene.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces",
+        "missionName": "Arc Hammer Approach"
+      }
+    },
+    {
+      "SceneGuid": "7957bfe6-0f5e-469c-87d6-aa366b450043",
+      "WorkKey": 154,
+      "SceneOrdinal": 52,
+      "SceneName": "Mission 07 Arc Hammer Approach - Security Nodes",
+      "SceneType": "MissionSegment",
+      "StartSec": null,
+      "EndSec": null,
+      "DurationSec": null,
+      "LocationHint": "Arc Hammer Approach - Security Nodes Zone",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "008_DimScene.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces",
+        "missionName": "Arc Hammer Approach"
+      }
+    },
+    {
+      "SceneGuid": "3e1b1cea-cedc-4e06-b1f0-983212121018",
+      "WorkKey": 154,
+      "SceneOrdinal": 53,
+      "SceneName": "Mission 07 Arc Hammer Approach - Primary Objective",
+      "SceneType": "MissionSegment",
+      "StartSec": null,
+      "EndSec": null,
+      "DurationSec": null,
+      "LocationHint": "Arc Hammer Approach - Primary Objective Zone",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "008_DimScene.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces",
+        "missionName": "Arc Hammer Approach"
+      }
+    },
+    {
+      "SceneGuid": "6cffdc7e-754e-437f-ab92-904ef873520a",
+      "WorkKey": 154,
+      "SceneOrdinal": 54,
+      "SceneName": "Mission 07 Arc Hammer Approach - Secondary Objective",
+      "SceneType": "MissionSegment",
+      "StartSec": null,
+      "EndSec": null,
+      "DurationSec": null,
+      "LocationHint": "Arc Hammer Approach - Secondary Objective Zone",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "008_DimScene.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces",
+        "missionName": "Arc Hammer Approach"
+      }
+    },
+    {
+      "SceneGuid": "b7a355d8-1361-462f-9337-256874d10ce0",
+      "WorkKey": 154,
+      "SceneOrdinal": 55,
+      "SceneName": "Mission 07 Arc Hammer Approach - Extraction Route",
+      "SceneType": "MissionSegment",
+      "StartSec": null,
+      "EndSec": null,
+      "DurationSec": null,
+      "LocationHint": "Arc Hammer Approach - Extraction Route Zone",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "008_DimScene.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces",
+        "missionName": "Arc Hammer Approach"
+      }
+    },
+    {
+      "SceneGuid": "23b8bb57-335a-40f3-b573-6e3b6d4983fe",
+      "WorkKey": 154,
+      "SceneOrdinal": 56,
+      "SceneName": "Mission 07 Arc Hammer Approach - Evacuation",
+      "SceneType": "MissionSegment",
+      "StartSec": null,
+      "EndSec": null,
+      "DurationSec": null,
+      "LocationHint": "Arc Hammer Approach - Evacuation Zone",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "008_DimScene.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces",
+        "missionName": "Arc Hammer Approach"
+      }
+    },
+    {
+      "SceneGuid": "bcdc7fb1-0055-43cc-8b65-a9cd4b6ee79e",
+      "WorkKey": 154,
+      "SceneOrdinal": 57,
+      "SceneName": "Mission 08 Arc Hammer Boarding - Insertion",
+      "SceneType": "MissionSegment",
+      "StartSec": null,
+      "EndSec": null,
+      "DurationSec": null,
+      "LocationHint": "Arc Hammer Boarding - Insertion Zone",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "008_DimScene.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces",
+        "missionName": "Arc Hammer Boarding"
+      }
+    },
+    {
+      "SceneGuid": "121eee46-ab6a-4aff-9e9e-a9f07b25477d",
+      "WorkKey": 154,
+      "SceneOrdinal": 58,
+      "SceneName": "Mission 08 Arc Hammer Boarding - Perimeter",
+      "SceneType": "MissionSegment",
+      "StartSec": null,
+      "EndSec": null,
+      "DurationSec": null,
+      "LocationHint": "Arc Hammer Boarding - Perimeter Zone",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "008_DimScene.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces",
+        "missionName": "Arc Hammer Boarding"
+      }
+    },
+    {
+      "SceneGuid": "6bf6999c-6ace-400c-925f-bde8c9baf189",
+      "WorkKey": 154,
+      "SceneOrdinal": 59,
+      "SceneName": "Mission 08 Arc Hammer Boarding - Interior Access",
+      "SceneType": "MissionSegment",
+      "StartSec": null,
+      "EndSec": null,
+      "DurationSec": null,
+      "LocationHint": "Arc Hammer Boarding - Interior Access Zone",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "008_DimScene.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces",
+        "missionName": "Arc Hammer Boarding"
+      }
+    },
+    {
+      "SceneGuid": "ac094ba8-7cc4-4b43-8b24-d839c5dc835f",
+      "WorkKey": 154,
+      "SceneOrdinal": 60,
+      "SceneName": "Mission 08 Arc Hammer Boarding - Security Nodes",
+      "SceneType": "MissionSegment",
+      "StartSec": null,
+      "EndSec": null,
+      "DurationSec": null,
+      "LocationHint": "Arc Hammer Boarding - Security Nodes Zone",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "008_DimScene.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces",
+        "missionName": "Arc Hammer Boarding"
+      }
+    },
+    {
+      "SceneGuid": "016b27e2-30d1-4dc9-85fc-dee18e8505e7",
+      "WorkKey": 154,
+      "SceneOrdinal": 61,
+      "SceneName": "Mission 08 Arc Hammer Boarding - Primary Objective",
+      "SceneType": "MissionSegment",
+      "StartSec": null,
+      "EndSec": null,
+      "DurationSec": null,
+      "LocationHint": "Arc Hammer Boarding - Primary Objective Zone",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "008_DimScene.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces",
+        "missionName": "Arc Hammer Boarding"
+      }
+    },
+    {
+      "SceneGuid": "3abd8975-3978-4420-a34c-fbd2860f5a96",
+      "WorkKey": 154,
+      "SceneOrdinal": 62,
+      "SceneName": "Mission 08 Arc Hammer Boarding - Secondary Objective",
+      "SceneType": "MissionSegment",
+      "StartSec": null,
+      "EndSec": null,
+      "DurationSec": null,
+      "LocationHint": "Arc Hammer Boarding - Secondary Objective Zone",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "008_DimScene.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces",
+        "missionName": "Arc Hammer Boarding"
+      }
+    },
+    {
+      "SceneGuid": "4a91e132-3b11-47f7-8844-04e349b0b01c",
+      "WorkKey": 154,
+      "SceneOrdinal": 63,
+      "SceneName": "Mission 08 Arc Hammer Boarding - Extraction Route",
+      "SceneType": "MissionSegment",
+      "StartSec": null,
+      "EndSec": null,
+      "DurationSec": null,
+      "LocationHint": "Arc Hammer Boarding - Extraction Route Zone",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "008_DimScene.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces",
+        "missionName": "Arc Hammer Boarding"
+      }
+    },
+    {
+      "SceneGuid": "cef9ee33-7ea7-4ab7-b2c9-c776a2765aca",
+      "WorkKey": 154,
+      "SceneOrdinal": 64,
+      "SceneName": "Mission 08 Arc Hammer Boarding - Evacuation",
+      "SceneType": "MissionSegment",
+      "StartSec": null,
+      "EndSec": null,
+      "DurationSec": null,
+      "LocationHint": "Arc Hammer Boarding - Evacuation Zone",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "008_DimScene.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces",
+        "missionName": "Arc Hammer Boarding"
+      }
+    },
+    {
+      "SceneGuid": "f52a6101-42df-473b-b9c9-1da6597036c1",
+      "WorkKey": 154,
+      "SceneOrdinal": 65,
+      "SceneName": "Mission 09 Arc Hammer Core - Insertion",
+      "SceneType": "MissionSegment",
+      "StartSec": null,
+      "EndSec": null,
+      "DurationSec": null,
+      "LocationHint": "Arc Hammer Core - Insertion Zone",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "008_DimScene.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces",
+        "missionName": "Arc Hammer Core"
+      }
+    },
+    {
+      "SceneGuid": "8c17cb46-f853-4ddc-a39d-d61d1bf3c8a2",
+      "WorkKey": 154,
+      "SceneOrdinal": 66,
+      "SceneName": "Mission 09 Arc Hammer Core - Perimeter",
+      "SceneType": "MissionSegment",
+      "StartSec": null,
+      "EndSec": null,
+      "DurationSec": null,
+      "LocationHint": "Arc Hammer Core - Perimeter Zone",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "008_DimScene.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces",
+        "missionName": "Arc Hammer Core"
+      }
+    },
+    {
+      "SceneGuid": "b180b214-01b3-4260-8bea-139c4ee2b600",
+      "WorkKey": 154,
+      "SceneOrdinal": 67,
+      "SceneName": "Mission 09 Arc Hammer Core - Interior Access",
+      "SceneType": "MissionSegment",
+      "StartSec": null,
+      "EndSec": null,
+      "DurationSec": null,
+      "LocationHint": "Arc Hammer Core - Interior Access Zone",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "008_DimScene.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces",
+        "missionName": "Arc Hammer Core"
+      }
+    },
+    {
+      "SceneGuid": "38048614-79f2-4170-9675-2d42f06242ad",
+      "WorkKey": 154,
+      "SceneOrdinal": 68,
+      "SceneName": "Mission 09 Arc Hammer Core - Security Nodes",
+      "SceneType": "MissionSegment",
+      "StartSec": null,
+      "EndSec": null,
+      "DurationSec": null,
+      "LocationHint": "Arc Hammer Core - Security Nodes Zone",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "008_DimScene.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces",
+        "missionName": "Arc Hammer Core"
+      }
+    },
+    {
+      "SceneGuid": "8c81cc93-7e96-4211-845b-9128cc58824c",
+      "WorkKey": 154,
+      "SceneOrdinal": 69,
+      "SceneName": "Mission 09 Arc Hammer Core - Primary Objective",
+      "SceneType": "MissionSegment",
+      "StartSec": null,
+      "EndSec": null,
+      "DurationSec": null,
+      "LocationHint": "Arc Hammer Core - Primary Objective Zone",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "008_DimScene.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces",
+        "missionName": "Arc Hammer Core"
+      }
+    },
+    {
+      "SceneGuid": "4bfa6d97-3e56-4e4a-8e38-e2f1bf4ca5cd",
+      "WorkKey": 154,
+      "SceneOrdinal": 70,
+      "SceneName": "Mission 09 Arc Hammer Core - Secondary Objective",
+      "SceneType": "MissionSegment",
+      "StartSec": null,
+      "EndSec": null,
+      "DurationSec": null,
+      "LocationHint": "Arc Hammer Core - Secondary Objective Zone",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "008_DimScene.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces",
+        "missionName": "Arc Hammer Core"
+      }
+    },
+    {
+      "SceneGuid": "68d9c4af-54b5-45b8-9895-bb36b7b1dbd4",
+      "WorkKey": 154,
+      "SceneOrdinal": 71,
+      "SceneName": "Mission 09 Arc Hammer Core - Extraction Route",
+      "SceneType": "MissionSegment",
+      "StartSec": null,
+      "EndSec": null,
+      "DurationSec": null,
+      "LocationHint": "Arc Hammer Core - Extraction Route Zone",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "008_DimScene.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces",
+        "missionName": "Arc Hammer Core"
+      }
+    },
+    {
+      "SceneGuid": "c979205d-1fb4-4e35-a7ef-b4541f917c51",
+      "WorkKey": 154,
+      "SceneOrdinal": 72,
+      "SceneName": "Mission 09 Arc Hammer Core - Evacuation",
+      "SceneType": "MissionSegment",
+      "StartSec": null,
+      "EndSec": null,
+      "DurationSec": null,
+      "LocationHint": "Arc Hammer Core - Evacuation Zone",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "008_DimScene.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces",
+        "missionName": "Arc Hammer Core"
+      }
+    },
+    {
+      "SceneGuid": "a78e8fbc-30b5-44ee-8cc5-c15cccda018a",
+      "WorkKey": 154,
+      "SceneOrdinal": 73,
+      "SceneName": "Mission 10 Arc Hammer Escape - Insertion",
+      "SceneType": "MissionSegment",
+      "StartSec": null,
+      "EndSec": null,
+      "DurationSec": null,
+      "LocationHint": "Arc Hammer Escape - Insertion Zone",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "008_DimScene.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces",
+        "missionName": "Arc Hammer Escape"
+      }
+    },
+    {
+      "SceneGuid": "bdec2bd8-5b08-41a4-b8c7-d4938517bf0d",
+      "WorkKey": 154,
+      "SceneOrdinal": 74,
+      "SceneName": "Mission 10 Arc Hammer Escape - Perimeter",
+      "SceneType": "MissionSegment",
+      "StartSec": null,
+      "EndSec": null,
+      "DurationSec": null,
+      "LocationHint": "Arc Hammer Escape - Perimeter Zone",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "008_DimScene.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces",
+        "missionName": "Arc Hammer Escape"
+      }
+    },
+    {
+      "SceneGuid": "13ae250b-d13f-4869-bc98-0caea241028b",
+      "WorkKey": 154,
+      "SceneOrdinal": 75,
+      "SceneName": "Mission 10 Arc Hammer Escape - Interior Access",
+      "SceneType": "MissionSegment",
+      "StartSec": null,
+      "EndSec": null,
+      "DurationSec": null,
+      "LocationHint": "Arc Hammer Escape - Interior Access Zone",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "008_DimScene.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces",
+        "missionName": "Arc Hammer Escape"
+      }
+    },
+    {
+      "SceneGuid": "7ed299e8-c931-4e38-bd62-34ad7e483f7c",
+      "WorkKey": 154,
+      "SceneOrdinal": 76,
+      "SceneName": "Mission 10 Arc Hammer Escape - Security Nodes",
+      "SceneType": "MissionSegment",
+      "StartSec": null,
+      "EndSec": null,
+      "DurationSec": null,
+      "LocationHint": "Arc Hammer Escape - Security Nodes Zone",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "008_DimScene.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces",
+        "missionName": "Arc Hammer Escape"
+      }
+    },
+    {
+      "SceneGuid": "7ff5f653-e7a5-416e-bd8a-fd2fc71b3365",
+      "WorkKey": 154,
+      "SceneOrdinal": 77,
+      "SceneName": "Mission 10 Arc Hammer Escape - Primary Objective",
+      "SceneType": "MissionSegment",
+      "StartSec": null,
+      "EndSec": null,
+      "DurationSec": null,
+      "LocationHint": "Arc Hammer Escape - Primary Objective Zone",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "008_DimScene.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces",
+        "missionName": "Arc Hammer Escape"
+      }
+    },
+    {
+      "SceneGuid": "2e041792-1fd8-4edf-a4f3-7ad913960195",
+      "WorkKey": 154,
+      "SceneOrdinal": 78,
+      "SceneName": "Mission 10 Arc Hammer Escape - Secondary Objective",
+      "SceneType": "MissionSegment",
+      "StartSec": null,
+      "EndSec": null,
+      "DurationSec": null,
+      "LocationHint": "Arc Hammer Escape - Secondary Objective Zone",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "008_DimScene.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces",
+        "missionName": "Arc Hammer Escape"
+      }
+    },
+    {
+      "SceneGuid": "50a98e69-c965-4869-8492-56ee7272440d",
+      "WorkKey": 154,
+      "SceneOrdinal": 79,
+      "SceneName": "Mission 10 Arc Hammer Escape - Extraction Route",
+      "SceneType": "MissionSegment",
+      "StartSec": null,
+      "EndSec": null,
+      "DurationSec": null,
+      "LocationHint": "Arc Hammer Escape - Extraction Route Zone",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "008_DimScene.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces",
+        "missionName": "Arc Hammer Escape"
+      }
+    },
+    {
+      "SceneGuid": "4eabbd35-ad35-4e6a-812a-58dedc18460e",
+      "WorkKey": 154,
+      "SceneOrdinal": 80,
+      "SceneName": "Mission 10 Arc Hammer Escape - Evacuation",
+      "SceneType": "MissionSegment",
+      "StartSec": null,
+      "EndSec": null,
+      "DurationSec": null,
+      "LocationHint": "Arc Hammer Escape - Evacuation Zone",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "008_DimScene.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces",
+        "missionName": "Arc Hammer Escape"
+      }
+    },
+    {
+      "SceneGuid": "1f3a718a-4cf1-483a-8c41-c23ffe936f8d",
+      "WorkKey": 154,
+      "SceneOrdinal": 81,
+      "SceneName": "Mission 11 Gromas Mines - Insertion",
+      "SceneType": "MissionSegment",
+      "StartSec": null,
+      "EndSec": null,
+      "DurationSec": null,
+      "LocationHint": "Gromas Mines - Insertion Zone",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "008_DimScene.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces",
+        "missionName": "Gromas Mines"
+      }
+    },
+    {
+      "SceneGuid": "a19948a2-39d1-45cc-9f2b-59c602bf9104",
+      "WorkKey": 154,
+      "SceneOrdinal": 82,
+      "SceneName": "Mission 11 Gromas Mines - Perimeter",
+      "SceneType": "MissionSegment",
+      "StartSec": null,
+      "EndSec": null,
+      "DurationSec": null,
+      "LocationHint": "Gromas Mines - Perimeter Zone",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "008_DimScene.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces",
+        "missionName": "Gromas Mines"
+      }
+    },
+    {
+      "SceneGuid": "881b7089-36f9-426b-9adb-fa691caa5741",
+      "WorkKey": 154,
+      "SceneOrdinal": 83,
+      "SceneName": "Mission 11 Gromas Mines - Interior Access",
+      "SceneType": "MissionSegment",
+      "StartSec": null,
+      "EndSec": null,
+      "DurationSec": null,
+      "LocationHint": "Gromas Mines - Interior Access Zone",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "008_DimScene.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces",
+        "missionName": "Gromas Mines"
+      }
+    },
+    {
+      "SceneGuid": "ba743baf-1814-4716-9398-abf49e18d205",
+      "WorkKey": 154,
+      "SceneOrdinal": 84,
+      "SceneName": "Mission 11 Gromas Mines - Security Nodes",
+      "SceneType": "MissionSegment",
+      "StartSec": null,
+      "EndSec": null,
+      "DurationSec": null,
+      "LocationHint": "Gromas Mines - Security Nodes Zone",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "008_DimScene.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces",
+        "missionName": "Gromas Mines"
+      }
+    },
+    {
+      "SceneGuid": "32f3247d-b032-4eec-9578-447dbd993dea",
+      "WorkKey": 154,
+      "SceneOrdinal": 85,
+      "SceneName": "Mission 11 Gromas Mines - Primary Objective",
+      "SceneType": "MissionSegment",
+      "StartSec": null,
+      "EndSec": null,
+      "DurationSec": null,
+      "LocationHint": "Gromas Mines - Primary Objective Zone",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "008_DimScene.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces",
+        "missionName": "Gromas Mines"
+      }
+    },
+    {
+      "SceneGuid": "5a12256a-e48e-44d4-964d-5c85f29cc57e",
+      "WorkKey": 154,
+      "SceneOrdinal": 86,
+      "SceneName": "Mission 11 Gromas Mines - Secondary Objective",
+      "SceneType": "MissionSegment",
+      "StartSec": null,
+      "EndSec": null,
+      "DurationSec": null,
+      "LocationHint": "Gromas Mines - Secondary Objective Zone",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "008_DimScene.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces",
+        "missionName": "Gromas Mines"
+      }
+    },
+    {
+      "SceneGuid": "71b17a04-e439-4964-8055-ec477bdc4db4",
+      "WorkKey": 154,
+      "SceneOrdinal": 87,
+      "SceneName": "Mission 11 Gromas Mines - Extraction Route",
+      "SceneType": "MissionSegment",
+      "StartSec": null,
+      "EndSec": null,
+      "DurationSec": null,
+      "LocationHint": "Gromas Mines - Extraction Route Zone",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "008_DimScene.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces",
+        "missionName": "Gromas Mines"
+      }
+    },
+    {
+      "SceneGuid": "a9aa4775-f241-402d-9266-36f777fa1613",
+      "WorkKey": 154,
+      "SceneOrdinal": 88,
+      "SceneName": "Mission 11 Gromas Mines - Evacuation",
+      "SceneType": "MissionSegment",
+      "StartSec": null,
+      "EndSec": null,
+      "DurationSec": null,
+      "LocationHint": "Gromas Mines - Evacuation Zone",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "008_DimScene.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces",
+        "missionName": "Gromas Mines"
+      }
+    },
+    {
+      "SceneGuid": "d56fee3d-fac3-4918-a760-86680114d91a",
+      "WorkKey": 154,
+      "SceneOrdinal": 89,
+      "SceneName": "Mission 12 Dark Trooper Labs - Insertion",
+      "SceneType": "MissionSegment",
+      "StartSec": null,
+      "EndSec": null,
+      "DurationSec": null,
+      "LocationHint": "Dark Trooper Labs - Insertion Zone",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "008_DimScene.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces",
+        "missionName": "Dark Trooper Labs"
+      }
+    },
+    {
+      "SceneGuid": "1cdbd2d9-fa32-4bac-bf8d-72eca7bb549f",
+      "WorkKey": 154,
+      "SceneOrdinal": 90,
+      "SceneName": "Mission 12 Dark Trooper Labs - Perimeter",
+      "SceneType": "MissionSegment",
+      "StartSec": null,
+      "EndSec": null,
+      "DurationSec": null,
+      "LocationHint": "Dark Trooper Labs - Perimeter Zone",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "008_DimScene.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces",
+        "missionName": "Dark Trooper Labs"
+      }
+    },
+    {
+      "SceneGuid": "82bcf8c1-141f-42bf-a842-c60e0b28fc9b",
+      "WorkKey": 154,
+      "SceneOrdinal": 91,
+      "SceneName": "Mission 12 Dark Trooper Labs - Interior Access",
+      "SceneType": "MissionSegment",
+      "StartSec": null,
+      "EndSec": null,
+      "DurationSec": null,
+      "LocationHint": "Dark Trooper Labs - Interior Access Zone",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "008_DimScene.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces",
+        "missionName": "Dark Trooper Labs"
+      }
+    },
+    {
+      "SceneGuid": "e123abb1-7d13-4ef5-9483-4340bc782a40",
+      "WorkKey": 154,
+      "SceneOrdinal": 92,
+      "SceneName": "Mission 12 Dark Trooper Labs - Security Nodes",
+      "SceneType": "MissionSegment",
+      "StartSec": null,
+      "EndSec": null,
+      "DurationSec": null,
+      "LocationHint": "Dark Trooper Labs - Security Nodes Zone",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "008_DimScene.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces",
+        "missionName": "Dark Trooper Labs"
+      }
+    },
+    {
+      "SceneGuid": "5a7352a8-cd67-4d01-bdc3-d4a6a7aeda85",
+      "WorkKey": 154,
+      "SceneOrdinal": 93,
+      "SceneName": "Mission 12 Dark Trooper Labs - Primary Objective",
+      "SceneType": "MissionSegment",
+      "StartSec": null,
+      "EndSec": null,
+      "DurationSec": null,
+      "LocationHint": "Dark Trooper Labs - Primary Objective Zone",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "008_DimScene.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces",
+        "missionName": "Dark Trooper Labs"
+      }
+    },
+    {
+      "SceneGuid": "f1f5dcc7-0683-464f-a041-33c3fa80694f",
+      "WorkKey": 154,
+      "SceneOrdinal": 94,
+      "SceneName": "Mission 12 Dark Trooper Labs - Secondary Objective",
+      "SceneType": "MissionSegment",
+      "StartSec": null,
+      "EndSec": null,
+      "DurationSec": null,
+      "LocationHint": "Dark Trooper Labs - Secondary Objective Zone",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "008_DimScene.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces",
+        "missionName": "Dark Trooper Labs"
+      }
+    },
+    {
+      "SceneGuid": "bec5015f-3310-4a8c-a580-985fd50d087f",
+      "WorkKey": 154,
+      "SceneOrdinal": 95,
+      "SceneName": "Mission 12 Dark Trooper Labs - Extraction Route",
+      "SceneType": "MissionSegment",
+      "StartSec": null,
+      "EndSec": null,
+      "DurationSec": null,
+      "LocationHint": "Dark Trooper Labs - Extraction Route Zone",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "008_DimScene.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces",
+        "missionName": "Dark Trooper Labs"
+      }
+    },
+    {
+      "SceneGuid": "b0fef006-ea7f-4b2f-b7b9-31249f944d9a",
+      "WorkKey": 154,
+      "SceneOrdinal": 96,
+      "SceneName": "Mission 12 Dark Trooper Labs - Evacuation",
+      "SceneType": "MissionSegment",
+      "StartSec": null,
+      "EndSec": null,
+      "DurationSec": null,
+      "LocationHint": "Dark Trooper Labs - Evacuation Zone",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "008_DimScene.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces",
+        "missionName": "Dark Trooper Labs"
+      }
+    },
+    {
+      "SceneGuid": "071bfc77-3d78-484d-a17a-4e36add678b8",
+      "WorkKey": 154,
+      "SceneOrdinal": 97,
+      "SceneName": "Mission 13 Command Ship - Insertion",
+      "SceneType": "MissionSegment",
+      "StartSec": null,
+      "EndSec": null,
+      "DurationSec": null,
+      "LocationHint": "Command Ship - Insertion Zone",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "008_DimScene.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces",
+        "missionName": "Command Ship"
+      }
+    },
+    {
+      "SceneGuid": "e6a34cf0-a0d0-433e-a4d0-b9a02e2d58e1",
+      "WorkKey": 154,
+      "SceneOrdinal": 98,
+      "SceneName": "Mission 13 Command Ship - Perimeter",
+      "SceneType": "MissionSegment",
+      "StartSec": null,
+      "EndSec": null,
+      "DurationSec": null,
+      "LocationHint": "Command Ship - Perimeter Zone",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "008_DimScene.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces",
+        "missionName": "Command Ship"
+      }
+    },
+    {
+      "SceneGuid": "a65a5cc1-c9f2-4382-a3df-3b59efa6e7b7",
+      "WorkKey": 154,
+      "SceneOrdinal": 99,
+      "SceneName": "Mission 13 Command Ship - Interior Access",
+      "SceneType": "MissionSegment",
+      "StartSec": null,
+      "EndSec": null,
+      "DurationSec": null,
+      "LocationHint": "Command Ship - Interior Access Zone",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "008_DimScene.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces",
+        "missionName": "Command Ship"
+      }
+    },
+    {
+      "SceneGuid": "9d743fd2-6136-4781-aa4f-3101e64dcad2",
+      "WorkKey": 154,
+      "SceneOrdinal": 100,
+      "SceneName": "Mission 13 Command Ship - Security Nodes",
+      "SceneType": "MissionSegment",
+      "StartSec": null,
+      "EndSec": null,
+      "DurationSec": null,
+      "LocationHint": "Command Ship - Security Nodes Zone",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "008_DimScene.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces",
+        "missionName": "Command Ship"
+      }
+    },
+    {
+      "SceneGuid": "3b6c97f7-77b8-4a0c-8647-466914edaa82",
+      "WorkKey": 154,
+      "SceneOrdinal": 101,
+      "SceneName": "Mission 13 Command Ship - Primary Objective",
+      "SceneType": "MissionSegment",
+      "StartSec": null,
+      "EndSec": null,
+      "DurationSec": null,
+      "LocationHint": "Command Ship - Primary Objective Zone",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "008_DimScene.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces",
+        "missionName": "Command Ship"
+      }
+    },
+    {
+      "SceneGuid": "3a8951cf-bfee-4de7-a977-de63e5b7e599",
+      "WorkKey": 154,
+      "SceneOrdinal": 102,
+      "SceneName": "Mission 13 Command Ship - Secondary Objective",
+      "SceneType": "MissionSegment",
+      "StartSec": null,
+      "EndSec": null,
+      "DurationSec": null,
+      "LocationHint": "Command Ship - Secondary Objective Zone",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "008_DimScene.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces",
+        "missionName": "Command Ship"
+      }
+    },
+    {
+      "SceneGuid": "dc878606-aef2-4fd4-b184-c5b81fc77254",
+      "WorkKey": 154,
+      "SceneOrdinal": 103,
+      "SceneName": "Mission 13 Command Ship - Extraction Route",
+      "SceneType": "MissionSegment",
+      "StartSec": null,
+      "EndSec": null,
+      "DurationSec": null,
+      "LocationHint": "Command Ship - Extraction Route Zone",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "008_DimScene.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces",
+        "missionName": "Command Ship"
+      }
+    },
+    {
+      "SceneGuid": "5fcc14a2-e43b-46b0-aefc-efaaef94a7d7",
+      "WorkKey": 154,
+      "SceneOrdinal": 104,
+      "SceneName": "Mission 13 Command Ship - Evacuation",
+      "SceneType": "MissionSegment",
+      "StartSec": null,
+      "EndSec": null,
+      "DurationSec": null,
+      "LocationHint": "Command Ship - Evacuation Zone",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "008_DimScene.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces",
+        "missionName": "Command Ship"
+      }
+    },
+    {
+      "SceneGuid": "848ddfc7-a6dc-458e-b2e7-894399dd162d",
+      "WorkKey": 154,
+      "SceneOrdinal": 105,
+      "SceneName": "Mission 14 Final Sabotage - Insertion",
+      "SceneType": "MissionSegment",
+      "StartSec": null,
+      "EndSec": null,
+      "DurationSec": null,
+      "LocationHint": "Final Sabotage - Insertion Zone",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "008_DimScene.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces",
+        "missionName": "Final Sabotage"
+      }
+    },
+    {
+      "SceneGuid": "ca8cb2df-5c2e-49d3-8d9c-b82a83462e8c",
+      "WorkKey": 154,
+      "SceneOrdinal": 106,
+      "SceneName": "Mission 14 Final Sabotage - Perimeter",
+      "SceneType": "MissionSegment",
+      "StartSec": null,
+      "EndSec": null,
+      "DurationSec": null,
+      "LocationHint": "Final Sabotage - Perimeter Zone",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "008_DimScene.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces",
+        "missionName": "Final Sabotage"
+      }
+    },
+    {
+      "SceneGuid": "13b121a3-a7a7-4999-a38a-fd1713302d6e",
+      "WorkKey": 154,
+      "SceneOrdinal": 107,
+      "SceneName": "Mission 14 Final Sabotage - Interior Access",
+      "SceneType": "MissionSegment",
+      "StartSec": null,
+      "EndSec": null,
+      "DurationSec": null,
+      "LocationHint": "Final Sabotage - Interior Access Zone",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "008_DimScene.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces",
+        "missionName": "Final Sabotage"
+      }
+    },
+    {
+      "SceneGuid": "89a99b92-09b1-4f99-b721-3e1a4037e5a2",
+      "WorkKey": 154,
+      "SceneOrdinal": 108,
+      "SceneName": "Mission 14 Final Sabotage - Security Nodes",
+      "SceneType": "MissionSegment",
+      "StartSec": null,
+      "EndSec": null,
+      "DurationSec": null,
+      "LocationHint": "Final Sabotage - Security Nodes Zone",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "008_DimScene.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces",
+        "missionName": "Final Sabotage"
+      }
+    },
+    {
+      "SceneGuid": "53c26934-0570-4ef6-8adf-f3205f5113d4",
+      "WorkKey": 154,
+      "SceneOrdinal": 109,
+      "SceneName": "Mission 14 Final Sabotage - Primary Objective",
+      "SceneType": "MissionSegment",
+      "StartSec": null,
+      "EndSec": null,
+      "DurationSec": null,
+      "LocationHint": "Final Sabotage - Primary Objective Zone",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "008_DimScene.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces",
+        "missionName": "Final Sabotage"
+      }
+    },
+    {
+      "SceneGuid": "966f8127-e32e-4652-bec0-874838b977fe",
+      "WorkKey": 154,
+      "SceneOrdinal": 110,
+      "SceneName": "Mission 14 Final Sabotage - Secondary Objective",
+      "SceneType": "MissionSegment",
+      "StartSec": null,
+      "EndSec": null,
+      "DurationSec": null,
+      "LocationHint": "Final Sabotage - Secondary Objective Zone",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "008_DimScene.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces",
+        "missionName": "Final Sabotage"
+      }
+    },
+    {
+      "SceneGuid": "5faf0ce6-3031-44d9-9719-f545610fa7b9",
+      "WorkKey": 154,
+      "SceneOrdinal": 111,
+      "SceneName": "Mission 14 Final Sabotage - Extraction Route",
+      "SceneType": "MissionSegment",
+      "StartSec": null,
+      "EndSec": null,
+      "DurationSec": null,
+      "LocationHint": "Final Sabotage - Extraction Route Zone",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "008_DimScene.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces",
+        "missionName": "Final Sabotage"
+      }
+    },
+    {
+      "SceneGuid": "43a953e6-2ee3-445a-9f84-2b8cc3a5ac64",
+      "WorkKey": 154,
+      "SceneOrdinal": 112,
+      "SceneName": "Mission 14 Final Sabotage - Evacuation",
+      "SceneType": "MissionSegment",
+      "StartSec": null,
+      "EndSec": null,
+      "DurationSec": null,
+      "LocationHint": "Final Sabotage - Evacuation Zone",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "008_DimScene.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces",
+        "missionName": "Final Sabotage"
+      }
     }
   ]
 }

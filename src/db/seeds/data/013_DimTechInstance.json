@@ -1518,6 +1518,1956 @@
       "Notes": "Synthetic seed data",
       "SourceSystem": "seed_loader",
       "SourceRef": "013_DimTechInstance.json"
+    },
+    {
+      "TechInstanceGuid": "18eb464f-32dd-491e-9a4e-a7b76f44a5d0",
+      "EntityKey": 696,
+      "TechAssetKey": 29,
+      "InstanceName": "Bryar Pistol - Kyle Katarn",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechInstanceGuid": "94be6d9b-a762-4677-9aa3-f0d2a3728cd1",
+      "EntityKey": 697,
+      "TechAssetKey": 29,
+      "InstanceName": "Bryar Pistol - Field Cache",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechInstanceGuid": "66cf42c0-46a3-45f0-986d-7c908a8a1daa",
+      "EntityKey": 698,
+      "TechAssetKey": 24,
+      "InstanceName": "E-11 Blaster Rifle - Kyle Katarn",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechInstanceGuid": "1577a235-0580-40ee-b868-265132ac29b0",
+      "EntityKey": 699,
+      "TechAssetKey": 24,
+      "InstanceName": "E-11 Blaster Rifle - Field Cache",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechInstanceGuid": "2b35f075-a809-4186-9970-61e41946f248",
+      "EntityKey": 700,
+      "TechAssetKey": 30,
+      "InstanceName": "DL-44 Blaster Pistol - Kyle Katarn",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechInstanceGuid": "9bfa70f3-33d2-470d-a97f-aaee8a377f81",
+      "EntityKey": 701,
+      "TechAssetKey": 30,
+      "InstanceName": "DL-44 Blaster Pistol - Field Cache",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechInstanceGuid": "f58f9ac2-1467-40c7-a8de-225e096dc3c7",
+      "EntityKey": 702,
+      "TechAssetKey": 31,
+      "InstanceName": "Imperial Repeater - Kyle Katarn",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechInstanceGuid": "645709fb-e2df-4d87-9f9d-1d866c703838",
+      "EntityKey": 703,
+      "TechAssetKey": 31,
+      "InstanceName": "Imperial Repeater - Field Cache",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechInstanceGuid": "f3643483-7b47-4c46-a6cd-5d9bed89d5c3",
+      "EntityKey": 704,
+      "TechAssetKey": 32,
+      "InstanceName": "Concussion Rifle - Kyle Katarn",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechInstanceGuid": "abc7005f-67ee-44fd-96fa-662fa7b06bc7",
+      "EntityKey": 705,
+      "TechAssetKey": 32,
+      "InstanceName": "Concussion Rifle - Field Cache",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechInstanceGuid": "99efff3f-4813-4cab-9f3a-d33a7de62c3d",
+      "EntityKey": 706,
+      "TechAssetKey": 33,
+      "InstanceName": "Assault Cannon - Kyle Katarn",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechInstanceGuid": "65382942-1b0e-48b9-813a-64b98637bb72",
+      "EntityKey": 707,
+      "TechAssetKey": 33,
+      "InstanceName": "Assault Cannon - Field Cache",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechInstanceGuid": "fdfd2dae-cd41-415d-b162-6b2bd49ff13b",
+      "EntityKey": 708,
+      "TechAssetKey": 34,
+      "InstanceName": "Thermal Detonator Launcher - Kyle Katarn",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechInstanceGuid": "8f72fddd-866c-4e1d-a3b4-7b4c4dc4e360",
+      "EntityKey": 709,
+      "TechAssetKey": 34,
+      "InstanceName": "Thermal Detonator Launcher - Field Cache",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechInstanceGuid": "0d514f24-4258-4d56-8464-9e2bdbe524f2",
+      "EntityKey": 710,
+      "TechAssetKey": 35,
+      "InstanceName": "Mortar Launcher - Kyle Katarn",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechInstanceGuid": "e8332720-6b9a-4e2e-951d-16c0dd0bed2e",
+      "EntityKey": 711,
+      "TechAssetKey": 35,
+      "InstanceName": "Mortar Launcher - Field Cache",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechInstanceGuid": "d633ba6d-d164-48a9-a1c3-93766995b37d",
+      "EntityKey": 712,
+      "TechAssetKey": 36,
+      "InstanceName": "Heavy Blaster - Kyle Katarn",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechInstanceGuid": "dcdb61d7-583c-4177-8116-e1d19af2d203",
+      "EntityKey": 713,
+      "TechAssetKey": 36,
+      "InstanceName": "Heavy Blaster - Field Cache",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechInstanceGuid": "91196e48-dee9-46b5-afd3-61d6a9f50f86",
+      "EntityKey": 714,
+      "TechAssetKey": 37,
+      "InstanceName": "Blaster Carbine - Kyle Katarn",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechInstanceGuid": "417ec400-6ebe-4948-b852-74ae81252d27",
+      "EntityKey": 715,
+      "TechAssetKey": 37,
+      "InstanceName": "Blaster Carbine - Field Cache",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechInstanceGuid": "4119f95d-f967-453c-b425-68deff38e0e4",
+      "EntityKey": 716,
+      "TechAssetKey": 38,
+      "InstanceName": "Blaster Pistol Mk I - Kyle Katarn",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechInstanceGuid": "d992b5ad-d77b-47a0-be9f-a52b41744456",
+      "EntityKey": 717,
+      "TechAssetKey": 38,
+      "InstanceName": "Blaster Pistol Mk I - Field Cache",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechInstanceGuid": "59265d1c-b529-4b10-b45a-f18b49b64225",
+      "EntityKey": 718,
+      "TechAssetKey": 39,
+      "InstanceName": "Blaster Pistol Mk II - Kyle Katarn",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechInstanceGuid": "727b6b16-0842-435e-966c-ec186f6bcc31",
+      "EntityKey": 719,
+      "TechAssetKey": 39,
+      "InstanceName": "Blaster Pistol Mk II - Field Cache",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechInstanceGuid": "8300163b-cdc4-498d-9fc2-6e7f1daef30e",
+      "EntityKey": 720,
+      "TechAssetKey": 40,
+      "InstanceName": "Plasma Rifle - Kyle Katarn",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechInstanceGuid": "d02651ef-569c-420f-8e7e-daf303ec715f",
+      "EntityKey": 721,
+      "TechAssetKey": 40,
+      "InstanceName": "Plasma Rifle - Field Cache",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechInstanceGuid": "87ddd49d-882f-44fb-b8b9-18b7cfd7b420",
+      "EntityKey": 722,
+      "TechAssetKey": 41,
+      "InstanceName": "Ion Rifle - Kyle Katarn",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechInstanceGuid": "26761678-3d95-4e01-95c6-58d3fe690d69",
+      "EntityKey": 723,
+      "TechAssetKey": 41,
+      "InstanceName": "Ion Rifle - Field Cache",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechInstanceGuid": "16bd38ca-29a1-4db7-b112-fb7ed44330cf",
+      "EntityKey": 724,
+      "TechAssetKey": 42,
+      "InstanceName": "Repeater Cannon - Kyle Katarn",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechInstanceGuid": "987e71a7-0239-4c15-8111-662b2096efc9",
+      "EntityKey": 725,
+      "TechAssetKey": 42,
+      "InstanceName": "Repeater Cannon - Field Cache",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechInstanceGuid": "2eeec24b-e5e4-458b-a957-a69afef898a9",
+      "EntityKey": 726,
+      "TechAssetKey": 43,
+      "InstanceName": "Sniper Blaster - Kyle Katarn",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechInstanceGuid": "bf070f0d-ae60-4729-a7b8-997f07b6ce64",
+      "EntityKey": 727,
+      "TechAssetKey": 43,
+      "InstanceName": "Sniper Blaster - Field Cache",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechInstanceGuid": "227a3909-40b7-4686-a55a-94b98295bfb9",
+      "EntityKey": 728,
+      "TechAssetKey": 44,
+      "InstanceName": "Vibroblade - Kyle Katarn",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechInstanceGuid": "685f5f94-209f-4ef2-8f35-e0a9b775a45a",
+      "EntityKey": 729,
+      "TechAssetKey": 44,
+      "InstanceName": "Vibroblade - Field Cache",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechInstanceGuid": "71bc5d06-c4b3-402d-9c33-5a4e10d1f853",
+      "EntityKey": 730,
+      "TechAssetKey": 45,
+      "InstanceName": "Stun Baton - Kyle Katarn",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechInstanceGuid": "2dcab932-8690-4848-adda-3f999806d239",
+      "EntityKey": 731,
+      "TechAssetKey": 45,
+      "InstanceName": "Stun Baton - Field Cache",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechInstanceGuid": "4ddc2e37-631b-4817-ae93-20f314cfff72",
+      "EntityKey": 732,
+      "TechAssetKey": 46,
+      "InstanceName": "Blast Rifle - Kyle Katarn",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechInstanceGuid": "660a78b5-3a77-45a3-b183-835f21b8d8de",
+      "EntityKey": 733,
+      "TechAssetKey": 46,
+      "InstanceName": "Blast Rifle - Field Cache",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechInstanceGuid": "bbec6253-9758-453b-8bc5-d3c2c1117733",
+      "EntityKey": 734,
+      "TechAssetKey": 47,
+      "InstanceName": "Pulse Cannon - Kyle Katarn",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechInstanceGuid": "c4cee251-ba5b-4f49-8ce7-dd22e9db0f79",
+      "EntityKey": 735,
+      "TechAssetKey": 47,
+      "InstanceName": "Pulse Cannon - Field Cache",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechInstanceGuid": "48be028f-7005-4255-8f7a-b836f1c27a41",
+      "EntityKey": 736,
+      "TechAssetKey": 48,
+      "InstanceName": "Thermal Detonator - Mission Stock",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechInstanceGuid": "1a04e8e0-a41b-450c-8b3f-05750dde0765",
+      "EntityKey": 737,
+      "TechAssetKey": 49,
+      "InstanceName": "Detonator Mine - Mission Stock",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechInstanceGuid": "8f37441b-0c1a-41a0-a339-ce65edcba12a",
+      "EntityKey": 738,
+      "TechAssetKey": 50,
+      "InstanceName": "Baradium Charge - Mission Stock",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechInstanceGuid": "47d38ae7-efbe-400f-a909-ddc481dddba4",
+      "EntityKey": 739,
+      "TechAssetKey": 51,
+      "InstanceName": "Remote Det Pack - Mission Stock",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechInstanceGuid": "4511501f-817e-4722-828f-1c004f128bae",
+      "EntityKey": 740,
+      "TechAssetKey": 52,
+      "InstanceName": "Timed Det Pack - Mission Stock",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechInstanceGuid": "e7642ebe-c7a9-410e-a3f2-1e7d01a035e7",
+      "EntityKey": 741,
+      "TechAssetKey": 53,
+      "InstanceName": "Proximity Mine - Mission Stock",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechInstanceGuid": "b8ab5bbd-8fb3-4c71-8d3c-637b5ee9cf5d",
+      "EntityKey": 742,
+      "TechAssetKey": 54,
+      "InstanceName": "Concussion Grenade - Mission Stock",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechInstanceGuid": "0173e14a-4fcc-4685-80d6-9ef8028572a4",
+      "EntityKey": 743,
+      "TechAssetKey": 55,
+      "InstanceName": "Satchel Charge - Mission Stock",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechInstanceGuid": "fa7c6cd2-b6d6-49e8-81df-a7b89b4ff4b6",
+      "EntityKey": 744,
+      "TechAssetKey": 56,
+      "InstanceName": "Plasma Charge - Mission Stock",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechInstanceGuid": "a3e47bee-1700-4bde-887a-3d682e8af62a",
+      "EntityKey": 745,
+      "TechAssetKey": 57,
+      "InstanceName": "Ion Charge - Mission Stock",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechInstanceGuid": "a386726a-0740-4456-bea2-30adb0475986",
+      "EntityKey": 746,
+      "TechAssetKey": 58,
+      "InstanceName": "Dark Trooper Phase I Unit 001",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechInstanceGuid": "c6f59fa5-abe0-4cc6-8a7f-5a28ada9cc28",
+      "EntityKey": 747,
+      "TechAssetKey": 58,
+      "InstanceName": "Dark Trooper Phase I Unit 002",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechInstanceGuid": "44249785-18d5-4a1a-aa59-fcbed16a8ff5",
+      "EntityKey": 748,
+      "TechAssetKey": 59,
+      "InstanceName": "Dark Trooper Phase II Unit 001",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechInstanceGuid": "2c93609d-1b8b-4cd0-af30-a0caaf045314",
+      "EntityKey": 749,
+      "TechAssetKey": 59,
+      "InstanceName": "Dark Trooper Phase II Unit 002",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechInstanceGuid": "4c36baef-2351-4293-b185-41ba40b060c3",
+      "EntityKey": 750,
+      "TechAssetKey": 60,
+      "InstanceName": "Dark Trooper Phase III Unit 001",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechInstanceGuid": "843d0b6c-3fbd-4a9d-b687-5ff7ddb6dae1",
+      "EntityKey": 751,
+      "TechAssetKey": 60,
+      "InstanceName": "Dark Trooper Phase III Unit 002",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechInstanceGuid": "2c3ff475-6e4d-441d-b44e-325303e0ba1a",
+      "EntityKey": 752,
+      "TechAssetKey": 61,
+      "InstanceName": "Imperial Probe Droid Unit 001",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechInstanceGuid": "19f82cbd-aacc-4710-a6b1-10b5f2375b37",
+      "EntityKey": 753,
+      "TechAssetKey": 61,
+      "InstanceName": "Imperial Probe Droid Unit 002",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechInstanceGuid": "ba297f1c-2242-4cbe-b220-1f1726ada6f5",
+      "EntityKey": 754,
+      "TechAssetKey": 62,
+      "InstanceName": "Imperial Sentry Droid Unit 001",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechInstanceGuid": "67d6dac8-3b9a-463d-99f4-b9fd1edc2cab",
+      "EntityKey": 755,
+      "TechAssetKey": 62,
+      "InstanceName": "Imperial Sentry Droid Unit 002",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechInstanceGuid": "ff9ae989-19b7-448a-8c95-fd79963e8f61",
+      "EntityKey": 756,
+      "TechAssetKey": 63,
+      "InstanceName": "Maintenance Droid Unit 001",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechInstanceGuid": "400d270f-8133-4c2b-b219-423eef31ccda",
+      "EntityKey": 757,
+      "TechAssetKey": 63,
+      "InstanceName": "Maintenance Droid Unit 002",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechInstanceGuid": "58d97f36-a853-4347-9d04-7707dc1b382c",
+      "EntityKey": 758,
+      "TechAssetKey": 64,
+      "InstanceName": "Security Droid Unit 001",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechInstanceGuid": "07486547-3f5c-44a5-a4b6-739095894109",
+      "EntityKey": 759,
+      "TechAssetKey": 64,
+      "InstanceName": "Security Droid Unit 002",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechInstanceGuid": "c547299b-3f4d-40a2-a62f-f22c5c0f67ed",
+      "EntityKey": 760,
+      "TechAssetKey": 65,
+      "InstanceName": "Cargo Handler Droid Unit 001",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechInstanceGuid": "4aca5140-824f-4954-aa3f-16793dee068e",
+      "EntityKey": 761,
+      "TechAssetKey": 65,
+      "InstanceName": "Cargo Handler Droid Unit 002",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechInstanceGuid": "f774d3e1-2aa6-4b40-b572-680f7aed6547",
+      "EntityKey": 762,
+      "TechAssetKey": 66,
+      "InstanceName": "Repair Droid Unit 001",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechInstanceGuid": "57a81872-3f5a-4ce5-a479-1a94608a08ab",
+      "EntityKey": 763,
+      "TechAssetKey": 66,
+      "InstanceName": "Repair Droid Unit 002",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechInstanceGuid": "42f901f2-a299-4bf3-a6df-7be829329883",
+      "EntityKey": 764,
+      "TechAssetKey": 67,
+      "InstanceName": "Communications Droid Unit 001",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechInstanceGuid": "0382640a-175b-4ae1-9568-8faae579c951",
+      "EntityKey": 765,
+      "TechAssetKey": 67,
+      "InstanceName": "Communications Droid Unit 002",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechInstanceGuid": "ca60ba05-96c2-49f1-bfdb-ac79e097e9ad",
+      "EntityKey": 766,
+      "TechAssetKey": 68,
+      "InstanceName": "Arc Hammer",
+      "CurrentStatus": "Destroyed",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechInstanceGuid": "565145d2-19fd-4709-ae52-34efd13068eb",
+      "EntityKey": 767,
+      "TechAssetKey": 69,
+      "InstanceName": "Lambda-class Shuttle",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechInstanceGuid": "a822f966-a518-41a6-b869-e8e2c01370be",
+      "EntityKey": 768,
+      "TechAssetKey": 70,
+      "InstanceName": "Imperial Transport",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechInstanceGuid": "cf12e0e7-3397-405a-9316-22f6343e9484",
+      "EntityKey": 769,
+      "TechAssetKey": 71,
+      "InstanceName": "Imperial Patrol Craft",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechInstanceGuid": "a7a0f0d4-6296-48a8-8b22-327bb75d498b",
+      "EntityKey": 770,
+      "TechAssetKey": 72,
+      "InstanceName": "Imperial Gunboat",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechInstanceGuid": "0bba0e92-95a5-48cf-aa16-a13fd45ac5f7",
+      "EntityKey": 771,
+      "TechAssetKey": 73,
+      "InstanceName": "Rebel Transport Shuttle",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechInstanceGuid": "792754ed-06df-4041-b478-afd938d3c2bf",
+      "EntityKey": 772,
+      "TechAssetKey": 74,
+      "InstanceName": "Imperial Landing Craft",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechInstanceGuid": "5e0140ad-091a-4ebb-b3cd-4af5f8b48bcf",
+      "EntityKey": 773,
+      "TechAssetKey": 75,
+      "InstanceName": "Cargo Skiff",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechInstanceGuid": "016152f1-e1fa-4755-98b0-5311b514a409",
+      "EntityKey": 774,
+      "TechAssetKey": 76,
+      "InstanceName": "Assault Skiff",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechInstanceGuid": "01e8d7f4-bd9f-4828-90a8-466c5de9b4bb",
+      "EntityKey": 775,
+      "TechAssetKey": 77,
+      "InstanceName": "Imperial Hover Tank",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechInstanceGuid": "cf8baf39-25ae-406c-965b-e64f91cac1e9",
+      "EntityKey": 776,
+      "TechAssetKey": 78,
+      "InstanceName": "Security Console Type A - Primary",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechInstanceGuid": "5971263d-1077-4d9a-ba25-c009c5b0495b",
+      "EntityKey": 777,
+      "TechAssetKey": 79,
+      "InstanceName": "Security Console Type B - Primary",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechInstanceGuid": "8508429a-7ebe-4957-a2ee-97e6e81c5a84",
+      "EntityKey": 778,
+      "TechAssetKey": 80,
+      "InstanceName": "Security Console Type C - Primary",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechInstanceGuid": "3317e1ab-5072-4b43-beed-21408436f6be",
+      "EntityKey": 779,
+      "TechAssetKey": 81,
+      "InstanceName": "Security Console Type D - Primary",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechInstanceGuid": "d1e7dab5-be28-4953-b5a3-c320b9bf2ffa",
+      "EntityKey": 780,
+      "TechAssetKey": 82,
+      "InstanceName": "Security Console Type E - Primary",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechInstanceGuid": "ae0300b4-678e-40ab-9e93-fb3a0394e521",
+      "EntityKey": 781,
+      "TechAssetKey": 83,
+      "InstanceName": "Security Console Type F - Primary",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechInstanceGuid": "1e12917f-6faf-4fe5-bae6-0e9d51c0bb09",
+      "EntityKey": 782,
+      "TechAssetKey": 84,
+      "InstanceName": "Security Console Type G - Primary",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechInstanceGuid": "d05780d8-be56-44df-92c9-d0180843ec13",
+      "EntityKey": 783,
+      "TechAssetKey": 85,
+      "InstanceName": "Security Console Type H - Primary",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechInstanceGuid": "e8d903a9-32db-4afe-968f-8df67ac470a8",
+      "EntityKey": 784,
+      "TechAssetKey": 86,
+      "InstanceName": "Security Console Type I - Primary",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechInstanceGuid": "03eb1640-9a8f-4fdd-9f49-a4e1d5214e50",
+      "EntityKey": 785,
+      "TechAssetKey": 87,
+      "InstanceName": "Security Console Type J - Primary",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechInstanceGuid": "7d90b792-d913-4ef9-b16e-ad095b4763c7",
+      "EntityKey": 786,
+      "TechAssetKey": 88,
+      "InstanceName": "Security Console Type K - Primary",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechInstanceGuid": "e2ba1406-af74-4755-a923-814bfbd9ed29",
+      "EntityKey": 787,
+      "TechAssetKey": 89,
+      "InstanceName": "Security Console Type L - Primary",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechInstanceGuid": "9a3b5af2-da30-4471-ade9-15b169747d31",
+      "EntityKey": 788,
+      "TechAssetKey": 90,
+      "InstanceName": "Security Console Type M - Primary",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechInstanceGuid": "728b8da8-af18-46e0-8a86-c8a17d55ebc6",
+      "EntityKey": 789,
+      "TechAssetKey": 91,
+      "InstanceName": "Security Console Type N - Primary",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechInstanceGuid": "384a3cb3-29b1-4640-9604-abd577ee1e42",
+      "EntityKey": 790,
+      "TechAssetKey": 92,
+      "InstanceName": "Security Console Type O - Primary",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechInstanceGuid": "cba86202-d14c-48b7-8213-ab6990faf1fb",
+      "EntityKey": 791,
+      "TechAssetKey": 93,
+      "InstanceName": "Security Console Type P - Primary",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechInstanceGuid": "235645eb-4098-4b23-b4d3-cfe8cf972dc1",
+      "EntityKey": 792,
+      "TechAssetKey": 94,
+      "InstanceName": "Security Console Type Q - Primary",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechInstanceGuid": "5722fcf6-b8e4-4b0a-9526-af5846ea2161",
+      "EntityKey": 793,
+      "TechAssetKey": 95,
+      "InstanceName": "Security Console Type R - Primary",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechInstanceGuid": "b3cfde81-17e8-459e-ac3d-482b623662c8",
+      "EntityKey": 794,
+      "TechAssetKey": 96,
+      "InstanceName": "Security Console Type S - Primary",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechInstanceGuid": "935bb210-51bf-4f76-a98b-56ab7986c830",
+      "EntityKey": 795,
+      "TechAssetKey": 97,
+      "InstanceName": "Security Console Type T - Primary",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechInstanceGuid": "dcfb565b-0f40-4cb3-bd81-f895a14be464",
+      "EntityKey": 796,
+      "TechAssetKey": 98,
+      "InstanceName": "Stormtrooper Armor - Issue",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechInstanceGuid": "8997a02b-d3a6-4f5b-bae4-2a8dae6d67c5",
+      "EntityKey": 797,
+      "TechAssetKey": 99,
+      "InstanceName": "Imperial Officer Armor - Issue",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechInstanceGuid": "30f7afd0-aefb-4452-8d59-dacd4f29eb2e",
+      "EntityKey": 798,
+      "TechAssetKey": 100,
+      "InstanceName": "Dark Trooper Armor Phase I - Issue",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechInstanceGuid": "1d01ba3d-f9ba-4f5f-a1a6-5d7e8a09dd13",
+      "EntityKey": 799,
+      "TechAssetKey": 101,
+      "InstanceName": "Dark Trooper Armor Phase II - Issue",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechInstanceGuid": "77dc2663-a03e-40ee-916d-458de2a66108",
+      "EntityKey": 800,
+      "TechAssetKey": 102,
+      "InstanceName": "Dark Trooper Armor Phase III - Issue",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechInstanceGuid": "d3be24b9-a927-46a1-9cf4-08f85e8d211d",
+      "EntityKey": 801,
+      "TechAssetKey": 103,
+      "InstanceName": "Rebel Combat Armor - Issue",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechInstanceGuid": "dc599c80-dfd4-4a6e-a3fe-5bfc0116e390",
+      "EntityKey": 802,
+      "TechAssetKey": 104,
+      "InstanceName": "Blast Shield - Issue",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechInstanceGuid": "eba9f80e-e4f7-47ec-a623-ec544747f842",
+      "EntityKey": 803,
+      "TechAssetKey": 105,
+      "InstanceName": "Breathing Mask - Issue",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechInstanceGuid": "03084319-293a-4ef3-a733-77de5e8893ac",
+      "EntityKey": 804,
+      "TechAssetKey": 106,
+      "InstanceName": "Power Pack - Issue",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechInstanceGuid": "932eb93f-f91e-47b6-99d6-a3134c1759ef",
+      "EntityKey": 805,
+      "TechAssetKey": 107,
+      "InstanceName": "Shield Belt - Issue",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechInstanceGuid": "91673dd5-ceda-43f7-8a94-4ff498367d9e",
+      "EntityKey": 806,
+      "TechAssetKey": 108,
+      "InstanceName": "Access Keycard Level 1 - Mission",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechInstanceGuid": "e6882109-d828-4125-94cf-b9ee1cd83a5e",
+      "EntityKey": 807,
+      "TechAssetKey": 109,
+      "InstanceName": "Access Keycard Level 2 - Mission",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechInstanceGuid": "cb436568-d973-4b25-9cf0-7e8b037b6db6",
+      "EntityKey": 808,
+      "TechAssetKey": 110,
+      "InstanceName": "Access Keycard Level 3 - Mission",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechInstanceGuid": "8c469c8c-27f1-481c-80ef-d7cbefba803f",
+      "EntityKey": 809,
+      "TechAssetKey": 111,
+      "InstanceName": "Access Keycard Level 4 - Mission",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechInstanceGuid": "3a8bebd7-5627-4d17-b4a5-35117bb0cbc7",
+      "EntityKey": 810,
+      "TechAssetKey": 112,
+      "InstanceName": "Access Keycard Level 5 - Mission",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechInstanceGuid": "d95414fe-1c8d-452b-8e01-4ccd9e15897d",
+      "EntityKey": 811,
+      "TechAssetKey": 113,
+      "InstanceName": "Access Keycard Level 6 - Mission",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechInstanceGuid": "5c7b9689-ccde-4a59-92fc-ef208428c536",
+      "EntityKey": 812,
+      "TechAssetKey": 114,
+      "InstanceName": "Access Keycard Level 7 - Mission",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechInstanceGuid": "32ba0a97-a63d-4df5-b33c-a3d0422aac8a",
+      "EntityKey": 813,
+      "TechAssetKey": 115,
+      "InstanceName": "Access Keycard Level 8 - Mission",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechInstanceGuid": "8856c0dc-b190-4358-b1ff-69c0208cd394",
+      "EntityKey": 814,
+      "TechAssetKey": 116,
+      "InstanceName": "Access Keycard Level 9 - Mission",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechInstanceGuid": "f5f28fc9-1b36-42bf-b2c5-2cdd31d3bdc0",
+      "EntityKey": 815,
+      "TechAssetKey": 117,
+      "InstanceName": "Access Keycard Level 10 - Mission",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechInstanceGuid": "198cad60-6eeb-4651-98ed-7720c61232b2",
+      "EntityKey": 816,
+      "TechAssetKey": 118,
+      "InstanceName": "Data Cartridge Type A - Briefing",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechInstanceGuid": "3976c9c9-ed7e-47fb-b340-ad85f263dd67",
+      "EntityKey": 817,
+      "TechAssetKey": 119,
+      "InstanceName": "Data Cartridge Type B - Briefing",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechInstanceGuid": "d021885e-6ac7-4710-a1e1-09a53f7be54f",
+      "EntityKey": 818,
+      "TechAssetKey": 120,
+      "InstanceName": "Data Cartridge Type C - Briefing",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechInstanceGuid": "376db7d8-80e3-4fa2-859d-9585737a9994",
+      "EntityKey": 819,
+      "TechAssetKey": 121,
+      "InstanceName": "Data Cartridge Type D - Briefing",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechInstanceGuid": "48173112-3190-4fd2-bcfc-7613f3765dbe",
+      "EntityKey": 820,
+      "TechAssetKey": 122,
+      "InstanceName": "Data Cartridge Type E - Briefing",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechInstanceGuid": "391e942c-d467-43cd-9bf5-d736e9a7d43c",
+      "EntityKey": 821,
+      "TechAssetKey": 123,
+      "InstanceName": "Data Cartridge Type F - Briefing",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechInstanceGuid": "e91a36a9-e1ce-47fb-805c-ff1b9b968f9a",
+      "EntityKey": 822,
+      "TechAssetKey": 124,
+      "InstanceName": "Data Cartridge Type G - Briefing",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechInstanceGuid": "780ffff5-dbd6-41a2-a2d4-bf9536dc7d50",
+      "EntityKey": 823,
+      "TechAssetKey": 125,
+      "InstanceName": "Data Cartridge Type H - Briefing",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechInstanceGuid": "235ce1a2-f9ee-4dbe-86da-e5561a8d9608",
+      "EntityKey": 824,
+      "TechAssetKey": 126,
+      "InstanceName": "Data Cartridge Type I - Briefing",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "TechInstanceGuid": "2e5b4276-d7d8-478f-a903-707b8f487813",
+      "EntityKey": 825,
+      "TechAssetKey": 127,
+      "InstanceName": "Data Cartridge Type J - Briefing",
+      "CurrentStatus": "Active",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "013_DimTechInstance.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
     }
   ]
 }

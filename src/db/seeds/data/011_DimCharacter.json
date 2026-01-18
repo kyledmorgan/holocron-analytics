@@ -609,6 +609,1806 @@
       "Notes": "Synthetic seed data",
       "SourceSystem": "seed_loader",
       "SourceRef": "011_DimCharacter.json"
+    },
+    {
+      "CharacterGuid": "8d6e98dc-656a-451b-a307-ffd9e7f3fc2b",
+      "EntityKey": 451,
+      "SpeciesKey": 1,
+      "Gender": "Male",
+      "RoleArchetype": "Hero",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "011_DimCharacter.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "CharacterGuid": "2a6b45d4-b919-4598-a18a-a630c9ada092",
+      "EntityKey": 452,
+      "SpeciesKey": 1,
+      "Gender": "Female",
+      "RoleArchetype": "Ally",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "011_DimCharacter.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "CharacterGuid": "45bfd13e-7928-4f98-895a-d423f62fc594",
+      "EntityKey": 453,
+      "SpeciesKey": 1,
+      "Gender": "Male",
+      "RoleArchetype": "Villain",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "011_DimCharacter.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "CharacterGuid": "95034b2f-c5dd-42ba-9e16-67d970877f1a",
+      "EntityKey": 454,
+      "SpeciesKey": 1,
+      "Gender": "Male",
+      "RoleArchetype": "Villain",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "011_DimCharacter.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "CharacterGuid": "350dd158-ecc8-4bff-81a8-0a7ae39c8966",
+      "EntityKey": 455,
+      "SpeciesKey": 1,
+      "Gender": "Male",
+      "RoleArchetype": "Officer",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "011_DimCharacter.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "CharacterGuid": "5423d196-2e15-42f2-bc50-5c247f9d4d6e",
+      "EntityKey": 456,
+      "SpeciesKey": 1,
+      "Gender": null,
+      "RoleArchetype": "Soldier",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "011_DimCharacter.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "CharacterGuid": "6888d66c-efaa-4605-8887-10fdbbbaae9c",
+      "EntityKey": 457,
+      "SpeciesKey": 1,
+      "Gender": null,
+      "RoleArchetype": "Soldier",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "011_DimCharacter.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "CharacterGuid": "5b1d1b78-2248-4c24-8427-663c41c5aa73",
+      "EntityKey": 458,
+      "SpeciesKey": 1,
+      "Gender": null,
+      "RoleArchetype": "Soldier",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "011_DimCharacter.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "CharacterGuid": "ea57cf5a-5ea2-4ac1-858f-86c3962a9b4e",
+      "EntityKey": 459,
+      "SpeciesKey": 1,
+      "Gender": null,
+      "RoleArchetype": "Soldier",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "011_DimCharacter.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "CharacterGuid": "858c72fc-4de0-4957-bdbd-71f571bf00fe",
+      "EntityKey": 460,
+      "SpeciesKey": 1,
+      "Gender": null,
+      "RoleArchetype": "Soldier",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "011_DimCharacter.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "CharacterGuid": "e807d068-44c9-4d3f-a2ce-ea6c7ac52352",
+      "EntityKey": 461,
+      "SpeciesKey": 1,
+      "Gender": null,
+      "RoleArchetype": "Soldier",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "011_DimCharacter.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "CharacterGuid": "1eeae4dc-78e7-43bc-b7f1-ca8e0fca31b2",
+      "EntityKey": 462,
+      "SpeciesKey": 1,
+      "Gender": null,
+      "RoleArchetype": "Soldier",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "011_DimCharacter.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "CharacterGuid": "4f5ea565-e7b6-438a-af8e-d8cf06751037",
+      "EntityKey": 463,
+      "SpeciesKey": 1,
+      "Gender": null,
+      "RoleArchetype": "Soldier",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "011_DimCharacter.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "CharacterGuid": "ca20169b-3209-4bb6-af00-5cf8f77fe762",
+      "EntityKey": 464,
+      "SpeciesKey": 1,
+      "Gender": null,
+      "RoleArchetype": "Soldier",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "011_DimCharacter.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "CharacterGuid": "587b6d5f-3a5b-4d32-9ace-3597e7b1b96a",
+      "EntityKey": 465,
+      "SpeciesKey": 1,
+      "Gender": null,
+      "RoleArchetype": "Soldier",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "011_DimCharacter.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "CharacterGuid": "24d49b5c-9d1b-4c60-a0c4-5bd037874377",
+      "EntityKey": 466,
+      "SpeciesKey": 1,
+      "Gender": null,
+      "RoleArchetype": "Soldier",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "011_DimCharacter.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "CharacterGuid": "29e1330a-6b4e-4533-9e0b-38e85e15226d",
+      "EntityKey": 467,
+      "SpeciesKey": 1,
+      "Gender": null,
+      "RoleArchetype": "Soldier",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "011_DimCharacter.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "CharacterGuid": "1749a8c5-8856-484a-823d-d6e463f1882e",
+      "EntityKey": 468,
+      "SpeciesKey": 1,
+      "Gender": null,
+      "RoleArchetype": "Soldier",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "011_DimCharacter.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "CharacterGuid": "37816045-d448-4b2c-a698-8fd95badf24d",
+      "EntityKey": 469,
+      "SpeciesKey": 1,
+      "Gender": null,
+      "RoleArchetype": "Soldier",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "011_DimCharacter.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "CharacterGuid": "3165a507-c93f-42d4-9206-decb7cd123ad",
+      "EntityKey": 470,
+      "SpeciesKey": 1,
+      "Gender": null,
+      "RoleArchetype": "Soldier",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "011_DimCharacter.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "CharacterGuid": "a53f5159-5ae9-431d-bd91-3f78145270f8",
+      "EntityKey": 471,
+      "SpeciesKey": 1,
+      "Gender": null,
+      "RoleArchetype": "Soldier",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "011_DimCharacter.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "CharacterGuid": "eb76e91e-d213-4e97-a60b-94f43281938f",
+      "EntityKey": 472,
+      "SpeciesKey": 1,
+      "Gender": null,
+      "RoleArchetype": "Soldier",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "011_DimCharacter.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "CharacterGuid": "ecb6c249-a34f-4bf6-bbf1-c95cca6c5f8f",
+      "EntityKey": 473,
+      "SpeciesKey": 1,
+      "Gender": null,
+      "RoleArchetype": "Soldier",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "011_DimCharacter.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "CharacterGuid": "a2ed95d3-76c3-49c7-bcb9-cf11b5ae7dc2",
+      "EntityKey": 474,
+      "SpeciesKey": 1,
+      "Gender": null,
+      "RoleArchetype": "Soldier",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "011_DimCharacter.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "CharacterGuid": "941e2b78-6043-4f13-9c13-5bdc884fc46c",
+      "EntityKey": 475,
+      "SpeciesKey": 1,
+      "Gender": null,
+      "RoleArchetype": "Soldier",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "011_DimCharacter.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "CharacterGuid": "4f310f0b-bc62-4bc7-a4fc-0d9bf288f623",
+      "EntityKey": 476,
+      "SpeciesKey": 1,
+      "Gender": null,
+      "RoleArchetype": "Soldier",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "011_DimCharacter.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "CharacterGuid": "2197eb7d-8010-4d0a-bdc9-7c52e19733cc",
+      "EntityKey": 477,
+      "SpeciesKey": 1,
+      "Gender": null,
+      "RoleArchetype": "Soldier",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "011_DimCharacter.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "CharacterGuid": "0dac7374-9e71-4703-b10f-f0ac8db35b42",
+      "EntityKey": 478,
+      "SpeciesKey": 1,
+      "Gender": null,
+      "RoleArchetype": "Soldier",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "011_DimCharacter.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "CharacterGuid": "daaa346a-36d1-41f7-925b-4298fc7033f9",
+      "EntityKey": 479,
+      "SpeciesKey": 1,
+      "Gender": null,
+      "RoleArchetype": "Soldier",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "011_DimCharacter.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "CharacterGuid": "8bec6117-c7bf-4116-b967-dc3d870c1a95",
+      "EntityKey": 480,
+      "SpeciesKey": 1,
+      "Gender": null,
+      "RoleArchetype": "Soldier",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "011_DimCharacter.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "CharacterGuid": "3996b8c6-b235-4ab6-86a3-baa834e87e6a",
+      "EntityKey": 481,
+      "SpeciesKey": 1,
+      "Gender": null,
+      "RoleArchetype": "Soldier",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "011_DimCharacter.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "CharacterGuid": "57181b50-3c7a-4836-b126-c4fead47f4de",
+      "EntityKey": 482,
+      "SpeciesKey": 1,
+      "Gender": null,
+      "RoleArchetype": "Soldier",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "011_DimCharacter.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "CharacterGuid": "25a27ef6-c9b1-4cd4-8465-d04858d5be7d",
+      "EntityKey": 483,
+      "SpeciesKey": 1,
+      "Gender": null,
+      "RoleArchetype": "Soldier",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "011_DimCharacter.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "CharacterGuid": "a2de8c54-85ef-4b27-a145-3f254910d56d",
+      "EntityKey": 484,
+      "SpeciesKey": 1,
+      "Gender": null,
+      "RoleArchetype": "Soldier",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "011_DimCharacter.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "CharacterGuid": "1e2e49b0-2d20-4daf-b697-ddcbf3010c4b",
+      "EntityKey": 485,
+      "SpeciesKey": 1,
+      "Gender": null,
+      "RoleArchetype": "Soldier",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "011_DimCharacter.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "CharacterGuid": "e62d022c-522a-4542-b98f-62f81c97bad9",
+      "EntityKey": 486,
+      "SpeciesKey": 1,
+      "Gender": null,
+      "RoleArchetype": "Soldier",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "011_DimCharacter.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "CharacterGuid": "5c0901ee-a847-45bf-b616-36172f61f294",
+      "EntityKey": 487,
+      "SpeciesKey": 1,
+      "Gender": null,
+      "RoleArchetype": "Soldier",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "011_DimCharacter.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "CharacterGuid": "6a6fd65c-b6dc-431c-8078-c756a332f2e1",
+      "EntityKey": 488,
+      "SpeciesKey": 1,
+      "Gender": null,
+      "RoleArchetype": "Soldier",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "011_DimCharacter.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "CharacterGuid": "73655aa9-40cb-43f9-bc2f-833ca981a1a1",
+      "EntityKey": 489,
+      "SpeciesKey": 1,
+      "Gender": null,
+      "RoleArchetype": "Soldier",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "011_DimCharacter.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "CharacterGuid": "4eaf215a-6653-4e82-b03e-55b32bc256c3",
+      "EntityKey": 490,
+      "SpeciesKey": 1,
+      "Gender": null,
+      "RoleArchetype": "Soldier",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "011_DimCharacter.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "CharacterGuid": "b7e5c2fe-855b-4f50-845b-f971e3a1b602",
+      "EntityKey": 491,
+      "SpeciesKey": 1,
+      "Gender": null,
+      "RoleArchetype": "Soldier",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "011_DimCharacter.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "CharacterGuid": "40a13678-fea9-43e3-9796-a747fcccf394",
+      "EntityKey": 492,
+      "SpeciesKey": 1,
+      "Gender": null,
+      "RoleArchetype": "Soldier",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "011_DimCharacter.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "CharacterGuid": "3bdbd790-10eb-4bcc-8c8d-5b11d55c87d0",
+      "EntityKey": 493,
+      "SpeciesKey": 1,
+      "Gender": null,
+      "RoleArchetype": "Soldier",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "011_DimCharacter.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "CharacterGuid": "7352ad29-b9ea-418b-bd7f-992067a54151",
+      "EntityKey": 494,
+      "SpeciesKey": 1,
+      "Gender": null,
+      "RoleArchetype": "Soldier",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "011_DimCharacter.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "CharacterGuid": "8e9f9888-437c-40e0-99b7-8e60ab4d63b9",
+      "EntityKey": 495,
+      "SpeciesKey": 1,
+      "Gender": null,
+      "RoleArchetype": "Soldier",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "011_DimCharacter.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "CharacterGuid": "563fe117-701b-42d8-a0b6-cec7afed997e",
+      "EntityKey": 496,
+      "SpeciesKey": 1,
+      "Gender": null,
+      "RoleArchetype": "Soldier",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "011_DimCharacter.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "CharacterGuid": "16907b76-66b8-4857-a3b5-88271333d80d",
+      "EntityKey": 497,
+      "SpeciesKey": 1,
+      "Gender": null,
+      "RoleArchetype": "Soldier",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "011_DimCharacter.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "CharacterGuid": "2afbeb82-e910-4608-9b4c-ef7e06b3387c",
+      "EntityKey": 498,
+      "SpeciesKey": 1,
+      "Gender": null,
+      "RoleArchetype": "Soldier",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "011_DimCharacter.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "CharacterGuid": "89dadeb4-cdfe-4e7b-8fe0-13d5039ed3ca",
+      "EntityKey": 499,
+      "SpeciesKey": 1,
+      "Gender": null,
+      "RoleArchetype": "Soldier",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "011_DimCharacter.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "CharacterGuid": "62a8e696-de64-4383-bf6d-da81c2bf2d30",
+      "EntityKey": 500,
+      "SpeciesKey": 1,
+      "Gender": null,
+      "RoleArchetype": "Soldier",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "011_DimCharacter.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "CharacterGuid": "8bd70ac7-a82e-4eee-9c7a-97a87c0dc1b3",
+      "EntityKey": 501,
+      "SpeciesKey": 1,
+      "Gender": null,
+      "RoleArchetype": "Soldier",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "011_DimCharacter.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "CharacterGuid": "714f8ad5-9187-4b4e-b3bd-8efdbc28b4b6",
+      "EntityKey": 502,
+      "SpeciesKey": 1,
+      "Gender": null,
+      "RoleArchetype": "Soldier",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "011_DimCharacter.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "CharacterGuid": "13182b01-db09-4d1e-a5fe-8978c0fa0929",
+      "EntityKey": 503,
+      "SpeciesKey": 1,
+      "Gender": null,
+      "RoleArchetype": "Soldier",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "011_DimCharacter.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "CharacterGuid": "d6de10f8-9608-4755-bb1b-6f3b53c2ec15",
+      "EntityKey": 504,
+      "SpeciesKey": 1,
+      "Gender": null,
+      "RoleArchetype": "Soldier",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "011_DimCharacter.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "CharacterGuid": "d9677825-1b58-4674-b3d0-8e851cd275c9",
+      "EntityKey": 505,
+      "SpeciesKey": 1,
+      "Gender": null,
+      "RoleArchetype": "Soldier",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "011_DimCharacter.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "CharacterGuid": "ea347557-b16a-4340-94d2-dbb36a50b011",
+      "EntityKey": 506,
+      "SpeciesKey": 1,
+      "Gender": null,
+      "RoleArchetype": "Soldier",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "011_DimCharacter.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "CharacterGuid": "9c6200de-ef3c-4eec-bfb9-438eb3faa596",
+      "EntityKey": 507,
+      "SpeciesKey": 1,
+      "Gender": null,
+      "RoleArchetype": "Soldier",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "011_DimCharacter.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "CharacterGuid": "88383363-3314-4e22-944d-39e52048c5eb",
+      "EntityKey": 508,
+      "SpeciesKey": 1,
+      "Gender": null,
+      "RoleArchetype": "Soldier",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "011_DimCharacter.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "CharacterGuid": "70824a07-1fd3-46e5-b290-bed9cb6013db",
+      "EntityKey": 509,
+      "SpeciesKey": 1,
+      "Gender": null,
+      "RoleArchetype": "Soldier",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "011_DimCharacter.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "CharacterGuid": "bbebc203-8dc6-443a-86b4-e94d05501b7c",
+      "EntityKey": 510,
+      "SpeciesKey": 1,
+      "Gender": null,
+      "RoleArchetype": "Soldier",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "011_DimCharacter.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "CharacterGuid": "337787ca-ca5d-48ca-8e3d-9be9c493a3cc",
+      "EntityKey": 511,
+      "SpeciesKey": 1,
+      "Gender": null,
+      "RoleArchetype": "Soldier",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "011_DimCharacter.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "CharacterGuid": "8ff02971-94e8-460c-a404-56dc720d36db",
+      "EntityKey": 512,
+      "SpeciesKey": 1,
+      "Gender": null,
+      "RoleArchetype": "Soldier",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "011_DimCharacter.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "CharacterGuid": "7787da5d-90ec-4dec-be98-7623f3dd18e0",
+      "EntityKey": 513,
+      "SpeciesKey": 1,
+      "Gender": null,
+      "RoleArchetype": "Soldier",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "011_DimCharacter.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "CharacterGuid": "88298d9a-b640-4931-8bf8-4184524629b2",
+      "EntityKey": 514,
+      "SpeciesKey": 1,
+      "Gender": null,
+      "RoleArchetype": "Soldier",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "011_DimCharacter.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "CharacterGuid": "54ba6d30-4f9b-4c8f-aa8d-28b1a6252553",
+      "EntityKey": 515,
+      "SpeciesKey": 1,
+      "Gender": null,
+      "RoleArchetype": "Soldier",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "011_DimCharacter.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "CharacterGuid": "2c9667f9-5b6b-4e57-b2ed-8de0b1437841",
+      "EntityKey": 516,
+      "SpeciesKey": 1,
+      "Gender": null,
+      "RoleArchetype": "Soldier",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "011_DimCharacter.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "CharacterGuid": "f62d6082-499c-4430-bac8-6877a0eb998e",
+      "EntityKey": 517,
+      "SpeciesKey": 1,
+      "Gender": null,
+      "RoleArchetype": "Soldier",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "011_DimCharacter.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "CharacterGuid": "ea96f2af-de61-4807-b185-9f638cff5cd6",
+      "EntityKey": 518,
+      "SpeciesKey": 1,
+      "Gender": null,
+      "RoleArchetype": "Soldier",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "011_DimCharacter.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "CharacterGuid": "ad15a04a-9ec3-4e73-ad2c-08ed1ad32d22",
+      "EntityKey": 519,
+      "SpeciesKey": 1,
+      "Gender": null,
+      "RoleArchetype": "Soldier",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "011_DimCharacter.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "CharacterGuid": "a473d754-e194-49f0-8033-afe28b4cad50",
+      "EntityKey": 520,
+      "SpeciesKey": 1,
+      "Gender": null,
+      "RoleArchetype": "Soldier",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "011_DimCharacter.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "CharacterGuid": "694b4040-7aab-4d1c-83be-8dae31921807",
+      "EntityKey": 521,
+      "SpeciesKey": 1,
+      "Gender": null,
+      "RoleArchetype": "Soldier",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "011_DimCharacter.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "CharacterGuid": "b02c360f-0717-4746-a20a-a574a721b7a6",
+      "EntityKey": 522,
+      "SpeciesKey": 1,
+      "Gender": null,
+      "RoleArchetype": "Soldier",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "011_DimCharacter.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "CharacterGuid": "c7cf4e09-02dd-43ab-b9cc-a32bf0d77231",
+      "EntityKey": 523,
+      "SpeciesKey": 1,
+      "Gender": null,
+      "RoleArchetype": "Soldier",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "011_DimCharacter.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "CharacterGuid": "1c9848df-b501-471b-a67f-051e5b6a8d87",
+      "EntityKey": 524,
+      "SpeciesKey": 1,
+      "Gender": null,
+      "RoleArchetype": "Soldier",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "011_DimCharacter.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "CharacterGuid": "cde2c1ad-1bca-4e19-80b2-e7adb69721d9",
+      "EntityKey": 525,
+      "SpeciesKey": 1,
+      "Gender": null,
+      "RoleArchetype": "Soldier",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "011_DimCharacter.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "CharacterGuid": "e7bae250-a20c-43b3-bf3b-cc0e2e8b053e",
+      "EntityKey": 526,
+      "SpeciesKey": 1,
+      "Gender": null,
+      "RoleArchetype": "Soldier",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "011_DimCharacter.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "CharacterGuid": "1c75d076-34de-4f81-9f4f-202e48ff3dc3",
+      "EntityKey": 527,
+      "SpeciesKey": 1,
+      "Gender": null,
+      "RoleArchetype": "Soldier",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "011_DimCharacter.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "CharacterGuid": "7dd74dbc-4d57-4935-a2e8-7e7a19ae80ec",
+      "EntityKey": 528,
+      "SpeciesKey": 1,
+      "Gender": null,
+      "RoleArchetype": "Soldier",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "011_DimCharacter.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "CharacterGuid": "acc60bb9-762a-47cd-b323-f4694d4793f5",
+      "EntityKey": 529,
+      "SpeciesKey": 1,
+      "Gender": null,
+      "RoleArchetype": "Soldier",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "011_DimCharacter.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "CharacterGuid": "6427d484-715b-44a5-a1d7-b467a010b7ee",
+      "EntityKey": 530,
+      "SpeciesKey": 1,
+      "Gender": null,
+      "RoleArchetype": "Soldier",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "011_DimCharacter.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "CharacterGuid": "05708c97-955c-4eba-90a5-1b5df38cccf9",
+      "EntityKey": 531,
+      "SpeciesKey": 1,
+      "Gender": null,
+      "RoleArchetype": "Officer",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "011_DimCharacter.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "CharacterGuid": "845eb9a4-6310-4e2f-8ff6-e4658c608b71",
+      "EntityKey": 532,
+      "SpeciesKey": 1,
+      "Gender": null,
+      "RoleArchetype": "Officer",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "011_DimCharacter.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "CharacterGuid": "3edf5c1e-2c50-4463-a953-681ebea1f1e0",
+      "EntityKey": 533,
+      "SpeciesKey": 1,
+      "Gender": null,
+      "RoleArchetype": "Officer",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "011_DimCharacter.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "CharacterGuid": "dc4bc18f-f7b6-451b-8e60-0fab1e0178e4",
+      "EntityKey": 534,
+      "SpeciesKey": 1,
+      "Gender": null,
+      "RoleArchetype": "Officer",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "011_DimCharacter.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "CharacterGuid": "d3551aad-b3d2-471c-afe7-c3b9f61e8796",
+      "EntityKey": 535,
+      "SpeciesKey": 1,
+      "Gender": null,
+      "RoleArchetype": "Officer",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "011_DimCharacter.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "CharacterGuid": "c4806063-55ca-45f1-96a7-215783d59a3f",
+      "EntityKey": 536,
+      "SpeciesKey": 1,
+      "Gender": null,
+      "RoleArchetype": "Officer",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "011_DimCharacter.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "CharacterGuid": "115468d4-b925-473a-b28a-3f606fc05bad",
+      "EntityKey": 537,
+      "SpeciesKey": 1,
+      "Gender": null,
+      "RoleArchetype": "Officer",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "011_DimCharacter.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "CharacterGuid": "f8bb4d16-092a-46dc-afbf-5f64d461572b",
+      "EntityKey": 538,
+      "SpeciesKey": 1,
+      "Gender": null,
+      "RoleArchetype": "Officer",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "011_DimCharacter.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "CharacterGuid": "2dc50990-e756-454a-b516-2a5e1ac86ee9",
+      "EntityKey": 539,
+      "SpeciesKey": 1,
+      "Gender": null,
+      "RoleArchetype": "Officer",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "011_DimCharacter.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "CharacterGuid": "aa0ca074-c8fb-4fb2-a606-cf49fd1c5bc1",
+      "EntityKey": 540,
+      "SpeciesKey": 1,
+      "Gender": null,
+      "RoleArchetype": "Officer",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "011_DimCharacter.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "CharacterGuid": "7bad6c74-73a3-42f1-9a11-7b6a969ca5de",
+      "EntityKey": 541,
+      "SpeciesKey": 1,
+      "Gender": null,
+      "RoleArchetype": "Officer",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "011_DimCharacter.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "CharacterGuid": "5f79aa2c-3f28-4fc5-b0ca-e2166aaf05e5",
+      "EntityKey": 542,
+      "SpeciesKey": 1,
+      "Gender": null,
+      "RoleArchetype": "Officer",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "011_DimCharacter.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "CharacterGuid": "8a1342d5-9abc-4d09-b68f-158892a99519",
+      "EntityKey": 543,
+      "SpeciesKey": 1,
+      "Gender": null,
+      "RoleArchetype": "Officer",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "011_DimCharacter.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "CharacterGuid": "f2f44e06-5910-42e4-ba10-d868ec9f6a4d",
+      "EntityKey": 544,
+      "SpeciesKey": 1,
+      "Gender": null,
+      "RoleArchetype": "Officer",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "011_DimCharacter.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "CharacterGuid": "c9622e62-12d8-4577-b7e9-fc4dda7152d1",
+      "EntityKey": 545,
+      "SpeciesKey": 1,
+      "Gender": null,
+      "RoleArchetype": "Officer",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "011_DimCharacter.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "CharacterGuid": "5d4e10c2-14da-4dad-bd69-f1a38be3e8b7",
+      "EntityKey": 546,
+      "SpeciesKey": 1,
+      "Gender": null,
+      "RoleArchetype": "Officer",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "011_DimCharacter.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "CharacterGuid": "c3e3a7f7-c981-46fa-9d91-2355371159e8",
+      "EntityKey": 547,
+      "SpeciesKey": 1,
+      "Gender": null,
+      "RoleArchetype": "Officer",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "011_DimCharacter.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "CharacterGuid": "5d127efb-99c1-472c-8f7e-fd6cf2d5fe5d",
+      "EntityKey": 548,
+      "SpeciesKey": 1,
+      "Gender": null,
+      "RoleArchetype": "Officer",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "011_DimCharacter.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "CharacterGuid": "f29d9fb7-dc77-4965-aded-8100c40dcb5d",
+      "EntityKey": 549,
+      "SpeciesKey": 1,
+      "Gender": null,
+      "RoleArchetype": "Officer",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "011_DimCharacter.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "CharacterGuid": "aa749c4f-8903-4e73-9cb7-9beb65aa8170",
+      "EntityKey": 550,
+      "SpeciesKey": 1,
+      "Gender": null,
+      "RoleArchetype": "Officer",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "011_DimCharacter.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "CharacterGuid": "4aeb2525-7bde-4483-be6e-74250bcd4594",
+      "EntityKey": 551,
+      "SpeciesKey": 1,
+      "Gender": null,
+      "RoleArchetype": "Operative",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "011_DimCharacter.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "CharacterGuid": "63ed3f58-7612-4479-8f43-048c275e13c1",
+      "EntityKey": 552,
+      "SpeciesKey": 1,
+      "Gender": null,
+      "RoleArchetype": "Operative",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "011_DimCharacter.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "CharacterGuid": "240af7bc-0ce5-4b1e-9057-602129698e09",
+      "EntityKey": 553,
+      "SpeciesKey": 1,
+      "Gender": null,
+      "RoleArchetype": "Operative",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "011_DimCharacter.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "CharacterGuid": "c70493b1-7d19-4e80-b993-0e37283183cc",
+      "EntityKey": 554,
+      "SpeciesKey": 1,
+      "Gender": null,
+      "RoleArchetype": "Operative",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "011_DimCharacter.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "CharacterGuid": "bfbbddb6-c4e9-493e-bf71-36767c2fc83b",
+      "EntityKey": 555,
+      "SpeciesKey": 1,
+      "Gender": null,
+      "RoleArchetype": "Operative",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "011_DimCharacter.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "CharacterGuid": "24ad31b7-dd93-4c7e-834e-a42ae0f1b930",
+      "EntityKey": 556,
+      "SpeciesKey": 1,
+      "Gender": null,
+      "RoleArchetype": "Operative",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "011_DimCharacter.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "CharacterGuid": "277dbd0c-cb8a-4a23-b206-c965d0beeeaa",
+      "EntityKey": 557,
+      "SpeciesKey": 1,
+      "Gender": null,
+      "RoleArchetype": "Operative",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "011_DimCharacter.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "CharacterGuid": "2d8dc4fd-4d8c-4bd2-af7c-b49c00e2f5ce",
+      "EntityKey": 558,
+      "SpeciesKey": 1,
+      "Gender": null,
+      "RoleArchetype": "Operative",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "011_DimCharacter.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "CharacterGuid": "ea5a33ec-049d-41af-85a7-e97092101364",
+      "EntityKey": 559,
+      "SpeciesKey": 1,
+      "Gender": null,
+      "RoleArchetype": "Operative",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "011_DimCharacter.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "CharacterGuid": "d5f51f0d-2d9e-4d53-9051-87995c28705e",
+      "EntityKey": 560,
+      "SpeciesKey": 1,
+      "Gender": null,
+      "RoleArchetype": "Operative",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "011_DimCharacter.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "CharacterGuid": "3c3a3fbb-9cff-4a7e-82e0-13c3ce788293",
+      "EntityKey": 561,
+      "SpeciesKey": 1,
+      "Gender": null,
+      "RoleArchetype": "Mercenary",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "011_DimCharacter.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "CharacterGuid": "a26334c3-84fc-47c8-81f7-6a3853b6b870",
+      "EntityKey": 562,
+      "SpeciesKey": 1,
+      "Gender": null,
+      "RoleArchetype": "Mercenary",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "011_DimCharacter.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "CharacterGuid": "f3b3d9ce-618d-4d52-ba31-a31907e93bed",
+      "EntityKey": 563,
+      "SpeciesKey": 1,
+      "Gender": null,
+      "RoleArchetype": "Mercenary",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "011_DimCharacter.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "CharacterGuid": "69a3c2cd-7bd2-4b90-960b-7e332051d598",
+      "EntityKey": 564,
+      "SpeciesKey": 1,
+      "Gender": null,
+      "RoleArchetype": "Mercenary",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "011_DimCharacter.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "CharacterGuid": "33eb510d-6af3-4046-8d65-0f30da6cb260",
+      "EntityKey": 565,
+      "SpeciesKey": 1,
+      "Gender": null,
+      "RoleArchetype": "Mercenary",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "011_DimCharacter.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "CharacterGuid": "224381b9-d229-4360-b686-02dd58fd702b",
+      "EntityKey": 566,
+      "SpeciesKey": 1,
+      "Gender": null,
+      "RoleArchetype": "Mercenary",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "011_DimCharacter.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "CharacterGuid": "2c2eea53-9f5e-4077-9234-d8d1c48f11b4",
+      "EntityKey": 567,
+      "SpeciesKey": 1,
+      "Gender": null,
+      "RoleArchetype": "Mercenary",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "011_DimCharacter.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "CharacterGuid": "3a562a4a-e0fc-4669-b97e-296be7149683",
+      "EntityKey": 568,
+      "SpeciesKey": 1,
+      "Gender": null,
+      "RoleArchetype": "Mercenary",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "011_DimCharacter.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "CharacterGuid": "17a26100-e68a-4574-b5b3-e3730f52f429",
+      "EntityKey": 569,
+      "SpeciesKey": 1,
+      "Gender": null,
+      "RoleArchetype": "Mercenary",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "011_DimCharacter.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "CharacterGuid": "66d987c7-f5e7-4370-9d60-40eb9ec96aae",
+      "EntityKey": 570,
+      "SpeciesKey": 1,
+      "Gender": null,
+      "RoleArchetype": "Mercenary",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "011_DimCharacter.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
     }
   ]
 }

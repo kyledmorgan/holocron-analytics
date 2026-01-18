@@ -158,6 +158,156 @@
       "Notes": "Synthetic seed data",
       "SourceSystem": "seed_loader",
       "SourceRef": "014_DimDroidModel.json"
+    },
+    {
+      "DroidModelGuid": "0f6afbec-0117-4e89-a403-a98069a81d1c",
+      "TechAssetKey": 58,
+      "DroidClass": "Combat",
+      "PrimaryFunction": "Combat",
+      "AutonomyLevel": "High",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "014_DimDroidModel.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "DroidModelGuid": "75f8ed4f-9142-4e5d-9063-8d96e1490cb2",
+      "TechAssetKey": 59,
+      "DroidClass": "Combat",
+      "PrimaryFunction": "Combat",
+      "AutonomyLevel": "High",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "014_DimDroidModel.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "DroidModelGuid": "62666bfb-94e3-4b22-a7e2-a7e5ef59148c",
+      "TechAssetKey": 60,
+      "DroidClass": "Combat",
+      "PrimaryFunction": "Combat",
+      "AutonomyLevel": "High",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "014_DimDroidModel.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "DroidModelGuid": "f871a7e3-81e2-47a0-b560-5e04421e68f4",
+      "TechAssetKey": 61,
+      "DroidClass": "Utility",
+      "PrimaryFunction": "Support",
+      "AutonomyLevel": "High",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "014_DimDroidModel.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "DroidModelGuid": "fab898a7-4a6c-4b75-a5c5-0c4804a038e9",
+      "TechAssetKey": 62,
+      "DroidClass": "Combat",
+      "PrimaryFunction": "Combat",
+      "AutonomyLevel": "High",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "014_DimDroidModel.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "DroidModelGuid": "42c9003d-3d60-4db7-bc26-515a346a4391",
+      "TechAssetKey": 63,
+      "DroidClass": "Utility",
+      "PrimaryFunction": "Support",
+      "AutonomyLevel": "High",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "014_DimDroidModel.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "DroidModelGuid": "6d878867-e5a8-43e1-838d-22b687a206e7",
+      "TechAssetKey": 64,
+      "DroidClass": "Utility",
+      "PrimaryFunction": "Support",
+      "AutonomyLevel": "High",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "014_DimDroidModel.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "DroidModelGuid": "d3438f20-ab8f-4e7b-bc75-c06d3125c715",
+      "TechAssetKey": 65,
+      "DroidClass": "Utility",
+      "PrimaryFunction": "Support",
+      "AutonomyLevel": "High",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "014_DimDroidModel.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "DroidModelGuid": "893fcebc-5401-4ce2-96d2-d1d18df05e9f",
+      "TechAssetKey": 66,
+      "DroidClass": "Utility",
+      "PrimaryFunction": "Support",
+      "AutonomyLevel": "High",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "014_DimDroidModel.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
+    },
+    {
+      "DroidModelGuid": "ec76ae24-9700-41e7-8839-9fb040aa97dc",
+      "TechAssetKey": 67,
+      "DroidClass": "Utility",
+      "PrimaryFunction": "Support",
+      "AutonomyLevel": "High",
+      "Notes": "Synthetic seed data - Dark Forces",
+      "SourceSystem": "seed_loader",
+      "SourceRef": "014_DimDroidModel.json",
+      "AttributesJson": {
+        "toolName": "CodexCLI",
+        "batchName": "dark-forces-deep-dive-20260117",
+        "sourceWork": "Dark Forces"
+      }
     }
   ]
 }
