@@ -6,7 +6,7 @@ import hashlib
 import json
 import logging
 import uuid
-from datetime import datetime
+from datetime import datetime, timezone
 from pathlib import Path
 from typing import Dict, List, Optional
 
@@ -203,7 +203,7 @@ class IngestRunner:
                 status_code=response.status_code,
                 response_headers=response.headers,
                 payload=response.payload,
-                fetched_at_utc=datetime.utcnow(),
+                fetched_at_utc=datetime.now(timezone.utc),
                 hash_sha256=self._compute_hash(response.payload),
                 run_id=work_item.run_id,
                 work_item_id=work_item.work_item_id,

@@ -7,6 +7,7 @@ Tests core functionality without requiring external APIs or databases.
 
 import sys
 import logging
+import tempfile
 from pathlib import Path
 
 # Add src directory to path
@@ -45,9 +46,8 @@ def test_state_store():
     logger.info("Testing SqliteStateStore...")
     
     # Use temporary database
-    db_path = Path("/tmp/test_state.db")
-    if db_path.exists():
-        db_path.unlink()
+    with tempfile.NamedTemporaryFile(suffix=".db", delete=False) as tmp:
+        db_path = Path(tmp.name)
     
     state_store = SqliteStateStore(db_path=db_path)
     
@@ -88,50 +88,44 @@ def test_file_lake_writer():
     """Test file lake writer."""
     logger.info("Testing FileLakeWriter...")
     
-    from datetime import datetime
+    from datetime import datetime, timezone
     import json
     
     # Use temporary directory
-    base_dir = Path("/tmp/test_lake")
-    if base_dir.exists():
-        import shutil
-        shutil.rmtree(base_dir)
+    with tempfile.TemporaryDirectory() as tmpdir:
+        base_dir = Path(tmpdir)
     
-    writer = FileLakeWriter(base_dir=base_dir, create_dirs=True)
-    
-    # Create ingest record
-    record = IngestRecord(
-        ingest_id="test-123",
-        source_system="mediawiki",
-        source_name="wikipedia",
-        resource_type="page",
-        resource_id="Test_Page",
-        request_uri="https://example.com/test",
-        request_method="GET",
-        status_code=200,
-        payload={"test": "data", "nested": {"value": 123}},
-        fetched_at_utc=datetime.utcnow(),
-    )
-    
-    # Write record
-    assert writer.write(record) == True
-    
-    # Verify file was created
-    expected_dir = base_dir / "mediawiki" / "wikipedia" / "page"
-    assert expected_dir.exists()
-    
-    files = list(expected_dir.glob("*.json"))
-    assert len(files) == 1
-    
-    # Verify content
-    with open(files[0], "r") as f:
-        content = json.load(f)
-        assert content["ingest_id"] == "test-123"
-        assert content["payload"]["test"] == "data"
-    
-    # Cleanup
-    import shutil
-    shutil.rmtree(base_dir)
+        writer = FileLakeWriter(base_dir=base_dir, create_dirs=True)
+        
+        # Create ingest record
+        record = IngestRecord(
+            ingest_id="test-123",
+            source_system="mediawiki",
+            source_name="wikipedia",
+            resource_type="page",
+            resource_id="Test_Page",
+            request_uri="https://example.com/test",
+            request_method="GET",
+            status_code=200,
+            payload={"test": "data", "nested": {"value": 123}},
+            fetched_at_utc=datetime.now(timezone.utc),
+        )
+        
+        # Write record
+        assert writer.write(record) == True
+        
+        # Verify file was created
+        expected_dir = base_dir / "mediawiki" / "wikipedia" / "page"
+        assert expected_dir.exists()
+        
+        files = list(expected_dir.glob("*.json"))
+        assert len(files) == 1
+        
+        # Verify content
+        with open(files[0], "r") as f:
+            content = json.load(f)
+            assert content["ingest_id"] == "test-123"
+            assert content["payload"]["test"] == "data"
     
     logger.info("✓ FileLakeWriter works correctly")
 

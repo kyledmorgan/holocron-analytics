@@ -37,9 +37,13 @@ class SqlServerIngestWriter(StorageWriter):
         
         Args:
             connection_string: SQL Server connection string
-            schema: Database schema name
-            table: Table name
+            schema: Database schema name (must be a valid SQL identifier)
+            table: Table name (must be a valid SQL identifier)
             auto_commit: Whether to auto-commit after each write
+            
+        Note:
+            schema and table names are used directly in SQL statements.
+            These should come from trusted configuration, not user input.
         """
         if pyodbc is None:
             raise ImportError(
@@ -47,12 +51,23 @@ class SqlServerIngestWriter(StorageWriter):
                 "Install with: pip install pyodbc"
             )
         
+        # Validate schema and table names to prevent SQL injection
+        if not self._is_valid_identifier(schema):
+            raise ValueError(f"Invalid schema name: {schema}")
+        if not self._is_valid_identifier(table):
+            raise ValueError(f"Invalid table name: {table}")
+        
         self.connection_string = connection_string
         self.schema = schema
         self.table = table
         self.auto_commit = auto_commit
         self.conn = None
         self._connect()
+
+    def _is_valid_identifier(self, name: str) -> bool:
+        """Validate that a name is a safe SQL identifier."""
+        # Simple validation: alphanumeric and underscore only
+        return bool(name and name.replace('_', '').isalnum() and not name[0].isdigit())
 
     def _connect(self) -> None:
         """Establish database connection."""

@@ -4,7 +4,7 @@ SQLite-based state store for managing work item queue.
 
 import logging
 import sqlite3
-from datetime import datetime
+from datetime import datetime, timezone
 from pathlib import Path
 from typing import List, Optional
 
@@ -221,7 +221,7 @@ class SqliteStateStore(StateStore):
                 WHERE work_item_id = ?
             """, (
                 status.value,
-                datetime.utcnow().isoformat(),
+                datetime.now(timezone.utc).isoformat(),
                 error_message,
                 work_item_id,
             ))

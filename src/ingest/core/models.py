@@ -3,7 +3,7 @@ Core data models for the ingestion framework.
 """
 
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import datetime, timezone
 from enum import Enum
 from typing import Any, Dict, Optional
 import uuid
@@ -55,8 +55,8 @@ class WorkItem:
     attempt: int = 0
     run_id: Optional[str] = None
     discovered_from: Optional[str] = None
-    created_at: datetime = field(default_factory=datetime.utcnow)
-    updated_at: datetime = field(default_factory=datetime.utcnow)
+    created_at: datetime = field(default_factory=lambda: datetime.now(timezone.utc))
+    updated_at: datetime = field(default_factory=lambda: datetime.now(timezone.utc))
     work_item_id: str = field(default_factory=lambda: str(uuid.uuid4()))
 
     def get_dedupe_key(self) -> str:
