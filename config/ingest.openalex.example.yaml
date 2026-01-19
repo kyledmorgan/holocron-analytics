@@ -1,0 +1,97 @@
+# Holocron Analytics Ingestion Framework Configuration - OpenAlex Example
+# This example shows how to configure OpenAlex as an ingestion source.
+# Copy relevant sections to your config/ingest.yaml file.
+
+# Storage configuration
+storage:
+  # File-based data lake
+  data_lake:
+    enabled: true
+    base_dir: "local/data_lake"
+    pretty_print: true
+
+# State store configuration
+state:
+  type: "sqlite"
+  db_path: "local/state/ingest_state.db"
+
+# Runner configuration
+runner:
+  batch_size: 10
+  max_items: null  # null = unlimited
+  max_retries: 3
+  enable_discovery: true
+
+# Source configurations
+sources:
+  # OpenAlex source configuration
+  - name: "openalex"
+    type: "openalex"
+    # Optional: Email for polite pool access (faster API responses)
+    # email: "your-email@example.com"
+    rate_limit_delay: 0.1  # 10 requests/second (polite pool limit)
+    timeout: 30
+    max_retries: 3
+    
+    # Discovery settings
+    discovery:
+      enabled: true
+      discover_references: true  # Follow citation links
+      discover_related: false     # Related works (not yet implemented)
+      max_depth: 1               # 0 = seeds only, 1 = first-degree citations
+    
+    # Entity matching for controlled expansion
+    entity_matching:
+      # Only enqueue works that match these known entities
+      entities:
+        - "Star Wars"
+        - "Artificial Intelligence"
+        - "Machine Learning"
+        - "Deep Learning"
+        - "Natural Language Processing"
+      
+      # Known identifiers (optional)
+      identifiers:
+        doi: []
+        openalex_id: []
+      
+      case_sensitive: false
+
+# Seed definitions (initial work items)
+seeds:
+  # Example 1: Fetch a specific OpenAlex work by ID
+  - source: "openalex"
+    resource_type: "work"
+    work_ids:
+      - "W2741809807"  # Example: A seminal paper
+    priority: 10
+  
+  # Example 2: Search OpenAlex and seed from results
+  - source: "openalex"
+    resource_type: "search"
+    search_query: "machine learning"
+    filters:
+      - "type:article"
+      - "is_oa:true"           # Open access only
+      - "publication_year:>2020"
+    per_page: 25
+    priority: 20
+
+# Additional examples (commented out):
+# 
+# # Seed by DOI
+# - source: "openalex"
+#   resource_type: "work"
+#   dois:
+#     - "10.1234/example.doi"
+#   priority: 10
+# 
+# # Seed by topic/concept
+# - source: "openalex"
+#   resource_type: "search"
+#   search_query: "neural networks AND computer vision"
+#   filters:
+#     - "is_oa:true"
+#     - "cited_by_count:>10"
+#   per_page: 50
+#   priority: 15
