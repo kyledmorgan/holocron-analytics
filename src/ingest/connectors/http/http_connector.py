@@ -13,7 +13,7 @@ try:
 except ImportError:
     requests = None
 
-from ..core.connector import Connector, ConnectorRequest, ConnectorResponse
+from ...core.connector import Connector, ConnectorRequest, ConnectorResponse
 
 
 logger = logging.getLogger(__name__)
