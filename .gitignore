@@ -45,3 +45,7 @@ config/*.yaml
 sources/*.yaml
 !sources/*.example.yaml
 
+# Ingestion framework runtime data
+local/data_lake/
+local/state/
+
