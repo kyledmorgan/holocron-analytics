@@ -58,6 +58,7 @@ class TestOpenAlexDiscovery(unittest.TestCase):
         )
         
         # Create ingest record with referenced works
+        # NOTE: Work must match a known entity to have references discovered
         record = IngestRecord(
             ingest_id="test-123",
             source_system="openalex",
@@ -69,7 +70,7 @@ class TestOpenAlexDiscovery(unittest.TestCase):
             status_code=200,
             payload={
                 "id": "https://openalex.org/W123456789",
-                "title": "Example Work",
+                "title": "Star Wars: A Study",  # Matches known entity "Star Wars"
                 "referenced_works": [
                     "https://openalex.org/W111111111",
                     "https://openalex.org/W222222222",
@@ -94,6 +95,43 @@ class TestOpenAlexDiscovery(unittest.TestCase):
         self.assertEqual(item.metadata["discovered_via"], "references")
         self.assertEqual(item.discovered_from, parent.work_item_id)
     
+    def test_discover_filters_non_matching_entities(self):
+        """Test that works not matching entities don't have references discovered."""
+        parent = WorkItem(
+            source_system="openalex",
+            source_name="openalex",
+            resource_type="work",
+            resource_id="W123456789",
+            request_uri="https://api.openalex.org/works/W123456789",
+            metadata={"depth": 0},
+        )
+        
+        # Work that doesn't match any known entity
+        record = IngestRecord(
+            ingest_id="test-123",
+            source_system="openalex",
+            source_name="openalex",
+            resource_type="work",
+            resource_id="W123456789",
+            request_uri="https://api.openalex.org/works/W123456789",
+            request_method="GET",
+            status_code=200,
+            payload={
+                "id": "https://openalex.org/W123456789",
+                "title": "Unrelated Biology Paper",  # Doesn't match known entities
+                "referenced_works": [
+                    "https://openalex.org/W111111111",
+                    "https://openalex.org/W222222222",
+                ],
+            },
+            fetched_at_utc=datetime.now(timezone.utc),
+        )
+        
+        discovered = self.discovery.discover(record, parent)
+        
+        # Should discover no works because parent doesn't match entities
+        self.assertEqual(len(discovered), 0)
+    
     def test_discover_no_references(self):
         """Test discovery when no references are present."""
         parent = WorkItem(
@@ -116,7 +154,7 @@ class TestOpenAlexDiscovery(unittest.TestCase):
             status_code=200,
             payload={
                 "id": "https://openalex.org/W123456789",
-                "title": "Example Work",
+                "title": "Star Wars Analysis",  # Matches known entity
                 "referenced_works": [],
             },
             fetched_at_utc=datetime.now(timezone.utc),
@@ -183,12 +221,14 @@ class TestOpenAlexDiscovery(unittest.TestCase):
                 "results": [
                     {
                         "id": "https://openalex.org/W111111111",
+                        "title": "Machine Learning Study",  # Matches known entity
                         "referenced_works": [
                             "https://openalex.org/W222222222",
                         ],
                     },
                     {
                         "id": "https://openalex.org/W333333333",
+                        "title": "Star Wars Analysis",  # Matches known entity
                         "referenced_works": [
                             "https://openalex.org/W444444444",
                         ],

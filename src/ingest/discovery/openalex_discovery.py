@@ -6,7 +6,6 @@ Extracts references, citations, and related works from OpenAlex API responses.
 
 import logging
 from typing import List, Optional, Dict, Any
-from urllib.parse import urlencode
 
 from .base import Discovery
 from .entity_matcher import EntityMatcher
@@ -88,6 +87,15 @@ class OpenAlexDiscovery(Discovery):
         
         # Process each work
         for work_data in works_to_process:
+            # Only discover references from works that match known entities
+            # This prevents "six degrees of Kevin Bacon" drift
+            if not self._matches_known_entity(work_data):
+                logger.debug(
+                    f"Skipping reference discovery for work {work_data.get('id', 'unknown')}: "
+                    "does not match known entities"
+                )
+                continue
+            
             # Extract referenced works
             if self.discover_references:
                 work_items.extend(
@@ -197,6 +205,10 @@ class OpenAlexDiscovery(Discovery):
     def _matches_known_entity(self, work_data: Dict[str, Any]) -> bool:
         """
         Check if a work matches a known entity.
+        
+        This method filters which works should have their references discovered,
+        preventing unbounded expansion ("six degrees of Kevin Bacon" drift).
+        Only works matching known entities will have their references extracted.
         
         Args:
             work_data: OpenAlex work data
