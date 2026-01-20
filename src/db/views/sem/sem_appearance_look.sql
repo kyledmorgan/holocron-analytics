@@ -50,23 +50,23 @@ SELECT
     f.Name                      AS FranchiseName,
     al.ValidFromUtc
 FROM dbo.DimAppearanceLook al
-INNER JOIN dbo.DimCharacter c
+LEFT OUTER JOIN dbo.DimCharacter c
     ON al.CharacterKey = c.CharacterKey
    AND c.IsActive = 1
    AND c.IsLatest = 1
-INNER JOIN dbo.DimEntity e
+LEFT OUTER JOIN dbo.DimEntity e
     ON c.EntityKey = e.EntityKey
    AND e.IsActive = 1
    AND e.IsLatest = 1
-INNER JOIN dbo.DimWork w
+LEFT OUTER JOIN dbo.DimWork w
     ON al.WorkKey = w.WorkKey
    AND w.IsActive = 1
    AND w.IsLatest = 1
-INNER JOIN dbo.DimScene sc
+LEFT OUTER JOIN dbo.DimScene sc
     ON al.SceneKey = sc.SceneKey
    AND sc.IsActive = 1
    AND sc.IsLatest = 1
-INNER JOIN dbo.DimFranchise f
+LEFT OUTER JOIN dbo.DimFranchise f
     ON w.FranchiseKey = f.FranchiseKey
    AND f.IsActive = 1
    AND f.IsLatest = 1

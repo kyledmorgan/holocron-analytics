@@ -1,0 +1,6 @@
+services:
+  holocronanalytics:
+    image: holocronanalytics
+    build:
+      context: .
+      dockerfile: ./Dockerfile
