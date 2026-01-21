@@ -8,6 +8,7 @@ NOTE: Exact SQL Server schema for job queue and run metadata is TBD.
 """
 
 import logging
+import uuid
 from datetime import datetime, timezone
 from typing import Any, Dict, List, Optional
 
@@ -107,8 +108,6 @@ class SqlQueueStore:
         Returns:
             Job ID
         """
-        import uuid
-        
         job_id = str(uuid.uuid4())
         
         self._jobs[job_id] = {
