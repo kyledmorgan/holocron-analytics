@@ -1,0 +1,166 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://holocron-analytics.local/schemas/llm/manifest/v1",
+  "title": "LLM Derive Manifest",
+  "description": "Manifest tracking inputs, configuration, and outputs for an LLM derive operation. Enables reproducibility and lineage tracking.",
+  "type": "object",
+  "required": [
+    "manifest_version",
+    "manifest_id",
+    "created_at_utc",
+    "evidence_bundle",
+    "llm_config",
+    "status"
+  ],
+  "properties": {
+    "manifest_version": {
+      "type": "string",
+      "description": "Schema version for this manifest",
+      "const": "1.0.0"
+    },
+    "manifest_id": {
+      "type": "string",
+      "description": "Unique identifier for this manifest (UUID)",
+      "format": "uuid"
+    },
+    "created_at_utc": {
+      "type": "string",
+      "description": "ISO 8601 timestamp when the manifest was created",
+      "format": "date-time"
+    },
+    "evidence_bundle": {
+      "type": "object",
+      "description": "References to source evidence used for derivation",
+      "required": ["items"],
+      "properties": {
+        "items": {
+          "type": "array",
+          "description": "List of evidence items",
+          "items": {
+            "type": "object",
+            "required": ["source_type", "source_ref"],
+            "properties": {
+              "source_type": {
+                "type": "string",
+                "description": "Type of evidence source",
+                "enum": ["ingest_record", "sql_result", "http_response", "document", "other"]
+              },
+              "source_ref": {
+                "type": "string",
+                "description": "Reference to the source (file path, ingest_id, query hash, etc.)"
+              },
+              "content_hash": {
+                "type": "string",
+                "description": "SHA256 hash of the source content for integrity verification"
+              },
+              "metadata": {
+                "type": "object",
+                "description": "Additional metadata about this evidence item"
+              }
+            }
+          }
+        },
+        "bundle_hash": {
+          "type": "string",
+          "description": "Combined hash of all evidence items for bundle-level integrity"
+        }
+      }
+    },
+    "llm_config": {
+      "type": "object",
+      "description": "LLM configuration used for this derivation",
+      "required": ["provider", "model"],
+      "properties": {
+        "provider": {
+          "type": "string",
+          "description": "LLM provider name",
+          "examples": ["ollama", "openai"]
+        },
+        "model": {
+          "type": "string",
+          "description": "Model identifier",
+          "examples": ["llama3.2", "gpt-4o"]
+        },
+        "temperature": {
+          "type": "number",
+          "description": "Sampling temperature (0.0-2.0)",
+          "minimum": 0,
+          "maximum": 2
+        },
+        "max_tokens": {
+          "type": "integer",
+          "description": "Maximum tokens in response"
+        },
+        "prompt_template_ref": {
+          "type": "string",
+          "description": "Reference to the prompt template used"
+        },
+        "prompt_template_hash": {
+          "type": "string",
+          "description": "Hash of the prompt template for version tracking"
+        }
+      }
+    },
+    "output_schema_ref": {
+      "type": "string",
+      "description": "Reference to the expected output JSON schema"
+    },
+    "status": {
+      "type": "string",
+      "description": "Current status of the derive operation",
+      "enum": ["pending", "in_progress", "completed", "failed", "validation_failed"]
+    },
+    "result": {
+      "type": "object",
+      "description": "Result of the derive operation (populated on completion)",
+      "properties": {
+        "artifact_path": {
+          "type": "string",
+          "description": "Path to the derived artifact file"
+        },
+        "artifact_hash": {
+          "type": "string",
+          "description": "SHA256 hash of the derived artifact"
+        },
+        "raw_response_path": {
+          "type": "string",
+          "description": "Path to the raw LLM response (for debugging)"
+        },
+        "completed_at_utc": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "duration_ms": {
+          "type": "integer",
+          "description": "Time taken for derivation in milliseconds"
+        },
+        "token_usage": {
+          "type": "object",
+          "properties": {
+            "prompt_tokens": { "type": "integer" },
+            "completion_tokens": { "type": "integer" },
+            "total_tokens": { "type": "integer" }
+          }
+        },
+        "validation_errors": {
+          "type": "array",
+          "description": "Schema validation errors (if any)",
+          "items": { "type": "string" }
+        }
+      }
+    },
+    "error": {
+      "type": "object",
+      "description": "Error information (if status is failed)",
+      "properties": {
+        "error_type": { "type": "string" },
+        "error_message": { "type": "string" },
+        "error_at_utc": { "type": "string", "format": "date-time" }
+      }
+    },
+    "metadata": {
+      "type": "object",
+      "description": "Additional metadata for this manifest"
+    }
+  }
+}
