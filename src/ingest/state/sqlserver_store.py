@@ -6,7 +6,7 @@ This is the default state store backend, replacing the deprecated SQLite impleme
 
 import json
 import logging
-import warnings
+import re
 from datetime import datetime, timezone
 from typing import List, Optional
 
@@ -98,8 +98,39 @@ class SqlServerStateStore(StateStore):
             self._init_schema()
 
     def _is_valid_identifier(self, name: str) -> bool:
-        """Validate that a name is a safe SQL identifier."""
-        return bool(name and name.replace('_', '').isalnum() and not name[0].isdigit())
+        """
+        Validate that a name is a safe SQL identifier.
+        
+        Uses a strict whitelist approach to prevent SQL injection:
+        - Must start with a letter or underscore
+        - Can only contain letters, digits, and underscores
+        - Maximum length of 128 characters (SQL Server limit)
+        - Cannot be a SQL reserved word
+        
+        Args:
+            name: The identifier to validate
+            
+        Returns:
+            True if valid, False otherwise
+        """
+        if not name or len(name) > 128:
+            return False
+        
+        # Strict regex: start with letter/underscore, followed by alphanumerics/underscores
+        pattern = r'^[a-zA-Z_][a-zA-Z0-9_]*$'
+        if not re.match(pattern, name):
+            return False
+        
+        # Block common SQL reserved words that could be dangerous
+        reserved_words = {
+            'select', 'insert', 'update', 'delete', 'drop', 'create', 'alter',
+            'exec', 'execute', 'union', 'where', 'from', 'table', 'database',
+            'schema', 'index', 'grant', 'revoke', 'truncate', 'declare', 'set'
+        }
+        if name.lower() in reserved_words:
+            return False
+        
+        return True
 
     def _connect(self) -> None:
         """Establish database connection."""
@@ -116,6 +147,10 @@ class SqlServerStateStore(StateStore):
         
         try:
             # Create schema if not exists
+            # Note: Schema name is validated in __init__ via _is_valid_identifier()
+            # which uses strict whitelist validation. The schema comes from trusted
+            # configuration (env vars or config file), not user input. Using EXEC
+            # is necessary because CREATE SCHEMA cannot use parameters directly.
             cursor.execute(f"""
                 IF NOT EXISTS (SELECT * FROM sys.schemas WHERE name = ?)
                 BEGIN

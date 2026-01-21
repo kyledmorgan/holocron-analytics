@@ -208,7 +208,14 @@ class TestSqlServerStateStore(unittest.TestCase):
         
         self.assertTrue(result)
         
-        # Note: WorkItem model doesn't have error_message, but it's stored in DB
+        # Verify status was updated in DB (error_message is stored but not in WorkItem model)
+        cursor = self.store.conn.cursor()
+        cursor.execute(f"""
+            SELECT error_message FROM [{self.store.schema}].[work_items]
+            WHERE work_item_id = ?
+        """, (work_item.work_item_id,))
+        row = cursor.fetchone()
+        self.assertEqual(row[0], error_msg)
     
     def test_get_stats(self):
         """Test getting queue statistics."""
