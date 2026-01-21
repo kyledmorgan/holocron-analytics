@@ -1,0 +1,10 @@
+# Holocron Analytics - Ingestion Framework Dependencies
+# Python 3.11+ recommended
+
+# Core dependencies
+requests>=2.31.0         # HTTP client for connectors
+pyyaml>=6.0              # YAML configuration parsing
+
+# Optional dependencies
+pyodbc>=5.0.0           # SQL Server connectivity (optional)
+python-dotenv>=1.0.0     # Environment variable management (optional)

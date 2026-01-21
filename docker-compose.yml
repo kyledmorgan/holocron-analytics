@@ -22,7 +22,7 @@ services:
     volumes:
       - mssql_data:/var/opt/mssql
     healthcheck:
-      test: /opt/mssql-tools18/bin/sqlcmd -S localhost -U sa -P "$${MSSQL_SA_PASSWORD}" -C -Q "SELECT 1" -b
+      test: ["CMD-SHELL", "bash -c \"echo > /dev/tcp/localhost/1433\""]
       interval: 10s
       timeout: 5s
       retries: 12
@@ -30,7 +30,7 @@ services:
     restart: unless-stopped
 
   initdb:
-    image: mcr.microsoft.com/mssql-tools:18
+    image: mcr.microsoft.com/mssql-tools
     container_name: holocron-initdb
     depends_on:
       sqlserver:
@@ -45,7 +45,12 @@ services:
     command:
       - |
         set -e
-        
+        echo "Waiting for SQL Server to accept connections..."
+        for i in {1..60}; do
+          /opt/mssql-tools/bin/sqlcmd -S sqlserver -U sa -P "$${MSSQL_SA_PASSWORD}" -C -Q "SELECT 1" -b && break
+          sleep 2
+        done
+ 
         # Function to run SQL scripts from a directory
         run_scripts() {
           local dir="$$1"
@@ -53,7 +58,7 @@ services:
             for script in "$${dir}"/*.sql; do
               if [ -f "$${script}" ]; then
                 echo "Running $${script}..."
-                /opt/mssql-tools18/bin/sqlcmd -S sqlserver -U sa -P "$${MSSQL_SA_PASSWORD}" -C \
+                /opt/mssql-tools/bin/sqlcmd -S sqlserver -U sa -P "$${MSSQL_SA_PASSWORD}" -C \
                   -d "$${DATABASE_NAME}" -i "$${script}"
               fi
             done
@@ -61,9 +66,8 @@ services:
         }
         
         echo "=== Creating database if not exists ==="
-        /opt/mssql-tools18/bin/sqlcmd -S sqlserver -U sa -P "$${MSSQL_SA_PASSWORD}" -C \
-          -v DATABASE_NAME="$${DATABASE_NAME}" \
-          -i /init-db.sql
+        /opt/mssql-tools/bin/sqlcmd -S sqlserver -U sa -P "$${MSSQL_SA_PASSWORD}" -C \
+          -Q "IF DB_ID(N'$${DATABASE_NAME}') IS NULL BEGIN CREATE DATABASE [$${DATABASE_NAME}]; PRINT 'Database $${DATABASE_NAME} created successfully.'; END ELSE BEGIN PRINT 'Database $${DATABASE_NAME} already exists.'; END"
 
         echo "=== Running DDL scripts ==="
         run_scripts "/ddl/01_dimensions"

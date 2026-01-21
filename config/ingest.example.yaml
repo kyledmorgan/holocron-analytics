@@ -1,0 +1,90 @@
+# Holocron Analytics Ingestion Framework Configuration
+# This is an example configuration file. Copy to config/ingest.yaml and customize.
+
+# Storage configuration
+storage:
+  # File-based data lake
+  data_lake:
+    enabled: true
+    base_dir: "local/data_lake"
+    pretty_print: true
+  
+  # SQL Server storage (optional)
+  sql_server:
+    enabled: false
+    # Connection string from environment variable: INGEST_SQLSERVER_CONN_STR
+    # Or use discrete variables:
+    # host: localhost
+    # port: 1433
+    # database: HolocronAnalytics
+    # user: sa
+    # password: ${INGEST_SQLSERVER_PASSWORD}
+    schema: "ingest"
+    table: "IngestRecords"
+
+# State store configuration
+state:
+  type: "sqlite"
+  db_path: "local/state/ingest_state.db"
+
+# Runner configuration
+runner:
+  batch_size: 10
+  max_items: null  # null = unlimited
+  max_retries: 3
+  enable_discovery: true
+
+# Source configurations
+sources:
+  - name: "wikipedia"
+    type: "mediawiki"
+    api_url: "https://en.wikipedia.org/w/api.php"
+    rate_limit_delay: 1.0  # seconds between requests
+    timeout: 30
+    max_retries: 3
+    user_agent: "HolocronAnalytics/1.0 (Educational; Local Research)"
+    
+    # Discovery settings
+    discovery:
+      enabled: true
+      discover_links: true
+      discover_categories: false
+      max_depth: 2
+
+  # Wookieepedia (Star Wars wiki) configuration
+  - name: "wookieepedia"
+    type: "mediawiki"
+    api_url: "https://starwars.fandom.com/api.php"
+    rate_limit_delay: 1.0  # Be polite to Fandom servers
+    timeout: 30
+    max_retries: 3
+    user_agent: "HolocronAnalytics/1.0 (Educational; Star Wars Research)"
+    
+    # Discovery settings for link crawling
+    discovery:
+      enabled: true
+      discover_links: true
+      discover_categories: false
+      max_depth: 3
+
+# Seed definitions (initial work items)
+seeds:
+  # Example: Fetch specific Wikipedia pages
+  - source: "wikipedia"
+    resource_type: "page"
+    titles:
+      - "Star Wars"
+      - "The Empire Strikes Back"
+      - "Return of the Jedi"
+    priority: 10
+
+  # Wookieepedia seed pages for link crawling
+  - source: "wookieepedia"
+    resource_type: "page"
+    titles:
+      - "Luke Skywalker"
+      - "Darth Vader"
+      - "Yoda"
+      - "Obi-Wan Kenobi"
+      - "Han Solo"
+    priority: 10
