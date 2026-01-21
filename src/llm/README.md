@@ -56,6 +56,10 @@ src/llm/
 │   ├── types.py          # Data models (dataclasses)
 │   ├── exceptions.py     # Custom exceptions
 │   └── logging.py        # Logging utilities
+├── interrogations/       # Interrogation catalog
+│   ├── README.md
+│   ├── definitions/      # YAML/JSON interrogation definitions
+│   └── rubrics/          # Rubric markdown files
 ├── prompts/              # Prompt management
 │   ├── README.md
 │   └── templates/        # Prompt template files
