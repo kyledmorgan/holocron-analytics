@@ -6,10 +6,6 @@ These tests verify the test connector functionality without external dependencie
 
 import pytest
 
-import sys
-from pathlib import Path
-sys.path.insert(0, str(Path(__file__).parent.parent.parent / "src"))
-
 from ingest.connectors.test_connector import (
     TestConnector,
     create_test_work_items,

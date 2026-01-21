@@ -4,15 +4,10 @@ Shared test fixtures and configuration for pytest.
 
 import logging
 import os
-import sys
 import time
-from pathlib import Path
 from typing import Generator, Optional
 
 import pytest
-
-# Add src directory to path for imports
-sys.path.insert(0, str(Path(__file__).parent.parent / "src"))
 
 
 logger = logging.getLogger(__name__)

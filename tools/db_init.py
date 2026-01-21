@@ -101,6 +101,31 @@ def wait_for_sqlserver(config: dict, timeout: int = 60, interval: int = 2) -> bo
     return False
 
 
+def _is_valid_sql_identifier(name: str) -> bool:
+    """
+    Validate that a name is a safe SQL identifier.
+    
+    Uses strict whitelist validation to prevent SQL injection:
+    - Must start with a letter or underscore
+    - Can only contain letters, digits, and underscores
+    - Maximum length of 128 characters (SQL Server limit)
+    
+    Args:
+        name: The identifier to validate
+        
+    Returns:
+        True if valid, False otherwise
+    """
+    import re
+    
+    if not name or len(name) > 128:
+        return False
+    
+    # Strict regex: start with letter/underscore, followed by alphanumerics/underscores
+    pattern = r'^[a-zA-Z_][a-zA-Z0-9_]*$'
+    return bool(re.match(pattern, name))
+
+
 def ensure_database_exists(config: dict) -> bool:
     """
     Ensure the target database exists, creating it if necessary.
@@ -118,6 +143,13 @@ def ensure_database_exists(config: dict) -> bool:
         return False
     
     database = config["database"]
+    
+    # Validate database name to prevent SQL injection
+    if not _is_valid_sql_identifier(database):
+        logger.error(f"Invalid database name: {database}")
+        logger.error("Database name must start with a letter/underscore and contain only alphanumerics/underscores")
+        return False
+    
     logger.info(f"Ensuring database [{database}] exists...")
     
     conn_str = build_connection_string(config, use_master=True)
@@ -132,8 +164,8 @@ def ensure_database_exists(config: dict) -> bool:
         
         if result[0] is None:
             logger.info(f"Creating database [{database}]...")
-            # Use dynamic SQL to avoid parameterization issues with CREATE DATABASE
-            # Database name is from trusted config, not user input
+            # Database name is validated above via _is_valid_sql_identifier()
+            # which uses strict whitelist validation. Safe to use in SQL.
             cursor.execute(f"CREATE DATABASE [{database}]")
             logger.info(f"✓ Database [{database}] created successfully")
         else:

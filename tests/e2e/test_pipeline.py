@@ -13,10 +13,6 @@ No external network dependencies - uses deterministic test connector.
 import pytest
 import uuid
 
-import sys
-from pathlib import Path
-sys.path.insert(0, str(Path(__file__).parent.parent.parent / "src"))
-
 
 @pytest.mark.e2e
 class TestEndToEndIngestion:

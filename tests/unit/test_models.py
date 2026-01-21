@@ -7,10 +7,6 @@ These tests verify the data models without external dependencies.
 import pytest
 from datetime import datetime, timezone
 
-import sys
-from pathlib import Path
-sys.path.insert(0, str(Path(__file__).parent.parent.parent / "src"))
-
 from ingest.core.models import WorkItem, WorkItemStatus, IngestRecord
 
 
