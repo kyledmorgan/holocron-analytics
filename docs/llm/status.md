@@ -6,7 +6,11 @@ This document tracks the implementation status of the LLM-Derived Data subsystem
 
 ---
 
-## Current Phase: Phase 0 — Foundations and Scaffolding
+## Current Phase: Phase 0 — Foundations and Scaffolding ✅
+
+**Status: COMPLETE**
+
+Phase 0 has been completed. All foundational documentation, scaffolding, and infrastructure are in place. See the checklists below for details.
 
 ---
 
@@ -19,6 +23,7 @@ This document tracks the implementation status of the LLM-Derived Data subsystem
 | Vision and Roadmap | ✅ Complete | [vision-and-roadmap.md](vision-and-roadmap.md) |
 | Glossary | ✅ Complete | [glossary.md](glossary.md) |
 | Ollama Integration Guide | ✅ Complete | [ollama.md](ollama.md) |
+| Contracts | ✅ Complete | [contracts.md](contracts.md) |
 | Governance (placeholder) | ✅ Complete | [governance.md](governance.md) |
 | Lineage (placeholder) | ✅ Complete | [lineage.md](lineage.md) |
 | Status Tracker | ✅ Complete | This file |
@@ -45,7 +50,8 @@ This document tracks the implementation status of the LLM-Derived Data subsystem
 | └─ derive_runner.py | ✅ Complete | Orchestration skeleton |
 | **Storage** | | |
 | ├─ artifact_store.py | ✅ Complete | Filesystem writer |
-| └─ sql_queue_store.py | ✅ Complete | SQL stub (in-memory) |
+| ├─ sql_queue_store.py | ✅ Complete | SQL stub (in-memory) |
+| └─ README.md | ✅ Complete | Storage documentation |
 | **Prompts** | | |
 | ├─ README.md | ✅ Complete | Prompt philosophy |
 | └─ templates/ | ✅ Complete | Template directory |
@@ -54,8 +60,20 @@ This document tracks the implementation status of the LLM-Derived Data subsystem
 | └─ llm.example.yaml | ✅ Complete | Example config |
 | **Interrogations** | | |
 | ├─ README.md | ✅ Complete | Catalog concept |
-| ├─ definitions/ | ✅ Complete | Example definition |
-| └─ rubrics/ | ✅ Complete | Rubric template |
+| ├─ definitions/ | ✅ Complete | Example definitions |
+| ├─ rubrics/ | ✅ Complete | Rubric templates |
+| └─ vocab/ | ✅ Complete | Controlled vocabularies |
+| **Tools** | | |
+| └─ capture_ollama_models.py | ✅ Complete | Model inventory tool |
+
+### Docker Compose
+
+| Item | Status | Notes |
+|------|--------|-------|
+| Ollama service | ✅ Complete | In `docker-compose.yml` |
+| Localhost-only binding | ✅ Complete | `127.0.0.1:11434` |
+| Named volume for models | ✅ Complete | `ollama_data` |
+| Optional GPU reservation | ✅ Complete | Commented, ready to enable |
 
 ### Agent Guidance
 

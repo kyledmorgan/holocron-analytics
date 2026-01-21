@@ -5,9 +5,11 @@
 #   - sqlserver: SQL Server Developer Edition (persisted)
 #   - initdb: Creates database if missing (runs once, then exits)
 #   - seed: Loads seed data into tables (runs once, then exits)
+#   - ollama: Local LLM inference (optional, for LLM-derived data features)
 #
-# After startup, SQL Server remains running for interactive use.
+# After startup, SQL Server and Ollama remain running for interactive use.
 # Connect with SSMS/Azure Data Studio: localhost,1433 | sa | <your password>
+# Ollama API: http://localhost:11434
 
 services:
   sqlserver:
@@ -104,6 +106,40 @@ services:
       # Mount src read-only for development (allows code changes without rebuild)
       - ./src:/app/src:ro
 
+  # Ollama - Local LLM inference server
+  # Optional: Start with `docker compose up ollama` or include in full stack
+  # Pull models after startup: docker exec -it holocron-ollama ollama pull llama3.2
+  ollama:
+    image: ollama/ollama:latest
+    container_name: holocron-ollama
+    ports:
+      # Bind to localhost only for security (not exposed to network)
+      - "127.0.0.1:11434:11434"
+    volumes:
+      # Persist downloaded models across container restarts
+      - ollama_data:/root/.ollama
+    environment:
+      # Bind to all interfaces inside container (required for port mapping)
+      - OLLAMA_HOST=0.0.0.0:11434
+    # Optional: GPU support (uncomment if NVIDIA GPU is available)
+    # Works with Docker Desktop + WSL2 on Windows, native on Linux
+    # deploy:
+    #   resources:
+    #     reservations:
+    #       devices:
+    #         - driver: nvidia
+    #           count: all
+    #           capabilities: [gpu]
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "curl -sf http://localhost:11434/api/tags || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
+
 volumes:
   mssql_data:
+    driver: local
+  ollama_data:
     driver: local
