@@ -28,7 +28,23 @@ def create_mock_page_artifact(
     title: str,
     links: list,
 ) -> dict:
-    """Create a mock page artifact JSON structure."""
+    """
+    Create a mock page artifact JSON structure for testing.
+    
+    Generates a JSON structure matching the format written by FileLakeWriter
+    when ingesting MediaWiki API responses. The structure includes:
+    - Standard envelope fields (ingest_id, source_system, etc.)
+    - MediaWiki API response payload with query.pages structure
+    - Page links in the format returned by action=query&prop=links
+    
+    Args:
+        page_id: Numeric page ID for the wiki page
+        title: Page title (case-sensitive)
+        links: List of link title strings that this page links to
+        
+    Returns:
+        Dict matching the page artifact JSON structure
+    """
     return {
         "ingest_id": f"test-{page_id}",
         "source_system": "mediawiki",

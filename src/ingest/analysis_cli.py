@@ -145,6 +145,7 @@ def main() -> int:
     if args.seed_content:
         logger.info(f"Seeding content work items for source: {args.source}")
         
+        state_store = None
         try:
             state_store = SqliteStateStore(db_path=args.state_db)
             
@@ -158,7 +159,6 @@ def main() -> int:
             )
             
             stats = state_store.get_stats()
-            state_store.close()
             
             logger.info(f"Content seeding complete!")
             logger.info(f"  New items enqueued: {enqueued}")
@@ -171,6 +171,9 @@ def main() -> int:
         except Exception as e:
             logger.exception(f"Content seeding failed: {e}")
             return 1
+        finally:
+            if state_store is not None:
+                state_store.close()
     
     return 0
 

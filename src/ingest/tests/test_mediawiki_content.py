@@ -21,7 +21,17 @@ logger = logging.getLogger(__name__)
 
 
 class MockHttpConnector:
-    """Mock HTTP connector for testing request building."""
+    """
+    Mock HTTP connector for testing request building.
+    
+    This class captures requests made by the MediaWiki connector without
+    making actual API calls. It's used to verify that the connector builds
+    correct API URLs and parameters.
+    
+    Attributes:
+        last_request: The most recent ConnectorRequest received
+        last_url: The full URL (including query params) from the last request
+    """
     
     def __init__(self):
         self.last_request = None
