@@ -5,6 +5,8 @@
 requests>=2.31.0         # HTTP client for connectors
 pyyaml>=6.0              # YAML configuration parsing
 
+# Database backends
+pyodbc>=5.0.0            # SQL Server connectivity (default backend)
+
 # Optional dependencies
-pyodbc>=5.0.0           # SQL Server connectivity (optional)
 python-dotenv>=1.0.0     # Environment variable management (optional)

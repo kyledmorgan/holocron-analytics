@@ -1,0 +1,98 @@
+# LLM-Derived Data Module Configuration
+# Copy this file to config/llm.yaml and customize as needed.
+
+# =============================================================================
+# LLM Provider Configuration
+# =============================================================================
+llm:
+  # Provider name (currently supported: ollama)
+  provider: "ollama"
+  
+  # Model identifier
+  # Examples: llama3.2, llama3.2:7b, mistral, codellama
+  model: "llama3.2"
+  
+  # Base URL for the provider API
+  # Default Ollama: http://localhost:11434
+  base_url: "http://localhost:11434"
+  
+  # Sampling temperature
+  # 0.0 = deterministic (recommended for reproducibility)
+  # Higher values (0.5-1.0) = more creative/random
+  temperature: 0.0
+  
+  # Maximum tokens in response (null = use model default)
+  max_tokens: null
+  
+  # Request timeout in seconds
+  timeout: 120
+  
+  # Enable streaming responses
+  # false = wait for complete response (recommended)
+  # true = stream tokens as generated
+  stream: false
+  
+  # API mode (TBD - both supported)
+  # native = Ollama native API (/api/generate, /api/chat)
+  # openai = OpenAI-compatible API (/v1/chat/completions)
+  api_mode: "native"
+
+# =============================================================================
+# Storage Configuration
+# =============================================================================
+storage:
+  # Filesystem artifact lake
+  artifact_lake:
+    enabled: true
+    base_dir: "local/llm_artifacts"
+    pretty_print: true
+  
+  # SQL Server persistence (optional)
+  sql_server:
+    enabled: false
+    # Connection string from environment: LLM_SQLSERVER_CONN_STR
+    # Or use discrete variables (same pattern as ingest):
+    # host: localhost
+    # port: 1433
+    # database: HolocronAnalytics
+    # user: sa
+    # password: ${LLM_SQLSERVER_PASSWORD}
+    schema: "llm"
+
+# =============================================================================
+# Queue Configuration
+# =============================================================================
+queue:
+  # Maximum concurrent derive jobs
+  max_workers: 1
+  
+  # Retry settings for failed jobs
+  max_retries: 3
+  retry_delay_seconds: 60
+  
+  # Job timeout (seconds)
+  job_timeout_seconds: 300
+
+# =============================================================================
+# Evidence Configuration
+# =============================================================================
+evidence:
+  # Maximum size of assembled evidence bundle (characters)
+  # Larger bundles may exceed model context limits
+  max_bundle_size: 50000
+  
+  # Hash algorithm for content integrity verification
+  hash_algorithm: "sha256"
+
+# =============================================================================
+# Validation Configuration (TBD)
+# =============================================================================
+validation:
+  # JSON schema validation (library TBD)
+  enabled: true
+  
+  # Fail on validation errors vs. log and continue
+  fail_on_error: true
+  
+  # Allow additional properties beyond schema
+  allow_additional_properties: true
