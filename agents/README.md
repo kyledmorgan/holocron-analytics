@@ -8,6 +8,9 @@ Start here:
 - `agents/policies/20_security-and-secrets.md`
 - `agents/policies/30_style-and-structure.md`
 
+Subsystem Guidance:
+- `agents/llm-derived-data.md` — Rules for LLM-Derived Data subsystem (`src/llm/`)
+
 Playbooks:
 - `agents/playbooks/docs/update_docs_and_links.md`
 - `agents/playbooks/db/ddl_ordering_and_manifest.md`

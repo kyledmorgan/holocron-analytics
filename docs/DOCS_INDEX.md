@@ -52,6 +52,16 @@ New to this repository? Start with these essential documents:
 | [OpenAlex Integration Guide](openalex-integration.md) | User guide for OpenAlex API integration |
 | [OpenAlex Implementation Summary](integrations/openalex-implementation-summary.md) | Technical implementation details and architecture decisions |
 
+### LLM-Derived Data
+
+| Document | Description |
+|----------|-------------|
+| [LLM-Derived Data Overview](llm/derived-data.md) | Concepts, architecture, and roadmap for the LLM-derived data subsystem |
+| [Ollama Integration Guide](llm/ollama.md) | Ollama API documentation, configuration, and operational guidance |
+| [LLM Module README](../src/llm/README.md) | Source code overview and quick start for the LLM module |
+| [LLM Configuration Reference](../src/llm/config/config.md) | Configuration options and environment variables |
+| [LLM Contracts README](../src/llm/contracts/README.md) | JSON schema documentation for manifests and outputs |
+
 ### Analytics / Views / Exercises
 
 | Document | Description |
@@ -116,6 +126,13 @@ All Markdown files in this repository, grouped by location:
 | File | Description |
 |------|-------------|
 | [openalex-implementation-summary.md](integrations/openalex-implementation-summary.md) | OpenAlex integration technical implementation summary |
+
+### `docs/llm/`
+
+| File | Description |
+|------|-------------|
+| [derived-data.md](llm/derived-data.md) | LLM-Derived Data subsystem overview, concepts, and roadmap |
+| [ollama.md](llm/ollama.md) | Ollama integration guide with API documentation |
 
 ### `docs/diagrams/mermaid/`
 
@@ -195,6 +212,16 @@ All Markdown files in this repository, grouped by location:
 | [README.md](../src/ingest/README.md) | Ingestion framework overview and architecture |
 | [QUICKSTART.md](../src/ingest/QUICKSTART.md) | Quick start guide for the ingestion framework |
 | [IMPLEMENTATION_SUMMARY.md](../src/ingest/IMPLEMENTATION_SUMMARY.md) | Ingestion framework implementation summary |
+
+### `src/llm/`
+
+| File | Description |
+|------|-------------|
+| [README.md](../src/llm/README.md) | LLM-Derived Data module overview and quick start |
+| [contracts/README.md](../src/llm/contracts/README.md) | JSON schema documentation for manifests and outputs |
+| [prompts/README.md](../src/llm/prompts/README.md) | Prompt template guidelines and best practices |
+| [providers/README.md](../src/llm/providers/README.md) | LLM provider strategy and client documentation |
+| [config/config.md](../src/llm/config/config.md) | Configuration reference for the LLM module |
 
 ### `sources/`
 
