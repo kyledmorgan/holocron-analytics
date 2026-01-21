@@ -52,6 +52,7 @@ def _normalize_for_canonical(obj: Any) -> Any:
     - Normalizes unicode strings (NFC)
     - Recursively processes dicts and lists
     - Handles special types
+    - Normalizes floats for consistent representation
     """
     if obj is None:
         return None
@@ -64,7 +65,22 @@ def _normalize_for_canonical(obj: Any) -> Any:
         # Handle bool before int (bool is subclass of int)
         return obj
     
-    if isinstance(obj, (int, float)):
+    if isinstance(obj, float):
+        # Normalize float: handle special values and limit precision
+        # for consistent cross-platform representation
+        if obj != obj:  # NaN check
+            return "NaN"
+        if obj == float('inf'):
+            return "Infinity"
+        if obj == float('-inf'):
+            return "-Infinity"
+        # Round to reasonable precision (15 significant digits)
+        # This handles most floating-point representation issues
+        if obj == 0.0:
+            return 0.0
+        return float(f"{obj:.15g}")
+    
+    if isinstance(obj, int):
         return obj
     
     if isinstance(obj, dict):

@@ -76,6 +76,17 @@ class Redactor:
         self._compiled_patterns = [
             re.compile(p, re.IGNORECASE) for p in self.secret_patterns
         ]
+        
+        # Pre-compile URL parameter patterns for efficiency
+        sensitive_params = {
+            "api_key", "apikey", "key", "token", "secret",
+            "password", "passwd", "pwd", "auth", "bearer",
+            "access_token", "refresh_token",
+        }
+        self._url_param_patterns = [
+            (param, re.compile(rf'([?&])({param})=([^&\s]+)', re.IGNORECASE))
+            for param in sensitive_params
+        ]
 
     def redact_record(self, record: "ExchangeRecord") -> "ExchangeRecord":
         """
@@ -160,23 +171,9 @@ class Redactor:
 
     def _redact_url(self, url: str) -> str:
         """Redact sensitive query parameters from URL."""
-        # Common sensitive parameter names
-        sensitive_params = {
-            "api_key", "apikey", "key", "token", "secret",
-            "password", "passwd", "pwd", "auth", "bearer",
-            "access_token", "refresh_token",
-        }
-        
-        # Simple pattern for query parameters
-        for param in sensitive_params:
-            # Match param=value pattern
-            pattern = rf'([?&])({param})=([^&\s]+)'
-            url = re.sub(
-                pattern,
-                rf'\1\2={REDACTED_VALUE}',
-                url,
-                flags=re.IGNORECASE,
-            )
+        # Use pre-compiled patterns for efficiency
+        for param, pattern in self._url_param_patterns:
+            url = pattern.sub(rf'\1\2={REDACTED_VALUE}', url)
         
         return url
 

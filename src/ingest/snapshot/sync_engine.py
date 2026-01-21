@@ -215,6 +215,7 @@ class SyncEngine:
                     continue
                 
                 # Check for natural key conflict
+                existing = []
                 if record.natural_key:
                     existing = self.sql_mirror.get_records_by_natural_key(
                         record.source_system,

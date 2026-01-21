@@ -112,6 +112,8 @@ class SnapshotPacker:
         """
         try:
             from cryptography.hazmat.primitives.ciphers.aead import AESGCM
+            from cryptography.hazmat.primitives.kdf.pbkdf2 import PBKDF2HMAC
+            from cryptography.hazmat.primitives import hashes
         except ImportError:
             raise ImportError(
                 "cryptography library is required for encryption. "
@@ -121,12 +123,17 @@ class SnapshotPacker:
         if not self.encryption_key:
             raise ValueError("Encryption key is required for encryption")
         
-        # Ensure key is 32 bytes (256 bits) for AES-256
-        key = self.encryption_key
-        if len(key) != 32:
-            # Hash the key to get consistent 32 bytes
-            import hashlib
-            key = hashlib.sha256(key).digest()
+        # Generate a random salt for key derivation
+        salt = os.urandom(16)
+        
+        # Derive a 32-byte key using PBKDF2 (secure key derivation)
+        kdf = PBKDF2HMAC(
+            algorithm=hashes.SHA256(),
+            length=32,
+            salt=salt,
+            iterations=480000,  # OWASP recommended minimum for PBKDF2-SHA256
+        )
+        key = kdf.derive(self.encryption_key)
         
         # Read archive data
         with open(archive_path, "rb") as f:
@@ -139,10 +146,10 @@ class SnapshotPacker:
         aesgcm = AESGCM(key)
         encrypted = aesgcm.encrypt(nonce, data, None)
         
-        # Write encrypted file (nonce + ciphertext)
+        # Write encrypted file (salt + nonce + ciphertext)
         encrypted_path = archive_path.with_suffix(".zip.enc")
         with open(encrypted_path, "wb") as f:
-            f.write(nonce + encrypted)
+            f.write(salt + nonce + encrypted)
         
         # Remove unencrypted archive
         archive_path.unlink()
@@ -227,6 +234,8 @@ class SnapshotUnpacker:
         """
         try:
             from cryptography.hazmat.primitives.ciphers.aead import AESGCM
+            from cryptography.hazmat.primitives.kdf.pbkdf2 import PBKDF2HMAC
+            from cryptography.hazmat.primitives import hashes
         except ImportError:
             raise ImportError(
                 "cryptography library is required for decryption. "
@@ -236,19 +245,23 @@ class SnapshotUnpacker:
         if not self.decryption_key:
             raise ValueError("Decryption key is required")
         
-        # Ensure key is 32 bytes
-        key = self.decryption_key
-        if len(key) != 32:
-            import hashlib
-            key = hashlib.sha256(key).digest()
-        
         # Read encrypted data
         with open(self.archive_path, "rb") as f:
             data = f.read()
         
-        # Extract nonce (first 12 bytes)
-        nonce = data[:12]
-        ciphertext = data[12:]
+        # Extract salt (first 16 bytes), nonce (next 12 bytes), then ciphertext
+        salt = data[:16]
+        nonce = data[16:28]
+        ciphertext = data[28:]
+        
+        # Derive key using same KDF parameters
+        kdf = PBKDF2HMAC(
+            algorithm=hashes.SHA256(),
+            length=32,
+            salt=salt,
+            iterations=480000,
+        )
+        key = kdf.derive(self.decryption_key)
         
         # Decrypt
         aesgcm = AESGCM(key)
