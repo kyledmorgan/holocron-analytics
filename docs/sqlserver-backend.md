@@ -11,13 +11,15 @@ This document describes the SQL Server-based state store, which is the **default
 3. [Configuration](#configuration)
 4. [Schema Conventions](#schema-conventions)
 5. [Running the Smoke Test](#running-the-smoke-test)
-6. [How the Runner Uses SQL Server](#how-the-runner-uses-sql-server)
-7. [Deduplication and Idempotency](#deduplication-and-idempotency)
-8. [Re-Crawl Patterns](#re-crawl-patterns)
-9. [Adding New Source Systems](#adding-new-source-systems)
-10. [Docker Compose Setup](#docker-compose-setup)
-11. [Troubleshooting](#troubleshooting)
-12. [Future Work](#future-work)
+6. [Running Tests Locally](#running-tests-locally)
+7. [How the Runner Uses SQL Server](#how-the-runner-uses-sql-server)
+8. [Deduplication and Idempotency](#deduplication-and-idempotency)
+9. [Re-Crawl Patterns](#re-crawl-patterns)
+10. [Adding New Source Systems](#adding-new-source-systems)
+11. [Docker Compose Setup](#docker-compose-setup)
+12. [Database Migrations](#database-migrations)
+13. [Troubleshooting](#troubleshooting)
+14. [Future Work](#future-work)
 
 ---
 
@@ -257,6 +259,143 @@ Test 4: Testing deduplication...
 
 ---
 
+## Running Tests Locally
+
+The test suite validates SQL Server ingestion end-to-end. Tests are organized by type:
+
+- **Unit tests** (`tests/unit/`): No external dependencies, fast
+- **Integration tests** (`tests/integration/`): Require SQL Server running
+- **E2E tests** (`tests/e2e/`): Full pipeline tests with deterministic test connector
+
+### Prerequisites
+
+1. Python 3.11+ with pytest installed
+2. Docker and Docker Compose
+3. ODBC Driver 18 for SQL Server
+4. `MSSQL_SA_PASSWORD` environment variable set
+
+### Quick Start: One Command Verification
+
+The easiest way to verify everything works:
+
+```bash
+# Set password
+export MSSQL_SA_PASSWORD="YourStrongPassword123!"
+
+# Run complete verification
+make verify-sqlserver
+
+# Or use the shell script
+./scripts/test/verify_sqlserver.sh
+```
+
+This command:
+1. Starts SQL Server container
+2. Waits for SQL Server to be ready
+3. Initializes schema/tables via migrations
+4. Runs smoke test
+5. Runs integration and E2E tests
+6. Prints a pass/fail summary
+
+### Running Individual Test Suites
+
+#### Unit Tests (No SQL Server Required)
+
+```bash
+# Using Make
+make test-unit
+
+# Using pytest directly
+python -m pytest tests/unit/ -v
+
+# Using script
+./scripts/test/test_unit.sh
+```
+
+#### Integration Tests (SQL Server Required)
+
+```bash
+# Start SQL Server first
+docker compose up -d sqlserver
+
+# Wait for healthy status
+docker compose ps
+
+# Run tests
+make test-integration
+# or
+./scripts/test/test_sqlserver.sh
+```
+
+#### E2E Tests (SQL Server Required)
+
+```bash
+# Ensure SQL Server is running
+make test-e2e
+# or
+./scripts/test/test_e2e.sh
+```
+
+#### All Tests
+
+```bash
+make test
+# or
+python -m pytest tests/ -v
+```
+
+### What Success Looks Like
+
+Successful test run output:
+
+```
+$ make verify-sqlserver
+╔════════════════════════════════════════════════════════════╗
+║       SQL Server Integration Verification                   ║
+╚════════════════════════════════════════════════════════════╝
+
+Step 1/5: Starting SQL Server container...
+Step 2/5: Waiting for SQL Server to be ready...
+✓ SQL Server is ready
+Step 3/5: Initializing database schema...
+✓ All migrations completed successfully
+Step 4/5: Running smoke test...
+✓ All smoke tests passed!
+Step 5/5: Running integration and E2E tests...
+
+tests/integration/test_schema.py::TestSchemaExists::test_ingest_schema_exists PASSED
+tests/integration/test_schema.py::TestSchemaExists::test_work_items_table_exists PASSED
+tests/e2e/test_pipeline.py::TestEndToEndIngestion::test_runner_processes_work_items PASSED
+tests/e2e/test_pipeline.py::TestEndToEndIngestion::test_dedupe_on_rerun PASSED
+
+╔════════════════════════════════════════════════════════════╗
+║       ✓ All verifications passed!                          ║
+╚════════════════════════════════════════════════════════════╝
+```
+
+### Test Connector for E2E Tests
+
+E2E tests use a deterministic test connector (`src/ingest/connectors/test_connector.py`) that:
+
+- Returns fixed synthetic data without network calls
+- Exercises the same pipeline path as production connectors
+- Provides predictable, reproducible test results
+
+```python
+from ingest.connectors.test_connector import TestConnector
+
+# Create connector
+connector = TestConnector()
+
+# Get seed work items
+work_items = connector.get_seed_work_items(source_name="my_test")
+
+# Fetch returns deterministic data
+response = connector.fetch(request)
+```
+
+---
+
 ## How the Runner Uses SQL Server
 
 ### Initialization
@@ -492,6 +631,80 @@ The healthcheck verifies TCP connectivity:
 - **Timeout**: 5 seconds per check
 - **Retries**: 12 attempts before unhealthy
 - **Start Period**: 30 seconds grace period for startup
+
+---
+
+## Database Migrations
+
+The database schema is managed through versioned SQL migration scripts that are idempotent (safe to run multiple times).
+
+### Migration Scripts
+
+Located in `db/migrations/`:
+
+| Script | Description |
+|--------|-------------|
+| `0001_create_schema.sql` | Creates the `ingest` schema |
+| `0002_create_tables.sql` | Creates work_items, IngestRecords, ingest_runs, seen_resources tables |
+| `0003_indexes_constraints.sql` | Adds indexes and constraints for performance |
+
+### Running Migrations
+
+#### Via Python Tool
+
+```bash
+# Set password
+export MSSQL_SA_PASSWORD="YourStrongPassword123!"
+
+# Run all migrations
+python -m tools.db_init
+
+# Specify migrations directory
+python -m tools.db_init --migrations-dir db/migrations
+
+# Dry run (show what would be done)
+python -m tools.db_init --dry-run
+
+# Wait longer for SQL Server startup
+python -m tools.db_init --wait-timeout 120
+```
+
+#### Via Docker Compose
+
+The `initdb` service in `docker-compose.yml` automatically runs DDL scripts on container startup.
+
+### Migration Design Principles
+
+1. **Idempotent**: Every script checks if objects exist before creating
+2. **Non-destructive**: No DROP statements by default (preserves data)
+3. **Ordered**: Scripts run in alphabetical order by filename
+4. **Versioned**: Prefix with number for explicit ordering
+
+### Adding New Migrations
+
+1. Create a new script with the next version number:
+   ```
+   db/migrations/0004_my_new_migration.sql
+   ```
+
+2. Use idempotent patterns:
+   ```sql
+   IF NOT EXISTS (SELECT * FROM sys.tables WHERE name = 'my_table')
+   BEGIN
+       CREATE TABLE [ingest].[my_table] (...)
+   END
+   GO
+   ```
+
+3. Test with dry-run:
+   ```bash
+   python -m tools.db_init --dry-run
+   ```
+
+4. Apply:
+   ```bash
+   python -m tools.db_init
+   ```
 
 ---
 
