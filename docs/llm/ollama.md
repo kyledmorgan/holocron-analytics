@@ -341,5 +341,6 @@ else:
 ## Related Documentation
 
 - [LLM-Derived Data Overview](derived-data.md)
+- [Ollama in Docker](ollama-docker.md) - Running Ollama as a Docker Compose service
 - [Configuration Reference](../../src/llm/config/config.md)
 - [Ollama Official Docs](https://ollama.ai/docs)

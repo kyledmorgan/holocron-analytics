@@ -10,11 +10,27 @@ llm:
   
   # Model identifier
   # Examples: llama3.2, llama3.2:7b, mistral, codellama
+  # Pull models first: docker exec -it holocron-ollama ollama pull llama3.2
   model: "llama3.2"
   
   # Base URL for the provider API
-  # Default Ollama: http://localhost:11434
-  base_url: "http://localhost:11434"
+  # -------------------------------------------------------------------------
+  # IMPORTANT: Use the correct URL based on where your code is running:
+  #
+  # From another container (e.g., derive runner in Docker):
+  #   base_url: "http://ollama:11434"
+  #
+  # From host machine (e.g., running Python scripts directly on Windows):
+  #   base_url: "http://localhost:11434"
+  #
+  # The default below assumes container-to-container communication.
+  # Override with LLM_BASE_URL environment variable for host-based testing.
+  # -------------------------------------------------------------------------
+  base_url: "http://ollama:11434"
+  
+  # Alternative URL for host-based testing (optional)
+  # Set this if you frequently switch between container and host execution.
+  # host_base_url: "http://localhost:11434"
   
   # Sampling temperature
   # 0.0 = deterministic (recommended for reproducibility)
@@ -25,10 +41,12 @@ llm:
   max_tokens: null
   
   # Request timeout in seconds
+  # LLM inference can be slow, especially on CPU or with large models.
+  # Increase this value if you experience timeout errors.
   timeout: 120
   
   # Enable streaming responses
-  # false = wait for complete response (recommended)
+  # false = wait for complete response (recommended for artifact capture)
   # true = stream tokens as generated
   stream: false
   

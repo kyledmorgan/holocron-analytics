@@ -5,9 +5,11 @@
 #   - sqlserver: SQL Server Developer Edition (persisted)
 #   - initdb: Creates database if missing (runs once, then exits)
 #   - seed: Loads seed data into tables (runs once, then exits)
+#   - ollama: Local LLM runtime for LLM-derived data (persisted models)
 #
-# After startup, SQL Server remains running for interactive use.
+# After startup, SQL Server and Ollama remain running for interactive use.
 # Connect with SSMS/Azure Data Studio: localhost,1433 | sa | <your password>
+# Ollama API: http://localhost:11434
 
 services:
   sqlserver:
@@ -104,6 +106,44 @@ services:
       # Mount src read-only for development (allows code changes without rebuild)
       - ./src:/app/src:ro
 
+  # =========================================================================
+  # Ollama - Local LLM Runtime
+  # =========================================================================
+  # Provides local LLM inference for the LLM-Derived Data subsystem.
+  # Models are persisted in a named volume across restarts.
+  #
+  # Usage:
+  #   docker compose up -d ollama
+  #   docker exec -it holocron-ollama ollama pull llama3.2
+  #   curl http://localhost:11434/api/tags
+  #
+  # GPU support is optional. See docs/llm/ollama-docker.md for details.
+  # =========================================================================
+  ollama:
+    image: ollama/ollama:latest
+    container_name: holocron-ollama
+    ports:
+      # Bind to localhost only for security (no LAN exposure)
+      - "127.0.0.1:11434:11434"
+    volumes:
+      # Persist downloaded models across container restarts/rebuilds
+      - ollama_data:/root/.ollama
+    restart: unless-stopped
+    # Optional: GPU support for NVIDIA GPUs (WSL2 + Docker Desktop)
+    # Uncomment the following section if you have NVIDIA GPU with CUDA support.
+    # This is NOT required - Ollama will work with CPU-only inference.
+    # To verify GPU support: docker run --rm -it --gpus=all nvcr.io/nvidia/k8s/cuda-sample:nbody nbody -gpu -benchmark
+    #
+    # deploy:
+    #   resources:
+    #     reservations:
+    #       devices:
+    #         - driver: nvidia
+    #           count: all
+    #           capabilities: [gpu]
+
 volumes:
   mssql_data:
+    driver: local
+  ollama_data:
     driver: local

@@ -102,6 +102,9 @@ src/llm/
 # Run the smoke test to verify Ollama connectivity
 python scripts/llm_smoke_test.py
 
+# Capture model inventory to JSON
+python scripts/ollama_capture_models.py
+
 # (Future) Run a derive operation
 python -m src.llm.runners.derive_runner --config config/llm.yaml
 ```
@@ -110,6 +113,7 @@ python -m src.llm.runners.derive_runner --config config/llm.yaml
 
 - [LLM-Derived Data Overview](../../docs/llm/derived-data.md) - Concepts and roadmap
 - [Ollama Integration Guide](../../docs/llm/ollama.md) - API documentation and configuration
+- [Ollama in Docker](../../docs/llm/ollama-docker.md) - Docker Compose setup and networking
 
 ## Status
 
