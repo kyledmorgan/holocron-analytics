@@ -23,9 +23,35 @@ storage:
     table: "IngestRecords"
 
 # State store configuration
+# The state store manages work queue, dedupe, and run tracking.
+#
+# Backend options:
+#   - sqlserver (default, recommended): Uses SQL Server for reliable state management
+#   - sqlite (deprecated): Legacy file-based store, use only for testing
+#
+# Set DB_BACKEND environment variable to override, or configure below.
 state:
-  type: "sqlite"
+  # Backend type: "sqlserver" (default) or "sqlite" (deprecated)
+  type: "sqlserver"
+  
+  # SQLite configuration (deprecated - only used when type: "sqlite")
   db_path: "local/state/ingest_state.db"
+  
+  # SQL Server configuration (used when type: "sqlserver")
+  sqlserver:
+    # Connection from environment variables (recommended):
+    # - INGEST_SQLSERVER_HOST, INGEST_SQLSERVER_PORT
+    # - INGEST_SQLSERVER_DATABASE, INGEST_SQLSERVER_USER
+    # - INGEST_SQLSERVER_PASSWORD (required, never commit to config)
+    # 
+    # Or use discrete values below:
+    host: "localhost"
+    port: 1433
+    database: "Holocron"
+    user: "sa"
+    # password: (use INGEST_SQLSERVER_PASSWORD or MSSQL_SA_PASSWORD env var)
+    driver: "ODBC Driver 18 for SQL Server"
+    schema: "ingest"
 
 # Runner configuration
 runner:
