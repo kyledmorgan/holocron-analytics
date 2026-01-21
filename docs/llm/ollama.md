@@ -308,6 +308,12 @@ services:
       - ollama_data:/root/.ollama
     environment:
       - OLLAMA_HOST=0.0.0.0:11434
+    # Healthcheck using bash (curl not available in image)
+    healthcheck:
+      test: ["CMD-SHELL", "bash -c 'echo > /dev/tcp/localhost/11434' || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
     # GPU support (uncomment if available):
     # deploy:
     #   resources:
