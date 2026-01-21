@@ -152,7 +152,7 @@ def parse_parameter_size(model_name: str, details: dict) -> str:
     name_lower = model_name.lower()
     
     # Common patterns: 7b, 13b, 70b, 3b, etc.
-    match = re.search(r'(\d+(?:\.\d+)?)[bB]', model_name)
+    match = re.search(r'(\d+(?:\.\d+)?)[bB]', name_lower)
     if match:
         size = match.group(1)
         return f"{size}B"
@@ -160,7 +160,7 @@ def parse_parameter_size(model_name: str, details: dict) -> str:
     # Try to extract from modelfile in details
     modelfile = details.get("modelfile", "")
     if modelfile:
-        match = re.search(r'(\d+(?:\.\d+)?)[bB]', modelfile)
+        match = re.search(r'(\d+(?:\.\d+)?)[bB]', modelfile.lower())
         if match:
             size = match.group(1)
             return f"{size}B"
@@ -172,7 +172,7 @@ def parse_quantization(model_name: str, details: dict) -> str:
     """
     Extract quantization level from model name or details.
     
-    Looks for patterns like "q4_0", "q8_0", "fp16" in model name or modelfile.
+    Looks for patterns like "q2_K", "q4_0", "q5_K_M", "q8_0", "fp16" in model name or modelfile.
     
     Args:
         model_name: Full model name
@@ -181,12 +181,12 @@ def parse_quantization(model_name: str, details: dict) -> str:
     Returns:
         Quantization string (e.g., "Q4_0") or None if not found
     """
-    # Common quantization patterns
+    # Common quantization patterns - covers q2 through q8 quantization levels
     patterns = [
-        r'(q[48]_[0kKmM])',      # q4_0, q8_0, q4_K, etc.
-        r'(q[48]_[kKmM]_[smSM])', # q4_K_S, q4_K_M, etc.
-        r'(fp16|fp32)',          # Full precision
-        r'(int8|int4)',          # Integer quantization
+        r'(q[2-8]_[0kKmM])',       # q2_0, q4_0, q8_0, q4_K, etc.
+        r'(q[2-8]_[kKmM]_[smSM])', # q4_K_S, q4_K_M, q5_K_M, etc.
+        r'(fp16|fp32)',            # Full precision
+        r'(int8|int4)',            # Integer quantization
     ]
     
     # Try model name first
