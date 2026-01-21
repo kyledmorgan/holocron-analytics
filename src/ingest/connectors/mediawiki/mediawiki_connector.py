@@ -222,6 +222,138 @@ class MediaWikiConnector(Connector):
             additional_params={"pllimit": limit}
         )
 
+    def fetch_raw_content_by_id(
+        self,
+        page_id: int,
+    ) -> ConnectorResponse:
+        """
+        Fetch raw wikitext content for a page by page ID.
+        
+        Uses action=query with prop=revisions to get the source wikitext.
+        Response structure (formatversion=2):
+            query.pages[0].revisions[0].slots.main.content
+        
+        Args:
+            page_id: The page ID to fetch content for
+            
+        Returns:
+            ConnectorResponse with the wikitext in payload
+        """
+        params = {
+            "action": "query",
+            "format": "json",
+            "pageids": str(page_id),
+            "prop": "revisions",
+            "rvprop": "content",
+            "rvslots": "main",
+            "formatversion": "2",
+        }
+        
+        request = ConnectorRequest(
+            uri=self.api_url,
+            method="GET",
+            params=params,
+        )
+        
+        return self.fetch(request)
+
+    def fetch_html_content_by_id(
+        self,
+        page_id: int,
+    ) -> ConnectorResponse:
+        """
+        Fetch rendered HTML content for a page by page ID.
+        
+        Uses action=parse to get the rendered HTML.
+        Response structure (formatversion=2):
+            parse.text (string containing HTML)
+        
+        Args:
+            page_id: The page ID to fetch HTML for
+            
+        Returns:
+            ConnectorResponse with HTML in payload
+        """
+        params = {
+            "action": "parse",
+            "format": "json",
+            "pageid": str(page_id),
+            "prop": "text",
+            "formatversion": "2",
+        }
+        
+        request = ConnectorRequest(
+            uri=self.api_url,
+            method="GET",
+            params=params,
+        )
+        
+        return self.fetch(request)
+
+    def fetch_raw_content(
+        self,
+        title: str,
+    ) -> ConnectorResponse:
+        """
+        Fetch raw wikitext content for a page by title.
+        
+        Uses action=query with prop=revisions to get the source wikitext.
+        
+        Args:
+            title: The page title to fetch content for
+            
+        Returns:
+            ConnectorResponse with the wikitext in payload
+        """
+        params = {
+            "action": "query",
+            "format": "json",
+            "titles": title,
+            "prop": "revisions",
+            "rvprop": "content",
+            "rvslots": "main",
+            "formatversion": "2",
+        }
+        
+        request = ConnectorRequest(
+            uri=self.api_url,
+            method="GET",
+            params=params,
+        )
+        
+        return self.fetch(request)
+
+    def fetch_html_content(
+        self,
+        title: str,
+    ) -> ConnectorResponse:
+        """
+        Fetch rendered HTML content for a page by title.
+        
+        Uses action=parse to get the rendered HTML.
+        
+        Args:
+            title: The page title to fetch HTML for
+            
+        Returns:
+            ConnectorResponse with HTML in payload
+        """
+        params = {
+            "action": "parse",
+            "format": "json",
+            "page": title,
+            "prop": "text",
+            "formatversion": "2",
+        }
+        
+        request = ConnectorRequest(
+            uri=self.api_url,
+            method="GET",
+            params=params,
+        )
+        
+        return self.fetch(request)
+
     def get_name(self) -> str:
         """Return the connector name."""
         return self.name

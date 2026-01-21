@@ -51,6 +51,22 @@ sources:
       discover_categories: false
       max_depth: 2
 
+  # Wookieepedia (Star Wars wiki) configuration
+  - name: "wookieepedia"
+    type: "mediawiki"
+    api_url: "https://starwars.fandom.com/api.php"
+    rate_limit_delay: 1.0  # Be polite to Fandom servers
+    timeout: 30
+    max_retries: 3
+    user_agent: "HolocronAnalytics/1.0 (Educational; Star Wars Research)"
+    
+    # Discovery settings for link crawling
+    discovery:
+      enabled: true
+      discover_links: true
+      discover_categories: false
+      max_depth: 3
+
 # Seed definitions (initial work items)
 seeds:
   # Example: Fetch specific Wikipedia pages
@@ -60,4 +76,15 @@ seeds:
       - "Star Wars"
       - "The Empire Strikes Back"
       - "Return of the Jedi"
+    priority: 10
+
+  # Wookieepedia seed pages for link crawling
+  - source: "wookieepedia"
+    resource_type: "page"
+    titles:
+      - "Luke Skywalker"
+      - "Darth Vader"
+      - "Yoda"
+      - "Obi-Wan Kenobi"
+      - "Han Solo"
     priority: 10
