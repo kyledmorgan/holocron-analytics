@@ -42,6 +42,15 @@ New to this repository? Start with these essential documents:
 | [Seed Data Framework](../src/db/seeds/README.md) | JSON seed format specification and loader usage |
 | [Sources Overview](../sources/README.md) | Source metadata and mapping templates |
 | [Ingest Transform Load](../agents/playbooks/pipeline/ingest_transform_load.md) | Conceptual ETL flow |
+| [Ingest Framework README](../src/ingest/README.md) | Ingestion framework overview and architecture |
+| [Ingest Quick Start](../src/ingest/QUICKSTART.md) | Getting started with the ingestion framework |
+
+### Integrations
+
+| Document | Description |
+|----------|-------------|
+| [OpenAlex Integration Guide](openalex-integration.md) | User guide for OpenAlex API integration |
+| [OpenAlex Implementation Summary](integrations/openalex-implementation-summary.md) | Technical implementation details and architecture decisions |
 
 ### Analytics / Views / Exercises
 
@@ -88,6 +97,25 @@ All Markdown files in this repository, grouped by location:
 |------|-------------|
 | [DOCS_INDEX.md](DOCS_INDEX.md) | This documentation index |
 | [REPO_STRUCTURE.md](REPO_STRUCTURE.md) | Repository folder layout and guiding principles |
+| [openalex-integration.md](openalex-integration.md) | OpenAlex API integration user guide |
+
+### `docs/_reports/`
+
+| File | Description |
+|------|-------------|
+| [folder-structure-recommendations.md](_reports/folder-structure-recommendations.md) | Folder structure improvement proposals (report only) |
+
+### `docs/data-quality/`
+
+| File | Description |
+|------|-------------|
+| [seed_cleanup_report.md](data-quality/seed_cleanup_report.md) | Seed data cleanup and validation report |
+
+### `docs/integrations/`
+
+| File | Description |
+|------|-------------|
+| [openalex-implementation-summary.md](integrations/openalex-implementation-summary.md) | OpenAlex integration technical implementation summary |
 
 ### `docs/diagrams/mermaid/`
 
@@ -134,6 +162,7 @@ All Markdown files in this repository, grouped by location:
 | File | Description |
 |------|-------------|
 | [ddl_ordering_and_manifest.md](../agents/playbooks/db/ddl_ordering_and_manifest.md) | DDL file organization and manifest guidance |
+| [seed_expansion_framework.md](../agents/playbooks/db/seed_expansion_framework.md) | Framework for expanding seed data coverage |
 
 ### `agents/playbooks/docs/`
 
@@ -158,6 +187,14 @@ All Markdown files in this repository, grouped by location:
 | File | Description |
 |------|-------------|
 | [README.md](../src/db/seeds/README.md) | Seed data framework documentation |
+
+### `src/ingest/`
+
+| File | Description |
+|------|-------------|
+| [README.md](../src/ingest/README.md) | Ingestion framework overview and architecture |
+| [QUICKSTART.md](../src/ingest/QUICKSTART.md) | Quick start guide for the ingestion framework |
+| [IMPLEMENTATION_SUMMARY.md](../src/ingest/IMPLEMENTATION_SUMMARY.md) | Ingestion framework implementation summary |
 
 ### `sources/`
 
