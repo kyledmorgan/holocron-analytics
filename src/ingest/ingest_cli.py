@@ -21,10 +21,10 @@ sys.path.insert(0, str(Path(__file__).parent.parent))
 
 from ingest.config import IngestConfig
 from ingest.core.models import WorkItem
-from ingest.connectors import HttpConnector, MediaWikiConnector
+from ingest.connectors import HttpConnector, MediaWikiConnector, OpenAlexConnector
 from ingest.storage import FileLakeWriter, SqlServerIngestWriter
 from ingest.state import SqliteStateStore
-from ingest.discovery import MediaWikiDiscovery
+from ingest.discovery import MediaWikiDiscovery, OpenAlexDiscovery, EntityMatcher
 from ingest.runner import IngestRunner
 
 
@@ -41,11 +41,20 @@ def setup_logging(verbose: bool = False) -> None:
 
 def build_connectors(config: IngestConfig) -> dict:
     """Build connectors from configuration."""
+    logger = logging.getLogger(__name__)
     connectors = {}
     
     for source_config in config.get_sources():
         source_type = source_config.get("type")
         source_name = source_config.get("name")
+        
+        if not source_type:
+            logger.warning(f"Skipping source '{source_name}': missing 'type' field")
+            continue
+        
+        if not source_name:
+            logger.warning(f"Skipping source with type '{source_type}': missing 'name' field")
+            continue
         
         if source_type == "mediawiki":
             connector = MediaWikiConnector(
@@ -57,6 +66,7 @@ def build_connectors(config: IngestConfig) -> dict:
                 user_agent=source_config.get("user_agent"),
             )
             connectors["mediawiki"] = connector
+            logger.info(f"Built connector: {source_name} ({source_type})")
         
         elif source_type == "http":
             connector = HttpConnector(
@@ -67,6 +77,23 @@ def build_connectors(config: IngestConfig) -> dict:
                 user_agent=source_config.get("user_agent"),
             )
             connectors["http"] = connector
+            logger.info(f"Built connector: {source_name} ({source_type})")
+        
+        elif source_type == "openalex":
+            connector = OpenAlexConnector(
+                email=source_config.get("email"),
+                rate_limit_delay=source_config.get("rate_limit_delay", 0.1),
+                timeout=source_config.get("timeout", 30),
+                max_retries=source_config.get("max_retries", 3),
+            )
+            connectors["openalex"] = connector
+            logger.info(f"Built connector: {source_name} ({source_type})")
+        
+        else:
+            logger.warning(
+                f"Skipping source '{source_name}': unknown type '{source_type}'. "
+                f"Supported types: mediawiki, http, openalex"
+            )
     
     return connectors
 
@@ -132,6 +159,7 @@ def build_state_store(config: IngestConfig) -> SqliteStateStore:
 
 def build_discovery_plugins(config: IngestConfig) -> list:
     """Build discovery plugins from configuration."""
+    logger = logging.getLogger(__name__)
     plugins = []
     
     for source_config in config.get_sources():
@@ -140,6 +168,7 @@ def build_discovery_plugins(config: IngestConfig) -> list:
         discovery_config = source_config.get("discovery", {})
         
         if not discovery_config.get("enabled", True):
+            logger.debug(f"Discovery disabled for source '{source_name}'")
             continue
         
         if source_type == "mediawiki":
@@ -151,19 +180,49 @@ def build_discovery_plugins(config: IngestConfig) -> list:
                 max_depth=discovery_config.get("max_depth"),
             )
             plugins.append(plugin)
+            logger.info(f"Built discovery plugin: {source_name} (mediawiki)")
+        
+        elif source_type == "openalex":
+            # Build entity matcher for controlled expansion
+            entity_config = source_config.get("entity_matching", {})
+            entities = entity_config.get("entities", [])
+            identifiers = entity_config.get("identifiers", {})
+            case_sensitive = entity_config.get("case_sensitive", False)
+            
+            entity_matcher = EntityMatcher(
+                known_entities=entities,
+                known_identifiers=identifiers,
+                case_sensitive=case_sensitive,
+            )
+            
+            plugin = OpenAlexDiscovery(
+                entity_matcher=entity_matcher,
+                max_depth=discovery_config.get("max_depth", 1),
+                discover_references=discovery_config.get("discover_references", True),
+                discover_related=discovery_config.get("discover_related", False),
+            )
+            plugins.append(plugin)
+            logger.info(
+                f"Built discovery plugin: {source_name} (openalex) "
+                f"with {len(entities)} entity filters, max_depth={discovery_config.get('max_depth', 1)}"
+            )
     
     return plugins
 
 
 def create_seed_work_items(config: IngestConfig) -> list:
     """Create initial work items from seed configuration."""
+    logger = logging.getLogger(__name__)
     work_items = []
     
     for seed_config in config.get_seeds():
         source_name = seed_config.get("source")
         resource_type = seed_config.get("resource_type", "page")
-        titles = seed_config.get("titles", [])
         priority = seed_config.get("priority", 10)
+        
+        if not source_name:
+            logger.warning("Skipping seed: missing 'source' field")
+            continue
         
         # Find the source configuration
         source_config = None
@@ -173,14 +232,19 @@ def create_seed_work_items(config: IngestConfig) -> list:
                 break
         
         if not source_config:
-            logging.warning(f"Source not found for seed: {source_name}")
+            logger.warning(f"Skipping seed: source '{source_name}' not found in sources config")
             continue
         
         source_type = source_config.get("type")
         
-        # Create work items for each title
-        for title in titles:
-            if source_type == "mediawiki":
+        # Handle MediaWiki seeds
+        if source_type == "mediawiki":
+            titles = seed_config.get("titles", [])
+            if not titles:
+                logger.warning(f"Skipping MediaWiki seed for '{source_name}': no 'titles' provided")
+                continue
+            
+            for title in titles:
                 from urllib.parse import urlencode
                 params = {
                     "action": "query",
@@ -202,6 +266,111 @@ def create_seed_work_items(config: IngestConfig) -> list:
                     metadata={"seed": True},
                 )
                 work_items.append(work_item)
+                logger.debug(f"Created MediaWiki seed: {title}")
+        
+        # Handle OpenAlex seeds
+        elif source_type == "openalex":
+            if resource_type == "search":
+                # Search seed - create a work item for the search query
+                search_query = seed_config.get("search_query")
+                if not search_query:
+                    logger.warning(f"Skipping OpenAlex search seed for '{source_name}': no 'search_query' provided")
+                    continue
+                
+                from urllib.parse import urlencode, quote
+                filters = seed_config.get("filters", [])
+                per_page = seed_config.get("per_page", 25)
+                
+                # Build OpenAlex search URL
+                filter_str = ",".join(filters) if filters else ""
+                params = {
+                    "search": search_query,
+                    "per-page": per_page,
+                }
+                if filter_str:
+                    params["filter"] = filter_str
+                
+                base_url = "https://api.openalex.org/works"
+                request_uri = f"{base_url}?{urlencode(params)}"
+                
+                work_item = WorkItem(
+                    source_system="openalex",
+                    source_name=source_name,
+                    resource_type="search",
+                    resource_id=f"search:{search_query}",
+                    request_uri=request_uri,
+                    request_method="GET",
+                    priority=priority,
+                    metadata={
+                        "seed": True,
+                        "search_query": search_query,
+                        "filters": filters,
+                    },
+                )
+                work_items.append(work_item)
+                logger.info(f"Created OpenAlex search seed: '{search_query}' with {len(filters)} filters")
+            
+            elif resource_type == "work":
+                # Work ID seed - create work items for specific work IDs
+                work_ids = seed_config.get("work_ids", [])
+                dois = seed_config.get("dois", [])
+                
+                if not work_ids and not dois:
+                    logger.warning(f"Skipping OpenAlex work seed for '{source_name}': no 'work_ids' or 'dois' provided")
+                    continue
+                
+                # Handle work IDs
+                for work_id in work_ids:
+                    # Ensure ID has proper format (W1234567890)
+                    if not work_id.startswith("W"):
+                        work_id = f"W{work_id}"
+                    
+                    request_uri = f"https://api.openalex.org/works/{work_id}"
+                    
+                    work_item = WorkItem(
+                        source_system="openalex",
+                        source_name=source_name,
+                        resource_type="work",
+                        resource_id=work_id,
+                        request_uri=request_uri,
+                        request_method="GET",
+                        priority=priority,
+                        metadata={"seed": True},
+                    )
+                    work_items.append(work_item)
+                    logger.debug(f"Created OpenAlex work seed: {work_id}")
+                
+                # Handle DOIs
+                for doi in dois:
+                    # DOIs are looked up via the works endpoint with filter
+                    from urllib.parse import quote
+                    encoded_doi = quote(doi, safe="")
+                    request_uri = f"https://api.openalex.org/works/doi:{encoded_doi}"
+                    
+                    work_item = WorkItem(
+                        source_system="openalex",
+                        source_name=source_name,
+                        resource_type="work",
+                        resource_id=f"doi:{doi}",
+                        request_uri=request_uri,
+                        request_method="GET",
+                        priority=priority,
+                        metadata={"seed": True, "doi": doi},
+                    )
+                    work_items.append(work_item)
+                    logger.debug(f"Created OpenAlex DOI seed: {doi}")
+            
+            else:
+                logger.warning(
+                    f"Skipping OpenAlex seed for '{source_name}': unknown resource_type '{resource_type}'. "
+                    f"Supported types: search, work"
+                )
+        
+        else:
+            logger.warning(
+                f"Skipping seed for '{source_name}': source type '{source_type}' seed creation not implemented. "
+                f"Supported types: mediawiki, openalex"
+            )
     
     return work_items
 
