@@ -23,7 +23,7 @@ from ingest.config import IngestConfig
 from ingest.core.models import WorkItem
 from ingest.connectors import HttpConnector, MediaWikiConnector
 from ingest.storage import FileLakeWriter, SqlServerIngestWriter
-from ingest.state import SqliteStateStore
+from ingest.state import create_state_store
 from ingest.discovery import MediaWikiDiscovery
 from ingest.runner import IngestRunner
 
@@ -122,12 +122,38 @@ def build_storage_writers(config: IngestConfig) -> list:
     return writers
 
 
-def build_state_store(config: IngestConfig) -> SqliteStateStore:
+def build_state_store(config: IngestConfig):
     """Build state store from configuration."""
-    state_config = config.get_state_config()
-    db_path = Path(state_config.get("db_path", "local/state/ingest_state.db"))
+    import os
     
-    return SqliteStateStore(db_path=db_path)
+    state_config = config.get_state_config()
+    
+    # Determine backend from config or environment
+    backend = os.environ.get("DB_BACKEND", state_config.get("type", "sqlserver"))
+    
+    if backend == "sqlite":
+        # Deprecated path - use SQLite
+        from pathlib import Path
+        db_path = Path(state_config.get("db_path", "local/state/ingest_state.db"))
+        return create_state_store(
+            backend="sqlite",
+            db_path=db_path,
+        )
+    else:
+        # Default path - use SQL Server
+        sql_config = state_config.get("sqlserver", {})
+        
+        return create_state_store(
+            backend="sqlserver",
+            connection_string=os.environ.get("INGEST_SQLSERVER_STATE_CONN_STR"),
+            host=sql_config.get("host", os.environ.get("INGEST_SQLSERVER_HOST", "localhost")),
+            port=int(sql_config.get("port", os.environ.get("INGEST_SQLSERVER_PORT", "1433"))),
+            database=sql_config.get("database", os.environ.get("INGEST_SQLSERVER_DATABASE", "Holocron")),
+            username=sql_config.get("user", os.environ.get("INGEST_SQLSERVER_USER", "sa")),
+            password=os.environ.get("INGEST_SQLSERVER_PASSWORD") or os.environ.get("MSSQL_SA_PASSWORD"),
+            driver=sql_config.get("driver", os.environ.get("INGEST_SQLSERVER_DRIVER", "ODBC Driver 18 for SQL Server")),
+            schema=sql_config.get("schema", "ingest"),
+        )
 
 
 def build_discovery_plugins(config: IngestConfig) -> list:

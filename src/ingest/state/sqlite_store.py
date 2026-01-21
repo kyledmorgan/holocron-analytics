@@ -1,9 +1,14 @@
 """
 SQLite-based state store for managing work item queue.
+
+.. deprecated::
+    SQLite backend is deprecated. Use SQL Server backend instead.
+    Set DB_BACKEND=sqlserver environment variable or use create_state_store() factory.
 """
 
 import logging
 import sqlite3
+import warnings
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import List, Optional
@@ -19,6 +24,10 @@ class SqliteStateStore(StateStore):
     """
     SQLite-based implementation of the state store.
     
+    .. deprecated::
+        This class is deprecated. Use SqlServerStateStore instead.
+        SQLite is only suitable for local testing and development.
+    
     Manages the work queue and tracks status using a local SQLite database.
     """
 
@@ -26,10 +35,24 @@ class SqliteStateStore(StateStore):
         """
         Initialize the SQLite state store.
         
+        .. deprecated::
+            SQLite backend is deprecated. Use SQL Server backend.
+        
         Args:
             db_path: Path to the SQLite database file
             auto_init: Whether to create tables automatically
         """
+        warnings.warn(
+            "SqliteStateStore is deprecated. Use SqlServerStateStore instead. "
+            "Set DB_BACKEND=sqlserver or use create_state_store() factory.",
+            DeprecationWarning,
+            stacklevel=2
+        )
+        logger.warning(
+            "SQLite backend is deprecated; use SQL Server backend. "
+            "See docs/sqlserver-backend.md for migration instructions."
+        )
+        
         self.db_path = Path(db_path)
         self.conn = None
         self._connect()
