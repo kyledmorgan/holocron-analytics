@@ -1,0 +1,81 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "sw_entity_facts_v1_output.json",
+  "title": "Star Wars Entity Facts Output",
+  "description": "Output schema for sw_entity_facts_v1 interrogation. Extracts normalized facts about Star Wars entities from evidence.",
+  "type": "object",
+  "required": ["entity_type", "entity_id", "facts"],
+  "properties": {
+    "entity_type": {
+      "type": "string",
+      "description": "The type of entity (e.g., 'character', 'planet', 'starship', 'organization')"
+    },
+    "entity_id": {
+      "type": "string",
+      "description": "The unique identifier for the entity"
+    },
+    "entity_name": {
+      "type": ["string", "null"],
+      "description": "The canonical name of the entity extracted from evidence"
+    },
+    "facts": {
+      "type": "array",
+      "description": "List of extracted facts about the entity",
+      "items": {
+        "type": "object",
+        "required": ["fact_key", "confidence", "evidence_ids"],
+        "properties": {
+          "fact_key": {
+            "type": "string",
+            "description": "Identifier for the type of fact (e.g., 'birth_year', 'homeworld', 'species')"
+          },
+          "value": {
+            "description": "The extracted value. Use null if not found in evidence.",
+            "oneOf": [
+              {"type": "string"},
+              {"type": "number"},
+              {"type": "boolean"},
+              {"type": "null"},
+              {"type": "array", "items": {"type": "string"}}
+            ]
+          },
+          "unit": {
+            "type": ["string", "null"],
+            "description": "Unit for numeric values (e.g., 'BBY' for years, 'meters' for height)"
+          },
+          "confidence": {
+            "type": "number",
+            "minimum": 0.0,
+            "maximum": 1.0,
+            "description": "Confidence score from 0.0 (no confidence) to 1.0 (certain)"
+          },
+          "evidence_ids": {
+            "type": "array",
+            "items": {"type": "string"},
+            "description": "List of evidence snippet IDs that support this fact"
+          },
+          "notes": {
+            "type": ["string", "null"],
+            "description": "Optional notes about the extraction or uncertainty"
+          }
+        }
+      }
+    },
+    "metadata": {
+      "type": ["object", "null"],
+      "description": "Additional output metadata",
+      "properties": {
+        "extraction_notes": {
+          "type": "string",
+          "description": "General notes about the extraction process"
+        },
+        "missing_info": {
+          "type": "array",
+          "items": {"type": "string"},
+          "description": "List of expected facts not found in evidence"
+        }
+      }
+    }
+  },
+  "additionalProperties": false
+}

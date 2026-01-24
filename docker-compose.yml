@@ -43,6 +43,7 @@ services:
     volumes:
       - ./docker/init-db.sql:/init-db.sql:ro
       - ./src/db/ddl:/ddl:ro
+      - ./db/migrations:/migrations:ro
     entrypoint: ["/bin/bash", "-c"]
     command:
       - |
@@ -75,6 +76,9 @@ services:
         run_scripts "/ddl/01_dimensions"
         run_scripts "/ddl/02_facts"
         run_scripts "/ddl/03_bridges"
+        
+        echo "=== Running migrations ==="
+        run_scripts "/migrations"
         
         echo "=== Database initialization complete ==="
 
@@ -150,8 +154,62 @@ services:
       retries: 3
       start_period: 10s
 
+  # =========================================================================
+  # LLM Runner - Phase 1 Derive Runner
+  # =========================================================================
+  # Processes LLM derive jobs from the SQL Server queue.
+  # Calls Ollama for structured output generation.
+  #
+  # Usage:
+  #   docker compose up -d llm-runner
+  #
+  # To run in loop mode (continuous polling):
+  #   docker compose up llm-runner
+  #
+  # To run once (process single job):
+  #   docker compose run llm-runner python -m src.llm.runners.phase1_runner --once
+  # =========================================================================
+  llm-runner:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.seed
+    container_name: holocron-llm-runner
+    depends_on:
+      initdb:
+        condition: service_completed_successfully
+      ollama:
+        condition: service_healthy
+    environment:
+      - WORKER_ID=llm-runner-docker
+      - OLLAMA_BASE_URL=http://ollama:11434
+      - OLLAMA_MODEL=${OLLAMA_MODEL:-llama3.2}
+      - OLLAMA_TIMEOUT_SECONDS=300
+      - OLLAMA_TEMPERATURE=0.0
+      - POLL_SECONDS=10
+      - LAKE_ROOT=/lake/llm_runs
+      # SQL Server connection (reuse ingest env vars)
+      - LLM_SQLSERVER_HOST=sqlserver
+      - LLM_SQLSERVER_DATABASE=${MSSQL_DATABASE:-Holocron}
+      - LLM_SQLSERVER_USER=sa
+      - LLM_SQLSERVER_PASSWORD=${MSSQL_SA_PASSWORD}
+      - LLM_SQLSERVER_PORT=1433
+      - LLM_SQLSERVER_DRIVER=ODBC Driver 18 for SQL Server
+      - LLM_SQLSERVER_SCHEMA=llm
+    volumes:
+      # Mount src read-only for development (allows code changes without rebuild)
+      - ./src:/app/src:ro
+      # Lake volume for artifact storage
+      - llm_lake:/lake
+    command: >
+      python -m src.llm.runners.phase1_runner --loop --poll-seconds 10 --verbose
+    restart: unless-stopped
+    profiles:
+      - llm
+
 volumes:
   mssql_data:
     driver: local
   ollama_data:
+    driver: local
+  llm_lake:
     driver: local

@@ -353,3 +353,161 @@ class OllamaClient:
                 total_tokens=(result.get("prompt_eval_count", 0) or 0) + (result.get("eval_count", 0) or 0),
                 done=result.get("done", True),
             )
+    
+    def chat_with_structured_output(
+        self,
+        messages: list,
+        output_schema: Dict[str, Any],
+        **kwargs
+    ) -> OllamaResponse:
+        """
+        Generate a response using structured output (JSON schema).
+        
+        Uses Ollama's native structured output support by passing the
+        JSON schema in the 'format' field.
+        
+        Args:
+            messages: List of message dicts with 'role' and 'content'
+            output_schema: JSON schema for the expected output
+            **kwargs: Additional parameters passed to the API
+            
+        Returns:
+            OllamaResponse with structured JSON content
+            
+        Raises:
+            LLMProviderError: If the request fails
+            
+        Example:
+            >>> schema = {"type": "object", "properties": {"name": {"type": "string"}}}
+            >>> messages = [{"role": "user", "content": "Extract the name"}]
+            >>> response = client.chat_with_structured_output(messages, schema)
+        """
+        url = f"{self.base_url}/api/chat"
+        
+        payload = {
+            "model": self.model,
+            "messages": messages,
+            "stream": False,  # Always non-streaming for structured output
+            "format": output_schema,  # Pass schema as format for structured output
+        }
+        
+        # Add optional parameters
+        if self.config.temperature is not None:
+            payload.setdefault("options", {})["temperature"] = self.config.temperature
+        
+        if self.config.max_tokens is not None:
+            payload.setdefault("options", {})["num_predict"] = self.config.max_tokens
+        
+        # Merge any additional kwargs
+        payload.update(kwargs)
+        
+        return self._make_request(url, payload, is_chat=True)
+    
+    def get_model_info(self, model_name: Optional[str] = None) -> Optional[Dict[str, Any]]:
+        """
+        Get model information from Ollama /api/show endpoint.
+        
+        Args:
+            model_name: Model name to query (defaults to configured model)
+            
+        Returns:
+            Model information dict, or None if request fails
+        """
+        model = model_name or self.model
+        url = f"{self.base_url}/api/show"
+        
+        try:
+            payload = {"name": model}
+            data = json.dumps(payload).encode("utf-8")
+            request = Request(
+                url,
+                data=data,
+                headers={"Content-Type": "application/json"},
+                method="POST",
+            )
+            
+            with urlopen(request, timeout=30) as response:
+                result = json.loads(response.read().decode("utf-8"))
+                return result
+                
+        except Exception as e:
+            logger.warning(f"Failed to get model info for {model}: {e}")
+            return None
+    
+    def get_model_digest(self, model_name: Optional[str] = None) -> Optional[str]:
+        """
+        Get the model digest (hash) for reproducibility tracking.
+        
+        Args:
+            model_name: Model name to query (defaults to configured model)
+            
+        Returns:
+            Model digest string, or None if not available
+        """
+        info = self.get_model_info(model_name)
+        if info:
+            # Try to extract digest from modelinfo or details
+            details = info.get("details", {})
+            if "digest" in details:
+                return details["digest"]
+            # Also check top-level
+            if "digest" in info:
+                return info["digest"]
+        return None
+    
+    def get_full_request_payload(
+        self,
+        messages: list,
+        output_schema: Optional[Dict[str, Any]] = None,
+        **kwargs
+    ) -> Dict[str, Any]:
+        """
+        Build the full request payload for logging/artifact capture.
+        
+        Args:
+            messages: List of message dicts
+            output_schema: Optional JSON schema for structured output
+            **kwargs: Additional parameters
+            
+        Returns:
+            Complete request payload dict
+        """
+        payload = {
+            "model": self.model,
+            "messages": messages,
+            "stream": False,
+        }
+        
+        if output_schema:
+            payload["format"] = output_schema
+        
+        options = {}
+        if self.config.temperature is not None:
+            options["temperature"] = self.config.temperature
+        if self.config.max_tokens is not None:
+            options["num_predict"] = self.config.max_tokens
+        
+        if options:
+            payload["options"] = options
+        
+        payload.update(kwargs)
+        return payload
+    
+    def extract_metrics(self, raw_response: Dict[str, Any]) -> Dict[str, Any]:
+        """
+        Extract metrics from a raw Ollama response.
+        
+        Args:
+            raw_response: The raw response dict from Ollama
+            
+        Returns:
+            Dict with standardized metrics
+        """
+        return {
+            "total_duration": raw_response.get("total_duration"),
+            "load_duration": raw_response.get("load_duration"),
+            "prompt_eval_count": raw_response.get("prompt_eval_count"),
+            "prompt_eval_duration": raw_response.get("prompt_eval_duration"),
+            "eval_count": raw_response.get("eval_count"),
+            "eval_duration": raw_response.get("eval_duration"),
+        }
