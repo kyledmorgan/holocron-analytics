@@ -59,6 +59,9 @@ New to this repository? Start with these essential documents:
 | [Vision and Roadmap](llm/vision-and-roadmap.md) | Project vision, goals, and phased roadmap |
 | [LLM-Derived Data Overview](llm/derived-data.md) | Concepts, architecture, and roadmap for the LLM-derived data subsystem |
 | [Phase 1 Runner](llm/phase1-runner.md) | End-to-end LLM derive pipeline usage guide |
+| [Retrieval (Phase 3)](llm/retrieval.md) | RAG architecture, chunking, embeddings, and retrieval |
+| [Indexing Guide](llm/indexing.md) | How to index sources for retrieval |
+| [Operational Guide](llm/operational.md) | Operations, retention, and troubleshooting |
 | [Ollama Integration Guide](llm/ollama.md) | Ollama API documentation, configuration, and operational guidance |
 | [Ollama in Docker](llm/ollama-docker.md) | Running Ollama as a Docker Compose service (Windows + WSL2) |
 | [Glossary](llm/glossary.md) | Core terminology and definitions |
@@ -144,10 +147,13 @@ All Markdown files in this repository, grouped by location:
 | [derived-data.md](llm/derived-data.md) | LLM-Derived Data subsystem overview, concepts, and roadmap |
 | [glossary.md](llm/glossary.md) | Core terminology and definitions |
 | [governance.md](llm/governance.md) | Governance policy placeholders (retention, redaction) |
+| [indexing.md](llm/indexing.md) | Phase 3 indexing guide for retrieval |
 | [lineage.md](llm/lineage.md) | Data lineage tracking approach |
 | [ollama.md](llm/ollama.md) | Ollama integration guide with API documentation |
 | [ollama-docker.md](llm/ollama-docker.md) | Running Ollama as a Docker Compose service |
+| [operational.md](llm/operational.md) | Phase 3 operations and troubleshooting |
 | [phase1-runner.md](llm/phase1-runner.md) | Phase 1 LLM Runner usage guide |
+| [retrieval.md](llm/retrieval.md) | Phase 3 RAG architecture and retrieval |
 | [status.md](llm/status.md) | Implementation status tracker |
 | [vision-and-roadmap.md](llm/vision-and-roadmap.md) | Vision, goals, and phased roadmap |
 

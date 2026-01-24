@@ -6,11 +6,11 @@ This document tracks the implementation status of the LLM-Derived Data subsystem
 
 ---
 
-## Current Phase: Phase 2 — Evidence Assembly + Packaging ✅
+## Current Phase: Phase 3 — Retrieval Augmentation ✅
 
 **Status: COMPLETE**
 
-Phase 2 has been completed. The evidence assembly system is now fully implemented with bounded artifacts, SQL result packaging, redaction hooks, and comprehensive testing.
+Phase 3 has been completed. The retrieval augmentation system is now fully implemented with chunking, embeddings, vector storage, and evidence selection capabilities.
 
 ---
 
@@ -181,6 +181,85 @@ Phase 2 has been completed. The evidence assembly system is now fully implemente
 
 ---
 
+## Phase 3 Checklist ✅
+
+**Status: COMPLETE**
+
+### Retrieval Contracts
+
+| Item | Status | Notes |
+|------|--------|-------|
+| ChunkRecord model | ✅ Complete | Deterministic chunk IDs |
+| EmbeddingRecord model | ✅ Complete | Vector storage with hashing |
+| RetrievalQuery model | ✅ Complete | Query metadata for reproducibility |
+| RetrievalHit model | ✅ Complete | Results with scores |
+| ChunkingPolicy model | ✅ Complete | Configurable chunking |
+| RetrievalPolicy model | ✅ Complete | Scoring configuration |
+
+### SQL Server Schema
+
+| Item | Status | Notes |
+|------|--------|-------|
+| llm.chunk table | ✅ Complete | Migration 0008 |
+| llm.embedding table | ✅ Complete | Vector storage as JSON |
+| llm.retrieval table | ✅ Complete | Query logging |
+| llm.retrieval_hit table | ✅ Complete | Result logging |
+| llm.source_registry table | ✅ Complete | Incremental indexing support |
+| Indexes | ✅ Complete | Performance indexes |
+
+### Embeddings Client
+
+| Item | Status | Notes |
+|------|--------|-------|
+| Ollama embed() method | ✅ Complete | /api/embed endpoint |
+| EmbeddingResponse model | ✅ Complete | Response handling |
+| Model configuration | ✅ Complete | OLLAMA_EMBED_MODEL env var |
+
+### Chunking Pipeline
+
+| Item | Status | Notes |
+|------|--------|-------|
+| Chunker class | ✅ Complete | Configurable chunking |
+| chunk_text function | ✅ Complete | Text splitting with overlap |
+| Deterministic chunk IDs | ✅ Complete | SHA256-based IDs |
+| Indexer CLI | ✅ Complete | Full and incremental modes |
+| Source manifest format | ✅ Complete | JSON manifest spec |
+
+### Retrieval Pipeline
+
+| Item | Status | Notes |
+|------|--------|-------|
+| cosine_similarity function | ✅ Complete | Vector similarity |
+| retrieve_chunks function | ✅ Complete | Top-K retrieval |
+| RetrievalStore class | ✅ Complete | DB persistence |
+| Deterministic tie-breaking | ✅ Complete | Secondary sort by chunk_id |
+
+### Evidence Integration
+
+| Item | Status | Notes |
+|------|--------|-------|
+| Evidence converter | ✅ Complete | Hits to EvidenceItems |
+| Retrieval evidence refs | ✅ Complete | Evidence bundle integration |
+
+### Documentation
+
+| Item | Status | Notes |
+|------|--------|-------|
+| retrieval.md | ✅ Complete | Architecture overview |
+| indexing.md | ✅ Complete | How to index sources |
+| operational.md | ✅ Complete | Operations guide |
+| Status update | ✅ Complete | This document |
+
+### Tests
+
+| Item | Status | Notes |
+|------|--------|-------|
+| Retrieval contracts tests | ✅ Complete | 30 tests passing |
+| Chunking tests | ✅ Complete | 19 tests passing |
+| Retrieval search tests | ✅ Complete | 22 tests passing |
+
+---
+
 ## TBD Decisions
 
 The following decisions are tracked but not yet finalized:
@@ -189,8 +268,8 @@ The following decisions are tracked but not yet finalized:
 |----------|--------|---------------|
 | Native vs OpenAI-compatible API | ✅ Decided | Both supported, config-driven |
 | JSON validation library | ✅ Decided | Dataclasses with manual validation |
-| SQL Server schema | ✅ Decided | Implemented in migrations 0004-0007 |
-| Vector store strategy | TBD | Phase 3 |
+| SQL Server schema | ✅ Decided | Implemented in migrations 0004-0008 |
+| Vector store strategy | ✅ Decided | SQL Server + Python similarity (Option 2) |
 | Prompt templating engine | ✅ Decided | Jinja2 in interrogations |
 
 ---
@@ -211,5 +290,8 @@ When completing work on the LLM-Derived Data subsystem:
 - [Vision and Roadmap](vision-and-roadmap.md) — Full roadmap
 - [LLM Module README](../../src/llm/README.md) — Source overview
 - [Evidence Bundles](evidence.md) — Phase 2 evidence system
+- [Retrieval (Phase 3)](retrieval.md) — RAG architecture
+- [Indexing Guide](indexing.md) — How to index sources
+- [Operational Guide](operational.md) — Operations and troubleshooting
 - [SQL Evidence](sql-evidence.md) — SQL result packaging
 - [Redaction](redaction.md) — PII redaction hooks
