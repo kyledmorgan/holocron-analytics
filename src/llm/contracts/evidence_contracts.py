@@ -257,14 +257,13 @@ def generate_evidence_id(evidence_type: str, source_identifier: str, chunk_index
         return f"{evidence_type}:{prefix}:{chunk_index}"
 
 
-def compute_content_hash(content: str) -> str:
-    """
-    Compute SHA256 hash of content.
-    
-    Args:
-        content: Content to hash
-        
-    Returns:
-        Hex-encoded SHA256 hash
-    """
-    return hashlib.sha256(content.encode()).hexdigest()
+# Import from shared utilities and re-export for backward compatibility
+from ..core.utils import compute_content_hash
+
+__all__ = [
+    "EvidencePolicy",
+    "EvidenceItem", 
+    "EvidenceBundle",
+    "generate_evidence_id",
+    "compute_content_hash",
+]

@@ -7,8 +7,8 @@ Supports both native Ollama API and OpenAI-compatible endpoints.
 
 import json
 import logging
-from dataclasses import dataclass
-from typing import Any, Dict, Optional
+from dataclasses import dataclass, field
+from typing import Any, Dict, List, Optional
 from urllib.request import Request, urlopen
 from urllib.error import URLError, HTTPError
 
@@ -511,3 +511,116 @@ class OllamaClient:
             "eval_count": raw_response.get("eval_count"),
             "eval_duration": raw_response.get("eval_duration"),
         }
+    
+    def embed(
+        self,
+        texts: list,
+        model: Optional[str] = None,
+    ) -> "EmbeddingResponse":
+        """
+        Generate embeddings for a list of texts using Ollama's /api/embed endpoint.
+        
+        Args:
+            texts: List of texts to embed
+            model: Embedding model to use (defaults to self.model or OLLAMA_EMBED_MODEL)
+            
+        Returns:
+            EmbeddingResponse with embeddings and metadata
+            
+        Raises:
+            LLMProviderError: If the request fails
+            
+        Example:
+            >>> response = client.embed(["Hello world", "Test text"])
+            >>> print(len(response.embeddings))  # 2
+            >>> print(len(response.embeddings[0]))  # vector dimension
+        """
+        import os
+        
+        # Determine embedding model
+        embed_model = model or os.environ.get("OLLAMA_EMBED_MODEL", "nomic-embed-text")
+        
+        url = f"{self.base_url}/api/embed"
+        
+        # Ollama supports either a single prompt or array of inputs
+        payload = {
+            "model": embed_model,
+            "input": texts,
+        }
+        
+        try:
+            data = json.dumps(payload).encode("utf-8")
+            request = Request(
+                url,
+                data=data,
+                headers={"Content-Type": "application/json"},
+                method="POST",
+            )
+            
+            logger.debug(f"Making embedding request to {url} with model {embed_model}")
+            
+            with urlopen(request, timeout=self.timeout) as response:
+                response_data = response.read().decode("utf-8")
+                result = json.loads(response_data)
+                
+                # Parse embeddings response
+                embeddings = result.get("embeddings", [])
+                
+                return EmbeddingResponse(
+                    success=True,
+                    embeddings=embeddings,
+                    model=result.get("model", embed_model),
+                    raw_response=result,
+                    total_duration=result.get("total_duration"),
+                    load_duration=result.get("load_duration"),
+                )
+                
+        except HTTPError as e:
+            error_body = e.read().decode("utf-8") if e.fp else str(e)
+            logger.error(f"HTTP error from Ollama embed: {e.code} - {error_body}")
+            raise LLMProviderError(
+                f"Ollama embed API error: {e.code} - {error_body}",
+                provider="ollama",
+                status_code=e.code,
+            )
+        except URLError as e:
+            logger.error(f"Failed to connect to Ollama for embedding: {e}")
+            raise LLMProviderError(
+                f"Failed to connect to Ollama at {self.base_url}: {e}",
+                provider="ollama",
+            )
+        except json.JSONDecodeError as e:
+            logger.error(f"Invalid JSON response from Ollama embed: {e}")
+            raise LLMProviderError(
+                f"Invalid JSON response from Ollama embed: {e}",
+                provider="ollama",
+            )
+        except Exception as e:
+            logger.error(f"Unexpected error calling Ollama embed: {e}")
+            raise LLMProviderError(
+                f"Unexpected error calling Ollama embed: {e}",
+                provider="ollama",
+            )
+
+
+@dataclass
+class EmbeddingResponse:
+    """
+    Response from Ollama embeddings API.
+    
+    Attributes:
+        success: Whether the request succeeded
+        embeddings: List of embedding vectors (each is list of floats)
+        model: Model that generated the embeddings
+        raw_response: Full response JSON
+        total_duration: Total time in nanoseconds
+        load_duration: Model load time in nanoseconds
+        error_message: Error message if failed
+    """
+    success: bool
+    embeddings: list = field(default_factory=list)
+    model: Optional[str] = None
+    raw_response: Optional[Dict[str, Any]] = None
+    total_duration: Optional[int] = None
+    load_duration: Optional[int] = None
+    error_message: Optional[str] = None
