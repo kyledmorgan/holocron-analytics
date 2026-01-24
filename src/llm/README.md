@@ -105,19 +105,31 @@ python scripts/llm_smoke_test.py
 # Capture model inventory to JSON
 python scripts/ollama_capture_models.py
 
-# (Future) Run a derive operation
-python -m src.llm.runners.derive_runner --config config/llm.yaml
+# Run the Phase 1 derive runner (single job)
+python -m src.llm.runners.phase1_runner --once --worker-id local --verbose
+
+# Run the Phase 1 derive runner (loop mode)
+python -m src.llm.runners.phase1_runner --loop --poll-seconds 10
 ```
 
 ## Documentation
 
 - [LLM-Derived Data Overview](../../docs/llm/derived-data.md) - Concepts and roadmap
+- [Phase 1 Runner Guide](../../docs/llm/phase1-runner.md) - End-to-end derive pipeline
 - [Ollama Integration Guide](../../docs/llm/ollama.md) - API documentation and configuration
 - [Ollama in Docker](../../docs/llm/ollama-docker.md) - Docker Compose setup and networking
 
 ## Status
 
-**Phase 0 (Foundation)** - Scaffolding and interfaces only. Full implementation is planned for subsequent phases.
+**Phase 1 (MVP Runner)** - End-to-end derive workflow implemented:
+- SQL Server job queue with atomic claiming
+- Ollama structured output with JSON schema
+- Evidence bundling from inline data or file references
+- Artifact storage to filesystem lake
+- Retry with backoff and deadlettering
+- Full telemetry capture (metrics, model info)
+
+See [Phase 1 Runner](../../docs/llm/phase1-runner.md) for usage guide.
 
 ## License
 

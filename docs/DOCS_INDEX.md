@@ -58,6 +58,7 @@ New to this repository? Start with these essential documents:
 |----------|-------------|
 | [Vision and Roadmap](llm/vision-and-roadmap.md) | Project vision, goals, and phased roadmap |
 | [LLM-Derived Data Overview](llm/derived-data.md) | Concepts, architecture, and roadmap for the LLM-derived data subsystem |
+| [Phase 1 Runner](llm/phase1-runner.md) | End-to-end LLM derive pipeline usage guide |
 | [Ollama Integration Guide](llm/ollama.md) | Ollama API documentation, configuration, and operational guidance |
 | [Ollama in Docker](llm/ollama-docker.md) | Running Ollama as a Docker Compose service (Windows + WSL2) |
 | [Glossary](llm/glossary.md) | Core terminology and definitions |
@@ -146,6 +147,7 @@ All Markdown files in this repository, grouped by location:
 | [lineage.md](llm/lineage.md) | Data lineage tracking approach |
 | [ollama.md](llm/ollama.md) | Ollama integration guide with API documentation |
 | [ollama-docker.md](llm/ollama-docker.md) | Running Ollama as a Docker Compose service |
+| [phase1-runner.md](llm/phase1-runner.md) | Phase 1 LLM Runner usage guide |
 | [status.md](llm/status.md) | Implementation status tracker |
 | [vision-and-roadmap.md](llm/vision-and-roadmap.md) | Vision, goals, and phased roadmap |
 
