@@ -409,6 +409,77 @@ class SqlJobQueue:
             logger.error(f"Failed to create artifact: {e}")
             raise LLMStorageError(f"Failed to create artifact: {e}")
     
+    def create_evidence_bundle(
+        self,
+        bundle_id: str,
+        build_version: str,
+        policy_json: str,
+        summary_json: str,
+        lake_uri: str,
+    ) -> None:
+        """
+        Record an evidence bundle used for runs.
+        
+        Args:
+            bundle_id: UUID of the evidence bundle
+            build_version: Evidence builder version
+            policy_json: JSON string of the evidence policy
+            summary_json: JSON string of the bundle summary
+            lake_uri: Path to the bundle artifact in the lake
+        """
+        try:
+            conn = self._get_connection()
+            cursor = conn.cursor()
+            
+            cursor.execute(
+                f"""
+                INSERT INTO [{self.config.schema}].[evidence_bundle] 
+                (bundle_id, created_utc, build_version, policy_json, summary_json, lake_uri)
+                VALUES (?, SYSUTCDATETIME(), ?, ?, ?, ?)
+                """,
+                (bundle_id, build_version, policy_json, summary_json, lake_uri)
+            )
+            
+            conn.commit()
+            logger.debug(f"Created evidence bundle record {bundle_id}")
+            
+        except Exception as e:
+            logger.error(f"Failed to create evidence bundle record: {e}")
+            # Don't fail the whole run if evidence bundle metadata can't be saved
+            # The bundle artifact is already in the lake
+    
+    def link_run_to_evidence_bundle(
+        self,
+        run_id: str,
+        bundle_id: str,
+    ) -> None:
+        """
+        Link a run to an evidence bundle.
+        
+        Args:
+            run_id: The run ID
+            bundle_id: The evidence bundle ID
+        """
+        try:
+            conn = self._get_connection()
+            cursor = conn.cursor()
+            
+            cursor.execute(
+                f"""
+                INSERT INTO [{self.config.schema}].[run_evidence] 
+                (run_id, bundle_id, attached_utc)
+                VALUES (?, ?, SYSUTCDATETIME())
+                """,
+                (run_id, bundle_id)
+            )
+            
+            conn.commit()
+            logger.debug(f"Linked run {run_id} to evidence bundle {bundle_id}")
+            
+        except Exception as e:
+            logger.error(f"Failed to link run to evidence bundle: {e}")
+            # Don't fail the whole run if the link can't be created
+    
     def get_queue_stats(self) -> Dict[str, int]:
         """
         Get queue statistics.

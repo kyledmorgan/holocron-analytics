@@ -42,8 +42,13 @@ from ..contracts.phase1_contracts import (
     JobInputEnvelope,
     validate_entity_facts_output,
 )
+from ..contracts.evidence_contracts import (
+    EvidenceBundle,
+    EvidencePolicy,
+)
 from ..core.exceptions import LLMProviderError, LLMValidationError, LLMStorageError
 from ..core.types import LLMConfig
+from ..evidence.builder import build_evidence_bundle
 from ..interrogations.registry import get_interrogation, InterrogationDefinition
 from ..providers.ollama_client import OllamaClient, OllamaResponse
 from ..storage.sql_job_queue import SqlJobQueue, QueueConfig
@@ -271,6 +276,21 @@ class Phase1Runner:
                 byte_count=evidence_artifact.byte_count,
             )
             
+            # 11b. Record evidence bundle metadata to SQL Server
+            self.queue.create_evidence_bundle(
+                bundle_id=evidence_bundle.bundle_id,
+                build_version=evidence_bundle.build_version,
+                policy_json=json.dumps(evidence_bundle.policy.to_dict()),
+                summary_json=json.dumps(evidence_bundle.summary),
+                lake_uri=evidence_artifact.lake_uri,
+            )
+            
+            # 11c. Link run to evidence bundle
+            self.queue.link_run_to_evidence_bundle(
+                run_id=run_id,
+                bundle_id=evidence_bundle.bundle_id,
+            )
+            
             # 12. Write prompt artifact
             prompt_artifact = self.lake_writer.write_prompt(run_id, prompt, timestamp)
             self.queue.create_artifact(
@@ -346,84 +366,61 @@ class Phase1Runner:
             self.queue.complete_run(run_id=run_id, status="FAILED", error=str(e))
             self.queue.mark_failed(job.job_id, str(e), run_id)
     
-    def _build_evidence_bundle(self, job: Job) -> EvidenceBundleV1:
+    def _build_evidence_bundle(self, job: Job) -> EvidenceBundle:
         """
-        Build evidence bundle from job input.
+        Build evidence bundle from job input using Phase 2 builder.
         
-        Phase 1 supports two modes:
-        1. Evidence provided directly in input_json
-        2. Evidence references in evidence_ref_json pointing to local files
+        Phase 2 supports multiple modes:
+        1. Evidence provided directly in input_json (inline)
+        2. Evidence references in evidence_ref_json pointing to lake artifacts
+        3. SQL result sets (existing artifacts or executed queries)
+        4. HTTP response artifacts
         
         Args:
             job: The job to build evidence for
             
         Returns:
-            EvidenceBundleV1 with evidence snippets
+            EvidenceBundle with bounded evidence items
         """
-        bundle = EvidenceBundleV1()
+        job_input_dict = json.loads(job.input_json)
         
-        job_input = job.get_input()
+        # Parse evidence references if present
+        evidence_refs = None
+        if job.evidence_ref_json:
+            try:
+                evidence_refs = json.loads(job.evidence_ref_json)
+            except json.JSONDecodeError as e:
+                logger.warning(f"Failed to parse evidence_ref_json: {e}")
         
-        # Check for inline evidence in extra_params
-        if job_input.extra_params and "evidence" in job_input.extra_params:
-            inline_evidence = job_input.extra_params["evidence"]
-            if isinstance(inline_evidence, list):
-                for i, item in enumerate(inline_evidence):
-                    if isinstance(item, dict):
-                        snippet = EvidenceSnippet(
-                            evidence_id=item.get("evidence_id", f"evidence_{i+1}"),
-                            source_uri=item.get("source_uri", "inline"),
-                            text=item.get("text", str(item)),
-                            offsets=item.get("offsets"),
-                            metadata=item.get("metadata"),
-                        )
-                    else:
-                        snippet = EvidenceSnippet(
-                            evidence_id=f"evidence_{i+1}",
-                            source_uri="inline",
-                            text=str(item),
-                        )
-                    bundle.snippets.append(snippet)
+        # Use default policy or customize as needed
+        policy = EvidencePolicy(
+            max_items=50,
+            max_total_bytes=100000,
+            max_item_bytes=10000,
+            max_sql_rows=100,
+            enable_redaction=False,
+        )
         
-        # Check for evidence file references
-        evidence_refs = job.get_evidence_refs()
-        if evidence_refs:
-            for i, ref in enumerate(evidence_refs):
-                try:
-                    # Try to load from file
-                    ref_path = Path(ref)
-                    if ref_path.exists():
-                        with open(ref_path, "r", encoding="utf-8") as f:
-                            content = f.read()
-                        snippet = EvidenceSnippet(
-                            evidence_id=f"file_{i+1}",
-                            source_uri=ref,
-                            text=content,
-                        )
-                        bundle.snippets.append(snippet)
-                    else:
-                        logger.warning(f"Evidence file not found: {ref}")
-                except Exception as e:
-                    logger.warning(f"Failed to load evidence from {ref}: {e}")
+        # Build evidence bundle using Phase 2 builder
+        bundle = build_evidence_bundle(
+            job_input=job_input_dict,
+            evidence_refs=evidence_refs,
+            policy=policy,
+            lake_root=self.config.lake_root,
+        )
         
-        # If no evidence found, use source_refs from input
-        if not bundle.snippets and job_input.source_refs:
-            for i, ref in enumerate(job_input.source_refs):
-                snippet = EvidenceSnippet(
-                    evidence_id=f"ref_{i+1}",
-                    source_uri=ref,
-                    text=f"[Reference: {ref}]",
-                )
-                bundle.snippets.append(snippet)
+        logger.info(
+            f"Built evidence bundle {bundle.bundle_id} with {len(bundle.items)} items "
+            f"({bundle.summary.get('total_bytes', 0)} bytes)"
+        )
         
-        logger.debug(f"Built evidence bundle with {len(bundle.snippets)} snippets")
         return bundle
     
     def _render_prompt(
         self,
         interrogation: InterrogationDefinition,
         job_input: JobInputEnvelope,
-        evidence_bundle: EvidenceBundleV1,
+        evidence_bundle: EvidenceBundle,
     ) -> str:
         """
         Render the prompt from template and inputs.
@@ -431,17 +428,17 @@ class Phase1Runner:
         Args:
             interrogation: The interrogation definition
             job_input: Job input envelope
-            evidence_bundle: Evidence bundle
+            evidence_bundle: Evidence bundle (Phase 2)
             
         Returns:
             Rendered prompt string
         """
-        # Format evidence content
+        # Format evidence content from Phase 2 evidence items
         evidence_parts = []
-        for snippet in evidence_bundle.snippets:
+        for item in evidence_bundle.items:
             evidence_parts.append(
-                f"--- Evidence [{snippet.evidence_id}] (source: {snippet.source_uri}) ---\n"
-                f"{snippet.text}\n"
+                f"--- Evidence [{item.evidence_id}] (type: {item.evidence_type}) ---\n"
+                f"{item.content}\n"
             )
         evidence_content = "\n".join(evidence_parts) if evidence_parts else "[No evidence provided]"
         
