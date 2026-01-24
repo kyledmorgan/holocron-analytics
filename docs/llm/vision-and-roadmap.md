@@ -125,19 +125,22 @@ Claims must cite evidence IDs. Fields without supporting evidence return null wi
 
 ## Roadmap
 
-### Phase 0 — Foundations and Scaffolding (Current)
+### Phase 0 — Foundations and Scaffolding ✅
 
-**Status:** ✅ Current Phase
+**Status:** ✅ COMPLETE
 
 **Intent:** Establish vocabulary, structure, contracts, and minimal runnable spine; avoid locking in details.
 
 **Deliverables:**
 
-- [x] `docs/llm/` vision, glossary, policy placeholders
+- [x] `docs/llm/` vision, glossary, contracts, policy placeholders
 - [x] Contract placeholder schemas (manifest + derived output)
 - [x] `src/llm/` scaffolding aligned to future phases
+- [x] Interrogation catalog skeleton with rubric templates
+- [x] Ollama Docker Compose service with model persistence
 - [x] Agent guidance updates (`agents/llm-derived-data.md`)
 - [x] Docs index updates
+- [x] Smoke test for provider connectivity
 
 **Decisions Kept Open (TBD):**
 

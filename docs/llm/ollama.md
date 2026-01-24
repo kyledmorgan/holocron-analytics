@@ -23,11 +23,15 @@ curl -fsSL https://ollama.ai/install.sh | sh
 
 Download from [ollama.ai/download](https://ollama.ai/download).
 
-### Docker
+### Docker (Standalone)
 
 ```bash
 docker run -d -v ollama:/root/.ollama -p 11434:11434 --name ollama ollama/ollama
 ```
+
+### Docker Compose (This Repository)
+
+This repository includes Ollama in the Docker Compose configuration. See the [Docker Compose section](#docker-compose-this-repository-1) below for details.
 
 ## Pulling Models
 
@@ -253,7 +257,80 @@ sudo systemctl enable ollama
 sudo systemctl start ollama
 ```
 
-#### Docker Compose
+#### Docker Compose (This Repository)
+
+This repository includes an Ollama service in `docker-compose.yml`. The configuration:
+
+- **Binds to localhost only** (`127.0.0.1:11434`) for security
+- **Persists models** via the `ollama_data` volume
+- **Optional GPU support** (commented out by default)
+
+**Starting Ollama with Docker Compose:**
+
+```bash
+# Start Ollama only
+docker compose up ollama -d
+
+# Start full stack (SQL Server + Ollama)
+docker compose up -d
+```
+
+**Pulling models inside the container:**
+
+```bash
+# Pull a model
+docker exec -it holocron-ollama ollama pull llama3.2
+
+# List available models
+docker exec -it holocron-ollama ollama list
+
+# Check running models
+docker exec -it holocron-ollama ollama ps
+```
+
+**Accessing Ollama:**
+
+- **From host machine**: `http://localhost:11434`
+- **From other containers**: `http://ollama:11434` (via Docker network)
+
+**Compose Configuration Details:**
+
+```yaml
+services:
+  ollama:
+    image: ollama/ollama:latest
+    container_name: holocron-ollama
+    ports:
+      # Bind to localhost only for security
+      - "127.0.0.1:11434:11434"
+    volumes:
+      # Persist downloaded models
+      - ollama_data:/root/.ollama
+    environment:
+      - OLLAMA_HOST=0.0.0.0:11434
+    # Healthcheck using bash (curl not available in image)
+    healthcheck:
+      test: ["CMD-SHELL", "bash -c 'echo > /dev/tcp/localhost/11434' || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    # GPU support (uncomment if available):
+    # deploy:
+    #   resources:
+    #     reservations:
+    #       devices:
+    #         - driver: nvidia
+    #           count: all
+    #           capabilities: [gpu]
+
+volumes:
+  ollama_data:
+    driver: local
+```
+
+#### Docker Compose (Generic Example)
+
+For other projects, a minimal Ollama Docker Compose configuration:
 
 ```yaml
 services:
@@ -278,6 +355,63 @@ Check GPU usage:
 ```bash
 ollama ps  # Shows running models and GPU memory
 ```
+
+#### GPU with Docker (Including WSL2)
+
+To enable GPU acceleration in Docker:
+
+**Prerequisites:**
+- NVIDIA GPU with updated drivers
+- NVIDIA Container Toolkit installed
+- Docker Desktop with WSL2 backend (Windows) or native Docker (Linux)
+
+**WSL2 Setup (Windows):**
+
+1. Install NVIDIA drivers for Windows (supports WSL2 automatically)
+2. Install Docker Desktop with WSL2 backend
+3. Enable GPU in Docker Desktop settings
+
+**Verify GPU access:**
+
+```bash
+# Check if Docker can see the GPU
+docker run --rm --gpus all nvidia/cuda:12.0-base nvidia-smi
+
+# Test Ollama with GPU
+docker run --rm --gpus all ollama/ollama ollama --version
+```
+
+**Enable GPU in docker-compose.yml:**
+
+Uncomment the GPU section in the Ollama service:
+
+```yaml
+ollama:
+  image: ollama/ollama:latest
+  # ... other config ...
+  deploy:
+    resources:
+      reservations:
+        devices:
+          - driver: nvidia
+            count: all
+            capabilities: [gpu]
+```
+
+**Verify GPU is being used:**
+
+```bash
+# Inside container
+docker exec -it holocron-ollama ollama ps
+
+# Output should show GPU memory usage
+```
+
+**Troubleshooting GPU in Docker:**
+
+- "GPU not found": Ensure NVIDIA Container Toolkit is installed
+- WSL2 issues: Update to latest Windows build and NVIDIA drivers
+- Memory errors: Use smaller models or quantized versions
 
 ### Model Memory Management
 

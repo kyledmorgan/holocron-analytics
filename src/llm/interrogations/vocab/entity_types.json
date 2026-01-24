@@ -1,0 +1,56 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://holocron-analytics.local/vocabularies/entity_types/v1",
+  "title": "Entity Types Vocabulary",
+  "description": "Controlled vocabulary for entity type classification. Phase 0 placeholder.",
+  "version": "1.0.0",
+  "status": "placeholder",
+  "vocabulary": {
+    "values": [
+      {
+        "value": "person",
+        "label": "Person",
+        "description": "Individual human or humanoid character, including historical and fictional persons."
+      },
+      {
+        "value": "place",
+        "label": "Place",
+        "description": "Geographic location including planets, cities, buildings, and natural features."
+      },
+      {
+        "value": "organization",
+        "label": "Organization",
+        "description": "Group, company, government, faction, or other collective entity."
+      },
+      {
+        "value": "event",
+        "label": "Event",
+        "description": "Historical event, battle, ceremony, or significant occurrence."
+      },
+      {
+        "value": "concept",
+        "label": "Concept",
+        "description": "Abstract idea, force, technology, or theoretical construct."
+      },
+      {
+        "value": "artifact",
+        "label": "Artifact",
+        "description": "Physical object, weapon, tool, or created item of significance."
+      },
+      {
+        "value": "species",
+        "label": "Species",
+        "description": "Biological species, race, or type of creature."
+      },
+      {
+        "value": "other",
+        "label": "Other",
+        "description": "Entity that does not fit other categories. Use sparingly."
+      }
+    ],
+    "allow_multiple": false,
+    "fallback_value": "other",
+    "case_sensitive": false
+  },
+  "notes": "This vocabulary is a placeholder for Phase 0 scaffolding. Values may be refined based on domain requirements."
+}

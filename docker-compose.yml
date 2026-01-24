@@ -141,6 +141,14 @@ services:
     #         - driver: nvidia
     #           count: all
     #           capabilities: [gpu]
+    restart: unless-stopped
+    healthcheck:
+      # Use bash /dev/tcp since curl is not available in ollama image
+      test: ["CMD-SHELL", "bash -c 'echo > /dev/tcp/localhost/11434' || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
 
 volumes:
   mssql_data:

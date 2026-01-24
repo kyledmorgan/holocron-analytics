@@ -61,6 +61,7 @@ New to this repository? Start with these essential documents:
 | [Ollama Integration Guide](llm/ollama.md) | Ollama API documentation, configuration, and operational guidance |
 | [Ollama in Docker](llm/ollama-docker.md) | Running Ollama as a Docker Compose service (Windows + WSL2) |
 | [Glossary](llm/glossary.md) | Core terminology and definitions |
+| [Contracts](llm/contracts.md) | Schema versioning, validation behavior, and contract-first approach |
 | [Implementation Status](llm/status.md) | Living checklist of implementation progress |
 | [Governance](llm/governance.md) | Retention, redaction, and policy placeholders (TBD) |
 | [Lineage](llm/lineage.md) | Data lineage tracking approach (TBD) |
@@ -138,6 +139,7 @@ All Markdown files in this repository, grouped by location:
 
 | File | Description |
 |------|-------------|
+| [contracts.md](llm/contracts.md) | Contract-first approach, schema versioning, and validation |
 | [derived-data.md](llm/derived-data.md) | LLM-Derived Data subsystem overview, concepts, and roadmap |
 | [glossary.md](llm/glossary.md) | Core terminology and definitions |
 | [governance.md](llm/governance.md) | Governance policy placeholders (retention, redaction) |
