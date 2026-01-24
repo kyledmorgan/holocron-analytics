@@ -246,10 +246,9 @@ class Indexer:
         
         # Incremental mode: check if already indexed with same content
         if mode == "incremental" and self.store:
-            # Check if we have embeddings for this content already
-            # For simplicity, we'll check if chunks exist with this content hash
-            # A more sophisticated implementation would use source_registry
-            pass  # TODO: implement incremental skip logic
+            if self._source_already_indexed(source_id, content_hash):
+                logger.debug(f"Source {source_id} already indexed with same content, skipping")
+                return {"skipped": True, "chunks_created": 0, "embeddings_created": 0}
         
         # Build source reference
         source_ref = {
@@ -300,6 +299,16 @@ class Indexer:
         except Exception as e:
             logger.error(f"Error generating embeddings for source {source_id}: {e}")
         
+        # Update source registry for incremental indexing support
+        self._update_source_registry(
+            source_id=source_id,
+            source_type=source_type,
+            source_ref=source_ref,
+            content_hash=content_hash,
+            chunk_count=len(chunks),
+            tags=tags,
+        )
+        
         return {
             "skipped": False,
             "chunks_created": len(chunks),
@@ -343,6 +352,110 @@ class Indexer:
         except Exception as e:
             logger.error(f"Error reading source {lake_uri}: {e}")
             return None
+    
+    def _source_already_indexed(self, source_id: str, content_hash: str) -> bool:
+        """
+        Check if a source has already been indexed with the same content.
+        
+        Uses the source_registry table or checks for existing chunks with
+        matching content hash.
+        
+        Args:
+            source_id: Source identifier
+            content_hash: SHA256 hash of content
+            
+        Returns:
+            True if source is already indexed with same content
+        """
+        if not self.store:
+            return False
+        
+        try:
+            conn = self.store._get_connection()
+            cursor = conn.cursor()
+            
+            # Check source_registry for existing entry with same hash
+            cursor.execute(
+                f"""
+                SELECT content_sha256 
+                FROM [{self.store.schema}].[source_registry]
+                WHERE source_id = ?
+                """,
+                (source_id,)
+            )
+            
+            row = cursor.fetchone()
+            if row and row[0] == content_hash:
+                return True
+            
+            return False
+            
+        except Exception as e:
+            logger.debug(f"Could not check source registry: {e}")
+            return False
+    
+    def _update_source_registry(
+        self,
+        source_id: str,
+        source_type: str,
+        source_ref: Dict[str, Any],
+        content_hash: str,
+        chunk_count: int,
+        tags: Dict[str, Any],
+    ) -> None:
+        """
+        Update the source registry with indexing information.
+        
+        Args:
+            source_id: Source identifier
+            source_type: Type of source
+            source_ref: Source reference metadata
+            content_hash: Content hash
+            chunk_count: Number of chunks created
+            tags: Source tags
+        """
+        if not self.store:
+            return
+        
+        try:
+            conn = self.store._get_connection()
+            cursor = conn.cursor()
+            
+            # Upsert source registry entry
+            cursor.execute(
+                f"""
+                MERGE [{self.store.schema}].[source_registry] AS target
+                USING (SELECT ? AS source_id) AS source
+                ON target.source_id = source.source_id
+                WHEN MATCHED THEN
+                    UPDATE SET 
+                        content_sha256 = ?,
+                        last_indexed_utc = SYSUTCDATETIME(),
+                        chunk_count = ?,
+                        tags_json = ?,
+                        updated_utc = SYSUTCDATETIME()
+                WHEN NOT MATCHED THEN
+                    INSERT (source_id, source_type, source_ref_json, content_sha256,
+                            last_indexed_utc, chunk_count, tags_json, created_utc, updated_utc)
+                    VALUES (?, ?, ?, ?, SYSUTCDATETIME(), ?, ?, SYSUTCDATETIME(), SYSUTCDATETIME());
+                """,
+                (
+                    source_id,
+                    content_hash,
+                    chunk_count,
+                    json.dumps(tags),
+                    source_id,
+                    source_type,
+                    json.dumps(source_ref),
+                    content_hash,
+                    chunk_count,
+                    json.dumps(tags),
+                )
+            )
+            conn.commit()
+            
+        except Exception as e:
+            logger.warning(f"Could not update source registry: {e}")
     
     def _write_run_manifest(
         self,

@@ -387,31 +387,18 @@ def generate_chunk_id(
     return hashlib.sha256(id_input.encode()).hexdigest()
 
 
-def compute_vector_hash(vector: List[float]) -> str:
-    """
-    Compute SHA256 hash of an embedding vector.
-    
-    Serializes the vector to a consistent format before hashing.
-    
-    Args:
-        vector: Embedding vector as list of floats
-        
-    Returns:
-        Hex-encoded SHA256 hash
-    """
-    # Use high precision to avoid floating point representation issues
-    vector_str = json.dumps([round(v, 10) for v in vector], separators=(',', ':'))
-    return hashlib.sha256(vector_str.encode()).hexdigest()
+# Import from shared utilities and re-export for backward compatibility
+from ..core.utils import compute_content_hash, compute_vector_hash
 
-
-def compute_content_hash(content: str) -> str:
-    """
-    Compute SHA256 hash of text content.
-    
-    Args:
-        content: Text content to hash
-        
-    Returns:
-        Hex-encoded SHA256 hash
-    """
-    return hashlib.sha256(content.encode()).hexdigest()
+__all__ = [
+    "ChunkingPolicy",
+    "ChunkRecord",
+    "EmbeddingRecord",
+    "RetrievalPolicy",
+    "RetrievalQuery",
+    "RetrievalHit",
+    "RetrievalResult",
+    "generate_chunk_id",
+    "compute_content_hash",
+    "compute_vector_hash",
+]
