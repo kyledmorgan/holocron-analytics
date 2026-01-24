@@ -54,6 +54,15 @@ docker exec -it holocron-ollama ollama pull llama3.2
 
 ### 2. Enqueue a Test Job
 
+Using the helper script (recommended):
+
+```bash
+python scripts/llm_enqueue_job.py \
+    --entity-type character \
+    --entity-id luke_skywalker \
+    --evidence "Luke Skywalker was a human male Jedi who was instrumental in defeating the Galactic Empire during the Galactic Civil War. Born on Tatooine in 19 BBY, Luke was the son of Anakin Skywalker and Padmé Amidala."
+```
+
 Using SQL:
 
 ```sql
@@ -149,6 +158,19 @@ ORDER BY r.started_utc DESC;
 SELECT a.artifact_id, a.run_id, a.artifact_type, a.lake_uri, a.byte_count
 FROM [llm].[artifact] a
 ORDER BY a.created_utc DESC;
+```
+
+**Using the helper script:**
+
+```bash
+# List recent jobs
+python scripts/llm_inspect_jobs.py --list
+
+# Show queue statistics
+python scripts/llm_inspect_jobs.py --stats
+
+# Show details for a specific job
+python scripts/llm_inspect_jobs.py --job-id <job-id>
 ```
 
 **View artifacts in the lake:**
