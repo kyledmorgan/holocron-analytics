@@ -290,7 +290,10 @@ class Job:
         """Parse evidence_ref_json into list of references."""
         if not self.evidence_ref_json:
             return None
-        return json.loads(self.evidence_ref_json)
+        try:
+            return json.loads(self.evidence_ref_json)
+        except json.JSONDecodeError as e:
+            raise ValueError(f"Invalid JSON in evidence_ref_json: {e}")
     
     @classmethod
     def from_row(cls, row: Dict[str, Any]) -> "Job":

@@ -108,6 +108,18 @@ class LakeWriter:
         run_dir.mkdir(parents=True, exist_ok=True)
         return run_dir
     
+    def _compute_lake_uri(self, file_path: Path) -> str:
+        """
+        Compute a relative lake URI for the given file path.
+        
+        Always returns a path relative to the base directory for consistency.
+        """
+        try:
+            return str(file_path.relative_to(self.base_dir))
+        except ValueError:
+            # file_path is not relative to base_dir, use the filename with run info
+            return str(file_path)
+    
     def write_json(
         self,
         run_id: str,
@@ -144,7 +156,7 @@ class LakeWriter:
         content_sha256 = hashlib.sha256(content_bytes).hexdigest()
         
         # Build relative lake URI
-        lake_uri = str(file_path.relative_to(self.base_dir.parent) if self.base_dir.parent.exists() else file_path)
+        lake_uri = self._compute_lake_uri(file_path)
         
         logger.debug(f"Wrote artifact: {file_path} ({len(content_bytes)} bytes)")
         
@@ -190,7 +202,7 @@ class LakeWriter:
         content_sha256 = hashlib.sha256(content_bytes).hexdigest()
         
         # Build relative lake URI
-        lake_uri = str(file_path.relative_to(self.base_dir.parent) if self.base_dir.parent.exists() else file_path)
+        lake_uri = self._compute_lake_uri(file_path)
         
         logger.debug(f"Wrote text artifact: {file_path} ({len(content_bytes)} bytes)")
         

@@ -13,6 +13,11 @@ from dataclasses import dataclass
 from datetime import datetime, timezone
 from typing import Any, Dict, List, Optional
 
+try:
+    import pyodbc
+except ImportError:
+    pyodbc = None  # Defer error to runtime when connection is attempted
+
 from ..contracts.phase1_contracts import Job, JobStatus
 from ..core.exceptions import LLMStorageError
 
@@ -110,8 +115,11 @@ class SqlJobQueue:
     def _get_connection(self):
         """Get or create a database connection."""
         if self._conn is None:
+            if pyodbc is None:
+                raise LLMStorageError(
+                    "pyodbc is not installed. Install it with: pip install pyodbc"
+                )
             try:
-                import pyodbc
                 self._conn = pyodbc.connect(
                     self.config.get_connection_string(),
                     autocommit=True
