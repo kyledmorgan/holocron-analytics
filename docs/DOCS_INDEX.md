@@ -11,7 +11,9 @@ New to this repository? Start with these essential documents:
 | Document | Description |
 |----------|-------------|
 | [Root README](../README.md) | Project overview, goals, quick start guide |
-| [Docker Local Dev Runbook](runbooks/docker_local_dev.md) | Step-by-step guide to run the stack locally with Docker |
+| [Quick Start Guide](../QUICKSTART.md) | **5-minute setup** — Get running with Docker immediately |
+| [Contributing Guide](../CONTRIBUTING.md) | How to contribute to the project |
+| [Docker Local Dev Runbook](runbooks/docker_local_dev.md) | Detailed step-by-step guide to run the stack locally with Docker |
 | [Repository Structure](REPO_STRUCTURE.md) | Top-level folder layout and guiding principles |
 | [Project Vision](vision/ProjectVision.md) | Long-term goals and design philosophy |
 | [Agent Overview](../agents/README.md) | Policies, playbooks, and templates for contributors |
@@ -111,6 +113,8 @@ All Markdown files in this repository, grouped by location:
 | File | Description |
 |------|-------------|
 | [README.md](../README.md) | Project overview, quick start, and contribution info |
+| [QUICKSTART.md](../QUICKSTART.md) | 5-minute quick start guide for new users |
+| [CONTRIBUTING.md](../CONTRIBUTING.md) | Contribution guidelines and development workflow |
 | [AGENTS.md](../AGENTS.md) | Agent instruction summary with links to detailed policies |
 
 ### `docs/`
@@ -252,6 +256,36 @@ All Markdown files in this repository, grouped by location:
 | File | Description |
 |------|-------------|
 | [README.md](../sources/README.md) | Source definitions and mapping templates overview |
+
+### `scripts/`
+
+| File | Description |
+|------|-------------|
+| [README.md](../scripts/README.md) | Utility scripts for database, LLM, and testing operations |
+
+### `tools/`
+
+| File | Description |
+|------|-------------|
+| [README.md](../tools/README.md) | Core tools documentation (db_init and system utilities) |
+
+### `web/`
+
+| File | Description |
+|------|-------------|
+| [README.md](../web/README.md) | Web application structure and planned features (placeholder) |
+
+### `exercises/`
+
+| File | Description |
+|------|-------------|
+| [README.md](../exercises/README.md) | Learning exercises for SQL, Python, and scenario-based challenges |
+
+### `prompts/`
+
+| File | Description |
+|------|-------------|
+| [README.md](../prompts/README.md) | LLM prompt templates for extraction, normalization, and evaluation |
 
 ---
 
