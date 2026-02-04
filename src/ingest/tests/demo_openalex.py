@@ -21,7 +21,8 @@ from ingest.discovery.openalex_discovery import OpenAlexDiscovery
 from ingest.discovery.entity_matcher import EntityMatcher
 from ingest.core.models import WorkItem, IngestRecord
 from ingest.core.connector import ConnectorRequest
-from ingest.state import SqliteStateStore
+# NOTE: State store operations require SQL Server backend now
+# from ingest.state import create_state_store
 from ingest.storage import FileLakeWriter
 from ingest.runner import IngestRunner
 
@@ -172,32 +173,48 @@ def demo_discovery():
 
 
 def demo_full_pipeline():
-    """Demonstrate full ingestion pipeline with OpenAlex."""
+    """
+    Demonstrate full ingestion pipeline with OpenAlex.
+    
+    NOTE: This demo is disabled because SQLite backend has been removed.
+    The full pipeline now requires SQL Server backend running in Docker.
+    
+    To run OpenAlex ingestion:
+    1. Start SQL Server: docker compose up -d sqlserver
+    2. Set environment variables (see .env.example)
+    3. Use ingest_cli.py with proper configuration
+    
+    See docs/sqlserver-backend.md for setup instructions.
+    """
     logger.info("")
     logger.info("=" * 60)
-    logger.info("Demo 4: Full Ingestion Pipeline (Dry Run)")
+    logger.info("Demo 4: Full Ingestion Pipeline")
     logger.info("=" * 60)
+    logger.warning("This demo has been disabled - SQLite backend removed.")
+    logger.info("The ingestion pipeline now requires SQL Server backend.")
+    logger.info("See docs/sqlserver-backend.md for setup instructions.")
     
+    # Original implementation commented out:
     # Use temporary directories
-    with tempfile.TemporaryDirectory() as tmpdir:
-        tmp_path = Path(tmpdir)
-        
-        # Setup components
-        state_store = SqliteStateStore(db_path=tmp_path / "state.db")
-        connector = OpenAlexConnector(rate_limit_delay=0.0)
-        file_writer = FileLakeWriter(base_dir=tmp_path / "data_lake")
-        
-        entity_matcher = EntityMatcher(
-            known_entities=["Machine Learning"],
-            case_sensitive=False,
-        )
-        
-        discovery_plugin = OpenAlexDiscovery(
-            entity_matcher=entity_matcher,
-            max_depth=0,  # No discovery for demo
-        )
-        
-        # Create runner
+    # with tempfile.TemporaryDirectory() as tmpdir:
+    #     tmp_path = Path(tmpdir)
+    #     
+    #     # Setup components
+    #     state_store = create_state_store()  # Now requires SQL Server
+    #     connector = OpenAlexConnector(rate_limit_delay=0.0)
+    #     file_writer = FileLakeWriter(base_dir=tmp_path / "data_lake")
+    #     
+    #     entity_matcher = EntityMatcher(
+    #         known_entities=["Machine Learning"],
+    #         case_sensitive=False,
+    #     )
+    #     
+    #     discovery_plugin = OpenAlexDiscovery(
+    #         entity_matcher=entity_matcher,
+    #         max_depth=0,  # No discovery for demo
+    #     )
+    #     
+    #     # Create runner
         runner = IngestRunner(
             state_store=state_store,
             connectors={"openalex": connector},

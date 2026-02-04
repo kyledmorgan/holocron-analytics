@@ -18,7 +18,7 @@ sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 from ingest.core.models import WorkItem, IngestRecord, WorkItemStatus
 from ingest.core.connector import ConnectorRequest, ConnectorResponse
 from ingest.storage import FileLakeWriter
-from ingest.state import SqliteStateStore, create_state_store
+from ingest.state import create_state_store
 
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(message)s")
@@ -43,80 +43,7 @@ def test_work_item():
     logger.info("✓ WorkItem works correctly")
 
 
-def test_state_store_sqlite():
-    """Test SQLite state store operations (deprecated backend)."""
-    logger.info("Testing SqliteStateStore (deprecated)...")
-    
-    # Use temporary database
-    with tempfile.NamedTemporaryFile(suffix=".db", delete=False) as tmp:
-        db_path = Path(tmp.name)
-    
-    # Suppress deprecation warning for this test
-    with warnings.catch_warnings():
-        warnings.simplefilter("ignore", DeprecationWarning)
-        state_store = SqliteStateStore(db_path=db_path)
-    
-    try:
-        # Create and enqueue work item
-        work_item = WorkItem(
-            source_system="mediawiki",
-            source_name="test",
-            resource_type="page",
-            resource_id="Test_Page",
-            request_uri="https://example.com/test",
-        )
-        
-        assert state_store.enqueue(work_item) == True
-        assert state_store.enqueue(work_item) == False  # Duplicate
-        
-        # Check stats
-        stats = state_store.get_stats()
-        assert stats.get("pending") == 1
-        
-        # Dequeue
-        items = state_store.dequeue(limit=1)
-        assert len(items) == 1
-        assert items[0].resource_id == "Test_Page"
-        
-        # Update status
-        state_store.update_status(items[0].work_item_id, WorkItemStatus.COMPLETED)
-        
-        stats = state_store.get_stats()
-        assert stats.get("completed") == 1
-        
-    finally:
-        state_store.close()
-        db_path.unlink()
-    
-    logger.info("✓ SqliteStateStore works correctly")
-
-
-def test_create_state_store_factory():
-    """Test the state store factory function."""
-    logger.info("Testing create_state_store factory...")
-    
-    # Use temporary database for SQLite test
-    with tempfile.NamedTemporaryFile(suffix=".db", delete=False) as tmp:
-        db_path = Path(tmp.name)
-    
-    try:
-        # Test SQLite creation via factory
-        with warnings.catch_warnings():
-            warnings.simplefilter("ignore", DeprecationWarning)
-            store = create_state_store(backend="sqlite", db_path=db_path)
-        
-        assert store is not None
-        assert hasattr(store, 'enqueue')
-        assert hasattr(store, 'dequeue')
-        store.close()
-        
-        logger.info("✓ create_state_store factory works correctly")
-        
-    finally:
-        db_path.unlink(missing_ok=True)
-
-
-def test_file_lake_writer():
+def test_connector_request_response():
     """Test file lake writer."""
     logger.info("Testing FileLakeWriter...")
     
@@ -194,10 +121,8 @@ def main():
     
     try:
         test_work_item()
-        test_state_store_sqlite()
-        test_create_state_store_factory()
-        test_file_lake_writer()
         test_connector_request_response()
+        test_file_lake_writer()
         
         logger.info("=" * 60)
         logger.info("✓ All validation tests passed!")
