@@ -1,0 +1,55 @@
+{
+  "description": "Top 10 movie prompts for smoke-testing LLM narrative analysis",
+  "movies": [
+    {
+      "movie_title": "The Empire Strikes Back",
+      "year": 1980,
+      "seed_prompt": "Provide a structured analysis of The Empire Strikes Back including key events, main characters, and major plot points. Focus on paraphrasing and summarizing rather than reproducing specific dialogue or scenes."
+    },
+    {
+      "movie_title": "The Shawshank Redemption",
+      "year": 1994,
+      "seed_prompt": "Analyze The Shawshank Redemption's narrative structure, identifying major story beats, character arcs, and thematic elements. Paraphrase key moments rather than quoting dialogue."
+    },
+    {
+      "movie_title": "Inception",
+      "year": 2010,
+      "seed_prompt": "Describe the multi-layered narrative of Inception, focusing on the dream levels, key turning points, and character motivations. Summarize plot mechanics in your own words."
+    },
+    {
+      "movie_title": "The Matrix",
+      "year": 1999,
+      "seed_prompt": "Provide an overview of The Matrix's story structure, main character journey, and pivotal events. Paraphrase the narrative rather than reproducing specific scenes or dialogue."
+    },
+    {
+      "movie_title": "Pulp Fiction",
+      "year": 1994,
+      "seed_prompt": "Analyze Pulp Fiction's non-linear narrative, identifying the major storylines, character intersections, and key events. Summarize the plot structure in your own words."
+    },
+    {
+      "movie_title": "Casablanca",
+      "year": 1942,
+      "seed_prompt": "Describe the narrative arc of Casablanca, including the main conflicts, character relationships, and story resolution. Focus on summarizing rather than quoting dialogue."
+    },
+    {
+      "movie_title": "Blade Runner",
+      "year": 1982,
+      "seed_prompt": "Analyze the narrative structure of Blade Runner, identifying key story elements, character development, and thematic beats. Paraphrase the story rather than reproducing specific scenes."
+    },
+    {
+      "movie_title": "12 Angry Men",
+      "year": 1957,
+      "seed_prompt": "Describe the deliberation process in 12 Angry Men, focusing on how the narrative unfolds through character interactions and evolving perspectives. Summarize the story progression."
+    },
+    {
+      "movie_title": "Spirited Away",
+      "year": 2001,
+      "seed_prompt": "Provide an analysis of Spirited Away's narrative journey, including the protagonist's transformation, key encounters, and story milestones. Paraphrase events rather than reproducing specific dialogue."
+    },
+    {
+      "movie_title": "The Godfather",
+      "year": 1972,
+      "seed_prompt": "Analyze The Godfather's story structure, focusing on the protagonist's character arc, major plot developments, and narrative turning points. Summarize the narrative in your own words."
+    }
+  ]
+}

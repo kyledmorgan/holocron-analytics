@@ -1,0 +1,45 @@
+meta {
+  name: List models (tags)
+  type: http
+  seq: 2
+}
+
+get {
+  url: {{OLLAMA_API_BASE}}/tags
+  body: none
+  auth: none
+}
+
+tests {
+  test("Status code is 200", function() {
+    expect(res.status).to.equal(200);
+  });
+  
+  test("Response contains models array", function() {
+    const data = res.body;
+    expect(data).to.have.property('models');
+    expect(data.models).to.be.an('array');
+  });
+}
+
+docs {
+  ## List Models (Tags)
+  
+  Lists all locally available models.
+  
+  Expected response:
+  ```json
+  {
+    "models": [
+      {
+        "name": "llama3.2:latest",
+        "model": "llama3.2:latest",
+        "modified_at": "2024-01-01T00:00:00Z",
+        "size": 1234567890,
+        "digest": "sha256:...",
+        "details": {...}
+      }
+    ]
+  }
+  ```
+}
