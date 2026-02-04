@@ -1,0 +1,119 @@
+meta {
+  name: OpenAI-compatible chat completions
+  type: http
+  seq: 1
+}
+
+post {
+  url: {{OLLAMA_URL}}/v1/chat/completions
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "model": "{{MODEL}}",
+    "messages": [
+      {
+        "role": "user",
+        "content": "{{PROMPT}}"
+      }
+    ],
+    "temperature": {{TEMPERATURE}},
+    "seed": {{SEED}},
+    "stream": {{STREAM}}
+  }
+}
+
+tests {
+  test("Status code is 200", function() {
+    expect(res.status).to.equal(200);
+  });
+  
+  test("Response is OpenAI-compatible", function() {
+    const data = res.body;
+    expect(data).to.have.property('id');
+    expect(data).to.have.property('object');
+    expect(data).to.have.property('choices');
+    expect(data.choices).to.be.an('array');
+  });
+  
+  test("Choices contain message", function() {
+    const data = res.body;
+    expect(data.choices.length).to.be.greaterThan(0);
+    expect(data.choices[0]).to.have.property('message');
+    expect(data.choices[0].message).to.have.property('role');
+    expect(data.choices[0].message).to.have.property('content');
+  });
+  
+  test("Usage stats are present", function() {
+    const data = res.body;
+    expect(data).to.have.property('usage');
+    expect(data.usage).to.have.property('prompt_tokens');
+    expect(data.usage).to.have.property('completion_tokens');
+    expect(data.usage).to.have.property('total_tokens');
+  });
+}
+
+docs {
+  ## OpenAI-Compatible Chat Completions
+  
+  Ollama provides an OpenAI-compatible API endpoint at `/v1/chat/completions`.
+  
+  This allows tools and libraries built for OpenAI's API to work with Ollama
+  with minimal changes.
+  
+  **Important notes:**
+  - The endpoint requires `api_key` in many OpenAI-compatible clients, but Ollama ignores it
+  - In Bruno, we don't need to provide an API key
+  - Response format matches OpenAI's structure with `id`, `object`, `choices`, and `usage`
+  
+  Expected response:
+  ```json
+  {
+    "id": "chatcmpl-123",
+    "object": "chat.completion",
+    "created": 1234567890,
+    "model": "llama3.2:latest",
+    "choices": [
+      {
+        "index": 0,
+        "message": {
+          "role": "assistant",
+          "content": "Response text here..."
+        },
+        "finish_reason": "stop"
+      }
+    ],
+    "usage": {
+      "prompt_tokens": 10,
+      "completion_tokens": 20,
+      "total_tokens": 30
+    }
+  }
+  ```
+  
+  ### Using with OpenAI clients
+  
+  When using OpenAI client libraries, configure them like this:
+  
+  **Python:**
+  ```python
+  from openai import OpenAI
+  
+  client = OpenAI(
+      base_url="http://localhost:11434/v1",
+      api_key="ollama"  # required but ignored
+  )
+  ```
+  
+  **Node.js:**
+  ```javascript
+  import OpenAI from 'openai';
+  
+  const client = new OpenAI({
+    baseURL: 'http://localhost:11434/v1',
+    apiKey: 'ollama'  // required but ignored
+  });
+  ```
+}

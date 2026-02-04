@@ -1,0 +1,41 @@
+meta {
+  name: Show model details
+  type: http
+  seq: 1
+}
+
+post {
+  url: {{OLLAMA_API_BASE}}/show
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "model": "{{MODEL}}"
+  }
+}
+
+tests {
+  test("Status code is 200", function() {
+    expect(res.status).to.equal(200);
+  });
+  
+  test("Response contains model info", function() {
+    const data = res.body;
+    expect(data).to.have.property('modelfile');
+    expect(data).to.have.property('parameters');
+  });
+}
+
+docs {
+  ## Show Model Details
+  
+  Retrieves detailed information about a specific model.
+  
+  Expected response includes:
+  - modelfile
+  - parameters
+  - template
+  - details
+}

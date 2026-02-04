@@ -1,0 +1,35 @@
+meta {
+  name: Get version
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{OLLAMA_API_BASE}}/version
+  body: none
+  auth: none
+}
+
+tests {
+  test("Status code is 200", function() {
+    expect(res.status).to.equal(200);
+  });
+  
+  test("Response contains version", function() {
+    const data = res.body;
+    expect(data).to.have.property('version');
+  });
+}
+
+docs {
+  ## Get Ollama Version
+  
+  Retrieves the version information from the Ollama API.
+  
+  Expected response:
+  ```json
+  {
+    "version": "0.x.x"
+  }
+  ```
+}
