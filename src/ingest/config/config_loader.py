@@ -63,8 +63,14 @@ class IngestConfig:
                 },
             },
             "state": {
-                "type": "sqlite",
-                "db_path": "local/state/ingest_state.db",
+                "type": "sqlserver",
+                "sqlserver": {
+                    "host": "localhost",
+                    "port": 1434,
+                    "database": "Holocron",
+                    "user": "sa",
+                    "schema": "ingest",
+                },
             },
             "runner": {
                 "batch_size": 10,

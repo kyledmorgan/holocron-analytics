@@ -11,7 +11,7 @@ The **Holocron Analytics Ingestion Framework** is a Python-first data ingestion 
 - **Crawl State Management**: Track discovered/pending/completed/failed items with resumability
 - **Discovery System**: Automatically discover and queue related resources (follow links)
 - **Rate Limiting & Retries**: Polite crawling with exponential backoff
-- **Local-First**: Runs on local machine with SQLite state store (no cloud required)
+- **Local-First**: Runs on local machine with SQL Server state store (Docker-based)
 - **Future-Friendly**: Designed for easy integration with Airflow/Prefect/Dagster later
 
 ---
@@ -19,12 +19,12 @@ The **Holocron Analytics Ingestion Framework** is a Python-first data ingestion 
 ## Architecture
 
 ```
-┌─────────────┐
-│   CLI       │ 
-│ (ingest_cli)│
-└──────┬──────┘
-       │
-       v
+┌─────────────────┐
+│   CLI           │ 
+│ (ingest_cli)    │
+└────────┬────────┘
+         │
+         v
 ┌─────────────────┐
 │  IngestRunner   │  ← Orchestrates workflow
 └────────┬────────┘
@@ -34,7 +34,8 @@ The **Holocron Analytics Ingestion Framework** is a Python-first data ingestion 
 ┌────────┐ ┌─────┐  ┌─────────┐ ┌─────────┐
 │State   │ │Conn-│  │Storage  │ │Discovery│
 │Store   │ │ector│  │Writers  │ │Plugins  │
-│(SQLite)│ │(MW) │  │(File/DB)│ │         │
+│(SQL    │ │(MW) │  │(File/DB)│ │         │
+│Server) │ │     │  │         │ │         │
 └────────┘ └─────┘  └─────────┘ └─────────┘
 ```
 
@@ -56,7 +57,7 @@ The **Holocron Analytics Ingestion Framework** is a Python-first data ingestion 
    - `SqlServerIngestWriter`: Writes to SQL Server `ingest.IngestRecords` table
 
 4. **State Management** (`src/ingest/state/`)
-   - `SqliteStateStore`: SQLite-based work queue with deduplication
+   - `SqlServerStateStore`: SQL Server-based work queue with deduplication
 
 5. **Discovery** (`src/ingest/discovery/`)
    - `MediaWikiDiscovery`: Extracts page links and categories for recursive crawling
@@ -129,8 +130,8 @@ See `config/ingest.example.yaml` for a fully commented example.
 - `sql_server`: Optional SQL Server storage
 
 **State**:
-- `type`: State store type (currently only `sqlite`)
-- `db_path`: Path to SQLite database
+- `type`: State store type (must be `sqlserver`)
+- `sqlserver`: SQL Server connection parameters (host, port, database, schema, etc.)
 
 **Runner**:
 - `batch_size`: Items to process per batch
@@ -177,7 +178,7 @@ See: `src/db/ddl/00_ingest/002_IngestRecords.sql`
 
 ## State Management
 
-The SQLite state store (`local/state/ingest_state.db`) tracks:
+The SQL Server state store (`ingest.work_items` table) tracks:
 
 - **Pending**: Items in the queue waiting to be processed
 - **In Progress**: Currently being fetched
@@ -188,7 +189,7 @@ The SQLite state store (`local/state/ingest_state.db`) tracks:
 
 If the ingestion process stops (crash, Ctrl+C), simply run again:
 - Completed items won't be re-fetched (deduplicated)
-- Failed items can be retried manually or by resetting their status
+- Failed items can be retried manually or by resetting their status via SQL queries
 
 ---
 
@@ -310,7 +311,7 @@ Future enhancements:
 ### "Work item already exists"
 
 - This is normal (deduplication working)
-- If you want to re-fetch, delete or update the state in SQLite
+- If you want to re-fetch, update the state in SQL Server directly (see `scripts/sqlserver_state_admin.py` for examples)
 
 ### High memory usage
 

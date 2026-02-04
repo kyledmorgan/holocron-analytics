@@ -74,8 +74,7 @@ Users are responsible for complying with the terms of service of any external da
 ## Technology stack (current / planned)
 
 - **Database**
-  - SQL Server (primary)
-  - SQLite / DuckDB (optional local experiments)
+  - SQL Server 2025 (primary, running in Docker on host port 1434)
 
 - **Languages**
   - SQL
@@ -106,7 +105,7 @@ docker compose up --build
 ```
 
 This will:
-- Start SQL Server 2022 Developer Edition
+- Start SQL Server 2025 Developer Edition (on host port 1434)
 - Create the database and all tables
 - Load seed data automatically
 

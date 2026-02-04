@@ -79,8 +79,14 @@ cat local/data_lake/mediawiki/wikipedia/page/Star_Wars_*.json | python3 -m json.
 ### Step 7: Inspect State Database
 
 ```bash
-# Use sqlite3 to inspect the state
-sqlite3 local/state/ingest_state.db "SELECT source_name, resource_type, resource_id, status FROM work_items LIMIT 10;"
+# Use Azure Data Studio or SQL Server Management Studio to inspect
+# Or use pyodbc/sqlcmd from command line:
+
+# Example with sqlcmd (if installed):
+sqlcmd -S localhost -U sa -P "YourPassword" -d Holocron -Q "SELECT source_name, resource_type, resource_id, status FROM ingest.work_items ORDER BY created_at DESC;"
+
+# Or via Python:
+python scripts/sqlserver_state_admin.py
 ```
 
 ---
@@ -91,7 +97,7 @@ sqlite3 local/state/ingest_state.db "SELECT source_name, resource_type, resource
 2. **Processing**: Fetched each page via MediaWiki API
 3. **Storage**: Saved raw JSON payloads to `local/data_lake/`
 4. **Discovery**: Extracted links from each page (if enabled)
-5. **State Tracking**: Updated SQLite database with completion status
+5. **State Tracking**: Updated SQL Server database with completion status
 
 ---
 
@@ -145,8 +151,8 @@ python3 src/ingest/ingest_cli.py --config config/ingest.yaml --seed
 2. Run the schema creation script:
 ```bash
 # Execute the DDL files
-sqlcmd -S localhost -U sa -P YourPassword -d HolocronAnalytics -i src/db/ddl/00_ingest/001_schema.sql
-sqlcmd -S localhost -U sa -P YourPassword -d HolocronAnalytics -i src/db/ddl/00_ingest/002_IngestRecords.sql
+sqlcmd -S localhost,1434 -U sa -P YourPassword -d Holocron -i src/db/ddl/00_ingest/001_schema.sql
+sqlcmd -S localhost,1434 -U sa -P YourPassword -d Holocron -i src/db/ddl/00_ingest/002_IngestRecords.sql
 ```
 
 3. Update `config/ingest.yaml`:
@@ -155,7 +161,8 @@ storage:
   sql_server:
     enabled: true
     host: localhost
-    database: HolocronAnalytics
+    port: 1434
+    database: Holocron
     user: sa
     # Set password via environment variable
     # password: ${INGEST_SQLSERVER_PASSWORD}
@@ -191,15 +198,27 @@ python3 src/ingest/ingest_cli.py --config config/ingest.yaml --stats
 
 ### Inspect Failed Items
 
-```bash
-sqlite3 local/state/ingest_state.db "SELECT resource_id, status, error_message FROM work_items WHERE status = 'failed';"
+```sql
+-- Use SQL Server client or Azure Data Studio
+SELECT resource_id, status, error_message 
+FROM ingest.work_items 
+WHERE status = 'failed'
+ORDER BY updated_at DESC;
 ```
 
 ### Reset a Failed Item
 
-```bash
-sqlite3 local/state/ingest_state.db "UPDATE work_items SET status = 'pending', error_message = NULL WHERE resource_id = 'SomeFailedPage';"
+```sql
+-- Use SQL Server client or Azure Data Studio
+UPDATE ingest.work_items 
+SET status = 'pending', 
+    error_message = NULL,
+    attempt = 0,
+    updated_at = GETUTCDATE()
+WHERE resource_id = 'SomeFailedPage';
 ```
+
+See `scripts/sqlserver_state_admin.py` for helper functions and more examples.
 
 ---
 
@@ -238,6 +257,6 @@ You've now:
 - ✅ Configured sources and seeds
 - ✅ Run your first ingestion
 - ✅ Stored JSON data in the data lake
-- ✅ Tracked state in SQLite
+- ✅ Tracked state in SQL Server
 
 Next, explore the full [README](README.md) for advanced features!
