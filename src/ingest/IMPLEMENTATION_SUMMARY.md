@@ -45,7 +45,7 @@ Successfully implemented a complete **Python-first ingestion framework** for the
 
 ### 4. State Management ✅
 
-**SQLite State Store** (`src/ingest/state/sqlite_store.py`)
+**SQL Server State Store** (`src/ingest/state/sqlserver_store.py`)
 - Work queue with deduplication (unique dedupe_key)
 - Status tracking: pending → in_progress → completed/failed
 - Resumable on crash or restart
@@ -110,7 +110,7 @@ Successfully implemented a complete **Python-first ingestion framework** for the
 
 **Validation Tests** (`src/ingest/tests/validate.py`)
 - WorkItem creation and dedupe key
-- SqliteStateStore operations
+- SqlServerStateStore operations
 - FileLakeWriter functionality
 - ConnectorRequest/Response models
 - All tests passing ✅
@@ -125,12 +125,12 @@ Successfully implemented a complete **Python-first ingestion framework** for the
 
 ✅ **Pluggable Connectors**: HTTP and MediaWiki with extensible interface
 ✅ **JSON-First Storage**: Raw payload preservation with minimal metadata
-✅ **State Management**: SQLite work queue with deduplication and resumability
+✅ **State Management**: SQL Server work queue with deduplication and resumability
 ✅ **Discovery**: Automatic link extraction for recursive crawling
 ✅ **Rate Limiting**: Configurable delays for polite API usage
 ✅ **Retry Logic**: Exponential backoff for transient failures
 ✅ **Configuration-Driven**: YAML config with CLI interface
-✅ **Local-First**: No cloud dependencies, SQLite state store
+✅ **Docker-Based**: SQL Server state store running in Docker
 ✅ **Future-Friendly**: Clean interfaces for orchestration integration
 
 ## Technical Details
@@ -145,7 +145,7 @@ Successfully implemented a complete **Python-first ingestion framework** for the
 **Storage Patterns**:
 - **Data Lake**: Hierarchical JSON files on disk
 - **SQL Server**: Metadata + JSON blob in single table
-- **State**: SQLite database for work queue
+- **State**: SQL Server database for work queue
 
 **Design Principles**:
 - Interface-based architecture (dependency inversion)

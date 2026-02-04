@@ -22,7 +22,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
 from ingest.analysis import InboundLinkAnalyzer, seed_content_queue
-from ingest.state import SqliteStateStore
+from ingest.state import create_state_store
 
 
 def setup_logging(verbose: bool = False) -> None:
@@ -74,13 +74,6 @@ def parse_args():
         type=Path,
         default=Path("local/data_lake"),
         help="Path to data lake directory",
-    )
-    
-    parser.add_argument(
-        "--state-db",
-        type=Path,
-        default=Path("local/state/ingest_state.db"),
-        help="Path to SQLite state database",
     )
     
     parser.add_argument(
@@ -147,7 +140,8 @@ def main() -> int:
         
         state_store = None
         try:
-            state_store = SqliteStateStore(db_path=args.state_db)
+            # Create SQL Server state store (only backend supported)
+            state_store = create_state_store()
             
             enqueued = seed_content_queue(
                 state_store=state_store,

@@ -1,0 +1,44 @@
+meta {
+  name: List running models
+  type: http
+  seq: 3
+}
+
+get {
+  url: {{OLLAMA_API_BASE}}/ps
+  body: none
+  auth: none
+}
+
+tests {
+  test("Status code is 200", function() {
+    expect(res.status).to.equal(200);
+  });
+  
+  test("Response contains models array", function() {
+    const data = res.body;
+    expect(data).to.have.property('models');
+    expect(data.models).to.be.an('array');
+  });
+}
+
+docs {
+  ## List Running Models
+  
+  Lists currently running models in Ollama.
+  
+  Expected response:
+  ```json
+  {
+    "models": [
+      {
+        "name": "llama3.2:latest",
+        "model": "llama3.2:latest",
+        "size": 1234567890,
+        "digest": "sha256:...",
+        "expires_at": "2024-01-01T00:00:00Z"
+      }
+    ]
+  }
+  ```
+}

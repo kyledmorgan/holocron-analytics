@@ -5,9 +5,11 @@ Basic validation script for the ingestion framework.
 Tests core functionality without requiring external APIs or databases.
 """
 
+import os
 import sys
 import logging
 import tempfile
+import warnings
 from pathlib import Path
 
 # Add src directory to path
@@ -16,7 +18,7 @@ sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 from ingest.core.models import WorkItem, IngestRecord, WorkItemStatus
 from ingest.core.connector import ConnectorRequest, ConnectorResponse
 from ingest.storage import FileLakeWriter
-from ingest.state import SqliteStateStore
+from ingest.state import create_state_store
 
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(message)s")
@@ -41,50 +43,7 @@ def test_work_item():
     logger.info("✓ WorkItem works correctly")
 
 
-def test_state_store():
-    """Test SQLite state store operations."""
-    logger.info("Testing SqliteStateStore...")
-    
-    # Use temporary database
-    with tempfile.NamedTemporaryFile(suffix=".db", delete=False) as tmp:
-        db_path = Path(tmp.name)
-    
-    state_store = SqliteStateStore(db_path=db_path)
-    
-    # Create and enqueue work item
-    work_item = WorkItem(
-        source_system="mediawiki",
-        source_name="test",
-        resource_type="page",
-        resource_id="Test_Page",
-        request_uri="https://example.com/test",
-    )
-    
-    assert state_store.enqueue(work_item) == True
-    assert state_store.enqueue(work_item) == False  # Duplicate
-    
-    # Check stats
-    stats = state_store.get_stats()
-    assert stats.get("pending") == 1
-    
-    # Dequeue
-    items = state_store.dequeue(limit=1)
-    assert len(items) == 1
-    assert items[0].resource_id == "Test_Page"
-    
-    # Update status
-    state_store.update_status(items[0].work_item_id, WorkItemStatus.COMPLETED)
-    
-    stats = state_store.get_stats()
-    assert stats.get("completed") == 1
-    
-    state_store.close()
-    db_path.unlink()
-    
-    logger.info("✓ SqliteStateStore works correctly")
-
-
-def test_file_lake_writer():
+def test_connector_request_response():
     """Test file lake writer."""
     logger.info("Testing FileLakeWriter...")
     
@@ -162,9 +121,8 @@ def main():
     
     try:
         test_work_item()
-        test_state_store()
-        test_file_lake_writer()
         test_connector_request_response()
+        test_file_lake_writer()
         
         logger.info("=" * 60)
         logger.info("✓ All validation tests passed!")

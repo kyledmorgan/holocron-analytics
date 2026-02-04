@@ -14,18 +14,38 @@ storage:
     enabled: false
     # Connection string from environment variable: INGEST_SQLSERVER_CONN_STR
     # Or use discrete variables:
-    # host: localhost
-    # port: 1433
-    # database: HolocronAnalytics
-    # user: sa
-    # password: ${INGEST_SQLSERVER_PASSWORD}
+    host: localhost
+    port: 1434
+    database: Holocron
+    user: sa
+    password: Password1!
     schema: "ingest"
     table: "IngestRecords"
 
 # State store configuration
+# The state store manages work queue, dedupe, and run tracking.
+#
+# SQL Server is the only supported backend.
+# Set DB_BACKEND environment variable or configure below.
 state:
-  type: "sqlite"
-  db_path: "local/state/ingest_state.db"
+  # Backend type: "sqlserver" (only supported option)
+  type: "sqlserver"
+  
+  # SQL Server configuration
+  sqlserver:
+    # Connection from environment variables (recommended):
+    # - INGEST_SQLSERVER_HOST, INGEST_SQLSERVER_PORT
+    # - INGEST_SQLSERVER_DATABASE, INGEST_SQLSERVER_USER
+    # - INGEST_SQLSERVER_PASSWORD (required, never commit to config)
+    # 
+    # Or use discrete values below:
+    host: "localhost"
+    port: 1434
+    database: "Holocron"
+    user: "sa"
+    # password: (use INGEST_SQLSERVER_PASSWORD or MSSQL_SA_PASSWORD env var)
+    driver: "ODBC Driver 18 for SQL Server"
+    schema: "ingest"
 
 # Runner configuration
 runner:

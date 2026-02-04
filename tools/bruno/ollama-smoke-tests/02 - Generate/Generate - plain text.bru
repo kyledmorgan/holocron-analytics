@@ -1,0 +1,70 @@
+meta {
+  name: Generate - plain text
+  type: http
+  seq: 1
+}
+
+post {
+  url: {{OLLAMA_API_BASE}}/generate
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "model": "{{MODEL}}",
+    "prompt": "{{PROMPT}}",
+    "stream": {{STREAM}},
+    "options": {
+      "temperature": {{TEMPERATURE}},
+      "seed": {{SEED}}
+    }
+  }
+}
+
+tests {
+  test("Status code is 200", function() {
+    expect(res.status).to.equal(200);
+  });
+  
+  test("Response contains expected fields", function() {
+    const data = res.body;
+    expect(data).to.have.property('response');
+    expect(data).to.have.property('model');
+    expect(data).to.have.property('done');
+  });
+  
+  test("Done is true", function() {
+    const data = res.body;
+    expect(data.done).to.equal(true);
+  });
+}
+
+docs {
+  ## Generate - Plain Text
+  
+  Sends a single prompt to the model and receives a text response.
+  
+  Variables used:
+  - MODEL: The model to use
+  - PROMPT: The prompt text
+  - STREAM: Set to false for non-streaming response
+  - TEMPERATURE: Controls randomness (0.0 to 1.0)
+  - SEED: Optional seed for reproducibility
+  
+  Expected response:
+  ```json
+  {
+    "model": "llama3.2:latest",
+    "response": "The capital of France is Paris.",
+    "done": true,
+    "context": [...],
+    "total_duration": 12345,
+    "load_duration": 1234,
+    "prompt_eval_count": 10,
+    "prompt_eval_duration": 1234,
+    "eval_count": 20,
+    "eval_duration": 5678
+  }
+  ```
+}

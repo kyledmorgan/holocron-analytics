@@ -3,9 +3,14 @@
     "sqltools.connections": [
         {
             "previewLimit": 100,
-            "driver": "SQLite",
-            "name": "Ingest",
-            "database": "local\\state\\ingest_state.db"
+            "driver": "MSSQL",
+            "name": "Holocron-Ingest",
+            "server": "localhost",
+            "port": 1433,
+            "database": "Holocron",
+            "username": "sa",
+            "password": "",
+            "connectionTimeout": 30
         }
     ]
 }

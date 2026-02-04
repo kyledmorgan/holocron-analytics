@@ -1,0 +1,111 @@
+meta {
+  name: Chat - system + user + contract JSON
+  type: http
+  seq: 2
+}
+
+post {
+  url: {{OLLAMA_API_BASE}}/chat
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "model": "{{MODEL}}",
+    "messages": [
+      {
+        "role": "system",
+        "content": "You are a precise film analyst. You MUST respond with ONLY valid JSON matching the provided schema. Use \"unknown\" for any fields you're uncertain about rather than guessing or hallucinating. Include confidence scores (0.0 to 1.0) for data points. List open questions instead of inventing details. Never reproduce copyrighted dialogue or narration - only provide paraphrased summaries."
+      },
+      {
+        "role": "user",
+        "content": "Analyze the movie '{{MOVIE_TITLE}}'. Respond with JSON matching this schema:\n{\n  \"movie\": { \"title\": \"string\", \"year\": number },\n  \"summary\": \"string (1-3 paragraphs, paraphrase only)\",\n  \"key_events\": [\n    { \"event_id\": \"E01\", \"event\": \"string\", \"act\": number, \"confidence\": number }\n  ],\n  \"scenes\": [\n    { \"scene_id\": \"S01\", \"setting\": \"string\", \"beat\": \"string\", \"characters\": [\"string\"], \"confidence\": number }\n  ],\n  \"entities\": {\n    \"characters\": [\"string\"],\n    \"locations\": [\"string\"],\n    \"objects\": [\"string\"]\n  },\n  \"open_questions\": [\"string\"]\n}"
+      }
+    ],
+    "stream": {{STREAM}},
+    "options": {
+      "temperature": {{TEMPERATURE}},
+      "seed": {{SEED}}
+    },
+    "format": "json"
+  }
+}
+
+tests {
+  test("Status code is 200", function() {
+    expect(res.status).to.equal(200);
+  });
+  
+  test("Response contains message", function() {
+    const data = res.body;
+    expect(data).to.have.property('message');
+    expect(data.message).to.have.property('content');
+  });
+  
+  test("Message is valid JSON", function() {
+    const data = res.body;
+    let parsed;
+    try {
+      parsed = JSON.parse(data.message.content);
+    } catch (e) {
+      throw new Error("Message content is not valid JSON: " + e.message);
+    }
+    
+    expect(parsed).to.be.an('object');
+  });
+  
+  test("JSON has required structure", function() {
+    const data = res.body;
+    const parsed = JSON.parse(data.message.content);
+    
+    expect(parsed).to.have.property('movie');
+    expect(parsed).to.have.property('summary');
+    expect(parsed).to.have.property('key_events');
+    expect(parsed).to.have.property('scenes');
+    expect(parsed).to.have.property('entities');
+    expect(parsed).to.have.property('open_questions');
+  });
+  
+  test("Arrays are properly typed", function() {
+    const data = res.body;
+    const parsed = JSON.parse(data.message.content);
+    
+    expect(parsed.key_events).to.be.an('array');
+    expect(parsed.scenes).to.be.an('array');
+    expect(parsed.open_questions).to.be.an('array');
+  });
+  
+  test("Entities structure is correct", function() {
+    const data = res.body;
+    const parsed = JSON.parse(data.message.content);
+    
+    expect(parsed.entities).to.be.an('object');
+    expect(parsed.entities.characters).to.be.an('array');
+    expect(parsed.entities.locations).to.be.an('array');
+    expect(parsed.entities.objects).to.be.an('array');
+  });
+}
+
+docs {
+  ## Chat - System + User + Contract JSON
+  
+  Multi-turn chat with system instructions and structured JSON output.
+  
+  This request demonstrates:
+  - Using a system message to set model behavior
+  - Instructing the model to output structured JSON
+  - Using Ollama's `format: "json"` to enforce JSON output
+  - Implementing the movie analysis contract
+  
+  The system message establishes rules:
+  - JSON-only output
+  - Use "unknown" for uncertain fields
+  - Include confidence scores
+  - List open questions
+  - Avoid copyrighted content reproduction
+  
+  Variables used:
+  - MOVIE_TITLE: The movie to analyze
+  - All standard chat parameters
+}

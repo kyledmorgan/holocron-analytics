@@ -1,0 +1,94 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://holocron-analytics.local/schemas/llm/derived-output/v1",
+  "title": "LLM Derived Output",
+  "description": "Base schema for LLM-derived structured outputs. Specific derive tasks should extend this schema with their own properties.",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "derived_at_utc",
+    "source_manifest_id"
+  ],
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "description": "Version of the derived output schema",
+      "const": "1.0.0"
+    },
+    "derived_at_utc": {
+      "type": "string",
+      "description": "ISO 8601 timestamp when this output was derived",
+      "format": "date-time"
+    },
+    "source_manifest_id": {
+      "type": "string",
+      "description": "Reference to the manifest that produced this output",
+      "format": "uuid"
+    },
+    "confidence": {
+      "type": "object",
+      "description": "Confidence indicators for the derived data",
+      "properties": {
+        "overall": {
+          "type": "string",
+          "description": "Overall confidence level",
+          "enum": ["high", "medium", "low", "unknown"]
+        },
+        "notes": {
+          "type": "string",
+          "description": "Explanation of confidence assessment"
+        }
+      }
+    },
+    "nulls_with_reasons": {
+      "type": "array",
+      "description": "Fields that are null with explanations (fail-closed validation)",
+      "items": {
+        "type": "object",
+        "required": ["field_path", "reason"],
+        "properties": {
+          "field_path": {
+            "type": "string",
+            "description": "JSON path to the null field"
+          },
+          "reason": {
+            "type": "string",
+            "description": "Explanation for why this field is null",
+            "enum": [
+              "not_found_in_evidence",
+              "ambiguous_in_evidence",
+              "extraction_failed",
+              "not_applicable",
+              "redacted",
+              "other"
+            ]
+          },
+          "details": {
+            "type": "string",
+            "description": "Additional details about the null value"
+          }
+        }
+      }
+    },
+    "data": {
+      "type": "object",
+      "description": "The actual derived data. Schema varies by task type.",
+      "additionalProperties": true
+    },
+    "extraction_notes": {
+      "type": "array",
+      "description": "Notes from the extraction process (warnings, assumptions, etc.)",
+      "items": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": ["info", "warning", "assumption", "conflict"]
+          },
+          "message": { "type": "string" },
+          "field_path": { "type": "string" }
+        }
+      }
+    }
+  }
+}

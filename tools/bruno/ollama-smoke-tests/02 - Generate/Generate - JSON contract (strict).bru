@@ -1,0 +1,93 @@
+meta {
+  name: Generate - JSON contract (strict)
+  type: http
+  seq: 2
+}
+
+post {
+  url: {{OLLAMA_API_BASE}}/generate
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "model": "{{MODEL}}",
+    "prompt": "Provide information about the movie '{{MOVIE_TITLE}}'. Respond ONLY with valid JSON matching this exact schema (no other text):\n{\n  \"movie\": { \"title\": \"string\", \"year\": number },\n  \"summary\": \"string (1-3 paragraphs, paraphrase only)\",\n  \"key_events\": [\n    { \"event_id\": \"E01\", \"event\": \"string\", \"act\": number, \"confidence\": number }\n  ],\n  \"scenes\": [\n    { \"scene_id\": \"S01\", \"setting\": \"string\", \"beat\": \"string\", \"characters\": [\"string\"], \"confidence\": number }\n  ],\n  \"entities\": {\n    \"characters\": [\"string\"],\n    \"locations\": [\"string\"],\n    \"objects\": [\"string\"]\n  },\n  \"open_questions\": [\"string\"]\n}\n\nIMPORTANT:\n- Use \"unknown\" for any fields you're uncertain about\n- Set confidence values between 0.0 and 1.0 based on your certainty\n- List open questions rather than inventing details\n- Do NOT reproduce copyrighted dialogue or narration",
+    "stream": {{STREAM}},
+    "options": {
+      "temperature": {{TEMPERATURE}},
+      "seed": {{SEED}}
+    },
+    "format": "json"
+  }
+}
+
+tests {
+  test("Status code is 200", function() {
+    expect(res.status).to.equal(200);
+  });
+  
+  test("Response contains done flag", function() {
+    const data = res.body;
+    expect(data).to.have.property('done');
+    expect(data.done).to.equal(true);
+  });
+  
+  test("Response is valid JSON", function() {
+    const data = res.body;
+    expect(data).to.have.property('response');
+    
+    let parsed;
+    try {
+      parsed = JSON.parse(data.response);
+    } catch (e) {
+      throw new Error("Response is not valid JSON: " + e.message);
+    }
+    
+    expect(parsed).to.be.an('object');
+  });
+  
+  test("JSON contract has required top-level keys", function() {
+    const data = res.body;
+    const parsed = JSON.parse(data.response);
+    
+    expect(parsed).to.have.property('movie');
+    expect(parsed).to.have.property('summary');
+    expect(parsed).to.have.property('key_events');
+    expect(parsed).to.have.property('scenes');
+    expect(parsed).to.have.property('entities');
+    expect(parsed).to.have.property('open_questions');
+  });
+  
+  test("Arrays are arrays", function() {
+    const data = res.body;
+    const parsed = JSON.parse(data.response);
+    
+    expect(parsed.key_events).to.be.an('array');
+    expect(parsed.scenes).to.be.an('array');
+    expect(parsed.open_questions).to.be.an('array');
+    expect(parsed.entities.characters).to.be.an('array');
+    expect(parsed.entities.locations).to.be.an('array');
+    expect(parsed.entities.objects).to.be.an('array');
+  });
+}
+
+docs {
+  ## Generate - JSON Contract (Strict)
+  
+  Tests the model's ability to produce structured JSON output conforming to a specific schema.
+  
+  This request uses Ollama's `format: "json"` parameter to enforce JSON output.
+  
+  The prompt instructs the model to:
+  - Output ONLY JSON (no markdown, no extra text)
+  - Use "unknown" for uncertain fields rather than hallucinating
+  - Include confidence scores for key data points
+  - List open questions instead of inventing details
+  - Avoid reproducing copyrighted content
+  
+  Variables used:
+  - MOVIE_TITLE: The movie to analyze
+  - All standard generation parameters (MODEL, STREAM, TEMPERATURE, SEED)
+}

@@ -12,8 +12,15 @@ storage:
 
 # State store configuration
 state:
-  type: "sqlite"
-  db_path: "local/state/ingest_state.db"
+  type: "sqlserver"
+  sqlserver:
+    host: "localhost"
+    port: 1434
+    database: "Holocron"
+    user: "sa"
+    # password: set via INGEST_SQLSERVER_PASSWORD env var
+    driver: "ODBC Driver 18 for SQL Server"
+    schema: "ingest"
 
 # Runner configuration
 runner:
@@ -29,7 +36,7 @@ sources:
     type: "openalex"
     # Optional: Email for polite pool access (faster API responses)
     # email: "your-email@example.com"
-    rate_limit_delay: 0.1  # 10 requests/second (polite pool limit)
+    rate_limit_delay: 0.08  # 8 requests/second (polite pool limit)
     timeout: 30
     max_retries: 3
     
@@ -45,10 +52,59 @@ sources:
       # Only enqueue works that match these known entities
       entities:
         - "Star Wars"
-        - "Artificial Intelligence"
-        - "Machine Learning"
-        - "Deep Learning"
-        - "Natural Language Processing"
+        - "Lucasfilm"
+        - "George Lucas"
+        - "Jedi"
+        - "Sith"
+        - "The Force"
+        - "Skywalker"
+        - "Luke Skywalker"
+        - "Darth Vader"
+        - "Anakin Skywalker"
+        - "Obi-Wan Kenobi"
+        - "Yoda"
+        - "Princess Leia"
+        - "Han Solo"
+        - "Chewbacca"
+        - "R2-D2"
+        - "C-3PO"
+        - "Millennium Falcon"
+        - "X-Wing"
+        - "TIE Fighter"
+        - "Death Star"
+        - "Lightsaber"
+        - "The Mandalorian"
+        - "Baby Yoda"
+        - "Grogu"
+        - "Boba Fett"
+        - "Stormtrooper"
+        - "Clone Trooper"
+        - "Rebel Alliance"
+        - "Galactic Empire"
+        - "First Order"
+        - "Resistance"
+        - "Republic"
+        - "Tatooine"
+        - "Coruscant"
+        - "Endor"
+        - "Hoth"
+        - "Dagobah"
+        - "Naboo"
+        - "Alderaan"
+        - "Mustafar"
+        - "Jakku"
+        - "Mandalore"
+        - "Wookiee"
+        - "Ewok"
+        - "Droid"
+        - "Jawa"
+        - "Tusken Raider"
+        - "Disney+"
+        - "Ahsoka"
+        - "Rey"
+        - "Kylo Ren"
+        - "Finn"
+        - "Poe Dameron"
       
       # Known identifiers (optional)
       identifiers:
@@ -59,21 +115,21 @@ sources:
 
 # Seed definitions (initial work items)
 seeds:
-  # Example 1: Fetch a specific OpenAlex work by ID
-  - source: "openalex"
-    resource_type: "work"
-    work_ids:
-      - "W2741809807"  # Example: A seminal paper
-    priority: 10
+  # # Example 1: Fetch a specific OpenAlex work by ID
+  # - source: "openalex"
+  #   resource_type: "work"
+  #   work_ids:
+  #     - "W2741809807"  # Example: A seminal paper
+  #   priority: 10
   
   # Example 2: Search OpenAlex and seed from results
   - source: "openalex"
     resource_type: "search"
-    search_query: "machine learning"
+    search_query: "Star Wars"
     filters:
       - "type:article"
       - "is_oa:true"           # Open access only
-      - "publication_year:>2020"
+      - "publication_year:>2000"
     per_page: 25
     priority: 20
 

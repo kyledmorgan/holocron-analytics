@@ -33,18 +33,19 @@ Create or update `config/ingest.yaml`:
 sources:
   - name: "openalex"
     type: "openalex"
-    email: "your-email@example.com"  # Optional, for polite pool
-    rate_limit_delay: 0.1             # 10 req/sec
+    #email: "your-email@example.com"  # Optional, for polite pool
+    rate_limit_delay: 0.08             # 8 req/sec
     
     discovery:
       enabled: true
       discover_references: true
-      max_depth: 1
+      max_depth: 0
     
     entity_matching:
       entities:
-        - "Machine Learning"
-        - "Artificial Intelligence"
+        - "Star Wars"
+        - "LucasFilms"
+        - "Disney+"
       case_sensitive: false
 
 seeds:
@@ -52,14 +53,14 @@ seeds:
     resource_type: "work"
     work_ids:
       - "W2741809807"
-    priority: 10
+    priority: 5
 ```
 
 ### 2. Seed the Queue
 
 ```bash
 cd /home/runner/work/holocron-analytics/holocron-analytics
-python3 src/ingest/ingest_cli.py --config config/ingest.yaml --seed
+python3 src/ingest/ingest_cli.py --config config/ingest.openalex.example.yaml --seed
 ```
 
 ### 3. Run Ingestion

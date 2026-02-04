@@ -1,0 +1,100 @@
+# Interrogation: Entity Extraction
+# Version: 1.0.0
+# Status: Example (Phase 0 placeholder)
+
+id: entity_extraction_v1
+name: Entity Extraction
+version: "1.0.0"
+status: example
+
+description: |
+  Extract named entities with attributes from evidence documents.
+  This is an example interrogation definition for Phase 0 scaffolding.
+
+# References to related files
+schema_ref: contracts/derived_output_schema.json
+rubric_ref: interrogations/rubrics/entity_extraction_rubric.md
+prompt_template_ref: prompts/templates/entity_extraction.txt
+
+# Output configuration
+output:
+  format: json
+  validation: fail_closed
+  null_handling: with_reason
+
+# Evidence requirements
+evidence:
+  min_items: 1
+  max_items: 10
+  allowed_types:
+    - ingest_record
+    - document
+    - sql_result
+    - http_response
+
+# LLM configuration recommendations
+llm_config:
+  recommended_temperature: 0.0
+  recommended_max_tokens: 2000
+
+# Controlled vocabularies
+vocabularies:
+  entity_type:
+    - person
+    - place
+    - organization
+    - event
+    - concept
+    - other
+  confidence_level:
+    - high
+    - medium
+    - low
+    - unknown
+
+# Output field definitions
+fields:
+  - name: entity_name
+    type: string
+    required: true
+    description: The name of the extracted entity
+    
+  - name: entity_type
+    type: enum
+    required: true
+    vocabulary: entity_type
+    description: The type/category of the entity
+    
+  - name: description
+    type: string
+    required: false
+    description: Brief description of the entity from evidence
+    
+  - name: aliases
+    type: array
+    required: false
+    description: Alternative names or spellings found in evidence
+    
+  - name: attributes
+    type: object
+    required: false
+    description: Additional attributes extracted (varies by entity type)
+    
+  - name: evidence_refs
+    type: array
+    required: true
+    description: List of evidence item references that support this entity
+    
+  - name: confidence
+    type: enum
+    required: true
+    vocabulary: confidence_level
+    description: Confidence level for this extraction
+
+# Notes for implementation
+notes: |
+  This is a placeholder definition for Phase 0 scaffolding.
+  Full implementation is planned for Phase 1.
+  
+  The actual prompt template and schema details will be refined
+  based on initial testing with real evidence bundles.

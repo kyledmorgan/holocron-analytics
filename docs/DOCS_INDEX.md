@@ -52,6 +52,28 @@ New to this repository? Start with these essential documents:
 | [OpenAlex Integration Guide](openalex-integration.md) | User guide for OpenAlex API integration |
 | [OpenAlex Implementation Summary](integrations/openalex-implementation-summary.md) | Technical implementation details and architecture decisions |
 
+### LLM-Derived Data
+
+| Document | Description |
+|----------|-------------|
+| [Vision and Roadmap](llm/vision-and-roadmap.md) | Project vision, goals, and phased roadmap |
+| [LLM-Derived Data Overview](llm/derived-data.md) | Concepts, architecture, and roadmap for the LLM-derived data subsystem |
+| [Phase 1 Runner](llm/phase1-runner.md) | End-to-end LLM derive pipeline usage guide |
+| [Retrieval (Phase 3)](llm/retrieval.md) | RAG architecture, chunking, embeddings, and retrieval |
+| [Indexing Guide](llm/indexing.md) | How to index sources for retrieval |
+| [Operational Guide](llm/operational.md) | Operations, retention, and troubleshooting |
+| [Ollama Integration Guide](llm/ollama.md) | Ollama API documentation, configuration, and operational guidance |
+| [Ollama in Docker](llm/ollama-docker.md) | Running Ollama as a Docker Compose service (Windows + WSL2) |
+| [Glossary](llm/glossary.md) | Core terminology and definitions |
+| [Contracts](llm/contracts.md) | Schema versioning, validation behavior, and contract-first approach |
+| [Implementation Status](llm/status.md) | Living checklist of implementation progress |
+| [Governance](llm/governance.md) | Retention, redaction, and policy placeholders (TBD) |
+| [Lineage](llm/lineage.md) | Data lineage tracking approach (TBD) |
+| [LLM Module README](../src/llm/README.md) | Source code overview and quick start for the LLM module |
+| [LLM Configuration Reference](../src/llm/config/config.md) | Configuration options and environment variables |
+| [LLM Contracts README](../src/llm/contracts/README.md) | JSON schema documentation for manifests and outputs |
+| [Interrogations README](../src/llm/interrogations/README.md) | Interrogation catalog concept and structure |
+
 ### Analytics / Views / Exercises
 
 | Document | Description |
@@ -116,6 +138,24 @@ All Markdown files in this repository, grouped by location:
 | File | Description |
 |------|-------------|
 | [openalex-implementation-summary.md](integrations/openalex-implementation-summary.md) | OpenAlex integration technical implementation summary |
+
+### `docs/llm/`
+
+| File | Description |
+|------|-------------|
+| [contracts.md](llm/contracts.md) | Contract-first approach, schema versioning, and validation |
+| [derived-data.md](llm/derived-data.md) | LLM-Derived Data subsystem overview, concepts, and roadmap |
+| [glossary.md](llm/glossary.md) | Core terminology and definitions |
+| [governance.md](llm/governance.md) | Governance policy placeholders (retention, redaction) |
+| [indexing.md](llm/indexing.md) | Phase 3 indexing guide for retrieval |
+| [lineage.md](llm/lineage.md) | Data lineage tracking approach |
+| [ollama.md](llm/ollama.md) | Ollama integration guide with API documentation |
+| [ollama-docker.md](llm/ollama-docker.md) | Running Ollama as a Docker Compose service |
+| [operational.md](llm/operational.md) | Phase 3 operations and troubleshooting |
+| [phase1-runner.md](llm/phase1-runner.md) | Phase 1 LLM Runner usage guide |
+| [retrieval.md](llm/retrieval.md) | Phase 3 RAG architecture and retrieval |
+| [status.md](llm/status.md) | Implementation status tracker |
+| [vision-and-roadmap.md](llm/vision-and-roadmap.md) | Vision, goals, and phased roadmap |
 
 ### `docs/diagrams/mermaid/`
 
@@ -195,6 +235,17 @@ All Markdown files in this repository, grouped by location:
 | [README.md](../src/ingest/README.md) | Ingestion framework overview and architecture |
 | [QUICKSTART.md](../src/ingest/QUICKSTART.md) | Quick start guide for the ingestion framework |
 | [IMPLEMENTATION_SUMMARY.md](../src/ingest/IMPLEMENTATION_SUMMARY.md) | Ingestion framework implementation summary |
+
+### `src/llm/`
+
+| File | Description |
+|------|-------------|
+| [README.md](../src/llm/README.md) | LLM-Derived Data module overview and quick start |
+| [contracts/README.md](../src/llm/contracts/README.md) | JSON schema documentation for manifests and outputs |
+| [interrogations/README.md](../src/llm/interrogations/README.md) | Interrogation catalog concept and structure |
+| [prompts/README.md](../src/llm/prompts/README.md) | Prompt template guidelines and best practices |
+| [providers/README.md](../src/llm/providers/README.md) | LLM provider strategy and client documentation |
+| [config/config.md](../src/llm/config/config.md) | Configuration reference for the LLM module |
 
 ### `sources/`
 

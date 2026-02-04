@@ -49,3 +49,6 @@ sources/*.yaml
 local/data_lake/
 local/state/
 
+# LLM artifacts (model snapshots, raw outputs)
+artifacts/
+

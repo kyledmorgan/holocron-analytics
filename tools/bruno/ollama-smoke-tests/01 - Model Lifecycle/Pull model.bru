@@ -1,0 +1,46 @@
+meta {
+  name: Pull model
+  type: http
+  seq: 2
+}
+
+post {
+  url: {{OLLAMA_API_BASE}}/pull
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "model": "{{MODEL}}",
+    "stream": false
+  }
+}
+
+tests {
+  test("Status code is 200", function() {
+    expect(res.status).to.equal(200);
+  });
+  
+  test("Response contains status", function() {
+    const data = res.body;
+    expect(data).to.have.property('status');
+  });
+}
+
+docs {
+  ## Pull Model
+  
+  Downloads a model from the Ollama library.
+  Set stream to false to get a single response instead of streaming updates.
+  
+  **Note**: This can take several minutes for large models.
+  Only use this to ensure the model is available locally.
+  
+  Expected response:
+  ```json
+  {
+    "status": "success"
+  }
+  ```
+}

@@ -1,0 +1,21 @@
+# Prompt Templates Directory
+
+This directory contains prompt template files for LLM interrogation.
+
+## Adding Templates
+
+1. Create a new `.txt` or `.md` file with the prompt template
+2. Use `{variable_name}` for substitution placeholders
+3. Document the template's purpose and expected variables
+4. Add corresponding output schema to `../contracts/` if needed
+
+## Template Naming Convention
+
+- `entity_extraction.txt` — Entity extraction prompts
+- `relationship_extraction.txt` — Relationship extraction prompts
+- `summarization.txt` — Summarization prompts
+- `classification.txt` — Classification prompts
+
+## See Also
+
+- [Prompts README](../README.md) — Prompt philosophy and guidelines

@@ -1,0 +1,76 @@
+meta {
+  name: Chat - minimal
+  type: http
+  seq: 1
+}
+
+post {
+  url: {{OLLAMA_API_BASE}}/chat
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "model": "{{MODEL}}",
+    "messages": [
+      {
+        "role": "user",
+        "content": "{{PROMPT}}"
+      }
+    ],
+    "stream": {{STREAM}},
+    "options": {
+      "temperature": {{TEMPERATURE}},
+      "seed": {{SEED}}
+    }
+  }
+}
+
+tests {
+  test("Status code is 200", function() {
+    expect(res.status).to.equal(200);
+  });
+  
+  test("Response contains message", function() {
+    const data = res.body;
+    expect(data).to.have.property('message');
+    expect(data.message).to.have.property('role');
+    expect(data.message).to.have.property('content');
+  });
+  
+  test("Message role is assistant", function() {
+    const data = res.body;
+    expect(data.message.role).to.equal('assistant');
+  });
+  
+  test("Done is true", function() {
+    const data = res.body;
+    expect(data).to.have.property('done');
+    expect(data.done).to.equal(true);
+  });
+}
+
+docs {
+  ## Chat - Minimal
+  
+  Minimal chat request with a single user message.
+  
+  Expected response:
+  ```json
+  {
+    "model": "llama3.2:latest",
+    "message": {
+      "role": "assistant",
+      "content": "Response text here..."
+    },
+    "done": true,
+    "total_duration": 12345,
+    "load_duration": 1234,
+    "prompt_eval_count": 10,
+    "prompt_eval_duration": 1234,
+    "eval_count": 20,
+    "eval_duration": 5678
+  }
+  ```
+}
