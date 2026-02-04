@@ -44,7 +44,7 @@ def is_sqlserver_available():
         
         store = SqlServerStateStore(
             host=os.environ.get("INGEST_SQLSERVER_HOST", "localhost"),
-            port=int(os.environ.get("INGEST_SQLSERVER_PORT", "1433")),
+            port=int(os.environ.get("INGEST_SQLSERVER_PORT", "1434")),
             database=os.environ.get("INGEST_SQLSERVER_DATABASE", "Holocron"),
             username=os.environ.get("INGEST_SQLSERVER_USER", "sa"),
             password=password,
@@ -74,7 +74,7 @@ class TestSqlServerStateStore(unittest.TestCase):
         
         cls.store = SqlServerStateStore(
             host=os.environ.get("INGEST_SQLSERVER_HOST", "localhost"),
-            port=int(os.environ.get("INGEST_SQLSERVER_PORT", "1433")),
+            port=int(os.environ.get("INGEST_SQLSERVER_PORT", "1434")),
             database=os.environ.get("INGEST_SQLSERVER_DATABASE", "Holocron"),
             username=os.environ.get("INGEST_SQLSERVER_USER", "sa"),
             password=password,

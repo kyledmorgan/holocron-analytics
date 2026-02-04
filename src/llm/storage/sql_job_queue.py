@@ -29,7 +29,7 @@ logger = logging.getLogger(__name__)
 class QueueConfig:
     """Configuration for the SQL job queue."""
     host: str = "localhost"
-    port: int = 1433
+    port: int = 1434
     database: str = "Holocron"
     username: str = "sa"
     password: str = ""
@@ -50,7 +50,7 @@ class QueueConfig:
             host=os.environ.get("LLM_SQLSERVER_HOST", 
                                os.environ.get("INGEST_SQLSERVER_HOST", "localhost")),
             port=int(os.environ.get("LLM_SQLSERVER_PORT", 
-                                    os.environ.get("INGEST_SQLSERVER_PORT", "1433"))),
+                                    os.environ.get("INGEST_SQLSERVER_PORT", "1434"))),
             database=os.environ.get("LLM_SQLSERVER_DATABASE",
                                     os.environ.get("INGEST_SQLSERVER_DATABASE",
                                                    os.environ.get("MSSQL_DATABASE", "Holocron"))),

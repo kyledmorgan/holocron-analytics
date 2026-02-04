@@ -60,7 +60,7 @@ export MSSQL_SA_PASSWORD="YourStrongPassword123!"
 # Optional (defaults shown)
 export DB_BACKEND=sqlserver
 export INGEST_SQLSERVER_HOST=localhost
-export INGEST_SQLSERVER_PORT=1433
+export INGEST_SQLSERVER_PORT=1434
 export INGEST_SQLSERVER_DATABASE=Holocron
 export INGEST_SQLSERVER_USER=sa
 export INGEST_SQLSERVER_PASSWORD="YourStrongPassword123!"
@@ -99,7 +99,7 @@ python src/ingest/ingest_cli.py --config config/ingest.yaml --seed --max-items 1
 |----------|---------|-------------|
 | `DB_BACKEND` | `sqlserver` | Backend type (must be `sqlserver`) |
 | `INGEST_SQLSERVER_HOST` | `localhost` | SQL Server hostname |
-| `INGEST_SQLSERVER_PORT` | `1433` | SQL Server port |
+| `INGEST_SQLSERVER_PORT` | `1434` | SQL Server port |
 | `INGEST_SQLSERVER_DATABASE` | `Holocron` | Database name |
 | `INGEST_SQLSERVER_USER` | `sa` | Database username |
 | `INGEST_SQLSERVER_PASSWORD` | (required) | Database password |
@@ -116,7 +116,7 @@ state:
   
   sqlserver:
     host: "localhost"
-    port: 1433
+    port: 1434
     database: "Holocron"
     user: "sa"
     # password: (use environment variable)
@@ -129,7 +129,7 @@ state:
 If you prefer a full connection string:
 
 ```
-Driver={ODBC Driver 18 for SQL Server};Server=localhost,1433;Database=Holocron;UID=sa;PWD=YourPassword;TrustServerCertificate=yes
+Driver={ODBC Driver 18 for SQL Server};Server=localhost,1434;Database=Holocron;UID=sa;PWD=YourPassword;TrustServerCertificate=yes
 ```
 
 ---
@@ -230,7 +230,7 @@ python scripts/db/db_smoketest.py
 SQL Server Connection Info
 ============================================================
   Host:     localhost
-  Port:     1433
+  Port:     1434
   Database: Holocron
   Username: sa
   Driver:   ODBC Driver 18 for SQL Server
@@ -585,14 +585,14 @@ class MyApiDiscovery(Discovery):
 ```yaml
 services:
   sqlserver:
-    image: mcr.microsoft.com/mssql/server:2022-latest
+    image: mcr.microsoft.com/mssql/server:2025-latest
     container_name: holocron-sqlserver
     environment:
       - ACCEPT_EULA=Y
       - MSSQL_PID=Developer
       - MSSQL_SA_PASSWORD=${MSSQL_SA_PASSWORD}
     ports:
-      - "1433:1433"
+      - "1434:1433"
     volumes:
       - mssql_data:/var/opt/mssql
     healthcheck:

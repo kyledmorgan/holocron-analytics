@@ -27,7 +27,7 @@ def is_sqlserver_available() -> bool:
         import pyodbc
         
         host = os.environ.get("INGEST_SQLSERVER_HOST", "localhost")
-        port = int(os.environ.get("INGEST_SQLSERVER_PORT", "1433"))
+        port = int(os.environ.get("INGEST_SQLSERVER_PORT", "1434"))
         database = os.environ.get("INGEST_SQLSERVER_DATABASE", 
                                   os.environ.get("MSSQL_DATABASE", "Holocron"))
         username = os.environ.get("INGEST_SQLSERVER_USER", "sa")
@@ -114,7 +114,7 @@ def sqlserver_config() -> dict:
     """Session-scoped fixture providing SQL Server connection configuration."""
     return {
         "host": os.environ.get("INGEST_SQLSERVER_HOST", "localhost"),
-        "port": int(os.environ.get("INGEST_SQLSERVER_PORT", "1433")),
+        "port": int(os.environ.get("INGEST_SQLSERVER_PORT", "1434")),
         "database": os.environ.get("INGEST_SQLSERVER_DATABASE", 
                                    os.environ.get("MSSQL_DATABASE", "Holocron")),
         "username": os.environ.get("INGEST_SQLSERVER_USER", "sa"),

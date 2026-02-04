@@ -12,7 +12,7 @@ Usage:
 
 Environment variables:
     INGEST_SQLSERVER_HOST - SQL Server hostname (default: localhost)
-    INGEST_SQLSERVER_PORT - SQL Server port (default: 1433)
+    INGEST_SQLSERVER_PORT - SQL Server port (default: 1434)
     INGEST_SQLSERVER_DATABASE - Database name (default: Holocron)
     INGEST_SQLSERVER_USER - Username (default: sa)
     INGEST_SQLSERVER_PASSWORD - Password (required)
@@ -40,7 +40,7 @@ def get_connection_config() -> dict:
     """Get database connection configuration from environment variables."""
     return {
         "host": os.environ.get("INGEST_SQLSERVER_HOST", "localhost"),
-        "port": int(os.environ.get("INGEST_SQLSERVER_PORT", "1433")),
+        "port": int(os.environ.get("INGEST_SQLSERVER_PORT", "1434")),
         "database": os.environ.get("INGEST_SQLSERVER_DATABASE", 
                                    os.environ.get("MSSQL_DATABASE", "Holocron")),
         "username": os.environ.get("INGEST_SQLSERVER_USER", "sa"),

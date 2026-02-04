@@ -402,7 +402,7 @@ This enables audit trails and lineage tracking.
 |----------|-------------|
 | `INGEST_SQLSERVER_CONN_STR` | Full SQL Server connection string |
 | `INGEST_SQLSERVER_HOST` | SQL Server hostname |
-| `INGEST_SQLSERVER_PORT` | SQL Server port (default: 1433) |
+| `INGEST_SQLSERVER_PORT` | SQL Server port (default: 1434) |
 | `INGEST_SQLSERVER_DATABASE` | Database name |
 | `INGEST_SQLSERVER_USER` | Database user |
 | `INGEST_SQLSERVER_PASSWORD` | Database password |

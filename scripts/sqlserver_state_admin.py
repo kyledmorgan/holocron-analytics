@@ -29,7 +29,7 @@ Connection approach:
 - Use pyodbc with ODBC Driver 18 for SQL Server
 - Get connection parameters from environment variables:
   - INGEST_SQLSERVER_HOST (default: localhost)
-  - INGEST_SQLSERVER_PORT (default: 1433)
+  - INGEST_SQLSERVER_PORT (default: 1434)
   - INGEST_SQLSERVER_DATABASE (default: Holocron)
   - INGEST_SQLSERVER_USER (default: sa)
   - INGEST_SQLSERVER_PASSWORD (required)
