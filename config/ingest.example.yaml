@@ -14,11 +14,11 @@ storage:
     enabled: false
     # Connection string from environment variable: INGEST_SQLSERVER_CONN_STR
     # Or use discrete variables:
-    # host: localhost
-    # port: 1433
-    # database: HolocronAnalytics
-    # user: sa
-    # password: ${INGEST_SQLSERVER_PASSWORD}
+    host: localhost
+    port: 1433
+    database: HolocronAnalytics
+    user: sa
+    password: Password1!
     schema: "ingest"
     table: "IngestRecords"
 

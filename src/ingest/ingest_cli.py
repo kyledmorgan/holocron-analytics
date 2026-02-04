@@ -23,13 +23,8 @@ from ingest.config import IngestConfig
 from ingest.core.models import WorkItem
 from ingest.connectors import HttpConnector, MediaWikiConnector, OpenAlexConnector
 from ingest.storage import FileLakeWriter, SqlServerIngestWriter
-<<<<<<< HEAD
-from ingest.state import SqliteStateStore
-from ingest.discovery import MediaWikiDiscovery, OpenAlexDiscovery, EntityMatcher
-=======
 from ingest.state import create_state_store
 from ingest.discovery import MediaWikiDiscovery
->>>>>>> 45c122409205fb75e3da1431343ddd72c47914d5
 from ingest.runner import IngestRunner
 
 
