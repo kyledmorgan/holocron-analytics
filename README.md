@@ -74,8 +74,7 @@ Users are responsible for complying with the terms of service of any external da
 ## Technology stack (current / planned)
 
 - **Database**
-  - SQL Server (primary)
-  - SQLite / DuckDB (optional local experiments)
+  - SQL Server 2022+ (primary, running in Docker)
 
 - **Languages**
   - SQL

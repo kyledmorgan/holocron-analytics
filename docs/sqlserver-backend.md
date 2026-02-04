@@ -97,7 +97,7 @@ python src/ingest/ingest_cli.py --config config/ingest.yaml --seed --max-items 1
 
 | Variable | Default | Description |
 |----------|---------|-------------|
-| `DB_BACKEND` | `sqlserver` | Backend type (`sqlserver` or `sqlite`) |
+| `DB_BACKEND` | `sqlserver` | Backend type (must be `sqlserver`) |
 | `INGEST_SQLSERVER_HOST` | `localhost` | SQL Server hostname |
 | `INGEST_SQLSERVER_PORT` | `1433` | SQL Server port |
 | `INGEST_SQLSERVER_DATABASE` | `Holocron` | Database name |
@@ -774,6 +774,5 @@ SSL Provider: Error:0A000438:SSL routines::tlsv1 alert internal error
 
 ## See Also
 
-- [Deprecated SQLite Documentation](deprecated/sqlite-state-store.md)
 - [Ingestion Framework README](../src/ingest/README.md)
 - [Configuration Examples](../config/ingest.example.yaml)

@@ -7,14 +7,15 @@ This runbook covers running the MediaWiki ingestion pipeline for Wookieepedia (S
 ## Prerequisites
 
 - Python environment configured
-- SQLite state database exists at `local/state/ingest_state.db`
+- SQL Server running (via Docker Compose)
+- SQL Server state store configured (see `.env.example`)
 - Configuration file at `config/ingest.example.yaml` or custom config
 
 ## Running Ingestion
 
 ### Process from Existing Queue
 
-Run ingestion on items already in the SQLite queue:
+Run ingestion on items already in the SQL Server queue:
 
 ```powershell
 python src/ingest/ingest_cli.py --config config/ingest.example.yaml --max-items 10000 --verbose

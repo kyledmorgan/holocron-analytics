@@ -25,19 +25,13 @@ storage:
 # State store configuration
 # The state store manages work queue, dedupe, and run tracking.
 #
-# Backend options:
-#   - sqlserver (default, recommended): Uses SQL Server for reliable state management
-#   - sqlite (deprecated): Legacy file-based store, use only for testing
-#
-# Set DB_BACKEND environment variable to override, or configure below.
+# SQL Server is the only supported backend.
+# Set DB_BACKEND environment variable or configure below.
 state:
-  # Backend type: "sqlserver" (default) or "sqlite" (deprecated)
+  # Backend type: "sqlserver" (only supported option)
   type: "sqlserver"
   
-  # SQLite configuration (deprecated - only used when type: "sqlite")
-  db_path: "local/state/ingest_state.db"
-  
-  # SQL Server configuration (used when type: "sqlserver")
+  # SQL Server configuration
   sqlserver:
     # Connection from environment variables (recommended):
     # - INGEST_SQLSERVER_HOST, INGEST_SQLSERVER_PORT

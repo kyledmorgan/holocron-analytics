@@ -77,21 +77,6 @@ def parse_args():
     )
     
     parser.add_argument(
-        "--state-db",
-        type=Path,
-        default=Path("local/state/ingest_state.db"),
-        help="Path to SQLite state database (deprecated, only used with --backend sqlite)",
-    )
-    
-    parser.add_argument(
-        "--backend",
-        type=str,
-        default=None,
-        choices=["sqlserver", "sqlite"],
-        help="State store backend (default: from DB_BACKEND env or 'sqlserver')",
-    )
-    
-    parser.add_argument(
         "--limit",
         type=int,
         help="Maximum number of pages to seed content for",
@@ -155,11 +140,8 @@ def main() -> int:
         
         state_store = None
         try:
-            # Use factory to create state store (respects backend preference)
-            if args.backend == "sqlite":
-                state_store = create_state_store(backend="sqlite", db_path=args.state_db)
-            else:
-                state_store = create_state_store(backend=args.backend)
+            # Create SQL Server state store (only backend supported)
+            state_store = create_state_store()
             
             enqueued = seed_content_queue(
                 state_store=state_store,
