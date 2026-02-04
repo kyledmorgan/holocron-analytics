@@ -1,0 +1,102 @@
+# Interrogation: Atomic Claims Extraction
+# Version: 1.0.0
+# Status: Example (Phase 0 placeholder)
+
+id: atomic_claims_v1
+name: Atomic Claims Extraction
+version: "1.0.0"
+status: example
+
+description: |
+  Extract atomic (falsifiable, self-contained) claims from evidence documents.
+  Each claim is a single fact with explicit evidence citations.
+  This is an example interrogation definition for Phase 0 scaffolding.
+
+# References to related files
+schema_ref: contracts/derived_output_schema.json
+rubric_ref: interrogations/rubrics/atomic_claims.md
+prompt_template_ref: prompts/templates/atomic_claims.txt
+
+# Output configuration
+output:
+  format: json
+  validation: fail_closed
+  null_handling: with_reason
+
+# Evidence requirements
+evidence:
+  min_items: 1
+  max_items: 10
+  allowed_types:
+    - ingest_record
+    - document
+    - sql_result
+    - http_response
+
+# LLM configuration recommendations
+llm_config:
+  recommended_temperature: 0.0
+  recommended_max_tokens: 4000
+
+# Controlled vocabularies
+vocabularies:
+  claim_type:
+    - factual
+    - temporal
+    - relational
+    - quantitative
+    - attributive
+  confidence_level:
+    - high
+    - medium
+    - low
+    - unknown
+
+# Output field definitions
+fields:
+  - name: claims
+    type: array
+    required: true
+    description: List of atomic claims extracted from evidence
+    items:
+      - name: claim_text
+        type: string
+        required: true
+        description: The atomic claim statement (falsifiable, self-contained)
+        
+      - name: claim_type
+        type: enum
+        required: false
+        vocabulary: claim_type
+        description: Category of the claim
+        
+      - name: evidence_refs
+        type: array
+        required: true
+        description: References to evidence items supporting this claim
+        
+      - name: confidence
+        type: enum
+        required: true
+        vocabulary: confidence_level
+        description: Confidence level for this claim
+
+# Quality signals to detect
+quality_signals:
+  - type: contradiction
+    description: Claims that conflict with each other
+  - type: ambiguity
+    description: Evidence that is unclear or open to interpretation
+  - type: low_coverage
+    description: Topics with insufficient supporting evidence
+
+# Notes for implementation
+notes: |
+  This is a placeholder definition for Phase 0 scaffolding.
+  Full implementation is planned for Phase 1.
+  
+  Key principles:
+  - Break compound statements into atomic claims
+  - Each claim must be independently falsifiable
+  - All claims must cite specific evidence IDs
+  - Do not infer beyond what evidence explicitly states
