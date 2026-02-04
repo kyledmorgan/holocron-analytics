@@ -66,7 +66,7 @@ class IngestConfig:
                 "type": "sqlserver",
                 "sqlserver": {
                     "host": "localhost",
-                    "port": 1433,
+                    "port": 1434,
                     "database": "Holocron",
                     "user": "sa",
                     "schema": "ingest",

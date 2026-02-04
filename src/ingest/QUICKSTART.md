@@ -151,8 +151,8 @@ python3 src/ingest/ingest_cli.py --config config/ingest.yaml --seed
 2. Run the schema creation script:
 ```bash
 # Execute the DDL files
-sqlcmd -S localhost -U sa -P YourPassword -d HolocronAnalytics -i src/db/ddl/00_ingest/001_schema.sql
-sqlcmd -S localhost -U sa -P YourPassword -d HolocronAnalytics -i src/db/ddl/00_ingest/002_IngestRecords.sql
+sqlcmd -S localhost,1434 -U sa -P YourPassword -d Holocron -i src/db/ddl/00_ingest/001_schema.sql
+sqlcmd -S localhost,1434 -U sa -P YourPassword -d Holocron -i src/db/ddl/00_ingest/002_IngestRecords.sql
 ```
 
 3. Update `config/ingest.yaml`:
@@ -161,7 +161,8 @@ storage:
   sql_server:
     enabled: true
     host: localhost
-    database: HolocronAnalytics
+    port: 1434
+    database: Holocron
     user: sa
     # Set password via environment variable
     # password: ${INGEST_SQLSERVER_PASSWORD}

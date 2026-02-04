@@ -17,7 +17,7 @@ If you're new to Docker, follow this short path first. It is designed for Window
    - `SQL Server is now ready for client connections`
    - `Database initialization complete`
    - `Seed loading complete` with exit code 0
-7. Connect with Azure Data Studio or SSMS using `localhost,1433`, user `sa`, and your `.env` password.
+7. Connect with Azure Data Studio or SSMS using `localhost,1434`, user `sa`, and your `.env` password.
 
 If anything fails, jump to **Troubleshooting** below.
 
@@ -103,7 +103,7 @@ Once the environment is running, connect using your preferred SQL client:
 
 | Setting | Value |
 |---------|-------|
-| **Server** | `localhost,1433` |
+| **Server** | `localhost,1434` |
 | **Authentication** | SQL Server Authentication |
 | **Username** | `sa` |
 | **Password** | (from your `.env` file) |
@@ -210,21 +210,21 @@ Password validation failed. The password does not meet SQL Server password polic
 
 **Solution**: Use a stronger password with uppercase, lowercase, numbers, and special characters.
 
-### Port 1433 Already in Use
+### Port 1434 Already in Use
 
 If you see:
 ```
-Bind for 0.0.0.0:1433 failed: port is already allocated
+Bind for 0.0.0.0:1434 failed: port is already allocated
 ```
 
 **Solution**: 
-1. Stop any existing SQL Server instances
+1. Stop any existing SQL Server instances on port 1434
 2. Or change the port mapping in `docker-compose.yml`:
    ```yaml
    ports:
-     - "1434:1433"  # Use 1434 externally
+     - "1435:1433"  # Use 1435 externally
    ```
-   Then connect to `localhost,1434`
+   Then connect to `localhost,1435` and update your environment variables accordingly
 
 ### Seed Container Exits Before SQL Ready
 
@@ -297,10 +297,10 @@ docker compose exec sqlserver /opt/mssql-tools18/bin/sqlcmd -S localhost -U sa -
 ├──────────────────┬──────────────────┬───────────────────────┤
 │    sqlserver     │     initdb       │        seed           │
 │                  │                  │                       │
-│ SQL Server 2022  │ Creates database │ Python + pyodbc       │
+│ SQL Server 2025  │ Creates database │ Python + pyodbc       │
 │ Developer Ed.    │ + runs DDL       │ Loads seed JSON       │
 │                  │                  │                       │
-│ Port: 1433       │ (exits after)    │ (exits after)         │
+│ Host Port: 1434  │ (exits after)    │ (exits after)         │
 │ Volume: mssql_data                  │                       │
 └──────────────────┴──────────────────┴───────────────────────┘
          ▲                   │                    │
@@ -387,7 +387,7 @@ Seed loading complete. Total rows inserted: ...
 
 Use Azure Data Studio or SSMS with these settings:
 
-- Server: `localhost,1433`
+- Server: `localhost,1434`
 - Authentication: SQL Server Authentication
 - Username: `sa`
 - Password: your `.env` value
@@ -409,7 +409,7 @@ SELECT COUNT(*) AS FranchiseCount FROM dbo.DimFranchise;
 - **WSL 2 backend disabled**: Docker Desktop -> Settings -> General -> enable WSL 2 engine, then restart Docker Desktop.
 - **Image pulls fail**: Verify you are signed in to Docker Desktop and your network allows access to `mcr.microsoft.com`.
 - **SQL Server takes time to initialize**: Wait 1-3 minutes after `sqlserver` starts before running `seed`.
-- **Port 1433 in use**: Stop other SQL Server instances or change the compose port mapping.
+- **Port 1434 in use**: Stop other SQL Server instances or change the compose port mapping.
 - **Volume permission issues**: Ensure the drive hosting the repo is shared in Docker Desktop -> Settings -> Resources -> File Sharing.
 - **Password policy failure**: Use at least 8 characters with upper, lower, number, and special characters.
 
@@ -428,4 +428,4 @@ SELECT COUNT(*) AS FranchiseCount FROM dbo.DimFranchise;
 - **Image**: A packaged blueprint used to create containers (like a template).
 - **Container**: A running instance of an image (the actual process).
 - **Volume**: A persistent storage location for container data (your database files live here).
-- **Port mapping**: A rule that exposes a container port to your host (e.g., `1433:1433`).
+- **Port mapping**: A rule that exposes a container port to your host (e.g., `1434:1433` maps host port 1434 to container port 1433).

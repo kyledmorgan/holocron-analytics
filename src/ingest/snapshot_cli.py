@@ -47,8 +47,8 @@ def get_sql_mirror(manifest: SnapshotManifest):
     if not conn_str:
         # Build from discrete values
         host = os.environ.get("INGEST_SQLSERVER_HOST", "localhost")
-        port = os.environ.get("INGEST_SQLSERVER_PORT", "1433")
-        database = os.environ.get("INGEST_SQLSERVER_DATABASE", "HolocronAnalytics")
+        port = os.environ.get("INGEST_SQLSERVER_PORT", "1434")
+        database = os.environ.get("INGEST_SQLSERVER_DATABASE", "Holocron")
         user = os.environ.get("INGEST_SQLSERVER_USER", "sa")
         password = os.environ.get("INGEST_SQLSERVER_PASSWORD", "")
         driver = os.environ.get("INGEST_SQLSERVER_DRIVER", "ODBC Driver 18 for SQL Server")

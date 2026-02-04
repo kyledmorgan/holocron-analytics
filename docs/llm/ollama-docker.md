@@ -26,8 +26,8 @@ Running Ollama in Docker means:
 ├──────────────────┬────────────────────┬────────────────────────────┤
 │    sqlserver     │       ollama       │      (future runner)       │
 │                  │                    │                            │
-│  SQL Server 2022 │  Local LLM API     │  Python derive jobs        │
-│  Port: 1433      │  Port: 11434       │  Calls ollama:11434        │
+│  SQL Server 2025 │  Local LLM API     │  Python derive jobs        │
+│  Host Port: 1434 │  Port: 11434       │  Calls ollama:11434        │
 │  Volume: mssql_data │ Volume: ollama_data │                        │
 └──────────────────┴────────────────────┴────────────────────────────┘
                            │

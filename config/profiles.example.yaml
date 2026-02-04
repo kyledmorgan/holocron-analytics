@@ -6,7 +6,7 @@ profiles:
     db:
       engine: "sqlserver"
       host: "localhost"
-      port: 1433
-      database: "holocron"
+      port: 1434
+      database: "Holocron"
       user: "REPLACE_ME"
       password: "REPLACE_ME"
