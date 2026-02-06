@@ -54,6 +54,20 @@ runner:
   max_items: null  # null = unlimited
   max_retries: 3
   enable_discovery: true
+  
+  # Concurrent runner settings
+  # These control multi-worker parallel processing
+  max_workers: 4              # Number of concurrent worker threads
+  lease_seconds: 300          # How long a work item lease is valid (5 min)
+  heartbeat_interval: 30      # Seconds between worker heartbeat updates
+  
+  # Backoff settings for throttling/error responses
+  base_backoff_seconds: 2.0   # Base delay for exponential backoff
+  max_backoff_seconds: 300.0  # Maximum backoff delay (5 min)
+  respect_retry_after: true   # Honor Retry-After header from responses
+  
+  # Global rate limiting (requests per second, 0 = unlimited)
+  requests_per_second: 0.0
 
 # Source configurations
 sources:

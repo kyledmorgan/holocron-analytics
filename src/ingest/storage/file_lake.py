@@ -5,6 +5,8 @@ File-based storage writer for JSON data lake.
 import hashlib
 import json
 import logging
+import os
+import tempfile
 from datetime import datetime
 from pathlib import Path
 from typing import Optional
@@ -49,6 +51,9 @@ class FileLakeWriter(StorageWriter):
         """
         Write an ingestion record as a JSON file.
         
+        Uses atomic write pattern (write to temp file, then rename) to ensure
+        concurrency safety when multiple workers write simultaneously.
+        
         Args:
             record: The ingestion record to write
             
@@ -67,11 +72,13 @@ class FileLakeWriter(StorageWriter):
             if self.create_dirs:
                 dir_path.mkdir(parents=True, exist_ok=True)
 
-            # Generate filename
+            # Generate filename with work_item_id for uniqueness
             timestamp = record.fetched_at_utc.strftime("%Y%m%d_%H%M%S")
             safe_resource_id = self._sanitize_filename(record.resource_id)
             variant_suffix = f"_{record.variant.value}" if record.variant else ""
-            filename = f"{safe_resource_id}{variant_suffix}_{timestamp}_{record.ingest_id[:8]}.json"
+            # Include work_item_id for guaranteed uniqueness across concurrent workers
+            work_item_suffix = f"_{record.work_item_id[:8]}" if record.work_item_id else ""
+            filename = f"{safe_resource_id}{variant_suffix}_{timestamp}{work_item_suffix}_{record.ingest_id[:8]}.json"
             file_path = dir_path / filename
 
             # Prepare JSON content (full record with extended fields)
@@ -102,10 +109,31 @@ class FileLakeWriter(StorageWriter):
                 "payload": record.payload,
             }
 
-            # Write file
+            # Atomic write: write to temp file, then rename
+            # This prevents partial writes and race conditions
             indent = 2 if self.pretty_print else None
-            with open(file_path, "w", encoding="utf-8") as f:
-                json.dump(content, f, indent=indent, ensure_ascii=False)
+            
+            # Create temp file in same directory (ensures same filesystem for atomic rename)
+            temp_fd, temp_path = tempfile.mkstemp(
+                suffix=".json.tmp",
+                prefix=".ingest_",
+                dir=str(dir_path)
+            )
+            
+            try:
+                with os.fdopen(temp_fd, "w", encoding="utf-8") as f:
+                    json.dump(content, f, indent=indent, ensure_ascii=False)
+                
+                # Atomic rename (works on same filesystem)
+                os.replace(temp_path, file_path)
+                
+            except Exception:
+                # Clean up temp file on error
+                try:
+                    os.unlink(temp_path)
+                except OSError:
+                    pass
+                raise
 
             logger.debug(f"Wrote ingestion record to: {file_path}")
             return True

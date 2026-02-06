@@ -7,7 +7,7 @@ This is the default state store backend, replacing the deprecated SQLite impleme
 import json
 import logging
 import re
-from datetime import datetime, timezone
+from datetime import datetime, timezone, timedelta
 from typing import List, Optional
 
 try:
@@ -16,7 +16,7 @@ except ImportError:
     pyodbc = None
 
 from ..core.state_store import StateStore
-from ..core.models import WorkItem, WorkItemStatus, AcquisitionVariant
+from ..core.models import WorkItem, WorkItemStatus, AcquisitionVariant, WorkerInfo, WorkerStatus, QueueStats
 
 
 logger = logging.getLogger(__name__)
@@ -213,6 +213,92 @@ class SqlServerStateStore(StateStore):
                                AND name = 'rank')
                 BEGIN
                     ALTER TABLE [{self.schema}].[work_items] ADD rank INT
+                END
+            """, (self.schema,))
+            
+            # Add claimed_by column for concurrent processing
+            cursor.execute(f"""
+                IF EXISTS (SELECT * FROM sys.tables t 
+                           JOIN sys.schemas s ON t.schema_id = s.schema_id 
+                           WHERE t.name = 'work_items' AND s.name = ?)
+                AND NOT EXISTS (SELECT * FROM sys.columns 
+                               WHERE object_id = OBJECT_ID('[{self.schema}].[work_items]') 
+                               AND name = 'claimed_by')
+                BEGIN
+                    ALTER TABLE [{self.schema}].[work_items] ADD claimed_by NVARCHAR(100)
+                END
+            """, (self.schema,))
+            
+            # Add claimed_at column for tracking claim time
+            cursor.execute(f"""
+                IF EXISTS (SELECT * FROM sys.tables t 
+                           JOIN sys.schemas s ON t.schema_id = s.schema_id 
+                           WHERE t.name = 'work_items' AND s.name = ?)
+                AND NOT EXISTS (SELECT * FROM sys.columns 
+                               WHERE object_id = OBJECT_ID('[{self.schema}].[work_items]') 
+                               AND name = 'claimed_at')
+                BEGIN
+                    ALTER TABLE [{self.schema}].[work_items] ADD claimed_at DATETIME2
+                END
+            """, (self.schema,))
+            
+            # Add lease_expires_at column for lease management
+            cursor.execute(f"""
+                IF EXISTS (SELECT * FROM sys.tables t 
+                           JOIN sys.schemas s ON t.schema_id = s.schema_id 
+                           WHERE t.name = 'work_items' AND s.name = ?)
+                AND NOT EXISTS (SELECT * FROM sys.columns 
+                               WHERE object_id = OBJECT_ID('[{self.schema}].[work_items]') 
+                               AND name = 'lease_expires_at')
+                BEGIN
+                    ALTER TABLE [{self.schema}].[work_items] ADD lease_expires_at DATETIME2
+                END
+            """, (self.schema,))
+            
+            # Add last_error column for error visibility
+            cursor.execute(f"""
+                IF EXISTS (SELECT * FROM sys.tables t 
+                           JOIN sys.schemas s ON t.schema_id = s.schema_id 
+                           WHERE t.name = 'work_items' AND s.name = ?)
+                AND NOT EXISTS (SELECT * FROM sys.columns 
+                               WHERE object_id = OBJECT_ID('[{self.schema}].[work_items]') 
+                               AND name = 'last_error')
+                BEGIN
+                    ALTER TABLE [{self.schema}].[work_items] ADD last_error NVARCHAR(MAX)
+                END
+            """, (self.schema,))
+            
+            # Add next_retry_at column for backoff scheduling
+            cursor.execute(f"""
+                IF EXISTS (SELECT * FROM sys.tables t 
+                           JOIN sys.schemas s ON t.schema_id = s.schema_id 
+                           WHERE t.name = 'work_items' AND s.name = ?)
+                AND NOT EXISTS (SELECT * FROM sys.columns 
+                               WHERE object_id = OBJECT_ID('[{self.schema}].[work_items]') 
+                               AND name = 'next_retry_at')
+                BEGIN
+                    ALTER TABLE [{self.schema}].[work_items] ADD next_retry_at DATETIME2
+                END
+            """, (self.schema,))
+            
+            # Create worker_heartbeats table
+            cursor.execute(f"""
+                IF NOT EXISTS (SELECT * FROM sys.tables t 
+                               JOIN sys.schemas s ON t.schema_id = s.schema_id 
+                               WHERE t.name = 'worker_heartbeats' AND s.name = ?)
+                BEGIN
+                    CREATE TABLE [{self.schema}].[worker_heartbeats] (
+                        worker_id NVARCHAR(100) PRIMARY KEY,
+                        hostname NVARCHAR(255) NOT NULL,
+                        pid INT NOT NULL,
+                        started_at DATETIME2 NOT NULL,
+                        last_heartbeat_at DATETIME2 NOT NULL,
+                        items_processed INT NOT NULL DEFAULT 0,
+                        items_succeeded INT NOT NULL DEFAULT 0,
+                        items_failed INT NOT NULL DEFAULT 0,
+                        status NVARCHAR(20) NOT NULL DEFAULT 'active',
+                        current_work_item_id NVARCHAR(36)
+                    )
                 END
             """, (self.schema,))
             
@@ -632,7 +718,588 @@ class SqlServerStateStore(StateStore):
             updated_at=updated_at,
             variant=variant,
             rank=row.get("rank"),
+            claimed_by=row.get("claimed_by"),
+            claimed_at=self._parse_datetime(row.get("claimed_at")),
+            lease_expires_at=self._parse_datetime(row.get("lease_expires_at")),
+            last_error=row.get("last_error"),
+            next_retry_at=self._parse_datetime(row.get("next_retry_at")),
         )
+    
+    def _parse_datetime(self, value) -> Optional[datetime]:
+        """Parse a datetime value from database."""
+        if value is None:
+            return None
+        if isinstance(value, datetime):
+            return value
+        if isinstance(value, str):
+            return datetime.fromisoformat(value)
+        return None
+
+    # =========================================================================
+    # Concurrent Processing Methods
+    # =========================================================================
+    
+    def claim_work_item(
+        self,
+        worker_id: str,
+        lease_seconds: int = 300,
+        source_filter: Optional[str] = None,
+    ) -> Optional[WorkItem]:
+        """
+        Atomically claim the next available work item.
+        
+        Uses an atomic UPDATE with OUTPUT to prevent race conditions.
+        The item is marked as in_progress with a lease that expires
+        after lease_seconds.
+        
+        Args:
+            worker_id: Unique identifier for this worker
+            lease_seconds: How long the lease is valid (default 5 minutes)
+            source_filter: Optional source_system filter
+            
+        Returns:
+            The claimed WorkItem, or None if no items available
+        """
+        now = datetime.now(timezone.utc)
+        lease_expires = now + timedelta(seconds=lease_seconds)
+        
+        try:
+            cursor = self.conn.cursor()
+            
+            # Build filter clause
+            source_clause = ""
+            params = [
+                WorkItemStatus.IN_PROGRESS.value,
+                worker_id,
+                now,
+                lease_expires,
+                now,
+                WorkItemStatus.PENDING.value,
+                now,  # For next_retry_at check
+                WorkItemStatus.IN_PROGRESS.value,  # For expired lease recovery
+            ]
+            
+            if source_filter:
+                source_clause = "AND source_system = ?"
+                params.append(source_filter)
+            
+            # Atomic claim using UPDATE with OUTPUT
+            # Claims items that are:
+            # 1. PENDING status, OR
+            # 2. IN_PROGRESS but lease expired (stalled worker recovery)
+            # Respects next_retry_at for backoff scheduling
+            cursor.execute(f"""
+                UPDATE TOP(1) [{self.schema}].[work_items]
+                SET status = ?,
+                    claimed_by = ?,
+                    claimed_at = ?,
+                    lease_expires_at = ?,
+                    updated_at = ?,
+                    attempt = attempt + 1
+                OUTPUT INSERTED.*
+                WHERE (
+                    (status = ? AND (next_retry_at IS NULL OR next_retry_at <= ?))
+                    {source_clause}
+                )
+                OR (
+                    status = ? 
+                    AND lease_expires_at IS NOT NULL 
+                    AND lease_expires_at < ?
+                )
+            """, params + [now])
+            
+            columns = [column[0] for column in cursor.description] if cursor.description else []
+            row = cursor.fetchone()
+            
+            if row:
+                self.conn.commit()
+                row_dict = dict(zip(columns, row))
+                work_item = self._row_to_work_item(row_dict)
+                logger.debug(
+                    f"Worker {worker_id} claimed item {work_item.work_item_id} "
+                    f"(attempt {work_item.attempt})"
+                )
+                return work_item
+            
+            self.conn.commit()
+            return None
+            
+        except pyodbc.Error as e:
+            logger.error(f"Failed to claim work item: {e}")
+            self.conn.rollback()
+            raise
+    
+    def renew_lease(
+        self,
+        work_item_id: str,
+        worker_id: str,
+        lease_seconds: int = 300,
+    ) -> bool:
+        """
+        Renew the lease on a work item.
+        
+        Only succeeds if the worker still owns the item.
+        
+        Args:
+            work_item_id: ID of the work item
+            worker_id: ID of the worker that owns the item
+            lease_seconds: New lease duration
+            
+        Returns:
+            True if lease was renewed, False if worker doesn't own item
+        """
+        now = datetime.now(timezone.utc)
+        lease_expires = now + timedelta(seconds=lease_seconds)
+        
+        try:
+            cursor = self.conn.cursor()
+            
+            cursor.execute(f"""
+                UPDATE [{self.schema}].[work_items]
+                SET lease_expires_at = ?,
+                    updated_at = ?
+                WHERE work_item_id = ?
+                  AND claimed_by = ?
+                  AND status = ?
+            """, (
+                lease_expires,
+                now,
+                work_item_id,
+                worker_id,
+                WorkItemStatus.IN_PROGRESS.value,
+            ))
+            
+            updated = cursor.rowcount > 0
+            self.conn.commit()
+            
+            if updated:
+                logger.debug(f"Worker {worker_id} renewed lease on {work_item_id}")
+            else:
+                logger.warning(
+                    f"Worker {worker_id} failed to renew lease on {work_item_id} "
+                    "(item may have been reclaimed)"
+                )
+            
+            return updated
+            
+        except pyodbc.Error as e:
+            logger.error(f"Failed to renew lease: {e}")
+            self.conn.rollback()
+            raise
+    
+    def complete_work_item(
+        self,
+        work_item_id: str,
+        worker_id: str,
+    ) -> bool:
+        """
+        Mark a work item as completed.
+        
+        Only succeeds if the worker still owns the item.
+        
+        Args:
+            work_item_id: ID of the work item
+            worker_id: ID of the worker that owns the item
+            
+        Returns:
+            True if item was marked completed
+        """
+        now = datetime.now(timezone.utc)
+        
+        try:
+            cursor = self.conn.cursor()
+            
+            cursor.execute(f"""
+                UPDATE [{self.schema}].[work_items]
+                SET status = ?,
+                    updated_at = ?,
+                    claimed_by = NULL,
+                    claimed_at = NULL,
+                    lease_expires_at = NULL,
+                    last_error = NULL
+                WHERE work_item_id = ?
+                  AND claimed_by = ?
+            """, (
+                WorkItemStatus.COMPLETED.value,
+                now,
+                work_item_id,
+                worker_id,
+            ))
+            
+            updated = cursor.rowcount > 0
+            self.conn.commit()
+            
+            if updated:
+                logger.debug(f"Worker {worker_id} completed item {work_item_id}")
+            else:
+                logger.warning(
+                    f"Worker {worker_id} failed to complete {work_item_id} "
+                    "(item may have been reclaimed)"
+                )
+            
+            return updated
+            
+        except pyodbc.Error as e:
+            logger.error(f"Failed to complete work item: {e}")
+            self.conn.rollback()
+            raise
+    
+    def fail_work_item(
+        self,
+        work_item_id: str,
+        worker_id: str,
+        error_message: str,
+        retryable: bool = True,
+        backoff_seconds: Optional[int] = None,
+        max_retries: int = 3,
+    ) -> bool:
+        """
+        Mark a work item as failed, optionally scheduling a retry.
+        
+        Args:
+            work_item_id: ID of the work item
+            worker_id: ID of the worker that owns the item
+            error_message: Description of the failure
+            retryable: Whether this error is retryable
+            backoff_seconds: Seconds to wait before retry (for Retry-After)
+            max_retries: Maximum retry attempts
+            
+        Returns:
+            True if item was updated
+        """
+        now = datetime.now(timezone.utc)
+        
+        try:
+            cursor = self.conn.cursor()
+            
+            # Get current attempt count
+            cursor.execute(f"""
+                SELECT attempt FROM [{self.schema}].[work_items]
+                WHERE work_item_id = ? AND claimed_by = ?
+            """, (work_item_id, worker_id))
+            
+            row = cursor.fetchone()
+            if not row:
+                logger.warning(
+                    f"Worker {worker_id} failed to fail {work_item_id} "
+                    "(item not found or not owned)"
+                )
+                return False
+            
+            current_attempt = row[0]
+            
+            # Determine final status and next_retry_at
+            if retryable and current_attempt < max_retries:
+                status = WorkItemStatus.PENDING.value
+                # Calculate backoff if not specified
+                if backoff_seconds is None:
+                    # Exponential backoff with jitter: 2^attempt * (1 + random(0,1))
+                    import random
+                    base_delay = 2 ** current_attempt
+                    jitter = random.uniform(0, 1)
+                    backoff_seconds = int(base_delay * (1 + jitter))
+                next_retry = now + timedelta(seconds=backoff_seconds)
+            else:
+                status = WorkItemStatus.FAILED.value
+                next_retry = None
+            
+            cursor.execute(f"""
+                UPDATE [{self.schema}].[work_items]
+                SET status = ?,
+                    updated_at = ?,
+                    last_error = ?,
+                    error_message = ?,
+                    next_retry_at = ?,
+                    claimed_by = NULL,
+                    claimed_at = NULL,
+                    lease_expires_at = NULL
+                WHERE work_item_id = ?
+                  AND claimed_by = ?
+            """, (
+                status,
+                now,
+                error_message,
+                error_message,
+                next_retry,
+                work_item_id,
+                worker_id,
+            ))
+            
+            updated = cursor.rowcount > 0
+            self.conn.commit()
+            
+            if updated:
+                if status == WorkItemStatus.PENDING.value:
+                    logger.info(
+                        f"Worker {worker_id} failed item {work_item_id} "
+                        f"(attempt {current_attempt}/{max_retries}), "
+                        f"retry in {backoff_seconds}s: {error_message}"
+                    )
+                else:
+                    logger.warning(
+                        f"Worker {worker_id} permanently failed item {work_item_id} "
+                        f"after {current_attempt} attempts: {error_message}"
+                    )
+            
+            return updated
+            
+        except pyodbc.Error as e:
+            logger.error(f"Failed to fail work item: {e}")
+            self.conn.rollback()
+            raise
+    
+    def recover_expired_leases(self) -> int:
+        """
+        Recover work items with expired leases.
+        
+        Items that were in_progress but whose lease has expired
+        are reset to pending for another worker to claim.
+        
+        Returns:
+            Number of items recovered
+        """
+        now = datetime.now(timezone.utc)
+        
+        try:
+            cursor = self.conn.cursor()
+            
+            cursor.execute(f"""
+                UPDATE [{self.schema}].[work_items]
+                SET status = ?,
+                    updated_at = ?,
+                    claimed_by = NULL,
+                    claimed_at = NULL,
+                    lease_expires_at = NULL
+                WHERE status = ?
+                  AND lease_expires_at IS NOT NULL
+                  AND lease_expires_at < ?
+            """, (
+                WorkItemStatus.PENDING.value,
+                now,
+                WorkItemStatus.IN_PROGRESS.value,
+                now,
+            ))
+            
+            count = cursor.rowcount
+            self.conn.commit()
+            
+            if count > 0:
+                logger.info(f"Recovered {count} items with expired leases")
+            
+            return count
+            
+        except pyodbc.Error as e:
+            logger.error(f"Failed to recover expired leases: {e}")
+            self.conn.rollback()
+            raise
+    
+    # =========================================================================
+    # Worker Heartbeat Methods
+    # =========================================================================
+    
+    def update_worker_heartbeat(
+        self,
+        worker_id: str,
+        hostname: str,
+        pid: int,
+        items_processed: int = 0,
+        items_succeeded: int = 0,
+        items_failed: int = 0,
+        status: str = "active",
+        current_work_item_id: Optional[str] = None,
+    ) -> bool:
+        """
+        Update or create a worker heartbeat record.
+        
+        Args:
+            worker_id: Unique worker identifier
+            hostname: Machine hostname
+            pid: Process ID
+            items_processed: Total items processed
+            items_succeeded: Items succeeded
+            items_failed: Items failed
+            status: Worker status (active, idle, paused, stopping, stopped)
+            current_work_item_id: Currently processing item
+            
+        Returns:
+            True if successful
+        """
+        now = datetime.now(timezone.utc)
+        
+        try:
+            cursor = self.conn.cursor()
+            
+            # Upsert pattern using MERGE
+            cursor.execute(f"""
+                MERGE [{self.schema}].[worker_heartbeats] AS target
+                USING (SELECT ? AS worker_id) AS source
+                ON target.worker_id = source.worker_id
+                WHEN MATCHED THEN
+                    UPDATE SET 
+                        last_heartbeat_at = ?,
+                        items_processed = ?,
+                        items_succeeded = ?,
+                        items_failed = ?,
+                        status = ?,
+                        current_work_item_id = ?
+                WHEN NOT MATCHED THEN
+                    INSERT (worker_id, hostname, pid, started_at, last_heartbeat_at,
+                            items_processed, items_succeeded, items_failed, status, current_work_item_id)
+                    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
+            """, (
+                worker_id,
+                now,
+                items_processed,
+                items_succeeded,
+                items_failed,
+                status,
+                current_work_item_id,
+                worker_id,
+                hostname,
+                pid,
+                now,
+                now,
+                items_processed,
+                items_succeeded,
+                items_failed,
+                status,
+                current_work_item_id,
+            ))
+            
+            self.conn.commit()
+            return True
+            
+        except pyodbc.Error as e:
+            logger.error(f"Failed to update worker heartbeat: {e}")
+            self.conn.rollback()
+            raise
+    
+    def get_active_workers(self, timeout_seconds: int = 120) -> List[WorkerInfo]:
+        """
+        Get list of active workers.
+        
+        Args:
+            timeout_seconds: Consider workers inactive after this many seconds
+            
+        Returns:
+            List of WorkerInfo for active workers
+        """
+        cutoff = datetime.now(timezone.utc) - timedelta(seconds=timeout_seconds)
+        
+        try:
+            cursor = self.conn.cursor()
+            
+            cursor.execute(f"""
+                SELECT * FROM [{self.schema}].[worker_heartbeats]
+                WHERE last_heartbeat_at >= ?
+                ORDER BY started_at
+            """, (cutoff,))
+            
+            columns = [column[0] for column in cursor.description]
+            workers = []
+            
+            for row in cursor.fetchall():
+                row_dict = dict(zip(columns, row))
+                workers.append(WorkerInfo(
+                    worker_id=row_dict["worker_id"],
+                    hostname=row_dict["hostname"],
+                    pid=row_dict["pid"],
+                    started_at=row_dict["started_at"],
+                    last_heartbeat_at=row_dict["last_heartbeat_at"],
+                    items_processed=row_dict["items_processed"],
+                    items_succeeded=row_dict["items_succeeded"],
+                    items_failed=row_dict["items_failed"],
+                    status=WorkerStatus(row_dict["status"]),
+                    current_work_item_id=row_dict.get("current_work_item_id"),
+                ))
+            
+            return workers
+            
+        except pyodbc.Error as e:
+            logger.error(f"Failed to get active workers: {e}")
+            raise
+    
+    def remove_worker(self, worker_id: str) -> bool:
+        """
+        Remove a worker heartbeat record.
+        
+        Args:
+            worker_id: Worker to remove
+            
+        Returns:
+            True if worker was removed
+        """
+        try:
+            cursor = self.conn.cursor()
+            
+            cursor.execute(f"""
+                DELETE FROM [{self.schema}].[worker_heartbeats]
+                WHERE worker_id = ?
+            """, (worker_id,))
+            
+            removed = cursor.rowcount > 0
+            self.conn.commit()
+            
+            return removed
+            
+        except pyodbc.Error as e:
+            logger.error(f"Failed to remove worker: {e}")
+            self.conn.rollback()
+            raise
+    
+    # =========================================================================
+    # Queue Statistics
+    # =========================================================================
+    
+    def get_queue_stats(self) -> QueueStats:
+        """
+        Get detailed queue statistics.
+        
+        Returns:
+            QueueStats object with counts and metadata
+        """
+        try:
+            cursor = self.conn.cursor()
+            
+            # Get counts by status
+            cursor.execute(f"""
+                SELECT 
+                    status,
+                    COUNT(*) as count
+                FROM [{self.schema}].[work_items]
+                GROUP BY status
+            """)
+            
+            counts = {}
+            for row in cursor.fetchall():
+                counts[row[0]] = row[1]
+            
+            # Get oldest pending
+            cursor.execute(f"""
+                SELECT MIN(created_at) 
+                FROM [{self.schema}].[work_items]
+                WHERE status = ?
+            """, (WorkItemStatus.PENDING.value,))
+            
+            oldest_row = cursor.fetchone()
+            oldest_pending = oldest_row[0] if oldest_row else None
+            
+            # Get active worker count
+            workers = self.get_active_workers()
+            
+            return QueueStats(
+                pending=counts.get(WorkItemStatus.PENDING.value, 0),
+                in_progress=counts.get(WorkItemStatus.IN_PROGRESS.value, 0),
+                completed=counts.get(WorkItemStatus.COMPLETED.value, 0),
+                failed=counts.get(WorkItemStatus.FAILED.value, 0),
+                total=sum(counts.values()),
+                oldest_pending_at=oldest_pending,
+                active_workers=len(workers),
+            )
+            
+        except pyodbc.Error as e:
+            logger.error(f"Failed to get queue stats: {e}")
+            raise
 
     def close(self) -> None:
         """Close the database connection."""
