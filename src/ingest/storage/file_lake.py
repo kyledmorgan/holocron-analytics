@@ -5,6 +5,8 @@ File-based storage writer for JSON data lake.
 import hashlib
 import json
 import logging
+import os
+import tempfile
 from datetime import datetime
 from pathlib import Path
 from typing import Optional
@@ -109,9 +111,6 @@ class FileLakeWriter(StorageWriter):
 
             # Atomic write: write to temp file, then rename
             # This prevents partial writes and race conditions
-            import tempfile
-            import os
-            
             indent = 2 if self.pretty_print else None
             
             # Create temp file in same directory (ensures same filesystem for atomic rename)

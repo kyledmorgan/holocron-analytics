@@ -13,6 +13,7 @@ import hashlib
 import json
 import logging
 import os
+import random
 import signal
 import socket
 import threading
@@ -512,8 +513,6 @@ class ConcurrentRunner:
         Respects Retry-After header if present, otherwise uses
         exponential backoff with jitter.
         """
-        import random
-        
         # Check for Retry-After header
         if headers and self.config.respect_retry_after:
             retry_after = headers.get("Retry-After") or headers.get("retry-after")

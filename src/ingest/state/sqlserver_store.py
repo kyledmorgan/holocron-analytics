@@ -776,6 +776,7 @@ class SqlServerStateStore(StateStore):
                 now,
                 WorkItemStatus.PENDING.value,
                 now,  # For next_retry_at check
+                WorkItemStatus.IN_PROGRESS.value,  # For expired lease recovery
             ]
             
             if source_filter:
@@ -801,7 +802,7 @@ class SqlServerStateStore(StateStore):
                     {source_clause}
                 )
                 OR (
-                    status = 'in_progress' 
+                    status = ? 
                     AND lease_expires_at IS NOT NULL 
                     AND lease_expires_at < ?
                 )
