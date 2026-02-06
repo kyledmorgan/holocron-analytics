@@ -79,6 +79,16 @@ class IngestConfig:
                 "batch_size": 10,
                 "max_retries": 3,
                 "enable_discovery": True,
+                # Concurrent runner settings
+                "max_workers": 4,
+                "lease_seconds": 300,
+                "heartbeat_interval": 30,
+                # Backoff settings
+                "base_backoff_seconds": 2.0,
+                "max_backoff_seconds": 300.0,
+                "respect_retry_after": True,
+                # Rate limiting
+                "requests_per_second": 0.0,  # 0 = unlimited
             },
             "sources": [],
         }

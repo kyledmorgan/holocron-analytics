@@ -453,6 +453,37 @@ def parse_args():
         help="Show queue statistics and exit",
     )
     
+    # Concurrent runner options
+    parser.add_argument(
+        "--concurrent",
+        action="store_true",
+        help="Use concurrent runner with multiple workers",
+    )
+    
+    parser.add_argument(
+        "--max-workers",
+        type=int,
+        help="Number of concurrent worker threads (default: from config or 4)",
+    )
+    
+    parser.add_argument(
+        "--stop-after",
+        type=int,
+        help="Stop after processing this many items (for testing)",
+    )
+    
+    parser.add_argument(
+        "--source-filter",
+        type=str,
+        help="Only process items from this source_system",
+    )
+    
+    parser.add_argument(
+        "--status",
+        action="store_true",
+        help="Show detailed queue and worker status",
+    )
+    
     return parser.parse_args()
 
 
@@ -478,59 +509,156 @@ def main() -> int:
     logger.info(f"Storage writers: {[w.get_name() for w in storage_writers]}")
     logger.info(f"Discovery plugins: {[p.get_name() for p in discovery_plugins]}")
     
-    # Create runner
     runner_config = config.get_runner_config()
-    runner = IngestRunner(
-        state_store=state_store,
-        connectors=connectors,
-        storage_writers=storage_writers,
-        discovery_plugins=discovery_plugins,
-        max_retries=runner_config.get("max_retries", 3),
-        enable_discovery=runner_config.get("enable_discovery", True),
-    )
     
-    try:
-        # Show stats mode
-        if args.stats:
-            stats = runner.get_stats()
-            logger.info("Queue statistics:")
-            logger.info(f"  Queue: {stats['queue']}")
-            return 0
+    # Decide which runner to use
+    use_concurrent = args.concurrent or args.max_workers or args.status
+    
+    if use_concurrent:
+        # Use concurrent runner
+        from ingest.runner import ConcurrentRunner, RunnerConfig
         
-        # Seed queue
-        if args.seed:
-            logger.info("Seeding queue...")
-            seed_items = create_seed_work_items(config)
-            enqueued = runner.seed_queue(seed_items)
-            logger.info(f"Seeded {enqueued} items")
-            
-            if not args.max_items and not args.batch_size:
-                # Just seeding, not running
-                return 0
-        
-        # Run ingestion
-        batch_size = args.batch_size or runner_config.get("batch_size", 10)
-        max_items = args.max_items or runner_config.get("max_items")
-        
-        logger.info("Starting ingestion run...")
-        metrics = runner.run(
-            batch_size=batch_size,
-            max_items=max_items,
+        concurrent_config = RunnerConfig(
+            max_workers=args.max_workers or runner_config.get("max_workers", 4),
+            lease_seconds=runner_config.get("lease_seconds", 300),
+            heartbeat_interval=runner_config.get("heartbeat_interval", 30),
+            batch_size=args.batch_size or runner_config.get("batch_size", 10),
+            max_items=args.max_items or runner_config.get("max_items"),
+            stop_after=args.stop_after,
+            max_retries=runner_config.get("max_retries", 3),
+            enable_discovery=runner_config.get("enable_discovery", True),
+            source_filter=args.source_filter,
+            base_backoff_seconds=runner_config.get("base_backoff_seconds", 2.0),
+            max_backoff_seconds=runner_config.get("max_backoff_seconds", 300.0),
+            respect_retry_after=runner_config.get("respect_retry_after", True),
+            requests_per_second=runner_config.get("requests_per_second", 0.0),
         )
         
-        logger.info("Run complete!")
-        logger.info(f"Final metrics: {metrics}")
+        runner = ConcurrentRunner(
+            state_store=state_store,
+            connectors=connectors,
+            storage_writers=storage_writers,
+            discovery_plugins=discovery_plugins,
+            config=concurrent_config,
+        )
         
-        return 0
+        try:
+            # Show detailed status mode
+            if args.status:
+                status = runner.get_status()
+                print("\n=== Queue Status ===")
+                queue = status["queue"]
+                print(f"  Pending:     {queue['pending']}")
+                print(f"  In Progress: {queue['in_progress']}")
+                print(f"  Completed:   {queue['completed']}")
+                print(f"  Failed:      {queue['failed']}")
+                print(f"  Total:       {queue['total']}")
+                if queue.get("oldest_pending_at"):
+                    print(f"  Oldest Pending: {queue['oldest_pending_at']}")
+                
+                print("\n=== Active Workers ===")
+                workers = status["workers"]
+                if workers:
+                    for w in workers:
+                        print(f"  {w['worker_id']} ({w['status']})")
+                        print(f"    Hostname: {w['hostname']}, PID: {w['pid']}")
+                        print(f"    Processed: {w['items_processed']}")
+                        if w.get("current_item"):
+                            print(f"    Current: {w['current_item']}")
+                        print(f"    Last Heartbeat: {w['last_heartbeat']}")
+                else:
+                    print("  No active workers")
+                
+                return 0
+            
+            # Seed queue
+            if args.seed:
+                logger.info("Seeding queue...")
+                seed_items = create_seed_work_items(config)
+                enqueued = 0
+                for item in seed_items:
+                    if state_store.enqueue(item):
+                        enqueued += 1
+                logger.info(f"Seeded {enqueued} items")
+                
+                if not args.max_items and not args.batch_size and not args.concurrent:
+                    # Just seeding, not running
+                    return 0
+            
+            # Run concurrent ingestion
+            logger.info(f"Starting concurrent ingestion run with {concurrent_config.max_workers} workers...")
+            metrics = runner.run()
+            
+            logger.info("Run complete!")
+            logger.info(f"Final metrics: processed={metrics.items_processed}, "
+                       f"succeeded={metrics.items_succeeded}, "
+                       f"failed={metrics.items_failed}")
+            
+            return 0
+            
+        except KeyboardInterrupt:
+            logger.info("Interrupted by user, shutting down...")
+            runner.shutdown()
+            return 1
+        except Exception as e:
+            logger.exception(f"Fatal error: {e}")
+            return 1
+        finally:
+            runner.close()
+    
+    else:
+        # Use original single-threaded runner
+        runner = IngestRunner(
+            state_store=state_store,
+            connectors=connectors,
+            storage_writers=storage_writers,
+            discovery_plugins=discovery_plugins,
+            max_retries=runner_config.get("max_retries", 3),
+            enable_discovery=runner_config.get("enable_discovery", True),
+        )
         
-    except KeyboardInterrupt:
-        logger.info("Interrupted by user")
-        return 1
-    except Exception as e:
-        logger.exception(f"Fatal error: {e}")
-        return 1
-    finally:
-        runner.close()
+        try:
+            # Show stats mode
+            if args.stats:
+                stats = runner.get_stats()
+                logger.info("Queue statistics:")
+                logger.info(f"  Queue: {stats['queue']}")
+                return 0
+            
+            # Seed queue
+            if args.seed:
+                logger.info("Seeding queue...")
+                seed_items = create_seed_work_items(config)
+                enqueued = runner.seed_queue(seed_items)
+                logger.info(f"Seeded {enqueued} items")
+                
+                if not args.max_items and not args.batch_size:
+                    # Just seeding, not running
+                    return 0
+            
+            # Run ingestion
+            batch_size = args.batch_size or runner_config.get("batch_size", 10)
+            max_items = args.max_items or runner_config.get("max_items")
+            
+            logger.info("Starting ingestion run...")
+            metrics = runner.run(
+                batch_size=batch_size,
+                max_items=max_items,
+            )
+            
+            logger.info("Run complete!")
+            logger.info(f"Final metrics: {metrics}")
+            
+            return 0
+            
+        except KeyboardInterrupt:
+            logger.info("Interrupted by user")
+            return 1
+        except Exception as e:
+            logger.exception(f"Fatal error: {e}")
+            return 1
+        finally:
+            runner.close()
 
 
 if __name__ == "__main__":
