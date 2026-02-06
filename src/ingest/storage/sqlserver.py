@@ -98,7 +98,10 @@ class SqlServerIngestWriter(StorageWriter):
             request_headers_json = json.dumps(record.request_headers) if record.request_headers else None
             response_headers_json = json.dumps(record.response_headers) if record.response_headers else None
             
-            # Insert statement
+            # Get variant value
+            variant_value = record.variant.value if record.variant else None
+            
+            # Insert statement with extended columns
             sql = f"""
                 INSERT INTO [{self.schema}].[{self.table}] (
                     ingest_id,
@@ -118,8 +121,14 @@ class SqlServerIngestWriter(StorageWriter):
                     work_item_id,
                     attempt,
                     error_message,
-                    duration_ms
-                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                    duration_ms,
+                    variant,
+                    content_type,
+                    content_length,
+                    file_path,
+                    request_timestamp,
+                    response_timestamp
+                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
             """
             
             cursor.execute(
@@ -143,6 +152,12 @@ class SqlServerIngestWriter(StorageWriter):
                     record.attempt,
                     record.error_message,
                     record.duration_ms,
+                    variant_value,
+                    record.content_type,
+                    record.content_length,
+                    record.file_path,
+                    record.request_timestamp,
+                    record.response_timestamp,
                 )
             )
             

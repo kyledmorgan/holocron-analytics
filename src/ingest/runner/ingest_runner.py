@@ -190,7 +190,21 @@ class IngestRunner:
                 
                 return
             
-            # Create ingest record
+            # Create ingest record with extended response metadata
+            response_timestamp = datetime.now(timezone.utc)
+            
+            # Extract content type and length from response headers
+            content_type = None
+            content_length = None
+            if response.headers:
+                content_type = response.headers.get("Content-Type") or response.headers.get("content-type")
+                length_str = response.headers.get("Content-Length") or response.headers.get("content-length")
+                if length_str:
+                    try:
+                        content_length = int(length_str)
+                    except ValueError:
+                        pass
+            
             ingest_record = IngestRecord(
                 ingest_id=str(uuid.uuid4()),
                 source_system=work_item.source_system,
@@ -203,12 +217,16 @@ class IngestRunner:
                 status_code=response.status_code,
                 response_headers=response.headers,
                 payload=response.payload,
-                fetched_at_utc=datetime.now(timezone.utc),
+                fetched_at_utc=response_timestamp,
                 hash_sha256=self._compute_hash(response.payload),
                 run_id=work_item.run_id,
                 work_item_id=work_item.work_item_id,
                 attempt=work_item.attempt,
                 duration_ms=response.duration_ms,
+                variant=work_item.variant,
+                content_type=content_type,
+                content_length=content_length,
+                response_timestamp=response_timestamp,
             )
             
             # Write to storage

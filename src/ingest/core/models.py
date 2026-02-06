@@ -18,6 +18,18 @@ class WorkItemStatus(str, Enum):
     SKIPPED = "skipped"
 
 
+class AcquisitionVariant(str, Enum):
+    """
+    Variant of content being acquired.
+    
+    For a single logical resource, we may fetch multiple variants:
+    - RAW: Source/API format (e.g., wikitext, raw API response)
+    - HTML: Rendered HTML format
+    """
+    RAW = "raw"
+    HTML = "html"
+
+
 @dataclass
 class WorkItem:
     """
@@ -40,6 +52,8 @@ class WorkItem:
         discovered_from: Optional reference to parent work item
         created_at: When the work item was created
         updated_at: When the work item was last updated
+        variant: Content variant being fetched (RAW or HTML)
+        rank: Inbound link rank for prioritization (optional)
     """
     source_system: str
     source_name: str
@@ -58,10 +72,20 @@ class WorkItem:
     created_at: datetime = field(default_factory=lambda: datetime.now(timezone.utc))
     updated_at: datetime = field(default_factory=lambda: datetime.now(timezone.utc))
     work_item_id: str = field(default_factory=lambda: str(uuid.uuid4()))
+    variant: Optional[AcquisitionVariant] = None
+    rank: Optional[int] = None
 
     def get_dedupe_key(self) -> str:
-        """Generate a stable key for deduplication."""
-        return f"{self.source_system}:{self.source_name}:{self.resource_type}:{self.resource_id}"
+        """
+        Generate a stable key for deduplication.
+        
+        The key includes variant if present, ensuring RAW and HTML 
+        versions of the same resource are tracked separately.
+        """
+        base_key = f"{self.source_system}:{self.source_name}:{self.resource_type}:{self.resource_id}"
+        if self.variant:
+            return f"{base_key}:{self.variant.value}"
+        return base_key
 
 
 @dataclass
@@ -90,6 +114,12 @@ class IngestRecord:
         attempt: Attempt number for this fetch
         error_message: Error message if fetch failed
         duration_ms: Time taken to fetch in milliseconds
+        variant: Content variant (RAW or HTML)
+        content_type: MIME content type of the response
+        content_length: Size of response body in bytes
+        file_path: Path to stored file artifact (if payload stored on disk)
+        request_timestamp: When the request was initiated
+        response_timestamp: When the response was received
     """
     ingest_id: str
     source_system: str
@@ -109,3 +139,9 @@ class IngestRecord:
     attempt: int = 1
     error_message: Optional[str] = None
     duration_ms: Optional[int] = None
+    variant: Optional[AcquisitionVariant] = None
+    content_type: Optional[str] = None
+    content_length: Optional[int] = None
+    file_path: Optional[str] = None
+    request_timestamp: Optional[datetime] = None
+    response_timestamp: Optional[datetime] = None

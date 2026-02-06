@@ -16,7 +16,7 @@ except ImportError:
     pyodbc = None
 
 from ..core.state_store import StateStore
-from ..core.models import WorkItem, WorkItemStatus
+from ..core.models import WorkItem, WorkItemStatus, AcquisitionVariant
 
 
 logger = logging.getLogger(__name__)
@@ -183,8 +183,36 @@ class SqlServerStateStore(StateStore):
                         created_at DATETIME2 NOT NULL,
                         updated_at DATETIME2 NOT NULL,
                         error_message NVARCHAR(MAX),
-                        dedupe_key NVARCHAR(800) NOT NULL
+                        dedupe_key NVARCHAR(800) NOT NULL,
+                        variant NVARCHAR(20),
+                        rank INT
                     )
+                END
+            """, (self.schema,))
+            
+            # Add variant column if table exists but column doesn't
+            cursor.execute(f"""
+                IF EXISTS (SELECT * FROM sys.tables t 
+                           JOIN sys.schemas s ON t.schema_id = s.schema_id 
+                           WHERE t.name = 'work_items' AND s.name = ?)
+                AND NOT EXISTS (SELECT * FROM sys.columns 
+                               WHERE object_id = OBJECT_ID('[{self.schema}].[work_items]') 
+                               AND name = 'variant')
+                BEGIN
+                    ALTER TABLE [{self.schema}].[work_items] ADD variant NVARCHAR(20)
+                END
+            """, (self.schema,))
+            
+            # Add rank column if table exists but column doesn't
+            cursor.execute(f"""
+                IF EXISTS (SELECT * FROM sys.tables t 
+                           JOIN sys.schemas s ON t.schema_id = s.schema_id 
+                           WHERE t.name = 'work_items' AND s.name = ?)
+                AND NOT EXISTS (SELECT * FROM sys.columns 
+                               WHERE object_id = OBJECT_ID('[{self.schema}].[work_items]') 
+                               AND name = 'rank')
+                BEGIN
+                    ALTER TABLE [{self.schema}].[work_items] ADD rank INT
                 END
             """, (self.schema,))
             
@@ -270,8 +298,8 @@ class SqlServerStateStore(StateStore):
                     work_item_id, source_system, source_name, resource_type, resource_id,
                     request_uri, request_method, request_headers, request_body, metadata,
                     priority, status, attempt, run_id, discovered_from,
-                    created_at, updated_at, dedupe_key
-                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                    created_at, updated_at, dedupe_key, variant, rank
+                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
             """, (
                 work_item.work_item_id,
                 work_item.source_system,
@@ -291,6 +319,8 @@ class SqlServerStateStore(StateStore):
                 work_item.created_at,
                 work_item.updated_at,
                 dedupe_key,
+                work_item.variant.value if work_item.variant else None,
+                work_item.rank,
             ))
             
             self.conn.commit()
@@ -574,6 +604,14 @@ class SqlServerStateStore(StateStore):
         if isinstance(updated_at, str):
             updated_at = datetime.fromisoformat(updated_at)
         
+        # Handle variant field
+        variant = None
+        if row.get("variant"):
+            try:
+                variant = AcquisitionVariant(row["variant"])
+            except ValueError:
+                pass  # Keep as None if invalid value
+        
         return WorkItem(
             work_item_id=row["work_item_id"],
             source_system=row["source_system"],
@@ -592,6 +630,8 @@ class SqlServerStateStore(StateStore):
             discovered_from=row["discovered_from"],
             created_at=created_at,
             updated_at=updated_at,
+            variant=variant,
+            rank=row.get("rank"),
         )
 
     def close(self) -> None:

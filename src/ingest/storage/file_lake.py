@@ -70,10 +70,11 @@ class FileLakeWriter(StorageWriter):
             # Generate filename
             timestamp = record.fetched_at_utc.strftime("%Y%m%d_%H%M%S")
             safe_resource_id = self._sanitize_filename(record.resource_id)
-            filename = f"{safe_resource_id}_{timestamp}_{record.ingest_id[:8]}.json"
+            variant_suffix = f"_{record.variant.value}" if record.variant else ""
+            filename = f"{safe_resource_id}{variant_suffix}_{timestamp}_{record.ingest_id[:8]}.json"
             file_path = dir_path / filename
 
-            # Prepare JSON content (full record)
+            # Prepare JSON content (full record with extended fields)
             content = {
                 "ingest_id": record.ingest_id,
                 "source_system": record.source_system,
@@ -92,6 +93,12 @@ class FileLakeWriter(StorageWriter):
                 "attempt": record.attempt,
                 "error_message": record.error_message,
                 "duration_ms": record.duration_ms,
+                "variant": record.variant.value if record.variant else None,
+                "content_type": record.content_type,
+                "content_length": record.content_length,
+                "file_path": str(file_path),
+                "request_timestamp": record.request_timestamp.isoformat() if record.request_timestamp else None,
+                "response_timestamp": record.response_timestamp.isoformat() if record.response_timestamp else None,
                 "payload": record.payload,
             }
 
