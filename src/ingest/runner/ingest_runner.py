@@ -157,8 +157,14 @@ class IngestRunner:
                 body=work_item.request_body,
             )
             
+            # Capture request timestamp before fetch
+            request_timestamp = datetime.now(timezone.utc)
+            
             # Fetch data
             response = connector.fetch(request)
+            
+            # Capture response timestamp immediately after fetch
+            response_timestamp = datetime.now(timezone.utc)
             
             # Check if successful
             if response.status_code < 200 or response.status_code >= 300:
@@ -190,9 +196,6 @@ class IngestRunner:
                 
                 return
             
-            # Create ingest record with extended response metadata
-            response_timestamp = datetime.now(timezone.utc)
-            
             # Extract content type and length from response headers
             content_type = None
             content_length = None
@@ -205,6 +208,7 @@ class IngestRunner:
                     except ValueError:
                         pass
             
+            # Create ingest record with full request/response metadata
             ingest_record = IngestRecord(
                 ingest_id=str(uuid.uuid4()),
                 source_system=work_item.source_system,
@@ -226,6 +230,7 @@ class IngestRunner:
                 variant=work_item.variant,
                 content_type=content_type,
                 content_length=content_length,
+                request_timestamp=request_timestamp,
                 response_timestamp=response_timestamp,
             )
             

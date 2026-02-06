@@ -46,23 +46,6 @@ BEGIN
 END
 GO
 
--- Add request_timestamp for when request was initiated
-IF NOT EXISTS (
-    SELECT * FROM sys.columns 
-    WHERE object_id = OBJECT_ID('[ingest].[work_items]') 
-    AND name = 'request_timestamp'
-)
-BEGIN
-    ALTER TABLE [ingest].[work_items] 
-    ADD request_timestamp DATETIME2 NULL;
-    PRINT 'Column [request_timestamp] added to [ingest].[work_items].'
-END
-ELSE
-BEGIN
-    PRINT 'Column [request_timestamp] already exists on [ingest].[work_items].'
-END
-GO
-
 -- ============================================================================
 -- Extend IngestRecords table with additional response metadata
 -- ============================================================================
@@ -169,22 +152,8 @@ BEGIN
 END
 GO
 
--- Add rank column for tracking inbound link rank
-IF NOT EXISTS (
-    SELECT * FROM sys.columns 
-    WHERE object_id = OBJECT_ID('[ingest].[IngestRecords]') 
-    AND name = 'rank'
-)
-BEGIN
-    ALTER TABLE [ingest].[IngestRecords] 
-    ADD rank INT NULL;
-    PRINT 'Column [rank] added to [ingest].[IngestRecords].'
-END
-ELSE
-BEGIN
-    PRINT 'Column [rank] already exists on [ingest].[IngestRecords].'
-END
-GO
+-- Note: rank is stored on work_items table and can be accessed via join on work_item_id
+-- This avoids data duplication while still enabling rank-based queries
 
 -- ============================================================================
 -- Additional indexes for efficient querying
