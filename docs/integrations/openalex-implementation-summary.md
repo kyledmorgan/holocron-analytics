@@ -158,10 +158,10 @@ python3 src/ingest/ingest_cli.py --config config/ingest.yaml --max-items 10
 
 ```bash
 # View data lake
-ls -R local/data_lake/openalex/
+ls -R W:/data_lake/openalex/
 
 # Inspect a work
-cat local/data_lake/openalex/openalex/work/*.json | python3 -m json.tool
+cat W:/data_lake/openalex/openalex/work/*.json | python3 -m json.tool
 ```
 
 ### 3. Run Demo

@@ -19,7 +19,7 @@ logger = logging.getLogger(__name__)
 def create_content_work_items(
     source_name: str = "wookieepedia",
     api_url: str = "https://starwars.fandom.com/api.php",
-    data_lake_base: Path = Path("local/data_lake"),
+    data_lake_base: Path = Path("W:/data_lake"),
     limit: Optional[int] = None,
     priority: int = 1,
     run_id: Optional[str] = None,
@@ -139,7 +139,7 @@ def seed_content_queue(
     state_store,
     source_name: str = "wookieepedia",
     api_url: str = "https://starwars.fandom.com/api.php",
-    data_lake_base: Path = Path("local/data_lake"),
+    data_lake_base: Path = Path("W:/data_lake"),
     limit: Optional[int] = None,
     priority: int = 1,
     run_id: Optional[str] = None,

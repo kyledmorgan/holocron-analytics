@@ -6,7 +6,8 @@ storage:
   # File-based data lake
   data_lake:
     enabled: true
-    base_dir: "local/data_lake"
+    # Override via INGEST_DATA_LAKE_DIR environment variable.
+    base_dir: "W:/data_lake"
     pretty_print: true
   
   # SQL Server storage (optional)
@@ -89,22 +90,50 @@ sources:
 
 # Seed definitions (initial work items)
 seeds:
-  # Example: Fetch specific Wikipedia pages
-  - source: "wikipedia"
-    resource_type: "page"
-    titles:
-      - "Star Wars"
-      - "The Empire Strikes Back"
-      - "Return of the Jedi"
-    priority: 10
+  # # Example: Fetch specific Wikipedia pages
+  # - source: "wikipedia"
+  #   resource_type: "page"
+  #   titles:
+  #     - "Star Wars"
+  #     - "The Empire Strikes Back"
+  #     - "Return of the Jedi"
+  #   priority: 10
 
   # Wookieepedia seed pages for link crawling
   - source: "wookieepedia"
     resource_type: "page"
     titles:
-      - "Luke Skywalker"
+      - "Jar Jar Binks"
+      - "Rogue One"
+      - "Dark Forces"
+      - "Mandalorian"
+      - "Ahsoka Tano
+      - "The Child (Star Wars)
+      - "Thrawn (Star Wars character)
+      - "Bo-Katan Kryze"
+      - "Grand Admiral Thrawn"
       - "Darth Vader"
-      - "Yoda"
-      - "Obi-Wan Kenobi"
+      - "Luke Skywalker"
+      - "Princess Leia"
       - "Han Solo"
+      - "Obi-Wan Kenobi"
+      - "Yoda"
+      - "Emperor Palpatine"
+      - "Chewbacca"
+      - "C-3PO"
+      - "R2-D2"
+      - "Boba Fett"
+      - "Lando Calrissian"
+      - "Darth Maul"
+      - "Qui-Gon Jinn"
+      - "Mace Windu"
+      - "Count Dooku"
+      - "General Grievous"
+      - "Kylo Ren"
+      - "Rey"
+      - "Finn"
+      - "Poe Dameron"
+      - "Captain Phasma"
+      - "Supreme Leader Snoke"
+      - "Darth Sidious"
     priority: 10

@@ -3,6 +3,7 @@ Configuration loader for the ingestion framework.
 """
 
 import logging
+import os
 from pathlib import Path
 from typing import Any, Dict, List, Optional
 
@@ -31,6 +32,7 @@ class IngestConfig:
         """
         self.config_path = config_path
         self.config = self._load_config() if config_path else self._default_config()
+        self._apply_env_overrides()
 
     def _load_config(self) -> Dict[str, Any]:
         """Load configuration from YAML file."""
@@ -52,11 +54,12 @@ class IngestConfig:
 
     def _default_config(self) -> Dict[str, Any]:
         """Return default configuration."""
+        data_lake_dir = os.environ.get("INGEST_DATA_LAKE_DIR", "W:/data_lake")
         return {
             "storage": {
                 "data_lake": {
                     "enabled": True,
-                    "base_dir": "local/data_lake",
+                    "base_dir": data_lake_dir,
                 },
                 "sql_server": {
                     "enabled": False,
@@ -79,6 +82,14 @@ class IngestConfig:
             },
             "sources": [],
         }
+
+    def _apply_env_overrides(self) -> None:
+        """Apply environment variable overrides to loaded config."""
+        data_lake_dir = os.environ.get("INGEST_DATA_LAKE_DIR")
+        if data_lake_dir:
+            storage = self.config.setdefault("storage", {})
+            data_lake = storage.setdefault("data_lake", {})
+            data_lake["base_dir"] = data_lake_dir
 
     def get_storage_config(self) -> Dict[str, Any]:
         """Get storage configuration."""

@@ -80,7 +80,7 @@ seeds:
 ### Data Lake
 Raw API responses stored at:
 ```
-local/data_lake/mediawiki/wookieepedia/page/
+W:\data_lake\mediawiki\wookieepedia\page\
 ```
 
 ### State Database
@@ -124,10 +124,10 @@ Monitor the terminal output for:
 ### Verify Results
 ```powershell
 # Count files in data lake
-Get-ChildItem -Path "local/data_lake/mediawiki/wookieepedia/page" -Recurse -File | Measure-Object
+Get-ChildItem -Path "W:\\data_lake\\mediawiki\\wookieepedia\\page" -Recurse -File | Measure-Object
 
 # View recent file
-Get-ChildItem -Path "local/data_lake/mediawiki/wookieepedia/page" -Recurse -File | Sort-Object LastWriteTime -Descending | Select-Object -First 1 | Get-Content | ConvertFrom-Json | ConvertTo-Json -Depth 10
+Get-ChildItem -Path "W:\\data_lake\\mediawiki\\wookieepedia\\page" -Recurse -File | Sort-Object LastWriteTime -Descending | Select-Object -First 1 | Get-Content | ConvertFrom-Json | ConvertTo-Json -Depth 10
 ```
 
 ## Troubleshooting

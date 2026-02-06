@@ -19,6 +19,13 @@ from pathlib import Path
 # Add src directory to path
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
+try:
+    from dotenv import load_dotenv
+    load_dotenv()
+except ImportError:
+    # dotenv is optional
+    pass
+
 from ingest.config import IngestConfig
 from ingest.core.models import WorkItem
 from ingest.connectors import HttpConnector, MediaWikiConnector, OpenAlexConnector
@@ -106,7 +113,7 @@ def build_storage_writers(config: IngestConfig) -> list:
     # Data lake writer
     if storage_config.get("data_lake", {}).get("enabled", True):
         lake_config = storage_config["data_lake"]
-        base_dir = Path(lake_config.get("base_dir", "local/data_lake"))
+        base_dir = Path(lake_config.get("base_dir", "W:/data_lake"))
         
         writer = FileLakeWriter(
             base_dir=base_dir,
@@ -174,7 +181,11 @@ def build_state_store(config: IngestConfig):
         port=int(sql_config.get("port", os.environ.get("INGEST_SQLSERVER_PORT", "1434"))),
         database=sql_config.get("database", os.environ.get("INGEST_SQLSERVER_DATABASE", "Holocron")),
         username=sql_config.get("user", os.environ.get("INGEST_SQLSERVER_USER", "sa")),
-        password=os.environ.get("INGEST_SQLSERVER_PASSWORD") or os.environ.get("MSSQL_SA_PASSWORD"),
+        password=(
+            os.environ.get("INGEST_SQLSERVER_PASSWORD")
+            or os.environ.get("MSSQL_SA_PASSWORD")
+            or sql_config.get("password")
+        ),
         driver=sql_config.get("driver", os.environ.get("INGEST_SQLSERVER_DRIVER", "ODBC Driver 18 for SQL Server")),
         schema=sql_config.get("schema", "ingest"),
     )

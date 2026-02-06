@@ -98,6 +98,8 @@ cp config/ingest.example.yaml config/ingest.yaml
    - User agent (required for MediaWiki etiquette)
    - Seed pages to start crawling
 
+You can also override the data lake directory with `INGEST_DATA_LAKE_DIR`.
+
 ### Running
 
 ```bash
@@ -152,7 +154,7 @@ See `config/ingest.example.yaml` for a fully commented example.
 ### File Lake Structure
 
 ```
-local/data_lake/
+W:/data_lake/
 ├── mediawiki/
 │   └── wikipedia/
 │       └── page/

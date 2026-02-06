@@ -74,10 +74,10 @@ python3 src/ingest/ingest_cli.py --config config/ingest.yaml --max-items 10
 
 ```bash
 # View data lake structure
-ls -R local/data_lake/openalex/
+ls -R W:/data_lake/openalex/
 
 # Inspect a work
-cat local/data_lake/openalex/openalex/work/*.json | python3 -m json.tool | head -100
+cat W:/data_lake/openalex/openalex/work/*.json | python3 -m json.tool | head -100
 ```
 
 ## Configuration Reference
@@ -202,7 +202,7 @@ This ensures:
 OpenAlex data is stored following the existing pattern:
 
 ```
-local/data_lake/
+W:/data_lake/
 └── openalex/
     └── openalex/
         └── work/

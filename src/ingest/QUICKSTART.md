@@ -17,6 +17,9 @@ cp config/ingest.example.yaml config/ingest.yaml
 
 # Edit if needed (the defaults work out of the box)
 # nano config/ingest.yaml
+
+# Optional: override data lake location
+# export INGEST_DATA_LAKE_DIR="W:/data_lake"
 ```
 
 ### Step 3: Seed the Queue
@@ -70,10 +73,10 @@ INFO Run complete!
 
 ```bash
 # List the data lake directory
-ls -R local/data_lake/
+ls -R W:/data_lake/
 
 # View a specific file
-cat local/data_lake/mediawiki/wikipedia/page/Star_Wars_*.json | python3 -m json.tool | head -50
+cat W:/data_lake/mediawiki/wikipedia/page/Star_Wars_*.json | python3 -m json.tool | head -50
 ```
 
 ### Step 7: Inspect State Database
@@ -95,7 +98,7 @@ python scripts/sqlserver_state_admin.py
 
 1. **Seeding**: Added 3 Wikipedia pages to the work queue
 2. **Processing**: Fetched each page via MediaWiki API
-3. **Storage**: Saved raw JSON payloads to `local/data_lake/`
+3. **Storage**: Saved raw JSON payloads to `W:/data_lake/`
 4. **Discovery**: Extracted links from each page (if enabled)
 5. **State Tracking**: Updated SQL Server database with completion status
 

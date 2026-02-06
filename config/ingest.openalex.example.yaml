@@ -7,7 +7,8 @@ storage:
   # File-based data lake
   data_lake:
     enabled: true
-    base_dir: "local/data_lake"
+    # Override via INGEST_DATA_LAKE_DIR environment variable.
+    base_dir: "W:/data_lake"
     pretty_print: true
 
 # State store configuration
