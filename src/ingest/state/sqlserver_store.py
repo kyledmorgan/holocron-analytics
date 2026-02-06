@@ -7,6 +7,7 @@ This is the default state store backend, replacing the deprecated SQLite impleme
 import json
 import logging
 import re
+import threading
 from datetime import datetime, timezone, timedelta
 from typing import List, Optional
 
@@ -91,7 +92,10 @@ class SqlServerStateStore(StateStore):
                 f"TrustServerCertificate={trust_cert}"
             )
         
-        self.conn = None
+        self._thread_local = threading.local()
+        self._connections = []
+        self._connections_lock = threading.Lock()
+        self.conn = _ThreadLocalConnectionProxy(self)
         self._connect()
         
         if auto_init:
@@ -135,11 +139,21 @@ class SqlServerStateStore(StateStore):
     def _connect(self) -> None:
         """Establish database connection."""
         try:
-            self.conn = pyodbc.connect(self.connection_string)
+            self._get_conn()
             logger.debug(f"Connected to SQL Server state store (schema: {self.schema})")
         except pyodbc.Error as e:
             logger.error(f"Failed to connect to SQL Server: {e}")
             raise
+
+    def _get_conn(self):
+        """Get (or create) a thread-local connection for safe concurrent use."""
+        conn = getattr(self._thread_local, "conn", None)
+        if conn is None:
+            conn = pyodbc.connect(self.connection_string)
+            self._thread_local.conn = conn
+            with self._connections_lock:
+                self._connections.append(conn)
+        return conn
 
     def _init_schema(self) -> None:
         """Initialize database schema and tables."""
@@ -776,12 +790,14 @@ class SqlServerStateStore(StateStore):
                 now,
                 WorkItemStatus.PENDING.value,
                 now,  # For next_retry_at check
-                WorkItemStatus.IN_PROGRESS.value,  # For expired lease recovery
             ]
             
             if source_filter:
                 source_clause = "AND source_system = ?"
                 params.append(source_filter)
+
+            # For expired lease recovery
+            params.append(WorkItemStatus.IN_PROGRESS.value)
             
             # Atomic claim using UPDATE with OUTPUT
             # Claims items that are:
@@ -1303,6 +1319,29 @@ class SqlServerStateStore(StateStore):
 
     def close(self) -> None:
         """Close the database connection."""
-        if self.conn:
-            self.conn.close()
-            logger.debug("Closed SQL Server state store connection")
+        with self._connections_lock:
+            for conn in self._connections:
+                try:
+                    conn.close()
+                except pyodbc.Error:
+                    pass
+            self._connections.clear()
+        logger.debug("Closed SQL Server state store connections")
+
+
+class _ThreadLocalConnectionProxy:
+    """Proxy that routes cursor/commit/rollback/close to a thread-local connection."""
+    def __init__(self, store: "SqlServerStateStore"):
+        self._store = store
+
+    def cursor(self):
+        return self._store._get_conn().cursor()
+
+    def commit(self):
+        return self._store._get_conn().commit()
+
+    def rollback(self):
+        return self._store._get_conn().rollback()
+
+    def close(self):
+        return self._store._get_conn().close()

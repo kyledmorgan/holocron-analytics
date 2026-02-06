@@ -193,6 +193,17 @@ class ConcurrentRunner:
         if recovered > 0:
             logger.info(f"Recovered {recovered} items with expired leases")
         
+        # Install signal handlers for graceful shutdown (Ctrl+C / SIGTERM)
+        original_sigint = signal.getsignal(signal.SIGINT)
+        original_sigterm = signal.getsignal(signal.SIGTERM)
+
+        def _handle_shutdown_signal(signum, frame):
+            logger.info(f"Received signal {signum}, initiating shutdown...")
+            self.shutdown()
+
+        signal.signal(signal.SIGINT, _handle_shutdown_signal)
+        signal.signal(signal.SIGTERM, _handle_shutdown_signal)
+
         try:
             # Start worker threads
             self._executor = ThreadPoolExecutor(
@@ -207,17 +218,27 @@ class ConcurrentRunner:
                 self._workers[worker_id] = future
                 logger.info(f"Started worker: {worker_id}")
             
-            # Wait for all workers to complete
-            for worker_id, future in self._workers.items():
-                try:
-                    future.result()
-                except Exception as e:
-                    logger.error(f"Worker {worker_id} failed with error: {e}")
-            
+            # Wait for all workers to complete (poll to allow Ctrl+C)
+            while True:
+                all_done = True
+                for worker_id, future in list(self._workers.items()):
+                    if future.done():
+                        if future.exception():
+                            logger.error(
+                                f"Worker {worker_id} failed with error: {future.exception()}"
+                            )
+                    else:
+                        all_done = False
+                if all_done:
+                    break
+                time.sleep(0.5)
         except KeyboardInterrupt:
             logger.info("Received keyboard interrupt, initiating shutdown...")
             self.shutdown()
         finally:
+            # Restore original signal handlers
+            signal.signal(signal.SIGINT, original_sigint)
+            signal.signal(signal.SIGTERM, original_sigterm)
             self._cleanup()
         
         # Finalize metrics
@@ -586,7 +607,7 @@ class ConcurrentRunner:
     def _cleanup(self) -> None:
         """Clean up resources."""
         if self._executor:
-            self._executor.shutdown(wait=True)
+            self._executor.shutdown(wait=True, cancel_futures=True)
             self._executor = None
         
         # Remove worker heartbeats

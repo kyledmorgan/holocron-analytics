@@ -19,7 +19,7 @@ storage:
     port: 1434
     database: Holocron
     user: sa
-    password: Password1!
+    # password is read from environment (INGEST_SQLSERVER_PASSWORD or MSSQL_SA_PASSWORD)
     schema: "ingest"
     table: "IngestRecords"
 
@@ -151,3 +151,4 @@ seeds:
       - "Supreme Leader Snoke"
       - "Darth Sidious"
     priority: 10
+
