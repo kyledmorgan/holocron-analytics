@@ -596,9 +596,8 @@ def main() -> int:
 
         # Build messages using standardized prompts (v3_contract)
         # Uses clean input envelope format instead of embedding raw payloads
+        # Namespace enum values use UPPER_SNAKE_CASE; convert to TitleCase for schema
         namespace_str = namespace.name.title().replace("_", "")
-        if namespace_str == "User_Talk":
-            namespace_str = "UserTalk"
         continuity_str = continuity.name.title()
         
         messages = build_messages(

@@ -46,7 +46,7 @@ class TestSystemPrompt:
     def test_system_prompt_includes_descriptor_sentence_rules(self):
         """System prompt should include descriptor sentence rules."""
         assert "50 words" in SYSTEM_PROMPT
-        assert "ONE sentence" in SYSTEM_PROMPT or "one sentence" in SYSTEM_PROMPT.lower()
+        assert "one sentence" in SYSTEM_PROMPT.lower()
     
     def test_system_prompt_includes_confidence_calibration(self):
         """System prompt should include confidence calibration guidance."""
