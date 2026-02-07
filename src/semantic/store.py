@@ -371,14 +371,16 @@ class SemanticStagingStore:
             WHERE source_page_id = ? AND is_current = 1
         """, (signals.source_page_id,))
         
-        # Insert new signals
+        # Insert new signals (including content extraction fields)
         cursor.execute("""
             INSERT INTO sem.PageSignals (
                 page_signals_id, source_page_id, content_hash_sha256, signals_version,
                 lead_sentence, infobox_type, categories_json,
                 is_list_page, is_disambiguation, has_timeline_markers, has_infobox,
-                signals_json, extracted_utc, extraction_method, extraction_duration_ms, is_current
-            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 1)
+                signals_json, extracted_utc, extraction_method, extraction_duration_ms, is_current,
+                content_format_detected, content_start_strategy, content_start_offset,
+                lead_excerpt_text, lead_excerpt_len, lead_excerpt_hash
+            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 1, ?, ?, ?, ?, ?, ?)
         """, (
             signals.page_signals_id,
             signals.source_page_id,
@@ -395,6 +397,12 @@ class SemanticStagingStore:
             signals.extracted_utc,
             signals.extraction_method,
             signals.extraction_duration_ms,
+            signals.content_format_detected,
+            signals.content_start_strategy,
+            signals.content_start_offset,
+            signals.lead_excerpt_text,
+            signals.lead_excerpt_len,
+            signals.lead_excerpt_hash,
         ))
         
         logger.debug(f"Inserted page signals {signals.page_signals_id}")
@@ -409,7 +417,9 @@ class SemanticStagingStore:
             SELECT page_signals_id, source_page_id, content_hash_sha256, signals_version,
                    lead_sentence, infobox_type, categories_json,
                    is_list_page, is_disambiguation, has_timeline_markers, has_infobox,
-                   signals_json, extracted_utc, extraction_method, extraction_duration_ms, is_current
+                   signals_json, extracted_utc, extraction_method, extraction_duration_ms, is_current,
+                   content_format_detected, content_start_strategy, content_start_offset,
+                   lead_excerpt_text, lead_excerpt_len, lead_excerpt_hash
             FROM sem.PageSignals
             WHERE source_page_id = ? AND is_current = 1
         """, (source_page_id,))
@@ -435,6 +445,12 @@ class SemanticStagingStore:
             extraction_method=row[13],
             extraction_duration_ms=row[14],
             is_current=bool(row[15]),
+            content_format_detected=row[16],
+            content_start_strategy=row[17],
+            content_start_offset=row[18],
+            lead_excerpt_text=row[19],
+            lead_excerpt_len=row[20],
+            lead_excerpt_hash=row[21],
         )
     
     # =========================================================================
@@ -471,14 +487,20 @@ class SemanticStagingStore:
             except (ValueError, TypeError, InvalidOperation):
                 confidence_value = None
 
+        # Truncate descriptor_sentence if needed
+        descriptor_sentence = classification.descriptor_sentence
+        if descriptor_sentence and len(descriptor_sentence) > 400:
+            descriptor_sentence = descriptor_sentence[:400]
+
         cursor.execute("""
             INSERT INTO sem.PageClassification (
                 page_classification_id, source_page_id, taxonomy_version,
                 primary_type, type_set_json, confidence_score,
                 method, model_name, prompt_version, run_id,
                 evidence_json, rationale, needs_review, review_notes,
-                suggested_tags_json, created_utc, is_current, superseded_by_id
-            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 1, NULL)
+                suggested_tags_json, created_utc, is_current, superseded_by_id,
+                descriptor_sentence
+            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 1, NULL, ?)
         """, (
             classification.page_classification_id,
             classification.source_page_id,
@@ -496,6 +518,7 @@ class SemanticStagingStore:
             classification.review_notes,
             classification.suggested_tags_json,
             classification.created_utc,
+            descriptor_sentence,
         ))
         
         logger.debug(f"Inserted page classification {classification.page_classification_id}")
@@ -513,7 +536,8 @@ class SemanticStagingStore:
                    primary_type, type_set_json, confidence_score,
                    method, model_name, prompt_version, run_id,
                    evidence_json, rationale, needs_review, review_notes,
-                   suggested_tags_json, created_utc, is_current, superseded_by_id
+                   suggested_tags_json, created_utc, is_current, superseded_by_id,
+                   descriptor_sentence
             FROM sem.PageClassification
             WHERE source_page_id = ? AND is_current = 1
         """, (source_page_id,))
@@ -541,6 +565,7 @@ class SemanticStagingStore:
             created_utc=row[15],
             is_current=bool(row[16]),
             superseded_by_id=str(row[17]) if row[17] else None,
+            descriptor_sentence=row[18],
         )
     
     # =========================================================================

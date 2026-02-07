@@ -32,6 +32,7 @@ from semantic.models import (
     SourcePage,
 )
 from semantic.signals_extractor import SignalsExtractor
+from semantic.content_extractor import ContentExtractor, ExtractionConfig
 from semantic.store import SemanticStagingStore, SemanticStagingStoreError
 
 logger = logging.getLogger("sem_staging.dry_run")
@@ -449,7 +450,12 @@ def main() -> int:
         }]
         selection_reason = "fallback_no_db_record"
 
-    extractor = SignalsExtractor()
+    signals_extractor = SignalsExtractor()
+    content_extractor = ContentExtractor(ExtractionConfig(
+        min_chars=1000,
+        default_max_chars=8000,
+        hard_max_chars=12000,
+    ))
     results = []
 
     # Step 4: Ollama call with strict JSON contract
@@ -503,11 +509,15 @@ def main() -> int:
             },
             "needs_review": {"type": "boolean"},
             "rationale_short": {"type": "string"},
+            "descriptor_sentence": {
+                "type": "string",
+                "description": "A single descriptive sentence (max 50 words) summarizing what this entity/page is. Plain text only, no markup."
+            },
         },
         "required": [
             "title", "namespace", "continuity_hint", "primary_type",
             "secondary_types", "confidence", "suggested_tags",
-            "needs_review", "rationale_short"
+            "needs_review", "rationale_short", "descriptor_sentence"
         ],
     }
 
@@ -516,7 +526,7 @@ def main() -> int:
         model=model_name,
         base_url=base_url,
         temperature=0.0,
-        max_tokens=800,
+        max_tokens=1000,
         timeout_seconds=120,
         stream=False,
     )
@@ -544,16 +554,40 @@ def main() -> int:
             continuity_hint=continuity,
             latest_ingest_id=record.get("ingest_id"),
         )
-        signals = extractor.extract(source_page, payload_obj, content_type=record.get("content_type"))
+        signals = signals_extractor.extract(source_page, payload_obj, content_type=record.get("content_type"))
 
-        payload_excerpt = get_payload_excerpt(payload_obj, max_chars=3000)
+        # Extract bounded content excerpt using new content extractor
+        extraction_result = content_extractor.extract(payload_obj, content_type_hint=record.get("content_type"))
+        lead_excerpt = extraction_result.excerpt if extraction_result.success else ""
+        
+        # Populate signals with extraction metadata
+        signals.content_format_detected = extraction_result.content_format.value
+        signals.content_start_strategy = extraction_result.strategy.value
+        signals.content_start_offset = extraction_result.content_start_offset
+        signals.lead_excerpt_text = lead_excerpt
+        signals.lead_excerpt_len = extraction_result.excerpt_length
+        signals.lead_excerpt_hash = extraction_result.excerpt_hash
+
+        # Use the new bounded excerpt for LLM input
+        payload_excerpt = lead_excerpt if lead_excerpt else get_payload_excerpt(payload_obj, max_chars=3000)
         lead_sentence = signals.lead_sentence or get_text_snippet(payload_obj, max_chars=300)
         categories = signals.categories if signals.categories_json else []
+
+        # Enhanced system prompt with descriptor_sentence guidance
+        system_prompt = """Return only valid JSON matching the schema. No extra keys. No markdown. No commentary.
+
+IMPORTANT for descriptor_sentence:
+- Must be exactly ONE sentence.
+- Maximum 50 words.
+- Plain text only (no citations, links, wikitext, HTML, or JSON).
+- Summarize what this entity/page is in a concise, descriptive way.
+- Example: "Luke Skywalker was a legendary Jedi Master who played a pivotal role in the fall of the Galactic Empire during the Galactic Civil War."
+"""
 
         messages = [
             {
                 "role": "system",
-                "content": "Return only valid JSON matching the schema. No extra keys. No markdown. No commentary.",
+                "content": system_prompt,
             },
             {
                 "role": "user",
@@ -619,6 +653,18 @@ def main() -> int:
         primary_type_val = map_primary_type(classification_json.get("primary_type", "Unknown"))
         confidence = float(classification_json.get("confidence", 0.0))
 
+        # Extract and validate descriptor_sentence
+        descriptor_sentence = classification_json.get("descriptor_sentence", "")
+        if descriptor_sentence:
+            # Validate <= 50 words
+            word_count = len(descriptor_sentence.split())
+            if word_count > 50:
+                logger.warning(f"descriptor_sentence exceeds 50 words ({word_count}), truncating")
+                words = descriptor_sentence.split()[:50]
+                descriptor_sentence = " ".join(words)
+                if not descriptor_sentence.endswith("."):
+                    descriptor_sentence += "."
+
         # Step 5: Persist outputs to SQL
         persist = {
             "source_page": False,
@@ -643,16 +689,20 @@ def main() -> int:
             confidence_score=confidence,
             method=ClassificationMethod.LLM,
             model_name=model_name,
-            prompt_version="dry_run_v1",
+            prompt_version="dry_run_v2",
             run_id=None,
             evidence_json=json.dumps({
                 "lead_sentence": lead_sentence,
                 "payload_excerpt": payload_excerpt[:800],
+                "content_format": extraction_result.content_format.value,
+                "extraction_strategy": extraction_result.strategy.value,
+                "excerpt_length": extraction_result.excerpt_length,
             }, ensure_ascii=False),
             rationale=classification_json.get("rationale_short"),
-            needs_review=bool(classification_json.get("needs_review")),
+            needs_review=bool(classification_json.get("needs_review")) or extraction_result.needs_review,
             review_notes=None,
             suggested_tags_json=json.dumps(classification_json.get("suggested_tags", [])),
+            descriptor_sentence=descriptor_sentence,
         )
         if sem_tables_ok:
             # Upsert SourcePage
@@ -736,6 +786,12 @@ def main() -> int:
             "dim_entity_ref": dim_entity_ref,
             "tags_attempted": tags_attempted,
             "classification_json": classification_json,
+            "extraction_info": {
+                "format": extraction_result.content_format.value,
+                "strategy": extraction_result.strategy.value,
+                "excerpt_length": extraction_result.excerpt_length,
+            },
+            "descriptor_sentence": descriptor_sentence,
         })
 
     # Step 6: Output summary
@@ -750,6 +806,15 @@ def main() -> int:
     if results:
         print("\nSample LLM response JSON (first item):")
         print(json.dumps(results[0]["classification_json"], indent=2))
+        
+        print("\nContent Extraction Info (first item):")
+        ext_info = results[0]["extraction_info"]
+        print(f"  Format detected: {ext_info['format']}")
+        print(f"  Strategy used: {ext_info['strategy']}")
+        print(f"  Excerpt length: {ext_info['excerpt_length']} chars")
+        
+        print("\nDescriptor Sentence (first item):")
+        print(f"  {results[0]['descriptor_sentence']}")
 
     print("\nPersist status (per item):")
     for result in results:
@@ -766,6 +831,7 @@ def main() -> int:
             print(f"    Tags: {'OK' if persist['tags'] else 'FAIL'}")
         else:
             print("    Tags: SKIPPED (tables missing)")
+        print(f"    Excerpt: {result['extraction_info']['excerpt_length']} chars ({result['extraction_info']['format']}/{result['extraction_info']['strategy']})")
 
     return 0
 
