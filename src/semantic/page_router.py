@@ -7,9 +7,11 @@ Orchestrates the classification stages:
 3. LLM classification enqueue (Stage 2)
 """
 
+from __future__ import annotations
+
 import json
 import logging
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from decimal import Decimal
 from typing import Any, Dict, List, Optional, Tuple
 
@@ -48,6 +50,10 @@ class PageRouterConfig:
         PageType.TECHNICAL_SITE_PAGE,
         PageType.META_REFERENCE,
     )
+    # Maximum categories to include in evidence/LLM input
+    max_categories_evidence: int = 5
+    # Maximum categories for LLM input
+    max_categories_llm_input: int = 10
 
 
 class PageRouter:
@@ -284,7 +290,7 @@ class PageRouter:
             "continuity_hint": result.continuity_hint.value,
             "title": source_page.resource_id,
             "infobox_type": signals.infobox_type,
-            "categories": signals.categories[:5] if signals.categories else [],
+            "categories": signals.categories[:self.config.max_categories_evidence] if signals.categories else [],
             "is_disambiguation": signals.is_disambiguation,
             "is_list_page": signals.is_list_page,
         }
@@ -377,11 +383,14 @@ class PageRoutingResult:
             suggested_tags=self.suggested_tags,
         )
     
-    def get_llm_input(self) -> Dict[str, Any]:
+    def get_llm_input(self, max_categories: int = 10) -> Dict[str, Any]:
         """
         Get the input data for LLM classification.
         
         This is what gets sent to the LLM job queue.
+        
+        Args:
+            max_categories: Maximum number of categories to include in input.
         """
         input_data = {
             "title": self.source_page.resource_id,
@@ -392,7 +401,7 @@ class PageRoutingResult:
         if self.signals:
             input_data["lead_sentence"] = self.signals.lead_sentence
             input_data["infobox_type"] = self.signals.infobox_type
-            input_data["categories"] = self.signals.categories[:10] if self.signals.categories else []
+            input_data["categories"] = self.signals.categories[:max_categories] if self.signals.categories else []
             input_data["is_list_page"] = self.signals.is_list_page
             input_data["is_disambiguation"] = self.signals.is_disambiguation
         

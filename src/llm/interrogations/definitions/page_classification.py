@@ -11,6 +11,11 @@ from typing import Any, Dict, List, Optional
 from ..registry import InterrogationDefinition
 
 
+# Configuration constants
+MAX_LEAD_SENTENCE_LENGTH = 500
+MAX_RATIONALE_LENGTH = 500
+
+
 # System prompt for the interrogation
 SYSTEM_PROMPT = """You are a precise page classification assistant for wiki pages about fictional universes.
 
@@ -109,7 +114,7 @@ OUTPUT_SCHEMA = {
             }
         },
         "needs_review": {"type": "boolean"},
-        "rationale": {"type": "string", "maxLength": 500},
+        "rationale": {"type": "string", "maxLength": MAX_RATIONALE_LENGTH},
         "suggested_tags": {
             "type": "array",
             "items": {"type": "string"}
@@ -180,7 +185,7 @@ def format_optional_signals(input_data: Dict[str, Any]) -> str:
     lines = []
     
     if input_data.get("lead_sentence"):
-        lines.append(f"Lead Sentence: {input_data['lead_sentence'][:500]}")
+        lines.append(f"Lead Sentence: {input_data['lead_sentence'][:MAX_LEAD_SENTENCE_LENGTH]}")
     
     if input_data.get("infobox_type"):
         lines.append(f"Infobox Type: {input_data['infobox_type']}")

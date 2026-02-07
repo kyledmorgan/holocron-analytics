@@ -29,6 +29,12 @@ class SignalsExtractorConfig:
     extract_section_headers: bool = True
     # Maximum number of section headers to extract
     max_section_headers: int = 10
+    # Minimum bullet points to detect list page
+    min_bullets_for_list_page: int = 20
+    # Maximum lead paragraph lines to extract
+    max_lead_lines: int = 3
+    # Minimum timeline markers to detect timeline page
+    min_timeline_markers: int = 3
 
 
 class SignalsExtractor:
@@ -256,8 +262,8 @@ class SignalsExtractor:
             # Found content
             lead_lines.append(stripped)
             
-            # Stop after first paragraph
-            if len(lead_lines) >= 3:
+            # Stop after first paragraph (configurable limit)
+            if len(lead_lines) >= self.config.max_lead_lines:
                 break
         
         if not lead_lines:
@@ -362,9 +368,9 @@ class SignalsExtractor:
         if title.lower().startswith("list of"):
             return True
         
-        # Check for many bullet points
+        # Check for many bullet points (configurable threshold)
         bullet_count = text.count('\n*') + text.count('\n#')
-        if bullet_count > 20:
+        if bullet_count > self.config.min_bullets_for_list_page:
             return True
         
         return False
@@ -378,7 +384,7 @@ class SignalsExtractor:
         # Look for year references
         timeline_pattern = re.compile(r'\b\d+\s*(?:BBY|ABY)\b', re.IGNORECASE)
         matches = timeline_pattern.findall(text)
-        return len(matches) >= 3  # Multiple timeline references
+        return len(matches) >= self.config.min_timeline_markers
     
     def _extract_section_headers(self, text: str) -> List[str]:
         """Extract section headers from wikitext."""
