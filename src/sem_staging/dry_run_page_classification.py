@@ -1,0 +1,774 @@
+#!/usr/bin/env python3
+"""
+Dry run: page classification v1 using local Ollama + sem tables.
+
+Local-only, single item, minimal payload excerpt.
+"""
+
+import argparse
+import json
+import logging
+import os
+import re
+import sys
+import time
+from datetime import datetime, timezone
+from typing import Any, Dict, List, Optional, Tuple
+from urllib.request import Request, urlopen
+from urllib.error import URLError, HTTPError
+
+# Add src directory to path
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
+
+from llm.core.types import LLMConfig
+from llm.providers.ollama_client import OllamaClient
+from semantic.models import (
+    ClassificationMethod,
+    ContinuityHint,
+    Namespace,
+    PageClassification,
+    PageSignals,
+    PageType,
+    SourcePage,
+)
+from semantic.signals_extractor import SignalsExtractor
+from semantic.store import SemanticStagingStore, SemanticStagingStoreError
+
+logger = logging.getLogger("sem_staging.dry_run")
+
+
+def load_env_fallback() -> None:
+    """Load .env if python-dotenv isn't available."""
+    env_path = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..", ".env"))
+    if not os.path.exists(env_path):
+        return
+    for raw_line in open(env_path, "r", encoding="utf-8").read().splitlines():
+        line = raw_line.strip()
+        if not line or line.startswith("#") or "=" not in line:
+            continue
+        key, value = line.split("=", 1)
+        key = key.strip()
+        value = value.strip().strip("\"'")
+        if key and key not in os.environ:
+            os.environ[key] = value
+
+
+def setup_logging() -> None:
+    logging.basicConfig(
+        level=logging.INFO,
+        format="%(asctime)s [%(levelname)s] %(name)s - %(message)s",
+        datefmt="%Y-%m-%d %H:%M:%S",
+    )
+
+
+def try_fetch_models(base_url: str) -> Optional[List[Dict[str, Any]]]:
+    url = f"{base_url.rstrip('/')}/api/tags"
+    try:
+        request = Request(url, method="GET")
+        with urlopen(request, timeout=10) as response:
+            if response.status != 200:
+                return None
+            data = json.loads(response.read().decode("utf-8"))
+            return data.get("models", [])
+    except (URLError, HTTPError, json.JSONDecodeError):
+        return None
+
+
+def select_model(models: List[Dict[str, Any]]) -> Optional[str]:
+    names = [m.get("name") for m in models if m.get("name")]
+    if not names:
+        return None
+
+    def pick_with_prefix(prefixes: List[str], require_instruct: bool = True) -> Optional[str]:
+        for name in names:
+            lower = name.lower()
+            if any(p in lower for p in prefixes):
+                if require_instruct and ("instruct" in lower or "chat" in lower):
+                    return name
+        return None
+
+    # Preference order
+    model = pick_with_prefix(["llama3.1", "llama3"])
+    if model:
+        return model
+    model = pick_with_prefix(["qwen2.5"])
+    if model:
+        return model
+    model = pick_with_prefix(["mistral"])
+    if model:
+        return model
+
+    # Fallback: any llama3/llama3.1 even without instruct
+    for name in names:
+        lower = name.lower()
+        if "llama3.1" in lower or "llama3" in lower:
+            return name
+
+    return names[0]
+
+
+def map_namespace(title: str) -> Namespace:
+    if title.startswith("Module:"):
+        return Namespace.MODULE
+    if title.startswith("User talk:"):
+        return Namespace.USER_TALK
+    if title.startswith("User:"):
+        return Namespace.USER
+    if title.startswith("Forum:"):
+        return Namespace.FORUM
+    if title.startswith("Wookieepedia:"):
+        return Namespace.WOOKIEEPEDIA
+    if title.startswith("Template:"):
+        return Namespace.TEMPLATE
+    if title.startswith("Category:"):
+        return Namespace.CATEGORY
+    if title.startswith("File:"):
+        return Namespace.FILE
+    if title.startswith("Help:"):
+        return Namespace.HELP
+    if title.startswith("MediaWiki:"):
+        return Namespace.MEDIAWIKI
+    return Namespace.MAIN
+
+
+def map_continuity(title: str) -> ContinuityHint:
+    if "/Legends" in title:
+        return ContinuityHint.LEGENDS
+    return ContinuityHint.UNKNOWN
+
+
+def map_primary_type(value: str) -> PageType:
+    try:
+        return PageType(value)
+    except Exception:
+        return PageType.UNKNOWN
+
+
+def normalize_display_name(title: str) -> str:
+    return title.strip().lower().replace(" ", "_")
+
+
+def get_payload_excerpt(payload: Any, max_chars: int = 3000) -> str:
+    if payload is None:
+        return ""
+    if isinstance(payload, str):
+        return payload[:max_chars]
+    try:
+        return json.dumps(payload, ensure_ascii=False)[:max_chars]
+    except Exception:
+        return str(payload)[:max_chars]
+
+
+def get_text_snippet(payload: Any, max_chars: int = 300) -> str:
+    if payload is None:
+        return ""
+    text = payload if isinstance(payload, str) else get_payload_excerpt(payload, 4000)
+    # Naive strip of HTML tags for lead sentence extraction
+    text = re.sub(r"<[^>]+>", " ", text)
+    text = re.sub(r"\s+", " ", text).strip()
+    return text[:max_chars]
+
+def _sanitize_filename(value: str) -> str:
+    value = re.sub(r"[^A-Za-z0-9._-]+", "_", value.strip())
+    return value[:120] if value else "item"
+
+
+def dump_ollama_io(
+    base_dir: str,
+    title: str,
+    request_payload: Dict[str, Any],
+    response_payload: Dict[str, Any],
+) -> Tuple[str, str]:
+    os.makedirs(base_dir, exist_ok=True)
+    stamp = datetime.utcnow().strftime("%Y%m%d_%H%M%S")
+    safe_title = _sanitize_filename(title)
+    req_path = os.path.join(base_dir, f"{stamp}_{safe_title}_request.json")
+    res_path = os.path.join(base_dir, f"{stamp}_{safe_title}_response.json")
+    with open(req_path, "w", encoding="utf-8") as f:
+        json.dump(request_payload, f, ensure_ascii=False, indent=2)
+    with open(res_path, "w", encoding="utf-8") as f:
+        json.dump(response_payload, f, ensure_ascii=False, indent=2)
+    return req_path, res_path
+
+
+def fetch_candidate_records(
+    conn,
+    limit: int,
+    randomize: bool,
+) -> Tuple[List[Dict[str, Any]], Optional[str]]:
+    cursor = conn.cursor()
+
+    cursor.execute(
+        """
+        SELECT COLUMN_NAME
+        FROM INFORMATION_SCHEMA.COLUMNS
+        WHERE TABLE_SCHEMA = 'ingest' AND TABLE_NAME = 'IngestRecords'
+        """
+    )
+    column_set = {row[0] for row in cursor.fetchall()}
+
+    def build_select_fields() -> List[str]:
+        fields = [
+            "ingest_id",
+            "resource_id",
+            "resource_type",
+            "payload",
+            "source_system",
+            "source_name",
+            "variant",
+            "fetched_at_utc",
+        ]
+        if "content_type" in column_set:
+            fields.insert(3, "content_type")
+        if "content_length" in column_set:
+            fields.insert(4, "content_length")
+        return [f for f in fields if f in column_set]
+
+    select_fields = build_select_fields()
+    select_sql = "SELECT TOP " + str(limit) + " " + ", ".join(select_fields) + " FROM ingest.IngestRecords"
+
+    if limit == 1 and not randomize:
+        # Preferred: Anakin Skywalker
+        cursor.execute(
+            f"""
+            {select_sql}
+            WHERE resource_id = ?
+              AND status_code BETWEEN 200 AND 299
+            ORDER BY fetched_at_utc DESC
+            """,
+            ("Anakin Skywalker",),
+        )
+        row = cursor.fetchone()
+        if row:
+            row_dict = dict(zip(select_fields, row))
+            return [{
+                "ingest_id": str(row_dict.get("ingest_id")) if row_dict.get("ingest_id") else None,
+                "resource_id": row_dict.get("resource_id"),
+                "resource_type": row_dict.get("resource_type"),
+                "content_type": row_dict.get("content_type"),
+                "content_length": row_dict.get("content_length"),
+                "payload": row_dict.get("payload"),
+                "source_system": row_dict.get("source_system"),
+                "source_name": row_dict.get("source_name"),
+                "variant": row_dict.get("variant"),
+                "fetched_at_utc": row_dict.get("fetched_at_utc"),
+            }], "resource_id=Anakin Skywalker"
+
+    order_by = "NEWID()" if randomize else "DATALENGTH(payload) DESC"
+    cursor.execute(
+        f"""
+        {select_sql}
+        WHERE status_code BETWEEN 200 AND 299
+          AND resource_id NOT LIKE 'Module:%'
+          AND resource_id NOT LIKE 'User:%'
+          AND resource_id NOT LIKE 'User talk:%'
+          AND resource_id NOT LIKE 'Forum:%'
+          AND resource_id NOT LIKE 'Wookieepedia:%'
+          AND resource_id NOT LIKE 'Template:%'
+          AND resource_id NOT LIKE 'Category:%'
+          AND resource_id NOT LIKE 'File:%'
+        ORDER BY {order_by}
+        """
+    )
+    rows = cursor.fetchall()
+    if rows:
+        records = []
+        for row in rows:
+            row_dict = dict(zip(select_fields, row))
+            records.append({
+                "ingest_id": str(row_dict.get("ingest_id")) if row_dict.get("ingest_id") else None,
+                "resource_id": row_dict.get("resource_id"),
+                "resource_type": row_dict.get("resource_type"),
+                "content_type": row_dict.get("content_type"),
+                "content_length": row_dict.get("content_length"),
+                "payload": row_dict.get("payload"),
+                "source_system": row_dict.get("source_system"),
+                "source_name": row_dict.get("source_name"),
+                "variant": row_dict.get("variant"),
+                "fetched_at_utc": row_dict.get("fetched_at_utc"),
+            })
+        reason = "random_sample" if randomize else "largest_payload_non_technical"
+        return records, reason
+
+    return [], None
+
+
+def table_exists(conn, schema: str, table: str) -> bool:
+    cursor = conn.cursor()
+    cursor.execute(
+        """
+        SELECT 1
+        FROM sys.tables t
+        JOIN sys.schemas s ON t.schema_id = s.schema_id
+        WHERE t.name = ? AND s.name = ?
+        """,
+        (table, schema),
+    )
+    return cursor.fetchone() is not None
+
+
+def update_dim_entity(
+    conn,
+    title: str,
+    source_page_id: str,
+    primary_type: str,
+    type_set_json: Optional[str],
+    confidence: Optional[float],
+) -> Tuple[bool, Optional[str]]:
+    if not table_exists(conn, "dbo", "DimEntity"):
+        return False, "dbo.DimEntity missing"
+
+    normalized = normalize_display_name(title)
+    cursor = conn.cursor()
+    cursor.execute(
+        """
+        SELECT TOP 1 EntityKey, EntityGuid
+        FROM dbo.DimEntity
+        WHERE IsLatest = 1 AND IsActive = 1
+          AND (DisplayNameNormalized = ? OR DisplayName = ?)
+        """,
+        (normalized, title),
+    )
+    row = cursor.fetchone()
+    if not row:
+        return False, "no matching DimEntity"
+
+    entity_key = row[0]
+    promotion_state = "candidate" if (confidence is not None and confidence >= 0.80 and primary_type not in ("TechnicalSitePage", "MetaReference")) else "staged"
+
+    cursor.execute(
+        """
+        UPDATE dbo.DimEntity
+        SET PromotionState = ?,
+            SourcePageId = ?,
+            PrimaryTypeInferred = ?,
+            TypeSetJsonInferred = ?,
+            UpdatedUtc = SYSUTCDATETIME()
+        WHERE EntityKey = ? AND IsLatest = 1
+        """,
+        (promotion_state, source_page_id, primary_type, type_set_json, entity_key),
+    )
+    return True, str(row[1])
+
+
+def main() -> int:
+    setup_logging()
+    load_env_fallback()
+    parser = argparse.ArgumentParser(description="Dry run page classification (single or small batch).")
+    parser.add_argument("--limit", type=int, default=1, help="Number of items to process (default: 1)")
+    parser.add_argument("--random", action="store_true", help="Select random items instead of top payloads")
+    parser.add_argument(
+        "--dump-ollama",
+        action="store_true",
+        help="Write raw Ollama request/response JSON to logs/ollama",
+    )
+    args = parser.parse_args()
+
+    # Step 0/1: Ollama connectivity + models
+    base_urls = []
+    env_ollama = os.environ.get("OLLAMA_BASE_URL") or os.environ.get("OLLAMA_HOST_BASE_URL")
+    if env_ollama:
+        base_urls.append(env_ollama)
+    base_urls.extend([
+        "http://localhost:11434",
+        "http://127.0.0.1:11434",
+        "http://host.docker.internal:11434",
+        "http://ollama:11434",
+        "http://holocron-ollama:11434",
+    ])
+    models = None
+    base_url = None
+    for candidate in base_urls:
+        models = try_fetch_models(candidate)
+        if models is not None:
+            base_url = candidate
+            break
+
+    if not models or not base_url:
+        print("Ollama connectivity: FAIL")
+        print("Tried:", ", ".join(base_urls))
+        return 1
+
+    model_name = select_model(models)
+    if not model_name:
+        print("No models available in Ollama /api/tags")
+        return 1
+
+    # Step 2: Pull candidate page from SQL
+    store = None
+    conn = None
+    try:
+        conn_str_set = bool(os.environ.get("SEMANTIC_SQLSERVER_CONN_STR"))
+        config = SemanticStagingStore.resolve_env_config()
+        logger.info(
+            "SQL connectivity: attempting (in_docker=%s, host=%s, port=%s, database=%s, conn_str=%s)",
+            config.get("in_docker"),
+            config.get("host"),
+            config.get("port"),
+            config.get("database"),
+            "set" if conn_str_set else "unset",
+        )
+        store = SemanticStagingStore.from_env()
+        conn = store._get_connection()
+
+        cursor = conn.cursor()
+        cursor.execute("SELECT 1")
+        cursor.fetchone()
+
+        logger.info(
+            "SQL connectivity: PASS (in_docker=%s, host=%s, port=%s, database=%s, conn_str=%s)",
+            config.get("in_docker"),
+            config.get("host"),
+            config.get("port"),
+            config.get("database"),
+            "set" if conn_str_set else "unset",
+        )
+    except SemanticStagingStoreError as e:
+        print(f"SQL connectivity: FAIL ({e})")
+        print("Resolved connection settings:")
+        print(f"  in_docker: {config.get('in_docker') if 'config' in locals() else 'unknown'}")
+        print(f"  host: {config.get('host') if 'config' in locals() else 'unknown'}")
+        print(f"  port: {config.get('port') if 'config' in locals() else 'unknown'}")
+        print(f"  database: {config.get('database') if 'config' in locals() else 'unknown'}")
+        print("Hint: if you see encryption errors, set DB_ENCRYPT=no and DB_TRUST_CERT=true in your .env.")
+        return 1
+
+    records, selection_reason = fetch_candidate_records(conn, limit=args.limit, randomize=args.random)
+    if not records:
+        records = [{
+            "ingest_id": None,
+            "resource_id": "Anakin Skywalker",
+            "resource_type": None,
+            "content_type": None,
+            "content_length": None,
+            "payload": None,
+            "source_system": "mediawiki",
+            "source_name": "wookieepedia",
+            "variant": None,
+            "fetched_at_utc": None,
+        }]
+        selection_reason = "fallback_no_db_record"
+
+    extractor = SignalsExtractor()
+    results = []
+
+    # Step 4: Ollama call with strict JSON contract
+    output_schema = {
+        "type": "object",
+        "additionalProperties": False,
+        "properties": {
+            "title": {"type": "string"},
+            "namespace": {
+                "type": "string",
+                "enum": ["Main", "Module", "Forum", "UserTalk", "Wookieepedia", "Other"]
+            },
+            "continuity_hint": {
+                "type": "string",
+                "enum": ["Canon", "Legends", "Unknown"]
+            },
+            "primary_type": {
+                "type": "string",
+                "enum": [
+                    "PersonCharacter", "LocationPlace", "WorkMedia", "EventConflict",
+                    "Organization", "Species", "ObjectArtifact", "Concept",
+                    "MetaReference", "TechnicalSitePage", "TimePeriod", "Other"
+                ]
+            },
+            "secondary_types": {
+                "type": "array",
+                "items": {
+                    "type": "object",
+                    "properties": {
+                        "type": {"type": "string"},
+                        "weight": {"type": "number"}
+                    },
+                    "required": ["type", "weight"],
+                    "additionalProperties": False
+                }
+            },
+            "confidence": {"type": "number"},
+            "suggested_tags": {
+                "type": "array",
+                "items": {
+                    "type": "object",
+                    "properties": {
+                        "tag": {"type": "string"},
+                        "tag_type": {"type": "string"},
+                        "visibility": {"type": "string"},
+                        "weight": {"type": "number"}
+                    },
+                    "required": ["tag", "tag_type", "visibility", "weight"],
+                    "additionalProperties": False
+                }
+            },
+            "needs_review": {"type": "boolean"},
+            "rationale_short": {"type": "string"},
+        },
+        "required": [
+            "title", "namespace", "continuity_hint", "primary_type",
+            "secondary_types", "confidence", "suggested_tags",
+            "needs_review", "rationale_short"
+        ],
+    }
+
+    llm_config = LLMConfig(
+        provider="ollama",
+        model=model_name,
+        base_url=base_url,
+        temperature=0.0,
+        max_tokens=800,
+        timeout_seconds=120,
+        stream=False,
+    )
+    client = OllamaClient(llm_config)
+
+    for record in records:
+        payload_raw = record.get("payload")
+        payload_obj: Any = payload_raw
+        if isinstance(payload_raw, str):
+            try:
+                payload_obj = json.loads(payload_raw)
+            except json.JSONDecodeError:
+                payload_obj = payload_raw
+
+        title = record["resource_id"]
+        namespace = map_namespace(title)
+        continuity = map_continuity(title)
+
+        # Build SourcePage and Signals
+        source_page = SourcePage(
+            source_system=record.get("source_system") or "mediawiki",
+            resource_id=title,
+            variant=record.get("variant"),
+            namespace=namespace,
+            continuity_hint=continuity,
+            latest_ingest_id=record.get("ingest_id"),
+        )
+        signals = extractor.extract(source_page, payload_obj, content_type=record.get("content_type"))
+
+        payload_excerpt = get_payload_excerpt(payload_obj, max_chars=3000)
+        lead_sentence = signals.lead_sentence or get_text_snippet(payload_obj, max_chars=300)
+        categories = signals.categories if signals.categories_json else []
+
+        messages = [
+            {
+                "role": "system",
+                "content": "Return only valid JSON matching the schema. No extra keys. No markdown. No commentary.",
+            },
+            {
+                "role": "user",
+                "content": json.dumps({
+                    "title": title,
+                    "namespace": namespace.name.title().replace("_", ""),
+                    "continuity_hint": continuity.name.title(),
+                    "lead_sentence": lead_sentence,
+                    "categories": categories,
+                    "payload_excerpt": payload_excerpt,
+                }, ensure_ascii=False),
+            },
+        ]
+
+        request_dump = {
+            "model": model_name,
+            "base_url": base_url,
+            "messages": messages,
+            "output_schema": output_schema,
+        }
+        response = client.chat_with_structured_output(messages, output_schema)
+        if not response.success or not response.content:
+            print("Ollama call failed.")
+            return 1
+
+        try:
+            classification_json = json.loads(response.content)
+        except json.JSONDecodeError:
+            print("Ollama returned invalid JSON.")
+            return 1
+        if args.dump_ollama:
+            dump_dir = os.environ.get("OLLAMA_DUMP_DIR", os.path.join("logs", "ollama"))
+            req_path, res_path = dump_ollama_io(
+                dump_dir,
+                title,
+                request_dump,
+                {
+                    "success": response.success,
+                    "content": response.content,
+                    "raw": getattr(response, "raw", None),
+                },
+            )
+            logger.info("Wrote Ollama request: %s", req_path)
+            logger.info("Wrote Ollama response: %s", res_path)
+
+        # Map model output to internal enums
+        namespace_map = {
+            "Main": Namespace.MAIN,
+            "Module": Namespace.MODULE,
+            "Forum": Namespace.FORUM,
+            "UserTalk": Namespace.USER_TALK,
+            "Wookieepedia": Namespace.WOOKIEEPEDIA,
+            "Other": Namespace.OTHER,
+        }
+        continuity_map = {
+            "Canon": ContinuityHint.CANON,
+            "Legends": ContinuityHint.LEGENDS,
+            "Unknown": ContinuityHint.UNKNOWN,
+        }
+
+        namespace_val = namespace_map.get(classification_json.get("namespace"), namespace)
+        continuity_val = continuity_map.get(classification_json.get("continuity_hint"), continuity)
+        primary_type_val = map_primary_type(classification_json.get("primary_type", "Unknown"))
+        confidence = float(classification_json.get("confidence", 0.0))
+
+        # Step 5: Persist outputs to SQL
+        persist = {
+            "source_page": False,
+            "page_signals": False,
+            "page_classification": False,
+            "dim_entity": False,
+            "tags": False,
+        }
+        dim_entity_ref = None
+        tags_attempted = False
+        sem_tables_ok = (
+            table_exists(conn, "sem", "SourcePage")
+            and table_exists(conn, "sem", "PageSignals")
+            and table_exists(conn, "sem", "PageClassification")
+        )
+
+        classification = PageClassification(
+            source_page_id="",
+            taxonomy_version="v1",
+            primary_type=primary_type_val,
+            type_set_json=json.dumps(classification_json.get("secondary_types", [])),
+            confidence_score=confidence,
+            method=ClassificationMethod.LLM,
+            model_name=model_name,
+            prompt_version="dry_run_v1",
+            run_id=None,
+            evidence_json=json.dumps({
+                "lead_sentence": lead_sentence,
+                "payload_excerpt": payload_excerpt[:800],
+            }, ensure_ascii=False),
+            rationale=classification_json.get("rationale_short"),
+            needs_review=bool(classification_json.get("needs_review")),
+            review_notes=None,
+            suggested_tags_json=json.dumps(classification_json.get("suggested_tags", [])),
+        )
+        if sem_tables_ok:
+            # Upsert SourcePage
+            source_page = store.upsert_source_page(
+                source_system=source_page.source_system,
+                resource_id=source_page.resource_id,
+                variant=source_page.variant,
+                namespace=namespace_val,
+                continuity_hint=continuity_val,
+                content_hash_sha256=signals.content_hash_sha256,
+                latest_ingest_id=record.get("ingest_id"),
+                source_registry_id=None,
+            )
+            persist["source_page"] = True
+
+            # Insert PageSignals
+            signals.source_page_id = source_page.source_page_id
+            signals.content_hash_sha256 = signals.content_hash_sha256
+            signals.extraction_method = signals.extraction_method or "dry_run"
+            store.insert_page_signals(signals)
+            persist["page_signals"] = True
+
+            # Insert PageClassification
+            classification.source_page_id = source_page.source_page_id
+            store.insert_page_classification(classification)
+            persist["page_classification"] = True
+
+            # Update DimEntity (if exists)
+            dim_entity_ok, dim_entity_ref = update_dim_entity(
+                conn,
+                title=title,
+                source_page_id=source_page.source_page_id,
+                primary_type=classification_json.get("primary_type", "Unknown"),
+                type_set_json=json.dumps(classification_json.get("secondary_types", [])),
+                confidence=confidence,
+            )
+            persist["dim_entity"] = dim_entity_ok
+
+            # Tags (optional)
+            if table_exists(conn, "dbo", "DimTag") and table_exists(conn, "dbo", "BridgeTagAssignment"):
+                tags_attempted = True
+                try:
+                    # canonical tags
+                    tag_keys = []
+                    tag_keys.append(store.ensure_tag(namespace_val.value, "namespace", "public"))
+                    tag_keys.append(store.ensure_tag(continuity_val.value, "continuity", "public"))
+                    tag_keys.append(store.ensure_tag(primary_type_val.value, "type", "public"))
+
+                    # assign canonical tags
+                    for tag_key in tag_keys:
+                        store.assign_tag(tag_key, "SourcePage", source_page.source_page_id,
+                                         source_page_id=source_page.source_page_id,
+                                         classification_id=classification.page_classification_id,
+                                         weight=1.0,
+                                         confidence=confidence,
+                                         assignment_method="llm")
+
+                    # suggested tags from model
+                    for tag in classification_json.get("suggested_tags", []):
+                        tag_name = tag.get("tag")
+                        tag_type = tag.get("tag_type", "topic")
+                        visibility = tag.get("visibility", "public")
+                        weight = tag.get("weight")
+                        if not tag_name:
+                            continue
+                        tag_key = store.ensure_tag(tag_name, tag_type, visibility)
+                        store.assign_tag(tag_key, "SourcePage", source_page.source_page_id,
+                                         source_page_id=source_page.source_page_id,
+                                         classification_id=classification.page_classification_id,
+                                         weight=weight,
+                                         confidence=confidence,
+                                         assignment_method="llm")
+
+                    persist["tags"] = True
+                except Exception:
+                    persist["tags"] = False
+
+        results.append({
+            "title": title,
+            "persist": persist,
+            "dim_entity_ref": dim_entity_ref,
+            "tags_attempted": tags_attempted,
+            "classification_json": classification_json,
+        })
+
+    # Step 6: Output summary
+    print("\n=== Dry Run Summary ===")
+    print(f"Ollama connectivity: PASS ({base_url})")
+    print("Models available:", ", ".join([m.get("name", "") for m in models]))
+    print(f"Model selected: {model_name}")
+    print("\nSQL source selection:")
+    print(f"  reason: {selection_reason}")
+    print(f"  count: {len(records)}")
+
+    if results:
+        print("\nSample LLM response JSON (first item):")
+        print(json.dumps(results[0]["classification_json"], indent=2))
+
+    print("\nPersist status (per item):")
+    for result in results:
+        persist = result["persist"]
+        dim_entity_ref = result["dim_entity_ref"]
+        tags_attempted = result["tags_attempted"]
+        print(f"  {result['title']}:")
+        print(f"    SourcePage upsert: {'OK' if persist['source_page'] else 'FAIL'}")
+        print(f"    PageSignals insert: {'OK' if persist['page_signals'] else 'FAIL'}")
+        print(f"    PageClassification insert: {'OK' if persist['page_classification'] else 'FAIL'}")
+        print(f"    DimEntity update: {'OK' if persist['dim_entity'] else 'FAIL'}"
+              f"{'' if persist['dim_entity'] else f' ({dim_entity_ref})'}")
+        if tags_attempted:
+            print(f"    Tags: {'OK' if persist['tags'] else 'FAIL'}")
+        else:
+            print("    Tags: SKIPPED (tables missing)")
+
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())

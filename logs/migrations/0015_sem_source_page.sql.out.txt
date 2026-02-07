@@ -1,0 +1,3 @@
+Table [sem].[SourcePage] created successfully.
+Msg 1934, Level 16, State 1, Server f876360ffe02, Line 13
+CREATE INDEX failed because the following SET options have incorrect settings: 'QUOTED_IDENTIFIER'. Verify that SET options are correct for use with indexed views and/or indexes on computed columns and/or filtered indexes and/or query notifications and/or XML data type methods and/or spatial index operations.

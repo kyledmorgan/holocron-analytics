@@ -586,7 +586,7 @@ class MyApiDiscovery(Discovery):
 services:
   sqlserver:
     image: mcr.microsoft.com/mssql/server:2025-latest
-    container_name: holocron-sqlserver
+    container_name: sql2025
     environment:
       - ACCEPT_EULA=Y
       - MSSQL_PID=Developer
@@ -718,7 +718,7 @@ pyodbc.Error: ('08001', '[08001] [Microsoft][ODBC Driver 18 for SQL Server]TCP P
 
 **Solutions**:
 1. Ensure SQL Server is running: `docker compose ps`
-2. Check port mapping: `docker port holocron-sqlserver`
+2. Check port mapping: `docker port sql2025`
 3. Wait for healthcheck: SQL Server takes 30+ seconds to start
 
 ### Driver Not Found
@@ -776,3 +776,4 @@ SSL Provider: Error:0A000438:SSL routines::tlsv1 alert internal error
 
 - [Ingestion Framework README](../src/ingest/README.md)
 - [Configuration Examples](../config/ingest.example.yaml)
+

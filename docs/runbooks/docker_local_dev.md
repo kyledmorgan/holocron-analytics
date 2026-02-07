@@ -76,7 +76,7 @@ docker compose up --build
 ```
 
 This single command will:
-1. Pull the SQL Server 2022 Developer Edition image
+1. Pull the SQL Server 2025 Developer Edition image
 2. Start SQL Server with a persistent data volume
 3. Create the `Holocron` database
 4. Run all DDL scripts to create tables
@@ -87,7 +87,7 @@ This single command will:
 Watch the logs for these success indicators:
 
 ```
-holocron-sqlserver  | SQL Server is now ready for client connections
+sql2025  | SQL Server is now ready for client connections
 holocron-initdb     | === Database initialization complete ===
 holocron-seed       | Seed loading complete. Total rows inserted: XX
 holocron-seed exited with code 0
@@ -191,7 +191,7 @@ failed to resolve reference "mcr.microsoft.com/mssql-tools:latest": EOF
 4. Manually pull the images to confirm connectivity:
 
 ```bash
-docker pull mcr.microsoft.com/mssql/server:2022-latest
+docker pull mcr.microsoft.com/mssql/server:2025-latest
 docker pull mcr.microsoft.com/mssql-tools:18
 ```
 
@@ -242,7 +242,7 @@ docker compose up seed
 
 1. Open Docker Desktop
 2. Go to **Containers**
-3. Click on `holocron-sqlserver`, `holocron-initdb`, or `holocron-seed`
+3. Click on `sql2025`, `holocron-initdb`, or `holocron-seed`
 4. View the **Logs** tab for detailed output
 
 ### Permission Errors on Windows
@@ -371,7 +371,7 @@ Docker Desktop UI (GUI-first):
 ### 5) What success looks like
 
 You should see:
-- `holocron-sqlserver` running and healthy
+- `sql2025` running and healthy
 - `holocron-initdb` exited successfully
 - `holocron-seed` exited successfully
 
@@ -429,3 +429,4 @@ SELECT COUNT(*) AS FranchiseCount FROM dbo.DimFranchise;
 - **Container**: A running instance of an image (the actual process).
 - **Volume**: A persistent storage location for container data (your database files live here).
 - **Port mapping**: A rule that exposes a container port to your host (e.g., `1434:1433` maps host port 1434 to container port 1433).
+

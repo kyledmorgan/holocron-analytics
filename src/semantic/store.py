@@ -14,7 +14,8 @@ import os
 import uuid
 from dataclasses import asdict
 from datetime import datetime, timezone
-from decimal import Decimal
+from decimal import Decimal, InvalidOperation
+import math
 from typing import Any, Dict, List, Optional
 
 try:
@@ -66,6 +67,8 @@ class SemanticStagingStore:
         username: str = "sa",
         password: str = "",
         driver: str = "ODBC Driver 18 for SQL Server",
+        trust_server_certificate: bool = True,
+        encrypt: str = "no",
     ):
         """
         Initialize the store.
@@ -81,15 +84,57 @@ class SemanticStagingStore:
         """
         self._conn_str = connection_string
         if not self._conn_str:
+            trust_cert = "yes" if trust_server_certificate else "no"
             self._conn_str = (
                 f"Driver={{{driver}}};"
                 f"Server={host},{port};"
                 f"Database={database};"
                 f"UID={username};"
                 f"PWD={password};"
-                f"TrustServerCertificate=yes"
+                f"TrustServerCertificate={trust_cert};"
+                f"Encrypt={encrypt}"
             )
         self._conn = None
+
+    @staticmethod
+    def _running_in_docker() -> bool:
+        if os.environ.get("RUNNING_IN_DOCKER") in ("1", "true", "True"):
+            return True
+        return os.path.exists("/.dockerenv")
+
+    @classmethod
+    def resolve_env_config(cls) -> Dict[str, Any]:
+        """Resolve connection settings from environment with Docker-aware defaults."""
+        in_docker = cls._running_in_docker()
+        default_host = "sql2025" if in_docker else "localhost"
+        default_port = "1433" if in_docker else "1434"
+
+        host = os.environ.get("DB_HOST") or os.environ.get("SEMANTIC_SQLSERVER_HOST") \
+            or os.environ.get("INGEST_SQLSERVER_HOST") or default_host
+        port = os.environ.get("DB_PORT") or os.environ.get("SEMANTIC_SQLSERVER_PORT") \
+            or os.environ.get("INGEST_SQLSERVER_PORT") or default_port
+        database = os.environ.get("DB_NAME") or os.environ.get("SEMANTIC_SQLSERVER_DATABASE") \
+            or os.environ.get("INGEST_SQLSERVER_DATABASE") or os.environ.get("MSSQL_DATABASE", "Holocron")
+        username = os.environ.get("DB_USER") or os.environ.get("SEMANTIC_SQLSERVER_USER") \
+            or os.environ.get("INGEST_SQLSERVER_USER", "sa")
+        password = os.environ.get("DB_PASSWORD") or os.environ.get("SEMANTIC_SQLSERVER_PASSWORD") \
+            or os.environ.get("INGEST_SQLSERVER_PASSWORD") or os.environ.get("MSSQL_SA_PASSWORD", "")
+        driver = os.environ.get("SEMANTIC_SQLSERVER_DRIVER") \
+            or os.environ.get("INGEST_SQLSERVER_DRIVER", "ODBC Driver 18 for SQL Server")
+        trust_cert = os.environ.get("DB_TRUST_CERT", "true").lower() in ("1", "true", "yes")
+        encrypt = os.environ.get("DB_ENCRYPT", "no")
+
+        return {
+            "in_docker": in_docker,
+            "host": host,
+            "port": int(port),
+            "database": database,
+            "username": username,
+            "password": password,
+            "driver": driver,
+            "trust_server_certificate": trust_cert,
+            "encrypt": encrypt,
+        }
     
     @classmethod
     def from_env(cls) -> "SemanticStagingStore":
@@ -97,23 +142,9 @@ class SemanticStagingStore:
         conn_str = os.environ.get("SEMANTIC_SQLSERVER_CONN_STR")
         if conn_str:
             return cls(connection_string=conn_str)
-        
-        return cls(
-            host=os.environ.get("SEMANTIC_SQLSERVER_HOST",
-                               os.environ.get("INGEST_SQLSERVER_HOST", "localhost")),
-            port=int(os.environ.get("SEMANTIC_SQLSERVER_PORT",
-                                    os.environ.get("INGEST_SQLSERVER_PORT", "1434"))),
-            database=os.environ.get("SEMANTIC_SQLSERVER_DATABASE",
-                                    os.environ.get("INGEST_SQLSERVER_DATABASE",
-                                                   os.environ.get("MSSQL_DATABASE", "Holocron"))),
-            username=os.environ.get("SEMANTIC_SQLSERVER_USER",
-                                    os.environ.get("INGEST_SQLSERVER_USER", "sa")),
-            password=os.environ.get("SEMANTIC_SQLSERVER_PASSWORD",
-                                    os.environ.get("INGEST_SQLSERVER_PASSWORD",
-                                                   os.environ.get("MSSQL_SA_PASSWORD", ""))),
-            driver=os.environ.get("SEMANTIC_SQLSERVER_DRIVER",
-                                  os.environ.get("INGEST_SQLSERVER_DRIVER", "ODBC Driver 18 for SQL Server")),
-        )
+
+        config = cls.resolve_env_config()
+        return cls(**{k: v for k, v in config.items() if k != "in_docker"})
     
     def _get_connection(self):
         """Get or create a database connection."""
@@ -329,6 +360,9 @@ class SemanticStagingStore:
         """
         conn = self._get_connection()
         cursor = conn.cursor()
+
+        if signals.lead_sentence and len(signals.lead_sentence) > 1000:
+            signals.lead_sentence = signals.lead_sentence[:1000]
         
         # Mark previous signals as non-current
         cursor.execute("""
@@ -427,6 +461,16 @@ class SemanticStagingStore:
         """, (classification.page_classification_id, classification.source_page_id))
         
         # Insert new classification
+        confidence_value = None
+        if classification.confidence_score is not None:
+            try:
+                raw_value = float(classification.confidence_score)
+                if math.isfinite(raw_value):
+                    bounded = max(0.0, min(1.0, raw_value))
+                    confidence_value = Decimal(str(bounded)).quantize(Decimal("0.0001"))
+            except (ValueError, TypeError, InvalidOperation):
+                confidence_value = None
+
         cursor.execute("""
             INSERT INTO sem.PageClassification (
                 page_classification_id, source_page_id, taxonomy_version,
@@ -441,7 +485,7 @@ class SemanticStagingStore:
             classification.taxonomy_version,
             classification.primary_type.value,
             classification.type_set_json,
-            float(classification.confidence_score) if classification.confidence_score else None,
+            confidence_value,
             classification.method.value,
             classification.model_name,
             classification.prompt_version,

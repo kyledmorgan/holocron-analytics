@@ -6,7 +6,7 @@ services:
         set -e
         echo "Waiting for SQL Server to accept connections..."
         for i in {1..60}; do
-          /opt/mssql-tools/bin/sqlcmd -S sqlserver -U sa -P "$${MSSQL_SA_PASSWORD}" -C -Q "SELECT 1" -b && break
+          /opt/mssql-tools/bin/sqlcmd -S sql2025 -U sa -P "$${MSSQL_SA_PASSWORD}" -C -Q "SELECT 1" -b && break
           sleep 2
         done
 
@@ -17,7 +17,7 @@ services:
             for script in "$${dir}"/*.sql; do
               if [ -f "$${script}" ]; then
                 echo "Running $${script}..."
-                /opt/mssql-tools/bin/sqlcmd -S sqlserver -U sa -P "$${MSSQL_SA_PASSWORD}" -C \
+                /opt/mssql-tools/bin/sqlcmd -S sql2025 -U sa -P "$${MSSQL_SA_PASSWORD}" -C \
                   -d "$${DATABASE_NAME}" -i "$${script}"
               fi
             done
@@ -25,7 +25,7 @@ services:
         }
 
         echo "=== Creating database if not exists ==="
-        /opt/mssql-tools/bin/sqlcmd -S sqlserver -U sa -P "$${MSSQL_SA_PASSWORD}" -C \
+        /opt/mssql-tools/bin/sqlcmd -S sql2025 -U sa -P "$${MSSQL_SA_PASSWORD}" -C \
           -v DATABASE_NAME="$${DATABASE_NAME}" \
           -i /init-db.sql
 
@@ -84,7 +84,7 @@ services:
       SEED_SKIP: "false"
       SEED_SQLSERVER_DATABASE: Holocron
       SEED_SQLSERVER_DRIVER: ODBC Driver 18 for SQL Server
-      SEED_SQLSERVER_HOST: sqlserver
+      SEED_SQLSERVER_HOST: sql2025
       SEED_SQLSERVER_PASSWORD: ${MSSQL_SA_PASSWORD}
       SEED_SQLSERVER_PORT: "1433"
       SEED_SQLSERVER_USER: sa
@@ -98,7 +98,7 @@ services:
         bind:
           create_host_path: true
   sqlserver:
-    container_name: holocron-sqlserver
+    container_name: sql2025
     environment:
       ACCEPT_EULA: "Y"
       MSSQL_PID: Developer
@@ -111,13 +111,13 @@ services:
       interval: 10s
       retries: 12
       start_period: 30s
-    image: mcr.microsoft.com/mssql/server:2022-latest
+    image: mcr.microsoft.com/mssql/server:2025-latest
     networks:
       default: null
     ports:
       - mode: ingress
         target: 1433
-        published: "1433"
+        published: "1434"
         protocol: tcp
     restart: unless-stopped
     volumes:
@@ -132,4 +132,5 @@ volumes:
   mssql_data:
     name: holocron-analytics_mssql_data
     driver: local
+
 

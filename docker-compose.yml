@@ -8,13 +8,13 @@
 #   - ollama: Local LLM runtime for LLM-derived data (persisted models)
 #
 # After startup, SQL Server and Ollama remain running for interactive use.
-# Connect with SSMS/Azure Data Studio: localhost,1433 | sa | <your password>
+# Connect with SSMS/Azure Data Studio: localhost,1434 | sa | <your password>
 # Ollama API: http://localhost:11434
 
 services:
   sqlserver:
     image: mcr.microsoft.com/mssql/server:2025-latest
-    container_name: holocron-sqlserver
+    container_name: sql2025
     environment:
       - ACCEPT_EULA=Y
       - MSSQL_PID=Developer
@@ -50,7 +50,7 @@ services:
         set -e
         echo "Waiting for SQL Server to accept connections..."
         for i in {1..60}; do
-          /opt/mssql-tools/bin/sqlcmd -S sqlserver -U sa -P "$${MSSQL_SA_PASSWORD}" -C -Q "SELECT 1" -b && break
+          /opt/mssql-tools/bin/sqlcmd -S sql2025 -U sa -P "$${MSSQL_SA_PASSWORD}" -C -Q "SELECT 1" -b && break
           sleep 2
         done
  
@@ -69,7 +69,7 @@ services:
         }
         
         echo "=== Creating database if not exists ==="
-        /opt/mssql-tools/bin/sqlcmd -S sqlserver -U sa -P "$${MSSQL_SA_PASSWORD}" -C \
+        /opt/mssql-tools/bin/sqlcmd -S sql2025 -U sa -P "$${MSSQL_SA_PASSWORD}" -C \
           -Q "IF DB_ID(N'$${DATABASE_NAME}') IS NULL BEGIN CREATE DATABASE [$${DATABASE_NAME}]; PRINT 'Database $${DATABASE_NAME} created successfully.'; END ELSE BEGIN PRINT 'Database $${DATABASE_NAME} already exists.'; END"
 
         echo "=== Running DDL scripts ==="
@@ -91,7 +91,7 @@ services:
       initdb:
         condition: service_completed_successfully
     environment:
-      - SEED_SQLSERVER_HOST=sqlserver
+      - SEED_SQLSERVER_HOST=sql2025
       - SEED_SQLSERVER_DATABASE=${MSSQL_DATABASE:-Holocron}
       - SEED_SQLSERVER_USER=sa
       - SEED_SQLSERVER_PASSWORD=${MSSQL_SA_PASSWORD}
@@ -188,7 +188,7 @@ services:
       - POLL_SECONDS=10
       - LAKE_ROOT=/lake/llm_runs
       # SQL Server connection (reuse ingest env vars)
-      - LLM_SQLSERVER_HOST=sqlserver
+      - LLM_SQLSERVER_HOST=sql2025
       - LLM_SQLSERVER_DATABASE=${MSSQL_DATABASE:-Holocron}
       - LLM_SQLSERVER_USER=sa
       - LLM_SQLSERVER_PASSWORD=${MSSQL_SA_PASSWORD}
@@ -213,3 +213,4 @@ volumes:
     driver: local
   llm_lake:
     driver: local
+
