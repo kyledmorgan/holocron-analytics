@@ -8,14 +8,16 @@ Provides persistence for:
 - Tag assignments via dbo.BridgeTagAssignment
 """
 
+import hashlib
 import json
 import logging
+import math
 import os
+import re
 import uuid
 from dataclasses import asdict
 from datetime import datetime, timezone
 from decimal import Decimal, InvalidOperation
-import math
 from typing import Any, Dict, List, Optional
 
 try:
@@ -729,7 +731,6 @@ class SemanticStagingStore:
 
         Applies: lowercase, strip, collapse whitespace, replace spaces with underscores.
         """
-        import re
         normalized = title.strip().lower()
         # Collapse multiple whitespace to single space, then replace with underscore
         normalized = re.sub(r'\s+', '_', normalized)
@@ -832,7 +833,6 @@ class SemanticStagingStore:
             else:
                 # Step 2b: INSERT new entity
                 # Compute RowHash (required NOT NULL column)
-                import hashlib
                 row_hash_input = f"{franchise_key}|{title}|{entity_type}|{primary_type or ''}"
                 row_hash = hashlib.sha256(row_hash_input.encode('utf-8')).digest()
 

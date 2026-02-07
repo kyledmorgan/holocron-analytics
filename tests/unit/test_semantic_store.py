@@ -182,21 +182,24 @@ class TestUpsertDimEntityLogic:
         assert "Database error" in result["error"]
 
     def test_descriptor_sentence_truncation(self, mock_store):
-        """Test that long descriptor sentences are truncated."""
-        mock_store._mock_cursor.fetchone.return_value = None  # Will insert
+        """Test that long descriptor sentences are truncated internally."""
+        # Simulate INSERT path (returns new entity)
+        mock_store._mock_cursor.fetchone.side_effect = [
+            None,  # SELECT returns no match
+            (789, "guid-789"),  # INSERT OUTPUT
+        ]
 
         # Create a descriptor sentence longer than 1000 chars
         long_descriptor = "A" * 1500
 
-        mock_store.upsert_dim_entity(
+        result = mock_store.upsert_dim_entity(
             title="Test Entity",
             descriptor_sentence=long_descriptor,
         )
 
-        # The method should have truncated internally but we can't easily
-        # verify without inspecting the call. Just verify it doesn't error.
-        # The actual truncation is tested implicitly by not raising an error.
-        assert True  # If we got here, no exception was raised
+        # Verify the upsert succeeded (truncation happens silently internally)
+        assert result["success"] is True
+        assert result["action"] == "inserted"
 
 
 class TestIdempotency:
