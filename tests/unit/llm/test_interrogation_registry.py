@@ -217,6 +217,107 @@ class TestBuiltinInterrogations:
         }
         errors = definition.validate_output(invalid_data)
         assert len(errors) > 0
+    
+    def test_page_classification_v1_exists(self):
+        """Test that page_classification_v1 is registered."""
+        registry = get_registry()
+        
+        definition = registry.get("page_classification_v1")
+        
+        assert definition is not None
+        assert definition.key == "page_classification_v1"
+        assert definition.name == "Page Classification"
+        assert definition.version == "1.1.0"
+    
+    def test_page_classification_v1_has_type_key_block(self):
+        """Test that page_classification_v1 includes TYPE KEY controlled vocabulary."""
+        definition = get_interrogation("page_classification_v1")
+        
+        assert definition is not None
+        assert definition.system_prompt is not None
+        
+        # Verify TYPE KEY block is present
+        assert "TYPE KEY (Controlled Vocabulary)" in definition.system_prompt
+        
+        # Verify all primary types are defined with descriptions
+        required_types = [
+            "PersonCharacter:",
+            "LocationPlace:",
+            "WorkMedia:",
+            "EventConflict:",
+            "Organization:",
+            "Species:",
+            "ObjectArtifact:",
+            "Concept:",
+            "TimePeriod:",
+            "MetaReference:",
+            "TechnicalSitePage:",
+        ]
+        for type_name in required_types:
+            assert type_name in definition.system_prompt, f"Missing type definition: {type_name}"
+        
+        # Verify DECISION RULES are present
+        assert "DECISION RULES" in definition.system_prompt
+        
+        # Verify key decision rules
+        assert "PersonCharacter even if it references many films/books" in definition.system_prompt
+        assert "Named droid-as-person" in definition.system_prompt
+    
+    def test_page_classification_v1_schema_has_correct_types(self):
+        """Test that page_classification_v1 schema has updated type enum."""
+        definition = get_interrogation("page_classification_v1")
+        
+        assert definition is not None
+        
+        types = definition.output_schema["properties"]["primary_type"]["enum"]
+        
+        # Verify new types are present
+        assert "ObjectArtifact" in types
+        assert "Other" in types
+        
+        # Verify old types are removed
+        assert "Technology" not in types
+        assert "Vehicle" not in types
+        assert "Weapon" not in types
+        assert "Unknown" not in types
+    
+    def test_page_classification_v1_validator(self):
+        """Test that page_classification_v1 validator works with new types."""
+        definition = get_interrogation("page_classification_v1")
+        
+        assert definition is not None
+        assert definition.validator is not None
+        
+        # Test valid data with ObjectArtifact (new type)
+        valid_data = {
+            "primary_type": "ObjectArtifact",
+            "confidence_score": 0.9,
+            "needs_review": False,
+            "rationale": "Named vessel"
+        }
+        errors = definition.validate_output(valid_data)
+        assert errors == []
+        
+        # Test valid data with Other (replacement for Unknown)
+        valid_data_other = {
+            "primary_type": "Other",
+            "confidence_score": 0.5,
+            "needs_review": True,
+            "rationale": "Unclear classification"
+        }
+        errors = definition.validate_output(valid_data_other)
+        assert errors == []
+        
+        # Test invalid data with old type (should fail)
+        invalid_data = {
+            "primary_type": "Unknown",  # Old type, no longer valid
+            "confidence_score": 0.5,
+            "needs_review": True,
+            "rationale": "test"
+        }
+        errors = definition.validate_output(invalid_data)
+        assert len(errors) > 0
+        assert "Invalid primary_type" in errors[0]
 
 
 class TestGlobalFunctions:

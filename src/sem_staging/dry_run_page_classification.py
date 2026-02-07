@@ -573,7 +573,7 @@ def main() -> int:
         lead_sentence = signals.lead_sentence or get_text_snippet(payload_obj, max_chars=300)
         categories = signals.categories if signals.categories_json else []
 
-        # Enhanced system prompt with descriptor_sentence guidance
+        # Enhanced system prompt with descriptor_sentence guidance and type key
         system_prompt = """Return only valid JSON matching the schema. No extra keys. No markdown. No commentary.
 
 IMPORTANT for descriptor_sentence:
@@ -582,6 +582,82 @@ IMPORTANT for descriptor_sentence:
 - Plain text only (no citations, links, wikitext, HTML, or JSON).
 - Summarize what this entity/page is in a concise, descriptive way.
 - Example: "Luke Skywalker was a legendary Jedi Master who played a pivotal role in the fall of the Galactic Empire during the Galactic Civil War."
+
+---
+TYPE KEY (Controlled Vocabulary)
+Choose exactly ONE primary_type. Use secondary_types only to add nuance (subtypes) that still fit the primary selection.
+
+PersonCharacter:
+- A sentient individual (or named character persona) in-universe: people, Force users, named aliens, named droids as individuals, named creatures if treated as a character.
+- Strong cues: biography, "was a… who…", personal history, relationships, homeworld, affiliations, appearances.
+- NOT this: a film/book/comic itself (WorkMedia), a battle (EventConflict), a planet (LocationPlace).
+
+LocationPlace:
+- A physical place: planet, moon, city, region, facility, shipyard, temple, base, station, terrain feature.
+- Strong cues: geography, climate, coordinates, "located on/in", inhabitants, points of interest.
+
+WorkMedia:
+- A published work: film, episode, series, novel, comic issue/run, game, soundtrack, reference book.
+- Strong cues: release date, creators, publisher, "is a film/novel/comic", plot summary as the primary framing.
+- NOT this: a character who appears in a film (that stays PersonCharacter).
+
+EventConflict:
+- A discrete event: battle, war, raid, uprising, treaty signing, catastrophe, mission, duel, major incident.
+- Strong cues: "battle of…", "during…", timeline emphasis, participants, outcome, casualties.
+
+Organization:
+- A group or formal body: governments, militaries, orders, syndicates, corporations, councils, clans.
+- Strong cues: membership, leadership, doctrine, structure, formation/dissolution.
+
+Species:
+- A biological species or sentient group (not a single individual): Human, Twi'lek, Wookiee, etc.
+- Strong cues: physiology, culture, homeworlds (plural), notable members list.
+
+ObjectArtifact:
+- A tangible item: weapon, ship (specific named vessel), vehicle model, device, relic, armor, droid model line.
+- Distinguish:
+  - Named one-off ship ("Millennium Falcon") => ObjectArtifact
+  - Class/model ("T-65B X-wing") => ObjectArtifact
+  - Named droid as a person ("R2-D2") => PersonCharacter
+  - Droid model ("R2-series astromech droid") => ObjectArtifact
+
+Concept:
+- An abstract idea or system: the Force, hyperspace, ideologies, technologies as concepts, doctrines.
+- Strong cues: definitions, principles, mechanics, applications, not a single place/person/event.
+
+TimePeriod:
+- A span of time: eras, ages, reigns, periods (e.g., "Imperial Era", "High Republic Era").
+- Strong cues: start/end markers, "era", "period", chronology framing.
+
+MetaReference:
+- Cross-page helper concepts: disambiguation, lists, timelines, glossaries, behind-the-scenes reference aggregations.
+- Strong cues: list-of entries, index pages, "may refer to", navigation role.
+
+TechnicalSitePage:
+- Site policy/technical/wiki infrastructure pages: protection policy, templates, categories, guidelines, help pages.
+- Strong cues: wiki policy language, editors, formatting instructions, non-universe content.
+
+Other:
+- Only use when none of the above apply and explain why in rationale_short.
+
+---
+DECISION RULES (to reduce common errors):
+1) If the page is centered on a named individual's life/story, it is PersonCharacter even if it references many films/books.
+2) If the title is a film/book/comic/game, it is WorkMedia even if it contains character lists.
+3) If the page is a battle/war/incident, it is EventConflict.
+4) If the page is an era or "Age of…", it is TimePeriod.
+5) Named droid-as-person => PersonCharacter; droid model line => ObjectArtifact.
+
+---
+SECONDARY TYPES (optional, free-text):
+Use secondary_types to add specificity like: "Jedi", "Sith", "Smuggler", "Planet", "Space station", "Comic series", "Film episode", "Battle", "Religious order"
+Each secondary_types[i].type is free-text; weight is 0.0–1.0.
+
+---
+TAG GUIDANCE (optional):
+Suggested tags should be meaningful and not redundant with primary_type.
+- Use tag_type examples: "Faction", "Role", "Species", "Era", "Theme", "EntitySubtype"
+- Use visibility: "public" for user-facing, "hidden" for internal retrieval helpers.
 """
 
         messages = [
@@ -689,9 +765,9 @@ IMPORTANT for descriptor_sentence:
             confidence_score=confidence,
             method=ClassificationMethod.LLM,
             model_name=model_name,
-            # dry_run_v2: Added descriptor_sentence, improved content extraction with
-            # bounded excerpts, enhanced evidence with extraction metadata
-            prompt_version="dry_run_v2",
+            # dry_run_v3: Added TYPE KEY controlled vocabulary block with explicit type
+            # definitions and decision rules to reduce misclassification errors
+            prompt_version="dry_run_v3",
             run_id=None,
             evidence_json=json.dumps({
                 "lead_sentence": lead_sentence,
