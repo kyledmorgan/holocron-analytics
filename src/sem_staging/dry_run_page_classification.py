@@ -22,6 +22,11 @@ sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")
 
 from llm.core.types import LLMConfig
 from llm.providers.ollama_client import OllamaClient
+from llm.prompts.page_classification import (
+    PROMPT_VERSION,
+    SYSTEM_PROMPT,
+    build_messages,
+)
 from semantic.models import (
     ClassificationMethod,
     ContinuityHint,
@@ -458,7 +463,8 @@ def main() -> int:
     ))
     results = []
 
-    # Step 4: Ollama call with strict JSON contract
+    # Step 4: Ollama call with strict JSON contract (v3_contract)
+    # Updated schema with structured notes field for subtype handling
     output_schema = {
         "type": "object",
         "additionalProperties": False,
@@ -475,49 +481,66 @@ def main() -> int:
             "primary_type": {
                 "type": "string",
                 "enum": [
-                    "PersonCharacter", "LocationPlace", "WorkMedia", "EventConflict",
-                    "Organization", "Species", "ObjectArtifact", "Concept",
-                    "MetaReference", "TechnicalSitePage", "TimePeriod", "Other"
+                    "PersonCharacter", "LocationPlace", "Organization", "Species",
+                    "ObjectArtifact", "WorkMedia", "EventConflict", "TimePeriod",
+                    "Concept", "MetaReference", "TechnicalSitePage", "Other"
                 ]
             },
             "secondary_types": {
                 "type": "array",
                 "items": {
                     "type": "object",
+                    "additionalProperties": False,
                     "properties": {
                         "type": {"type": "string"},
-                        "weight": {"type": "number"}
+                        "weight": {"type": "number"},
+                        "is_candidate_new_type": {"type": "boolean"}
                     },
-                    "required": ["type", "weight"],
-                    "additionalProperties": False
+                    "required": ["type", "weight", "is_candidate_new_type"]
                 }
             },
-            "confidence": {"type": "number"},
+            "descriptor_sentence": {
+                "type": "string",
+                "description": "Exactly one sentence, <= 50 words, plain text only."
+            },
             "suggested_tags": {
                 "type": "array",
                 "items": {
                     "type": "object",
+                    "additionalProperties": False,
                     "properties": {
                         "tag": {"type": "string"},
-                        "tag_type": {"type": "string"},
-                        "visibility": {"type": "string"},
+                        "tag_type": {
+                            "type": "string",
+                            "enum": ["EntityFacet", "Topic", "EraTime", "Continuity", "Affiliation", "Role", "Medium", "Meta", "Keyword"]
+                        },
+                        "visibility": {
+                            "type": "string",
+                            "enum": ["Public", "Hidden"]
+                        },
                         "weight": {"type": "number"}
                     },
-                    "required": ["tag", "tag_type", "visibility", "weight"],
-                    "additionalProperties": False
+                    "required": ["tag", "tag_type", "visibility", "weight"]
                 }
             },
+            "confidence": {"type": "number"},
             "needs_review": {"type": "boolean"},
-            "rationale_short": {"type": "string"},
-            "descriptor_sentence": {
-                "type": "string",
-                "description": "A single descriptive sentence (max 50 words) summarizing what this entity/page is. Plain text only, no markup."
-            },
+            "notes": {
+                "type": "object",
+                "additionalProperties": False,
+                "properties": {
+                    "likely_subtype": {"type": "string"},
+                    "why_primary_type": {"type": "string"},
+                    "new_type_suggestions": {"type": "array", "items": {"type": "string"}},
+                    "ignored_noise": {"type": "array", "items": {"type": "string"}}
+                },
+                "required": ["likely_subtype", "why_primary_type", "new_type_suggestions", "ignored_noise"]
+            }
         },
         "required": [
             "title", "namespace", "continuity_hint", "primary_type",
-            "secondary_types", "confidence", "suggested_tags",
-            "needs_review", "rationale_short", "descriptor_sentence"
+            "secondary_types", "descriptor_sentence", "suggested_tags",
+            "confidence", "needs_review", "notes"
         ],
     }
 
@@ -570,113 +593,21 @@ def main() -> int:
 
         # Use the new bounded excerpt for LLM input
         payload_excerpt = lead_excerpt if lead_excerpt else get_payload_excerpt(payload_obj, max_chars=3000)
-        lead_sentence = signals.lead_sentence or get_text_snippet(payload_obj, max_chars=300)
-        categories = signals.categories if signals.categories_json else []
 
-        # Enhanced system prompt with descriptor_sentence guidance and type key
-        system_prompt = """Return only valid JSON matching the schema. No extra keys. No markdown. No commentary.
-
-IMPORTANT for descriptor_sentence:
-- Must be exactly ONE sentence.
-- Maximum 50 words.
-- Plain text only (no citations, links, wikitext, HTML, or JSON).
-- Summarize what this entity/page is in a concise, descriptive way.
-- Example: "Luke Skywalker was a legendary Jedi Master who played a pivotal role in the fall of the Galactic Empire during the Galactic Civil War."
-
----
-TYPE KEY (Controlled Vocabulary)
-Choose exactly ONE primary_type. Use secondary_types only to add nuance (subtypes) that still fit the primary selection.
-
-PersonCharacter:
-- A sentient individual (or named character persona) in-universe: people, Force users, named aliens, named droids as individuals, named creatures if treated as a character.
-- Strong cues: biography, "was a… who…", personal history, relationships, homeworld, affiliations, appearances.
-- NOT this: a film/book/comic itself (WorkMedia), a battle (EventConflict), a planet (LocationPlace).
-
-LocationPlace:
-- A physical place: planet, moon, city, region, facility, shipyard, temple, base, station, terrain feature.
-- Strong cues: geography, climate, coordinates, "located on/in", inhabitants, points of interest.
-
-WorkMedia:
-- A published work: film, episode, series, novel, comic issue/run, game, soundtrack, reference book.
-- Strong cues: release date, creators, publisher, "is a film/novel/comic", plot summary as the primary framing.
-- NOT this: a character who appears in a film (that stays PersonCharacter).
-
-EventConflict:
-- A discrete event: battle, war, raid, uprising, treaty signing, catastrophe, mission, duel, major incident.
-- Strong cues: "battle of…", "during…", timeline emphasis, participants, outcome, casualties.
-
-Organization:
-- A group or formal body: governments, militaries, orders, syndicates, corporations, councils, clans.
-- Strong cues: membership, leadership, doctrine, structure, formation/dissolution.
-
-Species:
-- A biological species or sentient group (not a single individual): Human, Twi'lek, Wookiee, etc.
-- Strong cues: physiology, culture, homeworlds (plural), notable members list.
-
-ObjectArtifact:
-- A tangible item: weapon, ship (specific named vessel), vehicle model, device, relic, armor, droid model line.
-- Distinguish:
-  - Named one-off ship ("Millennium Falcon") => ObjectArtifact
-  - Class/model ("T-65B X-wing") => ObjectArtifact
-  - Named droid as a person ("R2-D2") => PersonCharacter
-  - Droid model ("R2-series astromech droid") => ObjectArtifact
-
-Concept:
-- An abstract idea or system: the Force, hyperspace, ideologies, technologies as concepts, doctrines.
-- Strong cues: definitions, principles, mechanics, applications, not a single place/person/event.
-
-TimePeriod:
-- A span of time: eras, ages, reigns, periods (e.g., "Imperial Era", "High Republic Era").
-- Strong cues: start/end markers, "era", "period", chronology framing.
-
-MetaReference:
-- Cross-page helper concepts: disambiguation, lists, timelines, glossaries, behind-the-scenes reference aggregations.
-- Strong cues: list-of entries, index pages, "may refer to", navigation role.
-
-TechnicalSitePage:
-- Site policy/technical/wiki infrastructure pages: protection policy, templates, categories, guidelines, help pages.
-- Strong cues: wiki policy language, editors, formatting instructions, non-universe content.
-
-Other:
-- Only use when none of the above apply and explain why in rationale_short.
-
----
-DECISION RULES (to reduce common errors):
-1) If the page is centered on a named individual's life/story, it is PersonCharacter even if it references many films/books.
-2) If the title is a film/book/comic/game, it is WorkMedia even if it contains character lists.
-3) If the page is a battle/war/incident, it is EventConflict.
-4) If the page is an era or "Age of…", it is TimePeriod.
-5) Named droid-as-person => PersonCharacter; droid model line => ObjectArtifact.
-
----
-SECONDARY TYPES (optional, free-text):
-Use secondary_types to add specificity like: "Jedi", "Sith", "Smuggler", "Planet", "Space station", "Comic series", "Film episode", "Battle", "Religious order"
-Each secondary_types[i].type is free-text; weight is 0.0–1.0.
-
----
-TAG GUIDANCE (optional):
-Suggested tags should be meaningful and not redundant with primary_type.
-- Use tag_type examples: "Faction", "Role", "Species", "Era", "Theme", "EntitySubtype"
-- Use visibility: "public" for user-facing, "hidden" for internal retrieval helpers.
-"""
-
-        messages = [
-            {
-                "role": "system",
-                "content": system_prompt,
-            },
-            {
-                "role": "user",
-                "content": json.dumps({
-                    "title": title,
-                    "namespace": namespace.name.title().replace("_", ""),
-                    "continuity_hint": continuity.name.title(),
-                    "lead_sentence": lead_sentence,
-                    "categories": categories,
-                    "payload_excerpt": payload_excerpt,
-                }, ensure_ascii=False),
-            },
-        ]
+        # Build messages using standardized prompts (v3_contract)
+        # Uses clean input envelope format instead of embedding raw payloads
+        # Namespace enum values use UPPER_SNAKE_CASE; convert to TitleCase for schema
+        namespace_str = namespace.name.title().replace("_", "")
+        continuity_str = continuity.name.title()
+        
+        messages = build_messages(
+            title=title,
+            namespace=namespace_str,
+            continuity_hint=continuity_str,
+            excerpt_text=payload_excerpt,
+            source_system=record.get("source_system"),
+            resource_id=record.get("resource_id"),
+        )
 
         request_dump = {
             "model": model_name,
@@ -765,18 +696,18 @@ Suggested tags should be meaningful and not redundant with primary_type.
             confidence_score=confidence,
             method=ClassificationMethod.LLM,
             model_name=model_name,
-            # dry_run_v3: Added TYPE KEY controlled vocabulary block with explicit type
-            # definitions and decision rules to reduce misclassification errors
-            prompt_version="dry_run_v3",
+            # v3_contract: Standardized model-agnostic contract with structured notes,
+            # bounded excerpts, enhanced schema for subtype handling
+            prompt_version=PROMPT_VERSION,
             run_id=None,
             evidence_json=json.dumps({
-                "lead_sentence": lead_sentence,
                 "payload_excerpt": payload_excerpt[:800],
                 "content_format": extraction_result.content_format.value,
                 "extraction_strategy": extraction_result.strategy.value,
                 "excerpt_length": extraction_result.excerpt_length,
+                "notes": classification_json.get("notes", {}),
             }, ensure_ascii=False),
-            rationale=classification_json.get("rationale_short"),
+            rationale=classification_json.get("notes", {}).get("why_primary_type", ""),
             needs_review=bool(classification_json.get("needs_review")) or extraction_result.needs_review,
             review_notes=None,
             suggested_tags_json=json.dumps(classification_json.get("suggested_tags", [])),
@@ -893,6 +824,21 @@ Suggested tags should be meaningful and not redundant with primary_type.
         
         print("\nDescriptor Sentence (first item):")
         print(f"  {results[0]['descriptor_sentence']}")
+        
+        # Show notes if available (v3_contract)
+        notes = results[0]["classification_json"].get("notes", {})
+        if notes:
+            print("\nClassification Notes (first item):")
+            if notes.get("likely_subtype"):
+                print(f"  Likely subtype: {notes['likely_subtype']}")
+            if notes.get("why_primary_type"):
+                print(f"  Rationale: {notes['why_primary_type']}")
+            if notes.get("new_type_suggestions"):
+                print(f"  New type suggestions: {', '.join(notes['new_type_suggestions'])}")
+            if notes.get("ignored_noise"):
+                print(f"  Ignored noise: {', '.join(notes['ignored_noise'][:3])}...")
+        
+        print(f"\nPrompt version: {PROMPT_VERSION}")
 
     print("\nPersist status (per item):")
     for result in results:
