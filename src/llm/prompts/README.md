@@ -4,6 +4,38 @@
 
 This directory contains **prompt templates** for LLM interrogation. Prompts are organized by "interrogation prompt families" — groups of related prompts that share a common purpose and output structure.
 
+## Prompt Modules
+
+### `page_classification.py` *(NEW)*
+
+Standardized prompts for Wikipedia/Wookieepedia page classification. Provides:
+
+- `PROMPT_VERSION` — Version identifier for tracking (`v3_contract`)
+- `SYSTEM_PROMPT` — Role definition and output rules for the classifier
+- `build_messages()` — Build complete message list for LLM call
+- `build_user_message()` — Build the user message with clean input envelope
+
+**Key features:**
+- Model-agnostic design (works with any Ollama model)
+- Clean input envelope (title, namespace, continuity_hint, excerpt_text)
+- Strict JSON output enforcement
+- Confidence calibration guidance
+- Structured notes field for subtype handling
+- Noise handling instructions
+
+**Usage:**
+```python
+from llm.prompts.page_classification import build_messages, PROMPT_VERSION
+
+messages = build_messages(
+    title="Luke Skywalker",
+    namespace="Main",
+    continuity_hint="Canon",
+    excerpt_text="Luke Skywalker was a legendary Jedi Master...",
+)
+# Pass to OllamaClient.chat_with_structured_output()
+```
+
 ## Prompt Philosophy
 
 ### JSON-Contract-First Prompting
