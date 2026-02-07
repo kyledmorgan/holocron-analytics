@@ -303,7 +303,11 @@ class ContentExtractor:
         elif html_score > wikitext_score:
             return ContentFormat.HTML
         else:
-            # Default to wikitext if ambiguous (more common in our pipeline)
+            # Default behavior when scores are equal:
+            # - Prefer WIKITEXT if triple quotes present (common wiki article pattern)
+            # - Otherwise return UNKNOWN for explicit handling
+            # This is intentional since our ingestion pipeline primarily processes
+            # MediaWiki wikitext content, making it a reasonable default.
             return ContentFormat.WIKITEXT if "'''" in sample else ContentFormat.UNKNOWN
     
     def _calculate_max_chars(self, model_context_size: Optional[int]) -> int:
@@ -417,8 +421,6 @@ class ContentExtractor:
             
             # Found content
             return offset
-            
-            offset += len(line) + 1
         
         return 0
     

@@ -689,6 +689,8 @@ IMPORTANT for descriptor_sentence:
             confidence_score=confidence,
             method=ClassificationMethod.LLM,
             model_name=model_name,
+            # dry_run_v2: Added descriptor_sentence, improved content extraction with
+            # bounded excerpts, enhanced evidence with extraction metadata
             prompt_version="dry_run_v2",
             run_id=None,
             evidence_json=json.dumps({

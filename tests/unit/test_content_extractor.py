@@ -18,12 +18,13 @@ class TestContentExtractorFormatDetection:
     """Tests for format detection logic."""
     
     def test_detect_wikitext_with_triple_quote(self):
-        """Triple quotes should be detected as wikitext."""
+        """Triple quotes with wiki links should be detected as wikitext."""
         extractor = ContentExtractor()
-        content = "'''Luke Skywalker''' was a [[Jedi]] Master. He trained with Yoda and became a powerful Force user."
+        # Include multiple wikitext markers to ensure detection
+        content = "'''Luke Skywalker''' was a [[Jedi]] Master. He trained with [[Yoda]] and became a powerful [[Force]] user."
         result = extractor.extract(content)
-        # With markers present, should detect as wikitext
-        assert result.content_format in (ContentFormat.WIKITEXT, ContentFormat.UNKNOWN)
+        # With multiple wikitext markers present, should detect as wikitext
+        assert result.content_format == ContentFormat.WIKITEXT
     
     def test_detect_wikitext_with_templates(self):
         """Templates should be detected as wikitext."""
