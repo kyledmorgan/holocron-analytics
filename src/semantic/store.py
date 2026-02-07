@@ -8,14 +8,16 @@ Provides persistence for:
 - Tag assignments via dbo.BridgeTagAssignment
 """
 
+import hashlib
 import json
 import logging
+import math
 import os
+import re
 import uuid
 from dataclasses import asdict
 from datetime import datetime, timezone
 from decimal import Decimal, InvalidOperation
-import math
 from typing import Any, Dict, List, Optional
 
 try:
@@ -717,3 +719,228 @@ class SemanticStagingStore:
             assignment_ids.append(assignment_id)
         
         return assignment_ids
+
+    # =========================================================================
+    # DimEntity operations
+    # =========================================================================
+
+    @staticmethod
+    def normalize_display_name(title: str) -> str:
+        """
+        Normalize a display name for matching.
+
+        Applies: lowercase, strip, collapse whitespace, replace spaces with underscores.
+        """
+        normalized = title.strip().lower()
+        # Collapse multiple whitespace to single space, then replace with underscore
+        normalized = re.sub(r'\s+', '_', normalized)
+        return normalized
+
+    def upsert_dim_entity(
+        self,
+        title: str,
+        source_page_id: Optional[str] = None,
+        primary_type: Optional[str] = None,
+        type_set_json: Optional[str] = None,
+        confidence: Optional[float] = None,
+        descriptor_sentence: Optional[str] = None,
+        entity_type: str = "Unknown",
+        franchise_key: int = 1,
+        run_id: Optional[str] = None,
+    ) -> Dict[str, Any]:
+        """
+        Upsert a DimEntity record based on normalized display name matching.
+
+        Match rule:
+        - Uses deterministic "same word" match on normalized display name
+          (case-insensitive, trimmed, collapsed whitespace).
+
+        Upsert behavior:
+        - If found: UPDATE with classification outputs (promotion state,
+          inferred types, confidence, descriptor).
+        - If not found: INSERT new DimEntity row with candidate/staged state.
+
+        Args:
+            title: The entity display name / page title.
+            source_page_id: Reference to sem.SourcePage (UUID string).
+            primary_type: Inferred primary type from classification.
+            type_set_json: Inferred type set as JSON (multi-label).
+            confidence: Classification confidence score (0.0 to 1.0).
+            descriptor_sentence: LLM-generated single sentence descriptor.
+            entity_type: Entity type (e.g., 'Character', 'Location'). Default 'Unknown'.
+            franchise_key: FK to DimFranchise. Default 1 (Star Wars).
+            run_id: Reference to llm.run for lineage.
+
+        Returns:
+            Dict with keys:
+            - success: bool
+            - entity_key: int (PK) if success
+            - entity_guid: str (UUID) if success
+            - action: 'updated' | 'inserted' | None
+            - error: str if not success
+        """
+        conn = self._get_connection()
+        cursor = conn.cursor()
+
+        normalized = self.normalize_display_name(title)
+
+        # Determine promotion state based on confidence and type
+        # Default to 'candidate' if confidence >= 0.80 and not a meta/technical page
+        meta_types = ("TechnicalSitePage", "MetaReference", "Unknown")
+        if confidence is not None and confidence >= 0.80 and primary_type not in meta_types:
+            promotion_state = "candidate"
+        else:
+            promotion_state = "staged"
+
+        # Truncate descriptor_sentence if too long (DB column is NVARCHAR(1000))
+        if descriptor_sentence and len(descriptor_sentence) > 1000:
+            descriptor_sentence = descriptor_sentence[:1000]
+
+        try:
+            # Step 1: Try to find existing entity by normalized name
+            cursor.execute("""
+                SELECT EntityKey, EntityGuid
+                FROM dbo.DimEntity
+                WHERE IsLatest = 1 AND IsActive = 1
+                  AND (DisplayNameNormalized = ? OR DisplayName = ?)
+            """, (normalized, title))
+
+            row = cursor.fetchone()
+
+            if row:
+                # Step 2a: UPDATE existing entity
+                entity_key = row[0]
+                entity_guid = str(row[1])
+
+                cursor.execute("""
+                    UPDATE dbo.DimEntity
+                    SET PromotionState = ?,
+                        SourcePageId = ?,
+                        PrimaryTypeInferred = ?,
+                        TypeSetJsonInferred = ?,
+                        UpdatedUtc = SYSUTCDATETIME()
+                    WHERE EntityKey = ? AND IsLatest = 1
+                """, (promotion_state, source_page_id, primary_type, type_set_json, entity_key))
+
+                logger.debug(f"Updated DimEntity {entity_key} for '{title}'")
+                return {
+                    "success": True,
+                    "entity_key": entity_key,
+                    "entity_guid": entity_guid,
+                    "action": "updated",
+                    "error": None,
+                }
+            else:
+                # Step 2b: INSERT new entity
+                # Compute RowHash (required NOT NULL column)
+                row_hash_input = f"{franchise_key}|{title}|{entity_type}|{primary_type or ''}"
+                row_hash = hashlib.sha256(row_hash_input.encode('utf-8')).digest()
+
+                # Use atomic INSERT with OUTPUT to get the new keys
+                cursor.execute("""
+                    INSERT INTO dbo.DimEntity (
+                        FranchiseKey,
+                        EntityType,
+                        DisplayName,
+                        DisplayNameNormalized,
+                        SortName,
+                        SourcePageId,
+                        PromotionState,
+                        PrimaryTypeInferred,
+                        TypeSetJsonInferred,
+                        RowHash,
+                        SourceSystem,
+                        SourceRef,
+                        IsActive,
+                        IsLatest,
+                        VersionNum,
+                        CreatedUtc,
+                        ValidFromUtc
+                    )
+                    OUTPUT INSERTED.EntityKey, INSERTED.EntityGuid
+                    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 1, 1, 1, SYSUTCDATETIME(), SYSUTCDATETIME())
+                """, (
+                    franchise_key,
+                    entity_type,
+                    title,
+                    normalized,
+                    title,  # SortName defaults to display name
+                    source_page_id,
+                    promotion_state,
+                    primary_type,
+                    type_set_json,
+                    row_hash,
+                    "sem_pipeline",
+                    source_page_id,  # SourceRef = source_page_id
+                ))
+
+                insert_row = cursor.fetchone()
+                if insert_row:
+                    entity_key = insert_row[0]
+                    entity_guid = str(insert_row[1])
+                    logger.debug(f"Inserted DimEntity {entity_key} for '{title}'")
+                    return {
+                        "success": True,
+                        "entity_key": entity_key,
+                        "entity_guid": entity_guid,
+                        "action": "inserted",
+                        "error": None,
+                    }
+                else:
+                    return {
+                        "success": False,
+                        "entity_key": None,
+                        "entity_guid": None,
+                        "action": None,
+                        "error": "INSERT did not return entity keys",
+                    }
+
+        except Exception as e:
+            logger.error(f"Failed to upsert DimEntity for '{title}': {e}")
+            return {
+                "success": False,
+                "entity_key": None,
+                "entity_guid": None,
+                "action": None,
+                "error": str(e),
+            }
+
+    def get_dim_entity_by_title(self, title: str) -> Optional[Dict[str, Any]]:
+        """
+        Get a DimEntity by display name using normalized matching.
+
+        Returns:
+            Dict with entity details if found, None otherwise.
+        """
+        conn = self._get_connection()
+        cursor = conn.cursor()
+
+        normalized = self.normalize_display_name(title)
+
+        cursor.execute("""
+            SELECT EntityKey, EntityGuid, FranchiseKey, EntityType, DisplayName,
+                   DisplayNameNormalized, PromotionState, SourcePageId,
+                   PrimaryTypeInferred, TypeSetJsonInferred, CreatedUtc, UpdatedUtc
+            FROM dbo.DimEntity
+            WHERE IsLatest = 1 AND IsActive = 1
+              AND (DisplayNameNormalized = ? OR DisplayName = ?)
+        """, (normalized, title))
+
+        row = cursor.fetchone()
+        if not row:
+            return None
+
+        return {
+            "entity_key": row[0],
+            "entity_guid": str(row[1]),
+            "franchise_key": row[2],
+            "entity_type": row[3],
+            "display_name": row[4],
+            "display_name_normalized": row[5],
+            "promotion_state": row[6],
+            "source_page_id": str(row[7]) if row[7] else None,
+            "primary_type_inferred": row[8],
+            "type_set_json_inferred": row[9],
+            "created_utc": row[10],
+            "updated_utc": row[11],
+        }

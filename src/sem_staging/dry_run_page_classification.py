@@ -321,6 +321,12 @@ def update_dim_entity(
     type_set_json: Optional[str],
     confidence: Optional[float],
 ) -> Tuple[bool, Optional[str]]:
+    """
+    DEPRECATED: Use SemanticStagingStore.upsert_dim_entity() instead.
+    
+    This function only updates existing entities and does not create new ones.
+    The new upsert_dim_entity method in store.py implements full create-or-update.
+    """
     if not table_exists(conn, "dbo", "DimEntity"):
         return False, "dbo.DimEntity missing"
 
@@ -681,6 +687,7 @@ def main() -> int:
             "tags": False,
         }
         dim_entity_ref = None
+        dim_entity_action = None
         tags_attempted = False
         sem_tables_ok = (
             table_exists(conn, "sem", "SourcePage")
@@ -739,16 +746,27 @@ def main() -> int:
             store.insert_page_classification(classification)
             persist["page_classification"] = True
 
-            # Update DimEntity (if exists)
-            dim_entity_ok, dim_entity_ref = update_dim_entity(
-                conn,
-                title=title,
-                source_page_id=source_page.source_page_id,
-                primary_type=classification_json.get("primary_type", "Unknown"),
-                type_set_json=json.dumps(classification_json.get("secondary_types", [])),
-                confidence=confidence,
-            )
-            persist["dim_entity"] = dim_entity_ok
+            # Upsert DimEntity (create-or-update)
+            if table_exists(conn, "dbo", "DimEntity"):
+                dim_entity_result = store.upsert_dim_entity(
+                    title=title,
+                    source_page_id=source_page.source_page_id,
+                    primary_type=classification_json.get("primary_type", "Unknown"),
+                    type_set_json=json.dumps(classification_json.get("secondary_types", [])),
+                    confidence=confidence,
+                    descriptor_sentence=descriptor_sentence,
+                    entity_type=classification_json.get("primary_type", "Unknown"),
+                )
+                persist["dim_entity"] = dim_entity_result.get("success", False)
+                if dim_entity_result.get("success"):
+                    dim_entity_ref = dim_entity_result.get("entity_guid")
+                else:
+                    dim_entity_ref = dim_entity_result.get("error")
+                dim_entity_action = dim_entity_result.get("action")
+            else:
+                persist["dim_entity"] = False
+                dim_entity_ref = "dbo.DimEntity missing"
+                dim_entity_action = None
 
             # Tags (optional)
             if table_exists(conn, "dbo", "DimTag") and table_exists(conn, "dbo", "BridgeTagAssignment"):
@@ -793,6 +811,7 @@ def main() -> int:
             "title": title,
             "persist": persist,
             "dim_entity_ref": dim_entity_ref,
+            "dim_entity_action": dim_entity_action,
             "tags_attempted": tags_attempted,
             "classification_json": classification_json,
             "extraction_info": {
@@ -844,13 +863,17 @@ def main() -> int:
     for result in results:
         persist = result["persist"]
         dim_entity_ref = result["dim_entity_ref"]
+        dim_entity_action = result.get("dim_entity_action")
         tags_attempted = result["tags_attempted"]
         print(f"  {result['title']}:")
         print(f"    SourcePage upsert: {'OK' if persist['source_page'] else 'FAIL'}")
         print(f"    PageSignals insert: {'OK' if persist['page_signals'] else 'FAIL'}")
         print(f"    PageClassification insert: {'OK' if persist['page_classification'] else 'FAIL'}")
-        print(f"    DimEntity update: {'OK' if persist['dim_entity'] else 'FAIL'}"
-              f"{'' if persist['dim_entity'] else f' ({dim_entity_ref})'}")
+        if persist['dim_entity']:
+            action_label = f"({dim_entity_action})" if dim_entity_action else ""
+            print(f"    DimEntity upsert: OK {action_label}")
+        else:
+            print(f"    DimEntity upsert: FAIL ({dim_entity_ref})")
         if tags_attempted:
             print(f"    Tags: {'OK' if persist['tags'] else 'FAIL'}")
         else:
