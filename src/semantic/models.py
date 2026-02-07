@@ -150,6 +150,12 @@ class PageSignals:
         extraction_method: Method used for extraction
         extraction_duration_ms: Time taken to extract
         is_current: Whether this is the current signals version
+        content_format_detected: Detected content format (wikitext/html/unknown)
+        content_start_strategy: Strategy used to find content start
+        content_start_offset: Character offset where content starts
+        lead_excerpt_text: Bounded excerpt used for LLM classification
+        lead_excerpt_len: Length of the lead excerpt
+        lead_excerpt_hash: SHA256 hash of the lead excerpt
     """
     page_signals_id: str = field(default_factory=lambda: str(uuid.uuid4()))
     source_page_id: str = ""
@@ -167,6 +173,13 @@ class PageSignals:
     extraction_method: Optional[str] = None
     extraction_duration_ms: Optional[int] = None
     is_current: bool = True
+    # Content extraction fields
+    content_format_detected: Optional[str] = None
+    content_start_strategy: Optional[str] = None
+    content_start_offset: Optional[int] = None
+    lead_excerpt_text: Optional[str] = None
+    lead_excerpt_len: Optional[int] = None
+    lead_excerpt_hash: Optional[str] = None
 
     @property
     def categories(self) -> List[str]:
@@ -206,6 +219,7 @@ class PageClassification:
         created_utc: When classification was performed
         is_current: Whether this is the current classification
         superseded_by_id: ID of classification that supersedes this one
+        descriptor_sentence: LLM-generated single sentence descriptor (<= 50 words)
     """
     page_classification_id: str = field(default_factory=lambda: str(uuid.uuid4()))
     source_page_id: str = ""
@@ -225,6 +239,7 @@ class PageClassification:
     created_utc: datetime = field(default_factory=lambda: datetime.now(timezone.utc))
     is_current: bool = True
     superseded_by_id: Optional[str] = None
+    descriptor_sentence: Optional[str] = None
 
     @property
     def type_set(self) -> Dict[str, float]:
