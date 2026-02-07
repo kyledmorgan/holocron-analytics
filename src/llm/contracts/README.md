@@ -6,6 +6,20 @@ This directory contains JSON Schema definitions that govern the structure of man
 
 ## Schemas
 
+### `page_classification_v1_schema.json` *(NEW)*
+
+Defines the **standardized output schema** for page classification tasks. This is the model-agnostic contract used by the page classification runner when calling Ollama.
+
+Key features:
+- Standardized `primary_type` enum with 12 values
+- Structured `notes` field for subtype handling and extensibility
+- `descriptor_sentence` (≤50 words, single sentence)
+- `suggested_tags` with visibility (Public/Hidden) and typed categories
+- Confidence calibration guidance
+- `is_candidate_new_type` flag for taxonomy evolution
+
+Used by: `src/sem_staging/dry_run_page_classification.py`, `src/llm/prompts/page_classification.py`
+
 ### `manifest_schema.json`
 
 Defines the structure of a **derive manifest** — the metadata record that tracks:

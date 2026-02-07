@@ -1,0 +1,150 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://holocron-analytics.local/schemas/llm/page-classification/v1",
+  "title": "Page Classification Output",
+  "description": "Standardized JSON schema for LLM page classification output. Used for classifying Wikipedia-style wiki pages into entity types with tags and metadata.",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "title": {
+      "type": "string",
+      "description": "The page title being classified"
+    },
+    "namespace": {
+      "type": "string",
+      "enum": ["Main", "Module", "Forum", "UserTalk", "Wookieepedia", "Other"],
+      "description": "Wiki namespace of the page"
+    },
+    "continuity_hint": {
+      "type": "string",
+      "enum": ["Canon", "Legends", "Unknown"],
+      "description": "Detected continuity (Canon, Legends, or Unknown)"
+    },
+    "primary_type": {
+      "type": "string",
+      "enum": [
+        "PersonCharacter",
+        "LocationPlace",
+        "Organization",
+        "Species",
+        "ObjectArtifact",
+        "WorkMedia",
+        "EventConflict",
+        "TimePeriod",
+        "Concept",
+        "MetaReference",
+        "TechnicalSitePage",
+        "Other"
+      ],
+      "description": "Primary entity type. Choose from enum; use Other only if necessary."
+    },
+    "secondary_types": {
+      "type": "array",
+      "description": "Additional types or candidate new types with weights",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "type": {
+            "type": "string",
+            "description": "Type name (enum value or freeform for candidates)"
+          },
+          "weight": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1,
+            "description": "Weight/probability for this type (0.0 to 1.0)"
+          },
+          "is_candidate_new_type": {
+            "type": "boolean",
+            "description": "True if this is a candidate for a new picklist entry"
+          }
+        },
+        "required": ["type", "weight", "is_candidate_new_type"]
+      }
+    },
+    "descriptor_sentence": {
+      "type": "string",
+      "description": "Exactly one sentence, <= 50 words, plain text only. Summarizes what this entity/page is."
+    },
+    "suggested_tags": {
+      "type": "array",
+      "description": "Suggested tags for indexing and retrieval",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "tag": {
+            "type": "string",
+            "description": "Tag name (short, human-readable)"
+          },
+          "tag_type": {
+            "type": "string",
+            "enum": ["EntityFacet", "Topic", "EraTime", "Continuity", "Affiliation", "Role", "Medium", "Meta", "Keyword"],
+            "description": "Category of tag"
+          },
+          "visibility": {
+            "type": "string",
+            "enum": ["Public", "Hidden"],
+            "description": "Public tags are user-facing; Hidden tags are for internal retrieval"
+          },
+          "weight": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1,
+            "description": "Relevance weight (0.0 to 1.0)"
+          }
+        },
+        "required": ["tag", "tag_type", "visibility", "weight"]
+      }
+    },
+    "confidence": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1,
+      "description": "Confidence score (0.90-1.00: clear match, 0.70-0.89: mostly clear, 0.40-0.69: uncertain, <0.40: very uncertain)"
+    },
+    "needs_review": {
+      "type": "boolean",
+      "description": "True if manual review is recommended (e.g., low confidence, noisy content)"
+    },
+    "notes": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "Structured notes for nuance and extensibility",
+      "properties": {
+        "likely_subtype": {
+          "type": "string",
+          "description": "More precise subtype if primary_type is broad (e.g., 'astromech droid' for ObjectArtifact)"
+        },
+        "why_primary_type": {
+          "type": "string",
+          "description": "Brief rationale for primary_type selection"
+        },
+        "new_type_suggestions": {
+          "type": "array",
+          "items": {"type": "string"},
+          "description": "Suggested new enum values if current taxonomy is insufficient"
+        },
+        "ignored_noise": {
+          "type": "array",
+          "items": {"type": "string"},
+          "description": "List of noise/artifacts that were ignored (templates, broken markup, etc.)"
+        }
+      },
+      "required": ["likely_subtype", "why_primary_type", "new_type_suggestions", "ignored_noise"]
+    }
+  },
+  "required": [
+    "title",
+    "namespace",
+    "continuity_hint",
+    "primary_type",
+    "secondary_types",
+    "descriptor_sentence",
+    "suggested_tags",
+    "confidence",
+    "needs_review",
+    "notes"
+  ]
+}

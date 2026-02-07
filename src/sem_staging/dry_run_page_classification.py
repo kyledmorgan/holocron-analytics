@@ -22,6 +22,11 @@ sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")
 
 from llm.core.types import LLMConfig
 from llm.providers.ollama_client import OllamaClient
+from llm.prompts.page_classification import (
+    PROMPT_VERSION,
+    SYSTEM_PROMPT,
+    build_messages,
+)
 from semantic.models import (
     ClassificationMethod,
     ContinuityHint,
@@ -458,7 +463,8 @@ def main() -> int:
     ))
     results = []
 
-    # Step 4: Ollama call with strict JSON contract
+    # Step 4: Ollama call with strict JSON contract (v3_contract)
+    # Updated schema with structured notes field for subtype handling
     output_schema = {
         "type": "object",
         "additionalProperties": False,
@@ -475,49 +481,66 @@ def main() -> int:
             "primary_type": {
                 "type": "string",
                 "enum": [
-                    "PersonCharacter", "LocationPlace", "WorkMedia", "EventConflict",
-                    "Organization", "Species", "ObjectArtifact", "Concept",
-                    "MetaReference", "TechnicalSitePage", "TimePeriod", "Other"
+                    "PersonCharacter", "LocationPlace", "Organization", "Species",
+                    "ObjectArtifact", "WorkMedia", "EventConflict", "TimePeriod",
+                    "Concept", "MetaReference", "TechnicalSitePage", "Other"
                 ]
             },
             "secondary_types": {
                 "type": "array",
                 "items": {
                     "type": "object",
+                    "additionalProperties": False,
                     "properties": {
                         "type": {"type": "string"},
-                        "weight": {"type": "number"}
+                        "weight": {"type": "number"},
+                        "is_candidate_new_type": {"type": "boolean"}
                     },
-                    "required": ["type", "weight"],
-                    "additionalProperties": False
+                    "required": ["type", "weight", "is_candidate_new_type"]
                 }
             },
-            "confidence": {"type": "number"},
+            "descriptor_sentence": {
+                "type": "string",
+                "description": "Exactly one sentence, <= 50 words, plain text only."
+            },
             "suggested_tags": {
                 "type": "array",
                 "items": {
                     "type": "object",
+                    "additionalProperties": False,
                     "properties": {
                         "tag": {"type": "string"},
-                        "tag_type": {"type": "string"},
-                        "visibility": {"type": "string"},
+                        "tag_type": {
+                            "type": "string",
+                            "enum": ["EntityFacet", "Topic", "EraTime", "Continuity", "Affiliation", "Role", "Medium", "Meta", "Keyword"]
+                        },
+                        "visibility": {
+                            "type": "string",
+                            "enum": ["Public", "Hidden"]
+                        },
                         "weight": {"type": "number"}
                     },
-                    "required": ["tag", "tag_type", "visibility", "weight"],
-                    "additionalProperties": False
+                    "required": ["tag", "tag_type", "visibility", "weight"]
                 }
             },
+            "confidence": {"type": "number"},
             "needs_review": {"type": "boolean"},
-            "rationale_short": {"type": "string"},
-            "descriptor_sentence": {
-                "type": "string",
-                "description": "A single descriptive sentence (max 50 words) summarizing what this entity/page is. Plain text only, no markup."
-            },
+            "notes": {
+                "type": "object",
+                "additionalProperties": False,
+                "properties": {
+                    "likely_subtype": {"type": "string"},
+                    "why_primary_type": {"type": "string"},
+                    "new_type_suggestions": {"type": "array", "items": {"type": "string"}},
+                    "ignored_noise": {"type": "array", "items": {"type": "string"}}
+                },
+                "required": ["likely_subtype", "why_primary_type", "new_type_suggestions", "ignored_noise"]
+            }
         },
         "required": [
             "title", "namespace", "continuity_hint", "primary_type",
-            "secondary_types", "confidence", "suggested_tags",
-            "needs_review", "rationale_short", "descriptor_sentence"
+            "secondary_types", "descriptor_sentence", "suggested_tags",
+            "confidence", "needs_review", "notes"
         ],
     }
 
@@ -570,37 +593,21 @@ def main() -> int:
 
         # Use the new bounded excerpt for LLM input
         payload_excerpt = lead_excerpt if lead_excerpt else get_payload_excerpt(payload_obj, max_chars=3000)
-        lead_sentence = signals.lead_sentence or get_text_snippet(payload_obj, max_chars=300)
-        categories = signals.categories if signals.categories_json else []
 
-        # Enhanced system prompt with descriptor_sentence guidance
-        system_prompt = """Return only valid JSON matching the schema. No extra keys. No markdown. No commentary.
-
-IMPORTANT for descriptor_sentence:
-- Must be exactly ONE sentence.
-- Maximum 50 words.
-- Plain text only (no citations, links, wikitext, HTML, or JSON).
-- Summarize what this entity/page is in a concise, descriptive way.
-- Example: "Luke Skywalker was a legendary Jedi Master who played a pivotal role in the fall of the Galactic Empire during the Galactic Civil War."
-"""
-
-        messages = [
-            {
-                "role": "system",
-                "content": system_prompt,
-            },
-            {
-                "role": "user",
-                "content": json.dumps({
-                    "title": title,
-                    "namespace": namespace.name.title().replace("_", ""),
-                    "continuity_hint": continuity.name.title(),
-                    "lead_sentence": lead_sentence,
-                    "categories": categories,
-                    "payload_excerpt": payload_excerpt,
-                }, ensure_ascii=False),
-            },
-        ]
+        # Build messages using standardized prompts (v3_contract)
+        # Uses clean input envelope format instead of embedding raw payloads
+        # Namespace enum values use UPPER_SNAKE_CASE; convert to TitleCase for schema
+        namespace_str = namespace.name.title().replace("_", "")
+        continuity_str = continuity.name.title()
+        
+        messages = build_messages(
+            title=title,
+            namespace=namespace_str,
+            continuity_hint=continuity_str,
+            excerpt_text=payload_excerpt,
+            source_system=record.get("source_system"),
+            resource_id=record.get("resource_id"),
+        )
 
         request_dump = {
             "model": model_name,
@@ -689,18 +696,18 @@ IMPORTANT for descriptor_sentence:
             confidence_score=confidence,
             method=ClassificationMethod.LLM,
             model_name=model_name,
-            # dry_run_v2: Added descriptor_sentence, improved content extraction with
-            # bounded excerpts, enhanced evidence with extraction metadata
-            prompt_version="dry_run_v2",
+            # v3_contract: Standardized model-agnostic contract with structured notes,
+            # bounded excerpts, enhanced schema for subtype handling
+            prompt_version=PROMPT_VERSION,
             run_id=None,
             evidence_json=json.dumps({
-                "lead_sentence": lead_sentence,
                 "payload_excerpt": payload_excerpt[:800],
                 "content_format": extraction_result.content_format.value,
                 "extraction_strategy": extraction_result.strategy.value,
                 "excerpt_length": extraction_result.excerpt_length,
+                "notes": classification_json.get("notes", {}),
             }, ensure_ascii=False),
-            rationale=classification_json.get("rationale_short"),
+            rationale=classification_json.get("notes", {}).get("why_primary_type", ""),
             needs_review=bool(classification_json.get("needs_review")) or extraction_result.needs_review,
             review_notes=None,
             suggested_tags_json=json.dumps(classification_json.get("suggested_tags", [])),
@@ -817,6 +824,21 @@ IMPORTANT for descriptor_sentence:
         
         print("\nDescriptor Sentence (first item):")
         print(f"  {results[0]['descriptor_sentence']}")
+        
+        # Show notes if available (v3_contract)
+        notes = results[0]["classification_json"].get("notes", {})
+        if notes:
+            print("\nClassification Notes (first item):")
+            if notes.get("likely_subtype"):
+                print(f"  Likely subtype: {notes['likely_subtype']}")
+            if notes.get("why_primary_type"):
+                print(f"  Rationale: {notes['why_primary_type']}")
+            if notes.get("new_type_suggestions"):
+                print(f"  New type suggestions: {', '.join(notes['new_type_suggestions'])}")
+            if notes.get("ignored_noise"):
+                print(f"  Ignored noise: {', '.join(notes['ignored_noise'][:3])}...")
+        
+        print(f"\nPrompt version: {PROMPT_VERSION}")
 
     print("\nPersist status (per item):")
     for result in results:
