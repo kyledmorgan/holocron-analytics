@@ -252,6 +252,7 @@ class TestBuiltinInterrogations:
             "TimePeriod:",
             "MetaReference:",
             "TechnicalSitePage:",
+            "Other:",
         ]
         for type_name in required_types:
             assert type_name in definition.system_prompt, f"Missing type definition: {type_name}"

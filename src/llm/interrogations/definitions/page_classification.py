@@ -75,7 +75,7 @@ TechnicalSitePage:
 - Site policy/technical/wiki infrastructure pages: protection policy, templates, categories, guidelines, help pages.
 - Strong cues: wiki policy language, editors, formatting instructions, non-universe content.
 
-Unknown:
+Other:
 - Only use when none of the above apply with any confidence and explain why in rationale.
 
 ---
