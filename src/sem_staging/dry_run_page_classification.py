@@ -365,6 +365,23 @@ def main() -> int:
     parser.add_argument("--limit", type=int, default=1, help="Number of items to process (default: 1)")
     parser.add_argument("--random", action="store_true", help="Select random items instead of top payloads")
     parser.add_argument(
+        "--ollama-timeout",
+        type=int,
+        default=120,
+        help="Ollama request timeout in seconds (default: 120)",
+    )
+    parser.add_argument(
+        "--ollama-retries",
+        type=int,
+        default=3,
+        help="Ollama request retries (default: 3)",
+    )
+    parser.add_argument(
+        "--fail-fast",
+        action="store_true",
+        help="Exit on first Ollama failure instead of continuing",
+    )
+    parser.add_argument(
         "--dump-ollama",
         action="store_true",
         help="Write raw Ollama request/response JSON to logs/ollama",
@@ -573,7 +590,7 @@ def main() -> int:
         base_url=base_url,
         temperature=0.0,
         max_tokens=1000,
-        timeout_seconds=120,
+        timeout_seconds=args.ollama_timeout,
         stream=False,
     )
     client = OllamaClient(llm_config)
@@ -641,19 +658,19 @@ def main() -> int:
             "messages": messages,
             "output_schema": output_schema,
         }
+        # Call Ollama with retry logic for connection failures and invalid JSON
+        max_attempts = max(1, args.ollama_retries)
+        classification_json = None
         response = None
         last_error: Optional[Exception] = None
-        for attempt in range(1, 4):
+
+        for attempt in range(1, max_attempts + 1):
+            logger.info("Ollama attempt %s/%s for '%s'", attempt, max_attempts, title)
             try:
                 response = client.chat_with_structured_output(messages, output_schema)
-                break
             except (ConnectionRefusedError, OSError, URLError, HTTPError) as exc:
                 last_error = exc
-                logger.warning(
-                    "Ollama request failed (attempt %s/3): %s",
-                    attempt,
-                    exc,
-                )
+                logger.warning("Ollama request failed (attempt %s/%s): %s", attempt, max_attempts, exc)
                 # Re-check connectivity and fall back to any available base URL
                 refreshed_base = None
                 refreshed_models = None
@@ -671,28 +688,123 @@ def main() -> int:
                         base_url=base_url,
                         temperature=0.0,
                         max_tokens=1000,
-                        timeout_seconds=120,
+                        timeout_seconds=args.ollama_timeout,
                         stream=False,
                     )
                     client = OllamaClient(llm_config)
-                time.sleep(2)
+                delay = 0.25 * (2 ** (attempt - 1))
+                time.sleep(delay)
+                continue
 
-        if response is None:
-            print("Ollama call failed after retries.")
-            if last_error:
-                print(f"Last error: {last_error}")
-            print("Hint: ensure Ollama is running and reachable at one of:")
-            print("  " + ", ".join(base_urls))
-            return 1
-        if not response.success or not response.content:
-            print("Ollama call failed.")
-            return 1
+            if not response.success or not response.content:
+                last_error = RuntimeError("Ollama call failed")
+                logger.warning("Ollama call failed on attempt %s", attempt)
+                if attempt < max_attempts:
+                    delay = 0.25 * (2 ** (attempt - 1))
+                    logger.info("Retrying after %ss backoff", delay)
+                    time.sleep(delay)
+                    continue
+                break
 
-        try:
-            classification_json = json.loads(response.content)
-        except json.JSONDecodeError:
-            print("Ollama returned invalid JSON.")
-            return 1
+            try:
+                # Try direct JSON parse
+                classification_json = json.loads(response.content)
+                if attempt > 1:
+                    logger.info(f"Successfully parsed JSON on attempt {attempt}")
+                break  # Success!
+                
+            except json.JSONDecodeError as e:
+                last_error = e
+                logger.warning(f"Attempt {attempt}: JSON parse failed - {e}")
+                
+                # Try with stripped whitespace
+                try:
+                    classification_json = json.loads(response.content.strip())
+                    logger.info(f"Successfully parsed JSON after stripping whitespace (attempt {attempt})")
+                    break
+                except json.JSONDecodeError:
+                    pass
+                
+                # Try to extract embedded JSON
+                try:
+                    content = response.content.strip()
+                    start = content.find('{')
+                    if start >= 0:
+                        depth = 0
+                        for i in range(start, len(content)):
+                            if content[i] == '{':
+                                depth += 1
+                            elif content[i] == '}':
+                                depth -= 1
+                                if depth == 0:
+                                    extracted = content[start:i+1]
+                                    classification_json = json.loads(extracted)
+                                    logger.info(f"Successfully extracted embedded JSON (attempt {attempt})")
+                                    break
+                except json.JSONDecodeError:
+                    pass
+                
+                # If this was the last attempt, fail
+                if attempt >= max_attempts:
+                    # Write error artifacts
+                    if args.dump_ollama:
+                        dump_dir = os.environ.get("OLLAMA_DUMP_DIR", os.path.join("logs", "ollama"))
+                        os.makedirs(dump_dir, exist_ok=True)
+                        
+                        # Write invalid response as text
+                        timestamp = datetime.now(timezone.utc).strftime("%Y%m%d_%H%M%S")
+                        safe_title = "".join(c if c.isalnum() or c in " _-" else "_" for c in title)
+                        error_path = os.path.join(
+                            dump_dir,
+                            f"{timestamp}_{safe_title}_invalid.txt"
+                        )
+                        with open(error_path, "w", encoding="utf-8") as f:
+                            f.write(response.content)
+                        
+                        # Write error manifest
+                        manifest = {
+                            "title": title,
+                            "attempts": max_attempts,
+                            "error": str(last_error),
+                            "content_preview": response.content[:500],
+                            "decision": "skipped_after_max_retries",
+                        }
+                        manifest_path = os.path.join(
+                            dump_dir,
+                            f"{timestamp}_{safe_title}_error.json"
+                        )
+                        with open(manifest_path, "w", encoding="utf-8") as f:
+                            json.dump(manifest, f, indent=2)
+                        
+                        logger.error(f"Wrote error artifacts: {error_path}, {manifest_path}")
+                    
+                    print(f"Ollama returned invalid JSON after {max_attempts} attempts.")
+                    print(f"Error: {last_error}")
+                    print(f"Content preview: {response.content[:200]}...")
+                    if args.fail_fast:
+                        return 1
+                    break
+                
+                # Backoff before retry
+                delay = 0.25 * (2 ** (attempt - 1))
+                logger.info(f"Retrying after {delay}s backoff")
+                time.sleep(delay)
+        
+        if classification_json is None:
+            if response is None:
+                print("Ollama call failed after retries.")
+                if last_error:
+                    print(f"Last error: {last_error}")
+                print("Hint: ensure Ollama is running and reachable at one of:")
+                print("  " + ", ".join(base_urls))
+            else:
+                print("Ollama call failed or returned invalid JSON.")
+            fail_count += 1
+            if args.fail_fast:
+                return 1
+            continue
+
+        # Dump artifacts if requested (only after successful parse)
         if args.dump_ollama:
             dump_dir = os.environ.get("OLLAMA_DUMP_DIR", os.path.join("logs", "ollama"))
             req_path, res_path = dump_ollama_io(

@@ -86,3 +86,22 @@ class LLMEvidenceError(LLMError):
     - Evidence bundle is empty
     """
     pass
+
+
+class InvalidOllamaJsonError(LLMValidationError):
+    """
+    Error when Ollama returns invalid JSON.
+    
+    Raised when:
+    - JSON parsing fails (json.JSONDecodeError)
+    - Ollama returns empty content
+    - Response contains malformed JSON
+    
+    This is a specific subclass of LLMValidationError for tracking
+    invalid JSON responses separately from schema validation failures.
+    """
+    
+    def __init__(self, message: str, raw_content: str = None, attempt: int = 1):
+        super().__init__(message, validation_errors=["Invalid JSON"])
+        self.raw_content = raw_content
+        self.attempt = attempt
