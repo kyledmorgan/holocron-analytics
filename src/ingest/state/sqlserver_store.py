@@ -41,7 +41,7 @@ class SqlServerStateStore(StateStore):
         self,
         connection_string: Optional[str] = None,
         host: str = "localhost",
-        port: int = 1434,
+        port: int = 1433,
         database: str = "Holocron",
         username: str = "sa",
         password: Optional[str] = None,

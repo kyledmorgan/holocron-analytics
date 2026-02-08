@@ -201,7 +201,8 @@ def fetch_candidate_records(
     conn,
     limit: int,
     randomize: bool,
-) -> Tuple[List[Dict[str, Any]], Optional[str]]:
+    payload_max_chars: int,
+) -> Tuple[Optional[Any], Optional[str], List[str]]:
     cursor = conn.cursor()
 
     cursor.execute(
@@ -213,7 +214,7 @@ def fetch_candidate_records(
     )
     column_set = {row[0] for row in cursor.fetchall()}
 
-    def build_select_fields() -> List[str]:
+    def build_select_fields() -> Tuple[List[str], List[str]]:
         fields = [
             "ingest_id",
             "resource_id",
@@ -228,10 +229,20 @@ def fetch_candidate_records(
             fields.insert(3, "content_type")
         if "content_length" in column_set:
             fields.insert(4, "content_length")
-        return [f for f in fields if f in column_set]
+        filtered = [f for f in fields if f in column_set]
 
-    select_fields = build_select_fields()
-    select_sql = "SELECT TOP " + str(limit) + " " + ", ".join(select_fields) + " FROM ingest.IngestRecords"
+        select_expr = []
+        for field in filtered:
+            if field == "payload" and payload_max_chars > 0:
+                select_expr.append(
+                    f"LEFT(CAST(payload AS NVARCHAR(MAX)), {int(payload_max_chars)}) AS payload"
+                )
+            else:
+                select_expr.append(field)
+        return filtered, select_expr
+
+    select_fields, select_expr = build_select_fields()
+    select_sql = "SELECT TOP " + str(limit) + " " + ", ".join(select_expr) + " FROM ingest.IngestRecords"
 
     if limit == 1 and not randomize:
         # Preferred: Anakin Skywalker
@@ -244,21 +255,17 @@ def fetch_candidate_records(
             """,
             ("Anakin Skywalker",),
         )
-        row = cursor.fetchone()
-        if row:
-            row_dict = dict(zip(select_fields, row))
-            return [{
-                "ingest_id": str(row_dict.get("ingest_id")) if row_dict.get("ingest_id") else None,
-                "resource_id": row_dict.get("resource_id"),
-                "resource_type": row_dict.get("resource_type"),
-                "content_type": row_dict.get("content_type"),
-                "content_length": row_dict.get("content_length"),
-                "payload": row_dict.get("payload"),
-                "source_system": row_dict.get("source_system"),
-                "source_name": row_dict.get("source_name"),
-                "variant": row_dict.get("variant"),
-                "fetched_at_utc": row_dict.get("fetched_at_utc"),
-            }], "resource_id=Anakin Skywalker"
+        if cursor.fetchone():
+            cursor.execute(
+                f"""
+                {select_sql}
+                WHERE resource_id = ?
+                  AND status_code BETWEEN 200 AND 299
+                ORDER BY fetched_at_utc DESC
+                """,
+                ("Anakin Skywalker",),
+            )
+            return cursor, "resource_id=Anakin Skywalker", select_fields
 
     order_by = "NEWID()" if randomize else "DATALENGTH(payload) DESC"
     cursor.execute(
@@ -276,27 +283,8 @@ def fetch_candidate_records(
         ORDER BY {order_by}
         """
     )
-    rows = cursor.fetchall()
-    if rows:
-        records = []
-        for row in rows:
-            row_dict = dict(zip(select_fields, row))
-            records.append({
-                "ingest_id": str(row_dict.get("ingest_id")) if row_dict.get("ingest_id") else None,
-                "resource_id": row_dict.get("resource_id"),
-                "resource_type": row_dict.get("resource_type"),
-                "content_type": row_dict.get("content_type"),
-                "content_length": row_dict.get("content_length"),
-                "payload": row_dict.get("payload"),
-                "source_system": row_dict.get("source_system"),
-                "source_name": row_dict.get("source_name"),
-                "variant": row_dict.get("variant"),
-                "fetched_at_utc": row_dict.get("fetched_at_utc"),
-            })
-        reason = "random_sample" if randomize else "largest_payload_non_technical"
-        return records, reason
-
-    return [], None
+    reason = "random_sample" if randomize else "largest_payload_non_technical"
+    return cursor, reason, select_fields
 
 
 def table_exists(conn, schema: str, table: str) -> bool:
@@ -374,7 +362,14 @@ def main() -> int:
         action="store_true",
         help="Write raw Ollama request/response JSON to logs/ollama",
     )
+    parser.add_argument(
+        "--payload-max-chars",
+        type=int,
+        default=4000,
+        help="Max characters to load from payload (default: 4000, 0 = full payload)",
+    )
     args = parser.parse_args()
+    max_results_keep = int(os.environ.get("DRY_RUN_RESULT_LIMIT", "50"))
 
     # Step 0/1: Ollama connectivity + models
     base_urls = []
@@ -445,9 +440,14 @@ def main() -> int:
         print("Hint: if you see encryption errors, set DB_ENCRYPT=no and DB_TRUST_CERT=true in your .env.")
         return 1
 
-    records, selection_reason = fetch_candidate_records(conn, limit=args.limit, randomize=args.random)
-    if not records:
-        records = [{
+    cursor, selection_reason, select_fields = fetch_candidate_records(
+        conn,
+        limit=args.limit,
+        randomize=args.random,
+        payload_max_chars=args.payload_max_chars,
+    )
+    if cursor is None:
+        fallback_records = [{
             "ingest_id": None,
             "resource_id": "Anakin Skywalker",
             "resource_type": None,
@@ -460,6 +460,8 @@ def main() -> int:
             "fetched_at_utc": None,
         }]
         selection_reason = "fallback_no_db_record"
+        select_fields = list(fallback_records[0].keys())
+        cursor = iter([tuple(fallback_records[0][k] for k in select_fields)])
 
     signals_extractor = SignalsExtractor()
     content_extractor = ContentExtractor(ExtractionConfig(
@@ -468,6 +470,11 @@ def main() -> int:
         hard_max_chars=12000,
     ))
     results = []
+    processed_count = 0
+    success_count = 0
+    fail_count = 0
+    first_classification_json = None
+    first_title = None
 
     # Step 4: Ollama call with strict JSON contract (v3_contract)
     # Updated schema with structured notes field for subtype handling
@@ -561,7 +568,10 @@ def main() -> int:
     )
     client = OllamaClient(llm_config)
 
-    for record in records:
+    for row in cursor:
+        record = dict(zip(select_fields, row))
+        if record.get("ingest_id"):
+            record["ingest_id"] = str(record.get("ingest_id"))
         payload_raw = record.get("payload")
         payload_obj: Any = payload_raw
         if isinstance(payload_raw, str):
@@ -807,20 +817,29 @@ def main() -> int:
                 except Exception:
                     persist["tags"] = False
 
-        results.append({
-            "title": title,
-            "persist": persist,
-            "dim_entity_ref": dim_entity_ref,
-            "dim_entity_action": dim_entity_action,
-            "tags_attempted": tags_attempted,
-            "classification_json": classification_json,
-            "extraction_info": {
-                "format": extraction_result.content_format.value,
-                "strategy": extraction_result.strategy.value,
-                "excerpt_length": extraction_result.excerpt_length,
-            },
-            "descriptor_sentence": descriptor_sentence,
-        })
+        if len(results) < max_results_keep:
+            results.append({
+                "title": title,
+                "persist": persist,
+                "dim_entity_ref": dim_entity_ref,
+                "dim_entity_action": dim_entity_action,
+                "tags_attempted": tags_attempted,
+                "classification_json": classification_json,
+                "extraction_info": {
+                    "format": extraction_result.content_format.value,
+                    "strategy": extraction_result.strategy.value,
+                    "excerpt_length": extraction_result.excerpt_length,
+                },
+                "descriptor_sentence": descriptor_sentence,
+            })
+        processed_count += 1
+        if persist["page_classification"]:
+            success_count += 1
+        else:
+            fail_count += 1
+        if first_classification_json is None:
+            first_classification_json = classification_json
+            first_title = title
 
     # Step 6: Output summary
     print("\n=== Dry Run Summary ===")
@@ -829,35 +848,41 @@ def main() -> int:
     print(f"Model selected: {model_name}")
     print("\nSQL source selection:")
     print(f"  reason: {selection_reason}")
-    print(f"  count: {len(records)}")
+    print(f"  count: {processed_count}")
+    print(f"  successes: {success_count}")
+    print(f"  failures: {fail_count}")
+    if processed_count > len(results):
+        print(f"  detail limit: showing first {len(results)} items only")
 
-    if results:
+    if first_classification_json is not None:
         print("\nSample LLM response JSON (first item):")
-        print(json.dumps(results[0]["classification_json"], indent=2))
+        print(f"  title: {first_title}")
+        print(json.dumps(first_classification_json, indent=2))
         
-        print("\nContent Extraction Info (first item):")
-        ext_info = results[0]["extraction_info"]
-        print(f"  Format detected: {ext_info['format']}")
-        print(f"  Strategy used: {ext_info['strategy']}")
-        print(f"  Excerpt length: {ext_info['excerpt_length']} chars")
-        
-        print("\nDescriptor Sentence (first item):")
-        print(f"  {results[0]['descriptor_sentence']}")
-        
-        # Show notes if available (v3_contract)
-        notes = results[0]["classification_json"].get("notes", {})
-        if notes:
-            print("\nClassification Notes (first item):")
-            if notes.get("likely_subtype"):
-                print(f"  Likely subtype: {notes['likely_subtype']}")
-            if notes.get("why_primary_type"):
-                print(f"  Rationale: {notes['why_primary_type']}")
-            if notes.get("new_type_suggestions"):
-                print(f"  New type suggestions: {', '.join(notes['new_type_suggestions'])}")
-            if notes.get("ignored_noise"):
-                print(f"  Ignored noise: {', '.join(notes['ignored_noise'][:3])}...")
-        
-        print(f"\nPrompt version: {PROMPT_VERSION}")
+        if results:
+            print("\nContent Extraction Info (first item):")
+            ext_info = results[0]["extraction_info"]
+            print(f"  Format detected: {ext_info['format']}")
+            print(f"  Strategy used: {ext_info['strategy']}")
+            print(f"  Excerpt length: {ext_info['excerpt_length']} chars")
+            
+            print("\nDescriptor Sentence (first item):")
+            print(f"  {results[0]['descriptor_sentence']}")
+            
+            # Show notes if available (v3_contract)
+            notes = results[0]["classification_json"].get("notes", {})
+            if notes:
+                print("\nClassification Notes (first item):")
+                if notes.get("likely_subtype"):
+                    print(f"  Likely subtype: {notes['likely_subtype']}")
+                if notes.get("why_primary_type"):
+                    print(f"  Rationale: {notes['why_primary_type']}")
+                if notes.get("new_type_suggestions"):
+                    print(f"  New type suggestions: {', '.join(notes['new_type_suggestions'])}")
+                if notes.get("ignored_noise"):
+                    print(f"  Ignored noise: {', '.join(notes['ignored_noise'][:3])}...")
+            
+            print(f"\nPrompt version: {PROMPT_VERSION}")
 
     print("\nPersist status (per item):")
     for result in results:

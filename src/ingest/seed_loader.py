@@ -102,7 +102,7 @@ def get_connection_string() -> str:
     database = os.environ.get("SEED_SQLSERVER_DATABASE")
     user = os.environ.get("SEED_SQLSERVER_USER")
     password = os.environ.get("SEED_SQLSERVER_PASSWORD")
-    port = os.environ.get("SEED_SQLSERVER_PORT", "1434")
+    port = os.environ.get("SEED_SQLSERVER_PORT", "1433")
     driver = os.environ.get(
         "SEED_SQLSERVER_DRIVER", "ODBC Driver 18 for SQL Server"
     )

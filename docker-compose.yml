@@ -2,17 +2,17 @@
 # Run: docker compose up --build
 #
 # Services:
-#   - sqlserver: SQL Server Developer Edition (persisted)
+#   - sql2025: SQL Server Developer Edition (persisted)
 #   - initdb: Creates database if missing (runs once, then exits)
 #   - seed: Loads seed data into tables (runs once, then exits)
 #   - ollama: Local LLM runtime for LLM-derived data (persisted models)
 #
 # After startup, SQL Server and Ollama remain running for interactive use.
-# Connect with SSMS/Azure Data Studio: localhost,1434 | sa | <your password>
+# Connect with SSMS/Azure Data Studio: localhost | sa | <your password>
 # Ollama API: http://localhost:11434
 
 services:
-  sqlserver:
+  sql2025:
     image: mcr.microsoft.com/mssql/server:2025-latest
     container_name: sql2025
     environment:
@@ -20,9 +20,13 @@ services:
       - MSSQL_PID=Developer
       - MSSQL_SA_PASSWORD=${MSSQL_SA_PASSWORD}
     ports:
-      - "1434:1433"
+      - "1433:1433"
     volumes:
-      - mssql_data:/var/opt/mssql
+      - W:/Docker/SQL2025/data:/var/opt/mssql/data
+      - W:/Docker/SQL2025/log:/var/opt/mssql/log
+      - W:/Docker/SQL2025/secrets:/var/opt/mssql/secrets
+      - W:/Docker/SQL2025/backup:/var/opt/mssql/backup
+      - sql2025_tempdb:/var/opt/mssql/tempdb
     healthcheck:
       test: ["CMD-SHELL", "bash -c \"echo > /dev/tcp/localhost/1433\""]
       interval: 10s
@@ -30,12 +34,14 @@ services:
       retries: 12
       start_period: 30s
     restart: unless-stopped
+    tmpfs:
+      - /var/opt/mssql/tempdb:rw,noexec,nosuid,size=4g
 
   initdb:
     image: mcr.microsoft.com/mssql-tools
     container_name: holocron-initdb
     depends_on:
-      sqlserver:
+      sql2025:
         condition: service_healthy
     environment:
       - MSSQL_SA_PASSWORD=${MSSQL_SA_PASSWORD}
@@ -61,7 +67,7 @@ services:
             for script in "$${dir}"/*.sql; do
               if [ -f "$${script}" ]; then
                 echo "Running $${script}..."
-                /opt/mssql-tools/bin/sqlcmd -S sqlserver -U sa -P "$${MSSQL_SA_PASSWORD}" -C \
+                  /opt/mssql-tools/bin/sqlcmd -S sql2025 -U sa -P "$${MSSQL_SA_PASSWORD}" -C \
                   -d "$${DATABASE_NAME}" -i "$${script}"
               fi
             done

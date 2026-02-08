@@ -145,7 +145,7 @@ def build_storage_writers(config: IngestConfig) -> list:
         if not conn_str:
             # Build from discrete values
             host = sql_config.get("host", "localhost")
-            port = sql_config.get("port", "1434")
+            port = sql_config.get("port", "1433")
             database = sql_config.get("database", "Holocron")
             user = sql_config.get("user", "sa")
             password = os.environ.get("INGEST_SQLSERVER_PASSWORD", sql_config.get("password"))
@@ -192,7 +192,7 @@ def build_state_store(config: IngestConfig):
         backend="sqlserver",
         connection_string=os.environ.get("INGEST_SQLSERVER_STATE_CONN_STR"),
         host=sql_config.get("host", os.environ.get("INGEST_SQLSERVER_HOST", "localhost")),
-        port=int(sql_config.get("port", os.environ.get("INGEST_SQLSERVER_PORT", "1434"))),
+        port=int(sql_config.get("port", os.environ.get("INGEST_SQLSERVER_PORT", "1433"))),
         database=sql_config.get("database", os.environ.get("INGEST_SQLSERVER_DATABASE", "Holocron")),
         username=sql_config.get("user", os.environ.get("INGEST_SQLSERVER_USER", "sa")),
         password=(

@@ -16,7 +16,7 @@ state:
   type: "sqlserver"
   sqlserver:
     host: "localhost"
-    port: 1434
+    port: 1433
     database: "Holocron"
     user: "sa"
     # password: set via INGEST_SQLSERVER_PASSWORD env var

@@ -71,7 +71,7 @@ storage:
     # Connection string from environment: LLM_SQLSERVER_CONN_STR
     # Or use discrete variables (same pattern as ingest):
     # host: localhost
-    # port: 1434
+    # port: 1433
     # database: Holocron
     # user: sa
     # password: ${LLM_SQLSERVER_PASSWORD}

@@ -24,10 +24,10 @@ Running Ollama in Docker means:
 ┌─────────────────────────────────────────────────────────────────────┐
 │                     Docker Compose Stack                            │
 ├──────────────────┬────────────────────┬────────────────────────────┤
-│    sqlserver     │       ollama       │      (future runner)       │
+│    sql2025     │       ollama       │      (future runner)       │
 │                  │                    │                            │
 │  SQL Server 2025 │  Local LLM API     │  Python derive jobs        │
-│  Host Port: 1434 │  Port: 11434       │  Calls ollama:11434        │
+│  Host Port: 1433 │  Port: 11433       │  Calls ollama:11433        │
 │  Volume: mssql_data │ Volume: ollama_data │                        │
 └──────────────────┴────────────────────┴────────────────────────────┘
                            │
@@ -96,7 +96,7 @@ docker compose up -d ollama
 This starts Ollama in detached mode. The service will:
 - Pull the `ollama/ollama:latest` image if not present
 - Create the `ollama_data` volume for model persistence
-- Start the Ollama API on port 11434
+- Start the Ollama API on port 11433
 
 ### Start the Full Stack
 
@@ -155,7 +155,7 @@ Recommended starting models:
 docker exec -it holocron-ollama ollama list
 
 # Via API
-curl http://localhost:11434/api/tags
+curl http://localhost:11433/api/tags
 ```
 
 ### Running Interactive Chat
@@ -217,10 +217,10 @@ Use `localhost`:
 
 ```bash
 # Health check
-curl http://localhost:11434/api/tags
+curl http://localhost:11433/api/tags
 
 # Generate text
-curl http://localhost:11434/api/generate -d '{
+curl http://localhost:11433/api/generate -d '{
   "model": "llama3.2",
   "prompt": "What is 2+2?",
   "stream": false
@@ -233,7 +233,7 @@ Use the service name `ollama`:
 
 ```python
 # Python code running in another container
-base_url = "http://ollama:11434"
+base_url = "http://ollama:11433"
 ```
 
 This works because all services in the same Compose file share a default bridge network. The service name resolves to the container's IP.
@@ -242,8 +242,8 @@ This works because all services in the same Compose file share a default bridge 
 
 | Variable | Use Case | Value |
 |----------|----------|-------|
-| `OLLAMA_BASE_URL` | Container-to-container | `http://ollama:11434` |
-| `OLLAMA_HOST_BASE_URL` | Host-based testing | `http://localhost:11434` |
+| `OLLAMA_BASE_URL` | Container-to-container | `http://ollama:11433` |
+| `OLLAMA_HOST_BASE_URL` | Host-based testing | `http://localhost:11433` |
 
 ---
 
@@ -251,16 +251,16 @@ This works because all services in the same Compose file share a default bridge 
 
 ### Default: Localhost Only
 
-The Compose file binds Ollama to `127.0.0.1:11434`:
+The Compose file binds Ollama to `127.0.0.1:11433`:
 
 ```yaml
 ports:
-  - "127.0.0.1:11434:11434"
+  - "127.0.0.1:11433:11433"
 ```
 
 This means:
 - ✓ Accessible from your Windows host via `localhost`
-- ✓ Accessible from other containers via `ollama:11434`
+- ✓ Accessible from other containers via `ollama:11433`
 - ✗ NOT accessible from other machines on your LAN
 - ✗ NOT accessible from the internet
 
@@ -270,7 +270,7 @@ If you need LAN access (e.g., for remote testing), you can bind to all interface
 
 ```yaml
 ports:
-  - "11434:11434"  # WARNING: Exposes to LAN
+  - "11433:11433"  # WARNING: Exposes to LAN
 ```
 
 **Security implications:**
@@ -297,7 +297,7 @@ ollama:
   image: ollama/ollama:latest
   container_name: holocron-ollama
   ports:
-    - "127.0.0.1:11434:11434"
+    - "127.0.0.1:11433:11433"
   volumes:
     - ollama_data:/root/.ollama
   restart: unless-stopped
@@ -337,7 +337,7 @@ docker exec -it holocron-ollama nvidia-smi
 | Pull model | `docker exec -it holocron-ollama ollama pull <model>` |
 | List models | `docker exec -it holocron-ollama ollama list` |
 | Run interactive | `docker exec -it holocron-ollama ollama run <model>` |
-| Check API | `curl http://localhost:11434/api/tags` |
+| Check API | `curl http://localhost:11433/api/tags` |
 | Show model info | `docker exec -it holocron-ollama ollama show <model>` |
 | Stop model | `docker exec -it holocron-ollama ollama stop <model>` |
 
@@ -349,11 +349,11 @@ docker exec -it holocron-ollama nvidia-smi
 
 1. Check if Ollama is running: `docker compose ps`
 2. Check logs for errors: `docker compose logs ollama`
-3. Verify port binding: `docker compose port ollama 11434`
+3. Verify port binding: `docker compose port ollama 11433`
 
 ### "Connection refused" from Another Container
 
-1. Use `http://ollama:11434`, not `localhost`
+1. Use `http://ollama:11433`, not `localhost`
 2. Ensure both containers are in the same Compose stack
 3. Check network: `docker network ls` and `docker network inspect`
 

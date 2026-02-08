@@ -64,7 +64,7 @@ class SemanticStagingStore:
         self,
         connection_string: Optional[str] = None,
         host: str = "localhost",
-        port: int = 1434,
+        port: int = 1433,
         database: str = "Holocron",
         username: str = "sa",
         password: str = "",
@@ -109,7 +109,7 @@ class SemanticStagingStore:
         """Resolve connection settings from environment with Docker-aware defaults."""
         in_docker = cls._running_in_docker()
         default_host = "sql2025" if in_docker else "localhost"
-        default_port = "1433" if in_docker else "1434"
+        default_port = "1433"
 
         host = os.environ.get("DB_HOST") or os.environ.get("SEMANTIC_SQLSERVER_HOST") \
             or os.environ.get("INGEST_SQLSERVER_HOST") or default_host

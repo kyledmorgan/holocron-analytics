@@ -38,7 +38,7 @@ def get_connection_info() -> dict:
     """Get connection info from environment variables."""
     return {
         "host": os.environ.get("INGEST_SQLSERVER_HOST", os.environ.get("SEED_SQLSERVER_HOST", "localhost")),
-        "port": int(os.environ.get("INGEST_SQLSERVER_PORT", os.environ.get("SEED_SQLSERVER_PORT", "1434"))),
+        "port": int(os.environ.get("INGEST_SQLSERVER_PORT", os.environ.get("SEED_SQLSERVER_PORT", "1433"))),
         "database": os.environ.get("INGEST_SQLSERVER_DATABASE", os.environ.get("SEED_SQLSERVER_DATABASE", os.environ.get("MSSQL_DATABASE", "Holocron"))),
         "username": os.environ.get("INGEST_SQLSERVER_USER", os.environ.get("SEED_SQLSERVER_USER", "sa")),
         "password": os.environ.get("INGEST_SQLSERVER_PASSWORD", os.environ.get("MSSQL_SA_PASSWORD")),

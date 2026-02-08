@@ -180,7 +180,7 @@ def demo_full_pipeline():
     The full pipeline now requires SQL Server backend running in Docker.
     
     To run OpenAlex ingestion:
-    1. Start SQL Server: docker compose up -d sqlserver
+    1. Start SQL Server: docker compose up -d sql2025
     2. Set environment variables (see .env.example)
     3. Use ingest_cli.py with proper configuration
     

@@ -44,7 +44,7 @@ cd "$PROJECT_DIR"
 
 # Step 1: Start SQL Server
 echo -e "${YELLOW}Step 1/5: Starting SQL Server container...${NC}"
-docker compose up -d sqlserver
+docker compose up -d sql2025
 echo ""
 
 # Step 2: Wait for SQL Server

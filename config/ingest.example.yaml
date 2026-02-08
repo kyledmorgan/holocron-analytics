@@ -16,7 +16,7 @@ storage:
     # Connection string from environment variable: INGEST_SQLSERVER_CONN_STR
     # Or use discrete variables:
     host: localhost
-    port: 1434
+    port: 1433
     database: Holocron
     user: sa
     # password is read from environment (INGEST_SQLSERVER_PASSWORD or MSSQL_SA_PASSWORD)
@@ -41,7 +41,7 @@ state:
     # 
     # Or use discrete values below:
     host: "localhost"
-    port: 1434
+    port: 1433
     database: "Holocron"
     user: "sa"
     # password: (use INGEST_SQLSERVER_PASSWORD or MSSQL_SA_PASSWORD env var)

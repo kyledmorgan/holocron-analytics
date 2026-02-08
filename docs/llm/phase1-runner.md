@@ -36,14 +36,14 @@ The Phase 1 Runner implements the first end-to-end execution path for the LLM-De
 ### Prerequisites
 
 1. Docker Desktop with WSL2 (Windows) or Docker Engine (Linux/Mac)
-2. SQL Server running (via `docker compose up sqlserver`)
+2. SQL Server running (via `docker compose up sql2025`)
 3. Ollama running with a model pulled (via `docker compose up ollama`)
 
 ### 1. Start the Stack
 
 ```bash
 # Start SQL Server and Ollama
-docker compose up -d sqlserver ollama
+docker compose up -d sql2025 ollama
 
 # Wait for SQL Server to be ready
 docker compose up initdb

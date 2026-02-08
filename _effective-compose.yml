@@ -37,7 +37,7 @@ services:
         echo "=== Database initialization complete ==="
     container_name: holocron-initdb
     depends_on:
-      sqlserver:
+      sql2025:
         condition: service_healthy
         required: true
     entrypoint:
@@ -97,7 +97,7 @@ services:
         read_only: true
         bind:
           create_host_path: true
-  sqlserver:
+  sql2025:
     container_name: sql2025
     environment:
       ACCEPT_EULA: "Y"
@@ -117,7 +117,7 @@ services:
     ports:
       - mode: ingress
         target: 1433
-        published: "1434"
+        published: "1433"
         protocol: tcp
     restart: unless-stopped
     volumes:
