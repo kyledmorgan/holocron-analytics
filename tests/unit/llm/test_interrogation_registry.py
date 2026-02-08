@@ -242,17 +242,20 @@ class TestBuiltinInterrogations:
         # Verify all primary types are defined with descriptions
         required_types = [
             "PersonCharacter:",
+            "PersonCharacter:",
+            "Droid:",
+            "Species:",
             "LocationPlace:",
+            "VehicleCraft:",
+            "ObjectItem:",
             "WorkMedia:",
             "EventConflict:",
             "Organization:",
-            "Species:",
-            "ObjectArtifact:",
             "Concept:",
             "TimePeriod:",
-            "MetaReference:",
+            "ReferenceMeta:",
             "TechnicalSitePage:",
-            "Other:",
+            "Unknown:",
         ]
         for type_name in required_types:
             assert type_name in definition.system_prompt, f"Missing type definition: {type_name}"
@@ -260,9 +263,9 @@ class TestBuiltinInterrogations:
         # Verify DECISION RULES are present
         assert "DECISION RULES" in definition.system_prompt
         
-        # Verify key decision rules
-        assert "PersonCharacter even if it references many films/books" in definition.system_prompt
-        assert "Named droid-as-person" in definition.system_prompt
+        # Verify key decision rules for new types
+        assert "droid model/type" in definition.system_prompt or "droid model line" in definition.system_prompt
+        assert "list/timeline/disambiguation" in definition.system_prompt or "ReferenceMeta" in definition.system_prompt
     
     def test_page_classification_v1_schema_has_correct_types(self):
         """Test that page_classification_v1 schema has updated type enum."""
@@ -273,14 +276,19 @@ class TestBuiltinInterrogations:
         types = definition.output_schema["properties"]["primary_type"]["enum"]
         
         # Verify new types are present
+        assert "Droid" in types
+        assert "VehicleCraft" in types
+        assert "ObjectItem" in types
+        assert "ReferenceMeta" in types
         assert "ObjectArtifact" in types
-        assert "Other" in types
+        assert "Unknown" in types
         
-        # Verify old types are removed
+        # Verify renamed/removed types
+        assert "MetaReference" not in types
+        assert "Other" not in types
         assert "Technology" not in types
         assert "Vehicle" not in types
         assert "Weapon" not in types
-        assert "Unknown" not in types
     
     def test_page_classification_v1_validator(self):
         """Test that page_classification_v1 validator works with new types."""
@@ -289,29 +297,38 @@ class TestBuiltinInterrogations:
         assert definition is not None
         assert definition.validator is not None
         
-        # Test valid data with ObjectArtifact (new type)
-        valid_data = {
-            "primary_type": "ObjectArtifact",
-            "confidence_score": 0.9,
-            "needs_review": False,
-            "rationale": "Named vessel"
-        }
-        errors = definition.validate_output(valid_data)
-        assert errors == []
+        # Test valid data with new types
+        test_cases = [
+            ("Droid", "Named droid individual"),
+            ("VehicleCraft", "Named starship with specifications"),
+            ("ObjectItem", "Lightsaber weapon"),
+            ("ReferenceMeta", "List of Star Wars films"),
+            ("ObjectArtifact", "Named vessel"),
+        ]
         
-        # Test valid data with Other (replacement for Unknown)
-        valid_data_other = {
-            "primary_type": "Other",
+        for primary_type, rationale in test_cases:
+            valid_data = {
+                "primary_type": primary_type,
+                "confidence_score": 0.9,
+                "needs_review": False,
+                "rationale": rationale
+            }
+            errors = definition.validate_output(valid_data)
+            assert errors == [], f"Validation failed for {primary_type}: {errors}"
+        
+        # Test valid data with Unknown (replacement for Other)
+        valid_data_unknown = {
+            "primary_type": "Unknown",
             "confidence_score": 0.5,
             "needs_review": True,
             "rationale": "Unclear classification"
         }
-        errors = definition.validate_output(valid_data_other)
+        errors = definition.validate_output(valid_data_unknown)
         assert errors == []
         
         # Test invalid data with old type (should fail)
         invalid_data = {
-            "primary_type": "Unknown",  # Old type, no longer valid
+            "primary_type": "Other",  # Old type, no longer valid
             "confidence_score": 0.5,
             "needs_review": True,
             "rationale": "test"
