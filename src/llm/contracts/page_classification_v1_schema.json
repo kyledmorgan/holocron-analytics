@@ -24,19 +24,22 @@
       "type": "string",
       "enum": [
         "PersonCharacter",
-        "LocationPlace",
-        "Organization",
+        "Droid",
         "Species",
+        "LocationPlace",
+        "VehicleCraft",
+        "ObjectItem",
         "ObjectArtifact",
-        "WorkMedia",
+        "Organization",
+        "Concept",
         "EventConflict",
         "TimePeriod",
-        "Concept",
-        "MetaReference",
+        "WorkMedia",
+        "ReferenceMeta",
         "TechnicalSitePage",
-        "Other"
+        "Unknown"
       ],
-      "description": "Primary entity type. Choose from enum; use Other only if necessary."
+      "description": "Primary entity type. Choose from enum; use Unknown only if necessary."
     },
     "secondary_types": {
       "type": "array",
@@ -107,6 +110,16 @@
     "needs_review": {
       "type": "boolean",
       "description": "True if manual review is recommended (e.g., low confidence, noisy content)"
+    },
+    "work_medium": {
+      "type": ["string", "null"],
+      "enum": ["film", "tv", "game", "book", "comic", "reference", "episode", "short", "other", "unknown", null],
+      "description": "Medium of work (for WorkMedia pages only). Required if primary_type is WorkMedia, null otherwise."
+    },
+    "canon_context": {
+      "type": ["string", "null"],
+      "enum": ["canon", "legends", "both", "unknown", null],
+      "description": "Canon context (for WorkMedia pages only). Required if primary_type is WorkMedia, null otherwise."
     },
     "notes": {
       "type": "object",
