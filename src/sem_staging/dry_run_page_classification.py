@@ -641,7 +641,49 @@ def main() -> int:
             "messages": messages,
             "output_schema": output_schema,
         }
-        response = client.chat_with_structured_output(messages, output_schema)
+        response = None
+        last_error: Optional[Exception] = None
+        for attempt in range(1, 4):
+            try:
+                response = client.chat_with_structured_output(messages, output_schema)
+                break
+            except (ConnectionRefusedError, OSError, URLError, HTTPError) as exc:
+                last_error = exc
+                logger.warning(
+                    "Ollama request failed (attempt %s/3): %s",
+                    attempt,
+                    exc,
+                )
+                # Re-check connectivity and fall back to any available base URL
+                refreshed_base = None
+                refreshed_models = None
+                for candidate in base_urls:
+                    refreshed_models = try_fetch_models(candidate)
+                    if refreshed_models is not None:
+                        refreshed_base = candidate
+                        break
+                if refreshed_base and refreshed_base != base_url:
+                    base_url = refreshed_base
+                    model_name = select_model(refreshed_models or models) or model_name
+                    llm_config = LLMConfig(
+                        provider="ollama",
+                        model=model_name,
+                        base_url=base_url,
+                        temperature=0.0,
+                        max_tokens=1000,
+                        timeout_seconds=120,
+                        stream=False,
+                    )
+                    client = OllamaClient(llm_config)
+                time.sleep(2)
+
+        if response is None:
+            print("Ollama call failed after retries.")
+            if last_error:
+                print(f"Last error: {last_error}")
+            print("Hint: ensure Ollama is running and reachable at one of:")
+            print("  " + ", ".join(base_urls))
+            return 1
         if not response.success or not response.content:
             print("Ollama call failed.")
             return 1
