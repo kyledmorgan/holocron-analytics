@@ -32,25 +32,37 @@ class ClassificationMethod(str, Enum):
 
 class PageType(str, Enum):
     """
-    Primary type taxonomy for page classification (v1).
+    Primary type taxonomy for page classification (v1.1).
     
     This taxonomy is designed for initial classification of wiki pages.
+    Expanded to reduce Unknown classifications for vehicles, items, droids, and meta pages.
     """
-    # In-universe entities
+    # In-universe entities - Characters and beings
     PERSON_CHARACTER = "PersonCharacter"
-    LOCATION_PLACE = "LocationPlace"
-    WORK_MEDIA = "WorkMedia"
-    EVENT_CONFLICT = "EventConflict"
-    CONCEPT = "Concept"
-    ORGANIZATION = "Organization"
+    DROID = "Droid"  # Named droids or droid model lines (e.g., R2-D2, R2-series)
     SPECIES = "Species"
-    TECHNOLOGY = "Technology"
-    VEHICLE = "Vehicle"
-    WEAPON = "Weapon"
+    
+    # In-universe entities - Places
+    LOCATION_PLACE = "LocationPlace"
+    
+    # In-universe entities - Objects and technology
+    VEHICLE_CRAFT = "VehicleCraft"  # Starships, starfighters, craft with specs/class/manufacturer
+    OBJECT_ITEM = "ObjectItem"  # Weapons, gear, armor, clothing, insignia, physical items
+    OBJECT_ARTIFACT = "ObjectArtifact"  # Legacy: General objects, use VehicleCraft or ObjectItem for new
+    
+    # In-universe entities - Organizations and concepts
+    ORGANIZATION = "Organization"
+    CONCEPT = "Concept"
+    
+    # In-universe entities - Events and time
+    EVENT_CONFLICT = "EventConflict"
+    TIME_PERIOD = "TimePeriod"
+    
+    # Media and creative works
+    WORK_MEDIA = "WorkMedia"
     
     # Meta/reference content
-    META_REFERENCE = "MetaReference"
-    TIME_PERIOD = "TimePeriod"
+    REFERENCE_META = "ReferenceMeta"  # Lists, timelines, disambiguation, guides, reference pages
     
     # Site/technical pages
     TECHNICAL_SITE_PAGE = "TechnicalSitePage"
@@ -81,6 +93,36 @@ class ContinuityHint(str, Enum):
     """Continuity hint detected from page title or metadata."""
     CANON = "canon"
     LEGENDS = "legends"
+    UNKNOWN = "unknown"
+
+
+class WorkMedium(str, Enum):
+    """
+    Work medium for WorkMedia pages.
+    
+    Distinguishes the format/medium of creative works.
+    """
+    FILM = "film"
+    TV = "tv"
+    GAME = "game"
+    BOOK = "book"
+    COMIC = "comic"
+    REFERENCE = "reference"
+    EPISODE = "episode"
+    SHORT = "short"
+    OTHER = "other"
+    UNKNOWN = "unknown"
+
+
+class CanonContext(str, Enum):
+    """
+    Canon context for WorkMedia pages.
+    
+    Indicates whether the work is part of Canon, Legends, both, or unknown.
+    """
+    CANON = "canon"
+    LEGENDS = "legends"
+    BOTH = "both"
     UNKNOWN = "unknown"
 
 
@@ -220,6 +262,8 @@ class PageClassification:
         is_current: Whether this is the current classification
         superseded_by_id: ID of classification that supersedes this one
         descriptor_sentence: LLM-generated single sentence descriptor (<= 50 words)
+        work_medium: Medium of work (for WorkMedia pages only)
+        canon_context: Canon context (for WorkMedia pages only)
     """
     page_classification_id: str = field(default_factory=lambda: str(uuid.uuid4()))
     source_page_id: str = ""
@@ -240,6 +284,8 @@ class PageClassification:
     is_current: bool = True
     superseded_by_id: Optional[str] = None
     descriptor_sentence: Optional[str] = None
+    work_medium: Optional[WorkMedium] = None
+    canon_context: Optional[CanonContext] = None
 
     @property
     def type_set(self) -> Dict[str, float]:
@@ -283,7 +329,7 @@ class PageClassificationResult:
         # Don't create entities for technical/meta pages
         if self.classification.primary_type in (
             PageType.TECHNICAL_SITE_PAGE,
-            PageType.META_REFERENCE,
+            PageType.REFERENCE_META,
         ):
             return False
         return True

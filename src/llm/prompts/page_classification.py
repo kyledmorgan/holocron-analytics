@@ -17,13 +17,72 @@ OUTPUT RULES (STRICT):
 - No markdown, no extra keys, no commentary
 - If uncertain, set needs_review=true and reduce confidence
 
-CLASSIFICATION RULES:
-1. primary_type: Choose from the enum list. Use "Other" only if no enum fits.
-2. If the entity is a specialized subtype not yet modeled (e.g., droid type, starfighter class):
-   - Choose the closest broad primary_type (often ObjectArtifact, Species, Organization, or Concept)
-   - Set notes.likely_subtype with the precise label
-   - Add to notes.new_type_suggestions
-   - Optionally add to secondary_types with is_candidate_new_type=true
+PRIMARY TYPE CLASSIFICATION RUBRIC:
+Follow this decision order to reduce Unknown classifications:
+
+1. **ReferenceMeta** - Lists, indexes, timelines, disambiguation, guides, reference aggregations
+   - Cues: "List of...", "Timeline of...", "may refer to", navigation role, encyclopedic cross-references
+   - Examples: "List of Star Wars films", "Timeline of galactic history", "Skywalker (disambiguation)"
+
+2. **VehicleCraft** - Starships, starfighters, shuttles, freighters, battle stations, vehicles with specs/class/manufacturer
+   - Cues: ship class, manufacturer, armament, propulsion systems, technical specifications
+   - Examples: "Millennium Falcon" (named craft), "X-wing starfighter" (model), "Death Star" (battle station)
+
+3. **ObjectItem** - Physical objects: weapons, lightsabers, blasters, armor, helmets, clothing, insignia, gear, tattoos
+   - Cues: physical description, materials, ownership, "wielded by", "worn by", design details
+   - Examples: "Anakin's lightsaber", "Clone trooper armor", "Mandalorian helmet", "Jedi robes"
+
+4. **Droid** - Named droids as individuals OR droid model lines/types
+   - Cues: droid designation (R2-D2, C-3PO), model series (R2-series), droid class/type
+   - Examples: "R2-D2" (named droid), "R2-series astromech droid" (model), "Protocol droid" (type)
+   - Note: Named droids as characters (with biography) go here, NOT PersonCharacter
+
+5. **PersonCharacter** - Sentient individuals with biography, personal history, relationships
+   - Cues: "was a...", biography, homeworld, family, affiliations, character arc, appearances
+   - Examples: "Luke Skywalker", "Darth Vader", "Ahsoka Tano", "Yoda"
+   - Note: NOT for droids (use Droid type), NOT for films/books (use WorkMedia)
+
+6. **LocationPlace** - Physical places: planets, moons, cities, regions, facilities, bases, stations, structures
+   - Cues: geography, climate, coordinates, inhabitants, "located on/in", points of interest
+   - Examples: "Tatooine" (planet), "Coruscant" (planet/city), "Jedi Temple" (structure), "Echo Base" (facility)
+
+7. **Species** - Biological species or sentient groups (NOT individuals)
+   - Cues: physiology, culture, homeworlds (plural), notable members list, "a species of..."
+   - Examples: "Human", "Twi'lek", "Wookiee", "Hutt"
+
+8. **Organization** - Groups, governments, militaries, orders, syndicates, corporations, councils
+   - Cues: membership, leadership, structure, doctrine, formation/dissolution, hierarchy
+   - Examples: "Jedi Order", "Galactic Empire", "Rebel Alliance", "Hutt Cartel"
+
+9. **EventConflict** - Discrete events: battles, wars, raids, missions, duels, treaties, catastrophes
+   - Cues: "Battle of...", "during...", participants, outcome, casualties, date/timeline
+   - Examples: "Battle of Yavin", "Clone Wars", "Order 66", "Duel on Mustafar"
+
+10. **WorkMedia** - Published creative works: films, episodes, series, novels, comics, games, soundtracks
+    - Cues: release date, creators, publisher, plot summary, "is a film/novel/comic/game"
+    - Examples: "Star Wars (film)", "The Empire Strikes Back", "Knights of the Old Republic" (game)
+    - IMPORTANT: If primary_type is WorkMedia, you MUST populate work_medium and canon_context fields
+
+11. **TimePeriod** - Spans of time: eras, ages, periods, reigns
+    - Cues: start/end dates, "era", "period", "age", chronology framing
+    - Examples: "Imperial Era", "High Republic Era", "Old Republic"
+
+12. **Concept** - Abstract ideas, systems, philosophies, technologies as concepts, doctrines
+    - Cues: definitions, principles, mechanics, applications, NOT a single place/person/event
+    - Examples: "The Force", "Hyperspace", "Dark side", "Lightsaber combat"
+
+13. **TechnicalSitePage** - Wiki infrastructure: templates, categories, policies, help pages, guidelines
+    - Cues: wiki policy language, template syntax, editing instructions, non-universe content
+    - Examples: "Template:Character infobox", "Wookieepedia:Policy", "Help:Editing"
+
+14. **Unknown** - ONLY if none of the above apply with any confidence
+    - Explain in notes.why_primary_type why no category fits
+
+WORK MEDIA METADATA:
+- If primary_type == "WorkMedia", you MUST populate:
+  - work_medium: film|tv|game|book|comic|reference|episode|short|other|unknown
+  - canon_context: canon|legends|both|unknown
+- If primary_type != "WorkMedia", set both to null
 
 DESCRIPTOR_SENTENCE RULES:
 - Exactly ONE sentence, maximum 50 words

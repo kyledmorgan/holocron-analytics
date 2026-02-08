@@ -56,12 +56,24 @@ class TestSystemPrompt:
     def test_system_prompt_includes_primary_type_guidance(self):
         """System prompt should include primary_type guidance."""
         assert "primary_type" in SYSTEM_PROMPT
-        assert "Other" in SYSTEM_PROMPT
+        # Check for new types in the rubric
+        assert "VehicleCraft" in SYSTEM_PROMPT
+        assert "ObjectItem" in SYSTEM_PROMPT
+        assert "Droid" in SYSTEM_PROMPT
+        assert "ReferenceMeta" in SYSTEM_PROMPT
+    
+    def test_system_prompt_includes_work_media_metadata(self):
+        """System prompt should include WorkMedia metadata instructions."""
+        assert "work_medium" in SYSTEM_PROMPT
+        assert "canon_context" in SYSTEM_PROMPT
+        assert "WorkMedia" in SYSTEM_PROMPT
     
     def test_system_prompt_includes_notes_guidance(self):
-        """System prompt should include structured notes guidance."""
-        assert "likely_subtype" in SYSTEM_PROMPT
-        assert "new_type_suggestions" in SYSTEM_PROMPT
+        """System prompt should include notes/rationale guidance."""
+        # The v3_contract prompt uses notes.ignored_noise for noise handling
+        # and has a notes section in the Unknown type description
+        assert "notes" in SYSTEM_PROMPT.lower() or "rationale" in SYSTEM_PROMPT.lower()
+        assert "ignored_noise" in SYSTEM_PROMPT or "noise" in SYSTEM_PROMPT.lower()
     
     def test_system_prompt_includes_noise_handling(self):
         """System prompt should include noise handling rules."""

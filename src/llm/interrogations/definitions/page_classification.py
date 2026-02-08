@@ -26,13 +26,29 @@ TYPE KEY (Controlled Vocabulary)
 Choose exactly ONE primary_type. Use secondary_types only to add nuance (subtypes) that still fit the primary selection.
 
 PersonCharacter:
-- A sentient individual (or named character persona) in-universe: people, Force users, named aliens, named droids as individuals, named creatures if treated as a character.
+- A sentient individual (or named character persona) in-universe: people, Force users, named aliens, named creatures (excluding droids) if treated as a character.
 - Strong cues: biography, "was a… who…", personal history, relationships, homeworld, affiliations, appearances.
-- NOT this: a film/book/comic itself (WorkMedia), a battle (EventConflict), a planet (LocationPlace).
+- NOT this: a film/book/comic itself (WorkMedia), a battle (EventConflict), a planet (LocationPlace), a droid (use Droid type).
+
+Droid:
+- Named droids as individuals OR droid model lines/types/series.
+- Strong cues: droid designation (R2-D2, C-3PO), model series (R2-series), droid class/type, technical specifications for droid models.
+- Examples: "R2-D2" (named droid), "R2-series astromech droid" (model line), "Protocol droid" (type/class).
 
 LocationPlace:
 - A physical place: planet, moon, city, region, facility, shipyard, temple, base, station, terrain feature.
 - Strong cues: geography, climate, coordinates, "located on/in", inhabitants, points of interest.
+
+VehicleCraft:
+- Starships, starfighters, shuttles, freighters, battle stations, vehicles with specs/class/manufacturer.
+- Strong cues: ship class, manufacturer, armament, propulsion systems, technical specifications, "commanded by".
+- Examples: "Millennium Falcon" (named craft), "X-wing starfighter" (model), "Death Star" (battle station).
+- Distinguished from ObjectItem by being primarily a vehicle/craft vs. a handheld/worn item.
+
+ObjectItem:
+- Physical objects: weapons, lightsabers, blasters, armor, helmets, clothing, insignia, gear, relics, tattoos.
+- Strong cues: physical description, materials, ownership, "wielded by", "worn by", design details.
+- Examples: "Anakin's lightsaber", "Clone trooper armor", "Mandalorian helmet", "Jedi robes".
 
 WorkMedia:
 - A published work: film, episode, series, novel, comic issue/run, game, soundtrack, reference book.
@@ -51,14 +67,6 @@ Species:
 - A biological species or sentient group (not a single individual): Human, Twi'lek, Wookiee, etc.
 - Strong cues: physiology, culture, homeworlds (plural), notable members list.
 
-ObjectArtifact:
-- A tangible item: weapon, ship (specific named vessel), vehicle model, device, relic, armor, droid model line.
-- Distinguish:
-  - Named one-off ship ("Millennium Falcon") => ObjectArtifact
-  - Class/model ("T-65B X-wing") => ObjectArtifact
-  - Named droid as a person ("R2-D2") => PersonCharacter
-  - Droid model ("R2-series astromech droid") => ObjectArtifact
-
 Concept:
 - An abstract idea or system: the Force, hyperspace, ideologies, technologies as concepts, doctrines.
 - Strong cues: definitions, principles, mechanics, applications, not a single place/person/event.
@@ -67,24 +75,27 @@ TimePeriod:
 - A span of time: eras, ages, reigns, periods (e.g., "Imperial Era", "High Republic Era").
 - Strong cues: start/end markers, "era", "period", chronology framing.
 
-MetaReference:
+ReferenceMeta:
 - Cross-page helper concepts: disambiguation, lists, timelines, glossaries, behind-the-scenes reference aggregations.
-- Strong cues: list-of entries, index pages, "may refer to", navigation role.
+- Strong cues: list-of entries, index pages, "may refer to", navigation role, "Timeline of...", "List of...".
 
 TechnicalSitePage:
 - Site policy/technical/wiki infrastructure pages: protection policy, templates, categories, guidelines, help pages.
 - Strong cues: wiki policy language, editors, formatting instructions, non-universe content.
 
-Other:
+Unknown:
 - Only use when none of the above apply with any confidence and explain why in rationale.
 
 ---
 DECISION RULES (to reduce common errors):
-1) If the page is centered on a named individual's life/story, it is PersonCharacter even if it references many films/books.
-2) If the title is a film/book/comic/game, it is WorkMedia even if it contains character lists.
-3) If the page is a battle/war/incident, it is EventConflict.
-4) If the page is an era or "Age of…", it is TimePeriod.
-5) Named droid-as-person => PersonCharacter; droid model line => ObjectArtifact.
+1) If the page is clearly a list/timeline/disambiguation/reference aggregation, it is ReferenceMeta.
+2) If it is a single craft/vehicle/station with specs/class/manufacturer, it is VehicleCraft.
+3) If it is a physical object/gear/weapon/apparel/handheld item, it is ObjectItem.
+4) If it is a named droid or droid model/type, it is Droid (NOT PersonCharacter).
+5) If it is centered on a named individual's life/story, it is PersonCharacter.
+6) If the title is a film/book/comic/game, it is WorkMedia.
+7) If the page is a battle/war/incident, it is EventConflict.
+8) If the page is an era or "Age of…", it is TimePeriod.
 
 ---
 SECONDARY TYPES (optional, free-text):
@@ -143,17 +154,20 @@ OUTPUT_SCHEMA = {
             "type": "string",
             "enum": [
                 "PersonCharacter",
-                "LocationPlace", 
-                "WorkMedia",
-                "EventConflict",
-                "Concept",
-                "Organization",
+                "Droid",
                 "Species",
+                "LocationPlace",
+                "VehicleCraft",
+                "ObjectItem",
                 "ObjectArtifact",
-                "MetaReference",
+                "Organization",
+                "Concept",
+                "EventConflict",
                 "TimePeriod",
+                "WorkMedia",
+                "ReferenceMeta",
                 "TechnicalSitePage",
-                "Other"
+                "Unknown"
             ]
         },
         "confidence_score": {

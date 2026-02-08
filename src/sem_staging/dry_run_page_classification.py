@@ -521,9 +521,10 @@ def main() -> int:
             "primary_type": {
                 "type": "string",
                 "enum": [
-                    "PersonCharacter", "LocationPlace", "Organization", "Species",
-                    "ObjectArtifact", "WorkMedia", "EventConflict", "TimePeriod",
-                    "Concept", "MetaReference", "TechnicalSitePage", "Other"
+                    "PersonCharacter", "Droid", "Species", "LocationPlace",
+                    "VehicleCraft", "ObjectItem", "ObjectArtifact",
+                    "Organization", "Concept", "EventConflict", "TimePeriod",
+                    "WorkMedia", "ReferenceMeta", "TechnicalSitePage", "Unknown"
                 ]
             },
             "secondary_types": {
@@ -565,6 +566,14 @@ def main() -> int:
             },
             "confidence": {"type": "number"},
             "needs_review": {"type": "boolean"},
+            "work_medium": {
+                "type": ["string", "null"],
+                "enum": ["film", "tv", "game", "book", "comic", "reference", "episode", "short", "other", "unknown", None]
+            },
+            "canon_context": {
+                "type": ["string", "null"],
+                "enum": ["canon", "legends", "both", "unknown", None]
+            },
             "notes": {
                 "type": "object",
                 "additionalProperties": False,
