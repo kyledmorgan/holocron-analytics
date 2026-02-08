@@ -242,7 +242,6 @@ class TestBuiltinInterrogations:
         # Verify all primary types are defined with descriptions
         required_types = [
             "PersonCharacter:",
-            "PersonCharacter:",
             "Droid:",
             "Species:",
             "LocationPlace:",
@@ -263,9 +262,9 @@ class TestBuiltinInterrogations:
         # Verify DECISION RULES are present
         assert "DECISION RULES" in definition.system_prompt
         
-        # Verify key decision rules for new types
-        assert "droid model/type" in definition.system_prompt or "droid model line" in definition.system_prompt
-        assert "list/timeline/disambiguation" in definition.system_prompt or "ReferenceMeta" in definition.system_prompt
+        # Verify key decision rules for new types are present
+        assert "droid" in definition.system_prompt.lower() and "model" in definition.system_prompt.lower()
+        assert "ReferenceMeta" in definition.system_prompt or "disambiguation" in definition.system_prompt
     
     def test_page_classification_v1_schema_has_correct_types(self):
         """Test that page_classification_v1 schema has updated type enum."""

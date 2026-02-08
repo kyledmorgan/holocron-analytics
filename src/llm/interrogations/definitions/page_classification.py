@@ -26,7 +26,7 @@ TYPE KEY (Controlled Vocabulary)
 Choose exactly ONE primary_type. Use secondary_types only to add nuance (subtypes) that still fit the primary selection.
 
 PersonCharacter:
-- A sentient individual (or named character persona) in-universe: people, Force users, named aliens, named creatures if treated as a character.
+- A sentient individual (or named character persona) in-universe: people, Force users, named aliens, named creatures (excluding droids) if treated as a character.
 - Strong cues: biography, "was a… who…", personal history, relationships, homeworld, affiliations, appearances.
 - NOT this: a film/book/comic itself (WorkMedia), a battle (EventConflict), a planet (LocationPlace), a droid (use Droid type).
 
