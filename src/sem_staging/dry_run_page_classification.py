@@ -186,7 +186,7 @@ def dump_ollama_io(
     response_payload: Dict[str, Any],
 ) -> Tuple[str, str]:
     os.makedirs(base_dir, exist_ok=True)
-    stamp = datetime.utcnow().strftime("%Y%m%d_%H%M%S")
+    stamp = datetime.now(timezone.utc).strftime("%Y%m%d_%H%M%S")
     safe_title = _sanitize_filename(title)
     req_path = os.path.join(base_dir, f"{stamp}_{safe_title}_request.json")
     res_path = os.path.join(base_dir, f"{stamp}_{safe_title}_response.json")
@@ -202,7 +202,7 @@ def fetch_candidate_records(
     limit: int,
     randomize: bool,
     payload_max_chars: int,
-) -> Tuple[Optional[Any], Optional[str], List[str]]:
+) -> Tuple[List[Tuple[Any, ...]], Optional[str], List[str]]:
     cursor = conn.cursor()
 
     cursor.execute(
@@ -265,7 +265,9 @@ def fetch_candidate_records(
                 """,
                 ("Anakin Skywalker",),
             )
-            return cursor, "resource_id=Anakin Skywalker", select_fields
+            rows = cursor.fetchall()
+            cursor.close()
+            return rows, "resource_id=Anakin Skywalker", select_fields
 
     order_by = "NEWID()" if randomize else "DATALENGTH(payload) DESC"
     cursor.execute(
@@ -284,21 +286,26 @@ def fetch_candidate_records(
         """
     )
     reason = "random_sample" if randomize else "largest_payload_non_technical"
-    return cursor, reason, select_fields
+    rows = cursor.fetchall()
+    cursor.close()
+    return rows, reason, select_fields
 
 
 def table_exists(conn, schema: str, table: str) -> bool:
     cursor = conn.cursor()
-    cursor.execute(
-        """
-        SELECT 1
-        FROM sys.tables t
-        JOIN sys.schemas s ON t.schema_id = s.schema_id
-        WHERE t.name = ? AND s.name = ?
-        """,
-        (table, schema),
-    )
-    return cursor.fetchone() is not None
+    try:
+        cursor.execute(
+            """
+            SELECT 1
+            FROM sys.tables t
+            JOIN sys.schemas s ON t.schema_id = s.schema_id
+            WHERE t.name = ? AND s.name = ?
+            """,
+            (table, schema),
+        )
+        return cursor.fetchone() is not None
+    finally:
+        cursor.close()
 
 
 def update_dim_entity(
@@ -419,8 +426,11 @@ def main() -> int:
         conn = store._get_connection()
 
         cursor = conn.cursor()
-        cursor.execute("SELECT 1")
-        cursor.fetchone()
+        try:
+            cursor.execute("SELECT 1")
+            cursor.fetchone()
+        finally:
+            cursor.close()
 
         logger.info(
             "SQL connectivity: PASS (in_docker=%s, host=%s, port=%s, database=%s, conn_str=%s)",
@@ -440,13 +450,13 @@ def main() -> int:
         print("Hint: if you see encryption errors, set DB_ENCRYPT=no and DB_TRUST_CERT=true in your .env.")
         return 1
 
-    cursor, selection_reason, select_fields = fetch_candidate_records(
+    rows, selection_reason, select_fields = fetch_candidate_records(
         conn,
         limit=args.limit,
         randomize=args.random,
         payload_max_chars=args.payload_max_chars,
     )
-    if cursor is None:
+    if not rows:
         fallback_records = [{
             "ingest_id": None,
             "resource_id": "Anakin Skywalker",
@@ -461,7 +471,7 @@ def main() -> int:
         }]
         selection_reason = "fallback_no_db_record"
         select_fields = list(fallback_records[0].keys())
-        cursor = iter([tuple(fallback_records[0][k] for k in select_fields)])
+        rows = [tuple(fallback_records[0][k] for k in select_fields)]
 
     signals_extractor = SignalsExtractor()
     content_extractor = ContentExtractor(ExtractionConfig(
@@ -568,7 +578,7 @@ def main() -> int:
     )
     client = OllamaClient(llm_config)
 
-    for row in cursor:
+    for row in rows:
         record = dict(zip(select_fields, row))
         if record.get("ingest_id"):
             record["ingest_id"] = str(record.get("ingest_id"))
