@@ -64,6 +64,7 @@ New to this repository? Start with these essential documents:
 | [Operational Guide](llm/operational.md) | Operations, retention, and troubleshooting |
 | [Ollama Integration Guide](llm/ollama.md) | Ollama API documentation, configuration, and operational guidance |
 | [Ollama in Docker](llm/ollama-docker.md) | Running Ollama as a Docker Compose service (Windows + WSL2) |
+| [Ollama Resilience](ollama-resilience.md) | Retry logic, error handling, and troubleshooting for Ollama JSON parsing |
 | [Glossary](llm/glossary.md) | Core terminology and definitions |
 | [Contracts](llm/contracts.md) | Schema versioning, validation behavior, and contract-first approach |
 | [Implementation Status](llm/status.md) | Living checklist of implementation progress |
