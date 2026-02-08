@@ -307,3 +307,47 @@ class LakeWriter:
             ArtifactInfo for the output artifact
         """
         return self.write_json(run_id, "output", output_data, timestamp)
+    
+    def write_artifact(
+        self,
+        run_id: str,
+        artifact_type: str,
+        content: bytes,
+        timestamp: Optional[datetime] = None,
+        extension: str = ".bin",
+    ) -> ArtifactInfo:
+        """
+        Write a generic binary artifact to the lake.
+        
+        Args:
+            run_id: The run identifier
+            artifact_type: Type/name of the artifact
+            content: Binary content to write
+            timestamp: Optional timestamp
+            extension: File extension (default: ".bin")
+            
+        Returns:
+            ArtifactInfo with path and hash
+        """
+        run_dir = self.ensure_run_dir(run_id, timestamp)
+        filename = f"{artifact_type}{extension}"
+        file_path = run_dir / filename
+        
+        # Write file
+        with open(file_path, "wb") as f:
+            f.write(content)
+        
+        # Calculate hash
+        content_sha256 = hashlib.sha256(content).hexdigest()
+        
+        # Build relative lake URI
+        lake_uri = self._compute_lake_uri(file_path)
+        
+        logger.debug(f"Wrote artifact: {file_path} ({len(content)} bytes)")
+        
+        return ArtifactInfo(
+            lake_uri=lake_uri,
+            content_sha256=content_sha256,
+            byte_count=len(content),
+            full_path=file_path,
+        )
