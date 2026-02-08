@@ -53,7 +53,7 @@ from ..interrogations.registry import get_interrogation, InterrogationDefinition
 from ..providers.ollama_client import OllamaClient, OllamaResponse
 from ..storage.sql_job_queue import SqlJobQueue, QueueConfig
 from ..storage.lake_writer import LakeWriter, LakeWriterConfig
-from ..utils.retry import RetryConfig, retry_with_backoff
+from ..utils.retry import RetryConfig, retry_with_backoff, calculate_delay
 
 
 logger = logging.getLogger(__name__)
@@ -432,7 +432,6 @@ class Phase1Runner:
                     
                     # Calculate backoff delay for next retry
                     if attempt < retry_config.max_attempts - 1:
-                        from ..utils.retry import calculate_delay
                         delay = calculate_delay(attempt, retry_config)
                         logger.info(f"Retrying after {delay:.3f}s backoff")
                         time.sleep(delay)

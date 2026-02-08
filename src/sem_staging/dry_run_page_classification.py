@@ -646,6 +646,7 @@ def main() -> int:
         max_attempts = 3
         classification_json = None
         response = None
+        last_error = None
         
         for attempt in range(1, max_attempts + 1):
             logger.info(f"Ollama attempt {attempt}/{max_attempts} for '{title}'")
@@ -671,6 +672,7 @@ def main() -> int:
                 break  # Success!
                 
             except json.JSONDecodeError as e:
+                last_error = e
                 logger.warning(f"Attempt {attempt}: JSON parse failed - {e}")
                 
                 # Try with stripped whitespace
@@ -721,7 +723,7 @@ def main() -> int:
                         manifest = {
                             "title": title,
                             "attempts": max_attempts,
-                            "error": str(e),
+                            "error": str(last_error),
                             "content_preview": response.content[:500],
                             "decision": "skipped_after_max_retries",
                         }
@@ -735,7 +737,7 @@ def main() -> int:
                         logger.error(f"Wrote error artifacts: {error_path}, {manifest_path}")
                     
                     print(f"Ollama returned invalid JSON after {max_attempts} attempts.")
-                    print(f"Error: {e}")
+                    print(f"Error: {last_error}")
                     print(f"Content preview: {response.content[:200]}...")
                     return 1
                 

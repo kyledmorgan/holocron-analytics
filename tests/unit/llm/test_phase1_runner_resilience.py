@@ -220,7 +220,11 @@ class TestPhase1RunnerInvalidJsonResilience:
         
         # Verify job marked as failed (but runner continues)
         mock_queue.mark_failed.assert_called_once()
-        assert "Invalid JSON" in str(mock_queue.mark_failed.call_args)
+        call_args = mock_queue.mark_failed.call_args
+        # Verify job_id is correct
+        assert call_args[0][0] == mock_job.job_id
+        # Verify error message contains "Invalid JSON"
+        assert "Invalid JSON" in call_args[0][1]
     
     @patch('llm.runners.phase1_runner.get_interrogation')
     @patch('llm.runners.phase1_runner.build_evidence_bundle')

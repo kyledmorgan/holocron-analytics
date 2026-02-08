@@ -162,29 +162,33 @@ def retry_with_backoff(
     )
 
 
-def parse_json_with_retry(
+def parse_json_with_strategies(
     content: str,
     config: Optional[RetryConfig] = None,
     extract_embedded: bool = False,
 ) -> Tuple[bool, Optional[Dict[str, Any]], list]:
     """
-    Parse JSON with retry logic and optional extraction of embedded JSON.
+    Parse JSON using multiple strategies (not actual retry of operation).
     
     This function handles:
     1. Direct JSON parsing
     2. Whitespace trimming
     3. Optional extraction of first {...} block if embedded in text
     
+    Note: This function does not retry the operation that generated the content.
+    It applies multiple parsing strategies to a single content string.
+    Use retry_with_backoff to retry the operation itself.
+    
     Args:
         content: String content to parse
-        config: Retry configuration (uses defaults if None)
+        config: Retry configuration (included for API consistency, not used for retry)
         extract_embedded: If True, try to extract first JSON object from text
         
     Returns:
         Tuple of (success, parsed_dict, error_list)
         
     Example:
-        >>> success, data, errors = parse_json_with_retry('{"key": "value"}')
+        >>> success, data, errors = parse_json_with_strategies('{"key": "value"}')
         >>> if success:
         ...     print(data["key"])
     """
@@ -235,9 +239,6 @@ def parse_json_with_retry(
             0
         )
     
-    # Note: We don't actually retry the JSON parsing itself since it's deterministic,
-    # but we keep this structure for consistency and future expansion (e.g., could
-    # retry the LLM call itself)
     try:
         result = try_parse()
         return True, result, errors

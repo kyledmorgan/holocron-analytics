@@ -4,7 +4,7 @@ Unit tests for retry logic and utilities.
 Tests for:
 - RetryConfig
 - retry_with_backoff
-- parse_json_with_retry
+- parse_json_with_strategies
 - calculate_delay
 """
 
@@ -17,7 +17,7 @@ from llm.utils.retry import (
     RetryConfig,
     RetryResult,
     retry_with_backoff,
-    parse_json_with_retry,
+    parse_json_with_strategies,
     calculate_delay,
 )
 
@@ -201,12 +201,12 @@ class TestRetryWithBackoff:
 
 
 class TestParseJsonWithRetry:
-    """Tests for parse_json_with_retry function."""
+    """Tests for parse_json_with_strategies function."""
     
     def test_valid_json(self):
         """Test parsing valid JSON."""
         content = '{"key": "value", "number": 42}'
-        success, data, errors = parse_json_with_retry(content)
+        success, data, errors = parse_json_with_strategies(content)
         
         assert success is True
         assert data == {"key": "value", "number": 42}
@@ -215,7 +215,7 @@ class TestParseJsonWithRetry:
     def test_valid_json_with_whitespace(self):
         """Test parsing JSON with leading/trailing whitespace."""
         content = '  \n  {"key": "value"}  \n  '
-        success, data, errors = parse_json_with_retry(content)
+        success, data, errors = parse_json_with_strategies(content)
         
         assert success is True
         assert data == {"key": "value"}
@@ -223,7 +223,7 @@ class TestParseJsonWithRetry:
     def test_embedded_json(self):
         """Test extracting embedded JSON from text."""
         content = 'Some text before {"key": "value"} some text after'
-        success, data, errors = parse_json_with_retry(
+        success, data, errors = parse_json_with_strategies(
             content,
             extract_embedded=True
         )
@@ -234,7 +234,7 @@ class TestParseJsonWithRetry:
     def test_complex_embedded_json(self):
         """Test extracting complex embedded JSON."""
         content = 'Here is the result: {"outer": {"inner": "value"}, "count": 3} - done'
-        success, data, errors = parse_json_with_retry(
+        success, data, errors = parse_json_with_strategies(
             content,
             extract_embedded=True
         )
@@ -245,7 +245,7 @@ class TestParseJsonWithRetry:
     def test_invalid_json_no_extraction(self):
         """Test that invalid JSON fails without extraction."""
         content = 'not json at all'
-        success, data, errors = parse_json_with_retry(
+        success, data, errors = parse_json_with_strategies(
             content,
             extract_embedded=False
         )
@@ -257,7 +257,7 @@ class TestParseJsonWithRetry:
     def test_invalid_json_with_extraction(self):
         """Test that invalid JSON without braces fails even with extraction."""
         content = 'no json here either'
-        success, data, errors = parse_json_with_retry(
+        success, data, errors = parse_json_with_strategies(
             content,
             extract_embedded=True
         )
@@ -269,7 +269,7 @@ class TestParseJsonWithRetry:
     def test_malformed_json_with_extraction(self):
         """Test malformed JSON with extraction enabled."""
         content = 'Text {"incomplete": json...'
-        success, data, errors = parse_json_with_retry(
+        success, data, errors = parse_json_with_strategies(
             content,
             extract_embedded=True
         )
@@ -282,7 +282,7 @@ class TestParseJsonWithRetry:
         """Test using custom retry config."""
         content = '{"valid": "json"}'
         config = RetryConfig(max_attempts=5)
-        success, data, errors = parse_json_with_retry(content, config)
+        success, data, errors = parse_json_with_strategies(content, config)
         
         assert success is True
         assert data == {"valid": "json"}
