@@ -59,9 +59,11 @@ New to this repository? Start with these essential documents:
 | [Vision and Roadmap](llm/vision-and-roadmap.md) | Project vision, goals, and phased roadmap |
 | [LLM-Derived Data Overview](llm/derived-data.md) | Concepts, architecture, and roadmap for the LLM-derived data subsystem |
 | [Phase 1 Runner](llm/phase1-runner.md) | End-to-end LLM derive pipeline usage guide |
-| [Retrieval (Phase 3)](llm/retrieval.md) | RAG architecture, chunking, embeddings, and retrieval |
+| [retrieval.md](llm/retrieval.md) | Phase 3 RAG architecture, chunking, embeddings, and retrieval |
 | [Indexing Guide](llm/indexing.md) | How to index sources for retrieval |
 | [Operational Guide](llm/operational.md) | Operations, retention, and troubleshooting |
+| [Schema Refactor Migration Notes](llm/schema-refactor-migration-notes.md) | Chat/vector runtime split migration plan |
+| [Dependency Inventory](llm/dependency-inventory-vector-subsystem.md) | Vector subsystem dependency analysis |
 | [Ollama Integration Guide](llm/ollama.md) | Ollama API documentation, configuration, and operational guidance |
 | [Ollama in Docker](llm/ollama-docker.md) | Running Ollama as a Docker Compose service (Windows + WSL2) |
 | [Ollama Resilience](ollama-resilience.md) | Retry logic, error handling, and troubleshooting for Ollama JSON parsing |
@@ -155,6 +157,8 @@ All Markdown files in this repository, grouped by location:
 | [operational.md](llm/operational.md) | Phase 3 operations and troubleshooting |
 | [phase1-runner.md](llm/phase1-runner.md) | Phase 1 LLM Runner usage guide |
 | [retrieval.md](llm/retrieval.md) | Phase 3 RAG architecture and retrieval |
+| [schema-refactor-migration-notes.md](llm/schema-refactor-migration-notes.md) | Chat/vector runtime split migration plan |
+| [dependency-inventory-vector-subsystem.md](llm/dependency-inventory-vector-subsystem.md) | Vector subsystem dependency analysis |
 | [status.md](llm/status.md) | Implementation status tracker |
 | [vision-and-roadmap.md](llm/vision-and-roadmap.md) | Vision, goals, and phased roadmap |
 
