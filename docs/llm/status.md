@@ -2,7 +2,7 @@
 
 This document tracks the implementation status of the LLM-Derived Data subsystem. It is updated as features are completed.
 
-**Last Updated:** January 2026
+**Last Updated:** February 2026
 
 ---
 
@@ -257,6 +257,34 @@ Phase 3 has been completed. The retrieval augmentation system is now fully imple
 | Retrieval contracts tests | ✅ Complete | 30 tests passing |
 | Chunking tests | ✅ Complete | 19 tests passing |
 | Retrieval search tests | ✅ Complete | 22 tests passing |
+
+---
+
+## Upcoming: Schema Refactor (Chat/Vector Runtime Split)
+
+**Status: Phase 0 Complete**
+
+A schema refactor is underway to split the `llm` schema into two independent runtimes:
+
+| Phase | Status | Description |
+|-------|--------|-------------|
+| Phase 0 | ✅ Complete | Baseline inventory, snapshot, and migration notes |
+| Phase 1 | 🔜 Planned | Create `vector` schema with new tables |
+| Phase 2 | 🔜 Planned | Cutover and deprecate legacy vector tables |
+
+### What's Changing
+
+The vector-related tables (`llm.chunk`, `llm.embedding`, `llm.retrieval`, `llm.retrieval_hit`, `llm.source_registry`) are moving to a new `vector` schema with enhanced lineage and experimentation support.
+
+### What's Preserved
+
+The chat runtime tables (`llm.job`, `llm.run`, `llm.artifact`, `llm.evidence_bundle`, `llm.evidence_item`, `llm.run_evidence`) remain unchanged.
+
+### Related Documents
+
+- [Schema Refactor Migration Notes](schema-refactor-migration-notes.md) — Full migration plan
+- [Dependency Inventory](dependency-inventory-vector-subsystem.md) — Impact analysis
+- [Legacy Schema Snapshot](../../db/legacy_snapshots/llm_vector_subsystem_snapshot.sql) — Historical reference
 
 ---
 
