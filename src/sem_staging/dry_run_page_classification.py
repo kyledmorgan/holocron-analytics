@@ -6,13 +6,17 @@ Local-only, single item, minimal payload excerpt.
 """
 
 import argparse
+import importlib
+import importlib.machinery
 import json
 import logging
 import os
 import re
 import sys
 import time
+import types
 from datetime import datetime, timezone
+from pathlib import Path
 from typing import Any, Dict, List, Optional, Tuple
 from urllib.request import Request, urlopen
 from urllib.error import URLError, HTTPError
@@ -27,18 +31,34 @@ from llm.prompts.page_classification import (
     SYSTEM_PROMPT,
     build_messages,
 )
-from semantic.models import (
-    ClassificationMethod,
-    ContinuityHint,
-    Namespace,
-    PageClassification,
-    PageSignals,
-    PageType,
-    SourcePage,
-)
-from semantic.signals_extractor import SignalsExtractor
-from semantic.content_extractor import ContentExtractor, ExtractionConfig
-from semantic.store import SemanticStagingStore, SemanticStagingStoreError
+# Avoid importing semantic/__init__.py (which may pull in optional modules)
+semantic_root = Path(__file__).resolve().parents[1] / "semantic"
+if "semantic" not in sys.modules:
+    semantic_pkg = types.ModuleType("semantic")
+    semantic_pkg.__path__ = [str(semantic_root)]
+    semantic_pkg.__package__ = "semantic"
+    semantic_pkg.__spec__ = importlib.machinery.ModuleSpec("semantic", None, is_package=True)
+    sys.modules["semantic"] = semantic_pkg
+
+semantic_models = importlib.import_module("semantic.models")
+semantic_store = importlib.import_module("semantic.store")
+semantic_signals = importlib.import_module("semantic.signals_extractor")
+semantic_content = importlib.import_module("semantic.content_extractor")
+
+ClassificationMethod = semantic_models.ClassificationMethod
+ContinuityHint = semantic_models.ContinuityHint
+Namespace = semantic_models.Namespace
+PageClassification = semantic_models.PageClassification
+PageSignals = semantic_models.PageSignals
+PageType = semantic_models.PageType
+SourcePage = semantic_models.SourcePage
+
+SignalsExtractor = semantic_signals.SignalsExtractor
+ContentExtractor = semantic_content.ContentExtractor
+ExtractionConfig = semantic_content.ExtractionConfig
+
+SemanticStagingStore = semantic_store.SemanticStagingStore
+SemanticStagingStoreError = semantic_store.SemanticStagingStoreError
 
 logger = logging.getLogger("sem_staging.dry_run")
 
@@ -921,6 +941,8 @@ def main() -> int:
             signals.source_page_id = source_page.source_page_id
             signals.content_hash_sha256 = signals.content_hash_sha256
             signals.extraction_method = signals.extraction_method or "dry_run"
+            if signals.lead_sentence and len(signals.lead_sentence) > 1000:
+                signals.lead_sentence = signals.lead_sentence[:1000]
             store.insert_page_signals(signals)
             persist["page_signals"] = True
 
