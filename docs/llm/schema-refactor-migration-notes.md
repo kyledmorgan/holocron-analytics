@@ -1,7 +1,7 @@
 # Schema Refactor: Splitting Chat Runtime from Vector Runtime
 
 **Date:** 2026-02-10  
-**Status:** Phase 0 Complete  
+**Status:** Phase 1 Complete  
 **Author:** Copilot Agent
 
 ---
@@ -61,13 +61,13 @@ As both systems evolved, several design tensions emerged:
 - No runtime code changed
 - Chat runtime fully preserved
 
-### Phase 1: Introduce `vector` Schema (Next PR)
+### Phase 1: Introduce `vector` Schema (This PR) ✅
 
 **Goal:** Create the new vector schema and Python code in parallel with legacy.
 
 **Deliverables:**
-- Create `vector` schema with migration script
-- Create all `vector.*` tables:
+- [x] Create `vector` schema with migration script (`db/migrations/0023_create_vector_schema.sql`)
+- [x] Create all `vector.*` tables:
   - `vector.job` — Vector task queue
   - `vector.run` — Vector execution lineage
   - `vector.source_registry` — Source index state
@@ -76,8 +76,10 @@ As both systems evolved, several design tensions emerged:
   - `vector.embedding` — Embeddings with lineage
   - `vector.retrieval` — Retrieval query log
   - `vector.retrieval_hit` — Retrieval results
-- Add `VectorStore` Python class for new schema
-- Keep `RetrievalStore` for backward compatibility
+- [x] Add `VectorStore` Python class for new schema (`src/vector/store.py`)
+- [x] Add vector contract models (`src/vector/contracts/models.py`)
+- [x] Add unit tests for vector contracts (`tests/unit/vector/test_vector_contracts.py`)
+- [x] Keep `RetrievalStore` for backward compatibility
 - Add configuration flag for schema selection
 
 **Constraints:**
