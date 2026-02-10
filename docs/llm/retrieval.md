@@ -1,14 +1,26 @@
 # Retrieval Augmented Generation (Phase 3)
 
-This document describes the Phase 3 Retrieval Augmented Generation (RAG) system for the LLM-Derived Data subsystem.
+> **⚠️ LEGACY DOCUMENTATION**
+> 
+> This document describes the original Phase 3 retrieval system using the `llm.*` tables.
+> **As of Phase 2 of the schema refactor, this documentation is historical.**
+> 
+> The `llm.*` vector tables have been renamed to `*_legacy` and are deprecated.
+> 
+> **For current documentation, see:**
+> - [Vector Runtime README](../vector/README.md) — New vector schema
+> - [Schema Refactor Migration Notes](schema-refactor-migration-notes.md) — Migration history
+> - [VectorStore usage](../vector/README.md#usage-example) — Current API
 
-**Last Updated:** January 2026
+This document describes the original Phase 3 Retrieval Augmented Generation (RAG) system for the LLM-Derived Data subsystem.
+
+**Last Updated:** February 2026 (marked as legacy)
 
 ---
 
 ## Overview
 
-Phase 3 adds retrieval augmentation to the LLM pipeline, enabling:
+Phase 3 added retrieval augmentation to the LLM pipeline, enabling:
 
 - **Chunking**: Split internal artifacts into searchable units
 - **Embeddings**: Generate vector representations using Ollama locally

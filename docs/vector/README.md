@@ -167,29 +167,29 @@ exists = store.embedding_exists(
 )
 ```
 
-## Migration Path
+## Migration Status (Complete)
 
-### Current State (Phase 1)
+### Phase 2 Complete ✅
 
-- ✅ `vector` schema created with all tables
-- ✅ Python `VectorStore` class available
-- ✅ Legacy `llm.*` vector tables remain (backward compatibility)
-- ✅ Both schemas can be used in parallel
+The schema refactor is **feature complete**. The `vector` schema is now the sole home for embedding and retrieval operations.
 
-### Phase 2 (Future)
+**What was completed:**
+- ✅ `vector` schema created with all 8 tables
+- ✅ Python `VectorStore` class available and is the primary interface
+- ✅ `Indexer` now uses `VectorStore` exclusively
+- ✅ Legacy `llm.*` vector tables renamed to `*_legacy` (migration 0024)
+- ✅ `RetrievalStore` marked as deprecated with warnings
 
-- Switch all embedding/retrieval code to `vector.*`
-- Remove `RetrievalStore` class
-- Drop legacy vector tables from `llm`:
-  - `llm.chunk`
-  - `llm.embedding`
-  - `llm.retrieval`
-  - `llm.retrieval_hit`
-  - `llm.source_registry`
+**Legacy tables (renamed, preserved for historical reference):**
+- `llm.chunk_legacy` (was `llm.chunk`)
+- `llm.embedding_legacy` (was `llm.embedding`)
+- `llm.retrieval_legacy` (was `llm.retrieval`)
+- `llm.retrieval_hit_legacy` (was `llm.retrieval_hit`)
+- `llm.source_registry_legacy` (was `llm.source_registry`)
 
 ## Related Documents
 
-- [Schema Refactor Migration Notes](../llm/schema-refactor-migration-notes.md)
-- [Dependency Inventory](../llm/dependency-inventory-vector-subsystem.md)
-- [Legacy Schema Snapshot](../../db/legacy_snapshots/llm_vector_subsystem_snapshot.sql)
-- [Retrieval System (Legacy)](../llm/retrieval.md)
+- [Schema Refactor Migration Notes](../llm/schema-refactor-migration-notes.md) — Complete migration history
+- [Dependency Inventory](../llm/dependency-inventory-vector-subsystem.md) — Impact analysis
+- [Legacy Schema Snapshot](../../db/legacy_snapshots/llm_vector_subsystem_snapshot.sql) — Historical reference
+- [Retrieval System (Legacy)](../llm/retrieval.md) — Legacy documentation

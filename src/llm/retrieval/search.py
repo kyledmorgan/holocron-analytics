@@ -6,6 +6,11 @@ Implements:
 - Top-K retrieval
 - Deterministic ordering with tie-breaks
 - Persistence of retrieval queries and hits
+
+DEPRECATED (Phase 2): RetrievalStore class is deprecated.
+Use VectorStore from src/vector/store.py instead.
+The legacy llm.* vector tables have been renamed to *_legacy and are no longer accessible.
+See docs/llm/schema-refactor-migration-notes.md for migration details.
 """
 
 import json
@@ -13,6 +18,7 @@ import logging
 import math
 import time
 import uuid
+import warnings
 from typing import Any, Dict, List, Optional
 
 from ..contracts.retrieval_contracts import (
@@ -163,6 +169,12 @@ class RetrievalStore:
     """
     Storage interface for retrieval operations.
     
+    DEPRECATED: This class is deprecated as of Phase 2 of the schema refactor.
+    Use VectorStore from src/vector/store.py instead.
+    
+    The legacy llm.* vector tables (chunk, embedding, retrieval, retrieval_hit,
+    source_registry) have been renamed to *_legacy and are no longer accessible.
+    
     Handles persistence of chunks, embeddings, and retrieval logs to SQL Server.
     Uses Python-side cosine similarity (Option 2 from the design).
     """
@@ -174,7 +186,16 @@ class RetrievalStore:
         Args:
             connection: Database connection (pyodbc)
             schema: SQL Server schema name
+            
+        .. deprecated::
+            Use VectorStore from src/vector/store.py instead.
         """
+        warnings.warn(
+            "RetrievalStore is deprecated. Use VectorStore from src/vector/store.py instead. "
+            "The legacy llm.* vector tables have been renamed to *_legacy.",
+            DeprecationWarning,
+            stacklevel=2
+        )
         self._conn = connection
         self.schema = schema
     

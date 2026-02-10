@@ -1,14 +1,14 @@
 # Schema Refactor: Splitting Chat Runtime from Vector Runtime
 
 **Date:** 2026-02-10  
-**Status:** Phase 1 Complete  
+**Status:** Phase 2 Complete (Feature Complete)  
 **Author:** Copilot Agent
 
 ---
 
 ## Overview
 
-This document describes the planned refactor to split the Holocron `llm` schema into two independent runtimes:
+This document describes the completed refactor that split the Holocron `llm` schema into two independent runtimes:
 
 | Schema | Purpose | Semantic |
 |--------|---------|----------|
@@ -33,7 +33,7 @@ As both systems evolved, several design tensions emerged:
 
 4. **Different lineage requirements**: Embeddings must track the exact input version (`content_sha256`) and model identity to prevent stale vector reuse. Chat doesn't have this concern.
 
-### What We Gain
+### What We Gained
 
 - **Cleaner separation of concerns**: Each runtime has its own job queue, run lineage, and artifact patterns.
 
@@ -47,7 +47,7 @@ As both systems evolved, several design tensions emerged:
 
 ## Phased Approach
 
-### Phase 0: Baseline & Safety Net (This PR) ✅
+### Phase 0: Baseline & Safety Net ✅
 
 **Goal:** Establish a safe baseline before making changes.
 
@@ -61,7 +61,7 @@ As both systems evolved, several design tensions emerged:
 - No runtime code changed
 - Chat runtime fully preserved
 
-### Phase 1: Introduce `vector` Schema (This PR) ✅
+### Phase 1: Introduce `vector` Schema ✅
 
 **Goal:** Create the new vector schema and Python code in parallel with legacy.
 
@@ -80,32 +80,30 @@ As both systems evolved, several design tensions emerged:
 - [x] Add vector contract models (`src/vector/contracts/models.py`)
 - [x] Add unit tests for vector contracts (`tests/unit/vector/test_vector_contracts.py`)
 - [x] Keep `RetrievalStore` for backward compatibility
-- Add configuration flag for schema selection
 
 **Constraints:**
 - Legacy `llm.*` vector tables remain
 - Chat runtime unchanged
 - Both old and new code paths work
 
-### Phase 2: Cutover & Cleanup (Future PR)
+### Phase 2: Cutover & Cleanup ✅
 
 **Goal:** Make `vector` the single source of truth and remove legacy.
 
 **Deliverables:**
-- Switch all embedding/retrieval code to `vector.*`
-- Remove `RetrievalStore` class
-- Drop legacy vector tables from `llm`:
-  - `llm.chunk`
-  - `llm.embedding`
-  - `llm.retrieval`
-  - `llm.retrieval_hit`
-  - `llm.source_registry`
-- Update documentation
-- Remove feature flags
+- [x] Switch all embedding/retrieval code to `vector.*` (`src/llm/retrieval/indexer.py` now uses `VectorStore`)
+- [x] Mark `RetrievalStore` class as deprecated with deprecation warnings
+- [x] Rename legacy vector tables from `llm` to `*_legacy` (migration 0024):
+  - `llm.chunk` → `llm.chunk_legacy`
+  - `llm.embedding` → `llm.embedding_legacy`
+  - `llm.retrieval` → `llm.retrieval_legacy`
+  - `llm.retrieval_hit` → `llm.retrieval_hit_legacy`
+  - `llm.source_registry` → `llm.source_registry_legacy`
+- [x] Update documentation
 
 **Constraints:**
-- Chat runtime must remain unchanged
-- Verify no remaining dependencies
+- Chat runtime remains unchanged
+- Legacy snapshot preserved as historical artifact
 
 ---
 
@@ -208,42 +206,45 @@ Same execution lineage pattern:
 
 ### Data Migration
 
-**Embeddings will NOT be migrated.** The legacy embedding tables have minimal production data and lack the lineage information needed for the new schema. We will generate fresh embeddings in Phase 1.
+**Embeddings were NOT migrated.** The legacy embedding tables had minimal production data and lacked the lineage information needed for the new schema. Fresh embeddings should be generated using the new `vector` schema.
 
-### Code Migration
+### Code Migration (Completed)
 
-| Component | Phase 1 | Phase 2 |
-|-----------|---------|---------|
-| `RetrievalStore` | Keep (legacy) | Remove |
-| `VectorStore` | Add (new) | Primary |
-| Indexer | Add new mode | Switch default |
-| Search | Add new mode | Switch default |
-| Contracts | Reuse | Reuse |
+| Component | Phase 1 | Phase 2 (Final) |
+|-----------|---------|-----------------|
+| `RetrievalStore` | Kept (legacy) | **Deprecated** (with warnings) |
+| `VectorStore` | Added (new) | **Primary** |
+| Indexer | Added new mode | **Uses VectorStore exclusively** |
+| Search | Added new mode | **VectorStore is default** |
+| Contracts | Reused | **Reused** |
 
 ### Configuration
 
-Phase 1 will add a configuration option:
+Vector operations now use the `vector` schema by default. No configuration needed.
 
-```yaml
-vector:
-  schema: "vector"  # or "llm" for legacy
-  enabled: true
+```python
+# Example: Using VectorStore (recommended)
+from vector.store import VectorStore
+store = VectorStore(connection=conn)
+
+# Legacy: RetrievalStore (deprecated - raises DeprecationWarning)
+from llm.retrieval.search import RetrievalStore
+store = RetrievalStore(connection=conn)  # Warning: deprecated
 ```
 
 ---
 
 ## Rollback Plan
 
-If issues arise during Phase 1 or Phase 2:
+The schema refactor is now complete (Phase 2). If issues arise:
 
-1. **Phase 1 issues:** Simply don't use the new `vector.*` tables. Legacy `llm.*` tables remain functional.
+1. **Rollback migration 0024:** Legacy tables were renamed to `*_legacy`, not dropped. They can be renamed back if absolutely necessary.
 
-2. **Phase 2 issues:** Before dropping legacy tables, we can:
-   - Restore from the snapshot artifact
-   - Point code back to legacy tables
-   - Re-run migration script
+2. **Restore from snapshot:** The legacy schema snapshot (`db/legacy_snapshots/llm_vector_subsystem_snapshot.sql`) provides documentation for reconstruction if needed.
 
-The legacy schema snapshot (`db/legacy_snapshots/llm_vector_subsystem_snapshot.sql`) provides documentation for reconstruction if needed.
+3. **Code rollback:** The `RetrievalStore` class still exists (deprecated) and can be temporarily re-enabled by updating imports.
+
+Note: Rollback should rarely be needed as the chat runtime is completely unaffected by this refactor.
 
 ---
 
@@ -251,8 +252,9 @@ The legacy schema snapshot (`db/legacy_snapshots/llm_vector_subsystem_snapshot.s
 
 - [Dependency Inventory](dependency-inventory-vector-subsystem.md) — Full dependency analysis
 - [Legacy Schema Snapshot](../../db/legacy_snapshots/llm_vector_subsystem_snapshot.sql) — Historical reference
-- [Retrieval System](retrieval.md) — Current retrieval documentation
-- [Indexing Guide](indexing.md) — Current indexing documentation
+- [Vector Runtime README](../vector/README.md) — New vector schema documentation
+- [Retrieval System (Legacy)](retrieval.md) — Legacy retrieval documentation
+- [Indexing Guide](indexing.md) — Indexing documentation
 
 ---
 
@@ -262,10 +264,10 @@ The legacy schema snapshot (`db/legacy_snapshots/llm_vector_subsystem_snapshot.s
 A: Yes. Chat runtime (`llm.job`, `llm.run`, etc.) is completely unchanged.
 
 **Q: Do we need to migrate existing embeddings?**  
-A: No. The legacy embeddings lack proper lineage and are from experimental use only.
+A: No. The legacy embeddings lacked proper lineage and were from experimental use only. Generate fresh embeddings using the new schema.
 
-**Q: Can we use both schemas during transition?**  
-A: Yes. Phase 1 supports both via configuration. Phase 2 removes the legacy option.
+**Q: Can we still access the legacy tables?**  
+A: The legacy tables have been renamed to `*_legacy` (e.g., `llm.chunk_legacy`). They are preserved for historical reference but should not be used in production.
 
 **Q: What happens to `sem.SourcePage.source_registry_id`?**  
-A: This column references `llm.source_registry.source_id`. In Phase 2, we'll update it to reference `vector.source_registry.source_id` or add a new column.
+A: This column should reference `vector.source_registry.source_id` for new sources. The legacy `llm.source_registry_legacy` table is preserved for historical data.

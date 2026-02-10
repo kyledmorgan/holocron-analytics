@@ -1,14 +1,21 @@
 # Indexing Guide (Phase 3)
 
+> **Note: As of Phase 2 of the schema refactor, indexing now uses the `vector` schema exclusively.**
+> 
+> The indexer has been updated to use `VectorStore` and persist data to `vector.*` tables.
+> See [Vector Runtime README](../vector/README.md) for current schema documentation.
+
 This document describes how to index sources for retrieval in the Phase 3 RAG system.
 
-**Last Updated:** January 2026
+**Last Updated:** February 2026
 
 ---
 
 ## Overview
 
 The indexer reads sources from a manifest file, chunks them into searchable units, generates embeddings using Ollama, and stores everything in SQL Server for retrieval.
+
+**Schema used:** `vector.*` (via `VectorStore`)
 
 ---
 

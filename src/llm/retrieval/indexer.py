@@ -7,6 +7,9 @@ Implements:
 - Chunk creation and embedding generation
 - Persistence to SQL Server and lake artifacts
 
+NOTE: As of Phase 2, this module uses the `vector` schema exclusively via VectorStore.
+      The legacy `llm.*` vector tables are deprecated.
+
 Usage:
     python -m src.llm.retrieval.indexer --source-manifest <path> --mode full
     python -m src.llm.retrieval.indexer --source-manifest <path> --mode incremental
@@ -22,7 +25,7 @@ import uuid
 from dataclasses import dataclass
 from datetime import datetime, timezone
 from pathlib import Path
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, List, Optional, Union
 
 # Add src to path if running as script
 if __name__ == "__main__":
@@ -38,7 +41,17 @@ from ..contracts.retrieval_contracts import (
 from ..core.types import LLMConfig
 from ..providers.ollama_client import OllamaClient
 from .chunker import Chunker
-from .search import RetrievalStore
+
+# Phase 2: Use VectorStore from the vector schema (primary)
+from ...vector.store import VectorStore
+from ...vector.contracts.models import (
+    VectorChunk,
+    VectorEmbedding,
+    VectorSourceRegistry,
+    SourceStatus,
+    compute_content_hash as vector_compute_content_hash,
+    compute_vector_hash as vector_compute_vector_hash,
+)
 
 
 logger = logging.getLogger(__name__)
@@ -122,22 +135,27 @@ class Indexer:
        c. Generate embeddings
        d. Store chunks and embeddings
     3. Write indexing run manifest to lake
+    
+    NOTE: As of Phase 2, this uses VectorStore exclusively (vector schema).
     """
     
     def __init__(
         self,
         config: IndexerConfig,
-        store: Optional[RetrievalStore] = None,
+        store: Optional[VectorStore] = None,
+        embedding_space_id: Optional[str] = None,
     ):
         """
         Initialize the indexer.
         
         Args:
             config: Indexer configuration
-            store: Retrieval store (for DB operations)
+            store: VectorStore for database operations (uses vector.* tables)
+            embedding_space_id: Optional embedding space ID for lineage
         """
         self.config = config
         self.store = store
+        self.embedding_space_id = embedding_space_id
         
         # Create chunking policy
         self.chunking_policy = ChunkingPolicy(
@@ -268,10 +286,22 @@ class Indexer:
         if not chunks:
             return {"skipped": False, "chunks_created": 0, "embeddings_created": 0}
         
-        # Save chunks to database
+        # Save chunks to database using VectorStore (vector schema)
         if self.store:
             for chunk in chunks:
-                self.store.save_chunk(chunk)
+                # Convert ChunkRecord to VectorChunk for the new schema
+                vector_chunk = VectorChunk(
+                    chunk_id=chunk.chunk_id,
+                    source_id=source_id,
+                    source_type=chunk.source_type,
+                    source_ref=chunk.source_ref,
+                    offsets=chunk.offsets,
+                    content=chunk.content,
+                    content_sha256=chunk.content_sha256,
+                    byte_count=chunk.byte_count,
+                    policy=chunk.policy,
+                )
+                self.store.save_chunk(vector_chunk)
         
         # Generate embeddings
         embeddings_created = 0
@@ -283,17 +313,15 @@ class Indexer:
             
             if embed_response.success and embed_response.embeddings:
                 for chunk, vector in zip(chunks, embed_response.embeddings):
-                    embedding = EmbeddingRecord(
-                        embedding_id=str(uuid.uuid4()),
-                        chunk_id=chunk.chunk_id,
-                        embedding_model=self.config.embed_model,
-                        vector_dim=len(vector),
-                        vector=vector,
-                        vector_sha256=compute_vector_hash(vector),
-                    )
-                    
-                    if self.store:
-                        self.store.save_embedding(embedding)
+                    # Use VectorEmbedding for the new schema (requires embedding_space_id)
+                    if self.store and self.embedding_space_id:
+                        vector_embedding = VectorEmbedding.create_new(
+                            chunk_id=chunk.chunk_id,
+                            embedding_space_id=self.embedding_space_id,
+                            input_content_sha256=chunk.content_sha256,
+                            vector=vector,
+                        )
+                        self.store.save_embedding(vector_embedding)
                     
                     embeddings_created += 1
         except Exception as e:
@@ -357,8 +385,7 @@ class Indexer:
         """
         Check if a source has already been indexed with the same content.
         
-        Uses the source_registry table or checks for existing chunks with
-        matching content hash.
+        Uses the VectorStore.source_already_indexed method to check vector.source_registry.
         
         Args:
             source_id: Source identifier
@@ -371,25 +398,7 @@ class Indexer:
             return False
         
         try:
-            conn = self.store._get_connection()
-            cursor = conn.cursor()
-            
-            # Check source_registry for existing entry with same hash
-            cursor.execute(
-                f"""
-                SELECT content_sha256 
-                FROM [{self.store.schema}].[source_registry]
-                WHERE source_id = ?
-                """,
-                (source_id,)
-            )
-            
-            row = cursor.fetchone()
-            if row and row[0] == content_hash:
-                return True
-            
-            return False
-            
+            return self.store.source_already_indexed(source_id, content_hash)
         except Exception as e:
             logger.debug(f"Could not check source registry: {e}")
             return False
@@ -406,6 +415,8 @@ class Indexer:
         """
         Update the source registry with indexing information.
         
+        Uses VectorStore.save_source_registry to update vector.source_registry.
+        
         Args:
             source_id: Source identifier
             source_type: Type of source
@@ -418,41 +429,17 @@ class Indexer:
             return
         
         try:
-            conn = self.store._get_connection()
-            cursor = conn.cursor()
-            
-            # Upsert source registry entry
-            cursor.execute(
-                f"""
-                MERGE [{self.store.schema}].[source_registry] AS target
-                USING (SELECT ? AS source_id) AS source
-                ON target.source_id = source.source_id
-                WHEN MATCHED THEN
-                    UPDATE SET 
-                        content_sha256 = ?,
-                        last_indexed_utc = SYSUTCDATETIME(),
-                        chunk_count = ?,
-                        tags_json = ?,
-                        updated_utc = SYSUTCDATETIME()
-                WHEN NOT MATCHED THEN
-                    INSERT (source_id, source_type, source_ref_json, content_sha256,
-                            last_indexed_utc, chunk_count, tags_json, created_utc, updated_utc)
-                    VALUES (?, ?, ?, ?, SYSUTCDATETIME(), ?, ?, SYSUTCDATETIME(), SYSUTCDATETIME());
-                """,
-                (
-                    source_id,
-                    content_hash,
-                    chunk_count,
-                    json.dumps(tags),
-                    source_id,
-                    source_type,
-                    json.dumps(source_ref),
-                    content_hash,
-                    chunk_count,
-                    json.dumps(tags),
-                )
+            source_entry = VectorSourceRegistry(
+                source_id=source_id,
+                source_type=source_type,
+                source_ref=source_ref,
+                content_sha256=content_hash,
+                last_indexed_utc=datetime.now(timezone.utc),
+                chunk_count=chunk_count,
+                tags=tags,
+                status=SourceStatus.INDEXED,
             )
-            conn.commit()
+            self.store.save_source_registry(source_entry)
             
         except Exception as e:
             logger.warning(f"Could not update source registry: {e}")

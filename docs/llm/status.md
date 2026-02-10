@@ -260,21 +260,28 @@ Phase 3 has been completed. The retrieval augmentation system is now fully imple
 
 ---
 
-## Upcoming: Schema Refactor (Chat/Vector Runtime Split)
+## Schema Refactor (Chat/Vector Runtime Split) ✅
 
-**Status: Phase 0 Complete**
+**Status: Phase 2 Complete (Feature Complete)**
 
-A schema refactor is underway to split the `llm` schema into two independent runtimes:
+The schema refactor to split the `llm` schema into two independent runtimes is complete:
 
 | Phase | Status | Description |
 |-------|--------|-------------|
 | Phase 0 | ✅ Complete | Baseline inventory, snapshot, and migration notes |
-| Phase 1 | 🔜 Planned | Create `vector` schema with new tables |
-| Phase 2 | 🔜 Planned | Cutover and deprecate legacy vector tables |
+| Phase 1 | ✅ Complete | Create `vector` schema with new tables |
+| Phase 2 | ✅ Complete | Cutover and deprecate legacy vector tables |
 
-### What's Changing
+### What Changed
 
-The vector-related tables (`llm.chunk`, `llm.embedding`, `llm.retrieval`, `llm.retrieval_hit`, `llm.source_registry`) are moving to a new `vector` schema with enhanced lineage and experimentation support.
+The vector-related tables have been deprecated in `llm` and renamed to `*_legacy`:
+- `llm.chunk` → `llm.chunk_legacy`
+- `llm.embedding` → `llm.embedding_legacy`
+- `llm.retrieval` → `llm.retrieval_legacy`
+- `llm.retrieval_hit` → `llm.retrieval_hit_legacy`
+- `llm.source_registry` → `llm.source_registry_legacy`
+
+The new `vector` schema is now the sole home for embedding and retrieval operations.
 
 ### What's Preserved
 
@@ -284,6 +291,7 @@ The chat runtime tables (`llm.job`, `llm.run`, `llm.artifact`, `llm.evidence_bun
 
 - [Schema Refactor Migration Notes](schema-refactor-migration-notes.md) — Full migration plan
 - [Dependency Inventory](dependency-inventory-vector-subsystem.md) — Impact analysis
+- [Vector Runtime README](../vector/README.md) — New vector schema documentation
 - [Legacy Schema Snapshot](../../db/legacy_snapshots/llm_vector_subsystem_snapshot.sql) — Historical reference
 
 ---
