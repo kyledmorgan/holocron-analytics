@@ -77,6 +77,12 @@ New to this repository? Start with these essential documents:
 | [LLM Contracts README](../src/llm/contracts/README.md) | JSON schema documentation for manifests and outputs |
 | [Interrogations README](../src/llm/interrogations/README.md) | Interrogation catalog concept and structure |
 
+### Vector Runtime
+
+| Document | Description |
+|----------|-------------|
+| [Vector Runtime Overview](vector/README.md) | Embedding, storage, and retrieval runtime documentation |
+
 ### Analytics / Views / Exercises
 
 | Document | Description |
@@ -161,6 +167,12 @@ All Markdown files in this repository, grouped by location:
 | [dependency-inventory-vector-subsystem.md](llm/dependency-inventory-vector-subsystem.md) | Vector subsystem dependency analysis |
 | [status.md](llm/status.md) | Implementation status tracker |
 | [vision-and-roadmap.md](llm/vision-and-roadmap.md) | Vision, goals, and phased roadmap |
+
+### `docs/vector/`
+
+| File | Description |
+|------|-------------|
+| [README.md](vector/README.md) | Vector runtime overview, schema tables, and Python modules |
 
 ### `docs/diagrams/mermaid/`
 
