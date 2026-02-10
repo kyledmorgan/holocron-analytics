@@ -187,8 +187,8 @@ class RetrievalStore:
             connection: Database connection (pyodbc)
             schema: SQL Server schema name
             
-        .. deprecated::
-            Use VectorStore from src/vector/store.py instead.
+        Deprecated:
+            This class is deprecated. Use VectorStore from src/vector/store.py instead.
         """
         warnings.warn(
             "RetrievalStore is deprecated. Use VectorStore from src/vector/store.py instead. "

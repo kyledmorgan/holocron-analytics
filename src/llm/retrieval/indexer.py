@@ -49,8 +49,6 @@ from ...vector.contracts.models import (
     VectorEmbedding,
     VectorSourceRegistry,
     SourceStatus,
-    compute_content_hash as vector_compute_content_hash,
-    compute_vector_hash as vector_compute_vector_hash,
 )
 
 
