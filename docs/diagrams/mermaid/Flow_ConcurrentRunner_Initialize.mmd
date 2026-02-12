@@ -1,0 +1,57 @@
+flowchart TD
+
+  A([run start]) --> B["Recover expired leases<br>(state_store.recover_expired_leases)"]
+  B --> C["Install signal handlers<br>(SIGINT/SIGTERM -> shutdown)"]
+  C --> D["Create ThreadPoolExecutor<br>(max_workers = N)"]
+  D --> E["Submit N workers<br>(worker_id = host-pid-i)"]
+
+  E --> F{All workers done?}
+  F -- No --> G["Poll futures + sleep<br>(allows Ctrl+C)"]
+  G --> F
+  F -- Yes --> H["Cleanup + finalize metrics<br>(ended_at/status)"]
+  H --> I([run complete])
+
+  subgraph W["Worker loop (per worker)"]
+    W0([start]) --> W1{shutdown_event set?}
+    W1 -- Yes --> WZ["Heartbeat: stopped<br>store final worker metrics"] --> WEND([exit])
+
+    W1 -- No --> WP{pause_event set?}
+    WP -- Yes --> WP1["Heartbeat: paused<br>sleep 1s"] --> WP
+    WP -- No --> WD{drain_mode?}
+    WD -- Yes --> WZ
+
+    WD -- No --> WL{limits reached?}
+    WL -- Yes --> WZ
+
+    WL -- No --> WH{heartbeat due?}
+    WH -- Yes --> WH1["Heartbeat: active"] --> WC
+    WH -- No --> WC
+
+    WC["Claim work item<br>(lease_seconds, source_filter)"] --> WN{Got item?}
+    WN -- No --> WI["Heartbeat: idle<br>sleep 1s"] --> W1
+    WN -- Yes --> WA["Heartbeat: active<br>(current_work_item_id)"] --> PX["process_work_item()"]
+
+    PX --> WOK{Success?}
+    WOK -- Yes --> WS["Update metrics<br>succeeded++"] --> W1
+    WOK -- No --> WF["Update metrics<br>failed++ and log"] --> W1
+  end
+
+  subgraph P["process_work_item(work_item)"]
+    P0([start]) --> P1["Select connector by source_system"]
+    P1 --> P2["Global rate limit gate<br>(_apply_rate_limit)"]
+    P2 --> P3["Build ConnectorRequest"]
+    P3 --> P4["connector.fetch(request)"]
+    P4 --> P5{HTTP status?}
+
+    P5 -- 429 or >=500 --> P6["Compute backoff<br>(Retry-After or exp+jitter)"]
+    P6 --> P7["Fail work item<br>(retryable + backoff_seconds)"] --> PEND([return])
+
+    P5 -- other non-2xx --> P8["Fail work item<br>(retryable if >=500)"] --> PEND
+
+    P5 -- 2xx --> P9["Create IngestRecord<br>(timestamps + duration + sha256)"]
+    P9 --> P10["Write to storage writers<br>(best-effort)"]
+    P10 --> P11{Discovery enabled?}
+    P11 -- Yes --> P12["Run discovery plugins<br>enqueue new items"] --> P13["Complete work item"]
+    P11 -- No --> P13["Complete work item"]
+    P13 --> PEND
+  end
