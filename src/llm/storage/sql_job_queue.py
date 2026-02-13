@@ -253,6 +253,7 @@ class SqlJobQueue:
         evidence_ref_json: Optional[str] = None,
         model_hint: Optional[str] = None,
         max_attempts: int = 3,
+        dedupe_key: Optional[str] = None,
     ) -> str:
         """
         Enqueue a new job.
@@ -264,6 +265,7 @@ class SqlJobQueue:
             evidence_ref_json: Evidence references as JSON string
             model_hint: Suggested model to use
             max_attempts: Maximum attempts before deadletter
+            dedupe_key: Optional idempotency key to prevent duplicate jobs
             
         Returns:
             The created job_id
@@ -275,19 +277,126 @@ class SqlJobQueue:
             cursor.execute(
                 f"EXEC [{self.config.schema}].[usp_enqueue_job] "
                 f"@priority = ?, @interrogation_key = ?, @input_json = ?, "
-                f"@evidence_ref_json = ?, @model_hint = ?, @max_attempts = ?",
-                (priority, interrogation_key, input_json, evidence_ref_json, model_hint, max_attempts)
+                f"@evidence_ref_json = ?, @model_hint = ?, @max_attempts = ?, @dedupe_key = ?",
+                (priority, interrogation_key, input_json, evidence_ref_json, model_hint, max_attempts, dedupe_key)
             )
             
             row = cursor.fetchone()
             job_id = str(row[0]) if row else str(uuid.uuid4())
             
-            logger.info(f"Enqueued job {job_id} for {interrogation_key}")
+            # Check if this was a duplicate (if stored proc returns is_duplicate flag)
+            is_duplicate = row[1] if row and len(row) > 1 else False
+            if is_duplicate:
+                logger.info(f"Found existing job {job_id} for dedupe_key={dedupe_key}")
+            else:
+                logger.info(f"Enqueued job {job_id} for {interrogation_key}")
+            
             return job_id
             
         except Exception as e:
             logger.error(f"Failed to enqueue job: {e}")
             raise LLMStorageError(f"Failed to enqueue job: {e}")
+    
+    def enqueue_job_idempotent(
+        self,
+        interrogation_key: str,
+        dedupe_key: str,
+        input_json: str,
+        priority: int = 100,
+        evidence_ref_json: Optional[str] = None,
+        model_hint: Optional[str] = None,
+        max_attempts: int = 3,
+    ) -> Dict[str, Any]:
+        """
+        Enqueue a new job with idempotency guarantee.
+        
+        If a job with the same (interrogation_key, dedupe_key) already exists,
+        returns the existing job_id instead of creating a duplicate.
+        
+        Args:
+            interrogation_key: Which interrogation to run
+            dedupe_key: Idempotency key (required)
+            input_json: Job input as JSON string
+            priority: Job priority (higher = processed sooner)
+            evidence_ref_json: Evidence references as JSON string
+            model_hint: Suggested model to use
+            max_attempts: Maximum attempts before deadletter
+            
+        Returns:
+            Dict with 'job_id', 'is_duplicate', and optionally 'existing_status'
+        """
+        if not dedupe_key:
+            raise ValueError("dedupe_key is required for idempotent enqueue")
+        
+        try:
+            conn = self._get_connection()
+            cursor = conn.cursor()
+            
+            cursor.execute(
+                f"EXEC [{self.config.schema}].[usp_enqueue_job] "
+                f"@priority = ?, @interrogation_key = ?, @input_json = ?, "
+                f"@evidence_ref_json = ?, @model_hint = ?, @max_attempts = ?, @dedupe_key = ?",
+                (priority, interrogation_key, input_json, evidence_ref_json, model_hint, max_attempts, dedupe_key)
+            )
+            
+            row = cursor.fetchone()
+            result = {
+                "job_id": str(row[0]) if row else str(uuid.uuid4()),
+                "is_duplicate": bool(row[1]) if row and len(row) > 1 else False,
+                "existing_status": row[2] if row and len(row) > 2 else None,
+            }
+            
+            if result["is_duplicate"]:
+                logger.info(
+                    f"Idempotent enqueue found existing job {result['job_id']} "
+                    f"(status={result['existing_status']}) for dedupe_key={dedupe_key}"
+                )
+            else:
+                logger.info(f"Idempotent enqueue created job {result['job_id']} for {interrogation_key}")
+            
+            return result
+            
+        except Exception as e:
+            logger.error(f"Failed to enqueue job idempotently: {e}")
+            raise LLMStorageError(f"Failed to enqueue job: {e}")
+    
+    def get_job_by_dedupe_key(
+        self,
+        interrogation_key: str,
+        dedupe_key: str,
+    ) -> Optional[Job]:
+        """
+        Look up a job by its dedupe key.
+        
+        Args:
+            interrogation_key: The interrogation key
+            dedupe_key: The dedupe key to search for
+            
+        Returns:
+            The Job if found, None otherwise
+        """
+        try:
+            conn = self._get_connection()
+            cursor = conn.cursor()
+            
+            cursor.execute(
+                f"EXEC [{self.config.schema}].[usp_get_job_by_dedupe_key] "
+                f"@interrogation_key = ?, @dedupe_key = ?",
+                (interrogation_key, dedupe_key)
+            )
+            
+            row = cursor.fetchone()
+            if row is None:
+                return None
+            
+            columns = [column[0] for column in cursor.description]
+            row_dict = dict(zip(columns, row))
+            
+            return Job.from_row(row_dict)
+            
+        except Exception as e:
+            logger.error(f"Failed to get job by dedupe key: {e}")
+            raise LLMStorageError(f"Failed to get job by dedupe key: {e}")
     
     def create_run(
         self,
