@@ -315,17 +315,17 @@ END
 
 #### Tasks
 
-| # | Task | Deliverable | Effort |
-|---|------|-------------|--------|
-| 3.1 | Generalize entity extraction prompt | `src/llm/prompts/entity_extraction_generic.py` that handles all entity types | 2 days |
-| 3.2 | Create backfill CLI | `src/llm/cli/backfill.py` with commands for bulk re-enqueue | 2 days |
-| 3.3 | Add queue depth monitoring | SQL view `llm.vw_queue_health` with depth by status and age | 1 day |
-| 3.4 | Implement priority escalation | Background job or CLI command to auto-escalate old jobs | 1 day |
-| 3.5 | Create event/work extraction contracts | `event_extraction_v1_schema.json`, `work_extraction_v1_schema.json` | 2 days |
-| 3.6 | Create event/work prompt templates | `src/llm/prompts/event_extraction.py`, `work_extraction.py` | 3 days |
-| 3.7 | Create event/work insertion stored procs | `dbo.usp_insert_event`, `dbo.usp_insert_entity_work_appearance` | 2 days |
-| 3.8 | Register event/work job types | Add to job type registry + handlers | 1 day |
-| 3.9 | Bulk backfill test | Re-process 100 low-confidence pages, verify improvements | 2 days |
+| # | Task | Deliverable |
+|---|------|-------------|
+| 3.1 | Generalize entity extraction prompt | `src/llm/prompts/entity_extraction_generic.py` that handles all entity types |
+| 3.2 | Create backfill CLI | `src/llm/cli/backfill.py` with commands for bulk re-enqueue |
+| 3.3 | Add queue depth monitoring | SQL view `llm.vw_queue_health` with depth by status and age |
+| 3.4 | Implement priority escalation | Background job or CLI command to auto-escalate old jobs |
+| 3.5 | Create event/work extraction contracts | `event_extraction_v1_schema.json`, `work_extraction_v1_schema.json` |
+| 3.6 | Create event/work prompt templates | `src/llm/prompts/event_extraction.py`, `work_extraction.py` |
+| 3.7 | Create event/work insertion stored procs | `dbo.usp_insert_event`, `dbo.usp_insert_entity_work_appearance` |
+| 3.8 | Register event/work job types | Add to job type registry + handlers |
+| 3.9 | Bulk backfill test | Re-process 100 low-confidence pages, verify improvements |
 
 **Backfill CLI Example:**
 ```bash

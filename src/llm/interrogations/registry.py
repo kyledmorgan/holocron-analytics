@@ -133,6 +133,11 @@ class InterrogationRegistry:
         definition = create_relationship_extraction_v1()
         self.register(definition)
         
+        # Register entity_extraction_generic_v1 (Phase 3)
+        from .definitions.entity_extraction_generic import create_entity_extraction_generic_v1
+        definition = create_entity_extraction_generic_v1()
+        self.register(definition)
+        
         self._loaded = True
         logger.debug(f"Loaded {len(self._definitions)} built-in interrogations")
 
