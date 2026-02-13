@@ -1,0 +1,116 @@
+{
+  "description": "Golden seed data for Phase 1 Droid Entity Extraction testing",
+  "version": "1.0.0",
+  "purpose": "Provides deterministic test inputs for prompt iteration, regression checks, and repeated verification",
+  "test_cases": [
+    {
+      "id": "droid-01",
+      "name": "clean_named_droid",
+      "intent": "Explicit named droid with full attributes",
+      "expected_entities": 1,
+      "expected_types": ["Droid"],
+      "expected_confidence_min": 0.9,
+      "source_page_title": "R2-D2",
+      "source_id": "wookieepedia:r2-d2",
+      "content": "R2-D2, pronounced Artoo-Detoo and often referred to as Artoo, was an R2-series astromech droid manufactured by Industrial Automaton. R2-D2 stood 0.96 meters tall with a blue and white color scheme. R2-D2 served Padmé Amidala during the Clone Wars and later became the property of Luke Skywalker."
+    },
+    {
+      "id": "droid-02",
+      "name": "clean_named_droid_protocol",
+      "intent": "Protocol droid with relationships",
+      "expected_entities": 1,
+      "expected_types": ["Droid"],
+      "expected_confidence_min": 0.9,
+      "source_page_title": "C-3PO",
+      "source_id": "wookieepedia:c-3po",
+      "content": "C-3PO, sometimes spelled See-Threepio and often referred to as Threepio, was a 3PO-series protocol droid designed to interact with organics, programmed primarily for etiquette and protocol. He was built by the slave Anakin Skywalker on Tatooine from spare parts, and served the Skywalker family for many years. C-3PO was fluent in over six million forms of communication."
+    },
+    {
+      "id": "droid-03",
+      "name": "multiple_droids_same_page",
+      "intent": "Multiple droids mentioned in same text",
+      "expected_entities": 3,
+      "expected_types": ["Droid", "Droid", "Droid"],
+      "expected_confidence_min": 0.7,
+      "source_page_title": "Battle of Yavin",
+      "source_id": "wookieepedia:battle-of-yavin",
+      "content": "The Battle of Yavin was a decisive engagement during the Galactic Civil War. R2-D2 carried the Death Star plans and accompanied Luke Skywalker in his X-wing during the assault. C-3PO monitored the battle from the Rebel base. Meanwhile, numerous R5-series astromech droids served in other starfighters during the engagement."
+    },
+    {
+      "id": "droid-04",
+      "name": "vague_reference_low_confidence",
+      "intent": "Vague droid reference should have low confidence",
+      "expected_entities": 1,
+      "expected_types": ["Droid"],
+      "expected_confidence_max": 0.6,
+      "source_page_title": "Rebel hangar",
+      "source_id": "fictional:rebel-hangar",
+      "content": "The Rebel hangar was a busy place. Pilots rushed to their ships while mechanics prepared the fighters. A few repair droids rolled around the floor, fixing minor damage on the starfighters. Nobody paid much attention to the droids as they went about their work."
+    },
+    {
+      "id": "droid-05",
+      "name": "no_droids_present",
+      "intent": "Page with no droids should return empty entities",
+      "expected_entities": 0,
+      "expected_types": [],
+      "source_page_title": "Obi-Wan Kenobi",
+      "source_id": "wookieepedia:obi-wan-kenobi",
+      "content": "Obi-Wan Kenobi was a legendary Jedi Master who trained Anakin Skywalker and later his son Luke. A native of Stewjon, Obi-Wan was apprenticed to Qui-Gon Jinn and eventually became a general in the Clone Wars. He lived in exile on Tatooine for many years, watching over Luke from afar."
+    },
+    {
+      "id": "droid-06",
+      "name": "droid_model_line",
+      "intent": "Droid model/series rather than individual",
+      "expected_entities": 1,
+      "expected_types": ["Droid"],
+      "expected_confidence_min": 0.9,
+      "source_page_title": "R2-series astromech droid",
+      "source_id": "wookieepedia:r2-series",
+      "content": "The R2-series astromech droid was a model of astromech droid produced by Industrial Automaton. The R2 series was one of the most successful droid lines in history, known for their reliability and versatility. R2 units stood approximately 0.96 meters tall and were equipped with a variety of tools including a computer interface arm, holographic projector, and repair tools."
+    },
+    {
+      "id": "droid-07",
+      "name": "battle_droid_variant",
+      "intent": "Battle droid is still a droid type",
+      "expected_entities": 2,
+      "expected_types": ["Droid", "Droid"],
+      "expected_confidence_min": 0.8,
+      "source_page_title": "Separatist Droid Army",
+      "source_id": "wookieepedia:separatist-droid-army",
+      "content": "The Separatist Droid Army was the military force of the Confederacy of Independent Systems. It was composed primarily of B1-series battle droids manufactured by Baktoid Combat Automata. The army also included the more advanced B2 super battle droid, which featured heavier armor and integrated weapons. Millions of these droids fought in the Clone Wars."
+    },
+    {
+      "id": "droid-08",
+      "name": "droid_with_complex_relationships",
+      "intent": "Extract relationships between droid and characters",
+      "expected_entities": 1,
+      "expected_types": ["Droid"],
+      "expected_relationships_min": 2,
+      "source_page_title": "BB-8",
+      "source_id": "wookieepedia:bb-8",
+      "content": "BB-8 was a BB-series astromech droid who operated approximately thirty years after the Battle of Endor. BB-8 originally served Resistance pilot Poe Dameron, but later became a companion to the scavenger Rey. The droid was instrumental in delivering a map to Luke Skywalker's location. BB-8 was known for his distinctive orange and white coloring."
+    },
+    {
+      "id": "droid-09",
+      "name": "mixed_entity_types",
+      "intent": "Droids alongside people/places - only extract droids",
+      "expected_entities": 1,
+      "expected_types": ["Droid"],
+      "expected_confidence_min": 0.8,
+      "source_page_title": "Echo Base",
+      "source_id": "wookieepedia:echo-base",
+      "content": "Echo Base was the headquarters of the Alliance to Restore the Republic on the ice planet Hoth. The base was discovered by the Empire through an Imperial probe droid that transmitted coordinates back to the fleet. General Rieekan commanded the base, and Han Solo was present during the Imperial attack. The probe droid, a Viper model manufactured by Arakyd Industries, self-destructed after being discovered."
+    },
+    {
+      "id": "droid-10",
+      "name": "edge_case_variant_naming",
+      "intent": "Droid with variant/alternate names",
+      "expected_entities": 1,
+      "expected_types": ["Droid"],
+      "expected_aliases_min": 1,
+      "source_page_title": "IG-88",
+      "source_id": "wookieepedia:ig-88",
+      "content": "IG-88, also known as IG-88B, was an assassin droid who worked as a bounty hunter during the Galactic Civil War. The IG-series droid was manufactured by Holowan Laboratories and was among the deadliest bounty hunters in the galaxy. IG-88 was hired by Darth Vader to track down Han Solo and the Millennium Falcon."
+    }
+  ]
+}
