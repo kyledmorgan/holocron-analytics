@@ -48,7 +48,10 @@ class StructuredFormatter(logging.Formatter):
         }
         
         if self.include_timestamp:
-            log_entry["timestamp"] = datetime.now(timezone.utc).isoformat()
+            # Use record.created for consistency with when log was actually created
+            log_entry["timestamp"] = datetime.fromtimestamp(
+                record.created, tz=timezone.utc
+            ).isoformat()
         
         # Add correlation fields if present
         for field in ['job_id', 'run_id', 'correlation_id', 'worker_id', 

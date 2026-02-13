@@ -4,6 +4,9 @@
 
 -- ============================================================================
 -- Add dedupe_key column to llm.job
+-- Length of 500 chosen to accommodate composite keys (e.g., source_id + job_type + version)
+-- while fitting within index size limits. Typical keys: SHA256 hash (64 chars),
+-- UUID (36 chars), or composite "page_id:version" style (under 200 chars).
 -- ============================================================================
 IF NOT EXISTS (
     SELECT * FROM sys.columns 

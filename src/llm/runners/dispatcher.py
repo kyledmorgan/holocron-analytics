@@ -179,7 +179,7 @@ class JobDispatcher:
         
         # Try to import from handler_ref
         handler_ref = job_type_def.handler_ref
-        if not handler_ref:
+        if not handler_ref or not handler_ref.strip():
             return None
         
         try:

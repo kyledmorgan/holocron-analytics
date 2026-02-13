@@ -284,8 +284,11 @@ class SqlJobQueue:
             row = cursor.fetchone()
             job_id = str(row[0]) if row else str(uuid.uuid4())
             
-            # Check if this was a duplicate (if stored proc returns is_duplicate flag)
-            is_duplicate = row[1] if row and len(row) > 1 else False
+            # Check if this was a duplicate (stored proc returns: job_id, is_duplicate, existing_status)
+            # Column indices: 0=job_id, 1=is_duplicate, 2=existing_status
+            COL_JOB_ID = 0
+            COL_IS_DUPLICATE = 1
+            is_duplicate = bool(row[COL_IS_DUPLICATE]) if row and len(row) > COL_IS_DUPLICATE else False
             if is_duplicate:
                 logger.info(f"Found existing job {job_id} for dedupe_key={dedupe_key}")
             else:
