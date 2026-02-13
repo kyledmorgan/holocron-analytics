@@ -165,7 +165,7 @@ class TestEntityExtractionDroidHandler:
         result = handler.handle(job, mock_ctx_dry_run)
         
         assert result.failed
-        assert "JSON" in result.error_message or "json" in result.error_message.lower()
+        assert "json" in result.error_message.lower()
     
     def test_prompt_rendering(self, mock_job, mock_ctx_dry_run):
         """Test that prompt is rendered correctly."""
