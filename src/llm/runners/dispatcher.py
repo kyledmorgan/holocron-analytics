@@ -645,7 +645,7 @@ def main():
         formatter_class=argparse.RawDescriptionHelpFormatter,
     )
     
-    mode_group = parser.add_mutually_exclusive_group(required=True)
+    mode_group = parser.add_mutually_exclusive_group(required=False)
     mode_group.add_argument(
         "--once",
         action="store_true",
@@ -655,6 +655,11 @@ def main():
         "--loop",
         action="store_true",
         help="Run continuously, dispatching jobs"
+    )
+    mode_group.add_argument(
+        "--list-types",
+        action="store_true",
+        help="List registered job types and exit"
     )
     
     parser.add_argument(
@@ -685,11 +690,6 @@ def main():
         action="store_true",
         help="Enable verbose logging"
     )
-    parser.add_argument(
-        "--list-types",
-        action="store_true",
-        help="List registered job types and exit"
-    )
     
     args = parser.parse_args()
     
@@ -709,6 +709,10 @@ def main():
             print(f"    interrogation: {job_type_def.interrogation_key}")
             print(f"    handler: {job_type_def.handler_ref}")
         sys.exit(0)
+    
+    # Require --once or --loop for actual dispatch
+    if not args.once and not args.loop:
+        parser.error("one of --once, --loop, or --list-types is required")
     
     # Build config
     config = DispatcherConfig.from_env(args.worker_id, args.dry_run)
