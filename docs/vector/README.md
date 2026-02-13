@@ -189,7 +189,18 @@ The schema refactor is **feature complete**. The `vector` schema is now the sole
 
 ## Related Documents
 
+### Phase III Evaluation (Current)
+
+- [Current State Inventory](current-state-inventory.md) — Comprehensive inventory of existing vector components
+- [Gap Analysis](gap-analysis.md) — What's missing to run first embedding batch
+- [Recommended Architecture](recommended-architecture.md) — Target architecture for vector operations
+- [Proposed Work Plan](proposed-work-plan.md) — Implementation roadmap and task breakdown
+- [Documentation Hygiene Report](docs-hygiene-llm-vs-vector.md) — LLM vs. Vector docs separation plan
+
+### Legacy Documentation
+
 - [Schema Refactor Migration Notes](../llm/schema-refactor-migration-notes.md) — Complete migration history
-- [Dependency Inventory](../llm/dependency-inventory-vector-subsystem.md) — Impact analysis
+- [Dependency Inventory](dependency-inventory-vector-subsystem.md) — Impact analysis (moved from llm/)
 - [Legacy Schema Snapshot](../../db/legacy_snapshots/llm_vector_subsystem_snapshot.sql) — Historical reference
-- [Retrieval System (Legacy)](../llm/retrieval.md) — Legacy documentation
+- [Retrieval System (Legacy)](../llm/retrieval.md) — Legacy documentation (will be moved)
+- [Indexing Guide (Legacy)](../llm/indexing.md) — Legacy indexing docs (will be moved)
