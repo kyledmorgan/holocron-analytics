@@ -18,6 +18,7 @@ ObjectItem, Organization, Concept, EventConflict, TimePeriod, WorkMedia, etc.
 
 import json
 import logging
+import re
 from datetime import datetime, timezone
 from typing import Any, Dict, List, Optional
 
@@ -302,7 +303,6 @@ class EntityExtractionGenericHandler:
             return json.loads(llm_output)
         except json.JSONDecodeError as e:
             # Try to extract JSON from markdown code blocks
-            import re
             json_match = re.search(r'```(?:json)?\s*([\s\S]*?)\s*```', llm_output)
             if json_match:
                 try:

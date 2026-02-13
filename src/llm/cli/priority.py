@@ -192,8 +192,10 @@ class PriorityService:
             conn = self._get_queue()._get_connection()
             cursor = conn.cursor()
             
-            cursor.execute(f"""
-                UPDATE TOP ({max_jobs}) llm.job
+            # Use parameterized query for all values including max_jobs
+            # SQL Server requires TOP in specific syntax, using dynamic SQL safely
+            query = """
+                UPDATE TOP (?) llm.job
                 SET 
                     priority = CASE 
                         WHEN priority + ? > ? THEN ?
@@ -203,7 +205,8 @@ class PriorityService:
                 WHERE status = 'NEW'
                   AND DATEDIFF(MINUTE, created_at, GETUTCDATE()) > ?
                   AND priority < ?
-            """, (boost, max_priority, max_priority, boost, age_threshold, max_priority))
+            """
+            cursor.execute(query, (max_jobs, boost, max_priority, max_priority, boost, age_threshold, max_priority))
             
             affected = cursor.rowcount
             
