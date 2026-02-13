@@ -215,6 +215,20 @@ class JobTypeRegistry:
             tags=["extraction", "relationships", "phase2"],
         ))
         
+        # Register entity_extraction_generic job type (Phase 3)
+        self.register(JobTypeDefinition(
+            job_type="entity_extraction_generic",
+            display_name="Generic Entity Extraction",
+            interrogation_key="entity_extraction_generic_v1",
+            handler_ref="src.llm.handlers.entity_extraction_generic.handle",
+            max_attempts=3,
+            default_priority=100,
+            timeout_seconds=180,
+            version="1.0.0",
+            description="Extract entities of ALL types from source text. Phase 3 generalized pipeline supporting PersonCharacter, LocationPlace, Organization, VehicleCraft, and more.",
+            tags=["extraction", "entities", "generic", "phase3"],
+        ))
+        
         self._loaded = True
         logger.debug(f"Loaded {len(self._definitions)} built-in job type definitions")
 

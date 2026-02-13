@@ -1,0 +1,136 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://holocron-analytics.local/schemas/llm/entity-extraction-generic/v1",
+  "title": "Generic Entity Extraction V1 Output",
+  "description": "Output schema for generic entity extraction jobs. Handles ALL entity types (PersonCharacter, LocationPlace, Organization, VehicleCraft, Work, Event, Concept, etc.) in a unified, contract-driven way.",
+  "version": "1.0.0",
+  "type": "object",
+  "required": ["entities"],
+  "properties": {
+    "entities": {
+      "type": "array",
+      "description": "Array of extracted entities from the source text",
+      "items": {
+        "type": "object",
+        "required": ["name", "type", "confidence"],
+        "properties": {
+          "name": {
+            "type": "string",
+            "maxLength": 500,
+            "description": "The canonical name of the entity as it appears in the text"
+          },
+          "type": {
+            "type": "string",
+            "maxLength": 100,
+            "description": "The entity type (open-ended string). Examples: PersonCharacter, Droid, Species, LocationPlace, VehicleCraft, ObjectItem, Organization, Concept, EventConflict, TimePeriod, WorkMedia, etc."
+          },
+          "confidence": {
+            "type": "number",
+            "minimum": 0.0,
+            "maximum": 1.0,
+            "description": "Confidence score: 1.0 = explicitly named, 0.7-0.9 = strongly implied, 0.4-0.6 = weakly implied, <0.4 = uncertain"
+          },
+          "aliases": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Alternative names or designations for this entity"
+          },
+          "attributes": {
+            "type": "object",
+            "additionalProperties": true,
+            "description": "Flexible key-value attributes extracted from text. Structure depends on entity type."
+          },
+          "evidence_quote": {
+            "type": ["string", "null"],
+            "description": "Direct quote from source text supporting this entity extraction (for provenance)"
+          },
+          "temporal_context": {
+            "type": ["string", "null"],
+            "maxLength": 200,
+            "description": "Optional time period or era when this entity is relevant (e.g., 'Clone Wars era', '22 BBY - 19 BBY')"
+          },
+          "work_references": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "maxLength": 500
+            },
+            "description": "Optional array of works/media where this entity appears (e.g., ['A New Hope', 'The Empire Strikes Back'])"
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "relationships": {
+      "type": "array",
+      "description": "Optional array of relationships between entities discovered during extraction",
+      "items": {
+        "type": "object",
+        "required": ["from_entity", "to_entity", "relation_type", "confidence"],
+        "properties": {
+          "from_entity": {
+            "type": "string",
+            "description": "Name of the source entity in the relationship"
+          },
+          "to_entity": {
+            "type": "string",
+            "description": "Name of the target entity in the relationship"
+          },
+          "relation_type": {
+            "type": "string",
+            "description": "Type of relationship (e.g., 'owned_by', 'served', 'member_of', 'located_in', 'manufactured_by')"
+          },
+          "start_date": {
+            "type": ["string", "null"],
+            "description": "Start date/era of the relationship (if known)"
+          },
+          "end_date": {
+            "type": ["string", "null"],
+            "description": "End date/era of the relationship (if known)"
+          },
+          "confidence": {
+            "type": "number",
+            "minimum": 0.0,
+            "maximum": 1.0,
+            "description": "Confidence score for this relationship"
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "extraction_metadata": {
+      "type": "object",
+      "description": "Metadata about the extraction process",
+      "properties": {
+        "source_page_title": {
+          "type": ["string", "null"],
+          "description": "Title of the source page/document"
+        },
+        "total_entities_found": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Total number of entities extracted"
+        },
+        "entity_types_found": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "List of unique entity types found in this extraction"
+        },
+        "primary_type_focus": {
+          "type": ["string", "null"],
+          "description": "If extraction was focused on a specific type, indicate it here (null for generic extraction)"
+        },
+        "extraction_notes": {
+          "type": ["string", "null"],
+          "description": "Notes about the extraction process, ambiguities, or assumptions"
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}
