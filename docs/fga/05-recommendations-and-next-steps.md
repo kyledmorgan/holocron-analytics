@@ -98,7 +98,7 @@ JOB_TYPE_REGISTRY = {
 | 1.6 | Create seed data | 5-10 droid pages in `sources/seed/droids.json` | 0.5 day |
 | 1.7 | End-to-end test | Enqueue jobs → process → verify entities in DB | 1 day |
 
-**Entity Extraction Contract (v1):**
+**Entity Extraction Contract (v1) — Illustrative Example:**
 ```json
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
@@ -115,19 +115,44 @@ JOB_TYPE_REGISTRY = {
           "name": {"type": "string", "maxLength": 500},
           "type": {
             "type": "string",
-            "enum": ["Droid", "PersonCharacter", "LocationPlace", "VehicleCraft", "ObjectItem", "Organization", "Species"]
+            "description": "Open-ended type string, not limited to enumerated examples. Can be any dimension, fact, or knowledge type."
           },
           "confidence": {"type": "number", "minimum": 0.0, "maximum": 1.0},
           "attributes": {
             "type": "object",
-            "additionalProperties": true
+            "additionalProperties": true,
+            "description": "Flexible JSON for any extracted attributes. Schema evolves with domain knowledge."
           }
+        }
+      }
+    },
+    "relationships": {
+      "type": "array",
+      "description": "Optional: relationships extracted alongside entities",
+      "items": {
+        "type": "object",
+        "required": ["from_entity", "to_entity", "relation_type", "confidence"],
+        "properties": {
+          "from_entity": {"type": "string"},
+          "to_entity": {"type": "string"},
+          "relation_type": {
+            "type": "string",
+            "description": "Open-ended relationship type, not enumerated. Examples: owned_by, member_of, located_in, appeared_in, etc."
+          },
+          "start_date": {"type": ["string", "null"]},
+          "end_date": {"type": ["string", "null"]},
+          "confidence": {"type": "number", "minimum": 0.0, "maximum": 1.0}
         }
       }
     }
   }
 }
 ```
+
+**Note:** This is an **illustrative example**. Actual contract should be flexible:
+- `type` is open string, not fixed enum (examples: "Droid", "PersonCharacter", "Event", "Concept", "Appearance", etc.)
+- Supports multiple output families: dimensions, facts, bridges, attributes, time-scoped assertions
+- Schema should be discovered from repository (`src/llm/contracts/`), not derived from this example
 
 **Example Prompt Template:**
 ```python
@@ -136,9 +161,11 @@ SYSTEM_PROMPT = """You are an expert in Star Wars lore. Extract all droid entiti
 
 For each droid, provide:
 - name: Full droid name or designation (e.g., "R2-D2", "C-3PO")
-- type: Always "Droid"
+- type: "Droid" (or more specific if known)
 - confidence: 0.0-1.0 (1.0 if explicitly named, <0.8 if vague mention)
 - attributes: JSON object with any mentioned details (model, affiliation, owner, etc.)
+
+Optionally extract relationships if mentioned (e.g., "owned_by", "accompanied_by").
 
 Output ONLY valid JSON. No markdown formatting."""
 
@@ -156,6 +183,14 @@ FEW_SHOT_EXAMPLES = [
                         "owner": "Luke Skywalker"
                     }
                 }
+            ],
+            "relationships": [
+                {
+                    "from_entity": "R2-D2",
+                    "to_entity": "Luke Skywalker",
+                    "relation_type": "owned_by",
+                    "confidence": 1.0
+                }
             ]
         }
     }
@@ -166,7 +201,7 @@ FEW_SHOT_EXAMPLES = [
 1. **Dry-Run Test:** Process 5 droid pages in dry-run mode, verify JSON output matches schema
 2. **Insertion Test:** Process 1 droid page, verify entity inserted into `dbo.DimEntity` with:
    - `EntityName` = extracted name
-   - `PrimaryTypeInferred` = "Droid"
+   - `PrimaryTypeInferred` = "Droid" (or other type)
    - `PromotionState` = "staged"
    - `AdjudicationRunId` = LLM run ID
 3. **Idempotency Test:** Re-enqueue same page, verify duplicate prevented by `dedupe_key`
@@ -193,7 +228,7 @@ FEW_SHOT_EXAMPLES = [
 | 2.6 | Register combined job type | Add `entity_and_relationship_extraction` to job type registry | 0.5 day |
 | 2.7 | End-to-end test | Extract entities + relationships from 5 pages, verify both tables populated | 1 day |
 
-**Relationship Extraction Contract (v1):**
+**Relationship Extraction Contract (v1) — Illustrative Example:**
 ```json
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
@@ -211,10 +246,15 @@ FEW_SHOT_EXAMPLES = [
           "to_entity": {"type": "string", "maxLength": 500},
           "relation_type": {
             "type": "string",
-            "enum": ["owned_by", "member_of", "ally_of", "enemy_of", "created_by", "located_in", "participated_in"]
+            "description": "Open-ended relationship type. Examples: owned_by, member_of, ally_of, enemy_of, created_by, located_in, participated_in, visited_in, trained_by, accompanied_by, appeared_in, etc. Taxonomy evolves; not limited to these examples."
           },
           "start_date": {"type": ["string", "null"]},
           "end_date": {"type": ["string", "null"]},
+          "work_context": {
+            "type": "array",
+            "items": {"type": "string"},
+            "description": "Optional: works/media where relationship is depicted or mentioned"
+          },
           "confidence": {"type": "number", "minimum": 0.0, "maximum": 1.0}
         }
       }
@@ -222,6 +262,12 @@ FEW_SHOT_EXAMPLES = [
   }
 }
 ```
+
+**Note:** This is an **illustrative example**. Actual contract should be flexible:
+- `relation_type` is open string, **not fixed enum**
+- Relationship taxonomy evolves; examples are not exhaustive
+- Supports broad relationship types: associations, participation, location, membership, ownership, appearance, time-bounded states
+- Time-scoped assertions encouraged (start/end dates or work context)
 
 **Combined Stored Procedure:**
 ```sql
@@ -336,27 +382,42 @@ GROUP BY status;
 
 ---
 
-### Decision Point 2: Chunking Strategy
+### Decision Point 2: LLM Context Chunking & Budgeting Strategy
 
-**Timeline:** Before Phase 3 (if vector retrieval needed)  
-**Stakeholders:** Tech Lead, Data Engineer  
-**Options:** Fixed-size vs sentence-boundary vs semantic chunking
+**Timeline:** Before Phase 1 (needed for reliable LLM extraction)  
+**Stakeholders:** Tech Lead, LLM Engineer  
+**Options:** Fixed-size vs sentence-boundary vs semantic chunking; static vs dynamic budgeting
 
-**Recommendation:** **Sentence-boundary-aware fixed-size chunking** (1000 tokens with 200-token overlap)
+**Recommendation:** **Sentence-boundary-aware fixed-size chunking with dynamic token budgeting**
 
 **Rationale:**
-- Fixed-size ensures consistent token counts for LLM context limits
-- Sentence boundaries prevent mid-sentence cuts (improves coherence)
-- Overlap ensures no information loss at chunk boundaries
+- **LLM context chunking is needed regardless of vector use:** Required for reliable extraction from long sources, not just for vector retrieval
+- **Dynamic budgeting accounts for model constraints:**
+  - Estimate available tokens: model window - (system prompt + contract + output buffer + safety margin)
+  - Adjust chunk size based on available budget
+  - Degrade gracefully for smaller context models
+- **Sentence boundaries prevent mid-sentence cuts:** Improves coherence and extraction quality
+- **Overlap ensures no information loss** at chunk boundaries
+- **Reusable for any unstructured/semi-structured source**
 
 **Parameters:**
 ```yaml
 chunking:
-  strategy: sentence_boundary_fixed
-  max_tokens: 1000
-  overlap_tokens: 200
-  min_chunk_tokens: 500
+  strategy: sentence_boundary_fixed_with_budgeting
+  # Dynamic calculation based on model
+  model_context_window: 128000  # tokens (model-specific)
+  system_prompt_tokens: 1500
+  contract_overhead_tokens: 300
+  output_buffer_tokens: 3000
+  safety_margin_percent: 15
+  # Resulting chunk parameters
+  max_chunk_tokens: 8000       # Cap for reliability
+  overlap_tokens: 1000
+  min_chunk_tokens: 2000
+  chars_per_token_estimate: 4  # Rough heuristic
 ```
+
+**Note:** Chunking for LLM context is a **general strategy**, not vector-specific. Vector tables exist but are not the primary driver in Phase 0-2.
 
 **Decision:**
 - [ ] Approved by: ___________  
@@ -364,24 +425,26 @@ chunking:
 
 ---
 
-### Decision Point 3: Identity Resolution Strategy
+### Decision Point 3: Identity Resolution Strategy (Best-Effort)
 
 **Timeline:** Before Phase 2 (multi-entity extraction)  
 **Stakeholders:** Tech Lead, Domain Expert  
-**Options:** Exact match only vs fuzzy match vs LLM adjudication vs phased
+**Options:** Exact match only vs fuzzy match vs LLM adjudication vs phased best-effort
 
-**Recommendation:** **Phased** — Exact match → fuzzy match → LLM adjudication (only for ambiguous cases)
+**Recommendation:** **Phased Best-Effort** — Exact match → simple fuzzy match → tolerate duplicates → future dedupe audit
 
 **Rationale:**
-- Minimize LLM calls (costly, slow)
-- Exact match handles 80%+ of cases (case-insensitive name comparison)
-- Fuzzy match handles 15% (minor typos, spelling variations)
-- LLM adjudication for remaining 5% (e.g., "Luke Skywalker" vs "Luke Skywalker (Jedi)")
+- **Not a hard requirement to prevent all duplicates** in Phase 0-2
+- Exact match handles most cases (case-insensitive name comparison)
+- Simple fuzzy match catches obvious typos (threshold >0.95)
+- **Tolerate some duplicates** in early data; noise is acceptable
+- Future: LLM contracts can mine database for duplicates and optionally relate or suppress/purge redundant records
 
 **Thresholds:**
-- Exact match: Levenshtein distance = 0 (case-insensitive)
-- Fuzzy match: Levenshtein distance ≤ 2 OR phonetic match (Soundex)
-- LLM adjudication: Fuzzy score 0.7-0.9 (ambiguous range)
+- Exact match: Case-insensitive name comparison (fast, prevents obvious duplicates)
+- Fuzzy match: High threshold only (>0.95 similarity) for obvious typos
+- Accept duplicates below threshold (no blocking)
+- Future: Dedupe audit job type for post-processing
 
 **Decision:**
 - [ ] Approved by: ___________  
@@ -707,6 +770,431 @@ WHERE lr.started_at >= DATEADD(DAY, -7, GETUTCDATE())
 GROUP BY lr.status, lr.model_name
 ORDER BY lr.status, lr.model_name;
 ```
+
+---
+
+## Illustrative Examples: Multi-Pronged Extraction with Time-Awareness
+
+**Important:** These examples are **descriptive** to demonstrate multi-output extraction patterns. They use fictional but plausible Star Wars content. Actual schemas, table structures, and contracts should be discovered from the repository, not derived from these examples.
+
+---
+
+### Example A: Dagobah Page (Location-Centric, Time-Bounded Relationships)
+
+**Context:** A wiki page about Dagobah contains rich information about the location, visitors, time periods, and associated works.
+
+#### Sample Raw Text Blob
+
+```
+Dagobah is a remote, swampy planet in the Sluis sector of the Outer Rim. 
+The planet is covered in murky swamps, twisted vegetation, and is home to 
+many dangerous creatures. Yoda, the Jedi Master, chose Dagobah as his place 
+of exile following the fall of the Jedi Order in 19 BBY (depicted in 
+"Revenge of the Sith").
+
+During the Galactic Civil War, Luke Skywalker traveled to Dagobah in 3 ABY 
+to seek training from Yoda, crash-landing his X-Wing in the swamps (events 
+shown in "The Empire Strikes Back"). Luke returned briefly in 4 ABY before 
+Yoda's death ("Return of the Jedi").
+
+R2-D2 accompanied Luke on both visits. Yoda's simple dwelling, a small hut 
+near the crash site, served as Luke's training ground. The planet's dark 
+side cave is a focal point for Jedi trials.
+```
+
+#### Example Output JSON (Multi-Pronged)
+
+```json
+{
+  "dimensions": [
+    {
+      "type": "Location",
+      "name": "Dagobah",
+      "attributes": {
+        "location_type": "planet",
+        "sector": "Sluis sector",
+        "region": "Outer Rim",
+        "terrain": "swamp, wetland",
+        "notable_features": ["dark side cave", "Yoda's hut"]
+      },
+      "confidence": 1.0
+    },
+    {
+      "type": "PersonCharacter",
+      "name": "Yoda",
+      "attributes": {
+        "title": "Jedi Master",
+        "affiliation": "Jedi Order"
+      },
+      "confidence": 1.0
+    },
+    {
+      "type": "PersonCharacter",
+      "name": "Luke Skywalker",
+      "attributes": {
+        "affiliation": "Rebel Alliance",
+        "training": "Jedi apprentice"
+      },
+      "confidence": 1.0
+    },
+    {
+      "type": "Droid",
+      "name": "R2-D2",
+      "attributes": {
+        "model": "astromech"
+      },
+      "confidence": 1.0
+    },
+    {
+      "type": "VehicleCraft",
+      "name": "X-Wing",
+      "attributes": {
+        "vehicle_type": "starfighter"
+      },
+      "confidence": 0.95
+    },
+    {
+      "type": "LocationPlace",
+      "name": "Yoda's hut",
+      "attributes": {
+        "structure_type": "dwelling",
+        "location_context": "Dagobah swamp"
+      },
+      "confidence": 0.9
+    }
+  ],
+  "relationships": [
+    {
+      "from_entity": "Yoda",
+      "to_entity": "Dagobah",
+      "relation_type": "resided_in",
+      "start_date": "19 BBY",
+      "end_date": "4 ABY",
+      "work_context": ["Revenge of the Sith", "The Empire Strikes Back", "Return of the Jedi"],
+      "confidence": 1.0
+    },
+    {
+      "from_entity": "Luke Skywalker",
+      "to_entity": "Dagobah",
+      "relation_type": "visited_in",
+      "start_date": "3 ABY",
+      "end_date": "3 ABY",
+      "work_context": ["The Empire Strikes Back"],
+      "confidence": 1.0
+    },
+    {
+      "from_entity": "Luke Skywalker",
+      "to_entity": "Dagobah",
+      "relation_type": "visited_in",
+      "start_date": "4 ABY",
+      "end_date": "4 ABY",
+      "work_context": ["Return of the Jedi"],
+      "confidence": 1.0
+    },
+    {
+      "from_entity": "R2-D2",
+      "to_entity": "Dagobah",
+      "relation_type": "visited_in",
+      "start_date": "3 ABY",
+      "end_date": "4 ABY",
+      "work_context": ["The Empire Strikes Back", "Return of the Jedi"],
+      "confidence": 0.95
+    },
+    {
+      "from_entity": "Luke Skywalker",
+      "to_entity": "Yoda",
+      "relation_type": "trained_by",
+      "start_date": "3 ABY",
+      "end_date": "4 ABY",
+      "work_context": ["The Empire Strikes Back", "Return of the Jedi"],
+      "confidence": 1.0
+    },
+    {
+      "from_entity": "Luke Skywalker",
+      "to_entity": "R2-D2",
+      "relation_type": "accompanied_by",
+      "start_date": "3 ABY",
+      "end_date": "4 ABY",
+      "work_context": ["The Empire Strikes Back", "Return of the Jedi"],
+      "confidence": 0.95
+    },
+    {
+      "from_entity": "X-Wing",
+      "to_entity": "Dagobah",
+      "relation_type": "located_in",
+      "start_date": "3 ABY",
+      "end_date": null,
+      "work_context": ["The Empire Strikes Back"],
+      "notes": "crashed in swamp",
+      "confidence": 0.9
+    }
+  ],
+  "work_references": [
+    {
+      "work_name": "Revenge of the Sith",
+      "work_type": "film",
+      "context": "Yoda's exile to Dagobah depicted"
+    },
+    {
+      "work_name": "The Empire Strikes Back",
+      "work_type": "film",
+      "context": "Luke's training on Dagobah"
+    },
+    {
+      "work_name": "Return of the Jedi",
+      "work_type": "film",
+      "context": "Luke's return, Yoda's death"
+    }
+  ]
+}
+```
+
+**Key Observations:**
+- Multiple output families: Location dimension, Character dimensions, Droid dimension, Vehicle dimension, Structure dimension
+- Multiple relationship types: `resided_in`, `visited_in`, `trained_by`, `accompanied_by`, `located_in`
+- Time-scoped assertions: Most relationships include start/end dates or work-bounded ranges
+- Work context: Relationships tied to specific films/media
+- Confidence scoring: Varies based on explicitness of source text
+
+---
+
+### Example B: R2-D2 Ownership Over Time (Timeframe-Driven Relationships)
+
+**Context:** A wiki page about R2-D2's ownership history demonstrates how relationships change over time.
+
+#### Sample Raw Text Blob
+
+```
+R2-D2, an astromech droid manufactured by Industrial Automaton, has had 
+several owners throughout the Star Wars saga.
+
+Initially, R2-D2 served the Royal House of Naboo during the Trade Federation 
+blockade in 32 BBY ("The Phantom Menace"). After the Battle of Naboo, R2-D2 
+became the property of Padmé Amidala, serving her through the Clone Wars era 
+(22-19 BBY, depicted in "Attack of the Clones" and "Revenge of the Sith").
+
+Following Padmé's death in 19 BBY, R2-D2 came into the possession of Bail 
+Organa briefly before being assigned to Captain Raymus Antilles aboard the 
+Tantive IV. In 0 BBY, R2-D2 was entrusted to Princess Leia Organa with the 
+Death Star plans ("A New Hope").
+
+After the destruction of the first Death Star, R2-D2 became Luke Skywalker's 
+astromech droid, serving him from 0 BBY through the end of the Galactic 
+Civil War in 4 ABY ("The Empire Strikes Back", "Return of the Jedi"). 
+R2-D2 remained with Luke during the formation of the New Republic and the 
+Jedi Order's attempted revival.
+
+Note: Throughout these periods, C-3PO frequently accompanied R2-D2, though 
+C-3PO's ownership sometimes diverged.
+```
+
+#### Example Output JSON (Multi-Pronged, Time-Bounded)
+
+```json
+{
+  "dimensions": [
+    {
+      "type": "Droid",
+      "name": "R2-D2",
+      "attributes": {
+        "model": "astromech",
+        "manufacturer": "Industrial Automaton",
+        "designation": "R2-D2"
+      },
+      "confidence": 1.0
+    },
+    {
+      "type": "Organization",
+      "name": "Royal House of Naboo",
+      "attributes": {
+        "type": "government",
+        "planet": "Naboo"
+      },
+      "confidence": 0.95
+    },
+    {
+      "type": "PersonCharacter",
+      "name": "Padmé Amidala",
+      "attributes": {
+        "title": "Queen, Senator",
+        "affiliation": "Galactic Republic"
+      },
+      "confidence": 1.0
+    },
+    {
+      "type": "PersonCharacter",
+      "name": "Bail Organa",
+      "attributes": {
+        "title": "Senator",
+        "affiliation": "Rebel Alliance"
+      },
+      "confidence": 0.95
+    },
+    {
+      "type": "PersonCharacter",
+      "name": "Raymus Antilles",
+      "attributes": {
+        "title": "Captain",
+        "affiliation": "Rebel Alliance"
+      },
+      "confidence": 0.9
+    },
+    {
+      "type": "PersonCharacter",
+      "name": "Princess Leia Organa",
+      "attributes": {
+        "title": "Princess",
+        "affiliation": "Rebel Alliance"
+      },
+      "confidence": 1.0
+    },
+    {
+      "type": "PersonCharacter",
+      "name": "Luke Skywalker",
+      "attributes": {
+        "title": "Jedi Knight",
+        "affiliation": "Rebel Alliance"
+      },
+      "confidence": 1.0
+    },
+    {
+      "type": "Droid",
+      "name": "C-3PO",
+      "attributes": {
+        "model": "protocol droid"
+      },
+      "confidence": 0.95
+    }
+  ],
+  "relationships": [
+    {
+      "from_entity": "R2-D2",
+      "to_entity": "Royal House of Naboo",
+      "relation_type": "owned_by",
+      "start_date": "32 BBY",
+      "end_date": "32 BBY",
+      "work_context": ["The Phantom Menace"],
+      "notes": "During Trade Federation blockade",
+      "confidence": 0.95
+    },
+    {
+      "from_entity": "R2-D2",
+      "to_entity": "Padmé Amidala",
+      "relation_type": "owned_by",
+      "start_date": "32 BBY",
+      "end_date": "19 BBY",
+      "work_context": ["Attack of the Clones", "Revenge of the Sith"],
+      "notes": "Through Clone Wars era",
+      "confidence": 1.0
+    },
+    {
+      "from_entity": "R2-D2",
+      "to_entity": "Bail Organa",
+      "relation_type": "owned_by",
+      "start_date": "19 BBY",
+      "end_date": "19 BBY",
+      "work_context": ["Revenge of the Sith"],
+      "notes": "Briefly after Padmé's death",
+      "confidence": 0.9
+    },
+    {
+      "from_entity": "R2-D2",
+      "to_entity": "Raymus Antilles",
+      "relation_type": "assigned_to",
+      "start_date": "19 BBY",
+      "end_date": "0 BBY",
+      "work_context": ["A New Hope"],
+      "notes": "Aboard Tantive IV",
+      "confidence": 0.85
+    },
+    {
+      "from_entity": "R2-D2",
+      "to_entity": "Princess Leia Organa",
+      "relation_type": "entrusted_to",
+      "start_date": "0 BBY",
+      "end_date": "0 BBY",
+      "work_context": ["A New Hope"],
+      "notes": "Carrying Death Star plans",
+      "confidence": 1.0
+    },
+    {
+      "from_entity": "R2-D2",
+      "to_entity": "Luke Skywalker",
+      "relation_type": "owned_by",
+      "start_date": "0 BBY",
+      "end_date": null,
+      "work_context": ["A New Hope", "The Empire Strikes Back", "Return of the Jedi"],
+      "notes": "Astromech droid through Galactic Civil War and beyond",
+      "confidence": 1.0
+    },
+    {
+      "from_entity": "R2-D2",
+      "to_entity": "C-3PO",
+      "relation_type": "accompanied_by",
+      "start_date": "32 BBY",
+      "end_date": null,
+      "work_context": ["multiple"],
+      "notes": "Frequently together, ownership sometimes diverged",
+      "confidence": 0.9
+    }
+  ],
+  "work_references": [
+    {
+      "work_name": "The Phantom Menace",
+      "work_type": "film"
+    },
+    {
+      "work_name": "Attack of the Clones",
+      "work_type": "film"
+    },
+    {
+      "work_name": "Revenge of the Sith",
+      "work_type": "film"
+    },
+    {
+      "work_name": "A New Hope",
+      "work_type": "film"
+    },
+    {
+      "work_name": "The Empire Strikes Back",
+      "work_type": "film"
+    },
+    {
+      "work_name": "Return of the Jedi",
+      "work_type": "film"
+    }
+  ],
+  "temporal_notes": [
+    {
+      "entity": "R2-D2",
+      "assertion": "Ownership without timeframe is incomplete",
+      "explanation": "R2-D2 had multiple owners across different time periods and works. Each ownership relationship requires temporal bounds (start/end dates or work context) to be meaningful."
+    }
+  ]
+}
+```
+
+**Key Observations:**
+- **Time-bounded relationships are essential:** "R2-D2 owned_by Luke" without timeframe is incomplete and potentially misleading
+- Multiple relationship types: `owned_by`, `assigned_to`, `entrusted_to`, `accompanied_by`
+- Overlapping timeframes: Some relationships transition directly, others overlap
+- Work context provides additional temporal anchoring
+- `end_date: null` indicates ongoing or open-ended relationships
+- Confidence varies based on explicitness of ownership claims
+- Relationship type evolves: `owned_by` vs `assigned_to` vs `entrusted_to` reflects nuanced ownership semantics
+
+---
+
+**Examples Summary:**
+
+These examples demonstrate:
+1. **Multi-pronged output:** Dimensions (locations, characters, droids, vehicles) + Relationships (bridges) + Work references in single extraction
+2. **Time-scoped assertions:** Most relationships include temporal bounds (start/end dates or work-bounded ranges)
+3. **Extensible taxonomy:** Relationship types are open-ended strings (`resided_in`, `visited_in`, `trained_by`, `owned_by`, `entrusted_to`, etc.), not fixed enums
+4. **Work context anchoring:** Relationships tied to specific films/media provide additional temporal context
+5. **Incomplete without time:** Examples show that assertions like "Luke owned R2-D2" are meaningless without timeframe
+
+**Reminder:** These are **illustrative examples only**. Actual schemas, table structures, and contracts should be discovered from the repository (`db/migrations/`, `src/llm/contracts/`, etc.), not derived from these examples.
 
 ---
 
