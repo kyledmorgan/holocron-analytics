@@ -187,6 +187,20 @@ class JobTypeRegistry:
             tags=["extraction", "facts", "entities"],
         ))
         
+        # Register entity_extraction_droid job type (Phase 1)
+        self.register(JobTypeDefinition(
+            job_type="entity_extraction_droid",
+            display_name="Droid Entity Extraction",
+            interrogation_key="entity_extraction_droid_v1",
+            handler_ref="src.llm.handlers.entity_extraction_droid.handle",
+            max_attempts=3,
+            default_priority=100,
+            timeout_seconds=180,
+            version="1.0.0",
+            description="Extract droid entities from source text. Phase 1 pipeline for entity extraction.",
+            tags=["extraction", "entities", "droid", "phase1"],
+        ))
+        
         self._loaded = True
         logger.debug(f"Loaded {len(self._definitions)} built-in job type definitions")
 

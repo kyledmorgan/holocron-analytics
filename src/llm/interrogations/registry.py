@@ -123,6 +123,11 @@ class InterrogationRegistry:
         definition = create_page_classification_v1()
         self.register(definition)
         
+        # Register entity_extraction_droid_v1
+        from .definitions.entity_extraction_droid import create_entity_extraction_droid_v1
+        definition = create_entity_extraction_droid_v1()
+        self.register(definition)
+        
         self._loaded = True
         logger.debug(f"Loaded {len(self._definitions)} built-in interrogations")
 
