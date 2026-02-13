@@ -224,8 +224,8 @@ FEW_SHOT_EXAMPLES = [
 | 2.2 | Define relationship extraction contract | `src/llm/contracts/relationship_extraction_v1_output.json` |
 | 2.3 | Create relationship prompt template | `src/llm/interrogations/definitions/relationship_extraction.py` |
 | 2.4 | Create relationship insertion stored proc | `dbo.usp_batch_insert_entity_relations` accepting JSON array |
-| 2.5 | Create combined extraction handler | `src/llm/handlers/combined_extraction_handler.py` that processes entities + relationships in single transaction |
-| 2.6 | Register combined job type | Add `relationship_extraction` to job type registry |
+| 2.5 | Create relationship extraction handler | `src/llm/handlers/relationship_extraction.py` that validates and persists relationships |
+| 2.6 | Register relationship job type | Add `relationship_extraction` to job type registry |
 | 2.7 | End-to-end test | Extract entities + relationships from 5 pages, verify both tables populated |
 
 **Relationship Extraction Contract (v1) — Illustrative Example:**
