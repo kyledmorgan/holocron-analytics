@@ -218,15 +218,15 @@ FEW_SHOT_EXAMPLES = [
 
 #### Tasks
 
-| # | Task | Deliverable | Effort |
-|---|------|-------------|--------|
-| 2.1 | Create relationship tables | Migration `0025_create_relationship_bridges.sql` for `BridgeEntityRelation`, `DimEvent`, `BridgeEntityEvent`, `DimWork`, `BridgeEntityWork` | 2 days |
-| 2.2 | Define relationship extraction contract | `src/llm/contracts/relationship_extraction_v1_schema.json` | 1 day |
-| 2.3 | Create relationship prompt template | `src/llm/prompts/relationship_extraction.py` | 2 days |
-| 2.4 | Create relationship insertion stored proc | `dbo.usp_batch_insert_entity_relations` accepting JSON array | 1 day |
-| 2.5 | Create combined extraction handler | `src/llm/handlers/combined_extraction_handler.py` that processes entities + relationships in single transaction | 2 days |
-| 2.6 | Register combined job type | Add `entity_and_relationship_extraction` to job type registry | 0.5 day |
-| 2.7 | End-to-end test | Extract entities + relationships from 5 pages, verify both tables populated | 1 day |
+| # | Task | Deliverable |
+|---|------|-------------|
+| 2.1 | Create relationship tables | Migration `0027_create_relationship_bridges.sql` for `BridgeEntityRelation`, `DimEvent`, `BridgeEntityEvent`, `DimWork`, `BridgeEntityWork` |
+| 2.2 | Define relationship extraction contract | `src/llm/contracts/relationship_extraction_v1_output.json` |
+| 2.3 | Create relationship prompt template | `src/llm/interrogations/definitions/relationship_extraction.py` |
+| 2.4 | Create relationship insertion stored proc | `dbo.usp_batch_insert_entity_relations` accepting JSON array |
+| 2.5 | Create combined extraction handler | `src/llm/handlers/combined_extraction_handler.py` that processes entities + relationships in single transaction |
+| 2.6 | Register combined job type | Add `relationship_extraction` to job type registry |
+| 2.7 | End-to-end test | Extract entities + relationships from 5 pages, verify both tables populated |
 
 **Relationship Extraction Contract (v1) — Illustrative Example:**
 ```json

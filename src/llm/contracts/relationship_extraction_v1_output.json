@@ -1,0 +1,123 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://holocron-analytics.local/schemas/llm/relationship-extraction/v1",
+  "title": "Relationship Extraction V1 Output",
+  "description": "Output schema for relationship extraction jobs. Extracts relationships between entities from source text. Supports time-bounded assertions and work context anchoring.",
+  "version": "1.0.0",
+  "type": "object",
+  "required": ["relationships"],
+  "properties": {
+    "relationships": {
+      "type": "array",
+      "description": "Array of extracted relationships between entities",
+      "items": {
+        "type": "object",
+        "required": ["from_entity", "to_entity", "relation_type", "confidence"],
+        "properties": {
+          "from_entity": {
+            "type": "string",
+            "maxLength": 500,
+            "description": "Name or identifier of the source entity in the relationship"
+          },
+          "to_entity": {
+            "type": "string",
+            "maxLength": 500,
+            "description": "Name or identifier of the target entity in the relationship"
+          },
+          "relation_type": {
+            "type": "string",
+            "maxLength": 100,
+            "description": "Type of relationship. Open-ended string taxonomy (not enum). Examples: owned_by, member_of, ally_of, enemy_of, created_by, located_in, participated_in, trained_by, companion_of, appeared_in, served, manufactured_by, etc."
+          },
+          "start_date": {
+            "type": ["string", "null"],
+            "maxLength": 100,
+            "description": "Start date/era of the relationship (if known). Accepts fuzzy dates like '22 BBY', 'Clone Wars era', 'approximately 0 BBY'."
+          },
+          "end_date": {
+            "type": ["string", "null"],
+            "maxLength": 100,
+            "description": "End date/era of the relationship (if known). Accepts fuzzy dates."
+          },
+          "work_context": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "maxLength": 500
+            },
+            "description": "Optional array of works/media where this relationship is depicted or mentioned (e.g., ['A New Hope', 'The Empire Strikes Back'])"
+          },
+          "confidence": {
+            "type": "number",
+            "minimum": 0.0,
+            "maximum": 1.0,
+            "description": "Confidence score: 1.0 = explicitly stated, 0.7-0.9 = strongly implied, 0.4-0.6 = weakly implied, <0.4 = uncertain"
+          },
+          "evidence_quote": {
+            "type": ["string", "null"],
+            "description": "Direct quote from source text supporting this relationship (for provenance)"
+          },
+          "bidirectional": {
+            "type": "boolean",
+            "default": false,
+            "description": "If true, the relationship is bidirectional (applies in both directions)"
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "entities_referenced": {
+      "type": "array",
+      "description": "Optional: List of entities referenced in relationships that may need resolution",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "maxLength": 500,
+            "description": "Entity name as referenced in relationships"
+          },
+          "type": {
+            "type": ["string", "null"],
+            "description": "Entity type if known (e.g., 'Droid', 'PersonCharacter')"
+          },
+          "confidence": {
+            "type": "number",
+            "minimum": 0.0,
+            "maximum": 1.0,
+            "description": "Confidence that this entity exists"
+          }
+        },
+        "required": ["name"]
+      }
+    },
+    "extraction_metadata": {
+      "type": "object",
+      "description": "Metadata about the extraction process",
+      "properties": {
+        "source_page_title": {
+          "type": ["string", "null"],
+          "description": "Title of the source page/document"
+        },
+        "total_relationships_found": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Total number of relationships extracted"
+        },
+        "relationship_types_found": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "List of unique relationship types found"
+        },
+        "extraction_notes": {
+          "type": ["string", "null"],
+          "description": "Notes about the extraction process, ambiguities, or assumptions"
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

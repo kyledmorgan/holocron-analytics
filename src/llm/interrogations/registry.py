@@ -128,6 +128,11 @@ class InterrogationRegistry:
         definition = create_entity_extraction_droid_v1()
         self.register(definition)
         
+        # Register relationship_extraction_v1 (Phase 2)
+        from .definitions.relationship_extraction import create_relationship_extraction_v1
+        definition = create_relationship_extraction_v1()
+        self.register(definition)
+        
         self._loaded = True
         logger.debug(f"Loaded {len(self._definitions)} built-in interrogations")
 

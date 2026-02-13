@@ -201,6 +201,20 @@ class JobTypeRegistry:
             tags=["extraction", "entities", "droid", "phase1"],
         ))
         
+        # Register relationship_extraction job type (Phase 2)
+        self.register(JobTypeDefinition(
+            job_type="relationship_extraction",
+            display_name="Relationship Extraction",
+            interrogation_key="relationship_extraction_v1",
+            handler_ref="src.llm.handlers.relationship_extraction.handle",
+            max_attempts=3,
+            default_priority=100,
+            timeout_seconds=180,
+            version="1.0.0",
+            description="Extract entity relationships from source text. Phase 2 pipeline for multi-output routing.",
+            tags=["extraction", "relationships", "phase2"],
+        ))
+        
         self._loaded = True
         logger.debug(f"Loaded {len(self._definitions)} built-in job type definitions")
 
