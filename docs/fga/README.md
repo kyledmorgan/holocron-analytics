@@ -62,13 +62,13 @@ This directory contains a complete Functional Gap Analysis (FGA) for the Holocro
 **Purpose:** Compare current capabilities vs LLM expansion pipeline requirements  
 **Contents:**
 - Gap analysis for 9 capability areas:
-  1. Work queue reuse for LLM jobs
-  2. LLM contract definition (input/output)
-  3. Chunking strategy + traceability
-  4. Multi-entity extraction + dedupe/identity resolution
-  5. Relationship/bridge creation patterns
-  6. Stored procedure routing from JSON payload
-  7. Observability (logging, metrics, run history)
+  1. Universal work queue for multiple job types (multi-tenant, concurrent processing)
+  2. LLM contracts: broad multi-pronged knowledge extraction (not limited to examples)
+  3. LLM context chunking & dynamic budgeting (reusable strategy, independent of vector)
+  4. Multi-entity extraction + best-effort dedupe (tolerate duplicates in early phases)
+  5. Relationship/bridge creation: broad taxonomy with extensibility (not fixed enums)
+  6. Stored procedure routing with transactional dependency resolution
+  7. Observability: structured logging and artifact tracking (Prometheus deferred to future)
   8. Idempotency + re-runs + backfills
   9. Governance (confidence scoring, human review hooks)
 - Impact assessment (High/Medium/Low)
@@ -84,17 +84,23 @@ This directory contains a complete Functional Gap Analysis (FGA) for the Holocro
 **Purpose:** Phased implementation roadmap with milestones and success criteria  
 **Contents:**
 - **Phase 0:** Minimal scaffolding (job type registry, structured logging, dry-run mode) — 3-5 days
-- **Phase 1:** One contract end-to-end (droid entity extraction) — 1-2 weeks
+- **Phase 1:** One contract end-to-end (entity extraction with flexible types) — 1-2 weeks
 - **Phase 2:** Relationships + multi-output routing — 2-3 weeks
 - **Phase 3:** Broader coverage + automated backfill — 3-4 weeks
 - **Long-term roadmap:** Phases 4-7 (governance UI, vector retrieval, event/work extraction, CI/CD)
-- Explicit decision points with recommendations (JSON schema design, chunking strategy, identity resolution, stored procedure design, priority escalation)
+- Explicit decision points with recommendations:
+  - JSON schema design (hybrid approach)
+  - LLM context chunking & dynamic budgeting (not vector-specific)
+  - Identity resolution (best-effort approach)
+  - Stored procedure design (many specific procs)
+  - Priority escalation (CLI + automated SLA)
 - Success metrics per phase
 - Risk mitigation plan
 - Rollback plan per phase
+- **Illustrative examples:** Dagobah (location-centric) and R2-D2 ownership (time-bounded relationships)
 - Example queries for validation
 
-**Key Output:** Actionable, incremental implementation plan with clear milestones.
+**Key Output:** Actionable, incremental implementation plan with clear milestones and rich examples.
 
 ---
 
@@ -136,11 +142,11 @@ This directory contains a complete Functional Gap Analysis (FGA) for the Holocro
 - **Docker Compose orchestration** for local development
 
 ### ❌ What's Missing (Gaps)
-- **Multi-entity extraction:** No support for extracting N entities from single source
-- **Relationship/bridge creation:** No entity-entity, entity-event, or entity-work bridges populated
-- **Stored procedure routing:** No stored procedures that accept JSON payloads and route to multiple tables
-- **Chunking pipeline:** No production chunking (only stubs in vector schema)
-- **Identity resolution:** No entity deduplication or merge logic
+- **Multi-entity extraction:** No support for extracting N entities from single source; contracts should support multi-pronged outputs (dimensions + facts + bridges)
+- **Relationship/bridge creation:** No entity-entity, entity-event, or entity-work bridges; taxonomy should be extensible, not fixed enums
+- **Stored procedure routing:** No stored procedures with dependency ordering (resolve IDs, insert dimensions first, then bridges)
+- **LLM context chunking:** No dynamic budgeting for chunking (strategy needed for reliable LLM extraction, independent of vector use)
+- **Best-effort dedupe:** Early phases tolerate duplicates; future dedupe audit capabilities needed
 - **Human review UI:** No web UI or CLI tool for reviewing flagged pages
 - **Backfill tooling:** No bulk re-processing or priority escalation utilities
 
@@ -177,6 +183,7 @@ Take an **Entity/Page** + **Source Page ID** + **raw content** (possibly chunked
 | Date | Change | Author |
 |------|--------|--------|
 | 2026-02-12 | Initial FGA documentation created (5 documents, 3,500 lines) | GitHub Copilot Agent |
+| 2026-02-13 | Refinement: Universal queue model, broad contracts, LLM context chunking, best-effort dedupe, extensible relationships, dependency ordering, and illustrative examples added | GitHub Copilot Agent |
 
 ---
 

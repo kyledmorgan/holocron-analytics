@@ -39,7 +39,7 @@ This document analyzes the gap between **what exists today** and **what's needed
 
 ## Detailed Gap Analysis
 
-### 1. Work Queue Reuse for LLM Jobs
+### 1. Universal Work Queue for Multiple Job Types
 
 #### Current State
 
@@ -57,26 +57,48 @@ This document analyzes the gap between **what exists today** and **what's needed
 #### Gap
 
 ❌ **Missing:**
-- **Job Type Extensibility:** Current system supports `page_classification` job type. Need formalized approach for adding new job types (e.g., `entity_extraction`, `relationship_extraction`, `entity_merge`)
+- **Universal Multi-Tenant Queue:** Current queue supports multiple job types but is not explicitly designed as a universal backlog where:
+  - Multiple job types coexist in the same queue simultaneously
+  - Multiple runners/contexts can pull different job types concurrently
+  - Operators can bump priorities to pull specific jobs into "current batch"
+  - Each job type has its own contract and handler path for routing and persistence
 - **Job Routing Logic:** No dispatcher that routes job types to appropriate prompt templates and output handlers
-- **Job Priority Management:** Priority column exists but not actively used (no utility to escalate priority, no SLA-based auto-escalation)
+- **Flexible Priority Management:** Priority column exists but not actively used for:
+  - Dynamic priority bumping (operators elevating specific jobs)
+  - Batch selection (pulling high-priority jobs into immediate processing)
+  - Runner dispatching (different runners processing different job types)
 
 #### Impact
 
-**Medium** — Can enqueue new job types manually, but no structured framework for adding new LLM operations
+**Medium** — Can enqueue new job types manually, but no structured framework for managing a universal multi-job-type backlog
 
 #### Recommended Solution
 
-- **Create Job Type Registry:** `src/llm/jobs/registry.py` with job type definitions, prompt templates, output schemas, and handlers
-- **Implement Dispatcher:** `src/llm/runners/dispatcher.py` that routes job types to handlers
-- **Add Priority Utilities:** `src/llm/utils/priority.py` with functions to bump priority, SLA checks, and auto-escalation
+- **Clarify Queue Model as Universal Backlog:** Document that `llm.job` is a **multi-tenant, multi-job-type** queue where:
+  - Jobs of many types (entity extraction, relationship extraction, dedupe, classification, etc.) exist simultaneously
+  - Runners can filter by job type or process mixed types
+  - Priority is used to control batch selection and processing order
+  - Each job type defines its own contract (input/output schemas) and routing path
+- **Create Job Type Registry:** `src/llm/jobs/registry.py` with job type definitions mapping to:
+  - Prompt templates
+  - Input/output schemas (contracts)
+  - Handler functions for persistence routing
+  - Default priority levels
+- **Implement Dispatcher:** `src/llm/runners/dispatcher.py` that:
+  - Claims jobs from queue (optionally filtered by job type)
+  - Routes to appropriate handler based on job type
+  - Supports concurrent runners processing different job types
+- **Add Priority Management Utilities:** `src/llm/utils/priority.py` with functions to:
+  - Bump priority for specific job types or source patterns
+  - Select batches based on priority thresholds
+  - Auto-escalate based on SLA (time in queue)
 
 **Effort:** Small (S)  
 **Dependencies:** None
 
 ---
 
-### 2. LLM Contract Definition (Input/Output)
+### 2. LLM Contracts: Broad Multi-Pronged Knowledge Extraction
 
 #### Current State
 
@@ -95,37 +117,61 @@ This document analyzes the gap between **what exists today** and **what's needed
 #### Gap
 
 ❌ **Missing:**
-- **Multi-Entity Extraction Contract:** No schema for extracting N entities from single source
-  - Example need: "List of Jedi" page → extract 50 PersonCharacter entities
-  - Required fields: Entity name, type, confidence, extracted attributes (e.g., species, homeworld)
-- **Relationship Extraction Contract:** No schema for entity-entity relationships
-  - Example need: "Luke Skywalker is a member of Rebel Alliance"
-  - Required fields: From entity, to entity, relationship type, temporal bounds (start/end date), confidence
-- **Entity Merge Contract:** No schema for resolving duplicate entities
-  - Example need: "Luke Skywalker" (entity_id=123) is same as "Luke Skywalker/Legends" (entity_id=456)
-  - Required fields: Master entity ID, duplicate entity IDs, merge reason, confidence
-- **Event/Work Extraction Contracts:** No schemas for extracting events or works
+- **Multi-Pronged Knowledge Extraction Contracts:** Current contracts limited to classification. Need contracts that extract **multiple output families** from a single source:
+  - **Dimensions:** Entities, events, works, locations, time periods, concepts (not limited to the enumerated examples)
+  - **Facts:** Assertions, measurements, attributes, descriptors, time-scoped states
+  - **Bridges:** Relationships, associations, participation, ownership, appearance, membership, location linkages
+  - **Time-Bounded Assertions:** Relationships or facts that are valid only within specific timeframes or work contexts
+  - **Future Extensibility:** New dimension/fact/bridge types can be introduced (e.g., appearance descriptors, costume details, visual characteristics)
+  
+- **Flexible Entity Representation:** Extracted entities from pages may not be permanent canonical entities. They may represent:
+  - Timeframes or periods
+  - Events or occurrences
+  - Continuity branches or alternative timelines
+  - Appearances or manifestations
+  - Facts or assertions about entities
+  - Transient relationships
+  
+- **Example Contracts Missing:**
+  - Multi-entity extraction (N entities from one source)
+  - Relationship extraction (entity↔entity, entity↔event, entity↔work, entity↔location, entity↔timeline)
+  - Entity dedupe/merge (identifying duplicates)
+  - Event extraction with participants
+  - Work extraction with appearances
+  
+**Important:** Contract universe is **not limited** to specific entity types (Droid, PersonCharacter, etc.) or relationship types. Examples are illustrative only; actual contracts should support extensibility and evolving taxonomies.
 
 #### Impact
 
-**High** — Cannot implement multi-entity or relationship extraction without defined contracts
+**High** — Cannot implement multi-pronged knowledge extraction without broadly-defined contracts
 
 #### Recommended Solution
 
-- **Create Multi-Entity Contract:** `src/llm/contracts/entity_extraction_v1_schema.json`
-  - Output: Array of `EntityRecord` with `name`, `type`, `confidence`, `attributes` (JSON)
-- **Create Relationship Contract:** `src/llm/contracts/relationship_extraction_v1_schema.json`
-  - Output: Array of `RelationshipRecord` with `from_entity`, `to_entity`, `relation_type`, `confidence`
-- **Create Merge Contract:** `src/llm/contracts/entity_merge_v1_schema.json`
-  - Output: `MergeDecision` with `master_entity_id`, `duplicate_entity_ids`, `merge_reason`
+- **Create Flexible Multi-Entity Contract:** `src/llm/contracts/entity_extraction_v1_schema.json`
+  - Output: Array of extracted knowledge items
+  - Each item: `name`, `type` (extensible, not enum), `confidence`, `attributes` (flexible JSON)
+  - Support for multiple output types in single extraction (dimensions + facts + bridges)
+  
+- **Create Broad Relationship Contract:** `src/llm/contracts/relationship_extraction_v1_schema.json`
+  - Output: Array of relationship assertions
+  - Relationship taxonomy evolves; examples only (not fixed enums)
+  - Types include but not limited to: associations, participation, location, membership, ownership, appearance, time-bounded states
+  - Support for temporal bounds (start/end or work-bounded)
+  
+- **Create Dedupe Contract:** `src/llm/contracts/entity_dedupe_v1_schema.json`
+  - Output: Dedupe decisions for best-effort matching
+  - Used for future "dedupe audit" capabilities
+  
 - **Versioning Strategy:** Use MAJOR.MINOR.PATCH versioning for all contracts (e.g., `entity_extraction_v1.0.0`)
 
+**Key Principle:** Contracts enable multiple output families (dimensions + facts + bridges + attributes + time-scoped assertions), not just "list of entities." Future schemas may target any table structure.
+
 **Effort:** Medium (M)  
-**Dependencies:** Job Type Registry (#1)
+**Dependencies:** Universal Queue Model (#1)
 
 ---
 
-### 3. Chunking Strategy + Traceability
+### 3. LLM Context Chunking & Dynamic Budgeting Strategy
 
 #### Current State
 
@@ -136,7 +182,13 @@ This document analyzes the gap between **what exists today** and **what's needed
 
 ❌ **Missing:**
 - **Production Chunking Pipeline:** No active runner that chunks sources and writes to `vector.chunk`
-- **Chunking Strategy Configuration:** No configurable chunk size, overlap, or boundary detection (e.g., sentence boundaries, paragraph boundaries)
+- **LLM Context Management:** No chunking strategy specifically for LLM calls (independent of vector use cases)
+- **Dynamic Budget Calculation:** No logic to:
+  - Estimate tokens available for content given model context window
+  - Account for overhead (system prompt + contract + JSON output envelope)
+  - Reserve safety buffer for model output
+  - Choose chunk sizes + overlap dynamically
+  - Degrade gracefully when model context is smaller
 - **Traceability Back to Source:** `vector.chunk` has `source_registry_id` FK, but no direct link to `ingest.IngestRecords` or `sem.SourcePage`
 
 **Evidence:**
@@ -146,35 +198,104 @@ This document analyzes the gap between **what exists today** and **what's needed
 #### Gap
 
 ❌ **Missing:**
-- **Chunker Module:** No `src/vector/chunker.py` with configurable chunking strategies (fixed-size, sentence-based, semantic)
-- **Chunk Job Type:** No `vector.job` with `job_type = 'CHUNK_SOURCE'` actively enqueued
-- **Chunk-to-Source Linking:** No clear linkage from chunk back to original `ingest.IngestRecords.ingest_id`
+
+**Primary Gap: LLM Context Chunking is needed for LLM calls, not primarily for vector search.**
+
+Chunking is required **regardless of vector search** because:
+- LLM calls have context window limits (measured in tokens)
+- Reliable extraction requires fitting: content + system prompt + contract + output space
+- Even with large context windows (128K+), chunking improves:
+  - Reliability (smaller chunks = more predictable outputs)
+  - Traceability (linking outputs to specific chunks)
+  - Repeatability (re-running chunks independently)
+
+**Specific Missing Capabilities:**
+- **Dynamic Budgeting Logic:** Calculate available tokens for content:
+  - Total model context window (e.g., 128K tokens)
+  - Minus: System prompt tokens (~500-2000)
+  - Minus: Contract/schema overhead (~200-500)
+  - Minus: Output buffer (reserve ~2000-4000 for JSON response)
+  - Minus: Safety margin (~10-20% of total)
+  - Remaining: Available for content chunks
+  
+- **Reusable Chunker Module:** No `src/llm/chunker.py` (or `src/vector/chunker.py`) with:
+  - Token estimation from text length (rough heuristic: ~4 chars/token)
+  - Configurable chunk sizes based on available budget
+  - Overlap configuration to prevent information loss at boundaries
+  - Sentence-boundary awareness (avoid mid-sentence cuts)
+  - Paragraph-boundary awareness (for semantic coherence)
+  
+- **Chunking Policy Configuration:**
+  ```yaml
+  chunking:
+    strategy: sentence_boundary_fixed
+    max_tokens: 8000           # Per chunk
+    overlap_tokens: 1000       # Overlap between chunks
+    min_chunk_tokens: 2000     # Minimum viable chunk
+    estimate_chars_per_token: 4
+  ```
+  
+- **Chunk-to-Source Linking:** No clear linkage from chunk back to original source for audit trail
+
+**Important:** Vector tables (`vector.chunk`, `vector.embedding`) exist for embedding/retrieval use cases, but LLM context chunking is a **general strategy** for any unstructured/semi-structured source. Chunking should not be framed as vector-specific in Phase 0-2.
 
 #### Impact
 
-**Medium** — Cannot use chunking for LLM evidence assembly or vector retrieval without production pipeline
+**High** — Cannot reliably process long sources with LLM without chunking and dynamic budgeting
 
 #### Recommended Solution
 
-- **Implement Chunker:** `src/vector/chunker.py` with:
-  - Fixed-size chunking (e.g., 1000 tokens with 200-token overlap)
+**Phase 1: Create LLM Context Chunking Module**
+- **Implement Chunker:** `src/llm/chunker.py` (or `src/vector/chunker.py` if shared) with:
+  - `chunk_for_llm_context()` function
+  - Dynamic budget calculation based on model context window
+  - Token estimation (chars → tokens heuristic)
   - Sentence-boundary-aware chunking
   - Configurable via `ChunkingPolicy` dataclass
-- **Create Chunk Runner:** `src/vector/runners/chunk_runner.py` that:
+  
+**Phase 2: Add Budgeting Logic**
+- **Budget Calculator:** `calculate_available_tokens(model_context_window, system_prompt_len, contract_len, output_buffer, safety_margin)`
+- **Example:**
+  ```python
+  model_window = 128000  # tokens
+  system_prompt = 1500
+  contract_overhead = 300
+  output_buffer = 3000
+  safety_margin = int(model_window * 0.15)  # 15%
+  
+  available = model_window - system_prompt - contract_overhead - output_buffer - safety_margin
+  # Result: ~103,700 tokens available for content
+  
+  chunk_size = min(available, 8000)  # Cap at 8K for reliability
+  overlap = 1000
+  ```
+
+**Phase 3: Integrate with Runners**
+- **Modify LLM Runners:** When processing long sources:
+  - Estimate source token count
+  - If exceeds budget, chunk source
+  - Process each chunk independently or with overlap
+  - Aggregate outputs (if applicable)
+  
+- **Chunk Runner (Optional):** `src/vector/runners/chunk_runner.py` for pre-chunking sources:
   - Dequeues `vector.job` with `job_type = 'CHUNK_SOURCE'`
-  - Loads source content from `ingest.IngestRecords` or lake
+  - Loads source content
   - Chunks content and writes to `vector.chunk`
   - Updates `vector.source_registry` status
-- **Add Source Traceability:** Extend `vector.chunk` with:
-  - `source_page_id` FK to `sem.SourcePage` (for page sources)
-  - `ingest_record_id` FK to `ingest.IngestRecords` (for raw HTTP sources)
+  
+**Phase 4: Source Traceability**
+- **Extend `vector.chunk`:** Add FK columns:
+  - `source_page_id` → `sem.SourcePage` (for page sources)
+  - `ingest_record_id` → `ingest.IngestRecords` (for raw HTTP sources)
+
+**Note:** Chunking strategy is reusable for any unstructured/semi-structured source, not just for vector retrieval. Vector tables are acknowledged but not the primary driver in early phases.
 
 **Effort:** Medium (M)  
 **Dependencies:** None
 
 ---
 
-### 4. Multi-Entity Extraction + Dedupe/Identity Resolution
+### 4. Multi-Entity Extraction + Best-Effort Dedupe/Identity Resolution
 
 #### Current State
 
@@ -194,19 +315,33 @@ This document analyzes the gap between **what exists today** and **what's needed
 #### Gap
 
 ❌ **Missing:**
+
+**Multi-Entity Extraction:**
 - **Batch Entity Insertion:** No stored procedure or utility to insert N entities in single transaction
-- **Dedupe Strategy:** No algorithm for:
-  - Exact match (case-insensitive name comparison)
-  - Fuzzy match (Levenshtein distance, phonetic matching)
-  - LLM-based identity resolution (call LLM to decide if "Luke Skywalker" == "Luke Skywalker (Jedi)")
-- **Merge Workflow:** No code to:
-  - Identify duplicate entity candidates
-  - Enqueue merge jobs for LLM adjudication
-  - Execute merge (update FKs, mark merged entity as suppressed)
+- **Extraction Pipeline:** No runner that processes "list" or "collection" pages to extract multiple entities
+
+**Identity Resolution (Best-Effort Approach):**
+
+**Important:** Preventing all duplicates is **not a hard requirement** in early phases. Strategy is best-effort:
+- Use **exact match** (case-insensitive name comparison)
+- Use **simple fuzzy match** (Levenshtein distance, phonetic matching)
+- **Tolerate some duplicates** in early data
+- Plan for **future dedupe audit capabilities:** LLM contracts can mine the database for duplicates and optionally relate or suppress/purge redundant records
+
+Current gaps:
+- No algorithm for exact match (case-insensitive name comparison)
+- No fuzzy match (Levenshtein distance, phonetic matching)
+- No LLM-based identity resolution (for ambiguous cases in future phases)
+- No "dedupe audit" job type or workflow
+
+**Merge Workflow (Future Phase):**
+- No code to identify duplicate entity candidates
+- No ability to enqueue merge jobs for LLM adjudication
+- No execution logic to merge entities (update FKs, mark merged entity as suppressed)
 
 #### Impact
 
-**High** — Cannot build "List of X" extraction pipeline without multi-entity support and dedupe
+**High** — Cannot build "List of X" extraction pipeline without multi-entity support; duplicates will exist but are acceptable in early phases
 
 #### Recommended Solution
 
@@ -215,26 +350,34 @@ This document analyzes the gap between **what exists today** and **what's needed
   - Input: JSON array of `EntityRecord` (name, type, attributes, source_page_id, llm_run_id)
   - Output: Array of inserted `EntityID` values
   - Logic: Insert N entities in single transaction, set `PromotionState = 'staged'`
+  - Apply best-effort dedupe: check for exact name match before insert, skip if exists
 - **Create Entity Writer:** `src/semantic/entity_writer.py` that calls stored procedure
 
-**Phase 2: Identity Resolution**
+**Phase 2: Best-Effort Identity Resolution**
 - **Exact Match:** Query `DimEntity` for exact name match (case-insensitive)
-- **Fuzzy Match:** Use Python `difflib` or `fuzzywuzzy` for Levenshtein distance
-- **LLM Adjudication:** If fuzzy match score 0.7-0.9, enqueue LLM job with contract:
-  - Input: Candidate entity names, attributes
-  - Output: `MergeDecision` (same_entity=true/false, confidence)
+  - If match found, reuse existing entity ID
+- **Simple Fuzzy Match:** Use Python `difflib` or `fuzzywuzzy` for Levenshtein distance
+  - If high-confidence fuzzy match (>0.95), reuse existing entity ID
+  - If low-confidence match (<0.95), create new entity (tolerate duplicate)
+- **No Hard Blocking:** Do not block insertion on ambiguous matches; allow duplicates
 
-**Phase 3: Merge Execution**
-- **Create Merge Stored Procedure:** `dbo.usp_merge_entities`
+**Phase 3: Future Dedupe Audit (Post Phase 0-2)**
+- **LLM Dedupe Contract:** Create contract for LLM to adjudicate duplicates
+  - Input: Candidate entity names, attributes, source contexts
+  - Output: `MergeDecision` (same_entity=true/false, confidence)
+- **Dedupe Audit Job Type:** Job that scans `DimEntity` for potential duplicates and enqueues LLM jobs
+- **Merge Execution:** `dbo.usp_merge_entities` (when ready)
   - Input: Master entity ID, duplicate entity IDs
   - Logic: Update all FKs to point to master, set duplicates to `PromotionState = 'merged'`
 
+**Key Principle:** Early phases use best-effort strategies to minimize obvious duplicates. Deeper identity resolution and merge capabilities are planned for future phases, not requirements for Phase 0-2.
+
 **Effort:** Large (L)  
-**Dependencies:** Multi-Entity Contract (#2), Stored Procedure Routing (#6)
+**Dependencies:** Multi-Pronged Contracts (#2), Stored Procedure Routing (#6)
 
 ---
 
-### 5. Relationship/Bridge Creation Patterns
+### 5. Relationship/Bridge Creation: Broad Taxonomy with Extensibility
 
 #### Current State
 
@@ -253,41 +396,86 @@ This document analyzes the gap between **what exists today** and **what's needed
 #### Gap
 
 ❌ **Missing:**
-- **Relationship Tables:** See "Missing Relationships" section in `02-data-model-map.md`
-- **Relationship Insertion Logic:** No stored procedures or utilities to insert relationships
-- **Relationship Extraction Runner:** No LLM runner that extracts relationships from text
+
+**Relationship Tables and Broad Taxonomy:**
+
+Current gaps assume fixed, enumerated relationship types. Need to generalize:
+
+- **Relationship Taxonomy Evolves:** Examples provided are illustrative only, not exhaustive or prescriptive
+- **Relationship types are broad and extensible:**
+  - Associations (general connections, affiliations)
+  - Participation (involved in events, works, organizations)
+  - Location (resided in, visited, stationed at, native to)
+  - Membership (member of organization, group, faction)
+  - Ownership (owned by, possessed by, commanded by)
+  - Appearance (appeared in work, depicted in source)
+  - Time-bounded states (relationships valid only within specific timeframes or work contexts)
+  - Family/kinship (parent, child, sibling, descendant)
+  - Creation/authorship (created by, designed by, commissioned by)
+  - Many more types as domain knowledge expands
+
+- **Relationship extraction can target any schema** and produce **multiple bridge rows:**
+  - Entity ↔ Entity (person-person, person-droid, person-organization, etc.)
+  - Entity ↔ Event (participated in battle, present at treaty signing)
+  - Entity ↔ Work (appeared in film, mentioned in novel)
+  - Entity ↔ Location (visited planet, stationed at base)
+  - Entity ↔ Timeline (existed during era, active in period)
+  - Future bridge types as new dimensions are introduced
+
+- **Time-Scoped Assertions:** Many relationships are not static:
+  - "Luke owned R2-D2 from [A New Hope] to [The Last Jedi]"
+  - "Anakin was a member of the Jedi Order from [The Phantom Menace] to [Revenge of the Sith]"
+  - Bridges should support start/end dates or work-bounded ranges
+
+**Specific Missing Infrastructure:**
+- No tables for relationships
+- No stored procedures or utilities to insert relationships
+- No LLM runner that extracts relationships from text
+- No extraction contract for relationship taxonomy
 
 #### Impact
 
-**High** — Cannot capture entity relationships, events, or work appearances without these tables
+**High** — Cannot capture entity relationships, events, or work appearances without these tables and broad relationship support
 
 #### Recommended Solution
 
-**Phase 1: Create Tables**
+**Phase 1: Create Extensible Relationship Tables**
 - **Migration:** `db/migrations/0025_create_relationship_bridges.sql`
-  - `dbo.BridgeEntityRelation` (FromEntityID, ToEntityID, RelationType, StartDate, EndDate, Confidence, SourceLLMRunID)
+  - `dbo.BridgeEntityRelation` (FromEntityID, ToEntityID, RelationType [varchar, not enum], StartDate, EndDate, WorkContext, Confidence, SourceLLMRunID)
+    - **RelationType is open-ended string**, not fixed enum, to support evolving taxonomy
   - `dbo.DimEvent` (EventID, EventName, EventType, EventDate, EventLocation, EventDescription)
-  - `dbo.BridgeEntityEvent` (EntityID, EventID, ParticipationRole, Confidence)
+  - `dbo.BridgeEntityEvent` (EntityID, EventID, ParticipationRole [open string], StartDate, EndDate, Confidence)
   - `dbo.DimWork` (WorkID, WorkName, WorkType, ReleaseDate, CanonStatus)
-  - `dbo.BridgeEntityWork` (EntityID, WorkID, AppearanceType, Confidence)
+  - `dbo.BridgeEntityWork` (EntityID, WorkID, AppearanceType [open string], Confidence)
+  - `dbo.BridgeEntityLocation` (EntityID, LocationID, LocationRole, StartDate, EndDate, Confidence)
+  - Future bridge tables as needed (entity-timeline, entity-concept, etc.)
 
 **Phase 2: Create Insertion Stored Procedures**
 - `dbo.usp_insert_entity_relation` (single relationship)
 - `dbo.usp_batch_insert_entity_relations` (N relationships from JSON array)
 - `dbo.usp_insert_entity_event` (entity-event linkage)
+- `dbo.usp_insert_entity_work` (entity-work appearance)
+- Procedures should accept open-ended `RelationType` or `Role` strings, not validate against fixed enums
 
 **Phase 3: Create Extraction Runner**
 - **Job Type:** `relationship_extraction`
 - **Contract:** Input = source_page_id, Output = Array of RelationshipRecord
+  - Relationship type is open string (examples: "owned_by", "visited_in", "trained_by", "appeared_in", "member_of", etc.)
+  - Support for temporal bounds (start/end dates or work context)
 - **Prompt Template:** `src/llm/prompts/relationship_extraction.py`
+  - Emphasize broad relationship taxonomy
+  - Include examples for: associations, participation, location, membership, ownership, appearance, time-bounded states
+  - Make clear that examples are not exhaustive
 - **Handler:** `src/llm/handlers/relationship_handler.py` that calls batch insertion stored procedure
 
+**Key Principle:** Relationship taxonomy evolves. Examples are illustrative, not prescriptive. Relationships are broad: associations, participation, location, membership, ownership, appearance, time-bounded states, and more. Future extraction contracts may target new bridge types as schema expands.
+
 **Effort:** Large (L)  
-**Dependencies:** Multi-Entity Contract (#2), Job Type Registry (#1)
+**Dependencies:** Multi-Pronged Contracts (#2), Universal Queue (#1)
 
 ---
 
-### 6. Stored Procedure Routing from JSON Payload
+### 6. Stored Procedure Routing with Transactional Dependency Resolution
 
 #### Current State
 
@@ -298,6 +486,7 @@ This document analyzes the gap between **what exists today** and **what's needed
 ❌ **Missing:**
 - **JSON-to-Table Routing:** No stored procedures that accept JSON payload and route to multiple tables
 - **Transactional Multi-Table Writes:** No single stored procedure that inserts entities + relationships + tags in one transaction
+- **Dependency Ordering:** No logic to handle insert order when dependent rows reference keys of other rows
 
 **Evidence:**
 - File: `db/migrations/0006_llm_indexes_sprocs.sql` (queue management stored procedures)
@@ -305,25 +494,70 @@ This document analyzes the gap between **what exists today** and **what's needed
 #### Gap
 
 ❌ **Missing:**
-- **Routing Stored Procedures:** Examples needed:
-  - `dbo.usp_process_entity_extraction_output`
-    - Input: JSON array of `EntityRecord` + `RelationshipRecord`
-    - Output: Inserted entity IDs and relationship IDs
-    - Logic: Parse JSON, insert entities, insert relationships, link to LLM run
-  - `dbo.usp_process_event_extraction_output`
-    - Input: JSON with event details + entity participants
-    - Output: Inserted event ID and entity-event linkages
-  - `dbo.usp_process_page_classification_output`
-    - Input: JSON with page classification result
-    - Output: Updated `sem.PageClassification` row
+
+**Routing Stored Procedures:**
+
+Need stored procedures that:
+- Accept JSON payload from LLM output
+- Route to multiple tables in single atomic transaction
+- Handle **dependency ordering** to ensure referential integrity
+
+**Dependency Ordering Pattern:**
+
+When LLM output contains multiple record types (e.g., entities + relationships), insertion must be ordered:
+
+1. **Pre-Step: Identify Existing vs New**
+   - Parse incoming JSON to staging tables (table variables)
+   - Check which entities/dimensions already exist (by name key, natural key, or ID lookup)
+   
+2. **Insert Base Dimensions First (Required Keys)**
+   - Insert missing entities/dimensions (e.g., `DimEntity`, `DimLocation`, `DimEvent`)
+   - Capture inserted IDs (use `OUTPUT INSERTED.EntityID`)
+   
+3. **Re-Resolve IDs After Insertion**
+   - Build lookup table mapping names → IDs (both pre-existing and newly inserted)
+   
+4. **Insert Dependent Rows (Bridges/Facts)**
+   - Insert bridges/facts that depend on dimension keys (e.g., `BridgeEntityRelation`, `BridgeEntityEvent`)
+   - Use resolved IDs from step 3
+   
+5. **Commit or Rollback (All-or-None)**
+   - If any step fails, rollback entire transaction
+   - Ensure "all-or-none" commit semantics
+
+**Example Dependency Chain:**
+- Relationship "Luke Skywalker owned_by R2-D2" requires:
+  1. Both entities exist in `DimEntity` (insert if missing)
+  2. Resolve EntityIDs for "Luke Skywalker" and "R2-D2"
+  3. Insert into `BridgeEntityRelation` with resolved IDs
+
+**Current Gap:**
+- No stored procedures with this dependency resolution logic
+- Python would need to orchestrate multi-table writes (less atomic, more error-prone)
+
+**Routing Examples Needed:**
+- `dbo.usp_process_entity_extraction_output`
+  - Input: JSON array of `EntityRecord` + optional `RelationshipRecord` array
+  - Output: Inserted entity IDs and relationship IDs
+  - Logic: Parse JSON → resolve existing entities → insert missing entities → insert relationships
+- `dbo.usp_process_event_extraction_output`
+  - Input: JSON with event details + entity participants
+  - Output: Inserted event ID and entity-event linkages
+  - Logic: Insert event → resolve entity IDs → insert entity-event bridges
+- `dbo.usp_process_page_classification_output`
+  - Input: JSON with page classification result
+  - Output: Updated `sem.PageClassification` row
 
 #### Impact
 
-**High** — Without stored procedure routing, Python code must orchestrate multi-table writes (more error-prone, less atomic)
+**High** — Without stored procedure routing with dependency ordering, Python code must orchestrate multi-table writes (more error-prone, less atomic, harder to maintain)
 
 #### Recommended Solution
 
-**Phase 1: Create Template Stored Procedure**
+**Phase 1: Create Template Stored Procedure with Dependency Ordering**
+
+Add subsection: **"Transactional Routing with Dependency Resolution"**
+
 - **Example:** `dbo.usp_process_entity_extraction_output`
   ```sql
   CREATE PROCEDURE dbo.usp_process_entity_extraction_output
@@ -334,8 +568,9 @@ This document analyzes the gap between **what exists today** and **what's needed
   BEGIN
       BEGIN TRANSACTION;
       
-      -- Parse JSON into temp table
+      -- Step 1: Parse JSON into staging table
       DECLARE @Entities TABLE (
+          RowNum INT IDENTITY(1,1),
           Name NVARCHAR(500),
           Type NVARCHAR(100),
           Confidence DECIMAL(5,4),
@@ -350,22 +585,74 @@ This document analyzes the gap between **what exists today** and **what's needed
           JSON_QUERY(value, '$.attributes')
       FROM OPENJSON(@InputJson, '$.entities');
       
-      -- Insert entities
-      INSERT INTO dbo.DimEntity (EntityName, PrimaryTypeInferred, PromotionState, SourcePageId, AdjudicationRunId)
-      OUTPUT INSERTED.EntityID
-      SELECT Name, Type, 'staged', @SourcePageID, @LLMRunID
-      FROM @Entities;
+      -- Step 2: Identify existing entities (pre-step)
+      DECLARE @EntityMapping TABLE (
+          Name NVARCHAR(500),
+          EntityID INT,
+          IsNew BIT
+      );
       
+      INSERT INTO @EntityMapping (Name, EntityID, IsNew)
+      SELECT e.Name, de.EntityID, 0
+      FROM @Entities e
+      LEFT JOIN dbo.DimEntity de ON LOWER(de.EntityName) = LOWER(e.Name)
+      WHERE de.EntityID IS NOT NULL;
+      
+      -- Step 3: Insert missing base rows (dimensions first)
+      INSERT INTO dbo.DimEntity (EntityName, PrimaryTypeInferred, PromotionState, SourcePageId, AdjudicationRunId)
+      OUTPUT INSERTED.EntityName, INSERTED.EntityID, 1 INTO @EntityMapping
+      SELECT e.Name, e.Type, 'staged', @SourcePageID, @LLMRunID
+      FROM @Entities e
+      WHERE NOT EXISTS (
+          SELECT 1 FROM @EntityMapping em WHERE em.Name = e.Name
+      );
+      
+      -- Step 4: Re-resolve IDs (now includes newly inserted)
+      -- (Already captured in @EntityMapping from OUTPUT clause)
+      
+      -- Step 5: Insert dependent rows (if relationships exist in JSON)
+      DECLARE @Relationships TABLE (
+          FromEntityName NVARCHAR(500),
+          ToEntityName NVARCHAR(500),
+          RelationType NVARCHAR(100),
+          Confidence DECIMAL(5,4)
+      );
+      
+      INSERT INTO @Relationships (FromEntityName, ToEntityName, RelationType, Confidence)
+      SELECT 
+          JSON_VALUE(value, '$.from_entity'),
+          JSON_VALUE(value, '$.to_entity'),
+          JSON_VALUE(value, '$.relation_type'),
+          JSON_VALUE(value, '$.confidence')
+      FROM OPENJSON(@InputJson, '$.relationships');
+      
+      INSERT INTO dbo.BridgeEntityRelation (FromEntityID, ToEntityID, RelationType, Confidence, SourceLLMRunID)
+      SELECT 
+          em_from.EntityID,
+          em_to.EntityID,
+          r.RelationType,
+          r.Confidence,
+          @LLMRunID
+      FROM @Relationships r
+      INNER JOIN @EntityMapping em_from ON em_from.Name = r.FromEntityName
+      INNER JOIN @EntityMapping em_to ON em_to.Name = r.ToEntityName;
+      
+      -- Step 6: Commit (all-or-none)
       COMMIT TRANSACTION;
   END
   ```
 
-**Phase 2: Implement in Python**
+**Phase 2: Implement in Python (Minimal Logic)**
 - **Handler:** `src/llm/handlers/entity_extraction_handler.py`
   ```python
   def handle_output(run_id, output_json, source_page_id):
       conn = get_db_connection()
       cursor = conn.cursor()
+      
+      # Validation only (JSON schema check)
+      validate_json_schema(output_json, 'entity_extraction_v1_schema.json')
+      
+      # Pass to stored procedure (routing logic in SQL)
       cursor.execute(
           "EXEC dbo.usp_process_entity_extraction_output @InputJson=?, @LLMRunID=?, @SourcePageID=?",
           json.dumps(output_json), run_id, source_page_id
@@ -377,13 +664,16 @@ This document analyzes the gap between **what exists today** and **what's needed
 - Catch SQL exceptions in Python, write error artifacts to lake
 - Retry on transient errors (deadlock, timeout)
 - Dead-letter on permanent errors (constraint violation, invalid JSON)
+- Log correlation ID for tracing
+
+**Key Principle:** Python does **validation + artifact logging + dispatch**. SQL stored procedures perform **atomic routing with dependency resolution**. Python avoids orchestration logic beyond validation and dispatch.
 
 **Effort:** Medium (M)  
-**Dependencies:** Multi-Entity Contract (#2), Relationship Tables (#5)
+**Dependencies:** Multi-Pronged Contracts (#2), Relationship Tables (#5)
 
 ---
 
-### 7. Observability (Logging, Metrics, Run History)
+### 7. Observability: Structured Logging and Artifact Tracking
 
 #### Current State
 
@@ -394,9 +684,8 @@ This document analyzes the gap between **what exists today** and **what's needed
 
 ❌ **Missing:**
 - **Structured Logging:** Logs are plaintext, not JSON (harder to parse, no log aggregation)
-- **Metrics Export:** No Prometheus metrics endpoint, no time-series metrics
 - **Distributed Tracing:** No correlation IDs across runner → LLM → storage
-- **Dashboards:** No Grafana dashboards for queue health, LLM performance, error rates
+- **Artifact Logging Focus:** Need consistent artifact write patterns for inputs, outputs, errors
 
 **Evidence:**
 - File: `src/llm/runners/phase1_runner.py` (plaintext logging via Python `logging` module)
@@ -405,20 +694,36 @@ This document analyzes the gap between **what exists today** and **what's needed
 #### Gap
 
 ❌ **Missing:**
-- **Structured Logging:** Need JSON logs with fields: `timestamp`, `level`, `message`, `correlation_id`, `job_id`, `run_id`, `worker_id`, `duration_ms`
-- **Metrics Instrumentation:** Need:
-  - Counter: `llm_runs_total{status="succeeded|failed"}`
-  - Histogram: `llm_duration_seconds{job_type="page_classification"}`
-  - Gauge: `llm_queue_depth{status="NEW|RUNNING"}`
-- **Tracing:** Need correlation ID that flows: job enqueue → job claim → LLM call → artifact write
-- **Alerting:** No alerts on:
-  - Queue depth > threshold (backlog building up)
-  - Error rate > threshold (LLM degraded)
-  - Dead-letter queue growing (manual intervention needed)
+
+**Structured Logging:**
+- Need JSON logs with fields: `timestamp`, `level`, `message`, `correlation_id`, `job_id`, `run_id`, `worker_id`, `duration_ms`
+- Consistent log format across all runners
+
+**Tracing:**
+- Need correlation ID that flows: job enqueue → job claim → LLM call → artifact write
+- Correlation ID should appear in logs, database records, and artifact metadata
+
+**Per-Run Artifacts (Focus Area):**
+- Write structured artifacts to lake for each run:
+  - Input evidence (content fed to LLM)
+  - Output JSON (raw LLM response)
+  - Error manifests (when failures occur)
+- Artifacts should be traced back to run via correlation IDs
+- Artifact paths should be consistent and discoverable
+
+**What to Avoid:**
+- **No Prometheus implementation details** in Phase 0-3 recommendations
+- **No Grafana dashboard instructions** in near-term phases
+- Metrics stacks are **optional future enhancements**, not near-term requirements
+
+**Future Optional (Post Phase 3):**
+- Time-series metrics collection (Prometheus or alternatives)
+- Dashboards for queue health and LLM performance
+- Alert rules for queue depth, error rates
 
 #### Impact
 
-**Medium** — System operational without metrics, but troubleshooting harder and no proactive alerts
+**Medium** — System operational without advanced metrics, but troubleshooting harder without structured logs and consistent artifact trails
 
 #### Recommended Solution
 
@@ -433,30 +738,38 @@ This document analyzes the gap between **what exists today** and **what's needed
   formatter = jsonlogger.JsonFormatter()
   handler.setFormatter(formatter)
   logger.addHandler(handler)
+  
+  # Example log
+  logger.info("Job claimed", extra={
+      "correlation_id": correlation_id,
+      "job_id": job_id,
+      "run_id": run_id,
+      "worker_id": worker_id
+  })
   ```
 
-**Phase 2: Metrics Export**
-- **Add Prometheus Client:** `prometheus_client` Python package
-- **Instrument Code:** Add counters, histograms, gauges
-  ```python
-  from prometheus_client import Counter, Histogram
-  
-  llm_runs_total = Counter('llm_runs_total', 'Total LLM runs', ['status'])
-  llm_duration_seconds = Histogram('llm_duration_seconds', 'LLM duration', ['job_type'])
-  
-  # In runner:
-  start_time = time.time()
-  # ... process job ...
-  llm_duration_seconds.labels(job_type).observe(time.time() - start_time)
-  llm_runs_total.labels(status='succeeded').inc()
-  ```
-- **Expose Endpoint:** HTTP endpoint at `:9090/metrics` for Prometheus scraping
+**Phase 2: Artifact Logging Consistency**
+- **Per-Run Artifacts:** For each LLM run, write to lake:
+  - `{run_id}/input.json` — Evidence bundle fed to LLM
+  - `{run_id}/output.json` — Raw LLM response
+  - `{run_id}/error.json` — Error manifest (if failed)
+- **Correlation IDs:** Include in artifact metadata and database records
+- **Lake Structure:** `lake/llm_runs/{yyyy}/{mm}/{dd}/{run_id}/`
 
-**Phase 3: Dashboards**
-- **Grafana Dashboards:** Import pre-built dashboards or create custom:
-  - Queue health: Depth by status, backlog age
-  - LLM performance: Duration percentiles (p50, p95, p99), token usage
-  - Error rates: Failure rate by job type, dead-letter queue size
+**Phase 3: Tracing**
+- **Generate Correlation ID:** At job enqueue time
+- **Flow Through System:**
+  - Written to `llm.job.correlation_id` (add column if needed)
+  - Passed to runner when job claimed
+  - Logged in all log entries for that job
+  - Written to artifact metadata
+  - Stored in `llm.run.correlation_id`
+
+**Phase 4: Future Optional Observability (Post Phase 3)**
+- **Optional Metrics Stack:** Time-series metrics (Prometheus, InfluxDB, or alternatives)
+- **Optional Dashboards:** Grafana or similar for visualization
+- **Optional Alerting:** Alert rules for queue health, error rates
+- **Note:** Not actionable steps for Phase 0-3; deferred to future phases
 
 **Effort:** Medium (M)  
 **Dependencies:** None
@@ -608,13 +921,13 @@ This document analyzes the gap between **what exists today** and **what's needed
 
 | # | Capability Area | Current State | Gap | Impact | Solution Direction | Effort | Dependencies |
 |---|----------------|---------------|-----|--------|-------------------|--------|--------------|
-| 1 | **Work Queue Reuse** | LLM job queue operational | No job type registry or dispatcher | Medium | Create job type registry + dispatcher | S | None |
-| 2 | **LLM Contract Definition** | Page classification contract exists | Multi-entity, relationship, merge contracts missing | High | Define JSON schemas for new contracts | M | #1 |
-| 3 | **Chunking Strategy** | Vector schema scaffolded | No production chunking pipeline | Medium | Implement chunker + chunk runner | M | None |
-| 4 | **Multi-Entity Extraction** | Single-entity promotion works | No N-entity extraction or dedupe | High | Batch insertion stored proc + dedupe logic | L | #2, #6 |
-| 5 | **Relationship/Bridge Creation** | Tag assignment bridge exists | No entity-entity, entity-event, entity-work bridges | High | Create bridge tables + insertion stored procs | L | #1, #2 |
-| 6 | **Stored Procedure Routing** | Queue management stored procs exist | No JSON-to-table routing stored procs | High | Template stored proc + Python handler | M | #2, #5 |
-| 7 | **Observability** | Plaintext logging + run history table | No structured metrics, tracing, dashboards | Medium | Add Prometheus metrics + JSON logging | M | None |
+| 1 | **Universal Work Queue** | LLM job queue operational | Need multi-tenant, multi-job-type model with priority management and batch selection | Medium | Create job type registry + dispatcher supporting concurrent runners and mixed job types | S | None |
+| 2 | **LLM Contracts: Multi-Pronged** | Page classification contract exists | Need broad contracts for dimensions + facts + bridges + time-scoped assertions, not limited to examples | High | Define flexible JSON schemas for multi-pronged knowledge extraction with extensible taxonomies | M | #1 |
+| 3 | **LLM Context Chunking** | Vector schema scaffolded | No dynamic budgeting or LLM-specific chunking strategy (independent of vector) | High | Implement chunking with token budgeting, overhead accounting, reusable for any source | M | None |
+| 4 | **Multi-Entity + Best-Effort Dedupe** | Single-entity promotion works | No N-entity extraction; dedupe is best-effort, tolerate duplicates in early phases | High | Batch insertion + exact/fuzzy match; future dedupe audit capabilities | L | #2, #6 |
+| 5 | **Relationships: Broad Taxonomy** | Tag assignment bridge exists | Need extensible bridges (not fixed enums) for associations, participation, location, time-bounded states, etc. | High | Create open-ended relationship tables + insertion procs with evolving taxonomy | L | #1, #2 |
+| 6 | **Stored Proc Routing + Dependencies** | Queue management stored procs exist | No JSON-to-table routing with dependency ordering (resolve IDs, insert dimensions first, then bridges) | High | Template stored proc with atomic transaction and dependency resolution pattern | M | #2, #5 |
+| 7 | **Observability: Artifacts + Logs** | Plaintext logging + run history table | No structured logs, correlation IDs, consistent artifact write patterns | Medium | Add JSON logging, correlation IDs, per-run artifacts; defer metrics to future | M | None |
 | 8 | **Idempotency** | Ingestion dedupe + LLM retry logic | No LLM job dedupe key or backfill CLI | Medium | Add dedupe_key to llm.job + backfill utility | S | None |
 | 9 | **Governance** | Confidence scoring + review flag exist | No review UI, approval workflow, audit trail | Low | Formalize thresholds + review UI + audit table | M | None |
 
@@ -672,15 +985,22 @@ This document analyzes the gap between **what exists today** and **what's needed
 
 ---
 
-### 3. Identity/Dedupe Strategy
+### 3. Identity/Dedupe Strategy (Best-Effort Approach)
 
 **Options:**
-- **A) Exact Match Only:** Case-insensitive name comparison (fast, low accuracy)
-- **B) Fuzzy Match:** Levenshtein distance + phonetic matching (medium accuracy)
+- **A) Exact Match Only:** Case-insensitive name comparison (fast, prevents obvious duplicates)
+- **B) Fuzzy Match:** Levenshtein distance + phonetic matching (medium accuracy, some duplicates tolerated)
 - **C) LLM Adjudication:** Call LLM to decide if entities are duplicates (high accuracy, slow, costly)
-- **D) Phased:** Exact match → fuzzy match → LLM adjudication (only for ambiguous cases)
+- **D) Phased Best-Effort:** Exact match → simple fuzzy match → tolerate duplicates → future dedupe audit
 
-**Recommendation:** **D) Phased** — Minimize LLM calls, maximize accuracy
+**Recommendation:** **D) Phased Best-Effort** — Minimize obvious duplicates in early phases, accept some noise, plan future "dedupe audit" capabilities
+
+**Rationale:**
+- Preventing all duplicates is **not a hard requirement** for Phase 0-2
+- Exact match handles most cases (case-insensitive comparison)
+- Simple fuzzy match catches obvious typos (high threshold >0.95)
+- Tolerate remaining duplicates in early data
+- Future: LLM contracts can mine database for duplicates and optionally relate or suppress/purge redundant records
 
 ---
 
