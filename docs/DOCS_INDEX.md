@@ -36,6 +36,10 @@ New to this repository? Start with these essential documents:
 |----------|-------------|
 | [ERD Explained](diagrams/mermaid/ERD_Explained.md) | Comprehensive schema documentation with column dictionaries |
 | [DDL Ordering and Manifest](../agents/playbooks/db/ddl_ordering_and_manifest.md) | DDL file organization and execution order |
+| [Schema Refactor Report](db/schema_refactor_report.md) | SQL standardization changes and migration guide |
+| [Database Policies](agent/db_policies.md) | Naming conventions, key patterns, datetime standards |
+| [Database Templates](agent/db_templates.md) | Copy-paste templates for tables, views, migrations |
+| [Database Review Checklist](agent/db_review_checklist.md) | PR review checklist for SQL changes |
 
 ### Seed Data & Ingestion
 
@@ -139,6 +143,21 @@ All Markdown files in this repository, grouped by location:
 | File | Description |
 |------|-------------|
 | [folder-structure-recommendations.md](_reports/folder-structure-recommendations.md) | Folder structure improvement proposals (report only) |
+
+### `docs/agent/`
+
+| File | Description |
+|------|-------------|
+| [README.md](agent/README.md) | Agent database documentation entry point |
+| [db_policies.md](agent/db_policies.md) | Canonical naming conventions, key patterns, datetime standards |
+| [db_templates.md](agent/db_templates.md) | Copy-paste templates for tables, views, migrations |
+| [db_review_checklist.md](agent/db_review_checklist.md) | PR review checklist for SQL changes |
+
+### `docs/db/`
+
+| File | Description |
+|------|-------------|
+| [schema_refactor_report.md](db/schema_refactor_report.md) | SQL schema standardization changes and migration guide |
 
 ### `docs/data-quality/`
 

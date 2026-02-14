@@ -1,47 +1,53 @@
 ﻿-- FactEvent: analytical event spine (actions/outcomes).
--- FactEventGuid provides stable identity; governance metadata supports versioned records.
+-- FactEventGuid provides stable identity (random GUID for security).
+-- Governance metadata supports versioned records (SCD Type 2 pattern).
+--
+-- Key Naming Conventions (see docs/agent/db_policies.md):
+--   EventKey = internal surrogate key (BIGINT for fact table - high cardinality)
+--   FactEventGuid = public-facing stable identifier (random UNIQUEIDENTIFIER)
+--
 CREATE TABLE dbo.FactEvent (
-    EventKey bigint IDENTITY(1,1) NOT NULL,
-    FactEventGuid uniqueidentifier NOT NULL CONSTRAINT DF_FactEvent_FactEventGuid DEFAULT (NEWSEQUENTIALID()),
+    EventKey BIGINT IDENTITY(1,1) NOT NULL,
+    FactEventGuid UNIQUEIDENTIFIER NOT NULL CONSTRAINT DF_FactEvent_FactEventGuid DEFAULT (NEWID()),
 
-    FranchiseKey int NOT NULL,
-    ContinuityFrameKey int NOT NULL,
-    WorkKey int NOT NULL,
-    SceneKey int NOT NULL,
-    ParentEventKey bigint NULL,
+    FranchiseKey INT NOT NULL,
+    ContinuityFrameKey INT NOT NULL,
+    WorkKey INT NOT NULL,
+    SceneKey INT NOT NULL,
+    ParentEventKey BIGINT NULL,
 
-    EventOrdinal int NOT NULL,
-    EventTypeKey int NOT NULL,
-    LocationKey int NULL,
+    EventOrdinal INT NOT NULL,
+    EventTypeKey INT NOT NULL,
+    LocationKey INT NULL,
 
-    StartSec int NULL,
-    EndSec int NULL,
-    EraKey int NULL,
-    UniverseYearMin int NULL,
-    UniverseYearMax int NULL,
-    DateKey int NULL,
-    TimeKey int NULL,
-    EventTimestampUtc datetime2(3) NULL,
+    StartSec INT NULL,
+    EndSec INT NULL,
+    EraKey INT NULL,
+    UniverseYearMin INT NULL,
+    UniverseYearMax INT NULL,
+    DateKey INT NULL,
+    TimeKey INT NULL,
+    EventTimestampUtc DATETIME2(3) NULL,
 
-    SummaryShort nvarchar(1000) NOT NULL,
-    SummaryNormalized nvarchar(1000) NULL,
-    ConfidenceScore decimal(5,4) NOT NULL,
-    ExtractionMethod nvarchar(20) NOT NULL, -- AI|Manual|Rules|Hybrid
-    Notes nvarchar(1000) NULL,
+    SummaryShort NVARCHAR(1000) NOT NULL,
+    SummaryNormalized NVARCHAR(1000) NULL,
+    ConfidenceScore DECIMAL(5,4) NOT NULL,
+    ExtractionMethod NVARCHAR(20) NOT NULL, -- AI|Manual|Rules|Hybrid
+    Notes NVARCHAR(1000) NULL,
 
-    RowHash varbinary(32) NOT NULL,
-    IsActive bit NOT NULL CONSTRAINT DF_FactEvent_IsActive DEFAULT (1),
-    IsLatest bit NOT NULL CONSTRAINT DF_FactEvent_IsLatest DEFAULT (1),
-    VersionNum int NOT NULL CONSTRAINT DF_FactEvent_VersionNum DEFAULT (1),
-    ValidFromUtc datetime2(3) NOT NULL CONSTRAINT DF_FactEvent_ValidFromUtc DEFAULT (SYSUTCDATETIME()),
-    ValidToUtc datetime2(3) NULL,
-    CreatedUtc datetime2(3) NOT NULL CONSTRAINT DF_FactEvent_CreatedUtc DEFAULT (SYSUTCDATETIME()),
-    UpdatedUtc datetime2(3) NULL,
+    RowHash VARBINARY(32) NOT NULL,
+    IsActive BIT NOT NULL CONSTRAINT DF_FactEvent_IsActive DEFAULT (1),
+    IsLatest BIT NOT NULL CONSTRAINT DF_FactEvent_IsLatest DEFAULT (1),
+    VersionNum INT NOT NULL CONSTRAINT DF_FactEvent_VersionNum DEFAULT (1),
+    ValidFromUtc DATETIME2(3) NOT NULL CONSTRAINT DF_FactEvent_ValidFromUtc DEFAULT (SYSUTCDATETIME()),
+    ValidToUtc DATETIME2(3) NULL,
+    CreatedUtc DATETIME2(3) NOT NULL CONSTRAINT DF_FactEvent_CreatedUtc DEFAULT (SYSUTCDATETIME()),
+    UpdatedUtc DATETIME2(3) NULL,
 
-    SourceSystem nvarchar(100) NULL,
-    SourceRef nvarchar(400) NULL,
-    IngestBatchId nvarchar(100) NULL,
-    AttributesJson nvarchar(max) NULL,
+    SourceSystem NVARCHAR(100) NULL,
+    SourceRef NVARCHAR(400) NULL,
+    IngestBatchKey NVARCHAR(100) NULL,
+    AttributesJson NVARCHAR(MAX) NULL,
 
     CONSTRAINT PK_FactEvent PRIMARY KEY CLUSTERED (EventKey),
     CONSTRAINT UQ_FactEvent_FactEventGuid UNIQUE (FactEventGuid),
