@@ -1,40 +1,40 @@
 ﻿-- ContinuityIssue: records continuity discrepancies or ambiguities.
 -- ContinuityIssueGuid stabilizes identity; governance metadata tracks versioned records.
 CREATE TABLE dbo.ContinuityIssue (
-    ContinuityIssueKey bigint IDENTITY(1,1) NOT NULL,
-    ContinuityIssueGuid uniqueidentifier NOT NULL CONSTRAINT DF_ContinuityIssue_ContinuityIssueGuid DEFAULT (NEWSEQUENTIALID()),
+    ContinuityIssueKey BIGINT IDENTITY(1,1) NOT NULL,
+    ContinuityIssueGuid UNIQUEIDENTIFIER NOT NULL CONSTRAINT DF_ContinuityIssue_ContinuityIssueGuid DEFAULT (NEWID()),
 
-    FranchiseKey int NOT NULL,
-    ContinuityFrameKey int NOT NULL,
-    IssueTypeKey int NOT NULL,
+    FranchiseKey INT NOT NULL,
+    ContinuityFrameKey INT NOT NULL,
+    IssueTypeKey INT NOT NULL,
 
-    IssueSummary nvarchar(300) NOT NULL,
-    IssueDescription nvarchar(2000) NULL,
-    Scope nvarchar(50) NOT NULL, -- Scene|Work|Franchise
-    WorkKey int NULL,
-    SceneKey int NULL,
+    IssueSummary NVARCHAR(300) NOT NULL,
+    IssueDescription NVARCHAR(2000) NULL,
+    Scope NVARCHAR(50) NOT NULL, -- Scene|Work|Franchise
+    WorkKey INT NULL,
+    SceneKey INT NULL,
 
-    SeverityScore int NOT NULL,
-    SeverityLabel nvarchar(20) NOT NULL, -- Low|Med|High|Critical
-    DisputeLevel nvarchar(20) NOT NULL, -- Low|Med|High
-    Status nvarchar(30) NOT NULL, -- Open|Explained|Retconned|SplitByFrame|Closed
+    SeverityScore INT NOT NULL,
+    SeverityLabel NVARCHAR(20) NOT NULL, -- Low|Med|High|Critical
+    DisputeLevel NVARCHAR(20) NOT NULL, -- Low|Med|High
+    Status NVARCHAR(30) NOT NULL, -- Open|Explained|Retconned|SplitByFrame|Closed
 
-    ConfidenceScore decimal(5,4) NULL,
-    Notes nvarchar(1000) NULL,
+    ConfidenceScore DECIMAL(5,4) NULL,
+    Notes NVARCHAR(1000) NULL,
 
-    RowHash varbinary(32) NOT NULL,
-    IsActive bit NOT NULL CONSTRAINT DF_ContinuityIssue_IsActive DEFAULT (1),
-    IsLatest bit NOT NULL CONSTRAINT DF_ContinuityIssue_IsLatest DEFAULT (1),
-    VersionNum int NOT NULL CONSTRAINT DF_ContinuityIssue_VersionNum DEFAULT (1),
-    ValidFromUtc datetime2(3) NOT NULL CONSTRAINT DF_ContinuityIssue_ValidFromUtc DEFAULT (SYSUTCDATETIME()),
-    ValidToUtc datetime2(3) NULL,
-    CreatedUtc datetime2(3) NOT NULL CONSTRAINT DF_ContinuityIssue_CreatedUtc DEFAULT (SYSUTCDATETIME()),
-    UpdatedUtc datetime2(3) NULL,
+    RowHash VARBINARY(32) NOT NULL,
+    IsActive BIT NOT NULL CONSTRAINT DF_ContinuityIssue_IsActive DEFAULT (1),
+    IsLatest BIT NOT NULL CONSTRAINT DF_ContinuityIssue_IsLatest DEFAULT (1),
+    VersionNum INT NOT NULL CONSTRAINT DF_ContinuityIssue_VersionNum DEFAULT (1),
+    ValidFromUtc DATETIME2(3) NOT NULL CONSTRAINT DF_ContinuityIssue_ValidFromUtc DEFAULT (SYSUTCDATETIME()),
+    ValidToUtc DATETIME2(3) NULL,
+    CreatedUtc DATETIME2(3) NOT NULL CONSTRAINT DF_ContinuityIssue_CreatedUtc DEFAULT (SYSUTCDATETIME()),
+    UpdatedUtc DATETIME2(3) NULL,
 
-    SourceSystem nvarchar(100) NULL,
-    SourceRef nvarchar(400) NULL,
-    IngestBatchId nvarchar(100) NULL,
-    AttributesJson nvarchar(max) NULL,
+    SourceSystem NVARCHAR(100) NULL,
+    SourceRef NVARCHAR(400) NULL,
+    IngestBatchKey NVARCHAR(100) NULL,
+    AttributesJson NVARCHAR(max) NULL,
 
     CONSTRAINT PK_ContinuityIssue PRIMARY KEY CLUSTERED (ContinuityIssueKey),
     CONSTRAINT UQ_ContinuityIssue_ContinuityIssueGuid UNIQUE (ContinuityIssueGuid),

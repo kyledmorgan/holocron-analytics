@@ -1,40 +1,46 @@
 ﻿-- DimCharacter: character specialization of DimEntity.
--- CharacterGuid keeps identity stable; governance metadata tracks record versions.
+-- CharacterGuid provides stable cross-system identity (random GUID).
+-- Governance metadata tracks record versions (SCD Type 2 pattern).
+--
+-- Key Naming Conventions (see docs/agent/db_policies.md):
+--   CharacterKey = internal surrogate key (INT for dimension)
+--   CharacterGuid = public-facing stable identifier (random UNIQUEIDENTIFIER)
+--
 CREATE TABLE dbo.DimCharacter (
-    CharacterKey int IDENTITY(1,1) NOT NULL,
-    CharacterGuid uniqueidentifier NOT NULL CONSTRAINT DF_DimCharacter_CharacterGuid DEFAULT (NEWSEQUENTIALID()),
+    CharacterKey INT IDENTITY(1,1) NOT NULL,
+    CharacterGuid UNIQUEIDENTIFIER NOT NULL CONSTRAINT DF_DimCharacter_CharacterGuid DEFAULT (NEWID()),
 
-    EntityKey int NOT NULL,
-    SpeciesKey int NULL,
-    Gender nvarchar(50) NULL,
-    Pronouns nvarchar(50) NULL,
-    BirthRef nvarchar(200) NULL,
-    DeathRef nvarchar(200) NULL,
-    BirthPlaceRef nvarchar(200) NULL,
-    HomeworldRef nvarchar(200) NULL,
-    SpeciesNameRef nvarchar(200) NULL,
-    HeightRef nvarchar(50) NULL,
-    MassRef nvarchar(50) NULL,
-    EyeColor nvarchar(50) NULL,
-    HairColor nvarchar(50) NULL,
-    SkinColor nvarchar(50) NULL,
-    DistinguishingMarks nvarchar(200) NULL,
-    RoleArchetype nvarchar(50) NULL,
-    Notes nvarchar(1000) NULL,
+    EntityKey INT NOT NULL,
+    SpeciesKey INT NULL,
+    Gender NVARCHAR(50) NULL,
+    Pronouns NVARCHAR(50) NULL,
+    BirthRef NVARCHAR(200) NULL,
+    DeathRef NVARCHAR(200) NULL,
+    BirthPlaceRef NVARCHAR(200) NULL,
+    HomeworldRef NVARCHAR(200) NULL,
+    SpeciesNameRef NVARCHAR(200) NULL,
+    HeightRef NVARCHAR(50) NULL,
+    MassRef NVARCHAR(50) NULL,
+    EyeColor NVARCHAR(50) NULL,
+    HairColor NVARCHAR(50) NULL,
+    SkinColor NVARCHAR(50) NULL,
+    DistinguishingMarks NVARCHAR(200) NULL,
+    RoleArchetype NVARCHAR(50) NULL,
+    Notes NVARCHAR(1000) NULL,
 
-    RowHash varbinary(32) NOT NULL,
-    IsActive bit NOT NULL CONSTRAINT DF_DimCharacter_IsActive DEFAULT (1),
-    IsLatest bit NOT NULL CONSTRAINT DF_DimCharacter_IsLatest DEFAULT (1),
-    VersionNum int NOT NULL CONSTRAINT DF_DimCharacter_VersionNum DEFAULT (1),
-    ValidFromUtc datetime2(3) NOT NULL CONSTRAINT DF_DimCharacter_ValidFromUtc DEFAULT (SYSUTCDATETIME()),
-    ValidToUtc datetime2(3) NULL,
-    CreatedUtc datetime2(3) NOT NULL CONSTRAINT DF_DimCharacter_CreatedUtc DEFAULT (SYSUTCDATETIME()),
-    UpdatedUtc datetime2(3) NULL,
+    RowHash VARBINARY(32) NOT NULL,
+    IsActive BIT NOT NULL CONSTRAINT DF_DimCharacter_IsActive DEFAULT (1),
+    IsLatest BIT NOT NULL CONSTRAINT DF_DimCharacter_IsLatest DEFAULT (1),
+    VersionNum INT NOT NULL CONSTRAINT DF_DimCharacter_VersionNum DEFAULT (1),
+    ValidFromUtc DATETIME2(3) NOT NULL CONSTRAINT DF_DimCharacter_ValidFromUtc DEFAULT (SYSUTCDATETIME()),
+    ValidToUtc DATETIME2(3) NULL,
+    CreatedUtc DATETIME2(3) NOT NULL CONSTRAINT DF_DimCharacter_CreatedUtc DEFAULT (SYSUTCDATETIME()),
+    UpdatedUtc DATETIME2(3) NULL,
 
-    SourceSystem nvarchar(100) NULL,
-    SourceRef nvarchar(400) NULL,
-    IngestBatchId nvarchar(100) NULL,
-    AttributesJson nvarchar(max) NULL,
+    SourceSystem NVARCHAR(100) NULL,
+    SourceRef NVARCHAR(400) NULL,
+    IngestBatchKey NVARCHAR(100) NULL,
+    AttributesJson NVARCHAR(MAX) NULL,
 
     CONSTRAINT PK_DimCharacter PRIMARY KEY CLUSTERED (CharacterKey),
     CONSTRAINT UQ_DimCharacter_CharacterGuid UNIQUE (CharacterGuid),

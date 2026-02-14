@@ -1,5 +1,5 @@
 /*******************************************************************************
- * VIEW: sem_location
+ * VIEW: sem.vw_location
  * 
  * PURPOSE: Canonical semantic view over location data with hierarchy.
  *          Flattens location information with entity and parent location context.
@@ -16,7 +16,7 @@
  *
  * NOTES: Only returns active, latest version records.
  ******************************************************************************/
-CREATE OR ALTER VIEW dbo.sem_location
+CREATE OR ALTER VIEW sem.vw_location
 AS
 SELECT
     loc.LocationKey,

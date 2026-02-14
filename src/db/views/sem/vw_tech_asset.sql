@@ -1,5 +1,5 @@
 /*******************************************************************************
- * VIEW: sem_tech_asset
+ * VIEW: sem.vw_tech_asset
  * 
  * PURPOSE: Canonical semantic view over technology asset models/classes.
  *          Covers ships, weapons, droids, and other tech definitions.
@@ -15,7 +15,7 @@
  *
  * NOTES: Only returns active, latest version records.
  ******************************************************************************/
-CREATE OR ALTER VIEW dbo.sem_tech_asset
+CREATE OR ALTER VIEW sem.vw_tech_asset
 AS
 SELECT
     ta.TechAssetKey,

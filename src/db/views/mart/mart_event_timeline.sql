@@ -54,5 +54,5 @@ SELECT
     e.ConfidenceScore,
     e.ExtractionMethod,
     e.Notes
-FROM dbo.sem_event e;
+FROM sem.vw_event e;
 GO

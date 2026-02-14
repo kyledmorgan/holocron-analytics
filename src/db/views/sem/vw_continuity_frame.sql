@@ -1,5 +1,5 @@
 /*******************************************************************************
- * VIEW: sem_continuity_frame
+ * VIEW: sem.vw_continuity_frame
  * 
  * PURPOSE: Canonical semantic view over continuity/canon frame definitions.
  *          Provides context for understanding which timeline or canon events
@@ -16,7 +16,7 @@
  *
  * NOTES: Only returns active, latest version records.
  ******************************************************************************/
-CREATE OR ALTER VIEW dbo.sem_continuity_frame
+CREATE OR ALTER VIEW sem.vw_continuity_frame
 AS
 SELECT
     cf.ContinuityFrameKey,

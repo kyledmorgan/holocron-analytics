@@ -1,5 +1,5 @@
 /*******************************************************************************
- * VIEW: sem_continuity_issue
+ * VIEW: sem.vw_continuity_issue
  * 
  * PURPOSE: Canonical semantic view over continuity issues/discrepancies.
  *          Records where conflicting or ambiguous information exists.
@@ -17,7 +17,7 @@
  *
  * NOTES: Only returns active, latest version records.
  ******************************************************************************/
-CREATE OR ALTER VIEW dbo.sem_continuity_issue
+CREATE OR ALTER VIEW sem.vw_continuity_issue
 AS
 SELECT
     ci.ContinuityIssueKey,

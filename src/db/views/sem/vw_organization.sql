@@ -1,5 +1,5 @@
 /*******************************************************************************
- * VIEW: sem_organization
+ * VIEW: sem.vw_organization
  * 
  * PURPOSE: Canonical semantic view over organization/faction data.
  *          Flattens organization information with entity context.
@@ -16,7 +16,7 @@
  *
  * NOTES: Only returns active, latest version records.
  ******************************************************************************/
-CREATE OR ALTER VIEW dbo.sem_organization
+CREATE OR ALTER VIEW sem.vw_organization
 AS
 SELECT
     o.OrganizationKey,

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * VIEW: sem_appearance_look
+ * VIEW: sem.vw_appearance_look
  * 
  * PURPOSE: Canonical semantic view over character appearance looks.
  *          Tracks how characters appear visually in specific scenes.
@@ -16,7 +16,7 @@
  *
  * NOTES: Only returns active, latest version records.
  ******************************************************************************/
-CREATE OR ALTER VIEW dbo.sem_appearance_look
+CREATE OR ALTER VIEW sem.vw_appearance_look
 AS
 SELECT
     al.LookKey,

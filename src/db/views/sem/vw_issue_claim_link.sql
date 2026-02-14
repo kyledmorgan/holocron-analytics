@@ -1,5 +1,5 @@
 /*******************************************************************************
- * VIEW: sem_issue_claim_link
+ * VIEW: sem.vw_issue_claim_link
  * 
  * PURPOSE: Canonical semantic view over issue-to-claim relationships.
  *          Links continuity issues to the claims that support or conflict.
@@ -16,7 +16,7 @@
  *
  * NOTES: Only returns active, latest version records.
  ******************************************************************************/
-CREATE OR ALTER VIEW dbo.sem_issue_claim_link
+CREATE OR ALTER VIEW sem.vw_issue_claim_link
 AS
 SELECT
     icl.BridgeContinuityIssueClaimKey,

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * VIEW: sem_scene
+ * VIEW: sem.vw_scene
  * 
  * PURPOSE: Canonical semantic view over scene subdivisions within works.
  *          Flattens scene information with work and franchise context.
@@ -17,7 +17,7 @@
  *
  * NOTES: Only returns active, latest version records.
  ******************************************************************************/
-CREATE OR ALTER VIEW dbo.sem_scene
+CREATE OR ALTER VIEW sem.vw_scene
 AS
 SELECT
     s.SceneKey,

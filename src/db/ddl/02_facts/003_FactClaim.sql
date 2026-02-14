@@ -1,38 +1,38 @@
 ﻿-- FactClaim: atomic assertions with provenance and confidence.
 -- FactClaimGuid provides stable identity; governance metadata tracks versioned claims.
 CREATE TABLE dbo.FactClaim (
-    ClaimKey bigint IDENTITY(1,1) NOT NULL,
-    FactClaimGuid uniqueidentifier NOT NULL CONSTRAINT DF_FactClaim_FactClaimGuid DEFAULT (NEWSEQUENTIALID()),
+    ClaimKey BIGINT IDENTITY(1,1) NOT NULL,
+    FactClaimGuid UNIQUEIDENTIFIER NOT NULL CONSTRAINT DF_FactClaim_FactClaimGuid DEFAULT (NEWID()),
 
-    FranchiseKey int NOT NULL,
-    ContinuityFrameKey int NOT NULL,
-    ClaimType nvarchar(50) NOT NULL, -- Attribute|Relationship|Ordering|Identity|Other
-    SubjectEntityKey int NOT NULL,
-    Predicate nvarchar(200) NOT NULL,
-    ObjectValue nvarchar(1000) NOT NULL, -- literal or EntityKey-as-text
-    ObjectValueType nvarchar(20) NOT NULL, -- EntityRef|String|Number|Date|Range|Other
+    FranchiseKey INT NOT NULL,
+    ContinuityFrameKey INT NOT NULL,
+    ClaimType NVARCHAR(50) NOT NULL, -- Attribute|Relationship|Ordering|Identity|Other
+    SubjectEntityKey INT NOT NULL,
+    Predicate NVARCHAR(200) NOT NULL,
+    ObjectValue NVARCHAR(1000) NOT NULL, -- literal or EntityKey-as-text
+    ObjectValueType NVARCHAR(20) NOT NULL, -- EntityRef|String|Number|Date|Range|Other
 
-    WorkKey int NULL,
-    SceneKey int NULL,
+    WorkKey INT NULL,
+    SceneKey INT NULL,
 
-    ConfidenceScore decimal(5,4) NOT NULL,
-    EvidenceRef nvarchar(200) NULL,
-    ExtractionMethod nvarchar(20) NOT NULL, -- AI|Manual|Rules|Hybrid
-    Notes nvarchar(1000) NULL,
+    ConfidenceScore DECIMAL(5,4) NOT NULL,
+    EvidenceRef NVARCHAR(200) NULL,
+    ExtractionMethod NVARCHAR(20) NOT NULL, -- AI|Manual|Rules|Hybrid
+    Notes NVARCHAR(1000) NULL,
 
-    RowHash varbinary(32) NOT NULL,
-    IsActive bit NOT NULL CONSTRAINT DF_FactClaim_IsActive DEFAULT (1),
-    IsLatest bit NOT NULL CONSTRAINT DF_FactClaim_IsLatest DEFAULT (1),
-    VersionNum int NOT NULL CONSTRAINT DF_FactClaim_VersionNum DEFAULT (1),
-    ValidFromUtc datetime2(3) NOT NULL CONSTRAINT DF_FactClaim_ValidFromUtc DEFAULT (SYSUTCDATETIME()),
-    ValidToUtc datetime2(3) NULL,
-    CreatedUtc datetime2(3) NOT NULL CONSTRAINT DF_FactClaim_CreatedUtc DEFAULT (SYSUTCDATETIME()),
-    UpdatedUtc datetime2(3) NULL,
+    RowHash VARBINARY(32) NOT NULL,
+    IsActive BIT NOT NULL CONSTRAINT DF_FactClaim_IsActive DEFAULT (1),
+    IsLatest BIT NOT NULL CONSTRAINT DF_FactClaim_IsLatest DEFAULT (1),
+    VersionNum INT NOT NULL CONSTRAINT DF_FactClaim_VersionNum DEFAULT (1),
+    ValidFromUtc DATETIME2(3) NOT NULL CONSTRAINT DF_FactClaim_ValidFromUtc DEFAULT (SYSUTCDATETIME()),
+    ValidToUtc DATETIME2(3) NULL,
+    CreatedUtc DATETIME2(3) NOT NULL CONSTRAINT DF_FactClaim_CreatedUtc DEFAULT (SYSUTCDATETIME()),
+    UpdatedUtc DATETIME2(3) NULL,
 
-    SourceSystem nvarchar(100) NULL,
-    SourceRef nvarchar(400) NULL,
-    IngestBatchId nvarchar(100) NULL,
-    AttributesJson nvarchar(max) NULL,
+    SourceSystem NVARCHAR(100) NULL,
+    SourceRef NVARCHAR(400) NULL,
+    IngestBatchKey NVARCHAR(100) NULL,
+    AttributesJson NVARCHAR(max) NULL,
 
     CONSTRAINT PK_FactClaim PRIMARY KEY CLUSTERED (ClaimKey),
     CONSTRAINT UQ_FactClaim_FactClaimGuid UNIQUE (FactClaimGuid),

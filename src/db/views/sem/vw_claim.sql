@@ -1,5 +1,5 @@
 /*******************************************************************************
- * VIEW: sem_claim
+ * VIEW: sem.vw_claim
  * 
  * PURPOSE: Canonical semantic view over atomic claims/assertions.
  *          Facts asserted about entities with provenance and confidence.
@@ -16,7 +16,7 @@
  *
  * NOTES: Only returns active, latest version records.
  ******************************************************************************/
-CREATE OR ALTER VIEW dbo.sem_claim
+CREATE OR ALTER VIEW sem.vw_claim
 AS
 SELECT
     fc.ClaimKey,

@@ -38,5 +38,5 @@ SELECT
     c.ContinuityFrameName       AS ContinuityFrame,
     c.FranchiseName             AS Franchise,
     c.ClaimKey                  -- Include for advanced join exercises
-FROM dbo.sem_claim c;
+FROM sem.vw_claim c;
 GO

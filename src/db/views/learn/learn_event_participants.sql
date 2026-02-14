@@ -38,5 +38,5 @@ SELECT
     p.FranchiseName             AS Franchise,
     p.EventKey,                 -- Include for advanced join exercises
     p.EntityKey                 -- Include for advanced join exercises
-FROM dbo.sem_event_participant p;
+FROM sem.vw_event_participant p;
 GO

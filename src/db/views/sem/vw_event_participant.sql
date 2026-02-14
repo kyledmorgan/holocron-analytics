@@ -1,5 +1,5 @@
 /*******************************************************************************
- * VIEW: sem_event_participant
+ * VIEW: sem.vw_event_participant
  * 
  * PURPOSE: Canonical semantic view over event participants.
  *          Links events to entities (characters, organizations) with roles.
@@ -16,7 +16,7 @@
  *
  * NOTES: Only returns active, latest version records.
  ******************************************************************************/
-CREATE OR ALTER VIEW dbo.sem_event_participant
+CREATE OR ALTER VIEW sem.vw_event_participant
 AS
 SELECT
     bp.BridgeEventParticipantKey,

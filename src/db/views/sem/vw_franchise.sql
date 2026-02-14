@@ -1,5 +1,5 @@
 /*******************************************************************************
- * VIEW: sem_franchise
+ * VIEW: sem.vw_franchise
  * 
  * PURPOSE: Canonical semantic view over franchise/universe data.
  *          Provides a clean, stable query surface for franchise information.
@@ -14,7 +14,7 @@
  *
  * NOTES: Only returns active, latest version records.
  ******************************************************************************/
-CREATE OR ALTER VIEW dbo.sem_franchise
+CREATE OR ALTER VIEW sem.vw_franchise
 AS
 SELECT
     f.FranchiseKey,
