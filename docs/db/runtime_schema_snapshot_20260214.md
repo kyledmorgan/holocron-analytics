@@ -114,9 +114,9 @@ JOIN sys.columns c ON dc.parent_object_id = c.object_id AND dc.parent_column_id 
 WHERE dc.definition LIKE '%NEWSEQUENTIALID%' AND c.name LIKE '%Guid';
 -- Expected: 0 rows
 
--- Verify ExternalExtKey column exists in DimEntity
+-- Verify ExternalKey column exists in DimEntity
 SELECT name FROM sys.columns 
-WHERE object_id = OBJECT_ID('dbo.DimEntity') AND name = 'ExternalExtKey';
+WHERE object_id = OBJECT_ID('dbo.DimEntity') AND name = 'ExternalKey';
 -- Expected: 1 row
 ```
 
@@ -127,7 +127,7 @@ WHERE object_id = OBJECT_ID('dbo.DimEntity') AND name = 'ExternalExtKey';
 | Check | Status | Notes |
 |-------|--------|-------|
 | All GUIDs use NEWID() | ✅ Scripted | DDL files updated |
-| ExternalId → ExternalExtKey | ✅ Scripted | Migration adds column |
+| ExternalId → ExternalKey | ✅ Scripted | Migration adds column |
 | dbo.sem_* → sem.vw_* | ✅ Scripted | Migration moves views |
 | IngestBatchId → IngestBatchKey | ✅ Scripted | DDL files updated |
 | DimEvent → DimOccurrence | ✅ Scripted | Migration renames table |

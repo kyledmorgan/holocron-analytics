@@ -84,9 +84,9 @@ PRINT 'Section 1 complete.';
 GO
 
 -- ============================================================================
--- SECTION 2: Add ExternalExtKey Columns and Deprecate ExternalId
+-- SECTION 2: Add ExternalKey Columns and Deprecate ExternalId
 -- ============================================================================
--- External/source system IDs should use ...ExtKey naming
+-- External/source system IDs should use ...Key naming
 -- Add new columns, copy data, mark old columns deprecated
 -- ============================================================================
 
@@ -94,37 +94,37 @@ PRINT '';
 PRINT 'Section 2: Standardizing external ID column naming...';
 PRINT '------------------------------------------------------';
 
--- Add ExternalExtKey to DimEntity if not exists
+-- Add ExternalKey to DimEntity if not exists
 IF NOT EXISTS (
     SELECT 1 FROM sys.columns 
     WHERE object_id = OBJECT_ID('[dbo].[DimEntity]') 
-    AND name = 'ExternalExtKey'
+    AND name = 'ExternalKey'
 )
 BEGIN
-    ALTER TABLE [dbo].[DimEntity] ADD ExternalExtKey NVARCHAR(200) NULL;
-    PRINT '  Added: [dbo].[DimEntity].ExternalExtKey column';
+    ALTER TABLE [dbo].[DimEntity] ADD ExternalKey NVARCHAR(200) NULL;
+    PRINT '  Added: [dbo].[DimEntity].ExternalKey column';
     
     -- Copy existing data from ExternalId
     UPDATE [dbo].[DimEntity] 
-    SET ExternalExtKey = ExternalId 
+    SET ExternalKey = ExternalId 
     WHERE ExternalId IS NOT NULL;
-    PRINT '  Copied: ExternalId values to ExternalExtKey';
+    PRINT '  Copied: ExternalId values to ExternalKey';
 END
 ELSE
 BEGIN
-    PRINT '  Skipped: [dbo].[DimEntity].ExternalExtKey already exists';
+    PRINT '  Skipped: [dbo].[DimEntity].ExternalKey already exists';
 END
 GO
 
--- Add ExternalExtKeyType to DimEntity if not exists
+-- Add ExternalKeyType to DimEntity if not exists
 IF NOT EXISTS (
     SELECT 1 FROM sys.columns 
     WHERE object_id = OBJECT_ID('[dbo].[DimEntity]') 
-    AND name = 'ExternalExtKeyType'
+    AND name = 'ExternalKeyType'
 )
 BEGIN
-    ALTER TABLE [dbo].[DimEntity] ADD ExternalExtKeyType NVARCHAR(50) NULL;
-    PRINT '  Added: [dbo].[DimEntity].ExternalExtKeyType column';
+    ALTER TABLE [dbo].[DimEntity] ADD ExternalKeyType NVARCHAR(50) NULL;
+    PRINT '  Added: [dbo].[DimEntity].ExternalKeyType column';
     
     -- Copy existing data from ExternalIdType
     IF EXISTS (
@@ -134,32 +134,32 @@ BEGIN
     )
     BEGIN
         UPDATE [dbo].[DimEntity] 
-        SET ExternalExtKeyType = ExternalIdType 
+        SET ExternalKeyType = ExternalIdType 
         WHERE ExternalIdType IS NOT NULL;
-        PRINT '  Copied: ExternalIdType values to ExternalExtKeyType';
+        PRINT '  Copied: ExternalIdType values to ExternalKeyType';
     END
 END
 ELSE
 BEGIN
-    PRINT '  Skipped: [dbo].[DimEntity].ExternalExtKeyType already exists';
+    PRINT '  Skipped: [dbo].[DimEntity].ExternalKeyType already exists';
 END
 GO
 
--- Add index on ExternalExtKey
+-- Add index on ExternalKey
 IF NOT EXISTS (
     SELECT 1 FROM sys.indexes 
-    WHERE name = 'UX_DimEntity_ExternalExtKey_IsLatest' 
-    AND object_id = OBJECT_ID('[dbo].[DimEntity]')
+    WHERE name = 'UX_DimEntity_ExternalKey_IsLatest' 
+    AND object_id = OBJECT_ID('dbo.DimEntity')
 )
 BEGIN
-    CREATE UNIQUE NONCLUSTERED INDEX UX_DimEntity_ExternalExtKey_IsLatest
-    ON [dbo].[DimEntity] (ExternalExtKey)
-    WHERE ExternalExtKey IS NOT NULL AND IsLatest = 1;
-    PRINT '  Created: Index UX_DimEntity_ExternalExtKey_IsLatest';
+    CREATE UNIQUE NONCLUSTERED INDEX UX_DimEntity_ExternalKey_IsLatest
+    ON [dbo].[DimEntity] (ExternalKey)
+    WHERE ExternalKey IS NOT NULL AND IsLatest = 1;
+    PRINT '  Created: Index UX_DimEntity_ExternalKey_IsLatest';
 END
 ELSE
 BEGIN
-    PRINT '  Skipped: Index UX_DimEntity_ExternalExtKey_IsLatest already exists';
+    PRINT '  Skipped: Index UX_DimEntity_ExternalKey_IsLatest already exists';
 END
 GO
 
@@ -546,7 +546,7 @@ PRINT '================================================';
 PRINT '';
 PRINT 'Summary of changes:';
 PRINT '  - Fixed GUID defaults to use NEWID() instead of NEWSEQUENTIALID()';
-PRINT '  - Added ExternalExtKey column to DimEntity';
+PRINT '  - Added ExternalKey column to DimEntity';
 PRINT '  - Renamed DimEvent → DimOccurrence (where applicable)';
 PRINT '  - Moved dbo.sem_* views to sem schema with vw_ prefix';
 PRINT '';

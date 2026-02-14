@@ -29,8 +29,8 @@ CREATE TABLE dbo.Dim{TableName} (
     {TableName}NameNormalized NVARCHAR(200) NULL,
     {TableName}Type NVARCHAR(50) NULL,
     Description NVARCHAR(1000) NULL,
-    ExternalExtKey NVARCHAR(200) NULL,
-    ExternalExtKeyType NVARCHAR(50) NULL,
+    ExternalKey NVARCHAR(200) NULL,
+    ExternalKeyType NVARCHAR(50) NULL,
     ExternalUrl NVARCHAR(400) NULL,
     Notes NVARCHAR(1000) NULL,
     
@@ -60,9 +60,9 @@ CREATE TABLE dbo.Dim{TableName} (
 -- Indexes
 CREATE INDEX IX_Dim{TableName}_FranchiseKey ON dbo.Dim{TableName}(FranchiseKey);
 CREATE INDEX IX_Dim{TableName}_RowHash ON dbo.Dim{TableName}(RowHash);
-CREATE UNIQUE INDEX UX_Dim{TableName}_ExternalExtKey_IsLatest
-    ON dbo.Dim{TableName}(ExternalExtKey)
-    WHERE ExternalExtKey IS NOT NULL AND IsLatest = 1;
+CREATE UNIQUE INDEX UX_Dim{TableName}_ExternalKey_IsLatest
+    ON dbo.Dim{TableName}(ExternalKey)
+    WHERE ExternalKey IS NOT NULL AND IsLatest = 1;
 GO
 ```
 

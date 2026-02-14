@@ -121,7 +121,7 @@ CreatedUtc DATETIME2(3) NOT NULL DEFAULT SYSUTCDATETIME()
 | Primary Key | `PK_TableName` | `PK_DimEntity` |
 | Foreign Key | `FK_Table_RefTable` | `FK_DimEntity_DimFranchise` |
 | Unique Constraint | `UQ_Table_Column` | `UQ_DimEntity_EntityGuid` |
-| Unique Index | `UX_Table_Columns` | `UX_DimEntity_ExternalExtKey_IsLatest` |
+| Unique Index | `UX_Table_Columns` | `UX_DimEntity_ExternalKey_IsLatest` |
 | Non-Unique Index | `IX_Table_Columns` | `IX_DimEntity_FranchiseKey` |
 | Check Constraint | `CK_Table_Column` | `CK_FactEvent_Status` |
 | Default Constraint | `DF_Table_Column` | `DF_DimEntity_CreatedUtc` |

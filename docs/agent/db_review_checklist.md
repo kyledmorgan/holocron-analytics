@@ -40,7 +40,8 @@ SourceNaturalKey NVARCHAR(400) NULL
 
 -- WRONG
 EntityId INT NOT NULL          -- Should be EntityKey
-external_id NVARCHAR(200) NULL -- Should be ExternalExtKey
+external_id NVARCHAR(200) NULL -- Should be ExternalKey
+ExtKey NVARCHAR(200) NULL      -- Should be ExternalKey
 ```
 
 ### 2. GUID Defaults
@@ -122,7 +123,7 @@ dbo.vw_semantic_data       -- Should be in sem schema
 | Primary Key | `PK_TableName` | `PK_DimEntity` |
 | Foreign Key | `FK_Table_RefTable` | `FK_DimEntity_DimFranchise` |
 | Unique | `UQ_Table_Column` | `UQ_DimEntity_EntityGuid` |
-| Index (unique) | `UX_Table_Columns` | `UX_DimEntity_ExternalExtKey_IsLatest` |
+| Index (unique) | `UX_Table_Columns` | `UX_DimEntity_ExternalKey_IsLatest` |
 | Index (non-unique) | `IX_Table_Columns` | `IX_DimEntity_FranchiseKey` |
 | Check | `CK_Table_Column` | `CK_FactEvent_Status` |
 | Default | `DF_Table_Column` | `DF_DimEntity_CreatedUtc` |

@@ -15,7 +15,7 @@ This refactor standardizes the holocron-analytics database schema to use consist
 ### Key Changes
 
 1. **GUID defaults changed** from `NEWSEQUENTIALID()` to `NEWID()` for security
-2. **External ID columns renamed** from `ExternalId` to `ExternalExtKey`
+2. **External ID columns renamed** from `ExternalId` to `ExternalKey`
 3. **DimEvent renamed** to `DimOccurrence` to avoid semantic collision with `FactEvent`
 4. **Semantic views moved** from `dbo.sem_*` to `sem.vw_*`
 5. **Timestamp standards** enforced: `DATETIME2(3)`, `SYSUTCDATETIME()`, `*Utc` suffix
@@ -62,8 +62,8 @@ This refactor standardizes the holocron-analytics database schema to use consist
 
 | Table | Old Column | New Column | Type | Notes |
 |-------|------------|------------|------|-------|
-| `dbo.DimEntity` | `ExternalId` | `ExternalExtKey` | `NVARCHAR(200)` | External source system ID |
-| `dbo.DimEntity` | `ExternalIdType` | `ExternalExtKeyType` | `NVARCHAR(50)` | Type of external ID |
+| `dbo.DimEntity` | `ExternalId` | `ExternalKey` | `NVARCHAR(200)` | External source system ID |
+| `dbo.DimEntity` | `ExternalIdType` | `ExternalKeyType` | `NVARCHAR(50)` | Type of external ID |
 
 ### 2.2 Batch ID Columns
 
@@ -109,8 +109,8 @@ Code referencing these columns must be updated:
 
 | Table | Old Column | New Column | Impact |
 |-------|------------|------------|--------|
-| `DimEntity` | `ExternalId` | `ExternalExtKey` | Update all SELECTs, INSERTs, stored procs |
-| `DimEntity` | `ExternalIdType` | `ExternalExtKeyType` | Update all SELECTs, INSERTs, stored procs |
+| `DimEntity` | `ExternalId` | `ExternalKey` | Update all SELECTs, INSERTs, stored procs |
+| `DimEntity` | `ExternalIdType` | `ExternalKeyType` | Update all SELECTs, INSERTs, stored procs |
 
 **Migration strategy:** Both columns exist during transition. Old column kept for compatibility with deprecation notice.
 
@@ -128,8 +128,8 @@ Code referencing these objects must be updated:
 ```python
 # Python column mapping
 COLUMN_RENAMES = {
-    'ExternalId': 'ExternalExtKey',
-    'ExternalIdType': 'ExternalExtKeyType',
+    'ExternalId': 'ExternalKey',
+    'ExternalIdType': 'ExternalKeyType',
     'IngestBatchId': 'IngestBatchKey',
 }
 
@@ -149,7 +149,7 @@ VIEW_RENAMES = {
 
 | Old Index | New Index | Table |
 |-----------|-----------|-------|
-| `UX_DimEntity_ExternalId_IsLatest` | `UX_DimEntity_ExternalExtKey_IsLatest` | `DimEntity` |
+| `UX_DimEntity_ExternalId_IsLatest` | `UX_DimEntity_ExternalKey_IsLatest` | `DimEntity` |
 | `IX_DimEvent_EventType` | `IX_DimOccurrence_OccurrenceType` | `DimOccurrence` |
 | `IX_DimEvent_EventName` | `IX_DimOccurrence_OccurrenceName` | `DimOccurrence` |
 
@@ -157,7 +157,7 @@ VIEW_RENAMES = {
 
 | Index | Table | Columns |
 |-------|-------|---------|
-| `UX_DimEntity_ExternalExtKey_IsLatest` | `DimEntity` | `ExternalExtKey` (filtered) |
+| `UX_DimEntity_ExternalKey_IsLatest` | `DimEntity` | `ExternalKey` (filtered) |
 
 ---
 
@@ -188,7 +188,7 @@ After running migrations, the repo DDL should match runtime. Known differences t
 | Object | DDL State | Runtime State | Resolution |
 |--------|-----------|---------------|------------|
 | `dbo.DimEntity.ExternalId` | Deprecated | May exist | Keep during transition |
-| `dbo.DimEntity.ExternalExtKey` | Added | May not exist | Migration adds it |
+| `dbo.DimEntity.ExternalKey` | Added | May not exist | Migration adds it |
 | `dbo.sem_*` views | Dropped | May exist | Migration moves to `sem.vw_*` |
 
 ### 7.2 Recommended Verification Queries
@@ -237,7 +237,7 @@ The following Python files need updates in the next PR:
 
 ### 9.1 Database Access Code
 
-- Update column references: `ExternalId` → `ExternalExtKey`
+- Update column references: `ExternalId` → `ExternalKey`
 - Update view references: `dbo.sem_*` → `sem.vw_*`
 - Update table references: `DimEvent` → `DimOccurrence`
 
@@ -278,8 +278,8 @@ The following documentation was created/updated:
 
 | Table | Old Column | New Column | Reason |
 |-------|------------|------------|--------|
-| `dbo.DimEntity` | `ExternalId` | `ExternalExtKey` | External source ID |
-| `dbo.DimEntity` | `ExternalIdType` | `ExternalExtKeyType` | Type qualifier |
+| `dbo.DimEntity` | `ExternalId` | `ExternalKey` | External source ID |
+| `dbo.DimEntity` | `ExternalIdType` | `ExternalKeyType` | Type qualifier |
 | `dbo.DimEntity` | `IngestBatchId` | `IngestBatchKey` | Batch reference |
 | `dbo.FactEvent` | `IngestBatchId` | `IngestBatchKey` | Batch reference |
 | `dbo.DimOccurrence` | `EventId` | `OccurrenceGuid` | Table renamed |

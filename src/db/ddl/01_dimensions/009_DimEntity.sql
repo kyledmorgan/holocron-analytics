@@ -5,7 +5,7 @@
 -- Key Naming Conventions (see docs/agent/db_policies.md):
 --   EntityKey = internal surrogate key (INT for dimension)
 --   EntityGuid = public-facing stable identifier (random UNIQUEIDENTIFIER)
---   ExternalExtKey = external source system identifier
+--   ExternalKey = external source system identifier
 --
 CREATE TABLE dbo.DimEntity (
     EntityKey INT IDENTITY(1,1) NOT NULL,
@@ -17,8 +17,8 @@ CREATE TABLE dbo.DimEntity (
     DisplayNameNormalized NVARCHAR(200) NULL,
     SortName NVARCHAR(200) NULL,
     AliasCsv NVARCHAR(1000) NULL,
-    ExternalExtKey NVARCHAR(200) NULL,
-    ExternalExtKeyType NVARCHAR(50) NULL,
+    ExternalKey NVARCHAR(200) NULL,
+    ExternalKeyType NVARCHAR(50) NULL,
     ExternalUrl NVARCHAR(400) NULL,
     SummaryShort NVARCHAR(1000) NULL,
     SummaryLong NVARCHAR(2000) NULL,
@@ -48,9 +48,9 @@ CREATE TABLE dbo.DimEntity (
 
 CREATE INDEX IX_DimEntity_FranchiseKey ON dbo.DimEntity(FranchiseKey);
 CREATE INDEX IX_DimEntity_RowHash ON dbo.DimEntity(RowHash);
-CREATE UNIQUE INDEX UX_DimEntity_ExternalExtKey_IsLatest
-    ON dbo.DimEntity(ExternalExtKey)
-    WHERE ExternalExtKey IS NOT NULL AND IsLatest = 1;
+CREATE UNIQUE INDEX UX_DimEntity_ExternalKey_IsLatest
+    ON dbo.DimEntity(ExternalKey)
+    WHERE ExternalKey IS NOT NULL AND IsLatest = 1;
 CREATE UNIQUE INDEX UX_DimEntity_Franchise_DisplayNameType_IsLatest
     ON dbo.DimEntity(FranchiseKey, DisplayName, EntityType)
     WHERE IsLatest = 1;

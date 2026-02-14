@@ -30,7 +30,7 @@ SELECT
     e.DisplayNameNormalized     AS CharacterNameNormalized,
     e.SortName,
     e.AliasCsv                  AS Aliases,
-    e.ExternalExtKey,
+    e.ExternalKey,
     e.SummaryShort,
     e.IsCanonical,
     c.SpeciesKey,
