@@ -15,6 +15,9 @@ This folder contains canonical rules, templates, and checklists for database wor
 | [db_policies.md](db_policies.md) | Canonical naming conventions, key patterns, datetime standards, schema ownership |
 | [db_templates.md](db_templates.md) | Copy-paste templates for tables, views, migrations |
 | [db_review_checklist.md](db_review_checklist.md) | PR review checklist for SQL changes |
+| [DB_NAMING_CONVENTIONS.md](DB_NAMING_CONVENTIONS.md) | Detailed naming convention rules (columns, tables, views, constraints) |
+| [DB_SCHEMA_CHANGE_WORKFLOW.md](DB_SCHEMA_CHANGE_WORKFLOW.md) | Step-by-step process for making schema changes |
+| [SQL_STYLE_GUIDE.md](SQL_STYLE_GUIDE.md) | SQL formatting, keywords, indentation, and best practices |
 
 ## Key Rules Summary
 
@@ -49,5 +52,10 @@ This folder contains canonical rules, templates, and checklists for database wor
 ## Related Documentation
 
 - [Schema Refactor Report](../db/schema_refactor_report.md) — Changes from the standardization migration
+- [Python SQL Alignment Map](../db/python_sql_alignment_map_2026-02-14.md) — Mapping of old → new names for Python/SQL reconciliation
 - [ERD Explained](../diagrams/mermaid/ERD_Explained.md) — Full schema documentation with column dictionaries
 - [DDL Ordering and Manifest](../../agents/playbooks/db/ddl_ordering_and_manifest.md) — DDL file organization
+
+## Verification Tools
+
+- `scripts/verify_schema_alignment.py` — Validates runtime schema against conventions
