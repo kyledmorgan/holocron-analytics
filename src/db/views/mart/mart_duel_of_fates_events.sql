@@ -47,7 +47,7 @@ SELECT
     e.SummaryShort,
     e.ConfidenceScore,
     e.ExtractionMethod
-FROM dbo.sem_event e
+FROM sem.vw_event e
 WHERE e.WorkCode = 'TPM'
   AND e.SceneOrdinal >= 27     -- Doors Open - Maul Revealed
   AND e.SceneOrdinal <= 44;    -- Qui-Gon's Last Words

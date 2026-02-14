@@ -1,5 +1,5 @@
 /*******************************************************************************
- * VIEW: sem_tech_instance
+ * VIEW: sem.vw_tech_instance
  * 
  * PURPOSE: Canonical semantic view over specific technology instances.
  *          Individual ships, droids, weapons with their own identity.
@@ -16,7 +16,7 @@
  *
  * NOTES: Only returns active, latest version records.
  ******************************************************************************/
-CREATE OR ALTER VIEW dbo.sem_tech_instance
+CREATE OR ALTER VIEW sem.vw_tech_instance
 AS
 SELECT
     ti.TechInstanceKey,

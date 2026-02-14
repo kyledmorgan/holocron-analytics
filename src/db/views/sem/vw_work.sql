@@ -1,5 +1,5 @@
 /*******************************************************************************
- * VIEW: sem_work
+ * VIEW: sem.vw_work
  * 
  * PURPOSE: Canonical semantic view over published works (films, series, etc.).
  *          Flattens work information with franchise context.
@@ -16,7 +16,7 @@
  *
  * NOTES: Only returns active, latest version records.
  ******************************************************************************/
-CREATE OR ALTER VIEW dbo.sem_work
+CREATE OR ALTER VIEW sem.vw_work
 AS
 SELECT
     w.WorkKey,

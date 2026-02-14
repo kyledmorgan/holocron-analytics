@@ -48,7 +48,7 @@ SELECT
     e.SummaryShort,
     e.ConfidenceScore,
     e.ExtractionMethod
-FROM dbo.sem_event e
+FROM sem.vw_event e
 WHERE e.WorkCode = 'ANH'
   AND e.SceneOrdinal >= 44     -- Gold Squadron Trench Run
   AND e.SceneOrdinal <= 54;    -- Death Star Destruction

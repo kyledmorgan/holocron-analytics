@@ -1,5 +1,5 @@
 /*******************************************************************************
- * VIEW: sem_event
+ * VIEW: sem.vw_event
  * 
  * PURPOSE: Canonical semantic view over events.
  *          Flattens event information with context from work, scene, location,
@@ -9,16 +9,19 @@
  *
  * KEY COLUMNS:
  *   - EventKey: Surrogate key for joins
- *   - FactEventGuid: Stable external identifier
+ *   - EventGuid: Stable external identifier (FactEventGuid)
  *   - EventOrdinal: Order within the scene
  *   - EventTypeName: Type of event (Combat, Movement, Dialogue, etc.)
  *   - SummaryShort: Brief event description
  *   - ConfidenceScore: Confidence in the event data (0.0 to 1.0)
  *   - WorkTitle, SceneName: Context for where the event occurs
  *
- * NOTES: Only returns active, latest version records.
+ * NOTES: 
+ *   - Only returns active, latest version records.
+ *   - Moved from sem.vw_event as part of schema standardization.
+ *   - See docs/agent/db_policies.md for naming conventions.
  ******************************************************************************/
-CREATE OR ALTER VIEW dbo.sem_event
+CREATE OR ALTER VIEW sem.vw_event
 AS
 SELECT
     ev.EventKey,

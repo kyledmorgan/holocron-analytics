@@ -1,5 +1,5 @@
 /*******************************************************************************
- * VIEW: sem_event_asset
+ * VIEW: sem.vw_event_asset
  * 
  * PURPOSE: Canonical semantic view over event-to-asset relationships.
  *          Links events to technology instances with usage roles.
@@ -16,7 +16,7 @@
  *
  * NOTES: Only returns active, latest version records.
  ******************************************************************************/
-CREATE OR ALTER VIEW dbo.sem_event_asset
+CREATE OR ALTER VIEW sem.vw_event_asset
 AS
 SELECT
     ba.BridgeEventAssetKey,

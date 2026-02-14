@@ -1,5 +1,5 @@
 /*******************************************************************************
- * VIEW: sem_species
+ * VIEW: sem.vw_species
  * 
  * PURPOSE: Canonical semantic view over species/creature data.
  *          Flattens species information with entity context.
@@ -15,7 +15,7 @@
  *
  * NOTES: Only returns active, latest version records.
  ******************************************************************************/
-CREATE OR ALTER VIEW dbo.sem_species
+CREATE OR ALTER VIEW sem.vw_species
 AS
 SELECT
     sp.SpeciesKey,

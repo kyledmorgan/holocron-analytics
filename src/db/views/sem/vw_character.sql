@@ -1,5 +1,5 @@
 /*******************************************************************************
- * VIEW: sem_character
+ * VIEW: sem.vw_character
  * 
  * PURPOSE: Canonical semantic view over character data.
  *          Flattens character information with entity and species context.
@@ -14,9 +14,12 @@
  *   - Gender, RoleArchetype: Character attributes
  *   - EntityKey: Link to base entity record
  *
- * NOTES: Only returns active, latest version records.
+ * NOTES: 
+ *   - Only returns active, latest version records.
+ *   - Moved from dbo.sem_character as part of schema standardization.
+ *   - See docs/agent/db_policies.md for naming conventions.
  ******************************************************************************/
-CREATE OR ALTER VIEW dbo.sem_character
+CREATE OR ALTER VIEW sem.vw_character
 AS
 SELECT
     c.CharacterKey,
@@ -27,7 +30,7 @@ SELECT
     e.DisplayNameNormalized     AS CharacterNameNormalized,
     e.SortName,
     e.AliasCsv                  AS Aliases,
-    e.ExternalId,
+    e.ExternalExtKey,
     e.SummaryShort,
     e.IsCanonical,
     c.SpeciesKey,

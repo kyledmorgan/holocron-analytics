@@ -45,7 +45,7 @@ SELECT
     e.ConfidenceScore,
     p.FranchiseKey,
     p.FranchiseName
-FROM dbo.sem_event_participant p
-INNER JOIN dbo.sem_event e
+FROM sem.vw_event_participant p
+INNER JOIN sem.vw_event e
     ON p.EventKey = e.EventKey;
 GO
