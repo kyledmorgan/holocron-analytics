@@ -368,7 +368,7 @@ BEGIN
             PRINT '  Renamed PK: PK_BridgeEntityEvent → PK_BridgeEntityOccurrence';
         END
         
-        -- Rename EventId to OccurrenceKey
+        -- Rename EventId to OccurrenceGuid (GUID reference to DimOccurrence)
         IF EXISTS (SELECT 1 FROM sys.columns WHERE object_id = OBJECT_ID('dbo.BridgeEntityOccurrence') AND name = 'EventId')
         BEGIN
             EXEC sp_rename 'dbo.BridgeEntityOccurrence.EventId', 'OccurrenceGuid', 'COLUMN';
@@ -675,7 +675,6 @@ BEGIN
             -- Modify definition for new schema/name
             SET @view_def = REPLACE(@view_def, 'dbo.' + @old_name, 'sem.' + @new_name);
             SET @view_def = REPLACE(@view_def, '[dbo].[' + @old_name + ']', '[sem].[' + @new_name + ']');
-            SET @view_def = REPLACE(@view_def, 'CREATE VIEW', 'CREATE VIEW');
             SET @view_def = REPLACE(@view_def, 'CREATE OR ALTER VIEW', 'CREATE VIEW');
             
             -- Create new view
@@ -714,6 +713,8 @@ END;
 GO
 
 -- Move all semantic views
+-- NOTE: sem.vw_event references FactEvent (analytical events), not DimEvent/DimOccurrence
+-- The view naming follows semantic domain concepts, not table names directly
 EXEC dbo.__usp_move_semantic_view 'sem_event', 'vw_event';
 EXEC dbo.__usp_move_semantic_view 'sem_character', 'vw_character';
 EXEC dbo.__usp_move_semantic_view 'sem_species', 'vw_species';
