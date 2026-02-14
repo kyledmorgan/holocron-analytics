@@ -232,14 +232,20 @@ class SchemaValidator:
         """Run all validation checks."""
         print("Running schema alignment checks...")
         
-        self.check_guid_defaults()
-        self.check_id_columns()
-        self.check_datetime_types()
-        self.check_timestamp_naming()
-        self.check_sem_views_location()
-        self.check_sem_views_prefix()
+        # List of check methods to run
+        checks = [
+            self.check_guid_defaults,
+            self.check_id_columns,
+            self.check_datetime_types,
+            self.check_timestamp_naming,
+            self.check_sem_views_location,
+            self.check_sem_views_prefix,
+        ]
         
-        print(f"Completed {6} checks.")
+        for check in checks:
+            check()
+        
+        print(f"Completed {len(checks)} checks.")
     
     def report(self) -> int:
         """Print validation report and return exit code."""
