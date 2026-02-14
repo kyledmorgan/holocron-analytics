@@ -21,6 +21,187 @@ The holocron-analytics LLM pipeline has **comprehensive observability** built-in
 
 ---
 
+## Visual Reference Pack (Mermaid + draw.io)
+
+Draw.io source files (presentation format):
+
+- `docs/llm/diagrams/llm_observability_system_context.drawio`
+- `docs/llm/diagrams/llm_observability_correlation_chain.drawio`
+- `docs/llm/diagrams/llm_observability_artifact_lifecycle.drawio`
+- `docs/llm/diagrams/llm_observability_evidence_linkage.drawio`
+- `docs/llm/diagrams/llm_observability_no_new_rows_troubleshooting.drawio`
+- `docs/llm/diagrams/llm_observability_stored_proc_boundary.drawio`
+
+> Open `.drawio` files in diagrams.net (draw.io). SVG exports are not included in this revision.
+
+### 1) System context flow (Python / Ollama / SQL / filesystem lake)
+
+```mermaid
+flowchart LR
+  subgraph PY[Python runtime]
+    DISP["dispatcher.py / handlers"]
+    QUEUE["sql_job_queue.py"]
+    LAKEW["lake_writer.py"]
+  end
+  subgraph OLL[Ollama API]
+    OCHAT["/api/chat or /api/generate"]
+  end
+  subgraph SQL[SQL Server]
+    subgraph LLM[llm schema]
+      JOB["llm.job"]
+      RUN["llm.run"]
+      ART["llm.artifact"]
+      EB["llm.evidence_bundle"]
+      RE["llm.run_evidence"]
+    end
+    subgraph DBO[dbo schema]
+      PROC["dbo.usp_batch_insert_entities"]
+      DIM["dbo.DimEntity (+ downstream dbo tables)"]
+    end
+  end
+  subgraph LAKE[Filesystem lake]
+    ROOT["{LAKE_ROOT}/YYYY/MM/DD/{run_id}/..."]
+  end
+
+  QUEUE -->|claim/create| JOB
+  JOB --> RUN
+  DISP --> OCHAT
+  DISP --> LAKEW
+  LAKEW -->|request/response/prompt/output/result files| ROOT
+  LAKEW -->|artifact pointers| ART
+  DISP -->|attach evidence| EB
+  RUN --> RE
+  EB --> RE
+  DISP -->|@entities_json, @run_id, @job_id, @source_page_id| PROC
+  PROC --> DIM
+  PROC -->|summary/per-entity status| RUN
+```
+
+### 2) Correlation chain (IDs and joins)
+
+```mermaid
+flowchart TD
+  J["llm.job\njob_id (PK)\ndedupe_key\ninput_json/evidence_ref_json"] -->|job_id FK| R["llm.run\nrun_id (PK)\njob_id (FK)\nstatus/metrics_json"]
+  R -->|run_id FK| A["llm.artifact\nartifact_id (PK)\nrun_id (FK)\nartifact_type\nlake_uri"]
+  R -->|run_id FK| RE["llm.run_evidence\nrun_id + bundle_id"]
+  RE -->|bundle_id FK| EB["llm.evidence_bundle\nbundle_id (PK)\nlake_uri (evidence.json)"]
+  R -->|proc params| P["dbo.usp_batch_insert_entities\n@run_id @job_id @source_page_id @entities_json"]
+  P --> D["dbo.DimEntity\nAdjudicationRunId\nSourcePageId"]
+  SP["source_page_id (if populated in run context)"] -.-> P
+  DK["dedupe_key (job-level idempotency)"] -.-> J
+```
+
+### 3) Artifact lifecycle (write points + mapping)
+
+```mermaid
+flowchart LR
+  subgraph WRITE[Python write points]
+    WRQ["write_request()"]
+    WRP["write_prompt()"]
+    WRS["write_response()"]
+    WRO["write_output()"]
+    WRM["write_run_meta()/job/result/evidence writes"]
+  end
+
+  subgraph FILES["Lake path: {LAKE_ROOT}/{YYYY}/{MM}/{DD}/{run_id}/"]
+    F1["request.json"]
+    F2["prompt.txt"]
+    F3["response.json"]
+    F4["output.json"]
+    F5["run_meta.json"]
+    F6["job.json"]
+    F7["evidence.json"]
+    F8["result.json"]
+  end
+
+  subgraph MAP["llm.artifact mapping"]
+    A1["request_json -> lake_uri"]
+    A2["prompt_text -> lake_uri"]
+    A3["response_json -> lake_uri"]
+    A4["parsed_output -> lake_uri"]
+    A5["evidence_bundle -> lake_uri"]
+  end
+
+  WRQ --> F1 --> A1
+  WRP --> F2 --> A2
+  WRS --> F3 --> A3
+  WRO --> F4 --> A4
+  WRM --> F5
+  WRM --> F6
+  WRM --> F7 --> A5
+  WRM --> F8
+```
+
+### 4) Evidence linkage
+
+```mermaid
+flowchart TD
+  R["llm.run\nrun_id"] --> RE["llm.run_evidence\nrun_id + bundle_id + attached_utc"]
+  RE --> EB["llm.evidence_bundle\nbundle_id\npolicy_json\nsummary_json\nlake_uri"]
+  EB --> L["lake/.../{run_id}/evidence.json"]
+  L --> EI["Evidence items referenced in bundle content"]
+  R --> AR["llm.artifact (optional evidence_bundle pointer)\nartifact_type='evidence_bundle'"]
+```
+
+### 5) Troubleshooting decision tree: “No new rows in dbo”
+
+```mermaid
+flowchart TD
+  START["No new rows in dbo.DimEntity"] --> DRY{"execution_mode = dry_run?"}
+  DRY -->|Yes| DRYQ["Check SQL:\nSELECT options_json FROM llm.run WHERE run_id=@RunId;\nInspect lake: result.json for dry_run=true"]
+  DRY -->|No| SKIP{"Handler skipped?"}
+  SKIP -->|Yes| SKIPQ["Check SQL:\nSELECT metrics_json,status FROM llm.run WHERE run_id=@RunId;\nInspect lake: result.json for skipped reason"]
+  SKIP -->|No| STORE{"entity_store is None?"}
+  STORE -->|Yes| STOREQ["Check runtime config + logs;\nCode path to confirm: entity_extraction_droid.py guard before _persist_entities()"]
+  STORE -->|No| VALID{"Validation errors?"}
+  VALID -->|Yes| VALQ["Check SQL:\nSELECT status,error,metrics_json FROM llm.run WHERE run_id=@RunId;\nInspect lake: validation_errors.json (if present)"]
+  VALID -->|No| DEDUPE{"Dedupe/updates only?"}
+  DEDUPE -->|Yes| DEDQ["Check SQL:\nEXEC dbo.usp_get_entities_by_type @entity_type='Droid', @run_id=@RunId;\nInspect proc summary/per-entity statuses"]
+  DEDUPE -->|No| BOUND{"Stored proc called?"}
+  BOUND -->|No| BQ["Inspect lake output.json + result.json and handler logs for proc call path"]
+  BOUND -->|Yes| DONE["Investigate downstream dbo tables and run-linked columns (AdjudicationRunId/SourcePageId)"]
+```
+
+### 6) Stored procedure boundary
+
+```mermaid
+flowchart LR
+  subgraph PY["Python handler boundary"]
+    IN["Validated entities contract\n(output.json)"]
+    CALL["EntityStore -> execute proc"]
+    MET["Run completion writes\nllm.run.metrics_json / status / error\n+ lake result.json"]
+  end
+
+  subgraph PROC["dbo.usp_batch_insert_entities (black box)"]
+    PIN["Inputs:\n@entities_json\n@run_id\n@job_id\n@source_page_id"]
+    POUT["Outputs:\nSummary: inserted/updated/skipped/error counts\nDetails: per-entity processing_status"]
+  end
+
+  subgraph DBO2["dbo targets"]
+    DENT["dbo.DimEntity"]
+    DOTHER["Other dbo tables (as handler/proc path applies)"]
+  end
+
+  IN --> CALL --> PIN --> POUT --> MET
+  POUT --> DENT
+  POUT --> DOTHER
+```
+
+### Debugging checklist (diagram-first)
+
+- [ ] Start with **Correlation chain** to identify `run_id`/`job_id` and join path.
+- [ ] Use **Artifact lifecycle** to locate exact files via `llm.artifact.lake_uri`.
+- [ ] Use **Evidence linkage** to confirm `llm.run_evidence` and evidence bundle attachment.
+- [ ] Use **Stored procedure boundary** to isolate Python input vs SQL output behavior.
+- [ ] Use **No new rows** decision tree for focused SQL/artifact checks.
+
+### Discrepancies / to confirm
+
+- `llm.artifact.artifact_type` naming vs file naming should be treated separately (example: `parsed_output` points to `output.json`); confirm no additional active artifact types per handler path.
+- `source_page_id` is shown as conditional because it depends on job/run context and handler path; confirm population behavior for the specific interrogation/job type under investigation.
+
+---
+
 ## Part A: End-to-End Traceability Map
 
 ### Correlation Chain
