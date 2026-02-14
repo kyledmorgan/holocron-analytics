@@ -82,6 +82,7 @@ New to this repository? Start with these essential documents:
 | [LLM Configuration Reference](../src/llm/config/config.md) | Configuration options and environment variables |
 | [LLM Contracts README](../src/llm/contracts/README.md) | JSON schema documentation for manifests and outputs |
 | [Interrogations README](../src/llm/interrogations/README.md) | Interrogation catalog concept and structure |
+| [Pipeline Observability](llm/llm-pipeline-observability-current-state.md) | End-to-end traceability map and artifact locations |
 
 ### Vector Runtime
 
@@ -190,6 +191,7 @@ All Markdown files in this repository, grouped by location:
 | [dependency-inventory-vector-subsystem.md](llm/dependency-inventory-vector-subsystem.md) | Vector subsystem dependency analysis |
 | [status.md](llm/status.md) | Implementation status tracker |
 | [vision-and-roadmap.md](llm/vision-and-roadmap.md) | Vision, goals, and phased roadmap |
+| [llm-pipeline-observability-current-state.md](llm/llm-pipeline-observability-current-state.md) | End-to-end traceability, artifact locations, and investigation queries |
 
 ### `docs/vector/`
 
