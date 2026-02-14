@@ -116,6 +116,35 @@ BEGIN
 END
 GO
 
+-- Add ExternalExtKeyType to DimEntity if not exists
+IF NOT EXISTS (
+    SELECT 1 FROM sys.columns 
+    WHERE object_id = OBJECT_ID('[dbo].[DimEntity]') 
+    AND name = 'ExternalExtKeyType'
+)
+BEGIN
+    ALTER TABLE [dbo].[DimEntity] ADD ExternalExtKeyType NVARCHAR(50) NULL;
+    PRINT '  Added: [dbo].[DimEntity].ExternalExtKeyType column';
+    
+    -- Copy existing data from ExternalIdType
+    IF EXISTS (
+        SELECT 1 FROM sys.columns 
+        WHERE object_id = OBJECT_ID('[dbo].[DimEntity]') 
+        AND name = 'ExternalIdType'
+    )
+    BEGIN
+        UPDATE [dbo].[DimEntity] 
+        SET ExternalExtKeyType = ExternalIdType 
+        WHERE ExternalIdType IS NOT NULL;
+        PRINT '  Copied: ExternalIdType values to ExternalExtKeyType';
+    END
+END
+ELSE
+BEGIN
+    PRINT '  Skipped: [dbo].[DimEntity].ExternalExtKeyType already exists';
+END
+GO
+
 -- Add index on ExternalExtKey
 IF NOT EXISTS (
     SELECT 1 FROM sys.indexes 
