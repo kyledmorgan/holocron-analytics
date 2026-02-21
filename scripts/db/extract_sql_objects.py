@@ -33,6 +33,7 @@ Exit codes:
 """
 
 import argparse
+import getpass
 import os
 import re
 import sys
@@ -121,7 +122,69 @@ def get_connection_string() -> str:
         f"Database={database};"
         f"UID={username};"
         f"PWD={password};"
+        f"Encrypt=no;"
         f"TrustServerCertificate=yes"
+    )
+
+
+def _upsert_connection_option(conn_str: str, key: str, value: str) -> str:
+    """Insert or replace a single key=value pair in an ODBC connection string."""
+    segments = [segment for segment in conn_str.split(";") if segment.strip()]
+    key_lower = key.lower()
+    updated = False
+    patched: List[str] = []
+
+    for segment in segments:
+        if "=" not in segment:
+            patched.append(segment)
+            continue
+
+        current_key, _ = segment.split("=", 1)
+        if current_key.strip().lower() == key_lower:
+            patched.append(f"{key}={value}")
+            updated = True
+        else:
+            patched.append(segment)
+
+    if not updated:
+        patched.append(f"{key}={value}")
+
+    return ";".join(patched) + ";"
+
+
+def _apply_connection_overrides(
+    conn_str: str,
+    encrypt: Optional[bool],
+    trust_server_cert: Optional[bool],
+    password: Optional[str],
+) -> str:
+    """Patch connection string with explicit transport/security options."""
+    if encrypt is not None:
+        conn_str = _upsert_connection_option(conn_str, "Encrypt", "yes" if encrypt else "no")
+    else:
+        # Keep deterministic behavior even for override strings.
+        conn_str = _upsert_connection_option(conn_str, "Encrypt", "no")
+
+    if trust_server_cert is not None:
+        conn_str = _upsert_connection_option(
+            conn_str, "TrustServerCertificate", "yes" if trust_server_cert else "no"
+        )
+    else:
+        # Keep deterministic behavior even for override strings.
+        conn_str = _upsert_connection_option(conn_str, "TrustServerCertificate", "yes")
+
+    if password is not None:
+        conn_str = _upsert_connection_option(conn_str, "PWD", password)
+
+    return conn_str
+
+
+def _mask_connection_string(conn_str: str) -> str:
+    """Mask password-like fields before printing."""
+    return re.sub(
+        r"(?i)\b(pwd|password)\s*=\s*([^;]*)",
+        r"\1=***",
+        conn_str,
     )
 
 
@@ -391,6 +454,48 @@ def main() -> int:
         default=None,
         help="Comma-separated list of schemas to include (default: dbo,sem,llm,ingest,vector)",
     )
+    encrypt_group = parser.add_mutually_exclusive_group()
+    encrypt_group.add_argument(
+        "--encrypt",
+        dest="encrypt",
+        action="store_true",
+        default=None,
+        help="Set Encrypt=yes in the SQL Server connection string",
+    )
+    encrypt_group.add_argument(
+        "--no-encrypt",
+        dest="encrypt",
+        action="store_false",
+        default=None,
+        help="Set Encrypt=no in the SQL Server connection string",
+    )
+    trust_group = parser.add_mutually_exclusive_group()
+    trust_group.add_argument(
+        "--trust-server-cert",
+        dest="trust_server_cert",
+        action="store_true",
+        default=None,
+        help="Set TrustServerCertificate=yes in the SQL Server connection string",
+    )
+    trust_group.add_argument(
+        "--no-trust-server-cert",
+        dest="trust_server_cert",
+        action="store_false",
+        default=None,
+        help="Set TrustServerCertificate=no in the SQL Server connection string",
+    )
+    password_group = parser.add_mutually_exclusive_group()
+    password_group.add_argument(
+        "--password",
+        type=str,
+        default=None,
+        help="Set SQL Server password (overrides env/connection string password)",
+    )
+    password_group.add_argument(
+        "--prompt-password",
+        action="store_true",
+        help="Prompt securely for SQL Server password",
+    )
     args = parser.parse_args()
 
     if not args.extract and not args.reconcile:
@@ -405,19 +510,30 @@ def main() -> int:
 
     # Connect
     conn_str = args.connection_string or get_connection_string()
+    password_override = args.password
+    if args.prompt_password:
+        password_override = getpass.getpass("SQL Server password: ")
+    conn_str = _apply_connection_overrides(
+        conn_str=conn_str,
+        encrypt=args.encrypt,
+        trust_server_cert=args.trust_server_cert,
+        password=password_override,
+    )
+
     if args.verbose:
-        masked = conn_str
-        if "PWD=" in masked:
-            start = masked.find("PWD=") + 4
-            end = masked.find(";", start) if ";" in masked[start:] else len(masked)
-            masked = masked[:start] + "***" + masked[end:]
-        print(f"Connection: {masked}")
+        print(f"Connection: {_mask_connection_string(conn_str)}")
 
     try:
         conn = pyodbc.connect(conn_str)
         print("Connected to SQL Server.")
     except pyodbc.Error as e:
         print(f"ERROR: Failed to connect to database: {e}")
+        print(
+            "Hint: verify password/host/port/container, then test with sqlcmd. "
+            "Examples:\n"
+            "  sqlcmd -S <host>,<port> -U <user> -P <password> -N -C\n"
+            "  sqlcmd -S <host>,<port> -U <user> -P <password> -N disable"
+        )
         return 2
 
     try:
