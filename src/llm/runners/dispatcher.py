@@ -440,8 +440,10 @@ class JobDispatcher:
             evidence_bundle = self._build_evidence_bundle(job, ctx)
             
             # Write evidence artifact
+            evidence_dict = evidence_bundle.to_dict()
+            evidence_content = json.dumps(evidence_dict, indent=2, ensure_ascii=False, default=str)
             evidence_artifact = self.lake_writer.write_evidence(
-                ctx.run_id, evidence_bundle.to_dict(), timestamp
+                ctx.run_id, evidence_dict, timestamp
             )
             artifacts.append(ArtifactReference(
                 artifact_type="evidence_bundle",
@@ -455,6 +457,10 @@ class JobDispatcher:
                 lake_uri=evidence_artifact.lake_uri,
                 content_sha256=evidence_artifact.content_sha256,
                 byte_count=evidence_artifact.byte_count,
+                content=evidence_content,
+                content_mime_type="application/json",
+                stored_in_sql=True,
+                mirrored_to_lake=True,
             )
             
             # Render prompt
@@ -475,6 +481,10 @@ class JobDispatcher:
                 lake_uri=prompt_artifact.lake_uri,
                 content_sha256=prompt_artifact.content_sha256,
                 byte_count=prompt_artifact.byte_count,
+                content=prompt,
+                content_mime_type="text/plain",
+                stored_in_sql=True,
+                mirrored_to_lake=True,
             )
             
             # Write job metadata artifact (for dry-run debugging)
@@ -627,8 +637,21 @@ class JobDispatcher:
     ) -> None:
         """Complete the run based on handler result."""
         # Write result artifact
+        result_dict = result.to_dict()
+        result_content = json.dumps(result_dict, indent=2, ensure_ascii=False, default=str)
         result_artifact = self.lake_writer.write_json(
-            ctx.run_id, "result", result.to_dict(), timestamp
+            ctx.run_id, "result", result_dict, timestamp
+        )
+        self.queue.create_artifact(
+            run_id=ctx.run_id,
+            artifact_type="parsed_output",
+            lake_uri=result_artifact.lake_uri,
+            content_sha256=result_artifact.content_sha256,
+            byte_count=result_artifact.byte_count,
+            content=result_content,
+            content_mime_type="application/json",
+            stored_in_sql=True,
+            mirrored_to_lake=True,
         )
         
         log_ctx = ctx.get_log_context()

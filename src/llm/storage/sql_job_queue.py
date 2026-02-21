@@ -534,19 +534,32 @@ class SqlJobQueue:
         self,
         run_id: str,
         artifact_type: str,
-        lake_uri: str,
+        lake_uri: Optional[str] = None,
         content_sha256: Optional[str] = None,
         byte_count: Optional[int] = None,
+        content: Optional[str] = None,
+        content_mime_type: Optional[str] = None,
+        stored_in_sql: bool = False,
+        mirrored_to_lake: bool = False,
     ) -> str:
         """
-        Record an artifact written to the lake.
+        Record an artifact, optionally with literal content stored in SQL.
+        
+        SQL is the system of record. The lake is additive/optional.
+        When ``content`` is provided the payload is persisted directly
+        in the ``llm.artifact`` row so runs can be reconstructed from
+        SQL alone without the data lake.
         
         Args:
             run_id: The run ID this artifact belongs to
             artifact_type: Type of artifact (e.g., "request_json", "response_json")
-            lake_uri: Path to the artifact in the lake
+            lake_uri: Path to the artifact in the lake (optional when SQL-first)
             content_sha256: SHA256 hash of the content
             byte_count: Size in bytes
+            content: Literal artifact payload (JSON or text)
+            content_mime_type: MIME type of the content (e.g., "application/json")
+            stored_in_sql: Whether the content is stored in SQL
+            mirrored_to_lake: Whether the content is also in the lake
             
         Returns:
             The created artifact_id
@@ -558,8 +571,16 @@ class SqlJobQueue:
             cursor.execute(
                 f"EXEC [{self.config.schema}].[usp_create_artifact] "
                 f"@run_id = ?, @artifact_type = ?, @lake_uri = ?, "
-                f"@content_sha256 = ?, @byte_count = ?",
-                (run_id, artifact_type, lake_uri, content_sha256, byte_count)
+                f"@content_sha256 = ?, @byte_count = ?, "
+                f"@content = ?, @content_mime_type = ?, "
+                f"@stored_in_sql = ?, @mirrored_to_lake = ?",
+                (
+                    run_id, artifact_type, lake_uri,
+                    content_sha256, byte_count,
+                    content, content_mime_type,
+                    1 if stored_in_sql else 0,
+                    1 if mirrored_to_lake else 0,
+                )
             )
             
             row = cursor.fetchone()
@@ -578,17 +599,22 @@ class SqlJobQueue:
         build_version: str,
         policy_json: str,
         summary_json: str,
-        lake_uri: str,
+        lake_uri: Optional[str] = None,
+        bundle_json: Optional[str] = None,
     ) -> None:
         """
         Record an evidence bundle used for runs.
+        
+        When ``bundle_json`` is provided the full evidence payload is
+        persisted in SQL so the bundle can be recovered without the lake.
         
         Args:
             bundle_id: UUID of the evidence bundle
             build_version: Evidence builder version
             policy_json: JSON string of the evidence policy
             summary_json: JSON string of the bundle summary
-            lake_uri: Path to the bundle artifact in the lake
+            lake_uri: Path to the bundle artifact in the lake (optional)
+            bundle_json: Full evidence bundle JSON content (optional)
         """
         try:
             conn = self._get_connection()
@@ -597,10 +623,10 @@ class SqlJobQueue:
             cursor.execute(
                 f"""
                 INSERT INTO [{self.config.schema}].[evidence_bundle] 
-                (bundle_id, created_utc, build_version, policy_json, summary_json, lake_uri)
-                VALUES (?, SYSUTCDATETIME(), ?, ?, ?, ?)
+                (bundle_id, created_utc, build_version, policy_json, summary_json, lake_uri, bundle_json)
+                VALUES (?, SYSUTCDATETIME(), ?, ?, ?, ?, ?)
                 """,
-                (bundle_id, build_version, policy_json, summary_json, lake_uri)
+                (bundle_id, build_version, policy_json, summary_json, lake_uri, bundle_json)
             )
             
             conn.commit()
