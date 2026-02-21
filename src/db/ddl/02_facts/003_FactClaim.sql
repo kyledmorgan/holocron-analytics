@@ -32,7 +32,8 @@ CREATE TABLE dbo.FactClaim (
     SourceSystem NVARCHAR(100) NULL,
     SourceRef NVARCHAR(400) NULL,
     IngestBatchKey NVARCHAR(100) NULL,
-    AttributesJson NVARCHAR(max) NULL,
+    EvidenceBundleGuid UNIQUEIDENTIFIER NULL,
+    AttributesJson NVARCHAR(MAX) NULL,
 
     CONSTRAINT PK_FactClaim PRIMARY KEY CLUSTERED (ClaimKey),
     CONSTRAINT UQ_FactClaim_FactClaimGuid UNIQUE (FactClaimGuid),
@@ -53,3 +54,5 @@ CREATE UNIQUE INDEX UX_FactClaim_Subject_Predicate_IsLatest
     ON dbo.FactClaim(SubjectEntityKey, Predicate)
     WHERE IsLatest = 1;
 CREATE INDEX IX_FactClaim_IsLatest ON dbo.FactClaim(IsLatest);
+CREATE INDEX IX_FactClaim_EvidenceBundleGuid ON dbo.FactClaim(EvidenceBundleGuid)
+    WHERE EvidenceBundleGuid IS NOT NULL;

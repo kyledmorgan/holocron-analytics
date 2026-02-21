@@ -96,6 +96,12 @@ class EvidenceItem:
         metadata: Additional metadata (row counts, mime type, offsets, bounding info, etc.)
         offsets: Optional line/byte ranges or chunk index
         full_ref: Optional pointer to full unbounded artifact if stored separately
+        source_system: Normalized origin system (wikipedia, youtube, pdf, sql, etc.)
+        source_uri: Canonical URL when applicable (external sources)
+        selector_json: Structured selection details (offsets, page ranges, timestamps, etc.)
+        ordinal: Ordering within the bundle for deterministic assembly
+        role: How this evidence is used (primary, supporting, counter, context)
+        excerpt_hash: Hash of the excerpt used if different from full content
     """
     evidence_id: str
     evidence_type: str
@@ -106,6 +112,12 @@ class EvidenceItem:
     metadata: Dict[str, Any] = field(default_factory=dict)
     offsets: Optional[Dict[str, Any]] = None
     full_ref: Optional[Dict[str, Any]] = None
+    source_system: Optional[str] = None
+    source_uri: Optional[str] = None
+    selector_json: Optional[Dict[str, Any]] = None
+    ordinal: Optional[int] = None
+    role: Optional[str] = None
+    excerpt_hash: Optional[str] = None
     
     def to_dict(self) -> Dict[str, Any]:
         """Convert to dictionary for serialization."""
@@ -122,6 +134,18 @@ class EvidenceItem:
             result["offsets"] = self.offsets
         if self.full_ref:
             result["full_ref"] = self.full_ref
+        if self.source_system is not None:
+            result["source_system"] = self.source_system
+        if self.source_uri is not None:
+            result["source_uri"] = self.source_uri
+        if self.selector_json is not None:
+            result["selector_json"] = self.selector_json
+        if self.ordinal is not None:
+            result["ordinal"] = self.ordinal
+        if self.role is not None:
+            result["role"] = self.role
+        if self.excerpt_hash is not None:
+            result["excerpt_hash"] = self.excerpt_hash
         return result
     
     @classmethod
@@ -137,6 +161,12 @@ class EvidenceItem:
             metadata=data.get("metadata", {}),
             offsets=data.get("offsets"),
             full_ref=data.get("full_ref"),
+            source_system=data.get("source_system"),
+            source_uri=data.get("source_uri"),
+            selector_json=data.get("selector_json"),
+            ordinal=data.get("ordinal"),
+            role=data.get("role"),
+            excerpt_hash=data.get("excerpt_hash"),
         )
 
 
@@ -155,6 +185,10 @@ class EvidenceBundle:
         policy: Bounding policy used to create this bundle
         items: List of evidence items
         summary: Summary statistics (counts by type, total bytes, token estimate)
+        bundle_sha256: Deterministic hash of ordered membership + content hashes
+        bundle_kind: Bundle category (llm_input, human_review_packet, etc.)
+        created_by: Worker/user identifier that assembled the bundle
+        notes: Optional human commentary about why these sources were assembled
     """
     bundle_id: str = field(default_factory=lambda: str(uuid.uuid4()))
     created_utc: datetime = field(default_factory=lambda: datetime.now(timezone.utc))
@@ -162,6 +196,10 @@ class EvidenceBundle:
     policy: EvidencePolicy = field(default_factory=EvidencePolicy)
     items: List[EvidenceItem] = field(default_factory=list)
     summary: Dict[str, Any] = field(default_factory=dict)
+    bundle_sha256: Optional[str] = None
+    bundle_kind: Optional[str] = None
+    created_by: Optional[str] = None
+    notes: Optional[str] = None
     
     def compute_summary(self) -> None:
         """Compute summary statistics for the bundle."""
@@ -183,9 +221,25 @@ class EvidenceBundle:
             "approx_tokens": approx_tokens,
         }
     
+    def compute_bundle_hash(self) -> str:
+        """
+        Compute a deterministic hash of bundle composition.
+        
+        The hash is derived from ordered item content hashes to enable
+        deduplication and reuse of identical bundles.
+        
+        Returns:
+            SHA256 hex digest of the bundle's ordered content.
+        """
+        hasher = hashlib.sha256()
+        for item in self.items:
+            hasher.update(item.content_sha256.encode())
+        self.bundle_sha256 = hasher.hexdigest()
+        return self.bundle_sha256
+    
     def to_dict(self) -> Dict[str, Any]:
         """Convert to dictionary for serialization."""
-        return {
+        result = {
             "bundle_id": self.bundle_id,
             "created_utc": self.created_utc.isoformat(),
             "build_version": self.build_version,
@@ -193,6 +247,15 @@ class EvidenceBundle:
             "items": [item.to_dict() for item in self.items],
             "summary": self.summary,
         }
+        if self.bundle_sha256 is not None:
+            result["bundle_sha256"] = self.bundle_sha256
+        if self.bundle_kind is not None:
+            result["bundle_kind"] = self.bundle_kind
+        if self.created_by is not None:
+            result["created_by"] = self.created_by
+        if self.notes is not None:
+            result["notes"] = self.notes
+        return result
     
     def to_json(self) -> str:
         """Convert to JSON string."""
@@ -211,6 +274,10 @@ class EvidenceBundle:
             policy=policy,
             items=items,
             summary=data.get("summary", {}),
+            bundle_sha256=data.get("bundle_sha256"),
+            bundle_kind=data.get("bundle_kind"),
+            created_by=data.get("created_by"),
+            notes=data.get("notes"),
         )
     
     @classmethod

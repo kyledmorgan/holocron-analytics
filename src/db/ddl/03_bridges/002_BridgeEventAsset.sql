@@ -24,7 +24,8 @@ CREATE TABLE dbo.BridgeEventAsset (
     SourceSystem NVARCHAR(100) NULL,
     SourceRef NVARCHAR(400) NULL,
     IngestBatchKey NVARCHAR(100) NULL,
-    AttributesJson NVARCHAR(max) NULL,
+    EvidenceBundleGuid UNIQUEIDENTIFIER NULL,
+    AttributesJson NVARCHAR(MAX) NULL,
 
     CONSTRAINT PK_BridgeEventAsset PRIMARY KEY CLUSTERED (BridgeEventAssetKey),
     CONSTRAINT UQ_BridgeEventAsset_BridgeEventAssetGuid UNIQUE (BridgeEventAssetGuid),
@@ -39,3 +40,5 @@ CREATE UNIQUE INDEX UX_BridgeEventAsset_Event_Asset_IsLatest
     ON dbo.BridgeEventAsset(EventKey, TechInstanceKey)
     WHERE IsLatest = 1;
 CREATE INDEX IX_BridgeEventAsset_IsLatest ON dbo.BridgeEventAsset(IsLatest);
+CREATE INDEX IX_BridgeEventAsset_EvidenceBundleGuid ON dbo.BridgeEventAsset(EvidenceBundleGuid)
+    WHERE EvidenceBundleGuid IS NOT NULL;

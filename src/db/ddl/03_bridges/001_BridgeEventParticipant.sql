@@ -27,7 +27,8 @@ CREATE TABLE dbo.BridgeEventParticipant (
     SourceSystem NVARCHAR(100) NULL,
     SourceRef NVARCHAR(400) NULL,
     IngestBatchKey NVARCHAR(100) NULL,
-    AttributesJson NVARCHAR(max) NULL,
+    EvidenceBundleGuid UNIQUEIDENTIFIER NULL,
+    AttributesJson NVARCHAR(MAX) NULL,
 
     CONSTRAINT PK_BridgeEventParticipant PRIMARY KEY CLUSTERED (BridgeEventParticipantKey),
     CONSTRAINT UQ_BridgeEventParticipant_BridgeEventParticipantGuid UNIQUE (BridgeEventParticipantGuid),
@@ -42,3 +43,5 @@ CREATE UNIQUE INDEX UX_BridgeEventParticipant_Event_Entity_Role_IsLatest
     ON dbo.BridgeEventParticipant(EventKey, EntityKey, RoleInEvent)
     WHERE IsLatest = 1;
 CREATE INDEX IX_BridgeEventParticipant_IsLatest ON dbo.BridgeEventParticipant(IsLatest);
+CREATE INDEX IX_BridgeEventParticipant_EvidenceBundleGuid ON dbo.BridgeEventParticipant(EvidenceBundleGuid)
+    WHERE EvidenceBundleGuid IS NOT NULL;
