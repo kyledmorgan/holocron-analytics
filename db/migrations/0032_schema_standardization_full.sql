@@ -13,14 +13,14 @@
 --
 -- STRATEGIES:
 --   A) Safe drop/recreate (RowCount = 0): Drop and recreate from canonical DDL
---   B) Data-preserving migration (RowCount > 0): Backup → Drop → Recreate → Copy → Validate
+--   B) Data-preserving migration (RowCount > 0): Backup -> Drop -> Recreate -> Copy -> Validate
 --
 -- KEY CHANGES:
---   1. GUID defaults: NEWSEQUENTIALID() → NEWID() (security)
+--   1. GUID defaults: NEWSEQUENTIALID() -> NEWID() (security)
 --   2. UTC naming and DATETIME2(3) precision
---   3. "Id" terminology cleanup (→ Guid, Key, ExternalKey, NaturalKey)
---   4. View relocation: dbo.sem_* → sem.vw_*
---   5. DimEvent → DimOccurrence rename
+--   3. "Id" terminology cleanup (-> Guid, Key, ExternalKey, NaturalKey)
+--   4. View relocation: dbo.sem_* -> sem.vw_*
+--   5. DimEvent -> DimOccurrence rename
 --
 -- IMPORTANT: SQL-only. Python updates happen in a later PR.
 --
@@ -126,7 +126,7 @@ PRINT '';
 GO
 
 -- ============================================================================
--- SECTION 1: GUID Default Standardization (NEWSEQUENTIALID → NEWID)
+-- SECTION 1: GUID Default Standardization (NEWSEQUENTIALID -> NEWID)
 -- ============================================================================
 -- Security fix: NEWSEQUENTIALID reveals row creation order
 -- All public-facing GUIDs should use random NEWID()
@@ -139,12 +139,18 @@ GO
 
 DECLARE @log_id INT;
 DECLARE @constraint_name NVARCHAR(128);
+DECLARE @schema_name NVARCHAR(128);
 DECLARE @table_name NVARCHAR(128);
 DECLARE @column_name NVARCHAR(128);
+DECLARE @new_constraint_name NVARCHAR(128);
+DECLARE @constraint_seed NVARCHAR(512);
+DECLARE @drop_sql NVARCHAR(MAX);
+DECLARE @add_sql NVARCHAR(MAX);
 
 -- Find all GUID columns with NEWSEQUENTIALID() default and fix them
 DECLARE guid_cursor CURSOR LOCAL FAST_FORWARD FOR
 SELECT 
+    s.name AS SchemaName,
     t.name AS TableName,
     c.name AS ColumnName,
     dc.name AS ConstraintName
@@ -158,28 +164,39 @@ WHERE s.name IN ('dbo', 'ingest', 'llm', 'vector', 'sem')
   AND dc.definition LIKE '%NEWSEQUENTIALID%';
 
 OPEN guid_cursor;
-FETCH NEXT FROM guid_cursor INTO @table_name, @column_name, @constraint_name;
+FETCH NEXT FROM guid_cursor INTO @schema_name, @table_name, @column_name, @constraint_name;
 
 WHILE @@FETCH_STATUS = 0
 BEGIN
     EXEC dbo.__usp_log_migration_start 
         @migration_id = '0032', 
         @step_name = 'Fix GUID default',
-        @details = @table_name + '.' + @column_name,
+        @details = @schema_name + '.' + @table_name + '.' + @column_name,
         @log_id = @log_id OUTPUT;
     
     BEGIN TRY
         BEGIN TRANSACTION;
-        
-        -- Drop the old constraint
-        DECLARE @drop_sql NVARCHAR(500) = 
-            'ALTER TABLE [dbo].[' + @table_name + '] DROP CONSTRAINT [' + @constraint_name + ']';
+
+        -- Generate a deterministic <=128 char constraint name.
+        SET @new_constraint_name = 'DF_' + @table_name + '_' + @column_name;
+        IF LEN(@new_constraint_name) > 128
+        BEGIN
+            SET @constraint_seed = @schema_name + '.' + @table_name + '.' + @column_name;
+            SET @new_constraint_name = 'DF_' + @table_name + '_' +
+                LEFT(CONVERT(VARCHAR(32), HASHBYTES('MD5', @constraint_seed), 2), 12);
+        END
+
+        -- Drop the old constraint.
+        SET @drop_sql =
+            'ALTER TABLE ' + QUOTENAME(@schema_name) + '.' + QUOTENAME(@table_name) +
+            ' DROP CONSTRAINT ' + QUOTENAME(@constraint_name);
         EXEC sp_executesql @drop_sql;
         
         -- Add new constraint with NEWID()
-        DECLARE @add_sql NVARCHAR(500) = 
-            'ALTER TABLE [dbo].[' + @table_name + '] ADD CONSTRAINT DF_' + @table_name + '_' + @column_name + 
-            ' DEFAULT (NEWID()) FOR [' + @column_name + ']';
+        SET @add_sql =
+            'ALTER TABLE ' + QUOTENAME(@schema_name) + '.' + QUOTENAME(@table_name) +
+            ' ADD CONSTRAINT ' + QUOTENAME(@new_constraint_name) +
+            ' DEFAULT (NEWID()) FOR ' + QUOTENAME(@column_name);
         EXEC sp_executesql @add_sql;
         
         COMMIT TRANSACTION;
@@ -193,7 +210,7 @@ BEGIN
             @error_message = ERROR_MESSAGE();
     END CATCH;
     
-    FETCH NEXT FROM guid_cursor INTO @table_name, @column_name, @constraint_name;
+    FETCH NEXT FROM guid_cursor INTO @schema_name, @table_name, @column_name, @constraint_name;
 END;
 
 CLOSE guid_cursor;
@@ -206,14 +223,14 @@ PRINT '';
 GO
 
 -- ============================================================================
--- SECTION 2: DimEvent → DimOccurrence Rename (Phase 6 Placeholder Table)
+-- SECTION 2: DimEvent -> DimOccurrence Rename (Phase 6 Placeholder Table)
 -- ============================================================================
 -- The DimEvent table from migration 0027 is a Phase 6 placeholder.
 -- It has 0 rows, so safe to drop/recreate with correct naming.
 -- ============================================================================
 
 PRINT '============================================================================';
-PRINT 'SECTION 2: DimEvent → DimOccurrence Table Rename';
+PRINT 'SECTION 2: DimEvent -> DimOccurrence Table Rename';
 PRINT '============================================================================';
 GO
 
@@ -240,82 +257,82 @@ BEGIN
         
         -- Rename the table
         EXEC sp_rename 'dbo.DimEvent', 'DimOccurrence';
-        PRINT '  Renamed table: dbo.DimEvent → dbo.DimOccurrence';
+        PRINT '  Renamed table: dbo.DimEvent -> dbo.DimOccurrence';
         
         -- Rename the primary key
         IF EXISTS (SELECT 1 FROM sys.key_constraints WHERE name = 'PK_DimEvent')
         BEGIN
             EXEC sp_rename 'dbo.PK_DimEvent', 'PK_DimOccurrence', 'OBJECT';
-            PRINT '  Renamed PK: PK_DimEvent → PK_DimOccurrence';
+            PRINT '  Renamed PK: PK_DimEvent -> PK_DimOccurrence';
         END
         
         -- Rename EventId to OccurrenceGuid
         IF EXISTS (SELECT 1 FROM sys.columns WHERE object_id = OBJECT_ID('dbo.DimOccurrence') AND name = 'EventId')
         BEGIN
             EXEC sp_rename 'dbo.DimOccurrence.EventId', 'OccurrenceGuid', 'COLUMN';
-            PRINT '  Renamed column: EventId → OccurrenceGuid';
+            PRINT '  Renamed column: EventId -> OccurrenceGuid';
         END
         
         -- Rename EventName to OccurrenceName
         IF EXISTS (SELECT 1 FROM sys.columns WHERE object_id = OBJECT_ID('dbo.DimOccurrence') AND name = 'EventName')
         BEGIN
             EXEC sp_rename 'dbo.DimOccurrence.EventName', 'OccurrenceName', 'COLUMN';
-            PRINT '  Renamed column: EventName → OccurrenceName';
+            PRINT '  Renamed column: EventName -> OccurrenceName';
         END
         
         -- Rename EventNameNormalized to OccurrenceNameNormalized
         IF EXISTS (SELECT 1 FROM sys.columns WHERE object_id = OBJECT_ID('dbo.DimOccurrence') AND name = 'EventNameNormalized')
         BEGIN
             EXEC sp_rename 'dbo.DimOccurrence.EventNameNormalized', 'OccurrenceNameNormalized', 'COLUMN';
-            PRINT '  Renamed column: EventNameNormalized → OccurrenceNameNormalized';
+            PRINT '  Renamed column: EventNameNormalized -> OccurrenceNameNormalized';
         END
         
         -- Rename EventType to OccurrenceType
         IF EXISTS (SELECT 1 FROM sys.columns WHERE object_id = OBJECT_ID('dbo.DimOccurrence') AND name = 'EventType')
         BEGIN
             EXEC sp_rename 'dbo.DimOccurrence.EventType', 'OccurrenceType', 'COLUMN';
-            PRINT '  Renamed column: EventType → OccurrenceType';
+            PRINT '  Renamed column: EventType -> OccurrenceType';
         END
         
         -- Rename EventDate to OccurrenceDate
         IF EXISTS (SELECT 1 FROM sys.columns WHERE object_id = OBJECT_ID('dbo.DimOccurrence') AND name = 'EventDate')
         BEGIN
             EXEC sp_rename 'dbo.DimOccurrence.EventDate', 'OccurrenceDate', 'COLUMN';
-            PRINT '  Renamed column: EventDate → OccurrenceDate';
+            PRINT '  Renamed column: EventDate -> OccurrenceDate';
         END
         
         -- Rename EventStartDate to OccurrenceStartDate
         IF EXISTS (SELECT 1 FROM sys.columns WHERE object_id = OBJECT_ID('dbo.DimOccurrence') AND name = 'EventStartDate')
         BEGIN
             EXEC sp_rename 'dbo.DimOccurrence.EventStartDate', 'OccurrenceStartDate', 'COLUMN';
-            PRINT '  Renamed column: EventStartDate → OccurrenceStartDate';
+            PRINT '  Renamed column: EventStartDate -> OccurrenceStartDate';
         END
         
         -- Rename EventEndDate to OccurrenceEndDate
         IF EXISTS (SELECT 1 FROM sys.columns WHERE object_id = OBJECT_ID('dbo.DimOccurrence') AND name = 'EventEndDate')
         BEGIN
             EXEC sp_rename 'dbo.DimOccurrence.EventEndDate', 'OccurrenceEndDate', 'COLUMN';
-            PRINT '  Renamed column: EventEndDate → OccurrenceEndDate';
+            PRINT '  Renamed column: EventEndDate -> OccurrenceEndDate';
         END
         
         -- Rename EventLocation to OccurrenceLocation
         IF EXISTS (SELECT 1 FROM sys.columns WHERE object_id = OBJECT_ID('dbo.DimOccurrence') AND name = 'EventLocation')
         BEGIN
             EXEC sp_rename 'dbo.DimOccurrence.EventLocation', 'OccurrenceLocation', 'COLUMN';
-            PRINT '  Renamed column: EventLocation → OccurrenceLocation';
+            PRINT '  Renamed column: EventLocation -> OccurrenceLocation';
         END
         
         -- Rename indexes
         IF EXISTS (SELECT 1 FROM sys.indexes WHERE name = 'IX_DimEvent_EventType' AND object_id = OBJECT_ID('dbo.DimOccurrence'))
         BEGIN
             EXEC sp_rename 'dbo.DimOccurrence.IX_DimEvent_EventType', 'IX_DimOccurrence_OccurrenceType', 'INDEX';
-            PRINT '  Renamed index: IX_DimEvent_EventType → IX_DimOccurrence_OccurrenceType';
+            PRINT '  Renamed index: IX_DimEvent_EventType -> IX_DimOccurrence_OccurrenceType';
         END
         
         IF EXISTS (SELECT 1 FROM sys.indexes WHERE name = 'IX_DimEvent_EventName' AND object_id = OBJECT_ID('dbo.DimOccurrence'))
         BEGIN
             EXEC sp_rename 'dbo.DimOccurrence.IX_DimEvent_EventName', 'IX_DimOccurrence_OccurrenceName', 'INDEX';
-            PRINT '  Renamed index: IX_DimEvent_EventName → IX_DimOccurrence_OccurrenceName';
+            PRINT '  Renamed index: IX_DimEvent_EventName -> IX_DimOccurrence_OccurrenceName';
         END
         
         COMMIT TRANSACTION;
@@ -341,7 +358,7 @@ END
 GO
 
 -- ============================================================================
--- SECTION 2B: BridgeEntityEvent → BridgeEntityOccurrence Rename
+-- SECTION 2B: BridgeEntityEvent -> BridgeEntityOccurrence Rename
 -- ============================================================================
 
 DECLARE @log_id INT;
@@ -359,33 +376,33 @@ BEGIN
         
         -- Rename the table
         EXEC sp_rename 'dbo.BridgeEntityEvent', 'BridgeEntityOccurrence';
-        PRINT '  Renamed table: dbo.BridgeEntityEvent → dbo.BridgeEntityOccurrence';
+        PRINT '  Renamed table: dbo.BridgeEntityEvent -> dbo.BridgeEntityOccurrence';
         
         -- Rename PK
         IF EXISTS (SELECT 1 FROM sys.key_constraints WHERE name = 'PK_BridgeEntityEvent')
         BEGIN
             EXEC sp_rename 'dbo.PK_BridgeEntityEvent', 'PK_BridgeEntityOccurrence', 'OBJECT';
-            PRINT '  Renamed PK: PK_BridgeEntityEvent → PK_BridgeEntityOccurrence';
+            PRINT '  Renamed PK: PK_BridgeEntityEvent -> PK_BridgeEntityOccurrence';
         END
         
         -- Rename EventId to OccurrenceGuid (GUID reference to DimOccurrence)
         IF EXISTS (SELECT 1 FROM sys.columns WHERE object_id = OBJECT_ID('dbo.BridgeEntityOccurrence') AND name = 'EventId')
         BEGIN
             EXEC sp_rename 'dbo.BridgeEntityOccurrence.EventId', 'OccurrenceGuid', 'COLUMN';
-            PRINT '  Renamed column: EventId → OccurrenceGuid';
+            PRINT '  Renamed column: EventId -> OccurrenceGuid';
         END
         
         -- Rename indexes
         IF EXISTS (SELECT 1 FROM sys.indexes WHERE name = 'IX_BridgeEntityEvent_EntityId' AND object_id = OBJECT_ID('dbo.BridgeEntityOccurrence'))
         BEGIN
             EXEC sp_rename 'dbo.BridgeEntityOccurrence.IX_BridgeEntityEvent_EntityId', 'IX_BridgeEntityOccurrence_EntityGuid', 'INDEX';
-            PRINT '  Renamed index: IX_BridgeEntityEvent_EntityId → IX_BridgeEntityOccurrence_EntityGuid';
+            PRINT '  Renamed index: IX_BridgeEntityEvent_EntityId -> IX_BridgeEntityOccurrence_EntityGuid';
         END
         
         IF EXISTS (SELECT 1 FROM sys.indexes WHERE name = 'IX_BridgeEntityEvent_EventId' AND object_id = OBJECT_ID('dbo.BridgeEntityOccurrence'))
         BEGIN
             EXEC sp_rename 'dbo.BridgeEntityOccurrence.IX_BridgeEntityEvent_EventId', 'IX_BridgeEntityOccurrence_OccurrenceGuid', 'INDEX';
-            PRINT '  Renamed index: IX_BridgeEntityEvent_EventId → IX_BridgeEntityOccurrence_OccurrenceGuid';
+            PRINT '  Renamed index: IX_BridgeEntityEvent_EventId -> IX_BridgeEntityOccurrence_OccurrenceGuid';
         END
         
         -- Add FK to DimOccurrence
@@ -419,7 +436,7 @@ END
 GO
 
 PRINT '';
-PRINT 'SECTION 2 complete: DimEvent → DimOccurrence rename applied.';
+PRINT 'SECTION 2 complete: DimEvent -> DimOccurrence rename applied.';
 PRINT '';
 GO
 
@@ -431,14 +448,14 @@ GO
 -- ============================================================================
 
 PRINT '============================================================================';
-PRINT 'SECTION 3: Column Standardization (ExternalId → ExternalKey, etc.)';
+PRINT 'SECTION 3: Column Standardization (ExternalId -> ExternalKey, etc.)';
 PRINT '============================================================================';
 GO
 
 DECLARE @log_id INT;
 
 -- ============================================================================
--- 3.1: DimEntity - ExternalId → ExternalKey (already done in 0031, verify)
+-- 3.1: DimEntity - ExternalId -> ExternalKey (already done in 0031, verify)
 -- ============================================================================
 
 IF EXISTS (SELECT 1 FROM sys.columns WHERE object_id = OBJECT_ID('dbo.DimEntity') AND name = 'ExternalKey')
@@ -479,7 +496,7 @@ BEGIN
 END
 GO
 
--- 3.2: DimEntity - ExternalIdType → ExternalKeyType
+-- 3.2: DimEntity - ExternalIdType -> ExternalKeyType
 DECLARE @log_id INT;
 
 IF EXISTS (SELECT 1 FROM sys.columns WHERE object_id = OBJECT_ID('dbo.DimEntity') AND name = 'ExternalKeyType')
@@ -562,7 +579,7 @@ BEGIN
         IF EXISTS (SELECT 1 FROM sys.indexes WHERE name = 'IX_BridgeEntityRelation_ToEntity' AND object_id = OBJECT_ID('dbo.BridgeEntityRelation'))
             DROP INDEX IX_BridgeEntityRelation_ToEntity ON dbo.BridgeEntityRelation;
         
-        -- Rename columns (FromEntityId → FromEntityGuid, ToEntityId → ToEntityGuid)
+        -- Rename columns (FromEntityId -> FromEntityGuid, ToEntityId -> ToEntityGuid)
         IF EXISTS (SELECT 1 FROM sys.columns WHERE object_id = OBJECT_ID('dbo.BridgeEntityRelation') AND name = 'FromEntityId')
         BEGIN
             EXEC sp_rename 'dbo.BridgeEntityRelation.FromEntityId', 'FromEntityGuid', 'COLUMN';
@@ -587,7 +604,7 @@ BEGIN
         SELECT @row_count = COUNT(*) FROM dbo.BridgeEntityRelation;
         EXEC dbo.__usp_log_migration_end @log_id = @log_id, @status = 'completed',
             @rows_after = @row_count,
-            @details = 'Column renames: FromEntityId→FromEntityGuid, ToEntityId→ToEntityGuid';
+            @details = 'Column renames: FromEntityId->FromEntityGuid, ToEntityId->ToEntityGuid';
     END TRY
     BEGIN CATCH
         IF @@TRANCOUNT > 0 ROLLBACK TRANSACTION;
@@ -631,7 +648,7 @@ PRINT '';
 GO
 
 -- ============================================================================
--- SECTION 5: Move Semantic Views (dbo.sem_* → sem.vw_*)
+-- SECTION 5: Move Semantic Views (dbo.sem_* -> sem.vw_*)
 -- ============================================================================
 -- Semantic views should live in the sem schema with vw_ prefix
 -- ============================================================================
@@ -652,33 +669,41 @@ CREATE PROCEDURE dbo.__usp_move_semantic_view
 AS
 BEGIN
     DECLARE @log_id INT;
-    DECLARE @old_full_name NVARCHAR(256) = '[dbo].[' + @old_name + ']';
-    DECLARE @new_full_name NVARCHAR(256) = '[sem].[' + @new_name + ']';
+    DECLARE @old_full_name NVARCHAR(256);
+    DECLARE @new_full_name NVARCHAR(256);
     DECLARE @view_def NVARCHAR(MAX);
+    DECLARE @drop_sql NVARCHAR(MAX);
+    DECLARE @create_sql NVARCHAR(MAX);
+    DECLARE @view_body NVARCHAR(MAX);
+    DECLARE @as_pos INT;
+
+    SET @old_full_name = '[dbo].[' + @old_name + ']';
+    SET @new_full_name = '[sem].[' + @new_name + ']';
     
     IF OBJECT_ID(@old_full_name, 'V') IS NOT NULL
        AND OBJECT_ID(@new_full_name, 'V') IS NULL
     BEGIN
         EXEC dbo.__usp_log_migration_start 
             @migration_id = '0032', 
-            @step_name = 'Move view ' + @old_name + ' → ' + @new_name,
+            @step_name = 'Move view ' + @old_name + ' -> ' + @new_name,
             @log_id = @log_id OUTPUT;
         
         BEGIN TRY
             -- Get view definition
             SELECT @view_def = OBJECT_DEFINITION(OBJECT_ID(@old_full_name));
+
+            SET @as_pos = PATINDEX('%[ ' + CHAR(9) + CHAR(10) + CHAR(13) + ']AS[ ' + CHAR(9) + CHAR(10) + CHAR(13) + ']%', UPPER(@view_def));
+            IF @as_pos = 0
+                THROW 50001, 'Could not parse view definition (missing AS separator).', 1;
+            SET @view_body = LTRIM(SUBSTRING(@view_def, @as_pos + 4, LEN(@view_def)));
             
             -- Drop old view
-            DECLARE @drop_sql NVARCHAR(500) = 'DROP VIEW ' + @old_full_name;
+            SET @drop_sql = 'DROP VIEW ' + @old_full_name;
             EXEC sp_executesql @drop_sql;
-            
-            -- Modify definition for new schema/name
-            SET @view_def = REPLACE(@view_def, 'dbo.' + @old_name, 'sem.' + @new_name);
-            SET @view_def = REPLACE(@view_def, '[dbo].[' + @old_name + ']', '[sem].[' + @new_name + ']');
-            SET @view_def = REPLACE(@view_def, 'CREATE OR ALTER VIEW', 'CREATE VIEW');
-            
+
             -- Create new view
-            EXEC sp_executesql @view_def;
+            SET @create_sql = 'CREATE VIEW ' + @new_full_name + ' AS ' + @view_body;
+            EXEC sp_executesql @create_sql;
             
             EXEC dbo.__usp_log_migration_end @log_id = @log_id, @status = 'completed',
                 @details = 'View moved from dbo to sem schema';
@@ -692,14 +717,14 @@ BEGIN
     BEGIN
         EXEC dbo.__usp_log_migration_start 
             @migration_id = '0032', 
-            @step_name = 'Move view ' + @old_name + ' → ' + @new_name,
+            @step_name = 'Move view ' + @old_name + ' -> ' + @new_name,
             @log_id = @log_id OUTPUT;
         
         -- If new view exists and old still exists, just drop old
         IF OBJECT_ID(@old_full_name, 'V') IS NOT NULL
         BEGIN
-            DECLARE @drop_old NVARCHAR(500) = 'DROP VIEW ' + @old_full_name;
-            EXEC sp_executesql @drop_old;
+            SET @drop_sql = 'DROP VIEW ' + @old_full_name;
+            EXEC sp_executesql @drop_sql;
             EXEC dbo.__usp_log_migration_end @log_id = @log_id, @status = 'completed',
                 @details = 'Dropped old view (new already exists)';
         END
@@ -742,20 +767,25 @@ IF OBJECT_ID('[dbo].[vw_TagAssignments]', 'V') IS NOT NULL
 BEGIN
     EXEC dbo.__usp_log_migration_start 
         @migration_id = '0032', 
-        @step_name = 'Move view vw_TagAssignments → vw_tag_assignments',
+        @step_name = 'Move view vw_TagAssignments -> vw_tag_assignments',
         @log_id = @log_id OUTPUT;
     
     BEGIN TRY
         DECLARE @view_def NVARCHAR(MAX);
+        DECLARE @create_sql NVARCHAR(MAX);
+        DECLARE @view_body NVARCHAR(MAX);
+        DECLARE @as_pos INT;
         SELECT @view_def = OBJECT_DEFINITION(OBJECT_ID('[dbo].[vw_TagAssignments]'));
+
+        SET @as_pos = PATINDEX('%[ ' + CHAR(9) + CHAR(10) + CHAR(13) + ']AS[ ' + CHAR(9) + CHAR(10) + CHAR(13) + ']%', UPPER(@view_def));
+        IF @as_pos = 0
+            THROW 50002, 'Could not parse view definition (missing AS separator).', 1;
+        SET @view_body = LTRIM(SUBSTRING(@view_def, @as_pos + 4, LEN(@view_def)));
         
         DROP VIEW [dbo].[vw_TagAssignments];
-        
-        SET @view_def = REPLACE(@view_def, 'dbo.vw_TagAssignments', 'sem.vw_tag_assignments');
-        SET @view_def = REPLACE(@view_def, '[dbo].[vw_TagAssignments]', '[sem].[vw_tag_assignments]');
-        SET @view_def = REPLACE(@view_def, 'CREATE OR ALTER VIEW', 'CREATE VIEW');
-        
-        EXEC sp_executesql @view_def;
+
+        SET @create_sql = 'CREATE VIEW [sem].[vw_tag_assignments] AS ' + @view_body;
+        EXEC sp_executesql @create_sql;
         
         EXEC dbo.__usp_log_migration_end @log_id = @log_id, @status = 'completed',
             @details = 'View moved from dbo to sem schema';
@@ -769,7 +799,7 @@ ELSE IF OBJECT_ID('[sem].[vw_tag_assignments]', 'V') IS NOT NULL
 BEGIN
     EXEC dbo.__usp_log_migration_start 
         @migration_id = '0032', 
-        @step_name = 'Move view vw_TagAssignments → vw_tag_assignments',
+        @step_name = 'Move view vw_TagAssignments -> vw_tag_assignments',
         @log_id = @log_id OUTPUT;
     
     IF OBJECT_ID('[dbo].[vw_TagAssignments]', 'V') IS NOT NULL
@@ -865,7 +895,7 @@ WHERE TypeStatus <> 'OK' OR NamingStatus <> 'OK' OR DefaultStatus <> 'OK';
 
 IF @non_compliant_count > 0
 BEGIN
-    PRINT '  Found ' + CAST(@non_compliant_count AS VARCHAR) + ' datetime columns needing attention:';
+    PRINT CONCAT('  Found ', @non_compliant_count, ' datetime columns needing attention:');
     SELECT * FROM #datetime_analysis ORDER BY SchemaName, TableName, ColumnName;
     EXEC dbo.__usp_log_migration_end @log_id = @log_id, @status = 'completed',
         @details = 'Found ' + CAST(@non_compliant_count AS VARCHAR) + ' columns needing review. See output above.';
@@ -958,20 +988,20 @@ GO
 
 -- 8.1: Verify no dbo.sem_* views remain
 PRINT '8.1: Checking for remaining dbo.sem_* views...';
-SELECT 'dbo.sem_* views remaining' AS Check, name AS ViewName 
+SELECT 'dbo.sem_* views remaining' AS CheckName, name AS ViewName 
 FROM sys.views 
 WHERE schema_id = SCHEMA_ID('dbo') AND name LIKE 'sem_%';
 
 IF NOT EXISTS (SELECT 1 FROM sys.views WHERE schema_id = SCHEMA_ID('dbo') AND name LIKE 'sem_%')
-    PRINT '  ✓ No dbo.sem_* views found (expected)';
+    PRINT '  [OK] No dbo.sem_* views found (expected)';
 ELSE
-    PRINT '  ✗ WARNING: dbo.sem_* views still exist';
+    PRINT '  [WARN] dbo.sem_* views still exist';
 GO
 
 -- 8.2: Verify semantic views in sem schema
 PRINT '';
 PRINT '8.2: Semantic views in sem schema:';
-SELECT 'sem.vw_* views' AS Check, name AS ViewName 
+SELECT 'sem.vw_* views' AS CheckName, name AS ViewName 
 FROM sys.views 
 WHERE schema_id = SCHEMA_ID('sem') AND name LIKE 'vw_%'
 ORDER BY name;
@@ -1001,29 +1031,29 @@ IF NOT EXISTS (
         AND c.user_type_id = t.user_type_id
     WHERE dc.definition LIKE '%NEWSEQUENTIALID%'
 )
-    PRINT '  ✓ No NEWSEQUENTIALID() defaults found (expected)';
+    PRINT '  [OK] No NEWSEQUENTIALID() defaults found (expected)';
 ELSE
-    PRINT '  ✗ WARNING: NEWSEQUENTIALID() defaults still exist';
+    PRINT '  [WARN] NEWSEQUENTIALID() defaults still exist';
 GO
 
 -- 8.4: Verify ExternalKey columns exist
 PRINT '';
 PRINT '8.4: Checking for ExternalKey column in DimEntity...';
 IF EXISTS (SELECT 1 FROM sys.columns WHERE object_id = OBJECT_ID('dbo.DimEntity') AND name = 'ExternalKey')
-    PRINT '  ✓ ExternalKey column exists in DimEntity';
+    PRINT '  [OK] ExternalKey column exists in DimEntity';
 ELSE
-    PRINT '  ✗ WARNING: ExternalKey column missing from DimEntity';
+    PRINT '  [WARN] ExternalKey column missing from DimEntity';
 GO
 
 -- 8.5: Verify DimOccurrence exists
 PRINT '';
 PRINT '8.5: Checking for DimOccurrence table...';
 IF EXISTS (SELECT 1 FROM sys.tables t JOIN sys.schemas s ON t.schema_id = s.schema_id WHERE t.name = 'DimOccurrence' AND s.name = 'dbo')
-    PRINT '  ✓ DimOccurrence table exists';
+    PRINT '  [OK] DimOccurrence table exists';
 ELSE IF EXISTS (SELECT 1 FROM sys.tables t JOIN sys.schemas s ON t.schema_id = s.schema_id WHERE t.name = 'DimEvent' AND s.name = 'dbo')
-    PRINT '  ✗ WARNING: DimEvent not renamed to DimOccurrence';
+    PRINT '  [WARN] DimEvent not renamed to DimOccurrence';
 ELSE
-    PRINT '  ○ Neither DimEvent nor DimOccurrence exists (placeholder table may not have been created)';
+    PRINT '  [INFO] Neither DimEvent nor DimOccurrence exists (placeholder table may not have been created)';
 GO
 
 -- 8.6: Migration log summary
