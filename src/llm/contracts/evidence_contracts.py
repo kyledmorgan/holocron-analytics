@@ -230,9 +230,17 @@ class EvidenceBundle:
         
         Returns:
             SHA256 hex digest of the bundle's ordered content.
+            
+        Raises:
+            ValueError: If any item has a missing content_sha256.
         """
         hasher = hashlib.sha256()
         for item in self.items:
+            if not item.content_sha256:
+                raise ValueError(
+                    f"Cannot compute bundle hash: item '{item.evidence_id}' "
+                    f"has no content_sha256"
+                )
             hasher.update(item.content_sha256.encode())
         self.bundle_sha256 = hasher.hexdigest()
         return self.bundle_sha256

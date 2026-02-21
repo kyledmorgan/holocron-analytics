@@ -534,6 +534,23 @@ class TestEvidenceBundleProvenance:
 
         assert bundle_ab.compute_bundle_hash() != bundle_ba.compute_bundle_hash()
 
+    def test_bundle_hash_raises_on_missing_content_sha256(self):
+        """Test that compute_bundle_hash raises ValueError if content_sha256 is missing."""
+        items = [
+            EvidenceItem(
+                evidence_id="item1",
+                evidence_type="inline_text",
+                source_ref={},
+                content="Content",
+                content_sha256="",
+                byte_count=7,
+            ),
+        ]
+
+        bundle = EvidenceBundle(items=items)
+        with pytest.raises(ValueError, match="has no content_sha256"):
+            bundle.compute_bundle_hash()
+
     def test_provenance_fields_default_to_none(self):
         """Test that provenance fields default to None."""
         bundle = EvidenceBundle()
