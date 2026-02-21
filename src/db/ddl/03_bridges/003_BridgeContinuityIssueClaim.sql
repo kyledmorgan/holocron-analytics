@@ -22,7 +22,8 @@ CREATE TABLE dbo.BridgeContinuityIssueClaim (
     SourceSystem NVARCHAR(100) NULL,
     SourceRef NVARCHAR(400) NULL,
     IngestBatchKey NVARCHAR(100) NULL,
-    AttributesJson NVARCHAR(max) NULL,
+    EvidenceBundleGuid UNIQUEIDENTIFIER NULL,
+    AttributesJson NVARCHAR(MAX) NULL,
 
     CONSTRAINT PK_BridgeContinuityIssueClaim PRIMARY KEY CLUSTERED (BridgeContinuityIssueClaimKey),
     CONSTRAINT UQ_BridgeContinuityIssueClaim_BridgeContinuityIssueClaimGuid UNIQUE (BridgeContinuityIssueClaimGuid),
@@ -37,3 +38,5 @@ CREATE UNIQUE INDEX UX_BridgeContinuityIssueClaim_IssueClaim_IsLatest
     ON dbo.BridgeContinuityIssueClaim(ContinuityIssueKey, ClaimKey)
     WHERE IsLatest = 1;
 CREATE INDEX IX_BridgeContinuityIssueClaim_IsLatest ON dbo.BridgeContinuityIssueClaim(IsLatest);
+CREATE INDEX IX_BridgeContinuityIssueClaim_EvidenceBundleGuid ON dbo.BridgeContinuityIssueClaim(EvidenceBundleGuid)
+    WHERE EvidenceBundleGuid IS NOT NULL;

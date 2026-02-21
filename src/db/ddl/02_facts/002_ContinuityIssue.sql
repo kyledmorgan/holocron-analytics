@@ -34,7 +34,8 @@ CREATE TABLE dbo.ContinuityIssue (
     SourceSystem NVARCHAR(100) NULL,
     SourceRef NVARCHAR(400) NULL,
     IngestBatchKey NVARCHAR(100) NULL,
-    AttributesJson NVARCHAR(max) NULL,
+    EvidenceBundleGuid UNIQUEIDENTIFIER NULL,
+    AttributesJson NVARCHAR(MAX) NULL,
 
     CONSTRAINT PK_ContinuityIssue PRIMARY KEY CLUSTERED (ContinuityIssueKey),
     CONSTRAINT UQ_ContinuityIssue_ContinuityIssueGuid UNIQUE (ContinuityIssueGuid),
@@ -55,3 +56,5 @@ CREATE UNIQUE INDEX UX_ContinuityIssue_Franchise_Frame_Summary_IsLatest
     ON dbo.ContinuityIssue(FranchiseKey, ContinuityFrameKey, IssueSummary)
     WHERE IsLatest = 1;
 CREATE INDEX IX_ContinuityIssue_IsLatest ON dbo.ContinuityIssue(IsLatest);
+CREATE INDEX IX_ContinuityIssue_EvidenceBundleGuid ON dbo.ContinuityIssue(EvidenceBundleGuid)
+    WHERE EvidenceBundleGuid IS NOT NULL;

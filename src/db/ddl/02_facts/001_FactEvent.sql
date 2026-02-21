@@ -47,6 +47,7 @@ CREATE TABLE dbo.FactEvent (
     SourceSystem NVARCHAR(100) NULL,
     SourceRef NVARCHAR(400) NULL,
     IngestBatchKey NVARCHAR(100) NULL,
+    EvidenceBundleGuid UNIQUEIDENTIFIER NULL,
     AttributesJson NVARCHAR(MAX) NULL,
 
     CONSTRAINT PK_FactEvent PRIMARY KEY CLUSTERED (EventKey),
@@ -77,3 +78,5 @@ CREATE UNIQUE INDEX UX_FactEvent_Franchise_Work_Scene_Ordinal_IsLatest
     ON dbo.FactEvent(FranchiseKey, WorkKey, SceneKey, EventOrdinal)
     WHERE IsLatest = 1;
 CREATE INDEX IX_FactEvent_IsLatest ON dbo.FactEvent(IsLatest);
+CREATE INDEX IX_FactEvent_EvidenceBundleGuid ON dbo.FactEvent(EvidenceBundleGuid)
+    WHERE EvidenceBundleGuid IS NOT NULL;
