@@ -11,6 +11,7 @@ import os
 import uuid
 from dataclasses import dataclass
 from datetime import datetime, timezone
+from pathlib import Path
 from typing import Any, Dict, List, Optional
 
 try:
@@ -23,6 +24,45 @@ from ..core.exceptions import LLMStorageError
 
 
 logger = logging.getLogger(__name__)
+_DOTENV_LOADED = False
+
+
+def _load_dotenv_if_present() -> None:
+    """
+    Load .env into process env for local runs.
+
+    Existing shell environment variables take precedence.
+    """
+    global _DOTENV_LOADED
+    if _DOTENV_LOADED:
+        return
+
+    # sql_job_queue.py -> storage -> llm -> src -> repo root
+    env_path = Path(__file__).resolve().parents[3] / ".env"
+    if not env_path.exists():
+        _DOTENV_LOADED = True
+        return
+
+    for raw_line in env_path.read_text(encoding="utf-8").splitlines():
+        line = raw_line.strip()
+        if not line or line.startswith("#") or "=" not in line:
+            continue
+        key, value = line.split("=", 1)
+        key = key.strip()
+        value = value.strip().strip("'").strip('"')
+        if key and os.environ.get(key) is None:
+            os.environ[key] = value
+
+    _DOTENV_LOADED = True
+
+
+def _first_non_empty_env(*keys: str) -> Optional[str]:
+    """Return the first non-empty env var value for the given keys."""
+    for key in keys:
+        value = os.environ.get(key)
+        if value is not None and value.strip() != "":
+            return value
+    return None
 
 
 @dataclass
@@ -40,28 +80,38 @@ class QueueConfig:
     @classmethod
     def from_env(cls) -> "QueueConfig":
         """Create config from environment variables."""
+        _load_dotenv_if_present()
+
         # Check for full connection string first
-        conn_str = os.environ.get("LLM_SQLSERVER_CONN_STR")
+        conn_str = _first_non_empty_env("LLM_SQLSERVER_CONN_STR")
         if conn_str:
             return cls(connection_string=conn_str)
         
         # Fall back to discrete variables
+        host = _first_non_empty_env("LLM_SQLSERVER_HOST", "INGEST_SQLSERVER_HOST") or "localhost"
+        port_str = _first_non_empty_env("LLM_SQLSERVER_PORT", "INGEST_SQLSERVER_PORT") or "1433"
+        database = _first_non_empty_env(
+            "LLM_SQLSERVER_DATABASE",
+            "INGEST_SQLSERVER_DATABASE",
+            "MSSQL_DATABASE",
+        ) or "Holocron"
+        username = _first_non_empty_env("LLM_SQLSERVER_USER", "INGEST_SQLSERVER_USER") or "sa"
+        password = _first_non_empty_env(
+            "LLM_SQLSERVER_PASSWORD",
+            "INGEST_SQLSERVER_PASSWORD",
+            "MSSQL_SA_PASSWORD",
+        ) or ""
+        driver = _first_non_empty_env("LLM_SQLSERVER_DRIVER", "INGEST_SQLSERVER_DRIVER") or "ODBC Driver 18 for SQL Server"
+        schema = _first_non_empty_env("LLM_SQLSERVER_SCHEMA") or "llm"
+
         return cls(
-            host=os.environ.get("LLM_SQLSERVER_HOST", 
-                               os.environ.get("INGEST_SQLSERVER_HOST", "localhost")),
-            port=int(os.environ.get("LLM_SQLSERVER_PORT", 
-                                    os.environ.get("INGEST_SQLSERVER_PORT", "1433"))),
-            database=os.environ.get("LLM_SQLSERVER_DATABASE",
-                                    os.environ.get("INGEST_SQLSERVER_DATABASE",
-                                                   os.environ.get("MSSQL_DATABASE", "Holocron"))),
-            username=os.environ.get("LLM_SQLSERVER_USER",
-                                    os.environ.get("INGEST_SQLSERVER_USER", "sa")),
-            password=os.environ.get("LLM_SQLSERVER_PASSWORD",
-                                    os.environ.get("INGEST_SQLSERVER_PASSWORD",
-                                                   os.environ.get("MSSQL_SA_PASSWORD", ""))),
-            driver=os.environ.get("LLM_SQLSERVER_DRIVER",
-                                  os.environ.get("INGEST_SQLSERVER_DRIVER", "ODBC Driver 18 for SQL Server")),
-            schema=os.environ.get("LLM_SQLSERVER_SCHEMA", "llm"),
+            host=host,
+            port=int(port_str),
+            database=database,
+            username=username,
+            password=password,
+            driver=driver,
+            schema=schema,
         )
     
     def get_connection_string(self) -> str:
@@ -75,6 +125,7 @@ class QueueConfig:
             f"Database={self.database};"
             f"UID={self.username};"
             f"PWD={self.password};"
+            f"Encrypt=no;"
             f"TrustServerCertificate=yes"
         )
 

@@ -53,6 +53,12 @@ from ..jobs.handlers import (
 logger = logging.getLogger(__name__)
 
 
+class _SafeFormatDict(dict):
+    """Format-map dict that returns empty string for missing keys."""
+    def __missing__(self, key):
+        return ""
+
+
 class DispatcherConfig:
     """Configuration for the job dispatcher."""
     
@@ -576,14 +582,41 @@ class JobDispatcher:
                 f"{item.content}\n"
             )
         evidence_content = "\n".join(evidence_parts) if evidence_parts else "[No evidence provided]"
-        
-        prompt = interrogation.prompt_template.format(
-            entity_type=job_input.entity_type,
-            entity_id=job_input.entity_id,
-            evidence_content=evidence_content,
+
+        # Build a flexible template context so different interrogation
+        # prompt variables can be satisfied without KeyError.
+        template_values = _SafeFormatDict()
+        template_values["evidence_content"] = evidence_content
+
+        # JobInputEnvelope fields (if present)
+        template_values["entity_type"] = getattr(job_input, "entity_type", "")
+        template_values["entity_id"] = getattr(job_input, "entity_id", "")
+
+        # Raw input payload fields (if present)
+        try:
+            input_dict = job_input.model_dump() if hasattr(job_input, "model_dump") else {}
+        except Exception:
+            input_dict = {}
+        if isinstance(input_dict, dict):
+            for k, v in input_dict.items():
+                if k not in template_values and v is not None:
+                    template_values[k] = v
+
+        # Common aliases used by interrogation templates.
+        source_id = template_values.get("source_id") or template_values.get("entity_id", "")
+        source_page_title = (
+            template_values.get("source_page_title")
+            or template_values.get("title")
+            or template_values.get("entity_id", "")
         )
-        
-        return prompt
+        template_values["source_id"] = source_id
+        template_values["source_page_title"] = source_page_title
+
+        # If no explicit content was provided, reuse assembled evidence text.
+        if not template_values.get("content"):
+            template_values["content"] = evidence_content
+
+        return interrogation.prompt_template.format_map(template_values)
     
     def _complete_run(
         self,
