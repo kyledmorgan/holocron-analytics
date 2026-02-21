@@ -140,7 +140,7 @@ def fetch_objects(conn: pyodbc.Connection, schemas: Set[str]) -> List[SqlObject]
         SELECT
             s.name          AS schema_name,
             o.name          AS object_name,
-            RTRIM(o.type)   AS object_type,
+            RTRIM(o.type)   AS object_type,   -- sys.objects.type is CHAR(2), padded with space
             o.type_desc     AS type_desc,
             m.definition    AS definition
         FROM sys.objects o
@@ -242,8 +242,6 @@ def scan_repo_objects(schemas: Set[str]) -> Dict[str, Path]:
         if not root_dir.exists():
             continue
         for sql_file in root_dir.rglob("*.sql"):
-            if sql_file.name == ".gitkeep":
-                continue
             stem = sql_file.stem  # e.g. "dbo.usp_claim_next_job" or "vw_event"
             if "." in stem:
                 # Schema-prefixed filename

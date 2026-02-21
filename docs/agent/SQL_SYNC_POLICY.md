@@ -74,7 +74,16 @@ At any point in time:
 Use the extraction script to perform the initial synchronization:
 
 ```bash
+# Step 1: Dry-run to preview what will be extracted
+python scripts/db/extract_sql_objects.py --extract --dry-run --verbose
+
+# Step 2: Extract definitions from SQL Server into repo
 python scripts/db/extract_sql_objects.py --extract --verbose
+
+# Step 3: Review extracted files, then commit
+git add src/db/dml/ src/db/views/
+git diff --cached --stat
+git commit -m "Baseline sync: extract SQL object definitions from SQL Server"
 ```
 
 This connects to the Docker SQL Server instance, extracts all programmable object and view definitions, and writes them to:
