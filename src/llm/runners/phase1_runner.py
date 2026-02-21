@@ -258,6 +258,7 @@ class Phase1Runner:
             )
             
             # 10. Write request artifact
+            request_content = json.dumps(request_payload, indent=2, ensure_ascii=False, default=str)
             request_artifact = self.lake_writer.write_request(run_id, request_payload, timestamp)
             self.queue.create_artifact(
                 run_id=run_id,
@@ -265,16 +266,26 @@ class Phase1Runner:
                 lake_uri=request_artifact.lake_uri,
                 content_sha256=request_artifact.content_sha256,
                 byte_count=request_artifact.byte_count,
+                content=request_content,
+                content_mime_type="application/json",
+                stored_in_sql=True,
+                mirrored_to_lake=True,
             )
             
             # 11. Write evidence artifact
-            evidence_artifact = self.lake_writer.write_evidence(run_id, evidence_bundle.to_dict(), timestamp)
+            evidence_dict = evidence_bundle.to_dict()
+            evidence_content = json.dumps(evidence_dict, indent=2, ensure_ascii=False, default=str)
+            evidence_artifact = self.lake_writer.write_evidence(run_id, evidence_dict, timestamp)
             self.queue.create_artifact(
                 run_id=run_id,
                 artifact_type="evidence_bundle",
                 lake_uri=evidence_artifact.lake_uri,
                 content_sha256=evidence_artifact.content_sha256,
                 byte_count=evidence_artifact.byte_count,
+                content=evidence_content,
+                content_mime_type="application/json",
+                stored_in_sql=True,
+                mirrored_to_lake=True,
             )
             
             # 11b. Record evidence bundle metadata to SQL Server
@@ -284,6 +295,7 @@ class Phase1Runner:
                 policy_json=json.dumps(evidence_bundle.policy.to_dict()),
                 summary_json=json.dumps(evidence_bundle.summary),
                 lake_uri=evidence_artifact.lake_uri,
+                bundle_json=evidence_content,
             )
             
             # 11c. Link run to evidence bundle
@@ -300,6 +312,10 @@ class Phase1Runner:
                 lake_uri=prompt_artifact.lake_uri,
                 content_sha256=prompt_artifact.content_sha256,
                 byte_count=prompt_artifact.byte_count,
+                content=prompt,
+                content_mime_type="text/plain",
+                stored_in_sql=True,
+                mirrored_to_lake=True,
             )
             
             # 13. Call Ollama with structured output (with retry on invalid JSON)
@@ -332,6 +348,10 @@ class Phase1Runner:
                     )
                     
                     # 14. Write response artifact (always, even if parsing fails)
+                    response_content = json.dumps(
+                        response.raw_response or {}, indent=2,
+                        ensure_ascii=False, default=str,
+                    )
                     response_artifact = self.lake_writer.write_response(
                         run_id, response.raw_response or {}, timestamp
                     )
@@ -341,6 +361,10 @@ class Phase1Runner:
                         lake_uri=response_artifact.lake_uri,
                         content_sha256=response_artifact.content_sha256,
                         byte_count=response_artifact.byte_count,
+                        content=response_content,
+                        content_mime_type="application/json",
+                        stored_in_sql=True,
+                        mirrored_to_lake=True,
                     )
                     
                     # 15. Extract metrics
@@ -445,6 +469,7 @@ class Phase1Runner:
                 )
             
             # 17. Write parsed output artifact
+            output_content = json.dumps(parsed_output, indent=2, ensure_ascii=False, default=str)
             output_artifact = self.lake_writer.write_output(run_id, parsed_output, timestamp)
             self.queue.create_artifact(
                 run_id=run_id,
@@ -452,6 +477,10 @@ class Phase1Runner:
                 lake_uri=output_artifact.lake_uri,
                 content_sha256=output_artifact.content_sha256,
                 byte_count=output_artifact.byte_count,
+                content=output_content,
+                content_mime_type="application/json",
+                stored_in_sql=True,
+                mirrored_to_lake=True,
             )
             
             # 18. Complete run as succeeded
