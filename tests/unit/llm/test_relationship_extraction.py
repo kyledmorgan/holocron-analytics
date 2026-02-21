@@ -544,4 +544,5 @@ class TestContractSchemaFile:
         rel_props = rel_items.get("properties", {})
         
         assert "work_context" in rel_props
-        assert rel_props["work_context"].get("type") == "array"
+        work_context_type = rel_props["work_context"].get("type")
+        assert work_context_type == ["array", "null"] or work_context_type == "array"

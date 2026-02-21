@@ -40,12 +40,12 @@
             "description": "End date/era of the relationship (if known). Accepts fuzzy dates."
           },
           "work_context": {
-            "type": "array",
+            "type": ["array", "null"],
             "items": {
               "type": "string",
               "maxLength": 500
             },
-            "description": "Optional array of works/media where this relationship is depicted or mentioned (e.g., ['A New Hope', 'The Empire Strikes Back'])"
+            "description": "Optional array of works/media where this relationship is depicted or mentioned (e.g., ['A New Hope', 'The Empire Strikes Back']). Null when not applicable."
           },
           "confidence": {
             "type": "number",
@@ -58,16 +58,16 @@
             "description": "Direct quote from source text supporting this relationship (for provenance)"
           },
           "bidirectional": {
-            "type": "boolean",
+            "type": ["boolean", "null"],
             "default": false,
-            "description": "If true, the relationship is bidirectional (applies in both directions)"
+            "description": "If true, the relationship is bidirectional (applies in both directions). Null when not specified."
           }
         },
         "additionalProperties": false
       }
     },
     "entities_referenced": {
-      "type": "array",
+      "type": ["array", "null"],
       "description": "Optional: List of entities referenced in relationships that may need resolution",
       "items": {
         "type": "object",
@@ -92,7 +92,7 @@
       }
     },
     "extraction_metadata": {
-      "type": "object",
+      "type": ["object", "null"],
       "description": "Metadata about the extraction process",
       "properties": {
         "source_page_title": {

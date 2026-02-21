@@ -240,7 +240,7 @@ def _load_output_schema() -> Dict[str, Any]:
                         "relation_type": {"type": "string", "maxLength": 100},
                         "start_date": {"type": ["string", "null"]},
                         "end_date": {"type": ["string", "null"]},
-                        "work_context": {"type": "array", "items": {"type": "string"}},
+                        "work_context": {"type": ["array", "null"], "items": {"type": "string"}},
                         "confidence": {"type": "number", "minimum": 0.0, "maximum": 1.0},
                         "evidence_quote": {"type": ["string", "null"]},
                         "bidirectional": {"type": "boolean"}

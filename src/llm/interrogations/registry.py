@@ -48,9 +48,14 @@ class InterrogationDefinition:
         """
         Get the schema formatted for Ollama structured output.
         
-        Ollama expects the schema in the 'format' parameter of the request.
+        Ollama expects a pure JSON schema in the 'format' parameter.
+        Draft metadata fields ($schema, $id, title, description, version)
+        are stripped since Ollama does not process them.
         """
-        return self.output_schema
+        schema = dict(self.output_schema)
+        for key in ("$schema", "$id", "title", "description", "version"):
+            schema.pop(key, None)
+        return schema
     
     def validate_output(self, output: Dict[str, Any]) -> List[str]:
         """
