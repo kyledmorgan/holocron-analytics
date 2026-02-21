@@ -18,6 +18,7 @@ This folder contains canonical rules, templates, and checklists for database wor
 | [DB_NAMING_CONVENTIONS.md](DB_NAMING_CONVENTIONS.md) | Detailed naming convention rules (columns, tables, views, constraints) |
 | [DB_SCHEMA_CHANGE_WORKFLOW.md](DB_SCHEMA_CHANGE_WORKFLOW.md) | Step-by-step process for making schema changes |
 | [SQL_STYLE_GUIDE.md](SQL_STYLE_GUIDE.md) | SQL formatting, keywords, indentation, and best practices |
+| [SQL_SYNC_POLICY.md](SQL_SYNC_POLICY.md) | SQL source-of-truth and repo synchronization policy |
 
 ## Key Rules Summary
 
@@ -59,3 +60,4 @@ This folder contains canonical rules, templates, and checklists for database wor
 ## Verification Tools
 
 - `scripts/verify_schema_alignment.py` — Validates runtime schema against conventions
+- `scripts/db/extract_sql_objects.py` — Extracts SQL object definitions from Docker SQL Server and reconciles with repo files

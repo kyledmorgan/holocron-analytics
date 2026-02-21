@@ -245,10 +245,15 @@ WHERE OldColumn <> NewColumn OR (OldColumn IS NULL XOR NewColumn IS NULL);
 
 Every schema change must update:
 
-1. **DDL file** (if adding new object): `src/db/ddl/`
-2. **Migration script** (if changing existing object): `db/migrations/`
-3. **Schema documentation** (if significant change): `docs/db/`
-4. **Agent documentation** (if new patterns): `docs/agent/`
+1. **DDL file** (if adding/modifying table): `src/db/ddl/`
+2. **DML file** (if adding/modifying stored procedure, function, or trigger): `src/db/dml/`
+3. **View file** (if adding/modifying view): `src/db/views/{schema}/`
+4. **Migration script** (if changing existing object): `db/migrations/`
+5. **Schema documentation** (if significant change): `docs/db/`
+6. **Agent documentation** (if new patterns): `docs/agent/`
+
+> **Important:** Both the migration script AND the canonical definition file must be updated.
+> See [SQL_SYNC_POLICY.md](SQL_SYNC_POLICY.md) for the full synchronization policy.
 
 ---
 
@@ -270,17 +275,32 @@ WORKFLOW:
   1. Read conventions
   2. Design change
   3. Write migration (idempotent)
-  4. Test on local
-  5. Update Python (same or follow-up PR)
-  6. Review with checklist
-  7. Deploy
+  4. Update canonical definition (ddl/ dml/ views/)
+  5. Test on local
+  6. Update Python (same or follow-up PR)
+  7. Review with checklist
+  8. Deploy
   
 MIGRATION FILES:
   db/migrations/XXXX_description.sql
   
-DDL FILES:
+DDL FILES (tables, schemas, types):
   src/db/ddl/{layer}/{NNN}_{TableName}.sql
+
+DML FILES (stored procedures, functions, triggers):
+  src/db/dml/stored_procedures/{schema}.{name}.sql
+  src/db/dml/functions/{schema}.{name}.sql
+  src/db/dml/triggers/{schema}.{name}.sql
+
+VIEW FILES:
+  src/db/views/{schema}/{schema}.{name}.sql
   
 VERIFICATION:
   scripts/verify_schema_alignment.py
+
+EXTRACTION & RECONCILIATION:
+  scripts/db/extract_sql_objects.py --extract --reconcile --verbose
+
+SYNC POLICY:
+  docs/agent/SQL_SYNC_POLICY.md
 ```
