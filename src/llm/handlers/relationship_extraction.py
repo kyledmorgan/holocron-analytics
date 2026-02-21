@@ -17,10 +17,12 @@ Foundation for: Phase 3 multi-output families, Phase 4 governance queue.
 import hashlib
 import json
 import logging
+import os
 from datetime import datetime, timezone
 from typing import Any, Dict, List, Optional
 
 from ..contracts.phase1_contracts import Job
+from ..core.types import LLMConfig
 from ..jobs.handlers import (
     RunContext,
     HandlerResult,
@@ -29,6 +31,9 @@ from ..jobs.handlers import (
 )
 from ..interrogations.registry import get_interrogation
 from ..interrogations.definitions.relationship_extraction import validate_relationship_extraction_output
+from ..providers.ollama_client import OllamaClient
+from ..storage.lake_writer import LakeWriter, LakeWriterConfig
+from ..storage.sql_job_queue import SqlJobQueue, QueueConfig
 
 
 logger = logging.getLogger(__name__)
@@ -489,7 +494,24 @@ def handle(job: Job, ctx: RunContext) -> HandlerResult:
     This function creates a handler instance and delegates to it.
     In production, dependencies would be injected from configuration.
     """
-    # Create handler with no dependencies (will use defaults or skip)
-    # In production, these would be injected from dispatcher config
-    handler = RelationshipExtractionHandler()
+    model = job.model_hint or os.environ.get("OLLAMA_MODEL", "llama3.2")
+    base_url = os.environ.get("OLLAMA_BASE_URL", "http://ollama:11434")
+    temperature = float(os.environ.get("OLLAMA_TEMPERATURE", "0.0"))
+    timeout_seconds = int(os.environ.get("OLLAMA_TIMEOUT_SECONDS", "120"))
+    lake_root = os.environ.get("LAKE_ROOT", "lake/llm_runs")
+
+    llm_config = LLMConfig(
+        provider="ollama",
+        model=model,
+        base_url=base_url,
+        temperature=temperature,
+        timeout_seconds=timeout_seconds,
+        stream=False,
+    )
+
+    handler = RelationshipExtractionHandler(
+        ollama_client=OllamaClient(llm_config),
+        lake_writer=LakeWriter(LakeWriterConfig(base_dir=lake_root)),
+        queue=SqlJobQueue(QueueConfig.from_env()),
+    )
     return handler.handle(job, ctx)

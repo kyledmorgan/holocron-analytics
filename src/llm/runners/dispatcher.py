@@ -360,6 +360,9 @@ class JobDispatcher:
         key_to_type = {
             "page_classification_v1": "page_classification",
             "sw_entity_facts_v1": "sw_entity_facts",
+            "entity_extraction_droid_v1": "entity_extraction_droid",
+            "entity_extraction_generic_v1": "entity_extraction_generic",
+            "relationship_extraction_v1": "relationship_extraction",
         }
         return key_to_type.get(job.interrogation_key, job.interrogation_key)
     

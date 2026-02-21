@@ -65,6 +65,18 @@ def _first_non_empty_env(*keys: str) -> Optional[str]:
     return None
 
 
+def _parse_yes_no(value: Optional[str], default: bool) -> bool:
+    """Parse yes/no style env vars with a safe default."""
+    if value is None:
+        return default
+    normalized = value.strip().lower()
+    if normalized in {"1", "true", "yes", "y", "on"}:
+        return True
+    if normalized in {"0", "false", "no", "n", "off"}:
+        return False
+    return default
+
+
 @dataclass
 class QueueConfig:
     """Configuration for the SQL job queue."""
@@ -75,6 +87,8 @@ class QueueConfig:
     password: str = ""
     driver: str = "ODBC Driver 18 for SQL Server"
     schema: str = "llm"
+    encrypt: bool = True
+    trust_server_certificate: bool = False
     connection_string: Optional[str] = None
     
     @classmethod
@@ -103,6 +117,14 @@ class QueueConfig:
         ) or ""
         driver = _first_non_empty_env("LLM_SQLSERVER_DRIVER", "INGEST_SQLSERVER_DRIVER") or "ODBC Driver 18 for SQL Server"
         schema = _first_non_empty_env("LLM_SQLSERVER_SCHEMA") or "llm"
+        encrypt_raw = _first_non_empty_env("LLM_SQLSERVER_ENCRYPT")
+        trust_raw = _first_non_empty_env("LLM_SQLSERVER_TRUST_SERVER_CERTIFICATE")
+
+        # SQL Server ODBC Driver 18+ defaults to encrypted transport.
+        # In local/dev scenarios with self-signed certs, trusting the server cert
+        # avoids handshake failures while keeping encryption enabled.
+        local_hosts = {"localhost", "127.0.0.1", "sql2025", "host.docker.internal"}
+        default_trust = host.lower() in local_hosts
 
         return cls(
             host=host,
@@ -112,6 +134,8 @@ class QueueConfig:
             password=password,
             driver=driver,
             schema=schema,
+            encrypt=_parse_yes_no(encrypt_raw, True),
+            trust_server_certificate=_parse_yes_no(trust_raw, default_trust),
         )
     
     def get_connection_string(self) -> str:
@@ -125,8 +149,8 @@ class QueueConfig:
             f"Database={self.database};"
             f"UID={self.username};"
             f"PWD={self.password};"
-            f"Encrypt=no;"
-            f"TrustServerCertificate=yes"
+            f"Encrypt={'yes' if self.encrypt else 'no'};"
+            f"TrustServerCertificate={'yes' if self.trust_server_certificate else 'no'}"
         )
 
 

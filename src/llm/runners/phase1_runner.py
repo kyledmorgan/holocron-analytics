@@ -36,11 +36,7 @@ if __name__ == "__main__":
     sys.path.insert(0, str(Path(__file__).parent.parent.parent.parent))
 
 from ..contracts.phase1_contracts import (
-    EvidenceBundleV1,
-    EvidenceSnippet,
     Job,
-    JobInputEnvelope,
-    validate_entity_facts_output,
 )
 from ..contracts.evidence_contracts import (
     EvidenceBundle,
@@ -57,6 +53,13 @@ from ..utils.retry import RetryConfig, retry_with_backoff, calculate_delay
 
 
 logger = logging.getLogger(__name__)
+
+
+class _SafeFormatDict(dict):
+    """Format-map dict that returns empty string for missing keys."""
+
+    def __missing__(self, key):
+        return ""
 
 
 @dataclass
@@ -242,7 +245,7 @@ class Phase1Runner:
             evidence_bundle = self._build_evidence_bundle(job)
             
             # 7. Render prompt
-            job_input = job.get_input()
+            job_input = json.loads(job.input_json)
             prompt = self._render_prompt(interrogation, job_input, evidence_bundle)
             
             # 8. Build messages
@@ -574,7 +577,7 @@ class Phase1Runner:
     def _render_prompt(
         self,
         interrogation: InterrogationDefinition,
-        job_input: JobInputEnvelope,
+        job_input: Dict[str, Any],
         evidence_bundle: EvidenceBundle,
     ) -> str:
         """
@@ -597,14 +600,31 @@ class Phase1Runner:
             )
         evidence_content = "\n".join(evidence_parts) if evidence_parts else "[No evidence provided]"
         
-        # Render template
-        prompt = interrogation.prompt_template.format(
-            entity_type=job_input.entity_type,
-            entity_id=job_input.entity_id,
-            evidence_content=evidence_content,
+        # Build flexible template context to support multiple interrogation families.
+        template_values = _SafeFormatDict()
+        template_values["evidence_content"] = evidence_content
+
+        for key, value in job_input.items():
+            if value is not None:
+                template_values[key] = value
+
+        # Common aliases used by prompt templates.
+        source_id = template_values.get("source_id") or template_values.get("entity_id", "")
+        source_page_title = (
+            template_values.get("source_page_title")
+            or template_values.get("title")
+            or template_values.get("entity_id", "")
         )
-        
-        return prompt
+        template_values["source_id"] = source_id
+        template_values["source_page_title"] = source_page_title
+        template_values["entity_type"] = template_values.get("entity_type", "")
+        template_values["entity_id"] = template_values.get("entity_id", "")
+
+        # If no explicit content was provided, reuse assembled evidence text.
+        if not template_values.get("content"):
+            template_values["content"] = evidence_content
+
+        return interrogation.prompt_template.format_map(template_values)
     
     def _parse_and_validate(
         self,
