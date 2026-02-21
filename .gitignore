@@ -51,6 +51,7 @@ local/state/
 
 # LLM artifacts (model snapshots, raw outputs)
 artifacts/
+lake/llm_runs/
 
 # Ollama debug dumps
 logs/ollama/
