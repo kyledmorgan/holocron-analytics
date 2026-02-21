@@ -14,6 +14,7 @@ Phase 2: Focused on entity-entity relationships with temporal bounds.
 Foundation for: Phase 3 multi-output families, Phase 4 governance queue.
 """
 
+import hashlib
 import json
 import logging
 from datetime import datetime, timezone
@@ -57,6 +58,7 @@ class RelationshipExtractionHandler:
         ollama_client=None,
         lake_writer=None,
         relationship_store=None,
+        queue=None,
     ):
         """
         Initialize the handler.
@@ -65,10 +67,12 @@ class RelationshipExtractionHandler:
             ollama_client: Client for LLM calls (optional, for testing)
             lake_writer: Lake writer for artifacts (optional, for testing)
             relationship_store: Store for relationship persistence (optional, for testing)
+            queue: SQL job queue for SQL-first artifact storage (optional)
         """
         self.ollama_client = ollama_client
         self.lake_writer = lake_writer
         self.relationship_store = relationship_store
+        self.queue = queue
         self._interrogation = None
     
     @property
@@ -94,6 +98,8 @@ class RelationshipExtractionHandler:
         metrics: Dict[str, Any] = {
             "handler": "relationship_extraction",
             "execution_mode": ctx.execution_mode.value,
+            "schema_key": self.interrogation.key,
+            "schema_version": self.interrogation.version,
         }
         
         log_ctx = ctx.get_log_context()
@@ -122,7 +128,7 @@ class RelationshipExtractionHandler:
             metrics["prompt_length"] = len(prompt)
             
             # 3. Write prompt artifact (always, even in dry-run)
-            if self.lake_writer:
+            if self.lake_writer or self.queue:
                 prompt_artifact = self._write_artifact(
                     ctx.run_id, "prompt", prompt, timestamp
                 )
@@ -130,7 +136,7 @@ class RelationshipExtractionHandler:
                     artifacts.append(prompt_artifact)
             
             # 4. Write input artifact for debugging
-            if self.lake_writer:
+            if self.lake_writer or self.queue:
                 input_artifact = self._write_artifact(
                     ctx.run_id, "input", json.dumps(job_input, indent=2), timestamp
                 )
@@ -156,7 +162,7 @@ class RelationshipExtractionHandler:
                     }
                 }
                 
-                if self.lake_writer:
+                if self.lake_writer or self.queue:
                     output_artifact = self._write_artifact(
                         ctx.run_id, "output", json.dumps(dry_run_output, indent=2), timestamp
                     )
@@ -184,7 +190,7 @@ class RelationshipExtractionHandler:
                 )
                 
                 # Write invalid output for debugging
-                if self.lake_writer:
+                if self.lake_writer or self.queue:
                     error_artifact = self._write_artifact(
                         ctx.run_id, "validation_errors",
                         json.dumps({"errors": validation_errors, "raw_output": llm_output}, indent=2),
@@ -201,7 +207,7 @@ class RelationshipExtractionHandler:
                 )
             
             # 8. Write validated output artifact
-            if self.lake_writer:
+            if self.lake_writer or self.queue:
                 output_artifact = self._write_artifact(
                     ctx.run_id, "output", json.dumps(parsed_output, indent=2), timestamp
                 )
@@ -265,22 +271,59 @@ class RelationshipExtractionHandler:
     
     def _call_llm(self, prompt: str, ctx: RunContext) -> str:
         """
-        Call the LLM with the rendered prompt.
+        Call the LLM with the rendered prompt using structured output.
+        
+        Uses chat_with_structured_output to enforce schema at the API
+        level via the Ollama ``format`` parameter.  The complete request
+        and response payloads are persisted as SQL-first artifacts when
+        a queue is configured.
         
         Returns the raw LLM output string.
         """
         if not self.ollama_client:
             raise RuntimeError("Ollama client not configured")
         
-        response = self.ollama_client.generate(
-            prompt=prompt,
-            system=self.interrogation.system_prompt,
-            model=self.interrogation.recommended_model,
-            temperature=self.interrogation.recommended_temperature,
-            format="json",
+        timestamp = datetime.now(timezone.utc)
+        
+        # Build chat messages
+        messages = []
+        if self.interrogation.system_prompt:
+            messages.append({"role": "system", "content": self.interrogation.system_prompt})
+        messages.append({"role": "user", "content": prompt})
+        
+        # Get schema for Ollama structured output enforcement
+        output_schema = self.interrogation.get_schema_for_ollama()
+        
+        # Build the full request payload for artifact capture
+        request_payload = self.ollama_client.get_full_request_payload(
+            messages=messages,
+            output_schema=output_schema,
         )
         
-        return response.get("response", "")
+        # Persist request artifact (SQL-first, lake additive)
+        request_content = json.dumps(request_payload, indent=2, ensure_ascii=False, default=str)
+        self._persist_artifact(
+            ctx.run_id, "request_json", request_content,
+            "application/json", timestamp,
+        )
+        
+        # Call Ollama with schema-enforced structured output
+        response = self.ollama_client.chat_with_structured_output(
+            messages=messages,
+            output_schema=output_schema,
+        )
+        
+        # Persist response artifact (SQL-first, lake additive)
+        response_content = json.dumps(
+            response.raw_response or {}, indent=2,
+            ensure_ascii=False, default=str,
+        )
+        self._persist_artifact(
+            ctx.run_id, "response_json", response_content,
+            "application/json", timestamp,
+        )
+        
+        return response.content or ""
     
     def _parse_llm_output(self, llm_output: str) -> Dict[str, Any]:
         """Parse LLM output string into dictionary."""
@@ -304,18 +347,106 @@ class RelationshipExtractionHandler:
         content: str,
         timestamp: datetime,
     ) -> Optional[ArtifactReference]:
-        """Write an artifact to the lake."""
-        try:
-            result = self.lake_writer.write_text(run_id, artifact_type, content, timestamp)
-            return ArtifactReference(
-                artifact_type=artifact_type,
-                lake_uri=result.lake_uri,
-                content_sha256=result.content_sha256,
-                byte_count=result.byte_count,
-            )
-        except Exception as e:
-            logger.warning(f"Failed to write artifact {artifact_type}: {e}")
-            return None
+        """Write an artifact to the lake and optionally to SQL."""
+        lake_uri = None
+        content_bytes = content.encode("utf-8")
+        content_sha256 = hashlib.sha256(content_bytes).hexdigest()
+        byte_count = len(content_bytes)
+        
+        # Write to lake if available
+        if self.lake_writer:
+            try:
+                result = self.lake_writer.write_text(
+                    run_id, artifact_type, content, timestamp=timestamp
+                )
+                lake_uri = result.lake_uri
+                content_sha256 = result.content_sha256
+                byte_count = result.byte_count
+            except Exception as e:
+                logger.warning(f"Failed to write artifact {artifact_type} to lake: {e}")
+        
+        # Write to SQL if queue is available (SQL-first)
+        if self.queue:
+            try:
+                mime_type = "application/json" if artifact_type.endswith("_json") else "text/plain"
+                self.queue.create_artifact(
+                    run_id=run_id,
+                    artifact_type=artifact_type,
+                    lake_uri=lake_uri,
+                    content_sha256=content_sha256,
+                    byte_count=byte_count,
+                    content=content,
+                    content_mime_type=mime_type,
+                    stored_in_sql=True,
+                    mirrored_to_lake=lake_uri is not None,
+                )
+            except Exception as e:
+                logger.warning(f"Failed to write artifact {artifact_type} to SQL: {e}")
+        
+        return ArtifactReference(
+            artifact_type=artifact_type,
+            lake_uri=lake_uri or "",
+            content_sha256=content_sha256,
+            byte_count=byte_count,
+        )
+    
+    def _persist_artifact(
+        self,
+        run_id: str,
+        artifact_type: str,
+        content: str,
+        content_mime_type: str,
+        timestamp: datetime,
+    ) -> Optional[ArtifactReference]:
+        """
+        Persist an artifact using SQL-first storage with optional lake mirroring.
+        
+        SQL is the system of record.  When a lake_writer is configured the
+        content is also mirrored to the data lake for portability.
+        """
+        content_bytes = content.encode("utf-8")
+        content_sha256 = hashlib.sha256(content_bytes).hexdigest()
+        byte_count = len(content_bytes)
+        lake_uri = None
+        
+        # Mirror to lake if available
+        if self.lake_writer:
+            try:
+                if content_mime_type == "application/json":
+                    result = self.lake_writer.write_json(
+                        run_id, artifact_type, json.loads(content), timestamp=timestamp
+                    )
+                else:
+                    result = self.lake_writer.write_text(
+                        run_id, artifact_type, content, timestamp=timestamp
+                    )
+                lake_uri = result.lake_uri
+            except Exception as e:
+                logger.warning(f"Failed to mirror artifact {artifact_type} to lake: {e}")
+        
+        # Store in SQL (system of record)
+        if self.queue:
+            try:
+                self.queue.create_artifact(
+                    run_id=run_id,
+                    artifact_type=artifact_type,
+                    lake_uri=lake_uri,
+                    content_sha256=content_sha256,
+                    byte_count=byte_count,
+                    content=content,
+                    content_mime_type=content_mime_type,
+                    stored_in_sql=True,
+                    mirrored_to_lake=lake_uri is not None,
+                )
+            except Exception as e:
+                logger.warning(f"Failed to persist artifact {artifact_type} to SQL: {e}")
+        
+        return ArtifactReference(
+            artifact_type=artifact_type,
+            lake_uri=lake_uri or "",
+            content_sha256=content_sha256,
+            byte_count=byte_count,
+        )
     
     def _persist_relationships(
         self,
