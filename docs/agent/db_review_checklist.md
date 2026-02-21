@@ -16,6 +16,17 @@ Before approving any SQL PR, verify:
 - [ ] Column ordering follows convention (keys → business → audit)
 - [ ] Constraint names follow naming convention
 
+### Sync Policy Checks (SQL PRs)
+
+- [ ] Migration script present in `db/migrations/`
+- [ ] Canonical definition file updated in `src/db/ddl/`, `src/db/dml/`, or `src/db/views/`
+- [ ] Stored procedures, functions, triggers in `src/db/dml/{type}/`
+- [ ] Views in `src/db/views/{schema}/`
+- [ ] One file per object, schema prefix in filename (e.g., `dbo.usp_proc_name.sql`)
+- [ ] No "migration-only" changes — canonical definitions must reflect end state
+
+> See [SQL_SYNC_POLICY.md](SQL_SYNC_POLICY.md) for the full synchronization policy.
+
 ---
 
 ## Detailed Review Criteria
@@ -204,12 +215,15 @@ dbo.vw_semantic_data       -- Should be in sem schema
 - No security issues
 - Naming conventions followed
 - Schema placement correct
+- Sync policy followed (migration + canonical definition updated)
 
 **Request changes if:**
 - Any naming violations
 - Wrong GUID default functions
 - Datetime type/naming issues
 - Wrong schema placement
+- Missing canonical definition update (migration-only change)
+- Missing migration script (definition-only change)
 
 **Block if:**
 - Security vulnerabilities
