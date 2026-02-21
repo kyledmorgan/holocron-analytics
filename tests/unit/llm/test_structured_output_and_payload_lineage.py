@@ -14,7 +14,6 @@ import json
 import pytest
 from unittest.mock import MagicMock, patch, call
 from datetime import datetime, timezone
-from dataclasses import dataclass
 from typing import Optional, Dict, Any
 
 from llm.handlers.relationship_extraction import RelationshipExtractionHandler

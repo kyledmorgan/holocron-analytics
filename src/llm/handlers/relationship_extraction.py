@@ -349,8 +349,9 @@ class RelationshipExtractionHandler:
     ) -> Optional[ArtifactReference]:
         """Write an artifact to the lake and optionally to SQL."""
         lake_uri = None
-        content_sha256 = hashlib.sha256(content.encode("utf-8")).hexdigest()
-        byte_count = len(content.encode("utf-8"))
+        content_bytes = content.encode("utf-8")
+        content_sha256 = hashlib.sha256(content_bytes).hexdigest()
+        byte_count = len(content_bytes)
         
         # Write to lake if available
         if self.lake_writer:
@@ -403,8 +404,9 @@ class RelationshipExtractionHandler:
         SQL is the system of record.  When a lake_writer is configured the
         content is also mirrored to the data lake for portability.
         """
-        content_sha256 = hashlib.sha256(content.encode("utf-8")).hexdigest()
-        byte_count = len(content.encode("utf-8"))
+        content_bytes = content.encode("utf-8")
+        content_sha256 = hashlib.sha256(content_bytes).hexdigest()
+        byte_count = len(content_bytes)
         lake_uri = None
         
         # Mirror to lake if available
