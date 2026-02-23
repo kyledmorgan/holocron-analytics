@@ -90,6 +90,12 @@ New to this repository? Start with these essential documents:
 |----------|-------------|
 | [Vector Runtime Overview](vector/README.md) | Embedding, storage, and retrieval runtime documentation |
 
+### Notebooks (Planning)
+
+| Document | Description |
+|----------|-------------|
+| [Notebook Inventory & Planning](notebooks/NOTEBOOK_INVENTORY.md) | Jupyter notebook use-case inventory, tech recommendations, and proposed conventions |
+
 ### Analytics / Views / Exercises
 
 | Document | Description |
@@ -144,6 +150,12 @@ All Markdown files in this repository, grouped by location:
 | File | Description |
 |------|-------------|
 | [folder-structure-recommendations.md](_reports/folder-structure-recommendations.md) | Folder structure improvement proposals (report only) |
+
+### `docs/notebooks/`
+
+| File | Description |
+|------|-------------|
+| [NOTEBOOK_INVENTORY.md](notebooks/NOTEBOOK_INVENTORY.md) | Jupyter notebook use-case inventory, tech recommendations, and proposed conventions |
 
 ### `docs/agent/`
 
