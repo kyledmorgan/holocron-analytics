@@ -85,7 +85,6 @@ python scripts/lake/decompress_gz_tree.py \
 | `--dry-run` | off | Preview without writing |
 | `--max-files N` | all | Process at most N files |
 | `--workers N` | 1 | Concurrent decompression threads |
-| `--skip-existing` | on | Skip if destination exists |
 | `--continue-on-error` | off | Keep going after failures |
 | `--log-level` | INFO | `DEBUG`, `INFO`, `WARNING`, `ERROR` |
 

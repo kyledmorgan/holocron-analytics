@@ -1,16 +1,20 @@
 """Unit tests for scripts/lake/decompress_gz_tree.py."""
 
 import gzip
+import importlib.util
 import os
-import textwrap
 from pathlib import Path
 
 import pytest
 
-# Import the module under test
-import importlib.util
-
-_SCRIPT_PATH = Path(__file__).resolve().parents[2] / "scripts" / "lake" / "decompress_gz_tree.py"
+# Import the module under test — locate repo root by searching for .git
+_test_dir = Path(__file__).resolve().parent
+_repo_root = _test_dir
+while _repo_root != _repo_root.parent:
+    if (_repo_root / ".git").exists():
+        break
+    _repo_root = _repo_root.parent
+_SCRIPT_PATH = _repo_root / "scripts" / "lake" / "decompress_gz_tree.py"
 _spec = importlib.util.spec_from_file_location("decompress_gz_tree", _SCRIPT_PATH)
 dgt = importlib.util.module_from_spec(_spec)
 _spec.loader.exec_module(dgt)

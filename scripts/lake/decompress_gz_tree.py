@@ -213,6 +213,9 @@ def run(
                 result = future.result()
                 results.append(result)
                 if not continue_on_error and result.status == "failed":
+                    # Cancel remaining futures on failure.
+                    for f in futures:
+                        f.cancel()
                     break
 
     for r in results:
@@ -294,12 +297,6 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
         type=int,
         default=1,
         help="Number of concurrent decompression workers (default: 1)",
-    )
-    parser.add_argument(
-        "--skip-existing",
-        action="store_true",
-        default=True,
-        help="Skip files whose destination already exists (default: True)",
     )
     parser.add_argument(
         "--continue-on-error",
