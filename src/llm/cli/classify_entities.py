@@ -88,6 +88,7 @@ def is_entity_classified(row: Dict[str, Any], *, require_tags: bool = False,
         if not row.get("DisplayNameNormalized") or not row.get("SortName"):
             return False
     if require_tags:
+        # --require-tags checks AliasCsv (the alias/tag field on DimEntity)
         if not row.get("AliasCsv"):
             return False
     return True
@@ -201,15 +202,15 @@ class EntityClassificationService:
                 pass
             else:
                 # Default resume: entities that are NOT yet classified
-                classification_predicate = ["e.EntityType IS NULL"]
                 if cfg.fill_missing_only:
                     # Also pick entities with partial classification
-                    classification_predicate = [
+                    where_parts.append(
                         "(e.EntityType IS NULL"
                         " OR e.DisplayNameNormalized IS NULL"
                         " OR e.SortName IS NULL)"
-                    ]
-                where_parts.extend(classification_predicate)
+                    )
+                else:
+                    where_parts.append("e.EntityType IS NULL")
         elif cfg.mode == MODE_RERUN:
             # rerun without explicit keys → treat like fresh
             pass
@@ -348,6 +349,10 @@ class EntityClassificationService:
                         stats.skipped += 1
                         stats.already_classified += 1
                     elif existing_status in ("FAILED", "DEADLETTER"):
+                        # In fresh mode or --only failed, a duplicate for a
+                        # previously failed job means we re-enqueued it
+                        # successfully (the stored proc returned the existing
+                        # job_id).  Otherwise treat it as skipped.
                         if cfg.mode == MODE_FRESH or cfg.only == ONLY_FAILED:
                             stats.succeeded += 1
                         else:
