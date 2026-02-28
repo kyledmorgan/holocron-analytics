@@ -10,6 +10,7 @@ This directory contains utility scripts for working with the Holocron Analytics 
 scripts/
 ├── db/              # Database-related scripts
 ├── dev/             # Development utilities (placeholder)
+├── lake/            # Data lake utilities
 ├── pipeline/        # Data pipeline scripts (placeholder)
 ├── test/            # Test runner scripts
 ├── llm_enqueue_job.py
@@ -176,6 +177,42 @@ bash scripts/test/verify_sqlserver.sh
 ```
 
 **💡 Tip:** Use `make verify-sqlserver` instead for better output formatting.
+
+---
+
+## Lake Scripts (`lake/`)
+
+### `decompress_gz_tree.py`
+
+**Purpose:** Bulk decompress `.gz` archives into a parallel directory tree, preserving folder structure. Designed for OpenAlex snapshot data but works with any `.gz` tree.
+
+**Usage:**
+```bash
+# Decompress everything (idempotent — skips existing)
+python scripts/lake/decompress_gz_tree.py
+
+# Dry-run
+python scripts/lake/decompress_gz_tree.py --dry-run
+
+# Force re-decompress, limited to 10 files, 4 workers
+python scripts/lake/decompress_gz_tree.py --force --max-files 10 --workers 4
+```
+
+**Exit Codes:**
+- `0`: All files processed successfully
+- `1`: One or more failures (unless `--continue-on-error`)
+
+See [docs/lake/openalex_decompression.md](../docs/lake/openalex_decompression.md) for full documentation.
+
+### `decompress_gz_tree.ps1`
+
+**Purpose:** PowerShell alternative using .NET `GzipStream` for Windows-native usage.
+
+**Usage:**
+```powershell
+.\scripts\lake\decompress_gz_tree.ps1 -DryRun
+.\scripts\lake\decompress_gz_tree.ps1 -Force -MaxFiles 5
+```
 
 ---
 
