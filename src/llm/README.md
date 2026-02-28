@@ -128,6 +128,8 @@ python -m src.llm.runners.phase1_runner --loop --poll-seconds 10
 - Artifact storage to filesystem lake
 - Retry with backoff and deadlettering
 - Full telemetry capture (metrics, model info)
+- Response lineage capture: raw `response_json` plus `response_normalized_json` for parsed
+  `message.content`/`message.thinking` when structured output format is used
 
 See [Phase 1 Runner](../../docs/llm/phase1-runner.md) for usage guide.
 

@@ -345,6 +345,90 @@ class TestSQLFirstArtifactPersistence:
             assert call_args.kwargs["content_sha256"] == expected_sha
             assert call_args.kwargs["byte_count"] == expected_bytes
 
+    def test_normalized_response_artifact_parses_message_content(self):
+        """Test normalized artifact stores parsed JSON for message.content."""
+        handler, mock_client, mock_queue = self._make_handler_with_mocks()
+
+        mock_client.get_full_request_payload.return_value = {
+            "model": "llama3.2",
+            "messages": [],
+            "format": {"type": "object"},
+        }
+        raw_response = {
+            "message": {
+                "role": "assistant",
+                "content": '{"relationships": []}',
+                "thinking": '{"plan": ["step1"]}',
+            }
+        }
+        mock_response = MagicMock()
+        mock_response.content = '{"relationships": []}'
+        mock_response.raw_response = raw_response
+        mock_client.chat_with_structured_output.return_value = mock_response
+
+        handler._call_llm("test prompt", MockRunContext())
+
+        normalized_calls = [
+            c for c in mock_queue.create_artifact.call_args_list
+            if c.kwargs.get("artifact_type") == "response_normalized_json"
+        ]
+        assert len(normalized_calls) == 1
+        normalized = json.loads(normalized_calls[0].kwargs["content"])
+        assert isinstance(normalized["message"]["content"], dict)
+        assert isinstance(normalized["message"]["thinking"], dict)
+        assert normalized["message"]["content"]["relationships"] == []
+
+    def test_normalized_response_artifact_wraps_non_json_text(self):
+        """Test normalized artifact wraps non-JSON message strings."""
+        handler, mock_client, mock_queue = self._make_handler_with_mocks()
+
+        mock_client.get_full_request_payload.return_value = {
+            "model": "llama3.2",
+            "messages": [],
+            "format": {"type": "object"},
+        }
+        mock_response = MagicMock()
+        mock_response.content = "plain text output"
+        mock_response.raw_response = {
+            "message": {"role": "assistant", "content": "plain text output"}
+        }
+        mock_client.chat_with_structured_output.return_value = mock_response
+
+        handler._call_llm("test prompt", MockRunContext())
+
+        normalized_calls = [
+            c for c in mock_queue.create_artifact.call_args_list
+            if c.kwargs.get("artifact_type") == "response_normalized_json"
+        ]
+        assert len(normalized_calls) == 1
+        normalized = json.loads(normalized_calls[0].kwargs["content"])
+        wrapped = normalized["message"]["content"]
+        assert wrapped["type"] == "text"
+        assert wrapped["text"] == "plain text output"
+        assert "parse_error" in wrapped
+        assert wrapped["original_length"] == len("plain text output")
+
+    def test_normalized_response_not_written_without_structured_format(self):
+        """Test normalization is skipped when request payload has no JSON format."""
+        handler, mock_client, mock_queue = self._make_handler_with_mocks()
+
+        mock_client.get_full_request_payload.return_value = {
+            "model": "llama3.2",
+            "messages": [],
+        }
+        mock_response = MagicMock()
+        mock_response.content = '{"relationships": []}'
+        mock_response.raw_response = {"message": {"content": '{"relationships": []}'}}
+        mock_client.chat_with_structured_output.return_value = mock_response
+
+        handler._call_llm("test prompt", MockRunContext())
+
+        normalized_calls = [
+            c for c in mock_queue.create_artifact.call_args_list
+            if c.kwargs.get("artifact_type") == "response_normalized_json"
+        ]
+        assert len(normalized_calls) == 0
+
 
 # ---------------------------------------------------------------------------
 # Schema/contract metadata tracking

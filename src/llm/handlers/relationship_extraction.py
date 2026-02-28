@@ -327,8 +327,84 @@ class RelationshipExtractionHandler:
             ctx.run_id, "response_json", response_content,
             "application/json", timestamp,
         )
+
+        # Persist a normalized response view when structured output is requested.
+        if self._should_normalize_message_fields(request_payload):
+            normalized_response = self._normalize_response_payload(response.raw_response or {})
+            normalized_content = json.dumps(
+                normalized_response, indent=2, ensure_ascii=False, default=str
+            )
+            self._persist_artifact(
+                ctx.run_id, "response_normalized_json", normalized_content,
+                "application/json", timestamp,
+            )
         
         return response.content or ""
+
+    def _should_normalize_message_fields(self, request_payload: Dict[str, Any]) -> bool:
+        """Return True when request format indicates structured JSON output."""
+        format_value = request_payload.get("format")
+        if isinstance(format_value, dict):
+            return True
+        if isinstance(format_value, str):
+            return format_value.strip().lower() == "json"
+        return False
+
+    def _normalize_response_payload(self, response_payload: Dict[str, Any]) -> Dict[str, Any]:
+        """
+        Normalize JSON-like message string fields into parsed JSON values.
+
+        Raw provenance is preserved separately in response_json. This method
+        produces a query-friendly normalized projection for message fields.
+        """
+        normalized = json.loads(json.dumps(response_payload, ensure_ascii=False, default=str))
+
+        message = normalized.get("message")
+        if isinstance(message, dict):
+            self._normalize_message_dict(message)
+
+        choices = normalized.get("choices")
+        if isinstance(choices, list):
+            for choice in choices:
+                if not isinstance(choice, dict):
+                    continue
+                choice_message = choice.get("message")
+                if isinstance(choice_message, dict):
+                    self._normalize_message_dict(choice_message)
+
+        return normalized
+
+    def _normalize_message_dict(self, message: Dict[str, Any]) -> None:
+        """Normalize JSON-like string fields in a message object in-place."""
+        for key, value in list(message.items()):
+            if key == "role" or not isinstance(value, str):
+                continue
+            message[key] = self._parse_or_wrap_json_text(value)
+
+    def _parse_or_wrap_json_text(self, text: str) -> Any:
+        """
+        Parse a JSON-like string into JSON; otherwise return a text wrapper.
+
+        Wrapper keeps data JSON-shaped for storage and downstream querying.
+        """
+        stripped = text.strip()
+        if not stripped.startswith("{") and not stripped.startswith("["):
+            return {
+                "type": "text",
+                "text": text,
+                "parse_error": "Input does not look like JSON (expected '{' or '[').",
+                "original_length": len(text),
+            }
+
+        try:
+            return json.loads(stripped)
+        except json.JSONDecodeError as exc:
+            return {
+                "type": "text",
+                "text": text,
+                "parse_error": str(exc),
+                "original_length": len(text),
+            }
     
     def _parse_llm_output(self, llm_output: str) -> Dict[str, Any]:
         """Parse LLM output string into dictionary."""
