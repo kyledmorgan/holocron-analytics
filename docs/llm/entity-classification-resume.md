@@ -1,5 +1,10 @@
 # Entity Classification Resume / Checkpoint
 
+> **Related reference:**
+> [`classify_entities` CLI](../reference/cli-reference.md#classify_entities) ·
+> [`dbo.DimEntity`](../reference/data-model.md#dbodimentity) ·
+> [`llm.job`](../reference/data-model.md#llmjob)
+
 This document describes the **resume / checkpoint** capability added to the entity classification runner. The runner identifies entities in `dbo.DimEntity` that need type classification and enqueues LLM jobs for them, with full support for resumable, idempotent processing.
 
 ## Overview

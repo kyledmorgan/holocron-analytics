@@ -1,5 +1,9 @@
 # Evidence Bundles - Phase 2 Evidence Assembly
 
+> **Related reference:**
+> [`llm.evidence_bundle`](../reference/data-model.md#llmevidence_bundle) ·
+> [Glossary: Evidence Bundle](glossary.md#evidence-bundle)
+
 ## Overview
 
 Evidence bundles are **deterministic, bounded, and auditable** collections of source materials that feed into LLM interrogations. Phase 2 implements a robust evidence assembly system that:

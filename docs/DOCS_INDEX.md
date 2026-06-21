@@ -13,6 +13,8 @@ New to this repository? Start with these essential documents:
 | [Root README](../README.md) | Project overview, goals, quick start guide |
 | [Quick Start Guide](../QUICKSTART.md) | **5-minute setup** — Get running with Docker immediately |
 | [Contributing Guide](../CONTRIBUTING.md) | How to contribute to the project |
+| [Reference Index (Concept Catalog)](reference/README.md) | Domain-grouped map of concepts → canonical definitions and implementations |
+| [Documentation and Links Standard](contributing/documentation-and-links.md) | Link-first navigation rules, stable headings, validation |
 | [Feature-Series Naming Convention](contributing/feature-series-convention.md) | Canonical `YYYY_MM_<name>_phase_<n>` naming for multi-phase work |
 | [Feature-Series History](history/feature-series/README.md) | Reconstructed history of past multi-phase feature efforts |
 | [Phase-Reference Inventory](history/phase-reference-inventory.md) | Catalogue of legacy phase references and how each was resolved |
@@ -25,6 +27,21 @@ New to this repository? Start with these essential documents:
 ---
 
 ## By Topic / Area
+
+### Concept Reference & Navigation
+
+| Document | Description |
+|----------|-------------|
+| [Reference Index](reference/README.md) | Central concept catalog grouped by domain |
+| [Terminology](reference/terminology.md) | Cross-domain term → canonical location |
+| [Data Model](reference/data-model.md) | Canonical SQL tables (dimensions, ingest, LLM) |
+| [CLI Reference](reference/cli-reference.md) | Command-line entry points |
+| [Jobs and Runners](reference/jobs-and-runners.md) | Long-running workers and orchestration |
+| [Lake and Artifacts](reference/lake-and-artifacts.md) | Lake datasets, OpenAlex, artifacts |
+| [Feature Series](reference/feature-series.md) | Multi-PR effort identifiers and history |
+| [Repository Concept Inventory](reference/repository-concept-inventory.md) | Full discovery inventory table |
+| [Documentation and Links Standard](contributing/documentation-and-links.md) | Link-first navigation conventions and validation |
+| [Cross-Reference Implementation Summary](reference/cross-reference-implementation-summary.md) | What the navigation system delivered |
 
 ### Local Development & Docker
 

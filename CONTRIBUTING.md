@@ -211,6 +211,13 @@ ORDER BY c.character_name;
 
 See [Documentation Update Workflow](agents/playbooks/docs/update_docs_and_links.md) for more details.
 
+For canonical concept definitions, stable headings, selective cross-linking, and
+link validation, follow the
+[Documentation and Links Standard](docs/contributing/documentation-and-links.md)
+and start from the [Reference Index](docs/reference/README.md). Run
+`python scripts/quality/check_markdown_links.py` before submitting documentation
+changes.
+
 ---
 
 ## Testing

@@ -7,6 +7,10 @@
 --   EntityGuid = public-facing stable identifier (random UNIQUEIDENTIFIER)
 --   ExternalKey = external source system identifier
 --
+-- Reference:
+--   Data model: docs/reference/data-model.md#dbodimentity
+--   Catalog:    docs/reference/README.md#core-dimensional-model
+--
 CREATE TABLE dbo.DimEntity (
     EntityKey INT IDENTITY(1,1) NOT NULL,
     EntityGuid UNIQUEIDENTIFIER NOT NULL CONSTRAINT DF_DimEntity_EntityGuid DEFAULT (NEWID()),

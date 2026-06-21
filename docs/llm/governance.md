@@ -81,7 +81,7 @@ Defines audit trail requirements:
 
 These governance features are planned for **Phase 7** of the roadmap.
 
-See: [Vision and Roadmap](vision-and-roadmap.md#phase-7--governance-lineage-and-operational-hardening)
+See: [Vision and Roadmap](vision-and-roadmap.md#governance-lineage-and-operational-hardening--2026_01_llm_derived_data_phase_7)
 
 ---
 

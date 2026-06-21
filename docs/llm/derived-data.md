@@ -190,5 +190,5 @@ The following decisions are documented as open:
 
 ## See Also
 
-- [Ingest Framework](../../../src/ingest/README.md) — Related ingestion patterns
+- [Ingest Framework](../../src/ingest/README.md) — Related ingestion patterns
 - [Project Vision](../vision/ProjectVision.md) — Long-term project goals

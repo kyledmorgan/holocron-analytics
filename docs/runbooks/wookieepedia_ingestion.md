@@ -1,5 +1,10 @@
 # Wookieepedia Ingestion Runbook
 
+> **Related reference:**
+> [Ingest CLI](../reference/cli-reference.md#ingest-cli) ·
+> [Ingest runner](../reference/jobs-and-runners.md#ingest-runner) ·
+> [`ingest.work_items`](../reference/data-model.md#ingestwork_items)
+
 ## Overview
 
 This runbook covers running the MediaWiki ingestion pipeline for Wookieepedia (Star Wars wiki) data.

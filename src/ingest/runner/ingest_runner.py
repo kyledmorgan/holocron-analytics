@@ -1,5 +1,10 @@
 """
 Main execution runner for the ingestion pipeline.
+
+Reference:
+    Runner reference: docs/reference/jobs-and-runners.md#ingest-runner
+    Runbook:          docs/runbooks/wookieepedia_ingestion.md
+    Data model:       docs/reference/data-model.md#ingestwork_items
 """
 
 import hashlib

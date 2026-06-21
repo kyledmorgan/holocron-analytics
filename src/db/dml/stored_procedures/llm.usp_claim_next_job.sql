@@ -5,6 +5,10 @@ BEGIN
     SET NOCOUNT ON;
     SET XACT_ABORT ON;
 
+    -- Reference:
+    --   Runner:     docs/reference/jobs-and-runners.md#phase-1-llm-runner
+    --   Data model: docs/reference/data-model.md#llmjob
+
     DECLARE @job_id UNIQUEIDENTIFIER;
     DECLARE @now DATETIME2 = SYSUTCDATETIME();
 
