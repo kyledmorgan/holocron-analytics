@@ -14,7 +14,7 @@
 #   MSSQL_SA_PASSWORD - SQL Server SA password (required for SQL Server tests)
 
 .PHONY: help test test-unit test-sqlserver test-e2e verify-sqlserver \
-        db-up db-down db-init db-wait install lint clean
+        db-up db-down db-init db-wait install lint docs-link-check clean
 
 # Default target
 .DEFAULT_GOAL := help
@@ -169,6 +169,10 @@ lint: ## Run linters
 	@echo "$(BLUE)Running linters...$(NC)"
 	python -m py_compile src/ingest/**/*.py 2>/dev/null || true
 	python -m py_compile tools/*.py 2>/dev/null || true
+
+docs-link-check: ## Validate repository-relative Markdown links and anchors
+	@echo "$(BLUE)Checking Markdown links...$(NC)"
+	python scripts/quality/check_markdown_links.py
 
 clean: ## Clean up temporary files
 	@echo "$(BLUE)Cleaning up...$(NC)"

@@ -17,6 +17,39 @@ More details:
 Subsystem-specific guidance:
 - `agents/llm-derived-data.md` — LLM-Derived Data subsystem rules (docs-first, contract-first, evidence-only citations)
 
+## Documentation and cross-reference requirements
+
+The repository uses a **link-first** navigation system. The central concept
+catalog is [`docs/reference/README.md`](docs/reference/README.md); the full
+standard is
+[`docs/contributing/documentation-and-links.md`](docs/contributing/documentation-and-links.md).
+
+When adding a new major concept, SQL object, job, runner, CLI, persistent data
+structure, or architectural boundary:
+
+1. Determine whether it requires a canonical definition.
+2. Add it to the appropriate grouped reference document under `docs/reference/`.
+3. Link the definition to its primary implementation.
+4. Link major implementation entry points back to architecture or runbook
+   documentation where useful.
+5. Add links selectively; do not hyperlink every occurrence of a term.
+6. Use repository-relative Markdown links (not hardcoded GitHub URLs).
+7. Use stable Markdown headings for canonical definitions.
+8. Update related architecture diagrams when relationships change.
+9. Distinguish implemented state from planned state (label planned work).
+10. Run Markdown link validation before completing the change:
+    `python scripts/quality/check_markdown_links.py`.
+11. Do not rely on IDE-only references as the sole navigation method.
+12. Do not document internal helper functions unless they are architecturally
+    meaningful.
+
+Also update the
+[concept inventory](docs/reference/repository-concept-inventory.md) when you:
+create a new SQL schema or major table; introduce a new CLI; add a new job or
+runner; add a new lake dataset; create a new artifact type; add a new evidence
+relationship; introduce a new domain concept; or materially change an existing
+subsystem relationship.
+
 ## Feature-Series Naming Convention
 
 When a body of work is intentionally split across multiple phases or pull requests,

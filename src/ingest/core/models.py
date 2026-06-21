@@ -1,5 +1,9 @@
 """
 Core data models for the ingestion framework.
+
+Reference:
+    Data model: docs/reference/data-model.md#ingestwork_items
+                docs/reference/data-model.md#ingestingestrecords
 """
 
 from dataclasses import dataclass, field

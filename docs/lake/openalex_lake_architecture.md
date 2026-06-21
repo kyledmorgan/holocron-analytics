@@ -9,6 +9,11 @@
 > **Status:** Planning / scaffolding — no full ETL or PDF download in
 > `2026_02_openalex_lake_phase_0`.
 
+> **Related reference:**
+> [Lake and artifacts](../reference/lake-and-artifacts.md) ·
+> [OpenAlex work](../reference/lake-and-artifacts.md#openalex-work) (planned) ·
+> [PDF artifact](../reference/lake-and-artifacts.md#pdf-artifact) (planned)
+
 This document describes how OpenAlex snapshot data, artifact blobs (PDFs), and
 metadata flow through the Holocron lake into a curated SQL subset and evidence
 layer.

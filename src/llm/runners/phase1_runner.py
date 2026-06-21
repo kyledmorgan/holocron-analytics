@@ -18,6 +18,11 @@ Usage:
 
     # Run in loop mode
     python -m src.llm.runners.phase1_runner --loop --poll-seconds 10 --worker-id worker-1
+
+Reference:
+    Runner reference: docs/reference/jobs-and-runners.md#phase-1-llm-runner
+    Usage guide:      docs/llm/phase1-runner.md
+    Operations:       docs/llm/operational.md
 """
 
 import argparse

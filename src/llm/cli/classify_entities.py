@@ -28,6 +28,11 @@ Usage:
 
     # Dry run (preview what would be processed)
     python -m llm.cli.classify_entities --mode resume --dry-run
+
+Reference:
+    CLI reference:  docs/reference/cli-reference.md#classify_entities
+    Behavior:       docs/llm/entity-classification-resume.md
+    Data model:     docs/reference/data-model.md#dbodimentity
 """
 
 import argparse

@@ -12,5 +12,8 @@
             "password": "",
             "connectionTimeout": 30
         }
-    ]
+    ],
+    "markdown.validate.enabled": true,
+    "markdown.updateLinksOnFileMove.enabled": "prompt",
+    "markdown.suggest.paths.includeWorkspaceHeaderCompletions": "onSingleOrDoubleHash"
 }
