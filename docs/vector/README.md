@@ -1,5 +1,12 @@
 # Vector Runtime
 
+> **Feature series:** The "Migration Status" / "Phase 2 Complete" section below refers
+> to `2026_02_vector_runtime_split` (the schema split, now `complete`). The
+> **"Phase III Evaluation"** work referenced under *Related Documents* is a **separate,
+> later** vector-evaluation effort and is **not** part of that series. See the
+> [feature-series convention](../contributing/feature-series-convention.md) and
+> [series history](../history/feature-series/2026_02_vector_runtime_split.md).
+
 The **vector** schema provides infrastructure for embedding generation, storage, and retrieval. It operates independently from the `llm` chat runtime schema.
 
 ## Overview
@@ -169,7 +176,7 @@ exists = store.embedding_exists(
 
 ## Migration Status (Complete)
 
-### Phase 2 Complete ✅
+### `2026_02_vector_runtime_split_phase_2` Complete ✅
 
 The schema refactor is **feature complete**. The `vector` schema is now the sole home for embedding and retrieval operations.
 

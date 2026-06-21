@@ -1,7 +1,7 @@
 """
 Generic Entity Extraction Interrogation (entity_extraction_generic_v1).
 
-Phase 3: Generalized extraction supporting ALL entity types (PersonCharacter,
+2026_02_entity_extraction_phase_3: Generalized extraction supporting ALL entity types (PersonCharacter,
 LocationPlace, Organization, VehicleCraft, Work, Event, Concept, etc.)
 in a unified, contract-driven way.
 
@@ -516,7 +516,7 @@ def create_entity_extraction_generic_v1() -> InterrogationDefinition:
         version="1.0.0",
         description=(
             "Extract entities of ALL types from source text into contract-compliant JSON. "
-            "Phase 3 generalized prompt supporting PersonCharacter, LocationPlace, Organization, "
+            "2026_02_entity_extraction_phase_3 generalized prompt supporting PersonCharacter, LocationPlace, Organization, "
             "VehicleCraft, Work, Event, Concept, and more. Uses flexible attributes and "
             "consistent confidence scoring."
         ),

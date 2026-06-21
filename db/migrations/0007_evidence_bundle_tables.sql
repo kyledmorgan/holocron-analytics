@@ -1,4 +1,4 @@
--- Migration 0007: Create evidence bundle tables for Phase 2
+-- Migration 0007: Create evidence bundle tables for 2026_01_llm_derived_data_phase_2 (evidence assembly)
 -- Idempotent: Only creates tables if they don't exist
 
 -- ============================================================================

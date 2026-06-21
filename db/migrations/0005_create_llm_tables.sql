@@ -1,4 +1,4 @@
--- Migration 0005: Create LLM tables for Phase 1
+-- Migration 0005: Create LLM tables for 2026_01_llm_derived_data_phase_1 (MVP runner)
 -- Idempotent: Only creates tables if they don't exist
 
 -- ============================================================================

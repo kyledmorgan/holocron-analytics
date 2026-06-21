@@ -1,6 +1,6 @@
 # Interrogation: Entity Extraction
 # Version: 1.0.0
-# Status: Example (Phase 0 placeholder)
+# Status: Example (2026_01_llm_derived_data_phase_0 scaffolding placeholder)
 
 id: entity_extraction_v1
 name: Entity Extraction
@@ -9,7 +9,7 @@ status: example
 
 description: |
   Extract named entities with attributes from evidence documents.
-  This is an example interrogation definition for Phase 0 scaffolding.
+  This is an example interrogation definition from 2026_01_llm_derived_data_phase_0 scaffolding.
 
 # References to related files
 schema_ref: contracts/derived_output_schema.json
@@ -93,8 +93,8 @@ fields:
 
 # Notes for implementation
 notes: |
-  This is a placeholder definition for Phase 0 scaffolding.
-  Full implementation is planned for Phase 1.
+  This is a placeholder definition from 2026_01_llm_derived_data_phase_0 scaffolding.
+  Full implementation is delivered by the entity-extraction interrogations in 2026_02_entity_extraction.
   
   The actual prompt template and schema details will be refined
   based on initial testing with real evidence bundles.

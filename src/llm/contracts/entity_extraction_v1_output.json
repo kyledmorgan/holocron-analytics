@@ -2,7 +2,7 @@
   "$schema": "http://json-schema.org/draft-07/schema#",
   "$id": "https://holocron-analytics.local/schemas/llm/entity-extraction/v1",
   "title": "Entity Extraction V1 Output",
-  "description": "Output schema for entity extraction jobs. Extracts entities (and optionally relationships) from source text. Phase 1 focuses on Droid entities.",
+  "description": "Output schema for entity extraction jobs. Extracts entities (and optionally relationships) from source text. 2026_02_entity_extraction_phase_1 focuses on Droid entities.",
   "version": "1.0.0",
   "type": "object",
   "required": ["entities"],
@@ -21,7 +21,7 @@
           },
           "type": {
             "type": "string",
-            "description": "The entity type (e.g., 'Droid', 'PersonCharacter', 'LocationPlace'). Open-ended string; Phase 1 expects 'Droid' as primary target."
+            "description": "The entity type (e.g., 'Droid', 'PersonCharacter', 'LocationPlace'). Open-ended string; 2026_02_entity_extraction_phase_1 expects 'Droid' as primary target."
           },
           "confidence": {
             "type": "number",
@@ -51,7 +51,7 @@
     },
     "relationships": {
       "type": "array",
-      "description": "Optional array of relationships between entities. Phase 1 validates but does not persist relationships.",
+      "description": "Optional array of relationships between entities. 2026_02_entity_extraction_phase_1 validates but does not persist relationships.",
       "items": {
         "type": "object",
         "required": ["from_entity", "to_entity", "relation_type", "confidence"],
@@ -101,7 +101,7 @@
         },
         "primary_type_focus": {
           "type": ["string", "null"],
-          "description": "The entity type this extraction focused on (e.g., 'Droid' for Phase 1)"
+          "description": "The entity type this extraction focused on (e.g., 'Droid' for 2026_02_entity_extraction_phase_1)"
         },
         "extraction_notes": {
           "type": ["string", "null"],

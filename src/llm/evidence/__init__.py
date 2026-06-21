@@ -1,5 +1,5 @@
 """
-Evidence Bundle Builder - Phase 2 evidence assembly system.
+Evidence Bundle Builder - evidence assembly system (2026_01_llm_derived_data_phase_2).
 
 This module provides functionality for building deterministic, bounded,
 and auditable evidence bundles from various sources.

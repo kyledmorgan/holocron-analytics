@@ -1,4 +1,4 @@
--- Migration 0024: Deprecate legacy vector tables in llm schema (Phase 2 Cutover)
+-- Migration 0024: Deprecate legacy vector tables in llm schema (2026_02_vector_runtime_split_phase_2 cutover)
 -- 
 -- This migration renames the legacy vector tables in the llm schema to *_legacy
 -- to prevent accidental use. The vector schema is now the sole home for:

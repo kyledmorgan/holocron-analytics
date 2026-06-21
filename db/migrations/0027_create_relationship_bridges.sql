@@ -1,8 +1,8 @@
--- Migration 0027: Create relationship bridge tables for Phase 2
+-- Migration 0027: Create relationship bridge tables for 2026_02_entity_extraction_phase_2
 -- Idempotent: Only creates tables if they don't exist
 --
 -- Purpose: Provides entity-to-entity relationship bridge and optional
--- event/work dimension tables for Phase 2 multi-output routing.
+-- event/work dimension tables for 2026_02_entity_extraction_phase_2 multi-output routing.
 --
 -- Tables:
 --   - BridgeEntityRelation: Core entity-to-entity relationship bridge
@@ -12,9 +12,9 @@
 --   - BridgeEntityWork: Entity appearances in works
 --
 -- Foundation for:
---   - Phase 6: Events/works extraction
---   - Phase 3: Broad coverage routing outputs to multiple tables
---   - Phase 4: Governance and human review of relationship assertions
+--   - 2026_02_entity_extraction_phase_6: Events/works extraction
+--   - 2026_02_entity_extraction_phase_3: Broad coverage routing outputs to multiple tables
+--   - 2026_02_entity_extraction_phase_4: Governance and human review of relationship assertions
 
 -- ============================================================================
 -- dbo.BridgeEntityRelation table: Entity-to-Entity relationships
@@ -183,7 +183,7 @@ GO
 
 -- ============================================================================
 -- dbo.DimEvent table: Event dimension (battles, treaties, births, deaths)
--- Deferred implementation - placeholder structure for Phase 6
+-- TODO(2026_02_entity_extraction_phase_6): Deferred placeholder structure for events/works extraction
 -- ============================================================================
 IF NOT EXISTS (
     SELECT * FROM sys.tables t 
@@ -276,7 +276,7 @@ GO
 
 -- ============================================================================
 -- dbo.BridgeEntityEvent table: Entity participation in events
--- Deferred implementation - placeholder structure for Phase 6
+-- TODO(2026_02_entity_extraction_phase_6): Deferred placeholder structure for events/works extraction
 -- ============================================================================
 IF NOT EXISTS (
     SELECT * FROM sys.tables t 
@@ -357,7 +357,7 @@ GO
 
 -- ============================================================================
 -- dbo.DimWork table: Creative works dimension (films, TV, novels, comics)
--- Deferred implementation - placeholder structure for Phase 6
+-- TODO(2026_02_entity_extraction_phase_6): Deferred placeholder structure for events/works extraction
 -- ============================================================================
 IF NOT EXISTS (
     SELECT * FROM sys.tables t 
@@ -448,7 +448,7 @@ GO
 
 -- ============================================================================
 -- dbo.BridgeEntityWork table: Entity appearances in works
--- Deferred implementation - placeholder structure for Phase 6
+-- TODO(2026_02_entity_extraction_phase_6): Deferred placeholder structure for events/works extraction
 -- ============================================================================
 IF NOT EXISTS (
     SELECT * FROM sys.tables t 
@@ -527,5 +527,5 @@ BEGIN
 END
 GO
 
-PRINT 'Migration 0027 completed: Relationship bridge tables created for Phase 2.'
+PRINT 'Migration 0027 completed: Relationship bridge tables created for 2026_02_entity_extraction_phase_2.'
 GO

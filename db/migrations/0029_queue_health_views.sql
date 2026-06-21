@@ -1,5 +1,5 @@
 -- Migration: 0029_queue_health_views.sql
--- Phase 3: Queue Health Monitoring Views
+-- 2026_02_entity_extraction_phase_3: Queue Health Monitoring Views
 --
 -- Creates views for monitoring LLM job queue health:
 -- - llm.vw_queue_health: Summary by status
@@ -7,7 +7,7 @@
 -- - llm.vw_queue_aged_jobs: Jobs exceeding age thresholds
 -- - llm.vw_queue_summary_by_priority: Priority band distribution
 --
--- Foundation for: Phase 4 UI; ops dashboards; Phase 7 automation
+-- Foundation for: 2026_02_entity_extraction_phase_4 UI; ops dashboards; _phase_7 automation
 
 SET ANSI_NULLS ON
 GO

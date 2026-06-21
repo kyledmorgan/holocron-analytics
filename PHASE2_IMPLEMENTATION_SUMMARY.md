@@ -1,4 +1,10 @@
-# Phase 2: Evidence Assembly + Packaging - Implementation Summary
+# Evidence Assembly + Packaging — `2026_01_llm_derived_data_phase_2` Implementation Summary
+
+> **Feature series:** `2026_01_llm_derived_data` (began January 2026). This document
+> summarizes `2026_01_llm_derived_data_phase_2` (Evidence Assembly). References to
+> "Phase 1", "Phase 3", etc. below are phases of this same series — see the
+> [series history](docs/history/feature-series/2026_01_llm_derived_data.md) and the
+> [feature-series convention](docs/contributing/feature-series-convention.md).
 
 ## Overview
 
@@ -313,10 +319,10 @@ print(f"Bundle {bundle.bundle_id} with {len(bundle.items)} items")
 
 Phase 2 is complete and integrated with Phase 1. The system is now ready for:
 
-- **Phase 3:** RAG / Embeddings (evidence retrieval)
-- **Phase 4:** Web browsing / snapshot integration
-- **Phase 5:** Multi-model adjudication
-- **Phase 6+:** Advanced governance and lineage
+- **`2026_01_llm_derived_data_phase_3`:** RAG / Embeddings (evidence retrieval)
+- **`2026_01_llm_derived_data_phase_4`:** Web browsing / snapshot integration
+- **`2026_01_llm_derived_data_phase_5`:** Multi-model adjudication
+- **`2026_01_llm_derived_data_phase_6`+:** Advanced governance and lineage
 
 ## Files Changed
 

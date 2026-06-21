@@ -1,6 +1,13 @@
 # Functional Gap Analysis (FGA)
 
-**Status:** Phase 0 — Documentation Only  
+> **Feature series:** All "Phase N" references across the FGA documents belong to the
+> `2026_02_entity_extraction` series (canonical form `2026_02_entity_extraction_phase_<n>`).
+> This series is **distinct** from `2026_01_llm_derived_data` despite both numbering
+> phases 1/2/3. See the
+> [series history](../history/feature-series/2026_02_entity_extraction.md) and the
+> [feature-series convention](../contributing/feature-series-convention.md).
+
+**Status:** `2026_02_entity_extraction_phase_0` — Documentation Only  
 **Date:** 2026-02-12  
 **Purpose:** Comprehensive analysis of current state and gaps for LLM-driven knowledge expansion pipeline.
 

@@ -31,7 +31,7 @@ class TestInterrogationDefinition:
         assert definition.key == "entity_extraction_generic_v1"
         assert definition.name == "Generic Entity Extraction"
         assert definition.version == "1.0.0"
-        assert "Phase 3" in definition.description
+        assert "2026_02_entity_extraction_phase_3" in definition.description
     
     def test_system_prompt_contains_entity_types(self):
         """Test that system prompt mentions key entity types."""

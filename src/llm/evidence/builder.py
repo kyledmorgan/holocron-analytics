@@ -1,5 +1,5 @@
 """
-Evidence Bundle Builder - Main entry point for Phase 2 evidence assembly.
+Evidence Bundle Builder - Main entry point for evidence assembly (2026_01_llm_derived_data_phase_2).
 
 Orchestrates the loading, bounding, and packaging of evidence from various
 sources into a deterministic, auditable evidence bundle.

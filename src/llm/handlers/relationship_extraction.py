@@ -10,8 +10,9 @@ Handles relationship_extraction jobs:
 6. Persists relationships via stored procedure (unless dry-run)
 7. Updates job/run status
 
-Phase 2: Focused on entity-entity relationships with temporal bounds.
-Foundation for: Phase 3 multi-output families, Phase 4 governance queue.
+2026_02_entity_extraction_phase_2: Focused on entity-entity relationships with temporal bounds.
+Foundation for: 2026_02_entity_extraction_phase_3 multi-output families,
+_phase_4 governance queue.
 """
 
 import hashlib

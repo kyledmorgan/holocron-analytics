@@ -1,6 +1,13 @@
 # OpenAlex Lake-First Architecture Plan
 
-> **Status:** Planning / scaffolding — no full ETL or PDF download in this phase.
+> **Feature series:** `2026_02_openalex_lake` (began February 2026). "this phase"
+> below refers to `2026_02_openalex_lake_phase_0` (scaffolding); later ETL/PDF work
+> is tracked as `2026_02_openalex_lake_phase_1`+. See the
+> [series history](../history/feature-series/2026_02_openalex_lake.md) and the
+> [feature-series convention](../contributing/feature-series-convention.md).
+
+> **Status:** Planning / scaffolding — no full ETL or PDF download in
+> `2026_02_openalex_lake_phase_0`.
 
 This document describes how OpenAlex snapshot data, artifact blobs (PDFs), and
 metadata flow through the Holocron lake into a curated SQL subset and evidence

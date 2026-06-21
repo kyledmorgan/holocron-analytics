@@ -1,6 +1,6 @@
 # Interrogation: Atomic Claims Extraction
 # Version: 1.0.0
-# Status: Example (Phase 0 placeholder)
+# Status: Example (2026_01_llm_derived_data_phase_0 scaffolding placeholder)
 
 id: atomic_claims_v1
 name: Atomic Claims Extraction
@@ -10,7 +10,7 @@ status: example
 description: |
   Extract atomic (falsifiable, self-contained) claims from evidence documents.
   Each claim is a single fact with explicit evidence citations.
-  This is an example interrogation definition for Phase 0 scaffolding.
+  This is an example interrogation definition from 2026_01_llm_derived_data_phase_0 scaffolding.
 
 # References to related files
 schema_ref: contracts/derived_output_schema.json
@@ -92,8 +92,8 @@ quality_signals:
 
 # Notes for implementation
 notes: |
-  This is a placeholder definition for Phase 0 scaffolding.
-  Full implementation is planned for Phase 1.
+  This is a placeholder definition from 2026_01_llm_derived_data_phase_0 scaffolding.
+  Full implementation is delivered by the entity-extraction interrogations in 2026_02_entity_extraction.
   
   Key principles:
   - Break compound statements into atomic claims

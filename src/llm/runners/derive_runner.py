@@ -2,7 +2,8 @@
 Derive Runner - Orchestrates LLM derive operations.
 
 This is a stub implementation providing the skeleton for derive operations.
-Full implementation is planned for Phase 1.
+Full implementation was delivered as the runner in 2026_01_llm_derived_data_phase_1
+(see src/llm/runners/phase1_runner.py).
 """
 
 import hashlib
@@ -37,7 +38,8 @@ class DeriveRunner:
     4. Validate and parse responses
     5. Persist artifacts and manifests
     
-    This is a stub implementation. Full logic is planned for Phase 1.
+    This is a stub implementation. Full logic was delivered in
+    2026_01_llm_derived_data_phase_1 (see phase1_runner.py).
     
     Example:
         >>> config = load_config("config/llm.yaml")

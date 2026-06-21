@@ -1,9 +1,9 @@
--- Migration 0023: Create Phase 1 vector schema and runtime tables
+-- Migration 0023: Create vector schema and runtime tables (2026_02_vector_runtime_split_phase_1)
 -- Idempotent: Only creates schema/tables if they don't exist
 --
 -- This migration introduces the new `vector` schema for embedding and retrieval,
--- separating it from the `llm` chat runtime schema. This is Phase 1 of the
--- schema refactor (additive, no legacy tables dropped).
+-- separating it from the `llm` chat runtime schema. This is
+-- 2026_02_vector_runtime_split_phase_1 (additive, no legacy tables dropped).
 --
 -- See docs/llm/schema-refactor-migration-notes.md for migration rationale.
 

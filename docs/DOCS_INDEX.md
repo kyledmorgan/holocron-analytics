@@ -13,6 +13,9 @@ New to this repository? Start with these essential documents:
 | [Root README](../README.md) | Project overview, goals, quick start guide |
 | [Quick Start Guide](../QUICKSTART.md) | **5-minute setup** — Get running with Docker immediately |
 | [Contributing Guide](../CONTRIBUTING.md) | How to contribute to the project |
+| [Feature-Series Naming Convention](contributing/feature-series-convention.md) | Canonical `YYYY_MM_<name>_phase_<n>` naming for multi-phase work |
+| [Feature-Series History](history/feature-series/README.md) | Reconstructed history of past multi-phase feature efforts |
+| [Phase-Reference Inventory](history/phase-reference-inventory.md) | Catalogue of legacy phase references and how each was resolved |
 | [Docker Local Dev Runbook](runbooks/docker_local_dev.md) | Detailed step-by-step guide to run the stack locally with Docker |
 | [Repository Structure](REPO_STRUCTURE.md) | Top-level folder layout and guiding principles |
 | [Project Vision](vision/ProjectVision.md) | Long-term goals and design philosophy |

@@ -1,8 +1,9 @@
 """
 Redaction hooks for evidence content.
 
-Provides a minimal redaction layer for Phase 2. This is a placeholder
-for future Phase 7 hardening with more sophisticated PII detection.
+Provides a minimal redaction layer introduced in 2026_01_llm_derived_data_phase_2.
+More sophisticated PII detection is planned for 2026_01_llm_derived_data_phase_7
+(governance and operational hardening).
 
 The design allows redaction to be toggled on/off via policy and records
 all redactions in evidence metadata for auditability.

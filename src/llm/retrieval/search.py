@@ -7,7 +7,7 @@ Implements:
 - Deterministic ordering with tie-breaks
 - Persistence of retrieval queries and hits
 
-DEPRECATED (Phase 2): RetrievalStore class is deprecated.
+DEPRECATED (2026_02_vector_runtime_split_phase_2): RetrievalStore class is deprecated.
 Use VectorStore from src/vector/store.py instead.
 The legacy llm.* vector tables have been renamed to *_legacy and are no longer accessible.
 See docs/llm/schema-refactor-migration-notes.md for migration details.
@@ -169,7 +169,7 @@ class RetrievalStore:
     """
     Storage interface for retrieval operations.
     
-    DEPRECATED: This class is deprecated as of Phase 2 of the schema refactor.
+    DEPRECATED: This class is deprecated as of 2026_02_vector_runtime_split_phase_2.
     Use VectorStore from src/vector/store.py instead.
     
     The legacy llm.* vector tables (chunk, embedding, retrieval, retrieval_hit,

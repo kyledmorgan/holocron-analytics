@@ -1,7 +1,7 @@
 """
 Backfill CLI - Bulk enqueue/re-enqueue operations with rate limits.
 
-Phase 3: Implements bulk re-processing capabilities for:
+2026_02_entity_extraction_phase_3: Implements bulk re-processing capabilities for:
 - Entity extraction (by type, confidence threshold, date range)
 - Relationship extraction (by date range, priority)
 - Classification (by confidence threshold)

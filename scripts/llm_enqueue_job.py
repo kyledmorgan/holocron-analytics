@@ -2,7 +2,7 @@
 """
 Helper script to enqueue LLM derive jobs.
 
-This script provides a simple way to enqueue jobs for the Phase 1 runner
+This script provides a simple way to enqueue jobs for the derive runner (2026_01_llm_derived_data_phase_1)
 without needing to write SQL directly.
 
 Usage:

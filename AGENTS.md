@@ -17,6 +17,25 @@ More details:
 Subsystem-specific guidance:
 - `agents/llm-derived-data.md` — LLM-Derived Data subsystem rules (docs-first, contract-first, evidence-only citations)
 
+## Feature-Series Naming Convention
+
+When a body of work is intentionally split across multiple phases or pull requests,
+it must use a canonical feature-series identifier of the form
+`YYYY_MM_<short_feature_name>_phase_<number>` (for example,
+`2026_02_entity_extraction_phase_1`). **Never** use a bare, unqualified reference
+such as `Phase 0`, `Phase 1`, or `next phase` to describe multi-PR feature work,
+because multiple unrelated initiatives have historically each had their own
+`Phase 1`/`Phase 2`.
+
+- Rules: `docs/contributing/feature-series-convention.md`
+- Reconstructed history of past series: `docs/history/feature-series/README.md`
+- Legacy reference inventory: `docs/history/phase-reference-inventory.md`
+
+Not every change needs a feature series — small, independent changes are fine to
+document via PR descriptions and changelogs. The word "phase" remains valid for
+genuine domain terminology (for example, "execution phase", "parsing phase").
+
+
 ## Bruno API Collection Syntax
 
 When working with Bruno `.bru` files in `tools/bruno/`:

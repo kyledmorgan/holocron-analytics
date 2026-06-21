@@ -285,6 +285,20 @@ Update documentation when:
 - [ ] Checked that all links work
 - [ ] Added examples where helpful
 
+### Multi-Phase Feature Work
+
+If your work is intentionally split across multiple PRs (scaffolding before
+functionality, an ordered sequence of deliverables, or an initiative that will be
+expanded in increments), name it using a canonical feature-series identifier
+(`YYYY_MM_<short_feature_name>_phase_<number>`). **Never** use a bare, unqualified
+reference such as `Phase 1` or `next phase` to describe such work.
+
+- [Feature-Series Naming Convention](docs/contributing/feature-series-convention.md) — rules
+- [Feature-Series History](docs/history/feature-series/README.md) — reconstructed series
+
+Most small, independent changes do **not** need a feature series — a PR description
+or changelog entry is enough.
+
 ---
 
 ## Pull Request Process

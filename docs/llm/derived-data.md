@@ -134,35 +134,35 @@ src/llm/
 
 > **Note**: Detailed phase descriptions are TBD. The following are placeholder headings for future planning.
 
-### Phase 0: Foundation (Current)
+### `2026_01_llm_derived_data_phase_0`: Foundation
 
 - Repository scaffolding and documentation
 - Core interfaces and types
 - Provider client stubs
 - Manifest and schema definitions
 
-### Phase 1: MVP Runner
+### `2026_01_llm_derived_data_phase_1`: MVP Runner
 
 - End-to-end derive workflow
 - Basic prompt templates
 - Filesystem artifact storage
 - CLI for manual derivation
 
-### Phase 2: Evidence Assembly
+### `2026_01_llm_derived_data_phase_2`: Evidence Assembly
 
 - Ingest record integration
 - SQL query result bundling
 - Evidence hash verification
 - Bundle size management
 
-### Phase 3: Multi-Model Benchmarking
+### `2026_01_llm_derived_data_phase_3`: Multi-Model Benchmarking
 
 - Model comparison framework
 - Output consistency metrics
 - Cost/latency tracking
 - Model selection guidance
 
-### Phase 4+: Hardening / Lineage / Governance
+### `2026_01_llm_derived_data_phase_4`+: Hardening / Lineage / Governance
 
 - Full SQL Server persistence
 - Data lineage visualization

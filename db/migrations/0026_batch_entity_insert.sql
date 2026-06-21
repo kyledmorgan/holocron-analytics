@@ -1,4 +1,4 @@
--- Migration 0026: Add batch entity insert stored procedure for Phase 1
+-- Migration 0026: Add batch entity insert stored procedure for 2026_02_entity_extraction_phase_1 (droid entities)
 -- Idempotent: Drops and recreates procedure
 --
 -- Purpose: Provides JSON-based batch insert for extracted entities into DimEntity.
@@ -9,8 +9,8 @@
 --   - Implements minimal identity resolution (exact match, case-insensitive)
 --   - Records provenance (run_id, job_id, confidence)
 --
--- Phase 1: Focused on droid entities, but works for any entity type.
--- Foundation for: Phase 2 relationship inserts, Phase 3 bulk throughput.
+-- 2026_02_entity_extraction_phase_1: Focused on droid entities, but works for any entity type.
+-- Foundation for: 2026_02_entity_extraction_phase_2 relationship inserts, _phase_3 bulk throughput.
 
 -- ============================================================================
 -- Stored Procedure: dbo.usp_batch_insert_entities

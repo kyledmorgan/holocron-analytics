@@ -1,5 +1,5 @@
 {
-  "description": "Golden seed data for Phase 1 Droid Entity Extraction testing",
+  "description": "Golden seed data for 2026_02_entity_extraction_phase_1 (Droid Entity Extraction) testing",
   "version": "1.0.0",
   "purpose": "Provides deterministic test inputs for prompt iteration, regression checks, and repeated verification",
   "test_cases": [

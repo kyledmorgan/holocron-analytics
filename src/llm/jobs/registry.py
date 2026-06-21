@@ -187,7 +187,7 @@ class JobTypeRegistry:
             tags=["extraction", "facts", "entities"],
         ))
         
-        # Register entity_extraction_droid job type (Phase 1)
+        # Register entity_extraction_droid job type (2026_02_entity_extraction_phase_1)
         self.register(JobTypeDefinition(
             job_type="entity_extraction_droid",
             display_name="Droid Entity Extraction",
@@ -197,11 +197,11 @@ class JobTypeRegistry:
             default_priority=100,
             timeout_seconds=180,
             version="1.0.0",
-            description="Extract droid entities from source text. Phase 1 pipeline for entity extraction.",
+            description="Extract droid entities from source text. 2026_02_entity_extraction_phase_1 pipeline for entity extraction.",
             tags=["extraction", "entities", "droid", "phase1"],
         ))
         
-        # Register relationship_extraction job type (Phase 2)
+        # Register relationship_extraction job type (2026_02_entity_extraction_phase_2)
         self.register(JobTypeDefinition(
             job_type="relationship_extraction",
             display_name="Relationship Extraction",
@@ -211,11 +211,11 @@ class JobTypeRegistry:
             default_priority=100,
             timeout_seconds=180,
             version="1.0.0",
-            description="Extract entity relationships from source text. Phase 2 pipeline for multi-output routing.",
+            description="Extract entity relationships from source text. 2026_02_entity_extraction_phase_2 pipeline for multi-output routing.",
             tags=["extraction", "relationships", "phase2"],
         ))
         
-        # Register entity_extraction_generic job type (Phase 3)
+        # Register entity_extraction_generic job type (2026_02_entity_extraction_phase_3)
         self.register(JobTypeDefinition(
             job_type="entity_extraction_generic",
             display_name="Generic Entity Extraction",
@@ -225,7 +225,7 @@ class JobTypeRegistry:
             default_priority=100,
             timeout_seconds=180,
             version="1.0.0",
-            description="Extract entities of ALL types from source text. Phase 3 generalized pipeline supporting PersonCharacter, LocationPlace, Organization, VehicleCraft, and more.",
+            description="Extract entities of ALL types from source text. 2026_02_entity_extraction_phase_3 generalized pipeline supporting PersonCharacter, LocationPlace, Organization, VehicleCraft, and more.",
             tags=["extraction", "entities", "generic", "phase3"],
         ))
         

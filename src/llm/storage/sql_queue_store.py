@@ -1,8 +1,9 @@
 """
 SQL Queue Store - SQL Server queue and persistence for LLM derive jobs.
 
-This is a stub implementation. Full database schema and implementation
-are planned for later phases.
+This is a stub implementation. The full database schema and implementation
+were delivered starting in 2026_01_llm_derived_data_phase_1
+(see src/llm/storage/sql_job_queue.py and migration 0005).
 
 NOTE: Exact SQL Server schema for job queue and run metadata is TBD.
 """

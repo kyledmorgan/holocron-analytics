@@ -1,7 +1,9 @@
 """
 Phase 1 Runner - End-to-end LLM derive runner.
 
-This runner implements the Phase 1 flow:
+Delivered by 2026_01_llm_derived_data_phase_1. The module path, ``Phase1Runner``
+class, and ``--once``/``--loop`` CLI are stable public identifiers and are retained
+as-is. This runner implements the derive flow:
 1. Claim a job from the SQL Server queue
 2. Build evidence bundle from job input
 3. Render prompt from interrogation definition
@@ -526,9 +528,9 @@ class Phase1Runner:
     
     def _build_evidence_bundle(self, job: Job) -> EvidenceBundle:
         """
-        Build evidence bundle from job input using Phase 2 builder.
+        Build evidence bundle from job input using the evidence builder.
         
-        Phase 2 supports multiple modes:
+        The evidence builder supports multiple modes:
         1. Evidence provided directly in input_json (inline)
         2. Evidence references in evidence_ref_json pointing to lake artifacts
         3. SQL result sets (existing artifacts or executed queries)
@@ -559,7 +561,7 @@ class Phase1Runner:
             enable_redaction=False,
         )
         
-        # Build evidence bundle using Phase 2 builder
+        # Build evidence bundle using the evidence builder
         bundle = build_evidence_bundle(
             job_input=job_input_dict,
             evidence_refs=evidence_refs,
@@ -586,12 +588,12 @@ class Phase1Runner:
         Args:
             interrogation: The interrogation definition
             job_input: Job input envelope
-            evidence_bundle: Evidence bundle (Phase 2)
+            evidence_bundle: Evidence bundle
             
         Returns:
             Rendered prompt string
         """
-        # Format evidence content from Phase 2 evidence items
+        # Format evidence content from evidence items
         evidence_parts = []
         for item in evidence_bundle.items:
             evidence_parts.append(
