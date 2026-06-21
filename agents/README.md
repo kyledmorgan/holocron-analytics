@@ -11,6 +11,11 @@ Start here:
 Subsystem Guidance:
 - `agents/llm-derived-data.md` — Rules for LLM-Derived Data subsystem (`src/llm/`)
 
+Database Guidance:
+- `docs/agent/db_policies.md` — Naming conventions, key patterns, datetime standards
+- `docs/agent/db_templates.md` — Copy-paste templates for tables/views/migrations
+- `docs/agent/db_review_checklist.md` — PR review checklist for SQL changes
+
 Playbooks:
 - `agents/playbooks/docs/update_docs_and_links.md`
 - `agents/playbooks/db/ddl_ordering_and_manifest.md`

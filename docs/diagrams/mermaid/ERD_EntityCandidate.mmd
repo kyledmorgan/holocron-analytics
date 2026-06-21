@@ -1,0 +1,87 @@
+erDiagram
+    %% --- INGEST PIPELINE ---
+    ingest_work_items ||--o{ ingest_IngestRecords : "produces fetches"
+    ingest_ingest_runs ||--o{ ingest_work_items : "schedules"
+    ingest_ingest_runs ||--o{ ingest_IngestRecords : "run_id"
+
+    %% --- LLM INDEXING ---
+    ingest_IngestRecords }o--|| llm_source_registry : "indexed as source"
+    llm_source_registry ||--o{ llm_chunk : "chunked into"
+    llm_chunk ||--o{ llm_embedding : "embedded"
+
+    %% --- NEW: SOURCE PAGE + SIGNALS + CLASSIFICATION ---
+    sem_SourcePage {
+        uniqueidentifier SourcePageId PK
+        nvarchar SourceSystem
+        nvarchar SourceName
+        nvarchar ResourceType
+        nvarchar ResourceId
+        nvarchar Variant
+        nvarchar Namespace
+        nvarchar ContinuityHint
+        uniqueidentifier LatestIngestId FK
+        varbinary ContentHashSha256
+        bigint SourceRegistryId FK
+        datetime2 LastIngestedUtc
+    }
+
+    sem_PageSignals {
+        uniqueidentifier SourcePageId PK,FK
+        nvarchar LeadSentence
+        nvarchar InfoboxType
+        nvarchar CategoriesJson
+        nvarchar SignalsJson
+        bit IsListPage
+        bit IsDisambiguation
+        bit HasTimelineMarkers
+        datetime2 CreatedUtc
+    }
+
+    sem_PageClassification {
+        uniqueidentifier PageClassificationId PK
+        uniqueidentifier SourcePageId FK
+        nvarchar TaxonomyVersion
+        nvarchar PrimaryType
+        nvarchar TypeSetJson
+        decimal ConfidenceScore
+        nvarchar Method
+        nvarchar ModelName
+        nvarchar PromptVersion
+        bigint RunId FK
+        nvarchar EvidenceJson
+        datetime2 CreatedUtc
+    }
+
+    %% --- LLM RUN LINEAGE (EXISTING) ---
+    llm_job ||--o{ llm_run : "executes"
+    llm_run ||--o{ llm_artifact : "produces"
+
+    %% --- DIMENSION ENTITY (EXISTING) + NEW PROMOTION COLUMNS ---
+    dbo_DimEntity {
+        int EntityKey PK
+        uniqueidentifier EntityGuid
+        int FranchiseKey
+        nvarchar EntityType
+        nvarchar DisplayName
+        nvarchar DisplayNameNormalized
+        decimal ConfidenceScore
+        bit IsCanonical
+        nvarchar PromotionState
+        datetime2 PromotionDecisionUtc
+        nvarchar PromotionDecidedBy
+        nvarchar PromotionReason
+        uniqueidentifier SourcePageId FK
+        nvarchar PrimaryTypeInferred
+        nvarchar TypeSetJsonInferred
+        bigint AdjudicationRunId FK
+        nvarchar AttributesJson
+    }
+
+    %% --- RELATIONSHIPS ---
+    ingest_IngestRecords ||--o{ sem_SourcePage : "LatestIngestId"
+    llm_source_registry ||--o{ sem_SourcePage : "SourceRegistryId"
+    sem_SourcePage ||--o{ sem_PageSignals : "signals"
+    sem_SourcePage ||--o{ sem_PageClassification : "classified as"
+    llm_run ||--o{ sem_PageClassification : "provenance"
+    sem_SourcePage ||--o{ dbo_DimEntity : "creates/links entity"
+    llm_run ||--o{ dbo_DimEntity : "adjudication provenance"

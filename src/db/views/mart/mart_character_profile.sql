@@ -45,19 +45,19 @@ SELECT
     c.FranchiseName,
     COALESCE(ep.EventParticipationCount, 0) AS EventParticipationCount,
     COALESCE(al.AppearanceCount, 0)         AS AppearanceCount
-FROM dbo.sem_character c
+FROM sem.vw_character c
 LEFT JOIN (
     SELECT
         p.EntityKey,
         COUNT(*) AS EventParticipationCount
-    FROM dbo.sem_event_participant p
+    FROM sem.vw_event_participant p
     GROUP BY p.EntityKey
 ) ep ON c.EntityKey = ep.EntityKey
 LEFT JOIN (
     SELECT
         al.CharacterKey,
         COUNT(*) AS AppearanceCount
-    FROM dbo.sem_appearance_look al
+    FROM sem.vw_appearance_look al
     GROUP BY al.CharacterKey
 ) al ON c.CharacterKey = al.CharacterKey;
 GO

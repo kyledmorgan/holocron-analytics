@@ -48,9 +48,14 @@ class InterrogationDefinition:
         """
         Get the schema formatted for Ollama structured output.
         
-        Ollama expects the schema in the 'format' parameter of the request.
+        Ollama expects a pure JSON schema in the 'format' parameter.
+        Draft metadata fields ($schema, $id, title, description, version)
+        are stripped since Ollama does not process them.
         """
-        return self.output_schema
+        schema = dict(self.output_schema)
+        for key in ("$schema", "$id", "title", "description", "version"):
+            schema.pop(key, None)
+        return schema
     
     def validate_output(self, output: Dict[str, Any]) -> List[str]:
         """
@@ -116,6 +121,26 @@ class InterrogationRegistry:
         # Register sw_entity_facts_v1
         from .definitions.sw_entity_facts import create_sw_entity_facts_v1
         definition = create_sw_entity_facts_v1()
+        self.register(definition)
+        
+        # Register page_classification_v1
+        from .definitions.page_classification import create_page_classification_v1
+        definition = create_page_classification_v1()
+        self.register(definition)
+        
+        # Register entity_extraction_droid_v1
+        from .definitions.entity_extraction_droid import create_entity_extraction_droid_v1
+        definition = create_entity_extraction_droid_v1()
+        self.register(definition)
+        
+        # Register relationship_extraction_v1 (Phase 2)
+        from .definitions.relationship_extraction import create_relationship_extraction_v1
+        definition = create_relationship_extraction_v1()
+        self.register(definition)
+        
+        # Register entity_extraction_generic_v1 (Phase 3)
+        from .definitions.entity_extraction_generic import create_entity_extraction_generic_v1
+        definition = create_entity_extraction_generic_v1()
         self.register(definition)
         
         self._loaded = True

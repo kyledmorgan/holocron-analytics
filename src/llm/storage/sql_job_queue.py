@@ -11,6 +11,7 @@ import os
 import uuid
 from dataclasses import dataclass
 from datetime import datetime, timezone
+from pathlib import Path
 from typing import Any, Dict, List, Optional
 
 try:
@@ -23,45 +24,118 @@ from ..core.exceptions import LLMStorageError
 
 
 logger = logging.getLogger(__name__)
+_DOTENV_LOADED = False
+
+
+def _load_dotenv_if_present() -> None:
+    """
+    Load .env into process env for local runs.
+
+    Existing shell environment variables take precedence.
+    """
+    global _DOTENV_LOADED
+    if _DOTENV_LOADED:
+        return
+
+    # sql_job_queue.py -> storage -> llm -> src -> repo root
+    env_path = Path(__file__).resolve().parents[3] / ".env"
+    if not env_path.exists():
+        _DOTENV_LOADED = True
+        return
+
+    for raw_line in env_path.read_text(encoding="utf-8").splitlines():
+        line = raw_line.strip()
+        if not line or line.startswith("#") or "=" not in line:
+            continue
+        key, value = line.split("=", 1)
+        key = key.strip()
+        value = value.strip().strip("'").strip('"')
+        if key and os.environ.get(key) is None:
+            os.environ[key] = value
+
+    _DOTENV_LOADED = True
+
+
+def _first_non_empty_env(*keys: str) -> Optional[str]:
+    """Return the first non-empty env var value for the given keys."""
+    for key in keys:
+        value = os.environ.get(key)
+        if value is not None and value.strip() != "":
+            return value
+    return None
+
+
+def _parse_yes_no(value: Optional[str], default: bool) -> bool:
+    """Parse yes/no style env vars with a safe default."""
+    if value is None:
+        return default
+    normalized = value.strip().lower()
+    if normalized in {"1", "true", "yes", "y", "on"}:
+        return True
+    if normalized in {"0", "false", "no", "n", "off"}:
+        return False
+    return default
 
 
 @dataclass
 class QueueConfig:
     """Configuration for the SQL job queue."""
     host: str = "localhost"
-    port: int = 1434
+    port: int = 1433
     database: str = "Holocron"
     username: str = "sa"
     password: str = ""
     driver: str = "ODBC Driver 18 for SQL Server"
     schema: str = "llm"
+    encrypt: bool = True
+    trust_server_certificate: bool = False
     connection_string: Optional[str] = None
     
     @classmethod
     def from_env(cls) -> "QueueConfig":
         """Create config from environment variables."""
+        _load_dotenv_if_present()
+
         # Check for full connection string first
-        conn_str = os.environ.get("LLM_SQLSERVER_CONN_STR")
+        conn_str = _first_non_empty_env("LLM_SQLSERVER_CONN_STR")
         if conn_str:
             return cls(connection_string=conn_str)
         
         # Fall back to discrete variables
+        host = _first_non_empty_env("LLM_SQLSERVER_HOST", "INGEST_SQLSERVER_HOST") or "localhost"
+        port_str = _first_non_empty_env("LLM_SQLSERVER_PORT", "INGEST_SQLSERVER_PORT") or "1433"
+        database = _first_non_empty_env(
+            "LLM_SQLSERVER_DATABASE",
+            "INGEST_SQLSERVER_DATABASE",
+            "MSSQL_DATABASE",
+        ) or "Holocron"
+        username = _first_non_empty_env("LLM_SQLSERVER_USER", "INGEST_SQLSERVER_USER") or "sa"
+        password = _first_non_empty_env(
+            "LLM_SQLSERVER_PASSWORD",
+            "INGEST_SQLSERVER_PASSWORD",
+            "MSSQL_SA_PASSWORD",
+        ) or ""
+        driver = _first_non_empty_env("LLM_SQLSERVER_DRIVER", "INGEST_SQLSERVER_DRIVER") or "ODBC Driver 18 for SQL Server"
+        schema = _first_non_empty_env("LLM_SQLSERVER_SCHEMA") or "llm"
+        encrypt_raw = _first_non_empty_env("LLM_SQLSERVER_ENCRYPT")
+        trust_raw = _first_non_empty_env("LLM_SQLSERVER_TRUST_SERVER_CERTIFICATE")
+
+        # SQL Server ODBC Driver 18+ defaults to encrypted transport.
+        # In local/dev scenarios with self-signed certs, trusting the server cert
+        # avoids handshake failures while keeping encryption enabled.
+        local_hosts = {"localhost", "127.0.0.1", "sql2025", "host.docker.internal"}
+        default_trust = host.lower() in local_hosts
+
         return cls(
-            host=os.environ.get("LLM_SQLSERVER_HOST", 
-                               os.environ.get("INGEST_SQLSERVER_HOST", "localhost")),
-            port=int(os.environ.get("LLM_SQLSERVER_PORT", 
-                                    os.environ.get("INGEST_SQLSERVER_PORT", "1434"))),
-            database=os.environ.get("LLM_SQLSERVER_DATABASE",
-                                    os.environ.get("INGEST_SQLSERVER_DATABASE",
-                                                   os.environ.get("MSSQL_DATABASE", "Holocron"))),
-            username=os.environ.get("LLM_SQLSERVER_USER",
-                                    os.environ.get("INGEST_SQLSERVER_USER", "sa")),
-            password=os.environ.get("LLM_SQLSERVER_PASSWORD",
-                                    os.environ.get("INGEST_SQLSERVER_PASSWORD",
-                                                   os.environ.get("MSSQL_SA_PASSWORD", ""))),
-            driver=os.environ.get("LLM_SQLSERVER_DRIVER",
-                                  os.environ.get("INGEST_SQLSERVER_DRIVER", "ODBC Driver 18 for SQL Server")),
-            schema=os.environ.get("LLM_SQLSERVER_SCHEMA", "llm"),
+            host=host,
+            port=int(port_str),
+            database=database,
+            username=username,
+            password=password,
+            driver=driver,
+            schema=schema,
+            encrypt=_parse_yes_no(encrypt_raw, True),
+            trust_server_certificate=_parse_yes_no(trust_raw, default_trust),
         )
     
     def get_connection_string(self) -> str:
@@ -75,7 +149,8 @@ class QueueConfig:
             f"Database={self.database};"
             f"UID={self.username};"
             f"PWD={self.password};"
-            f"TrustServerCertificate=yes"
+            f"Encrypt={'yes' if self.encrypt else 'no'};"
+            f"TrustServerCertificate={'yes' if self.trust_server_certificate else 'no'}"
         )
 
 
@@ -253,6 +328,7 @@ class SqlJobQueue:
         evidence_ref_json: Optional[str] = None,
         model_hint: Optional[str] = None,
         max_attempts: int = 3,
+        dedupe_key: Optional[str] = None,
     ) -> str:
         """
         Enqueue a new job.
@@ -264,6 +340,7 @@ class SqlJobQueue:
             evidence_ref_json: Evidence references as JSON string
             model_hint: Suggested model to use
             max_attempts: Maximum attempts before deadletter
+            dedupe_key: Optional idempotency key to prevent duplicate jobs
             
         Returns:
             The created job_id
@@ -275,19 +352,129 @@ class SqlJobQueue:
             cursor.execute(
                 f"EXEC [{self.config.schema}].[usp_enqueue_job] "
                 f"@priority = ?, @interrogation_key = ?, @input_json = ?, "
-                f"@evidence_ref_json = ?, @model_hint = ?, @max_attempts = ?",
-                (priority, interrogation_key, input_json, evidence_ref_json, model_hint, max_attempts)
+                f"@evidence_ref_json = ?, @model_hint = ?, @max_attempts = ?, @dedupe_key = ?",
+                (priority, interrogation_key, input_json, evidence_ref_json, model_hint, max_attempts, dedupe_key)
             )
             
             row = cursor.fetchone()
             job_id = str(row[0]) if row else str(uuid.uuid4())
             
-            logger.info(f"Enqueued job {job_id} for {interrogation_key}")
+            # Check if this was a duplicate (stored proc returns: job_id, is_duplicate, existing_status)
+            # Column indices: 0=job_id, 1=is_duplicate, 2=existing_status
+            COL_JOB_ID = 0
+            COL_IS_DUPLICATE = 1
+            is_duplicate = bool(row[COL_IS_DUPLICATE]) if row and len(row) > COL_IS_DUPLICATE else False
+            if is_duplicate:
+                logger.info(f"Found existing job {job_id} for dedupe_key={dedupe_key}")
+            else:
+                logger.info(f"Enqueued job {job_id} for {interrogation_key}")
+            
             return job_id
             
         except Exception as e:
             logger.error(f"Failed to enqueue job: {e}")
             raise LLMStorageError(f"Failed to enqueue job: {e}")
+    
+    def enqueue_job_idempotent(
+        self,
+        interrogation_key: str,
+        dedupe_key: str,
+        input_json: str,
+        priority: int = 100,
+        evidence_ref_json: Optional[str] = None,
+        model_hint: Optional[str] = None,
+        max_attempts: int = 3,
+    ) -> Dict[str, Any]:
+        """
+        Enqueue a new job with idempotency guarantee.
+        
+        If a job with the same (interrogation_key, dedupe_key) already exists,
+        returns the existing job_id instead of creating a duplicate.
+        
+        Args:
+            interrogation_key: Which interrogation to run
+            dedupe_key: Idempotency key (required)
+            input_json: Job input as JSON string
+            priority: Job priority (higher = processed sooner)
+            evidence_ref_json: Evidence references as JSON string
+            model_hint: Suggested model to use
+            max_attempts: Maximum attempts before deadletter
+            
+        Returns:
+            Dict with 'job_id', 'is_duplicate', and optionally 'existing_status'
+        """
+        if not dedupe_key:
+            raise ValueError("dedupe_key is required for idempotent enqueue")
+        
+        try:
+            conn = self._get_connection()
+            cursor = conn.cursor()
+            
+            cursor.execute(
+                f"EXEC [{self.config.schema}].[usp_enqueue_job] "
+                f"@priority = ?, @interrogation_key = ?, @input_json = ?, "
+                f"@evidence_ref_json = ?, @model_hint = ?, @max_attempts = ?, @dedupe_key = ?",
+                (priority, interrogation_key, input_json, evidence_ref_json, model_hint, max_attempts, dedupe_key)
+            )
+            
+            row = cursor.fetchone()
+            result = {
+                "job_id": str(row[0]) if row else str(uuid.uuid4()),
+                "is_duplicate": bool(row[1]) if row and len(row) > 1 else False,
+                "existing_status": row[2] if row and len(row) > 2 else None,
+            }
+            
+            if result["is_duplicate"]:
+                logger.info(
+                    f"Idempotent enqueue found existing job {result['job_id']} "
+                    f"(status={result['existing_status']}) for dedupe_key={dedupe_key}"
+                )
+            else:
+                logger.info(f"Idempotent enqueue created job {result['job_id']} for {interrogation_key}")
+            
+            return result
+            
+        except Exception as e:
+            logger.error(f"Failed to enqueue job idempotently: {e}")
+            raise LLMStorageError(f"Failed to enqueue job: {e}")
+    
+    def get_job_by_dedupe_key(
+        self,
+        interrogation_key: str,
+        dedupe_key: str,
+    ) -> Optional[Job]:
+        """
+        Look up a job by its dedupe key.
+        
+        Args:
+            interrogation_key: The interrogation key
+            dedupe_key: The dedupe key to search for
+            
+        Returns:
+            The Job if found, None otherwise
+        """
+        try:
+            conn = self._get_connection()
+            cursor = conn.cursor()
+            
+            cursor.execute(
+                f"EXEC [{self.config.schema}].[usp_get_job_by_dedupe_key] "
+                f"@interrogation_key = ?, @dedupe_key = ?",
+                (interrogation_key, dedupe_key)
+            )
+            
+            row = cursor.fetchone()
+            if row is None:
+                return None
+            
+            columns = [column[0] for column in cursor.description]
+            row_dict = dict(zip(columns, row))
+            
+            return Job.from_row(row_dict)
+            
+        except Exception as e:
+            logger.error(f"Failed to get job by dedupe key: {e}")
+            raise LLMStorageError(f"Failed to get job by dedupe key: {e}")
     
     def create_run(
         self,
@@ -371,19 +558,32 @@ class SqlJobQueue:
         self,
         run_id: str,
         artifact_type: str,
-        lake_uri: str,
+        lake_uri: Optional[str] = None,
         content_sha256: Optional[str] = None,
         byte_count: Optional[int] = None,
+        content: Optional[str] = None,
+        content_mime_type: Optional[str] = None,
+        stored_in_sql: bool = False,
+        mirrored_to_lake: bool = False,
     ) -> str:
         """
-        Record an artifact written to the lake.
+        Record an artifact, optionally with literal content stored in SQL.
+        
+        SQL is the system of record. The lake is additive/optional.
+        When ``content`` is provided the payload is persisted directly
+        in the ``llm.artifact`` row so runs can be reconstructed from
+        SQL alone without the data lake.
         
         Args:
             run_id: The run ID this artifact belongs to
             artifact_type: Type of artifact (e.g., "request_json", "response_json")
-            lake_uri: Path to the artifact in the lake
+            lake_uri: Path to the artifact in the lake (optional when SQL-first)
             content_sha256: SHA256 hash of the content
             byte_count: Size in bytes
+            content: Literal artifact payload (JSON or text)
+            content_mime_type: MIME type of the content (e.g., "application/json")
+            stored_in_sql: Whether the content is stored in SQL
+            mirrored_to_lake: Whether the content is also in the lake
             
         Returns:
             The created artifact_id
@@ -395,8 +595,16 @@ class SqlJobQueue:
             cursor.execute(
                 f"EXEC [{self.config.schema}].[usp_create_artifact] "
                 f"@run_id = ?, @artifact_type = ?, @lake_uri = ?, "
-                f"@content_sha256 = ?, @byte_count = ?",
-                (run_id, artifact_type, lake_uri, content_sha256, byte_count)
+                f"@content_sha256 = ?, @byte_count = ?, "
+                f"@content = ?, @content_mime_type = ?, "
+                f"@stored_in_sql = ?, @mirrored_to_lake = ?",
+                (
+                    run_id, artifact_type, lake_uri,
+                    content_sha256, byte_count,
+                    content, content_mime_type,
+                    1 if stored_in_sql else 0,
+                    1 if mirrored_to_lake else 0,
+                )
             )
             
             row = cursor.fetchone()
@@ -415,17 +623,22 @@ class SqlJobQueue:
         build_version: str,
         policy_json: str,
         summary_json: str,
-        lake_uri: str,
+        lake_uri: Optional[str] = None,
+        bundle_json: Optional[str] = None,
     ) -> None:
         """
         Record an evidence bundle used for runs.
+        
+        When ``bundle_json`` is provided the full evidence payload is
+        persisted in SQL so the bundle can be recovered without the lake.
         
         Args:
             bundle_id: UUID of the evidence bundle
             build_version: Evidence builder version
             policy_json: JSON string of the evidence policy
             summary_json: JSON string of the bundle summary
-            lake_uri: Path to the bundle artifact in the lake
+            lake_uri: Path to the bundle artifact in the lake (optional)
+            bundle_json: Full evidence bundle JSON content (optional)
         """
         try:
             conn = self._get_connection()
@@ -434,10 +647,10 @@ class SqlJobQueue:
             cursor.execute(
                 f"""
                 INSERT INTO [{self.config.schema}].[evidence_bundle] 
-                (bundle_id, created_utc, build_version, policy_json, summary_json, lake_uri)
-                VALUES (?, SYSUTCDATETIME(), ?, ?, ?, ?)
+                (bundle_id, created_utc, build_version, policy_json, summary_json, lake_uri, bundle_json)
+                VALUES (?, SYSUTCDATETIME(), ?, ?, ?, ?, ?)
                 """,
-                (bundle_id, build_version, policy_json, summary_json, lake_uri)
+                (bundle_id, build_version, policy_json, summary_json, lake_uri, bundle_json)
             )
             
             conn.commit()

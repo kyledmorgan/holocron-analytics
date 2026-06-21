@@ -1,0 +1,42 @@
+erDiagram
+    sem_SourcePage ||--o{ sem_PageSignals : "has"
+    sem_SourcePage ||--o{ sem_PageClassification : "has"
+
+    dbo_DimEntity }o--|| sem_SourcePage : "may link via SourcePageId"
+
+    dbo_DimTag ||--o{ dbo_BridgeTagAssignment : "assigned as"
+    sem_SourcePage ||--o{ dbo_BridgeTagAssignment : "tagged (TargetType=SourcePage)"
+    dbo_DimEntity ||--o{ dbo_BridgeTagAssignment : "tagged (TargetType=Entity)"
+
+    dbo_DimTag ||--o{ dbo_BridgeTagRelation : "relates to"
+    dbo_DimTag ||--o{ dbo_BridgeTagRelation : "relates from"
+
+    dbo_DimTag {
+        int TagKey PK
+        uniqueidentifier TagGuid
+        nvarchar TagName
+        nvarchar TagNameNormalized
+        nvarchar TagType
+        nvarchar Visibility
+        nvarchar Description
+        nvarchar AttributesJson
+    }
+
+    dbo_BridgeTagAssignment {
+        bigint TagAssignmentKey PK
+        int TagKey FK
+        nvarchar TargetType
+        nvarchar TargetId
+        decimal Weight
+        nvarchar AssignmentMethod
+        nvarchar EvidenceRef
+        nvarchar Notes
+    }
+
+    dbo_BridgeTagRelation {
+        int ParentTagKey FK
+        int ChildTagKey FK
+        nvarchar RelationType
+        decimal Weight
+        nvarchar Notes
+    }

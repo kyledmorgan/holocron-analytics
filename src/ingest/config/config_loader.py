@@ -3,6 +3,7 @@ Configuration loader for the ingestion framework.
 """
 
 import logging
+import os
 from pathlib import Path
 from typing import Any, Dict, List, Optional
 
@@ -31,6 +32,7 @@ class IngestConfig:
         """
         self.config_path = config_path
         self.config = self._load_config() if config_path else self._default_config()
+        self._apply_env_overrides()
 
     def _load_config(self) -> Dict[str, Any]:
         """Load configuration from YAML file."""
@@ -52,11 +54,12 @@ class IngestConfig:
 
     def _default_config(self) -> Dict[str, Any]:
         """Return default configuration."""
+        data_lake_dir = os.environ.get("INGEST_DATA_LAKE_DIR", "W:/data_lake")
         return {
             "storage": {
                 "data_lake": {
                     "enabled": True,
-                    "base_dir": "local/data_lake",
+                    "base_dir": data_lake_dir,
                 },
                 "sql_server": {
                     "enabled": False,
@@ -66,7 +69,7 @@ class IngestConfig:
                 "type": "sqlserver",
                 "sqlserver": {
                     "host": "localhost",
-                    "port": 1434,
+                    "port": 1433,
                     "database": "Holocron",
                     "user": "sa",
                     "schema": "ingest",
@@ -76,9 +79,27 @@ class IngestConfig:
                 "batch_size": 10,
                 "max_retries": 3,
                 "enable_discovery": True,
+                # Concurrent runner settings
+                "max_workers": 4,
+                "lease_seconds": 300,
+                "heartbeat_interval": 30,
+                # Backoff settings
+                "base_backoff_seconds": 2.0,
+                "max_backoff_seconds": 300.0,
+                "respect_retry_after": True,
+                # Rate limiting
+                "requests_per_second": 0.0,  # 0 = unlimited
             },
             "sources": [],
         }
+
+    def _apply_env_overrides(self) -> None:
+        """Apply environment variable overrides to loaded config."""
+        data_lake_dir = os.environ.get("INGEST_DATA_LAKE_DIR")
+        if data_lake_dir:
+            storage = self.config.setdefault("storage", {})
+            data_lake = storage.setdefault("data_lake", {})
+            data_lake["base_dir"] = data_lake_dir
 
     def get_storage_config(self) -> Dict[str, Any]:
         """Get storage configuration."""

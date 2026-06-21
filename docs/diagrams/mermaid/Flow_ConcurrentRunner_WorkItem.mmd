@@ -1,0 +1,23 @@
+flowchart TD
+  P0([process_work_item start]) --> P1["Select connector<br>(by source_system)"]
+  P1 --> P2["Apply global rate limit<br>(_apply_rate_limit)"]
+  P2 --> P3["Build ConnectorRequest<br>(uri/method/headers/body)"]
+  P3 --> P4["Fetch via connector<br>(connector.fetch)"]
+  P4 --> P5{HTTP status?}
+
+  P5 -- "429 or >=500" --> P6["Calculate backoff<br>(Retry-After or exp+jitter)"]
+  P6 --> P7["Fail work item<br>(retryable=true, backoff, max_retries)"]
+  P7 --> PEND([return])
+
+  P5 -- "non-2xx" --> P8["Fail work item<br>(retryable if >=500)"]
+  P8 --> PEND
+
+  P5 -- "2xx" --> P9["Create IngestRecord<br>(hash, timestamps, duration, metadata)"]
+  P9 --> P10["Write to storage writers<br>(best-effort, log on failure)"]
+  P10 --> P11{Discovery enabled<br>and plugins exist?}
+
+  P11 -- Yes --> P12["Run discovery<br>(plugin.discover -> enqueue)"]
+  P12 --> P13["Complete work item<br>(state_store.complete_work_item)"]
+  P13 --> PEND
+
+  P11 -- No --> P13 --> PEND

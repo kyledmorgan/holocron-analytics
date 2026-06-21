@@ -33,12 +33,12 @@ SELECT
     loc.FranchiseKey,
     loc.FranchiseName,
     COALESCE(ev.EventCount, 0) AS EventCount
-FROM dbo.sem_location loc
+FROM sem.vw_location loc
 LEFT JOIN (
     SELECT
         e.LocationKey,
         COUNT(*) AS EventCount
-    FROM dbo.sem_event e
+    FROM sem.vw_event e
     WHERE e.LocationKey IS NOT NULL
     GROUP BY e.LocationKey
 ) ev ON loc.LocationKey = ev.LocationKey;

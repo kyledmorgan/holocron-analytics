@@ -11,7 +11,9 @@ New to this repository? Start with these essential documents:
 | Document | Description |
 |----------|-------------|
 | [Root README](../README.md) | Project overview, goals, quick start guide |
-| [Docker Local Dev Runbook](runbooks/docker_local_dev.md) | Step-by-step guide to run the stack locally with Docker |
+| [Quick Start Guide](../QUICKSTART.md) | **5-minute setup** — Get running with Docker immediately |
+| [Contributing Guide](../CONTRIBUTING.md) | How to contribute to the project |
+| [Docker Local Dev Runbook](runbooks/docker_local_dev.md) | Detailed step-by-step guide to run the stack locally with Docker |
 | [Repository Structure](REPO_STRUCTURE.md) | Top-level folder layout and guiding principles |
 | [Project Vision](vision/ProjectVision.md) | Long-term goals and design philosophy |
 | [Agent Overview](../agents/README.md) | Policies, playbooks, and templates for contributors |
@@ -34,6 +36,10 @@ New to this repository? Start with these essential documents:
 |----------|-------------|
 | [ERD Explained](diagrams/mermaid/ERD_Explained.md) | Comprehensive schema documentation with column dictionaries |
 | [DDL Ordering and Manifest](../agents/playbooks/db/ddl_ordering_and_manifest.md) | DDL file organization and execution order |
+| [Schema Refactor Report](db/schema_refactor_report.md) | SQL standardization changes and migration guide |
+| [Database Policies](agent/db_policies.md) | Naming conventions, key patterns, datetime standards |
+| [Database Templates](agent/db_templates.md) | Copy-paste templates for tables, views, migrations |
+| [Database Review Checklist](agent/db_review_checklist.md) | PR review checklist for SQL changes |
 
 ### Seed Data & Ingestion
 
@@ -59,11 +65,14 @@ New to this repository? Start with these essential documents:
 | [Vision and Roadmap](llm/vision-and-roadmap.md) | Project vision, goals, and phased roadmap |
 | [LLM-Derived Data Overview](llm/derived-data.md) | Concepts, architecture, and roadmap for the LLM-derived data subsystem |
 | [Phase 1 Runner](llm/phase1-runner.md) | End-to-end LLM derive pipeline usage guide |
-| [Retrieval (Phase 3)](llm/retrieval.md) | RAG architecture, chunking, embeddings, and retrieval |
+| [retrieval.md](llm/retrieval.md) | Phase 3 RAG architecture, chunking, embeddings, and retrieval |
 | [Indexing Guide](llm/indexing.md) | How to index sources for retrieval |
 | [Operational Guide](llm/operational.md) | Operations, retention, and troubleshooting |
+| [Schema Refactor Migration Notes](llm/schema-refactor-migration-notes.md) | Chat/vector runtime split migration plan |
+| [Dependency Inventory](llm/dependency-inventory-vector-subsystem.md) | Vector subsystem dependency analysis |
 | [Ollama Integration Guide](llm/ollama.md) | Ollama API documentation, configuration, and operational guidance |
 | [Ollama in Docker](llm/ollama-docker.md) | Running Ollama as a Docker Compose service (Windows + WSL2) |
+| [Ollama Resilience](ollama-resilience.md) | Retry logic, error handling, and troubleshooting for Ollama JSON parsing |
 | [Glossary](llm/glossary.md) | Core terminology and definitions |
 | [Contracts](llm/contracts.md) | Schema versioning, validation behavior, and contract-first approach |
 | [Implementation Status](llm/status.md) | Living checklist of implementation progress |
@@ -73,6 +82,14 @@ New to this repository? Start with these essential documents:
 | [LLM Configuration Reference](../src/llm/config/config.md) | Configuration options and environment variables |
 | [LLM Contracts README](../src/llm/contracts/README.md) | JSON schema documentation for manifests and outputs |
 | [Interrogations README](../src/llm/interrogations/README.md) | Interrogation catalog concept and structure |
+| [Pipeline Observability](llm/llm-pipeline-observability-current-state.md) | End-to-end traceability map and artifact locations |
+| [Classify Entities Resume Debug (2026-02-28)](llm/classify-entities-resume-zero-candidates-debug-2026-02-28.md) | Root-cause analysis for `--mode resume` returning zero candidates, with SQL evidence and CLI fixes |
+
+### Vector Runtime
+
+| Document | Description |
+|----------|-------------|
+| [Vector Runtime Overview](vector/README.md) | Embedding, storage, and retrieval runtime documentation |
 
 ### Analytics / Views / Exercises
 
@@ -111,6 +128,8 @@ All Markdown files in this repository, grouped by location:
 | File | Description |
 |------|-------------|
 | [README.md](../README.md) | Project overview, quick start, and contribution info |
+| [QUICKSTART.md](../QUICKSTART.md) | 5-minute quick start guide for new users |
+| [CONTRIBUTING.md](../CONTRIBUTING.md) | Contribution guidelines and development workflow |
 | [AGENTS.md](../AGENTS.md) | Agent instruction summary with links to detailed policies |
 
 ### `docs/`
@@ -126,6 +145,21 @@ All Markdown files in this repository, grouped by location:
 | File | Description |
 |------|-------------|
 | [folder-structure-recommendations.md](_reports/folder-structure-recommendations.md) | Folder structure improvement proposals (report only) |
+
+### `docs/agent/`
+
+| File | Description |
+|------|-------------|
+| [README.md](agent/README.md) | Agent database documentation entry point |
+| [db_policies.md](agent/db_policies.md) | Canonical naming conventions, key patterns, datetime standards |
+| [db_templates.md](agent/db_templates.md) | Copy-paste templates for tables, views, migrations |
+| [db_review_checklist.md](agent/db_review_checklist.md) | PR review checklist for SQL changes |
+
+### `docs/db/`
+
+| File | Description |
+|------|-------------|
+| [schema_refactor_report.md](db/schema_refactor_report.md) | SQL schema standardization changes and migration guide |
 
 ### `docs/data-quality/`
 
@@ -154,8 +188,18 @@ All Markdown files in this repository, grouped by location:
 | [operational.md](llm/operational.md) | Phase 3 operations and troubleshooting |
 | [phase1-runner.md](llm/phase1-runner.md) | Phase 1 LLM Runner usage guide |
 | [retrieval.md](llm/retrieval.md) | Phase 3 RAG architecture and retrieval |
+| [schema-refactor-migration-notes.md](llm/schema-refactor-migration-notes.md) | Chat/vector runtime split migration plan |
+| [dependency-inventory-vector-subsystem.md](llm/dependency-inventory-vector-subsystem.md) | Vector subsystem dependency analysis |
 | [status.md](llm/status.md) | Implementation status tracker |
 | [vision-and-roadmap.md](llm/vision-and-roadmap.md) | Vision, goals, and phased roadmap |
+| [llm-pipeline-observability-current-state.md](llm/llm-pipeline-observability-current-state.md) | End-to-end traceability, artifact locations, and investigation queries |
+| [classify-entities-resume-zero-candidates-debug-2026-02-28.md](llm/classify-entities-resume-zero-candidates-debug-2026-02-28.md) | Investigation report for zero-candidate resume runs, including DB counts and code-path fixes |
+
+### `docs/vector/`
+
+| File | Description |
+|------|-------------|
+| [README.md](vector/README.md) | Vector runtime overview, schema tables, and Python modules |
 
 ### `docs/diagrams/mermaid/`
 
@@ -252,6 +296,36 @@ All Markdown files in this repository, grouped by location:
 | File | Description |
 |------|-------------|
 | [README.md](../sources/README.md) | Source definitions and mapping templates overview |
+
+### `scripts/`
+
+| File | Description |
+|------|-------------|
+| [README.md](../scripts/README.md) | Utility scripts for database, LLM, and testing operations |
+
+### `tools/`
+
+| File | Description |
+|------|-------------|
+| [README.md](../tools/README.md) | Core tools documentation (db_init and system utilities) |
+
+### `web/`
+
+| File | Description |
+|------|-------------|
+| [README.md](../web/README.md) | Web application structure and planned features (placeholder) |
+
+### `exercises/`
+
+| File | Description |
+|------|-------------|
+| [README.md](../exercises/README.md) | Learning exercises for SQL, Python, and scenario-based challenges |
+
+### `prompts/`
+
+| File | Description |
+|------|-------------|
+| [README.md](../prompts/README.md) | LLM prompt templates for extraction, normalization, and evaluation |
 
 ---
 

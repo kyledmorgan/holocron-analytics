@@ -57,7 +57,7 @@ install: ## Install Python dependencies
 
 db-up: ## Start SQL Server container
 	@echo "$(BLUE)Starting SQL Server...$(NC)"
-	docker compose up -d sqlserver
+	docker compose up -d sql2025
 	@echo "$(GREEN)SQL Server container started$(NC)"
 
 db-down: ## Stop SQL Server container
@@ -68,7 +68,7 @@ db-down: ## Stop SQL Server container
 db-wait: ## Wait for SQL Server to be ready
 	@echo "$(BLUE)Waiting for SQL Server to be ready...$(NC)"
 	@for i in $$(seq 1 60); do \
-		docker compose exec -T sqlserver /opt/mssql-tools18/bin/sqlcmd \
+		docker compose exec -T sql2025 /opt/mssql-tools18/bin/sqlcmd \
 			-S localhost -U sa -P "$$MSSQL_SA_PASSWORD" -C -Q "SELECT 1" \
 			> /dev/null 2>&1 && break; \
 		echo "  Waiting... ($$i/60)"; \
@@ -136,7 +136,7 @@ verify-sqlserver: ## One command to verify SQL Server integration works end-to-e
 		exit 1; \
 	fi
 	@echo "$(YELLOW)Step 1/5: Starting SQL Server container...$(NC)"
-	@docker compose up -d sqlserver
+	@docker compose up -d sql2025
 	@echo ""
 	@echo "$(YELLOW)Step 2/5: Waiting for SQL Server to be ready...$(NC)"
 	@python -c "from tests.conftest import wait_for_sqlserver; import sys; sys.exit(0 if wait_for_sqlserver(timeout=60) else 1)" || \

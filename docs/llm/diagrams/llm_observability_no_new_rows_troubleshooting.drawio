@@ -1,0 +1,49 @@
+<mxfile host="app.diagrams.net" modified="2026-02-14T18:56:00.000Z" agent="Mozilla/5.0" version="24.7.17">
+  <diagram id="No New Rows" name="No New Rows">
+    <mxGraphModel dx="1600" dy="900" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1920" pageHeight="1080" math="0" shadow="0">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+        <mxCell id="title" value="LLM Observability — Troubleshooting: No New Rows in dbo" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontSize=18;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="20" y="10" width="1100" height="30" as="geometry"/>
+        </mxCell>
+        <mxCell id="l1" value="Decision flow" style="swimlane;horizontal=0;startSize=28;rounded=0;html=1;fontStyle=1;fillColor=#E8F0FE;strokeColor=#5B8DEF;" vertex="1" parent="1"><mxGeometry x="20" y="60" width="760" height="920" as="geometry"/></mxCell>
+        <mxCell id="l2" value="SQL/Artifacts to inspect" style="swimlane;horizontal=0;startSize=28;rounded=0;html=1;fontStyle=1;fillColor=#FFF4E5;strokeColor=#D79B00;" vertex="1" parent="1"><mxGeometry x="800" y="60" width="700" height="920" as="geometry"/></mxCell>
+        <mxCell id="t1" value="No new rows in dbo.DimEntity" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8F0FE;strokeColor=#5B8DEF;fontSize=12;" vertex="1" parent="1"><mxGeometry x="50" y="100" width="300" height="60" as="geometry"/></mxCell>
+        <mxCell id="t2" value="Dry-run mode?" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8F0FE;strokeColor=#5B8DEF;fontSize=12;" vertex="1" parent="1"><mxGeometry x="50" y="190" width="200" height="60" as="geometry"/></mxCell>
+        <mxCell id="t3" value="Handler skipped?" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8F0FE;strokeColor=#5B8DEF;fontSize=12;" vertex="1" parent="1"><mxGeometry x="50" y="280" width="200" height="60" as="geometry"/></mxCell>
+        <mxCell id="t4" value="entity_store is None?" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8F0FE;strokeColor=#5B8DEF;fontSize=12;" vertex="1" parent="1"><mxGeometry x="50" y="370" width="220" height="60" as="geometry"/></mxCell>
+        <mxCell id="t5" value="Validation errors?" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8F0FE;strokeColor=#5B8DEF;fontSize=12;" vertex="1" parent="1"><mxGeometry x="50" y="460" width="200" height="60" as="geometry"/></mxCell>
+        <mxCell id="t6" value="Dedupe update-only?" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8F0FE;strokeColor=#5B8DEF;fontSize=12;" vertex="1" parent="1"><mxGeometry x="50" y="550" width="220" height="60" as="geometry"/></mxCell>
+        <mxCell id="t7" value="Stored proc invoked?" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8F0FE;strokeColor=#5B8DEF;fontSize=12;" vertex="1" parent="1"><mxGeometry x="50" y="640" width="220" height="60" as="geometry"/></mxCell>
+        <mxCell id="t8" value="Investigate downstream dbo tables
+and run-linked columns" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8F0FE;strokeColor=#5B8DEF;fontSize=12;" vertex="1" parent="1"><mxGeometry x="50" y="730" width="300" height="70" as="geometry"/></mxCell>
+        <mxCell id="q1" value="SQL: SELECT options_json FROM llm.run WHERE run_id=@RunId;
+Artifact: result.json dry_run=true" style="shape=note;whiteSpace=wrap;html=1;fillColor=#FFF9C4;strokeColor=#B7950B;fontSize=11;" vertex="1" parent="1"><mxGeometry x="840" y="170" width="620" height="70" as="geometry"/></mxCell>
+        <mxCell id="q2" value="SQL: SELECT metrics_json,status FROM llm.run WHERE run_id=@RunId;
+Artifact: result.json skipped reason" style="shape=note;whiteSpace=wrap;html=1;fillColor=#FFF9C4;strokeColor=#B7950B;fontSize=11;" vertex="1" parent="1"><mxGeometry x="840" y="260" width="620" height="70" as="geometry"/></mxCell>
+        <mxCell id="q3" value="Check runtime wiring + handler logs
+(entity_extraction_droid.py guard before persistence)" style="shape=note;whiteSpace=wrap;html=1;fillColor=#FFF9C4;strokeColor=#B7950B;fontSize=11;" vertex="1" parent="1"><mxGeometry x="840" y="350" width="620" height="70" as="geometry"/></mxCell>
+        <mxCell id="q4" value="SQL: SELECT status,error,metrics_json FROM llm.run WHERE run_id=@RunId;
+Artifact: validation_errors.json (if present)" style="shape=note;whiteSpace=wrap;html=1;fillColor=#FFF9C4;strokeColor=#B7950B;fontSize=11;" vertex="1" parent="1"><mxGeometry x="840" y="440" width="620" height="70" as="geometry"/></mxCell>
+        <mxCell id="q5" value="SQL: proc summary/per-entity statuses
++ dedupe indicators (updated/skipped)" style="shape=note;whiteSpace=wrap;html=1;fillColor=#FFF9C4;strokeColor=#B7950B;fontSize=11;" vertex="1" parent="1"><mxGeometry x="840" y="530" width="620" height="70" as="geometry"/></mxCell>
+        <mxCell id="q6" value="Artifacts: output.json + result.json
+Verify proc call path" style="shape=note;whiteSpace=wrap;html=1;fillColor=#FFF9C4;strokeColor=#B7950B;fontSize=11;" vertex="1" parent="1"><mxGeometry x="840" y="620" width="620" height="70" as="geometry"/></mxCell>
+        <mxCell id="e1" style="endArrow=block;html=1;rounded=0;" edge="1" parent="1" source="t1" target="t2"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e2" value="yes" style="endArrow=block;html=1;rounded=0;" edge="1" parent="1" source="t2" target="q1"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e3" value="no" style="endArrow=block;html=1;rounded=0;" edge="1" parent="1" source="t2" target="t3"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e4" value="yes" style="endArrow=block;html=1;rounded=0;" edge="1" parent="1" source="t3" target="q2"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e5" value="no" style="endArrow=block;html=1;rounded=0;" edge="1" parent="1" source="t3" target="t4"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e6" value="yes" style="endArrow=block;html=1;rounded=0;" edge="1" parent="1" source="t4" target="q3"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e7" value="no" style="endArrow=block;html=1;rounded=0;" edge="1" parent="1" source="t4" target="t5"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e8" value="yes" style="endArrow=block;html=1;rounded=0;" edge="1" parent="1" source="t5" target="q4"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e9" value="no" style="endArrow=block;html=1;rounded=0;" edge="1" parent="1" source="t5" target="t6"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e10" value="yes" style="endArrow=block;html=1;rounded=0;" edge="1" parent="1" source="t6" target="q5"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e11" value="no" style="endArrow=block;html=1;rounded=0;" edge="1" parent="1" source="t6" target="t7"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e12" value="no" style="endArrow=block;html=1;rounded=0;" edge="1" parent="1" source="t7" target="q6"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e13" value="yes" style="endArrow=block;html=1;rounded=0;" edge="1" parent="1" source="t7" target="t8"><mxGeometry relative="1" as="geometry"/></mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

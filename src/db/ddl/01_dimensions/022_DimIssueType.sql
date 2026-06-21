@@ -1,27 +1,27 @@
 ﻿-- DimIssueType: taxonomy for continuity issue categories.
 -- IssueTypeGuid tracks identity; governance metadata captures versioning.
 CREATE TABLE dbo.DimIssueType (
-    IssueTypeKey int IDENTITY(1,1) NOT NULL,
-    IssueTypeGuid uniqueidentifier NOT NULL CONSTRAINT DF_DimIssueType_IssueTypeGuid DEFAULT (NEWSEQUENTIALID()),
+    IssueTypeKey INT IDENTITY(1,1) NOT NULL,
+    IssueTypeGuid UNIQUEIDENTIFIER NOT NULL CONSTRAINT DF_DimIssueType_IssueTypeGuid DEFAULT (NEWID()),
 
-    IssueTypeName nvarchar(200) NOT NULL,
-    IssueTypeCode nvarchar(50) NOT NULL,
-    Description nvarchar(1000) NULL,
-    Notes nvarchar(1000) NULL,
+    IssueTypeName NVARCHAR(200) NOT NULL,
+    IssueTypeCode NVARCHAR(50) NOT NULL,
+    Description NVARCHAR(1000) NULL,
+    Notes NVARCHAR(1000) NULL,
 
-    RowHash varbinary(32) NOT NULL,
-    IsActive bit NOT NULL CONSTRAINT DF_DimIssueType_IsActive DEFAULT (1),
-    IsLatest bit NOT NULL CONSTRAINT DF_DimIssueType_IsLatest DEFAULT (1),
-    VersionNum int NOT NULL CONSTRAINT DF_DimIssueType_VersionNum DEFAULT (1),
-    ValidFromUtc datetime2(3) NOT NULL CONSTRAINT DF_DimIssueType_ValidFromUtc DEFAULT (SYSUTCDATETIME()),
-    ValidToUtc datetime2(3) NULL,
-    CreatedUtc datetime2(3) NOT NULL CONSTRAINT DF_DimIssueType_CreatedUtc DEFAULT (SYSUTCDATETIME()),
-    UpdatedUtc datetime2(3) NULL,
+    RowHash VARBINARY(32) NOT NULL,
+    IsActive BIT NOT NULL CONSTRAINT DF_DimIssueType_IsActive DEFAULT (1),
+    IsLatest BIT NOT NULL CONSTRAINT DF_DimIssueType_IsLatest DEFAULT (1),
+    VersionNum INT NOT NULL CONSTRAINT DF_DimIssueType_VersionNum DEFAULT (1),
+    ValidFromUtc DATETIME2(3) NOT NULL CONSTRAINT DF_DimIssueType_ValidFromUtc DEFAULT (SYSUTCDATETIME()),
+    ValidToUtc DATETIME2(3) NULL,
+    CreatedUtc DATETIME2(3) NOT NULL CONSTRAINT DF_DimIssueType_CreatedUtc DEFAULT (SYSUTCDATETIME()),
+    UpdatedUtc DATETIME2(3) NULL,
 
-    SourceSystem nvarchar(100) NULL,
-    SourceRef nvarchar(400) NULL,
-    IngestBatchId nvarchar(100) NULL,
-    AttributesJson nvarchar(max) NULL,
+    SourceSystem NVARCHAR(100) NULL,
+    SourceRef NVARCHAR(400) NULL,
+    IngestBatchKey NVARCHAR(100) NULL,
+    AttributesJson NVARCHAR(max) NULL,
 
     CONSTRAINT PK_DimIssueType PRIMARY KEY CLUSTERED (IssueTypeKey),
     CONSTRAINT UQ_DimIssueType_IssueTypeGuid UNIQUE (IssueTypeGuid)

@@ -39,5 +39,5 @@ SELECT
     ci.ContinuityFrameName      AS ContinuityFrame,
     ci.FranchiseName            AS Franchise,
     ci.ContinuityIssueKey       -- Include for advanced join exercises
-FROM dbo.sem_continuity_issue ci;
+FROM sem.vw_continuity_issue ci;
 GO

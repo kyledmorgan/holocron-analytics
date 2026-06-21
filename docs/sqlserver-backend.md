@@ -45,7 +45,7 @@ The SQL Server state store (`SqlServerStateStore`) provides robust, production-g
 
 ```bash
 # Start SQL Server container
-docker compose up -d sqlserver
+docker compose up -d sql2025
 
 # Wait for healthy status
 docker compose ps
@@ -60,7 +60,7 @@ export MSSQL_SA_PASSWORD="YourStrongPassword123!"
 # Optional (defaults shown)
 export DB_BACKEND=sqlserver
 export INGEST_SQLSERVER_HOST=localhost
-export INGEST_SQLSERVER_PORT=1434
+export INGEST_SQLSERVER_PORT=1433
 export INGEST_SQLSERVER_DATABASE=Holocron
 export INGEST_SQLSERVER_USER=sa
 export INGEST_SQLSERVER_PASSWORD="YourStrongPassword123!"
@@ -99,7 +99,7 @@ python src/ingest/ingest_cli.py --config config/ingest.yaml --seed --max-items 1
 |----------|---------|-------------|
 | `DB_BACKEND` | `sqlserver` | Backend type (must be `sqlserver`) |
 | `INGEST_SQLSERVER_HOST` | `localhost` | SQL Server hostname |
-| `INGEST_SQLSERVER_PORT` | `1434` | SQL Server port |
+| `INGEST_SQLSERVER_PORT` | `1433` | SQL Server port |
 | `INGEST_SQLSERVER_DATABASE` | `Holocron` | Database name |
 | `INGEST_SQLSERVER_USER` | `sa` | Database username |
 | `INGEST_SQLSERVER_PASSWORD` | (required) | Database password |
@@ -116,7 +116,7 @@ state:
   
   sqlserver:
     host: "localhost"
-    port: 1434
+    port: 1433
     database: "Holocron"
     user: "sa"
     # password: (use environment variable)
@@ -129,7 +129,7 @@ state:
 If you prefer a full connection string:
 
 ```
-Driver={ODBC Driver 18 for SQL Server};Server=localhost,1434;Database=Holocron;UID=sa;PWD=YourPassword;TrustServerCertificate=yes
+Driver={ODBC Driver 18 for SQL Server};Server=localhost;Database=Holocron;UID=sa;PWD=YourPassword;TrustServerCertificate=yes
 ```
 
 ---
@@ -230,7 +230,7 @@ python scripts/db/db_smoketest.py
 SQL Server Connection Info
 ============================================================
   Host:     localhost
-  Port:     1434
+  Port:     1433
   Database: Holocron
   Username: sa
   Driver:   ODBC Driver 18 for SQL Server
@@ -316,7 +316,7 @@ python -m pytest tests/unit/ -v
 
 ```bash
 # Start SQL Server first
-docker compose up -d sqlserver
+docker compose up -d sql2025
 
 # Wait for healthy status
 docker compose ps
@@ -584,15 +584,15 @@ class MyApiDiscovery(Discovery):
 
 ```yaml
 services:
-  sqlserver:
+  sql2025:
     image: mcr.microsoft.com/mssql/server:2025-latest
-    container_name: holocron-sqlserver
+    container_name: sql2025
     environment:
       - ACCEPT_EULA=Y
       - MSSQL_PID=Developer
       - MSSQL_SA_PASSWORD=${MSSQL_SA_PASSWORD}
     ports:
-      - "1434:1433"
+      - "1433:1433"
     volumes:
       - mssql_data:/var/opt/mssql
     healthcheck:
@@ -615,7 +615,7 @@ volumes:
 export MSSQL_SA_PASSWORD="YourStrongPassword123!"
 
 # Start SQL Server
-docker compose up -d sqlserver
+docker compose up -d sql2025
 
 # Wait for healthy
 docker compose ps
@@ -718,7 +718,7 @@ pyodbc.Error: ('08001', '[08001] [Microsoft][ODBC Driver 18 for SQL Server]TCP P
 
 **Solutions**:
 1. Ensure SQL Server is running: `docker compose ps`
-2. Check port mapping: `docker port holocron-sqlserver`
+2. Check port mapping: `docker port sql2025`
 3. Wait for healthcheck: SQL Server takes 30+ seconds to start
 
 ### Driver Not Found
@@ -776,3 +776,4 @@ SSL Provider: Error:0A000438:SSL routines::tlsv1 alert internal error
 
 - [Ingestion Framework README](../src/ingest/README.md)
 - [Configuration Examples](../config/ingest.example.yaml)
+

@@ -6,6 +6,33 @@ This directory contains JSON Schema definitions that govern the structure of man
 
 ## Schemas
 
+### `page_classification_v1_schema.json` *(NEW)*
+
+Defines the **standardized output schema** for page classification tasks. This is the model-agnostic contract used by the page classification runner when calling Ollama.
+
+Key features:
+- Standardized `primary_type` enum with 12 values
+- Structured `notes` field for subtype handling and extensibility
+- `descriptor_sentence` (≤50 words, single sentence)
+- `suggested_tags` with visibility (Public/Hidden) and typed categories
+- Confidence calibration guidance
+- `is_candidate_new_type` flag for taxonomy evolution
+
+Used by: `src/sem_staging/dry_run_page_classification.py`, `src/llm/prompts/page_classification.py`
+
+### `entity_extraction_v1_output.json` *(NEW - Phase 1)*
+
+Defines the **standardized output schema** for entity extraction tasks. Phase 1 focuses on droid extraction but the schema supports any entity type.
+
+Key features:
+- `entities` array with required fields: `name`, `type`, `confidence`
+- Flexible `attributes` object for entity-specific data
+- Optional `aliases` array for alternative names
+- Optional `relationships` array (validates but Phase 1 does not persist)
+- `extraction_metadata` for provenance tracking
+
+Used by: `src/llm/interrogations/definitions/entity_extraction_droid.py`, `src/llm/handlers/entity_extraction_droid.py`
+
 ### `manifest_schema.json`
 
 Defines the structure of a **derive manifest** — the metadata record that tracks:
@@ -85,9 +112,9 @@ with open(schema_path) as f:
 ## Future Schemas
 
 Planned schema additions:
-- Task-specific output schemas (e.g., `entity_extraction_output.json`)
 - Evidence bundle schemas (e.g., `sql_evidence.json`, `document_evidence.json`)
 - Benchmark result schemas (for multi-model comparison)
+- Phase 2: Relationship extraction schemas
 
 ## Related Documentation
 

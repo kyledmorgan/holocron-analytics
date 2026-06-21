@@ -1,0 +1,56 @@
+<mxfile host="app.diagrams.net" modified="2026-02-14T18:56:00.000Z" agent="Mozilla/5.0" version="24.7.17">
+  <diagram id="Correlation Chain" name="Correlation Chain">
+    <mxGraphModel dx="1600" dy="900" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1920" pageHeight="1080" math="0" shadow="0">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+        <mxCell id="title" value="LLM Observability — Correlation Chain (IDs & Joins)" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontSize=18;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="20" y="10" width="1100" height="30" as="geometry"/>
+        </mxCell>
+        <mxCell id="l1" value="Python runtime" style="swimlane;horizontal=0;startSize=28;rounded=0;html=1;fontStyle=1;fillColor=#E8F0FE;strokeColor=#5B8DEF;" vertex="1" parent="1"><mxGeometry x="20" y="60" width="260" height="600" as="geometry"/></mxCell>
+        <mxCell id="l2" value="SQL (llm)" style="swimlane;horizontal=0;startSize=28;rounded=0;html=1;fontStyle=1;fillColor=#FFF4E5;strokeColor=#D79B00;" vertex="1" parent="1"><mxGeometry x="300" y="60" width="320" height="600" as="geometry"/></mxCell>
+        <mxCell id="l3" value="SQL (dbo)" style="swimlane;horizontal=0;startSize=28;rounded=0;html=1;fontStyle=1;fillColor=#FDEDEC;strokeColor=#C0392B;" vertex="1" parent="1"><mxGeometry x="640" y="60" width="300" height="600" as="geometry"/></mxCell>
+        <mxCell id="l4" value="Filesystem lake" style="swimlane;horizontal=0;startSize=28;rounded=0;html=1;fontStyle=1;fillColor=#F5EEF8;strokeColor=#8E44AD;" vertex="1" parent="1"><mxGeometry x="960" y="60" width="340" height="600" as="geometry"/></mxCell>
+        <mxCell id="a1" value="job context
+(dedupe_key optional)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8F0FE;strokeColor=#5B8DEF;fontSize=12;" vertex="1" parent="1"><mxGeometry x="40" y="140" width="220" height="70" as="geometry"/></mxCell>
+        <mxCell id="a2" value="run context
+(source_page_id optional)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8F0FE;strokeColor=#5B8DEF;fontSize=12;" vertex="1" parent="1"><mxGeometry x="40" y="260" width="220" height="70" as="geometry"/></mxCell>
+        <mxCell id="a3" value="llm.job
+PK: job_id
+dedupe_key" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF4E5;strokeColor=#D79B00;fontSize=12;" vertex="1" parent="1"><mxGeometry x="320" y="110" width="280" height="90" as="geometry"/></mxCell>
+        <mxCell id="a4" value="llm.run
+PK: run_id
+FK: job_id" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF4E5;strokeColor=#D79B00;fontSize=12;" vertex="1" parent="1"><mxGeometry x="320" y="230" width="280" height="90" as="geometry"/></mxCell>
+        <mxCell id="a5" value="llm.artifact
+PK: artifact_id
+FK: run_id
+artifact_type, lake_uri" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF4E5;strokeColor=#D79B00;fontSize=12;" vertex="1" parent="1"><mxGeometry x="320" y="350" width="280" height="100" as="geometry"/></mxCell>
+        <mxCell id="a6" value="llm.run_evidence
+run_id + bundle_id" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF4E5;strokeColor=#D79B00;fontSize=12;" vertex="1" parent="1"><mxGeometry x="320" y="480" width="280" height="80" as="geometry"/></mxCell>
+        <mxCell id="a7" value="llm.evidence_bundle
+PK: bundle_id
+lake_uri -> evidence.json" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF4E5;strokeColor=#D79B00;fontSize=12;" vertex="1" parent="1"><mxGeometry x="980" y="120" width="300" height="90" as="geometry"/></mxCell>
+        <mxCell id="a8" value="dbo.usp_batch_insert_entities
+Inputs: @run_id, @job_id, @source_page_id" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FDEDEC;strokeColor=#C0392B;fontSize=12;" vertex="1" parent="1"><mxGeometry x="660" y="260" width="260" height="90" as="geometry"/></mxCell>
+        <mxCell id="a9" value="dbo.DimEntity
+AdjudicationRunId
+SourcePageId" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FDEDEC;strokeColor=#C0392B;fontSize=12;" vertex="1" parent="1"><mxGeometry x="660" y="390" width="260" height="90" as="geometry"/></mxCell>
+        <mxCell id="a10" value="lake/.../{run_id}/
+request.json/response.json/..." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F5EEF8;strokeColor=#8E44AD;fontSize=12;" vertex="1" parent="1"><mxGeometry x="980" y="300" width="300" height="110" as="geometry"/></mxCell>
+        <mxCell id="n1" value="Join path:
+llm.job.job_id = llm.run.job_id
+llm.run.run_id = llm.artifact.run_id
+llm.run_evidence joins run/bundle" style="shape=note;whiteSpace=wrap;html=1;fillColor=#FFF9C4;strokeColor=#B7950B;fontSize=11;" vertex="1" parent="1"><mxGeometry x="980" y="450" width="300" height="120" as="geometry"/></mxCell>
+        <mxCell id="e1" style="endArrow=block;html=1;rounded=0;" edge="1" parent="1" source="a1" target="a3"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e2" value="job_id" style="endArrow=block;html=1;rounded=0;" edge="1" parent="1" source="a3" target="a4"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e3" value="run_id" style="endArrow=block;html=1;rounded=0;" edge="1" parent="1" source="a4" target="a5"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e4" value="run_id" style="endArrow=block;html=1;rounded=0;" edge="1" parent="1" source="a4" target="a6"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e5" value="bundle_id" style="endArrow=block;html=1;rounded=0;" edge="1" parent="1" source="a6" target="a7"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e6" value="proc params" style="endArrow=block;html=1;rounded=0;" edge="1" parent="1" source="a4" target="a8"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e7" value="source_page_id" style="endArrow=block;html=1;rounded=0;" edge="1" parent="1" source="a2" target="a8"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e8" value="dbo writes" style="endArrow=block;html=1;rounded=0;" edge="1" parent="1" source="a8" target="a9"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e9" value="lake_uri pointers" style="endArrow=block;html=1;rounded=0;" edge="1" parent="1" source="a5" target="a10"><mxGeometry relative="1" as="geometry"/></mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

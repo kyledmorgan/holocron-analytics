@@ -72,7 +72,7 @@ def parse_args():
     parser.add_argument(
         "--data-lake",
         type=Path,
-        default=Path("local/data_lake"),
+        default=Path("W:/data_lake"),
         help="Path to data lake directory",
     )
     

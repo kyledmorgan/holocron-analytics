@@ -36,7 +36,7 @@ class InboundLinkAnalyzer:
     def __init__(
         self,
         source_name: str = "wookieepedia",
-        data_lake_base: Path = Path("local/data_lake"),
+        data_lake_base: Path = Path("W:/data_lake"),
     ):
         """
         Initialize the analyzer.
@@ -263,7 +263,7 @@ class InboundLinkAnalyzer:
 
 def load_inbound_rank(
     source_name: str = "wookieepedia",
-    data_lake_base: Path = Path("local/data_lake"),
+    data_lake_base: Path = Path("W:/data_lake"),
     filename: str = "inbound_link_rank.json",
 ) -> List[Dict[str, Any]]:
     """

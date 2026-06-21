@@ -33,6 +33,7 @@ Environment Variables:
 
 import argparse
 import json
+import os
 import sys
 from pathlib import Path
 
@@ -40,6 +41,27 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).parent.parent / "src"))
 
 from llm.storage.sql_job_queue import SqlJobQueue, QueueConfig
+
+
+def _load_dotenv_if_present() -> None:
+    """
+    Load key/value pairs from .env into process env if not already set.
+
+    Keeps explicit shell environment values as the source of truth.
+    """
+    env_path = Path(__file__).parent.parent / ".env"
+    if not env_path.exists():
+        return
+
+    for raw_line in env_path.read_text(encoding="utf-8").splitlines():
+        line = raw_line.strip()
+        if not line or line.startswith("#") or "=" not in line:
+            continue
+        key, value = line.split("=", 1)
+        key = key.strip()
+        value = value.strip().strip("'").strip('"')
+        if key and os.environ.get(key) is None:
+            os.environ[key] = value
 
 
 def main():
@@ -92,6 +114,9 @@ def main():
     )
     
     args = parser.parse_args()
+
+    # Make local CLI runs work without manually exporting env vars first.
+    _load_dotenv_if_present()
     
     # Build evidence list
     evidence_items = []

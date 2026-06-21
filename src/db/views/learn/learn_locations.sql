@@ -35,5 +35,5 @@ SELECT
     loc.FranchiseName           AS Franchise,
     loc.LocationKey,            -- Include for advanced join exercises
     loc.ParentLocationKey       -- Include for advanced join exercises
-FROM dbo.sem_location loc;
+FROM sem.vw_location loc;
 GO

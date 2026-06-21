@@ -7,7 +7,7 @@ They can be run manually when SQL Server (Docker) is available.
 
 Usage:
     # Ensure SQL Server is running
-    docker compose up -d sqlserver
+    docker compose up -d sql2025
     
     # Set environment variables
     export MSSQL_SA_PASSWORD="YourPassword"
@@ -44,7 +44,7 @@ def is_sqlserver_available():
         
         store = SqlServerStateStore(
             host=os.environ.get("INGEST_SQLSERVER_HOST", "localhost"),
-            port=int(os.environ.get("INGEST_SQLSERVER_PORT", "1434")),
+            port=int(os.environ.get("INGEST_SQLSERVER_PORT", "1433")),
             database=os.environ.get("INGEST_SQLSERVER_DATABASE", "Holocron"),
             username=os.environ.get("INGEST_SQLSERVER_USER", "sa"),
             password=password,
@@ -74,7 +74,7 @@ class TestSqlServerStateStore(unittest.TestCase):
         
         cls.store = SqlServerStateStore(
             host=os.environ.get("INGEST_SQLSERVER_HOST", "localhost"),
-            port=int(os.environ.get("INGEST_SQLSERVER_PORT", "1434")),
+            port=int(os.environ.get("INGEST_SQLSERVER_PORT", "1433")),
             database=os.environ.get("INGEST_SQLSERVER_DATABASE", "Holocron"),
             username=os.environ.get("INGEST_SQLSERVER_USER", "sa"),
             password=password,
@@ -330,7 +330,7 @@ def main():
     if not is_sqlserver_available():
         logger.warning("SQL Server not available. Tests will be skipped.")
         logger.info("To run these tests:")
-        logger.info("  1. Start SQL Server: docker compose up -d sqlserver")
+        logger.info("  1. Start SQL Server: docker compose up -d sql2025")
         logger.info("  2. Set password: export MSSQL_SA_PASSWORD='YourPassword'")
         logger.info("  3. Run tests: python src/ingest/tests/test_sqlserver_state_store.py")
         return 0  # Return success (tests skipped, not failed)

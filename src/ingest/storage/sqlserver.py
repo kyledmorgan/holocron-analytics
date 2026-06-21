@@ -4,6 +4,7 @@ SQL Server storage writer for ingestion records.
 
 import json
 import logging
+import threading
 from typing import Optional
 
 try:
@@ -61,7 +62,10 @@ class SqlServerIngestWriter(StorageWriter):
         self.schema = schema
         self.table = table
         self.auto_commit = auto_commit
-        self.conn = None
+        self._thread_local = threading.local()
+        self._connections = []
+        self._connections_lock = threading.Lock()
+        self.conn = _ThreadLocalConnectionProxy(self)
         self._connect()
 
     def _is_valid_identifier(self, name: str) -> bool:
@@ -72,11 +76,21 @@ class SqlServerIngestWriter(StorageWriter):
     def _connect(self) -> None:
         """Establish database connection."""
         try:
-            self.conn = pyodbc.connect(self.connection_string, autocommit=self.auto_commit)
+            self._get_conn()
             logger.debug("Connected to SQL Server")
         except pyodbc.Error as e:
             logger.error(f"Failed to connect to SQL Server: {e}")
             raise
+
+    def _get_conn(self):
+        """Get (or create) a thread-local connection for safe concurrent use."""
+        conn = getattr(self._thread_local, "conn", None)
+        if conn is None:
+            conn = pyodbc.connect(self.connection_string, autocommit=self.auto_commit)
+            self._thread_local.conn = conn
+            with self._connections_lock:
+                self._connections.append(conn)
+        return conn
 
     def write(self, record: IngestRecord) -> bool:
         """
@@ -98,7 +112,10 @@ class SqlServerIngestWriter(StorageWriter):
             request_headers_json = json.dumps(record.request_headers) if record.request_headers else None
             response_headers_json = json.dumps(record.response_headers) if record.response_headers else None
             
-            # Insert statement
+            # Get variant value
+            variant_value = record.variant.value if record.variant else None
+            
+            # Insert statement with extended columns
             sql = f"""
                 INSERT INTO [{self.schema}].[{self.table}] (
                     ingest_id,
@@ -118,8 +135,14 @@ class SqlServerIngestWriter(StorageWriter):
                     work_item_id,
                     attempt,
                     error_message,
-                    duration_ms
-                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                    duration_ms,
+                    variant,
+                    content_type,
+                    content_length,
+                    file_path,
+                    request_timestamp,
+                    response_timestamp
+                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
             """
             
             cursor.execute(
@@ -143,6 +166,12 @@ class SqlServerIngestWriter(StorageWriter):
                     record.attempt,
                     record.error_message,
                     record.duration_ms,
+                    variant_value,
+                    record.content_type,
+                    record.content_length,
+                    record.file_path,
+                    record.request_timestamp,
+                    record.response_timestamp,
                 )
             )
             
@@ -164,6 +193,29 @@ class SqlServerIngestWriter(StorageWriter):
 
     def close(self) -> None:
         """Close the database connection."""
-        if self.conn:
-            self.conn.close()
-            logger.debug("Closed SQL Server connection")
+        with self._connections_lock:
+            for conn in self._connections:
+                try:
+                    conn.close()
+                except pyodbc.Error:
+                    pass
+            self._connections.clear()
+        logger.debug("Closed SQL Server connections")
+
+
+class _ThreadLocalConnectionProxy:
+    """Proxy that routes cursor/commit/rollback/close to a thread-local connection."""
+    def __init__(self, writer: "SqlServerIngestWriter"):
+        self._writer = writer
+
+    def cursor(self):
+        return self._writer._get_conn().cursor()
+
+    def commit(self):
+        return self._writer._get_conn().commit()
+
+    def rollback(self):
+        return self._writer._get_conn().rollback()
+
+    def close(self):
+        return self._writer._get_conn().close()

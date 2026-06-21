@@ -39,5 +39,5 @@ SELECT
     c.FranchiseName             AS Franchise,
     c.CharacterKey,             -- Include for advanced join exercises
     c.EntityKey                 -- Include for advanced join exercises
-FROM dbo.sem_character c;
+FROM sem.vw_character c;
 GO

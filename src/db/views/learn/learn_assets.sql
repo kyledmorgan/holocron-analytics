@@ -33,5 +33,5 @@ SELECT
     ti.FranchiseName            AS Franchise,
     ti.TechInstanceKey,         -- Include for advanced join exercises
     ti.TechAssetKey             -- Include for advanced join exercises
-FROM dbo.sem_tech_instance ti;
+FROM sem.vw_tech_instance ti;
 GO

@@ -157,8 +157,14 @@ class IngestRunner:
                 body=work_item.request_body,
             )
             
+            # Capture request timestamp before fetch
+            request_timestamp = datetime.now(timezone.utc)
+            
             # Fetch data
             response = connector.fetch(request)
+            
+            # Capture response timestamp immediately after fetch
+            response_timestamp = datetime.now(timezone.utc)
             
             # Check if successful
             if response.status_code < 200 or response.status_code >= 300:
@@ -190,7 +196,19 @@ class IngestRunner:
                 
                 return
             
-            # Create ingest record
+            # Extract content type and length from response headers
+            content_type = None
+            content_length = None
+            if response.headers:
+                content_type = response.headers.get("Content-Type") or response.headers.get("content-type")
+                length_str = response.headers.get("Content-Length") or response.headers.get("content-length")
+                if length_str:
+                    try:
+                        content_length = int(length_str)
+                    except ValueError:
+                        pass
+            
+            # Create ingest record with full request/response metadata
             ingest_record = IngestRecord(
                 ingest_id=str(uuid.uuid4()),
                 source_system=work_item.source_system,
@@ -203,12 +221,17 @@ class IngestRunner:
                 status_code=response.status_code,
                 response_headers=response.headers,
                 payload=response.payload,
-                fetched_at_utc=datetime.now(timezone.utc),
+                fetched_at_utc=response_timestamp,
                 hash_sha256=self._compute_hash(response.payload),
                 run_id=work_item.run_id,
                 work_item_id=work_item.work_item_id,
                 attempt=work_item.attempt,
                 duration_ms=response.duration_ms,
+                variant=work_item.variant,
+                content_type=content_type,
+                content_length=content_length,
+                request_timestamp=request_timestamp,
+                response_timestamp=response_timestamp,
             )
             
             # Write to storage

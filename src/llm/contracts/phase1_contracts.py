@@ -266,6 +266,7 @@ class Job:
         locked_by: Worker ID that claimed this job
         locked_utc: When the job was claimed
         last_error: Last error message if failed
+        dedupe_key: Idempotency key for preventing duplicate jobs (optional)
     """
     job_id: str
     interrogation_key: str
@@ -281,6 +282,7 @@ class Job:
     locked_by: Optional[str] = None
     locked_utc: Optional[datetime] = None
     last_error: Optional[str] = None
+    dedupe_key: Optional[str] = None
     
     def get_input(self) -> JobInputEnvelope:
         """Parse input_json into JobInputEnvelope."""
@@ -313,6 +315,7 @@ class Job:
             locked_by=row.get("locked_by"),
             locked_utc=row.get("locked_utc"),
             last_error=row.get("last_error"),
+            dedupe_key=row.get("dedupe_key"),
         )
 
 

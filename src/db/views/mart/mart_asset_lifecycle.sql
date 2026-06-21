@@ -49,7 +49,7 @@ SELECT
     ea.FranchiseName,
     /* Computed timeline ordering */
     (e.SceneOrdinal * 1000 + ea.EventOrdinal) AS TimelineOrdinal
-FROM dbo.sem_event_asset ea
-INNER JOIN dbo.sem_event e
+FROM sem.vw_event_asset ea
+INNER JOIN sem.vw_event e
     ON ea.EventKey = e.EventKey;
 GO

@@ -45,5 +45,5 @@ SELECT
     e.EventKey,                 -- Include for advanced join exercises
     e.SceneKey,                 -- Include for advanced join exercises
     e.WorkKey                   -- Include for advanced join exercises
-FROM dbo.sem_event e;
+FROM sem.vw_event e;
 GO

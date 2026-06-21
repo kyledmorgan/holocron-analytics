@@ -1,0 +1,46 @@
+<mxfile host="app.diagrams.net" modified="2026-02-14T18:56:00.000Z" agent="Mozilla/5.0" version="24.7.17">
+  <diagram id="Evidence Linkage" name="Evidence Linkage">
+    <mxGraphModel dx="1600" dy="900" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1920" pageHeight="1080" math="0" shadow="0">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+        <mxCell id="title" value="LLM Observability — Evidence Linkage" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontSize=18;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="20" y="10" width="1100" height="30" as="geometry"/>
+        </mxCell>
+        <mxCell id="l1" value="Python runtime" style="swimlane;horizontal=0;startSize=28;rounded=0;html=1;fontStyle=1;fillColor=#E8F0FE;strokeColor=#5B8DEF;" vertex="1" parent="1"><mxGeometry x="20" y="60" width="280" height="560" as="geometry"/></mxCell>
+        <mxCell id="l2" value="SQL (llm)" style="swimlane;horizontal=0;startSize=28;rounded=0;html=1;fontStyle=1;fillColor=#FFF4E5;strokeColor=#D79B00;" vertex="1" parent="1"><mxGeometry x="320" y="60" width="440" height="560" as="geometry"/></mxCell>
+        <mxCell id="l3" value="Filesystem lake" style="swimlane;horizontal=0;startSize=28;rounded=0;html=1;fontStyle=1;fillColor=#F5EEF8;strokeColor=#8E44AD;" vertex="1" parent="1"><mxGeometry x="780" y="60" width="500" height="560" as="geometry"/></mxCell>
+        <mxCell id="d1" value="evidence assembly
+(policy + references)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8F0FE;strokeColor=#5B8DEF;fontSize=12;" vertex="1" parent="1"><mxGeometry x="40" y="180" width="240" height="70" as="geometry"/></mxCell>
+        <mxCell id="d2" value="llm.run
+run_id" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF4E5;strokeColor=#D79B00;fontSize=12;" vertex="1" parent="1"><mxGeometry x="340" y="120" width="190" height="60" as="geometry"/></mxCell>
+        <mxCell id="d3" value="llm.evidence_bundle
+bundle_id
+policy_json
+summary_json
+lake_uri" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF4E5;strokeColor=#D79B00;fontSize=12;" vertex="1" parent="1"><mxGeometry x="340" y="220" width="190" height="120" as="geometry"/></mxCell>
+        <mxCell id="d4" value="llm.run_evidence
+run_id + bundle_id
+attached_utc" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF4E5;strokeColor=#D79B00;fontSize=12;" vertex="1" parent="1"><mxGeometry x="560" y="240" width="180" height="90" as="geometry"/></mxCell>
+        <mxCell id="d5" value="llm.evidence_item
+(bundle/item metadata)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF4E5;strokeColor=#D79B00;fontSize=12;" vertex="1" parent="1"><mxGeometry x="340" y="390" width="190" height="90" as="geometry"/></mxCell>
+        <mxCell id="d6" value="llm.artifact
+artifact_type=evidence_bundle
+lake_uri" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF4E5;strokeColor=#D79B00;fontSize=12;" vertex="1" parent="1"><mxGeometry x="560" y="390" width="180" height="90" as="geometry"/></mxCell>
+        <mxCell id="d7" value="lake/.../{run_id}/evidence.json" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F5EEF8;strokeColor=#8E44AD;fontSize=12;" vertex="1" parent="1"><mxGeometry x="800" y="230" width="460" height="70" as="geometry"/></mxCell>
+        <mxCell id="d8" value="Evidence content referenced
+from summary/policy metadata" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F5EEF8;strokeColor=#8E44AD;fontSize=12;" vertex="1" parent="1"><mxGeometry x="800" y="340" width="460" height="80" as="geometry"/></mxCell>
+        <mxCell id="n1" value="Key joins:
+run_evidence.run_id = run.run_id
+run_evidence.bundle_id = evidence_bundle.bundle_id" style="shape=note;whiteSpace=wrap;html=1;fillColor=#FFF9C4;strokeColor=#B7950B;fontSize=11;" vertex="1" parent="1"><mxGeometry x="800" y="450" width="460" height="100" as="geometry"/></mxCell>
+        <mxCell id="e1" style="endArrow=block;html=1;rounded=0;" edge="1" parent="1" source="d1" target="d3"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e2" value="run_id" style="endArrow=block;html=1;rounded=0;" edge="1" parent="1" source="d2" target="d4"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e3" value="bundle_id" style="endArrow=block;html=1;rounded=0;" edge="1" parent="1" source="d3" target="d4"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e4" value="lake_uri" style="endArrow=block;html=1;rounded=0;" edge="1" parent="1" source="d3" target="d7"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e5" style="endArrow=block;html=1;rounded=0;" edge="1" parent="1" source="d7" target="d8"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e6" style="endArrow=block;html=1;rounded=0;" edge="1" parent="1" source="d3" target="d5"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e7" style="endArrow=block;html=1;rounded=0;" edge="1" parent="1" source="d3" target="d6"><mxGeometry relative="1" as="geometry"/></mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

@@ -17,6 +17,9 @@ cp config/ingest.example.yaml config/ingest.yaml
 
 # Edit if needed (the defaults work out of the box)
 # nano config/ingest.yaml
+
+# Optional: override data lake location
+# export INGEST_DATA_LAKE_DIR="W:/data_lake"
 ```
 
 ### Step 3: Seed the Queue
@@ -70,10 +73,10 @@ INFO Run complete!
 
 ```bash
 # List the data lake directory
-ls -R local/data_lake/
+ls -R W:/data_lake/
 
 # View a specific file
-cat local/data_lake/mediawiki/wikipedia/page/Star_Wars_*.json | python3 -m json.tool | head -50
+cat W:/data_lake/mediawiki/wikipedia/page/Star_Wars_*.json | python3 -m json.tool | head -50
 ```
 
 ### Step 7: Inspect State Database
@@ -95,7 +98,7 @@ python scripts/sqlserver_state_admin.py
 
 1. **Seeding**: Added 3 Wikipedia pages to the work queue
 2. **Processing**: Fetched each page via MediaWiki API
-3. **Storage**: Saved raw JSON payloads to `local/data_lake/`
+3. **Storage**: Saved raw JSON payloads to `W:/data_lake/`
 4. **Discovery**: Extracted links from each page (if enabled)
 5. **State Tracking**: Updated SQL Server database with completion status
 
@@ -151,8 +154,8 @@ python3 src/ingest/ingest_cli.py --config config/ingest.yaml --seed
 2. Run the schema creation script:
 ```bash
 # Execute the DDL files
-sqlcmd -S localhost,1434 -U sa -P YourPassword -d Holocron -i src/db/ddl/00_ingest/001_schema.sql
-sqlcmd -S localhost,1434 -U sa -P YourPassword -d Holocron -i src/db/ddl/00_ingest/002_IngestRecords.sql
+sqlcmd -S localhost -U sa -P YourPassword -d Holocron -i src/db/ddl/00_ingest/001_schema.sql
+sqlcmd -S localhost -U sa -P YourPassword -d Holocron -i src/db/ddl/00_ingest/002_IngestRecords.sql
 ```
 
 3. Update `config/ingest.yaml`:
@@ -161,7 +164,7 @@ storage:
   sql_server:
     enabled: true
     host: localhost
-    port: 1434
+    port: 1433
     database: Holocron
     user: sa
     # Set password via environment variable

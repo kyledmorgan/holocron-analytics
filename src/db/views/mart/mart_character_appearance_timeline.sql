@@ -40,7 +40,7 @@ SELECT
     sc.LocationHint,
     al.FranchiseKey,
     al.FranchiseName
-FROM dbo.sem_appearance_look al
-INNER JOIN dbo.sem_scene sc
+FROM sem.vw_appearance_look al
+INNER JOIN sem.vw_scene sc
     ON al.SceneKey = sc.SceneKey;
 GO

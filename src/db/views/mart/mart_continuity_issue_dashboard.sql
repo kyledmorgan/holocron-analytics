@@ -45,14 +45,14 @@ SELECT
     COALESCE(lc.LinkedClaimCount, 0)    AS LinkedClaimCount,
     COALESCE(lc.ConflictingClaims, 0)   AS ConflictingClaimCount,
     COALESCE(lc.SupportingClaims, 0)    AS SupportingClaimCount
-FROM dbo.sem_continuity_issue ci
+FROM sem.vw_continuity_issue ci
 LEFT JOIN (
     SELECT
         icl.ContinuityIssueKey,
         COUNT(*)                                        AS LinkedClaimCount,
         SUM(CASE WHEN icl.Role = 'Conflicting' THEN 1 ELSE 0 END) AS ConflictingClaims,
         SUM(CASE WHEN icl.Role = 'Supporting' THEN 1 ELSE 0 END)  AS SupportingClaims
-    FROM dbo.sem_issue_claim_link icl
+    FROM sem.vw_issue_claim_link icl
     GROUP BY icl.ContinuityIssueKey
 ) lc ON ci.ContinuityIssueKey = lc.ContinuityIssueKey;
 GO

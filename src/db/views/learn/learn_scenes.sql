@@ -34,5 +34,5 @@ SELECT
     sc.FranchiseName            AS Franchise,
     sc.SceneKey,                -- Include for advanced join exercises
     sc.WorkKey                  -- Include for advanced join exercises
-FROM dbo.sem_scene sc;
+FROM sem.vw_scene sc;
 GO

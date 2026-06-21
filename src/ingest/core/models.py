@@ -18,6 +18,18 @@ class WorkItemStatus(str, Enum):
     SKIPPED = "skipped"
 
 
+class AcquisitionVariant(str, Enum):
+    """
+    Variant of content being acquired.
+    
+    For a single logical resource, we may fetch multiple variants:
+    - RAW: Source/API format (e.g., wikitext, raw API response)
+    - HTML: Rendered HTML format
+    """
+    RAW = "raw"
+    HTML = "html"
+
+
 @dataclass
 class WorkItem:
     """
@@ -40,6 +52,13 @@ class WorkItem:
         discovered_from: Optional reference to parent work item
         created_at: When the work item was created
         updated_at: When the work item was last updated
+        variant: Content variant being fetched (RAW or HTML)
+        rank: Inbound link rank for prioritization (optional)
+        claimed_by: Worker ID that has claimed this item (for concurrent processing)
+        claimed_at: When the item was claimed by a worker
+        lease_expires_at: When the lease expires (worker must complete or renew)
+        last_error: Most recent error message for debugging
+        next_retry_at: When this item is eligible for retry
     """
     source_system: str
     source_name: str
@@ -58,10 +77,25 @@ class WorkItem:
     created_at: datetime = field(default_factory=lambda: datetime.now(timezone.utc))
     updated_at: datetime = field(default_factory=lambda: datetime.now(timezone.utc))
     work_item_id: str = field(default_factory=lambda: str(uuid.uuid4()))
+    variant: Optional[AcquisitionVariant] = None
+    rank: Optional[int] = None
+    claimed_by: Optional[str] = None
+    claimed_at: Optional[datetime] = None
+    lease_expires_at: Optional[datetime] = None
+    last_error: Optional[str] = None
+    next_retry_at: Optional[datetime] = None
 
     def get_dedupe_key(self) -> str:
-        """Generate a stable key for deduplication."""
-        return f"{self.source_system}:{self.source_name}:{self.resource_type}:{self.resource_id}"
+        """
+        Generate a stable key for deduplication.
+        
+        The key includes variant if present, ensuring RAW and HTML 
+        versions of the same resource are tracked separately.
+        """
+        base_key = f"{self.source_system}:{self.source_name}:{self.resource_type}:{self.resource_id}"
+        if self.variant:
+            return f"{base_key}:{self.variant.value}"
+        return base_key
 
 
 @dataclass
@@ -90,6 +124,12 @@ class IngestRecord:
         attempt: Attempt number for this fetch
         error_message: Error message if fetch failed
         duration_ms: Time taken to fetch in milliseconds
+        variant: Content variant (RAW or HTML)
+        content_type: MIME content type of the response
+        content_length: Size of response body in bytes
+        file_path: Path to stored file artifact (if payload stored on disk)
+        request_timestamp: When the request was initiated
+        response_timestamp: When the response was received
     """
     ingest_id: str
     source_system: str
@@ -109,3 +149,72 @@ class IngestRecord:
     attempt: int = 1
     error_message: Optional[str] = None
     duration_ms: Optional[int] = None
+    variant: Optional[AcquisitionVariant] = None
+    content_type: Optional[str] = None
+    content_length: Optional[int] = None
+    file_path: Optional[str] = None
+    request_timestamp: Optional[datetime] = None
+    response_timestamp: Optional[datetime] = None
+
+
+class WorkerStatus(str, Enum):
+    """Status of a worker in the concurrent runner."""
+    ACTIVE = "active"
+    IDLE = "idle"
+    PAUSED = "paused"
+    STOPPING = "stopping"
+    STOPPED = "stopped"
+
+
+@dataclass
+class WorkerInfo:
+    """
+    Represents the status of a concurrent worker.
+    
+    Attributes:
+        worker_id: Unique identifier for this worker
+        hostname: Machine hostname where worker is running
+        pid: Process ID of the worker
+        started_at: When the worker was started
+        last_heartbeat_at: When the worker last sent a heartbeat
+        items_processed: Total items processed by this worker
+        items_succeeded: Items successfully completed
+        items_failed: Items that failed
+        status: Current worker status
+        current_work_item_id: The work item currently being processed (if any)
+    """
+    worker_id: str
+    hostname: str
+    pid: int
+    started_at: datetime
+    last_heartbeat_at: datetime
+    items_processed: int = 0
+    items_succeeded: int = 0
+    items_failed: int = 0
+    status: WorkerStatus = WorkerStatus.ACTIVE
+    current_work_item_id: Optional[str] = None
+
+
+@dataclass
+class QueueStats:
+    """
+    Aggregate statistics for the work queue.
+    
+    Attributes:
+        pending: Number of items waiting to be processed
+        in_progress: Number of items currently being processed
+        completed: Number of successfully completed items
+        failed: Number of failed items
+        total: Total items in queue
+        oldest_pending_at: Timestamp of oldest pending item
+        active_workers: Number of active workers
+        estimated_completion_minutes: Estimated time to complete remaining work
+    """
+    pending: int = 0
+    in_progress: int = 0
+    completed: int = 0
+    failed: int = 0
+    total: int = 0
+    oldest_pending_at: Optional[datetime] = None
+    active_workers: int = 0
+    estimated_completion_minutes: Optional[float] = None

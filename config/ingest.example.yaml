@@ -6,7 +6,8 @@ storage:
   # File-based data lake
   data_lake:
     enabled: true
-    base_dir: "local/data_lake"
+    # Override via INGEST_DATA_LAKE_DIR environment variable.
+    base_dir: "W:/data_lake"
     pretty_print: true
   
   # SQL Server storage (optional)
@@ -15,10 +16,10 @@ storage:
     # Connection string from environment variable: INGEST_SQLSERVER_CONN_STR
     # Or use discrete variables:
     host: localhost
-    port: 1434
+    port: 1433
     database: Holocron
     user: sa
-    password: Password1!
+    # password is read from environment (INGEST_SQLSERVER_PASSWORD or MSSQL_SA_PASSWORD)
     schema: "ingest"
     table: "IngestRecords"
 
@@ -40,7 +41,7 @@ state:
     # 
     # Or use discrete values below:
     host: "localhost"
-    port: 1434
+    port: 1433
     database: "Holocron"
     user: "sa"
     # password: (use INGEST_SQLSERVER_PASSWORD or MSSQL_SA_PASSWORD env var)
@@ -53,6 +54,20 @@ runner:
   max_items: null  # null = unlimited
   max_retries: 3
   enable_discovery: true
+  
+  # Concurrent runner settings
+  # These control multi-worker parallel processing
+  max_workers: 4              # Number of concurrent worker threads
+  lease_seconds: 300          # How long a work item lease is valid (5 min)
+  heartbeat_interval: 30      # Seconds between worker heartbeat updates
+  
+  # Backoff settings for throttling/error responses
+  base_backoff_seconds: 2.0   # Base delay for exponential backoff
+  max_backoff_seconds: 300.0  # Maximum backoff delay (5 min)
+  respect_retry_after: true   # Honor Retry-After header from responses
+  
+  # Global rate limiting (requests per second, 0 = unlimited)
+  requests_per_second: 0.0
 
 # Source configurations
 sources:
@@ -89,22 +104,51 @@ sources:
 
 # Seed definitions (initial work items)
 seeds:
-  # Example: Fetch specific Wikipedia pages
-  - source: "wikipedia"
-    resource_type: "page"
-    titles:
-      - "Star Wars"
-      - "The Empire Strikes Back"
-      - "Return of the Jedi"
-    priority: 10
+  # # Example: Fetch specific Wikipedia pages
+  # - source: "wikipedia"
+  #   resource_type: "page"
+  #   titles:
+  #     - "Star Wars"
+  #     - "The Empire Strikes Back"
+  #     - "Return of the Jedi"
+  #   priority: 10
 
   # Wookieepedia seed pages for link crawling
   - source: "wookieepedia"
     resource_type: "page"
     titles:
-      - "Luke Skywalker"
+      - "Jar Jar Binks"
+      - "Rogue One"
+      - "Dark Forces"
+      - "Mandalorian"
+      - "Ahsoka Tano
+      - "The Child (Star Wars)
+      - "Thrawn (Star Wars character)
+      - "Bo-Katan Kryze"
+      - "Grand Admiral Thrawn"
       - "Darth Vader"
-      - "Yoda"
-      - "Obi-Wan Kenobi"
+      - "Luke Skywalker"
+      - "Princess Leia"
       - "Han Solo"
+      - "Obi-Wan Kenobi"
+      - "Yoda"
+      - "Emperor Palpatine"
+      - "Chewbacca"
+      - "C-3PO"
+      - "R2-D2"
+      - "Boba Fett"
+      - "Lando Calrissian"
+      - "Darth Maul"
+      - "Qui-Gon Jinn"
+      - "Mace Windu"
+      - "Count Dooku"
+      - "General Grievous"
+      - "Kylo Ren"
+      - "Rey"
+      - "Finn"
+      - "Poe Dameron"
+      - "Captain Phasma"
+      - "Supreme Leader Snoke"
+      - "Darth Sidious"
     priority: 10
+

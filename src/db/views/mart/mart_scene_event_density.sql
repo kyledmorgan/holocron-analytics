@@ -45,7 +45,7 @@ SELECT
     ev.MaxEventOrdinal,
     ev.DistinctEventTypes,
     COALESCE(part.DistinctParticipants, 0) AS DistinctParticipants
-FROM dbo.sem_scene sc
+FROM sem.vw_scene sc
 LEFT JOIN (
     SELECT
         e.SceneKey,
@@ -53,14 +53,14 @@ LEFT JOIN (
         MIN(e.EventOrdinal)            AS MinEventOrdinal,
         MAX(e.EventOrdinal)            AS MaxEventOrdinal,
         COUNT(DISTINCT e.EventTypeKey) AS DistinctEventTypes
-    FROM dbo.sem_event e
+    FROM sem.vw_event e
     GROUP BY e.SceneKey
 ) ev ON sc.SceneKey = ev.SceneKey
 LEFT JOIN (
     SELECT
         p.SceneKey,
         COUNT(DISTINCT p.EntityKey) AS DistinctParticipants
-    FROM dbo.sem_event_participant p
+    FROM sem.vw_event_participant p
     GROUP BY p.SceneKey
 ) part ON sc.SceneKey = part.SceneKey;
 GO

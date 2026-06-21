@@ -36,26 +36,30 @@ if __name__ == "__main__":
     sys.path.insert(0, str(Path(__file__).parent.parent.parent.parent))
 
 from ..contracts.phase1_contracts import (
-    EvidenceBundleV1,
-    EvidenceSnippet,
     Job,
-    JobInputEnvelope,
-    validate_entity_facts_output,
 )
 from ..contracts.evidence_contracts import (
     EvidenceBundle,
     EvidencePolicy,
 )
-from ..core.exceptions import LLMProviderError, LLMValidationError, LLMStorageError
+from ..core.exceptions import LLMProviderError, LLMValidationError, LLMStorageError, InvalidOllamaJsonError
 from ..core.types import LLMConfig
 from ..evidence.builder import build_evidence_bundle
 from ..interrogations.registry import get_interrogation, InterrogationDefinition
 from ..providers.ollama_client import OllamaClient, OllamaResponse
 from ..storage.sql_job_queue import SqlJobQueue, QueueConfig
 from ..storage.lake_writer import LakeWriter, LakeWriterConfig
+from ..utils.retry import RetryConfig, retry_with_backoff, calculate_delay
 
 
 logger = logging.getLogger(__name__)
+
+
+class _SafeFormatDict(dict):
+    """Format-map dict that returns empty string for missing keys."""
+
+    def __missing__(self, key):
+        return ""
 
 
 @dataclass
@@ -241,7 +245,7 @@ class Phase1Runner:
             evidence_bundle = self._build_evidence_bundle(job)
             
             # 7. Render prompt
-            job_input = job.get_input()
+            job_input = json.loads(job.input_json)
             prompt = self._render_prompt(interrogation, job_input, evidence_bundle)
             
             # 8. Build messages
@@ -257,6 +261,7 @@ class Phase1Runner:
             )
             
             # 10. Write request artifact
+            request_content = json.dumps(request_payload, indent=2, ensure_ascii=False, default=str)
             request_artifact = self.lake_writer.write_request(run_id, request_payload, timestamp)
             self.queue.create_artifact(
                 run_id=run_id,
@@ -264,16 +269,26 @@ class Phase1Runner:
                 lake_uri=request_artifact.lake_uri,
                 content_sha256=request_artifact.content_sha256,
                 byte_count=request_artifact.byte_count,
+                content=request_content,
+                content_mime_type="application/json",
+                stored_in_sql=True,
+                mirrored_to_lake=True,
             )
             
             # 11. Write evidence artifact
-            evidence_artifact = self.lake_writer.write_evidence(run_id, evidence_bundle.to_dict(), timestamp)
+            evidence_dict = evidence_bundle.to_dict()
+            evidence_content = json.dumps(evidence_dict, indent=2, ensure_ascii=False, default=str)
+            evidence_artifact = self.lake_writer.write_evidence(run_id, evidence_dict, timestamp)
             self.queue.create_artifact(
                 run_id=run_id,
                 artifact_type="evidence_bundle",
                 lake_uri=evidence_artifact.lake_uri,
                 content_sha256=evidence_artifact.content_sha256,
                 byte_count=evidence_artifact.byte_count,
+                content=evidence_content,
+                content_mime_type="application/json",
+                stored_in_sql=True,
+                mirrored_to_lake=True,
             )
             
             # 11b. Record evidence bundle metadata to SQL Server
@@ -283,6 +298,7 @@ class Phase1Runner:
                 policy_json=json.dumps(evidence_bundle.policy.to_dict()),
                 summary_json=json.dumps(evidence_bundle.summary),
                 lake_uri=evidence_artifact.lake_uri,
+                bundle_json=evidence_content,
             )
             
             # 11c. Link run to evidence bundle
@@ -299,34 +315,164 @@ class Phase1Runner:
                 lake_uri=prompt_artifact.lake_uri,
                 content_sha256=prompt_artifact.content_sha256,
                 byte_count=prompt_artifact.byte_count,
+                content=prompt,
+                content_mime_type="text/plain",
+                stored_in_sql=True,
+                mirrored_to_lake=True,
             )
             
-            # 13. Call Ollama with structured output
+            # 13. Call Ollama with structured output (with retry on invalid JSON)
             logger.info(f"Calling Ollama ({model}) for job {job.job_id}")
-            response = client.chat_with_structured_output(
-                messages=messages,
-                output_schema=interrogation.output_schema,
+            
+            # Configure retry for Ollama calls
+            retry_config = RetryConfig(
+                max_attempts=3,
+                initial_delay_ms=250.0,
+                max_delay_ms=1000.0,
+                backoff_multiplier=2.0,
+                jitter=True,
             )
             
-            # 14. Write response artifact (always, even if parsing fails)
-            response_artifact = self.lake_writer.write_response(
-                run_id, response.raw_response or {}, timestamp
-            )
-            self.queue.create_artifact(
-                run_id=run_id,
-                artifact_type="response_json",
-                lake_uri=response_artifact.lake_uri,
-                content_sha256=response_artifact.content_sha256,
-                byte_count=response_artifact.byte_count,
-            )
+            response = None
+            parsed_output = None
+            attempt_count = 0
+            error_history = []
             
-            # 15. Extract metrics
-            metrics = client.extract_metrics(response.raw_response or {})
+            # Retry loop for Ollama call + parse
+            for attempt in range(retry_config.max_attempts):
+                attempt_count = attempt + 1
+                try:
+                    logger.info(f"Ollama attempt {attempt_count}/{retry_config.max_attempts} for job {job.job_id}")
+                    
+                    # Call Ollama
+                    response = client.chat_with_structured_output(
+                        messages=messages,
+                        output_schema=interrogation.output_schema,
+                    )
+                    
+                    # 14. Write response artifact (always, even if parsing fails)
+                    response_content = json.dumps(
+                        response.raw_response or {}, indent=2,
+                        ensure_ascii=False, default=str,
+                    )
+                    response_artifact = self.lake_writer.write_response(
+                        run_id, response.raw_response or {}, timestamp
+                    )
+                    self.queue.create_artifact(
+                        run_id=run_id,
+                        artifact_type="response_json",
+                        lake_uri=response_artifact.lake_uri,
+                        content_sha256=response_artifact.content_sha256,
+                        byte_count=response_artifact.byte_count,
+                        content=response_content,
+                        content_mime_type="application/json",
+                        stored_in_sql=True,
+                        mirrored_to_lake=True,
+                    )
+                    
+                    # 15. Extract metrics
+                    metrics = client.extract_metrics(response.raw_response or {})
+                    
+                    # 16. Parse and validate output
+                    parsed_output = self._parse_and_validate(response, interrogation)
+                    
+                    # Success! Break out of retry loop
+                    if attempt > 0:
+                        logger.info(
+                            f"Ollama call succeeded on attempt {attempt_count} for job {job.job_id}"
+                        )
+                    break
+                    
+                except InvalidOllamaJsonError as e:
+                    error_msg = f"Attempt {attempt_count}: {str(e)}"
+                    error_history.append(error_msg)
+                    logger.warning(error_msg)
+                    
+                    # Write raw response as text artifact for troubleshooting
+                    if response and response.content:
+                        try:
+                            raw_artifact = self.lake_writer.write_artifact(
+                                run_id=run_id,
+                                artifact_type="invalid_json_response",
+                                content=response.content.encode('utf-8'),
+                                timestamp=timestamp,
+                                extension=".txt"
+                            )
+                            self.queue.create_artifact(
+                                run_id=run_id,
+                                artifact_type="invalid_json_response",
+                                lake_uri=raw_artifact.lake_uri,
+                                content_sha256=raw_artifact.content_sha256,
+                                byte_count=raw_artifact.byte_count,
+                            )
+                        except Exception as write_err:
+                            logger.error(f"Failed to write invalid JSON artifact: {write_err}")
+                    
+                    # If this was the last attempt, write error manifest and fail
+                    if attempt >= retry_config.max_attempts - 1:
+                        error_manifest = {
+                            "job_id": job.job_id,
+                            "run_id": run_id,
+                            "error_type": "invalid_json",
+                            "attempts": attempt_count,
+                            "error_history": error_history,
+                            "final_error": str(e),
+                            "raw_content_preview": response.content[:500] if response and response.content else None,
+                            "decision": "skipped_after_max_retries",
+                        }
+                        
+                        try:
+                            manifest_artifact = self.lake_writer.write_artifact(
+                                run_id=run_id,
+                                artifact_type="error_manifest",
+                                content=json.dumps(error_manifest, indent=2).encode('utf-8'),
+                                timestamp=timestamp,
+                                extension=".json"
+                            )
+                            self.queue.create_artifact(
+                                run_id=run_id,
+                                artifact_type="error_manifest",
+                                lake_uri=manifest_artifact.lake_uri,
+                                content_sha256=manifest_artifact.content_sha256,
+                                byte_count=manifest_artifact.byte_count,
+                            )
+                            logger.info(f"Wrote error manifest to {manifest_artifact.lake_uri}")
+                        except Exception as manifest_err:
+                            logger.error(f"Failed to write error manifest: {manifest_err}")
+                        
+                        # Mark as failed and continue (don't crash runner)
+                        logger.error(
+                            f"Job {job.job_id} failed after {attempt_count} attempts with invalid JSON"
+                        )
+                        self.queue.complete_run(
+                            run_id=run_id,
+                            status="FAILED",
+                            error=f"Invalid JSON after {attempt_count} attempts",
+                            metrics_json=json.dumps(metrics) if response else None,
+                        )
+                        self.queue.mark_failed(
+                            job.job_id,
+                            f"Invalid JSON from Ollama after {attempt_count} attempts",
+                            run_id
+                        )
+                        return  # Exit and continue to next job
+                    
+                    # Calculate backoff delay for next retry
+                    if attempt < retry_config.max_attempts - 1:
+                        delay = calculate_delay(attempt, retry_config)
+                        logger.info(f"Retrying after {delay:.3f}s backoff")
+                        time.sleep(delay)
             
-            # 16. Parse and validate output
-            parsed_output = self._parse_and_validate(response, interrogation)
+            # If we get here, parsing succeeded
+            if parsed_output is None:
+                # Should not happen, but handle defensively
+                raise LLMValidationError(
+                    "Parsing succeeded but no output produced",
+                    validation_errors=["No output"]
+                )
             
             # 17. Write parsed output artifact
+            output_content = json.dumps(parsed_output, indent=2, ensure_ascii=False, default=str)
             output_artifact = self.lake_writer.write_output(run_id, parsed_output, timestamp)
             self.queue.create_artifact(
                 run_id=run_id,
@@ -334,6 +480,10 @@ class Phase1Runner:
                 lake_uri=output_artifact.lake_uri,
                 content_sha256=output_artifact.content_sha256,
                 byte_count=output_artifact.byte_count,
+                content=output_content,
+                content_mime_type="application/json",
+                stored_in_sql=True,
+                mirrored_to_lake=True,
             )
             
             # 18. Complete run as succeeded
@@ -347,6 +497,14 @@ class Phase1Runner:
             self.queue.mark_succeeded(job.job_id, run_id)
             
             logger.info(f"Job {job.job_id} completed successfully")
+            
+        
+        except InvalidOllamaJsonError as e:
+            # This should not reach here since we handle it in the retry loop
+            # But catch it defensively to prevent crash
+            logger.error(f"Invalid JSON error escaped retry loop for job {job.job_id}: {e}")
+            self.queue.complete_run(run_id=run_id, status="FAILED", error=str(e))
+            self.queue.mark_failed(job.job_id, str(e), run_id)
             
         except LLMValidationError as e:
             # Validation failed - artifacts are already written
@@ -419,7 +577,7 @@ class Phase1Runner:
     def _render_prompt(
         self,
         interrogation: InterrogationDefinition,
-        job_input: JobInputEnvelope,
+        job_input: Dict[str, Any],
         evidence_bundle: EvidenceBundle,
     ) -> str:
         """
@@ -442,14 +600,31 @@ class Phase1Runner:
             )
         evidence_content = "\n".join(evidence_parts) if evidence_parts else "[No evidence provided]"
         
-        # Render template
-        prompt = interrogation.prompt_template.format(
-            entity_type=job_input.entity_type,
-            entity_id=job_input.entity_id,
-            evidence_content=evidence_content,
+        # Build flexible template context to support multiple interrogation families.
+        template_values = _SafeFormatDict()
+        template_values["evidence_content"] = evidence_content
+
+        for key, value in job_input.items():
+            if value is not None:
+                template_values[key] = value
+
+        # Common aliases used by prompt templates.
+        source_id = template_values.get("source_id") or template_values.get("entity_id", "")
+        source_page_title = (
+            template_values.get("source_page_title")
+            or template_values.get("title")
+            or template_values.get("entity_id", "")
         )
-        
-        return prompt
+        template_values["source_id"] = source_id
+        template_values["source_page_title"] = source_page_title
+        template_values["entity_type"] = template_values.get("entity_type", "")
+        template_values["entity_id"] = template_values.get("entity_id", "")
+
+        # If no explicit content was provided, reuse assembled evidence text.
+        if not template_values.get("content"):
+            template_values["content"] = evidence_content
+
+        return interrogation.prompt_template.format_map(template_values)
     
     def _parse_and_validate(
         self,
@@ -468,6 +643,7 @@ class Phase1Runner:
             
         Raises:
             LLMValidationError: If parsing or validation fails
+            InvalidOllamaJsonError: If JSON parsing fails after all strategies
         """
         if not response.success:
             raise LLMValidationError(
@@ -481,14 +657,51 @@ class Phase1Runner:
                 validation_errors=["Empty content"]
             )
         
-        # Parse JSON
+        # Parse JSON with multiple strategies
         try:
             parsed = json.loads(response.content)
         except json.JSONDecodeError as e:
-            raise LLMValidationError(
-                f"LLM returned invalid JSON: {e}",
-                validation_errors=[str(e)]
-            )
+            # Try with stripped whitespace
+            try:
+                parsed = json.loads(response.content.strip())
+            except json.JSONDecodeError:
+                # Try to extract embedded JSON (conservative approach)
+                try:
+                    content = response.content.strip()
+                    start = content.find('{')
+                    if start >= 0:
+                        # Simple bracket counting to find matching close
+                        depth = 0
+                        for i in range(start, len(content)):
+                            if content[i] == '{':
+                                depth += 1
+                            elif content[i] == '}':
+                                depth -= 1
+                                if depth == 0:
+                                    extracted = content[start:i+1]
+                                    parsed = json.loads(extracted)
+                                    logger.warning(
+                                        f"Successfully extracted embedded JSON from position {start} to {i+1}"
+                                    )
+                                    break
+                        else:
+                            # No matching close brace found
+                            raise InvalidOllamaJsonError(
+                                f"LLM returned invalid JSON (no matching close brace): {e}",
+                                raw_content=response.content
+                            )
+                    else:
+                        # No opening brace found
+                        raise InvalidOllamaJsonError(
+                            f"LLM returned invalid JSON (no JSON object found): {e}",
+                            raw_content=response.content
+                        )
+                except json.JSONDecodeError:
+                    # All parsing strategies failed
+                    raise InvalidOllamaJsonError(
+                        f"LLM returned invalid JSON after all parsing strategies: {e}",
+                        raw_content=response.content
+                    )
         
         # Validate against contract
         validation_errors = interrogation.validate_output(parsed)

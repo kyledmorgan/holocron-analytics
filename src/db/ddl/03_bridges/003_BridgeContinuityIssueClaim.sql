@@ -1,28 +1,29 @@
 ﻿-- BridgeContinuityIssueClaim: links claims to continuity issues with roles.
 -- BridgeContinuityIssueClaimGuid maintains stable identity; governance metadata records versions.
 CREATE TABLE dbo.BridgeContinuityIssueClaim (
-    BridgeContinuityIssueClaimKey int IDENTITY(1,1) NOT NULL,
-    BridgeContinuityIssueClaimGuid uniqueidentifier NOT NULL CONSTRAINT DF_BridgeContinuityIssueClaim_BridgeContinuityIssueClaimGuid DEFAULT (NEWSEQUENTIALID()),
+    BridgeContinuityIssueClaimKey INT IDENTITY(1,1) NOT NULL,
+    BridgeContinuityIssueClaimGuid UNIQUEIDENTIFIER NOT NULL CONSTRAINT DF_BridgeContinuityIssueClaim_BridgeContinuityIssueClaimGuid DEFAULT (NEWID()),
 
-    ContinuityIssueKey bigint NOT NULL,
-    ClaimKey bigint NOT NULL,
+    ContinuityIssueKey BIGINT NOT NULL,
+    ClaimKey BIGINT NOT NULL,
 
-    Role nvarchar(30) NOT NULL, -- Conflicting|Context|Supporting|ResolutionBasis
-    Notes nvarchar(1000) NULL,
+    Role NVARCHAR(30) NOT NULL, -- Conflicting|Context|Supporting|ResolutionBasis
+    Notes NVARCHAR(1000) NULL,
 
-    RowHash varbinary(32) NOT NULL,
-    IsActive bit NOT NULL CONSTRAINT DF_BridgeContinuityIssueClaim_IsActive DEFAULT (1),
-    IsLatest bit NOT NULL CONSTRAINT DF_BridgeContinuityIssueClaim_IsLatest DEFAULT (1),
-    VersionNum int NOT NULL CONSTRAINT DF_BridgeContinuityIssueClaim_VersionNum DEFAULT (1),
-    ValidFromUtc datetime2(3) NOT NULL CONSTRAINT DF_BridgeContinuityIssueClaim_ValidFromUtc DEFAULT (SYSUTCDATETIME()),
-    ValidToUtc datetime2(3) NULL,
-    CreatedUtc datetime2(3) NOT NULL CONSTRAINT DF_BridgeContinuityIssueClaim_CreatedUtc DEFAULT (SYSUTCDATETIME()),
-    UpdatedUtc datetime2(3) NULL,
+    RowHash VARBINARY(32) NOT NULL,
+    IsActive BIT NOT NULL CONSTRAINT DF_BridgeContinuityIssueClaim_IsActive DEFAULT (1),
+    IsLatest BIT NOT NULL CONSTRAINT DF_BridgeContinuityIssueClaim_IsLatest DEFAULT (1),
+    VersionNum INT NOT NULL CONSTRAINT DF_BridgeContinuityIssueClaim_VersionNum DEFAULT (1),
+    ValidFromUtc DATETIME2(3) NOT NULL CONSTRAINT DF_BridgeContinuityIssueClaim_ValidFromUtc DEFAULT (SYSUTCDATETIME()),
+    ValidToUtc DATETIME2(3) NULL,
+    CreatedUtc DATETIME2(3) NOT NULL CONSTRAINT DF_BridgeContinuityIssueClaim_CreatedUtc DEFAULT (SYSUTCDATETIME()),
+    UpdatedUtc DATETIME2(3) NULL,
 
-    SourceSystem nvarchar(100) NULL,
-    SourceRef nvarchar(400) NULL,
-    IngestBatchId nvarchar(100) NULL,
-    AttributesJson nvarchar(max) NULL,
+    SourceSystem NVARCHAR(100) NULL,
+    SourceRef NVARCHAR(400) NULL,
+    IngestBatchKey NVARCHAR(100) NULL,
+    EvidenceBundleGuid UNIQUEIDENTIFIER NULL,
+    AttributesJson NVARCHAR(MAX) NULL,
 
     CONSTRAINT PK_BridgeContinuityIssueClaim PRIMARY KEY CLUSTERED (BridgeContinuityIssueClaimKey),
     CONSTRAINT UQ_BridgeContinuityIssueClaim_BridgeContinuityIssueClaimGuid UNIQUE (BridgeContinuityIssueClaimGuid),
@@ -37,3 +38,5 @@ CREATE UNIQUE INDEX UX_BridgeContinuityIssueClaim_IssueClaim_IsLatest
     ON dbo.BridgeContinuityIssueClaim(ContinuityIssueKey, ClaimKey)
     WHERE IsLatest = 1;
 CREATE INDEX IX_BridgeContinuityIssueClaim_IsLatest ON dbo.BridgeContinuityIssueClaim(IsLatest);
+CREATE INDEX IX_BridgeContinuityIssueClaim_EvidenceBundleGuid ON dbo.BridgeContinuityIssueClaim(EvidenceBundleGuid)
+    WHERE EvidenceBundleGuid IS NOT NULL;
