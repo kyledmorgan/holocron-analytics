@@ -373,6 +373,19 @@ class TestEntityClassificationService:
         assert stats.succeeded == 0
         assert stats.failed == 0
 
+    def test_candidate_query_failure_is_reported(self):
+        """Candidate discovery failures should not be reported as empty success."""
+        config = ClassifyConfig(mode=MODE_RESUME)
+        service, mock_queue = self._make_service(config=config)
+        mock_queue._get_connection.side_effect = RuntimeError("db connection failed")
+
+        stats = service.run()
+
+        assert stats.failed == 1
+        assert stats.attempted == 0
+        assert len(stats.errors) == 1
+        assert "candidate_discovery_failed" in stats.errors[0]
+
     def test_fill_missing_only_flag_in_job_input(self):
         """fill_missing_only should be passed through to job input."""
         candidates = [
@@ -394,6 +407,27 @@ class TestEntityClassificationService:
         call_kwargs = mock_queue.enqueue_job_idempotent.call_args[1]
         input_payload = json.loads(call_kwargs["input_json"])
         assert input_payload["fill_missing_only"] is True
+
+    def test_resume_require_tags_updates_candidate_query(self):
+        """--require-tags should include AliasCsv IS NULL in candidate SQL."""
+        config = ClassifyConfig(mode=MODE_RESUME, require_tags=True)
+        service, mock_queue = self._make_service(config=config, candidates=[])
+
+        service.get_candidates()
+
+        executed_query = mock_queue._get_connection.return_value.cursor.return_value.execute.call_args[0][0]
+        assert "e.AliasCsv IS NULL" in executed_query
+
+    def test_resume_require_normalization_updates_candidate_query(self):
+        """--require-normalization should include missing normalization fields."""
+        config = ClassifyConfig(mode=MODE_RESUME, require_normalization=True)
+        service, mock_queue = self._make_service(config=config, candidates=[])
+
+        service.get_candidates()
+
+        executed_query = mock_queue._get_connection.return_value.cursor.return_value.execute.call_args[0][0]
+        assert "e.DisplayNameNormalized IS NULL" in executed_query
+        assert "e.SortName IS NULL" in executed_query
 
 
 # ---------------------------------------------------------------------------

@@ -201,16 +201,16 @@ class EntityClassificationService:
                 # Revalidate: include already-classified entities
                 pass
             else:
-                # Default resume: entities that are NOT yet classified
-                if cfg.fill_missing_only:
-                    # Also pick entities with partial classification
-                    where_parts.append(
-                        "(e.EntityType IS NULL"
-                        " OR e.DisplayNameNormalized IS NULL"
-                        " OR e.SortName IS NULL)"
-                    )
-                else:
-                    where_parts.append("e.EntityType IS NULL")
+                # Default resume: entities missing required classification fields.
+                missing_parts: List[str] = ["e.EntityType IS NULL"]
+                if cfg.fill_missing_only or cfg.require_normalization:
+                    missing_parts.extend([
+                        "e.DisplayNameNormalized IS NULL",
+                        "e.SortName IS NULL",
+                    ])
+                if cfg.require_tags:
+                    missing_parts.append("e.AliasCsv IS NULL")
+                where_parts.append(f"({' OR '.join(missing_parts)})")
         elif cfg.mode == MODE_RERUN:
             # rerun without explicit keys → treat like fresh
             pass
@@ -228,6 +228,56 @@ class EntityClassificationService:
         params.insert(0, cfg.batch_size)
 
         return self._execute_query(query, params)
+
+    def _candidate_source_description(self) -> str:
+        """Human-readable description of candidate source tables."""
+        cfg = self.config
+        if cfg.mode == MODE_RERUN and cfg.entity_keys:
+            return "dbo.DimEntity by explicit EntityKey list"
+        if cfg.mode == MODE_RESUME and cfg.only == ONLY_FAILED:
+            return "dbo.DimEntity joined to llm.job failed/deadletter rows"
+        return "dbo.DimEntity (active/latest rows)"
+
+    def _resume_predicate_summary(self) -> str:
+        """Summarize the effective resume predicate."""
+        cfg = self.config
+        if cfg.mode != MODE_RESUME:
+            return "n/a (mode is not resume)"
+        if cfg.only == ONLY_FAILED:
+            return "llm.job status IN (FAILED, DEADLETTER)"
+        if cfg.revalidate_existing:
+            return "revalidate-existing (no missing-field filter)"
+
+        fields = ["EntityType"]
+        if cfg.fill_missing_only or cfg.require_normalization:
+            fields.extend(["DisplayNameNormalized", "SortName"])
+        if cfg.require_tags:
+            fields.append("AliasCsv")
+        return "missing any of: " + ", ".join(fields)
+
+    def _get_candidate_breakdown(self) -> Dict[str, int]:
+        """Return lightweight category counts for observability."""
+        query = (
+            "SELECT "
+            "  COUNT(*) AS total_active_latest, "
+            "  SUM(CASE WHEN e.EntityType IS NULL THEN 1 ELSE 0 END) AS missing_entity_type, "
+            "  SUM(CASE WHEN e.DisplayNameNormalized IS NULL THEN 1 ELSE 0 END) AS missing_normalized, "
+            "  SUM(CASE WHEN e.SortName IS NULL THEN 1 ELSE 0 END) AS missing_sort, "
+            "  SUM(CASE WHEN e.AliasCsv IS NULL THEN 1 ELSE 0 END) AS missing_alias "
+            "FROM dbo.DimEntity e "
+            "WHERE e.IsLatest = 1 AND e.IsActive = 1"
+        )
+        rows = self._execute_query(query, [])
+        if not rows:
+            return {}
+        row = rows[0]
+        return {
+            "total_active_latest": int(row.get("total_active_latest") or 0),
+            "missing_entity_type": int(row.get("missing_entity_type") or 0),
+            "missing_normalized": int(row.get("missing_normalized") or 0),
+            "missing_sort": int(row.get("missing_sort") or 0),
+            "missing_alias": int(row.get("missing_alias") or 0),
+        }
 
     def _query_entities_by_keys(self, keys: List[int]) -> List[Dict[str, Any]]:
         """Fetch specific entities by EntityKey."""
@@ -267,15 +317,11 @@ class EntityClassificationService:
 
     def _execute_query(self, query: str, params: list) -> List[Dict[str, Any]]:
         """Execute a query and return list of row dicts."""
-        try:
-            conn = self._get_queue()._get_connection()
-            cursor = conn.cursor()
-            cursor.execute(query, params)
-            columns = [col[0] for col in cursor.description]
-            return [dict(zip(columns, row)) for row in cursor.fetchall()]
-        except Exception as exc:
-            logger.error(f"Query failed: {exc}")
-            return []
+        conn = self._get_queue()._get_connection()
+        cursor = conn.cursor()
+        cursor.execute(query, params)
+        columns = [col[0] for col in cursor.description]
+        return [dict(zip(columns, row)) for row in cursor.fetchall()]
 
     # -- main processing loop -----------------------------------------------
 
@@ -291,7 +337,27 @@ class EntityClassificationService:
         stats = RunStats()
         cfg = self.config
 
-        candidates = self.get_candidates()
+        try:
+            logger.info(f"Candidate source: {self._candidate_source_description()}")
+            logger.info(f"Candidate predicate: {self._resume_predicate_summary()}")
+            if cfg.mode == MODE_RESUME and cfg.only != ONLY_FAILED:
+                breakdown = self._get_candidate_breakdown()
+                if breakdown:
+                    logger.info(
+                        "Candidate category counts: "
+                        f"total={breakdown['total_active_latest']}, "
+                        f"missing_entity_type={breakdown['missing_entity_type']}, "
+                        f"missing_normalized={breakdown['missing_normalized']}, "
+                        f"missing_sort={breakdown['missing_sort']}, "
+                        f"missing_alias={breakdown['missing_alias']}"
+                    )
+            candidates = self.get_candidates()
+        except Exception as exc:
+            logger.error(f"Candidate discovery failed: {exc}")
+            stats.failed += 1
+            stats.errors.append(f"candidate_discovery_failed: {exc}")
+            return stats
+
         logger.info(f"Found {len(candidates)} candidate entities (mode={cfg.mode})")
 
         if not candidates:
@@ -419,9 +485,9 @@ Examples:
         choices=[MODE_FRESH, MODE_RESUME, MODE_RERUN],
         default=MODE_RESUME,
         help=(
-            "Run mode: 'fresh' processes all entities, 'resume' skips "
-            "already-classified, 'rerun' processes specific entity keys "
-            "(default: resume)"
+            "Run mode: 'fresh' processes all entities, 'resume' processes "
+            "active/latest rows missing required fields (EntityType by default), "
+            "'rerun' processes specific entity keys (default: resume)"
         ),
     )
     parser.add_argument(

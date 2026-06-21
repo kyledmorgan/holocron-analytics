@@ -83,6 +83,7 @@ New to this repository? Start with these essential documents:
 | [LLM Contracts README](../src/llm/contracts/README.md) | JSON schema documentation for manifests and outputs |
 | [Interrogations README](../src/llm/interrogations/README.md) | Interrogation catalog concept and structure |
 | [Pipeline Observability](llm/llm-pipeline-observability-current-state.md) | End-to-end traceability map and artifact locations |
+| [Classify Entities Resume Debug (2026-02-28)](llm/classify-entities-resume-zero-candidates-debug-2026-02-28.md) | Root-cause analysis for `--mode resume` returning zero candidates, with SQL evidence and CLI fixes |
 
 ### Vector Runtime
 
@@ -192,6 +193,7 @@ All Markdown files in this repository, grouped by location:
 | [status.md](llm/status.md) | Implementation status tracker |
 | [vision-and-roadmap.md](llm/vision-and-roadmap.md) | Vision, goals, and phased roadmap |
 | [llm-pipeline-observability-current-state.md](llm/llm-pipeline-observability-current-state.md) | End-to-end traceability, artifact locations, and investigation queries |
+| [classify-entities-resume-zero-candidates-debug-2026-02-28.md](llm/classify-entities-resume-zero-candidates-debug-2026-02-28.md) | Investigation report for zero-candidate resume runs, including DB counts and code-path fixes |
 
 ### `docs/vector/`
 
