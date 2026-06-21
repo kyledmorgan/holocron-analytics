@@ -223,9 +223,9 @@ PRINT '';
 GO
 
 -- ============================================================================
--- SECTION 2: DimEvent -> DimOccurrence Rename (Phase 6 Placeholder Table)
+-- SECTION 2: DimEvent -> DimOccurrence Rename (2026_02_entity_extraction_phase_6 placeholder table)
 -- ============================================================================
--- The DimEvent table from migration 0027 is a Phase 6 placeholder.
+-- The DimEvent table from migration 0027 is a 2026_02_entity_extraction_phase_6 placeholder.
 -- It has 0 rows, so safe to drop/recreate with correct naming.
 -- ============================================================================
 

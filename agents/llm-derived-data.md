@@ -45,7 +45,7 @@ Follow existing repository patterns:
 - **Refactor broadly** — Do not move files outside `src/llm/` as part of LLM work
 - **Change ingest module** — Do not modify `src/ingest/` (patterns can be referenced but not touched)
 - **Commit secrets** — Never commit API keys, passwords, or sensitive data
-- **Implement full features** — Scaffolding and interfaces only in Phase 0
+- **Implement full features** — Scaffolding and interfaces only in `2026_01_llm_derived_data_phase_0`
 
 ### DO
 

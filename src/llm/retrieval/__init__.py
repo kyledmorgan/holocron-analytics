@@ -1,5 +1,5 @@
 """
-Retrieval module for Phase 3 RAG (Retrieval Augmented Generation).
+Retrieval module for RAG (2026_01_llm_derived_data_phase_3).
 
 This module provides:
 - Chunking: Split documents into searchable units

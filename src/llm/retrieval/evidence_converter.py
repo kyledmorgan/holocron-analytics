@@ -1,7 +1,7 @@
 """
 Evidence Conversion - Convert retrieval hits to evidence items.
 
-Bridges Phase 3 retrieval with Phase 2 evidence builder, converting
+Bridges 2026_01_llm_derived_data_phase_3 retrieval with the _phase_2 evidence builder, converting
 retrieved chunks into EvidenceItem objects for LLM interrogation.
 """
 
@@ -29,7 +29,7 @@ def convert_retrieval_to_evidence(
     Convert retrieval hits to evidence items.
     
     Takes a retrieval result and the corresponding chunk contents, and produces
-    EvidenceItem objects suitable for the Phase 2 evidence builder.
+    EvidenceItem objects suitable for the evidence builder (2026_01_llm_derived_data_phase_2).
     
     Args:
         result: RetrievalResult with hits

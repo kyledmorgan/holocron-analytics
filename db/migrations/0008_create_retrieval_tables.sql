@@ -1,4 +1,4 @@
--- Migration 0008: Create Phase 3 retrieval tables (chunks, embeddings, retrieval logs)
+-- Migration 0008: Create retrieval tables for 2026_01_llm_derived_data_phase_3 (chunks, embeddings, retrieval logs)
 -- Idempotent: Only creates tables if they don't exist
 
 -- ============================================================================

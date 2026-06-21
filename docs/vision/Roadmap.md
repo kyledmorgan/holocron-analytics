@@ -2,6 +2,15 @@
 
 This roadmap outlines the **phased evolution** of the project from an educational, hands-on data modeling exercise into a robust, extensible analytics platform for narrative universes. While learning and experimentation are first-class goals early on, the roadmap is intentionally structured to support long-term growth, automation, and public-facing exploration.
 
+> **Note:** The "Phase 0–7" milestones in this document are **program-level**
+> milestones for the project as a whole. They are **not** a multi-PR feature series
+> and are intentionally exempt from the canonical `YYYY_MM_<feature>_phase_<n>`
+> identifier convention used for coordinated feature work. See the
+> [feature-series convention](../contributing/feature-series-convention.md) for when
+> that convention applies, and the
+> [feature-series history index](../history/feature-series/README.md) for the actual
+> feature series.
+
 ---
 
 ## Guiding Principles

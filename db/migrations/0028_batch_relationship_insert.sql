@@ -1,4 +1,4 @@
--- Migration 0028: Add batch relationship insert stored procedure for Phase 2
+-- Migration 0028: Add batch relationship insert stored procedure for 2026_02_entity_extraction_phase_2
 -- Idempotent: Drops and recreates procedure
 --
 -- Purpose: Provides JSON-based batch insert for extracted relationships into BridgeEntityRelation.
@@ -9,8 +9,8 @@
 --   - Inserts relationships with provenance (run_id, source_page_id)
 --   - Supports idempotency via duplicate detection
 --
--- Phase 2: Focused on entity-entity relationships with entity name resolution.
--- Foundation for: Phase 3 throughput, Phase 4 governance queue.
+-- 2026_02_entity_extraction_phase_2: Focused on entity-entity relationships with entity name resolution.
+-- Foundation for: 2026_02_entity_extraction_phase_3 throughput, _phase_4 governance queue.
 
 -- ============================================================================
 -- Stored Procedure: dbo.usp_batch_insert_entity_relations

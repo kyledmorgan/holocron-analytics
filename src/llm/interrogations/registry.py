@@ -133,12 +133,12 @@ class InterrogationRegistry:
         definition = create_entity_extraction_droid_v1()
         self.register(definition)
         
-        # Register relationship_extraction_v1 (Phase 2)
+        # Register relationship_extraction_v1 (2026_02_entity_extraction_phase_2)
         from .definitions.relationship_extraction import create_relationship_extraction_v1
         definition = create_relationship_extraction_v1()
         self.register(definition)
         
-        # Register entity_extraction_generic_v1 (Phase 3)
+        # Register entity_extraction_generic_v1 (2026_02_entity_extraction_phase_3)
         from .definitions.entity_extraction_generic import create_entity_extraction_generic_v1
         definition = create_entity_extraction_generic_v1()
         self.register(definition)

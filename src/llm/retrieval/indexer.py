@@ -7,7 +7,7 @@ Implements:
 - Chunk creation and embedding generation
 - Persistence to SQL Server and lake artifacts
 
-NOTE: As of Phase 2, this module uses the `vector` schema exclusively via VectorStore.
+NOTE: As of 2026_02_vector_runtime_split_phase_2, this module uses the `vector` schema exclusively via VectorStore.
       The legacy `llm.*` vector tables are deprecated.
 
 Usage:
@@ -42,7 +42,7 @@ from ..core.types import LLMConfig
 from ..providers.ollama_client import OllamaClient
 from .chunker import Chunker
 
-# Phase 2: Use VectorStore from the vector schema (primary)
+# 2026_02_vector_runtime_split_phase_2: Use VectorStore from the vector schema (primary)
 from ...vector.store import VectorStore
 from ...vector.contracts.models import (
     VectorChunk,
@@ -134,7 +134,7 @@ class Indexer:
        d. Store chunks and embeddings
     3. Write indexing run manifest to lake
     
-    NOTE: As of Phase 2, this uses VectorStore exclusively (vector schema).
+    NOTE: As of 2026_02_vector_runtime_split_phase_2, this uses VectorStore exclusively (vector schema).
     """
     
     def __init__(

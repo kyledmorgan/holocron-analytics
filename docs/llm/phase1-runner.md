@@ -1,5 +1,11 @@
 # Phase 1 Runner - End-to-End LLM Derive Pipeline
 
+> **Feature series:** The "Phase 1 Runner" is the component delivered in
+> `2026_01_llm_derived_data_phase_1`. "Phase 1 Runner" / `Phase1Runner` is the
+> component's stable name and is retained as-is; phase references in this doc belong to
+> the [`2026_01_llm_derived_data`](../history/feature-series/2026_01_llm_derived_data.md)
+> series. See the [feature-series convention](../contributing/feature-series-convention.md).
+
 ## Overview
 
 The Phase 1 Runner implements the first end-to-end execution path for the LLM-Derived Data subsystem. It provides:

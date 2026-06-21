@@ -2,7 +2,7 @@
 Relationship Extraction Interrogation (relationship_extraction_v1).
 
 Extracts relationships between entities from source text into contract-compliant JSON.
-Phase 2 focuses on entity-to-entity relationships with temporal bounds and work context.
+2026_02_entity_extraction_phase_2 focuses on entity-to-entity relationships with temporal bounds and work context.
 """
 
 import json
@@ -344,7 +344,7 @@ def create_relationship_extraction_v1() -> InterrogationDefinition:
         key="relationship_extraction_v1",
         name="Relationship Extraction",
         version="1.0.0",
-        description="Extract relationships between entities from source text into contract-compliant JSON. Phase 2 focuses on entity-to-entity relationships with temporal bounds and work context.",
+        description="Extract relationships between entities from source text into contract-compliant JSON. 2026_02_entity_extraction_phase_2 focuses on entity-to-entity relationships with temporal bounds and work context.",
         prompt_template=PROMPT_TEMPLATE,
         output_schema=_load_output_schema(),
         system_prompt=SYSTEM_PROMPT,

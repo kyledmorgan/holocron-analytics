@@ -1,7 +1,7 @@
 """
 Priority CLI - Queue priority management and escalation.
 
-Phase 3: Implements priority escalation controls:
+2026_02_entity_extraction_phase_3: Implements priority escalation controls:
 - Manual priority bumping for specific jobs/types
 - Auto-escalation for stale jobs (anti-starvation)
 - Priority band management

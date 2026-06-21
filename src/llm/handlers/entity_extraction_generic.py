@@ -1,7 +1,7 @@
 """
 Generic Entity Extraction Handler.
 
-Phase 3: Handles entity_extraction_generic jobs for ALL entity types.
+2026_02_entity_extraction_phase_3: Handles entity_extraction_generic jobs for ALL entity types.
 
 This handler:
 1. Reads source content from job input

@@ -16,7 +16,7 @@ Key concepts:
 - Embedding: A vector representation of a chunk with lineage tracking.
 - Retrieval: Query logging for audit and evaluation.
 
-Phase 1 of the schema refactor (additive, parallel with legacy llm.* tables).
+2026_02_vector_runtime_split_phase_1 (additive, parallel with legacy llm.* tables).
 """
 
 __version__ = "0.1.0"

@@ -2,7 +2,7 @@
   "$schema": "http://json-schema.org/draft-07/schema#",
   "$id": "https://holocron-analytics.local/vocabularies/entity_types/v1",
   "title": "Entity Types Vocabulary",
-  "description": "Controlled vocabulary for entity type classification. Phase 0 placeholder.",
+  "description": "Controlled vocabulary for entity type classification. 2026_01_llm_derived_data_phase_0 scaffolding placeholder.",
   "version": "1.0.0",
   "status": "placeholder",
   "vocabulary": {
@@ -52,5 +52,5 @@
     "fallback_value": "other",
     "case_sensitive": false
   },
-  "notes": "This vocabulary is a placeholder for Phase 0 scaffolding. Values may be refined based on domain requirements."
+  "notes": "This vocabulary is a placeholder from 2026_01_llm_derived_data_phase_0 scaffolding. Values may be refined based on domain requirements."
 }

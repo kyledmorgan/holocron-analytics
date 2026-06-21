@@ -2,7 +2,7 @@
 Droid Entity Extraction Interrogation (entity_extraction_droid_v1).
 
 Extracts droid entities from source text into contract-compliant JSON.
-Phase 1 focuses on droids as a single entity subtype.
+2026_02_entity_extraction_phase_1 focuses on droids as a single entity subtype.
 """
 
 import json
@@ -314,7 +314,7 @@ def create_entity_extraction_droid_v1() -> InterrogationDefinition:
         key="entity_extraction_droid_v1",
         name="Droid Entity Extraction",
         version="1.0.0",
-        description="Extract droid entities from source text into contract-compliant JSON. Phase 1 focuses on droids as a single entity subtype.",
+        description="Extract droid entities from source text into contract-compliant JSON. 2026_02_entity_extraction_phase_1 focuses on droids as a single entity subtype.",
         prompt_template=PROMPT_TEMPLATE,
         output_schema=_load_output_schema(),
         system_prompt=SYSTEM_PROMPT,

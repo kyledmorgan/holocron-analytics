@@ -1,20 +1,28 @@
 # LLM-Derived Data: Implementation Status
 
+> **Feature series:** This tracker covers two series:
+> [`2026_01_llm_derived_data`](../history/feature-series/2026_01_llm_derived_data.md)
+> (the Phase 0–3 checklists below) and
+> [`2026_02_vector_runtime_split`](../history/feature-series/2026_02_vector_runtime_split.md)
+> (the "Schema Refactor" section). Phase numbers are scoped to their series — see the
+> [feature-series convention](../contributing/feature-series-convention.md).
+
+
 This document tracks the implementation status of the LLM-Derived Data subsystem. It is updated as features are completed.
 
 **Last Updated:** February 2026
 
 ---
 
-## Current Phase: Phase 3 — Retrieval Augmentation ✅
+## Current Phase: Retrieval Augmentation — `2026_01_llm_derived_data_phase_3` ✅
 
 **Status: COMPLETE**
 
-Phase 3 has been completed. The retrieval augmentation system is now fully implemented with chunking, embeddings, vector storage, and evidence selection capabilities.
+`2026_01_llm_derived_data_phase_3` has been completed. The retrieval augmentation system is now fully implemented with chunking, embeddings, vector storage, and evidence selection capabilities.
 
 ---
 
-## Phase 0 Checklist
+## `2026_01_llm_derived_data_phase_0` Checklist
 
 ### Documentation (`docs/llm/`)
 
@@ -96,7 +104,7 @@ Phase 3 has been completed. The retrieval augmentation system is now fully imple
 
 ---
 
-## Phase 1 Checklist ✅
+## `2026_01_llm_derived_data_phase_1` Checklist ✅
 
 **Status: COMPLETE**
 
@@ -112,7 +120,7 @@ Phase 3 has been completed. The retrieval augmentation system is now fully imple
 
 ---
 
-## Phase 2 Checklist ✅
+## `2026_01_llm_derived_data_phase_2` Checklist ✅
 
 **Status: COMPLETE**
 
@@ -181,7 +189,7 @@ Phase 3 has been completed. The retrieval augmentation system is now fully imple
 
 ---
 
-## Phase 3 Checklist ✅
+## `2026_01_llm_derived_data_phase_3` Checklist ✅
 
 **Status: COMPLETE**
 
@@ -262,15 +270,15 @@ Phase 3 has been completed. The retrieval augmentation system is now fully imple
 
 ## Schema Refactor (Chat/Vector Runtime Split) ✅
 
-**Status: Phase 2 Complete (Feature Complete)**
+**Status: `2026_02_vector_runtime_split_phase_2` complete (feature complete)**
 
 The schema refactor to split the `llm` schema into two independent runtimes is complete:
 
 | Phase | Status | Description |
 |-------|--------|-------------|
-| Phase 0 | ✅ Complete | Baseline inventory, snapshot, and migration notes |
-| Phase 1 | ✅ Complete | Create `vector` schema with new tables |
-| Phase 2 | ✅ Complete | Cutover and deprecate legacy vector tables |
+| `..._phase_0` | ✅ Complete | Baseline inventory, snapshot, and migration notes |
+| `..._phase_1` | ✅ Complete | Create `vector` schema with new tables |
+| `..._phase_2` | ✅ Complete | Cutover and deprecate legacy vector tables |
 
 ### What Changed
 
@@ -325,8 +333,8 @@ When completing work on the LLM-Derived Data subsystem:
 
 - [Vision and Roadmap](vision-and-roadmap.md) — Full roadmap
 - [LLM Module README](../../src/llm/README.md) — Source overview
-- [Evidence Bundles](evidence.md) — Phase 2 evidence system
-- [Retrieval (Phase 3)](retrieval.md) — RAG architecture
+- [Evidence Bundles](evidence.md) — `2026_01_llm_derived_data_phase_2` evidence system
+- [Retrieval (`2026_01_llm_derived_data_phase_3`)](retrieval.md) — RAG architecture
 - [Indexing Guide](indexing.md) — How to index sources
 - [Operational Guide](operational.md) — Operations and troubleshooting
 - [SQL Evidence](sql-evidence.md) — SQL result packaging

@@ -1,8 +1,8 @@
 """
-Evidence Contracts - Phase 2 data models for evidence bundles.
+Evidence Contracts - data models for evidence bundles (2026_01_llm_derived_data_phase_2).
 
 These models define the structure for evidence items, evidence bundles, and
-evidence bounding policies used by the Phase 2 evidence assembly system.
+evidence bounding policies used by the 2026_01_llm_derived_data_phase_2 evidence assembly system.
 
 Uses dataclasses following the pattern established in phase1_contracts.py.
 """

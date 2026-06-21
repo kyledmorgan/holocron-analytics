@@ -1,5 +1,11 @@
 # LLM-Derived Data: Vision and Roadmap
 
+> **Feature series:** `2026_01_llm_derived_data` (began January 2026). The phases
+> below are the phases of this single series; each is written in canonical form
+> `2026_01_llm_derived_data_phase_<n>`. See
+> [feature-series convention](../contributing/feature-series-convention.md) and the
+> [series history](../history/feature-series/2026_01_llm_derived_data.md).
+
 ## Overview
 
 This document establishes the vision, purpose, and phased roadmap for the **LLM-Derived Data** subsystem within Holocron Analytics.
@@ -125,7 +131,7 @@ Claims must cite evidence IDs. Fields without supporting evidence return null wi
 
 ## Roadmap
 
-### Phase 0 — Foundations and Scaffolding ✅
+### Foundations and Scaffolding — `2026_01_llm_derived_data_phase_0` ✅
 
 **Status:** ✅ COMPLETE
 
@@ -135,7 +141,7 @@ Claims must cite evidence IDs. Fields without supporting evidence return null wi
 
 - [x] `docs/llm/` vision, glossary, contracts, policy placeholders
 - [x] Contract placeholder schemas (manifest + derived output)
-- [x] `src/llm/` scaffolding aligned to future phases
+- [x] `src/llm/` scaffolding aligned to later phases of this series
 - [x] Interrogation catalog skeleton with rubric templates
 - [x] Ollama Docker Compose service with model persistence
 - [x] Agent guidance updates (`agents/llm-derived-data.md`)
@@ -148,12 +154,12 @@ Claims must cite evidence IDs. Fields without supporting evidence return null wi
 |----------|--------|-------|
 | Native Ollama API vs OpenAI-compatible endpoints | TBD | Both supported; selection via config |
 | Exact SQL Server schema / stored procedures | TBD | Scaffold only |
-| Vector store + embeddings strategy | TBD | Future phase |
+| Vector store + embeddings strategy | TBD | Later phase of this series |
 | JSON validation library | TBD | `jsonschema` or `pydantic` |
 
 ---
 
-### Phase 1 — MVP Runner
+### MVP Runner — `2026_01_llm_derived_data_phase_1`
 
 **Status:** 🔮 Planned
 
@@ -167,7 +173,7 @@ Claims must cite evidence IDs. Fields without supporting evidence return null wi
 
 ---
 
-### Phase 2 — Evidence Assembly
+### Evidence Assembly — `2026_01_llm_derived_data_phase_2`
 
 **Status:** 🔮 Planned
 
@@ -180,7 +186,7 @@ Claims must cite evidence IDs. Fields without supporting evidence return null wi
 
 ---
 
-### Phase 3 — RAG / Retrieval
+### RAG / Retrieval — `2026_01_llm_derived_data_phase_3`
 
 **Status:** 🔮 Planned
 
@@ -193,7 +199,7 @@ Claims must cite evidence IDs. Fields without supporting evidence return null wi
 
 ---
 
-### Phase 4 — Web Evidence
+### Web Evidence — `2026_01_llm_derived_data_phase_4`
 
 **Status:** 🔮 Planned
 
@@ -207,7 +213,7 @@ Claims must cite evidence IDs. Fields without supporting evidence return null wi
 
 ---
 
-### Phase 5 — Multi-Model Benchmarking and Adjudication
+### Multi-Model Benchmarking and Adjudication — `2026_01_llm_derived_data_phase_5`
 
 **Status:** 🔮 Planned
 
@@ -221,7 +227,7 @@ Claims must cite evidence IDs. Fields without supporting evidence return null wi
 
 ---
 
-### Phase 6 — Interrogation Catalog Expansion
+### Interrogation Catalog Expansion — `2026_01_llm_derived_data_phase_6`
 
 **Status:** 🔮 Planned
 
@@ -235,7 +241,7 @@ Claims must cite evidence IDs. Fields without supporting evidence return null wi
 
 ---
 
-### Phase 7 — Governance, Lineage, and Operational Hardening
+### Governance, Lineage, and Operational Hardening — `2026_01_llm_derived_data_phase_7`
 
 **Status:** 🔮 Planned
 

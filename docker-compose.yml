@@ -161,7 +161,7 @@ services:
       start_period: 10s
 
   # =========================================================================
-  # LLM Runner - Phase 1 Derive Runner
+  # LLM Runner - derive runner (2026_01_llm_derived_data_phase_1)
   # =========================================================================
   # Processes LLM derive jobs from the SQL Server queue.
   # Calls Ollama for structured output generation.

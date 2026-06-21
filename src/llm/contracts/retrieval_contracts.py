@@ -1,8 +1,8 @@
 """
-Retrieval Contracts - Phase 3 data models for RAG (Retrieval Augmented Generation).
+Retrieval Contracts - data models for RAG (2026_01_llm_derived_data_phase_3).
 
 These models define the structure for chunk records, embedding records, retrieval
-queries, and retrieval results used by the Phase 3 retrieval system.
+queries, and retrieval results used by the 2026_01_llm_derived_data_phase_3 retrieval system.
 
 Uses dataclasses following the pattern established in phase1_contracts.py and
 evidence_contracts.py.

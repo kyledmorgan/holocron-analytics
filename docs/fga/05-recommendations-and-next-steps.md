@@ -1,6 +1,13 @@
 # Recommendations and Next Steps
 
-**Status:** Phase 0 — Documentation Only  
+> **Feature series:** `2026_02_entity_extraction` (began February 2026). The phases
+> in this roadmap are phases of this series; in canonical form they are
+> `2026_02_entity_extraction_phase_<n>`. This series is **distinct** from
+> `2026_01_llm_derived_data` even though both number their phases 1/2/3 — see the
+> [series history](../history/feature-series/2026_02_entity_extraction.md) and the
+> [feature-series convention](../contributing/feature-series-convention.md).
+
+**Status:** `2026_02_entity_extraction_phase_0` — Documentation Only  
 **Date:** 2026-02-12  
 **Purpose:** Provide a phased implementation roadmap for the LLM expansion pipeline with explicit decision points, milestones, and success criteria.
 
