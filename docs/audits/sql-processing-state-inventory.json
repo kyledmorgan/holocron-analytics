@@ -1,0 +1,177 @@
+{
+  "generated_at": "2026-06-21T00:00:00.000Z",
+  "database": {
+    "configured_server": "localhost/sql2025:1433",
+    "configured_database_name": "Holocron",
+    "server_version": "unverified - SQL execution blocked in this Codex session",
+    "schemas_from_repository": ["dbo", "ingest", "llm", "sem", "vector", "lake"],
+    "live_verification_status": "blocked"
+  },
+  "environment": {
+    "compose_file": "docker-compose.yml",
+    "sql_service": "sql2025",
+    "sql_container": "sql2025",
+    "ollama_url_checked": "http://localhost:11434/api/tags",
+    "ollama_models": [
+      "llama3.2:latest",
+      "deepseek-r1:8b",
+      "gemma3:12b",
+      "gpt-oss:120b-cloud",
+      "gpt-oss:20b-cloud"
+    ],
+    "process_execution_blocked": true
+  },
+  "pipelines": [
+    {
+      "name": "Entity Classification CLI",
+      "cli": "python -m llm.cli.classify_entities",
+      "category": "breadth enqueue",
+      "input": "dbo.DimEntity",
+      "output": "llm.job",
+      "resume": "missing DimEntity fields, default EntityType IS NULL",
+      "idempotency": "dedupe_key entity_classify:{EntityKey}",
+      "decision": "B/C"
+    },
+    {
+      "name": "LLM Backfill CLI",
+      "cli": "python -m src.llm.cli.backfill",
+      "category": "breadth enqueue",
+      "input": "sem.SourcePage",
+      "output": "llm.job",
+      "resume": "none; filter-based backfill",
+      "idempotency": "insufficient; no dedupe key passed",
+      "decision": "D"
+    },
+    {
+      "name": "Phase1Runner",
+      "cli": "python -m src.llm.runners.phase1_runner",
+      "category": "artifact inference runner",
+      "input": "llm.job",
+      "output": "llm.run,llm.artifact,lake",
+      "resume": "queue claim/retry",
+      "idempotency": "queue based; artifact per run",
+      "decision": "C/D"
+    },
+    {
+      "name": "JobDispatcher",
+      "cli": "python -m src.llm.runners.dispatcher",
+      "category": "handler dispatcher",
+      "input": "llm.job",
+      "output": "llm.run,llm.artifact,optional domain writes",
+      "resume": "queue claim/retry",
+      "idempotency": "handler dependent",
+      "decision": "D"
+    },
+    {
+      "name": "Ingest runner",
+      "cli": "src.ingest.ingest_cli / concurrent_runner",
+      "category": "breadth ingest",
+      "input": "ingest.work_items",
+      "output": "ingest.IngestRecords",
+      "resume": "queue status/lease",
+      "idempotency": "dedupe_key",
+      "decision": "C"
+    }
+  ],
+  "historical_coverage": {
+    "evidence_file": "docs/llm/classify-entities-resume-zero-candidates-debug-2026-02-28.md",
+    "dim_entity_active_latest": 15637,
+    "dim_entity_missing_entity_type": 0,
+    "dim_entity_missing_aliascsv": 15637,
+    "ingest_records_total": 99970,
+    "ingest_work_items_completed": 799040,
+    "ingest_work_items_in_progress": 10
+  },
+  "coverage": {
+    "current_live_counts": "blocked",
+    "local_lake_run_dirs": 10,
+    "local_lake_files": 40,
+    "local_lake_relationship_outputs": 3,
+    "local_lake_duplicate_output_groups": 1
+  },
+  "duplicates": [
+    {
+      "object": "local lake relationship output",
+      "duplicate_groups": 1,
+      "excess_rows": 1,
+      "risk": "medium",
+      "evidence": "identical output hash across two 2026-02-21 run dirs"
+    },
+    {
+      "object": "llm.job",
+      "duplicate_groups": "unverified",
+      "risk": "high when dedupe_key is omitted"
+    },
+    {
+      "object": "dbo.BridgeEntityRelation",
+      "duplicate_groups": "unverified",
+      "risk": "high; no hard natural unique constraint in source DDL"
+    }
+  ],
+  "failures": [
+    {
+      "category": "live SQL unavailable in Codex session",
+      "count": null,
+      "retryable": false,
+      "recommendation": "run supplied SQL manually"
+    },
+    {
+      "category": "missing page_classification handler",
+      "count": null,
+      "retryable": false,
+      "recommendation": "code remediation before dispatcher live"
+    },
+    {
+      "category": "entity handlers missing dependencies",
+      "count": null,
+      "retryable": false,
+      "recommendation": "inject Ollama client and entity store before live jobs"
+    },
+    {
+      "category": "relationship handler lacks relationship store",
+      "count": null,
+      "retryable": false,
+      "recommendation": "inject store or do not expect domain rows"
+    }
+  ],
+  "recommended_commands": [
+    {
+      "priority": 1,
+      "command": "sqlcmd -S localhost,1433 -U sa -P <redacted> -C -d Holocron -i docs/audits/sql-processing-state-queries.sql",
+      "writes": false,
+      "inference": false,
+      "recommendation": "run first"
+    },
+    {
+      "priority": 2,
+      "command": "$env:PYTHONPATH=\"src\"; python -m llm.cli.classify_entities --mode resume --require-tags --batch-size 5 --dry-run -v",
+      "writes": false,
+      "inference": false,
+      "recommendation": "restricted validation"
+    },
+    {
+      "priority": 3,
+      "command": "$env:PYTHONPATH=\"src\"; python -m llm.cli.classify_entities --mode resume --only failed --batch-size 20 --dry-run -v",
+      "writes": false,
+      "inference": false,
+      "recommendation": "failed-only validation"
+    }
+  ],
+  "blockers": [
+    "Current live SQL counts unavailable from this session",
+    "Backfill enqueue lacks dedupe keys",
+    "Dispatcher generic live path does not call Ollama",
+    "Page classification handler missing",
+    "Entity extraction handlers are not wired with Ollama client or entity store",
+    "Relationship handler is not wired with relationship store",
+    "BridgeEntityRelation lacks hard natural uniqueness in source DDL"
+  ],
+  "uncertainties": [
+    "Current SQL Server version and compatibility level",
+    "Current live row counts and date ranges",
+    "Current failed/deadletter queue state",
+    "Current live duplicate groups",
+    "Whether live database has all migrations through 0036",
+    "Whether model digest was captured for all historical runs"
+  ]
+}
